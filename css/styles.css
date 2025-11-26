@@ -724,7 +724,7 @@ body {
 
 .contact-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .contact-header h1 {
@@ -740,6 +740,76 @@ body {
 .contact-header p {
     max-width: 600px;
     margin: 0 auto;
+}
+
+/* Calendly Section */
+.calendly-section {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+}
+
+.calendly-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.15);
+    text-align: center;
+    border: 2px solid transparent;
+    background-image: linear-gradient(white, white), var(--primary-gradient);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: all 0.3s ease;
+}
+
+.calendly-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.25);
+}
+
+.calendly-icon {
+    font-size: 3rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.calendly-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.calendly-card p {
+    font-size: 1.1rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.btn-calendly {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-calendly:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.btn-calendly i {
+    font-size: 1.2rem;
 }
 
 .contact-content {
@@ -1106,6 +1176,18 @@ body {
 
     .contact-section {
         padding: 60px 0;
+    }
+
+    .calendly-card {
+        padding: 2rem;
+    }
+
+    .calendly-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .calendly-card p {
+        font-size: 1rem;
     }
 
     .contact-content {
