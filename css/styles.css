@@ -45,15 +45,34 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo img.logo-main {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img.logo-main {
+    transform: scale(1.05);
+}
+
+.logo-text {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text span {
     font-size: 1.5rem;
     font-weight: 700;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
 }
 
 .logo img.profile-thumb {
@@ -922,6 +941,25 @@ body {
     text-align: center;
     padding: 3rem 0 2rem;
     margin-top: 4rem;
+}
+
+.footer-logo {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.95;
+    transition: all 0.3s ease;
+}
+
+.footer-logo-img:hover {
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 .footer-content {
