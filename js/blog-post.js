@@ -1,23 +1,7 @@
 // Individual blog post functionality
 
-// Blog posts metadata (same as in blog.js)
-const blogPostsData = {
-    'welcome-to-my-blog': {
-        title: 'Welcome to My Blog',
-        date: '2024-11-25',
-        author: 'Eytan Benzeno'
-    },
-    'getting-started-with-web-development': {
-        title: 'Getting Started with Web Development',
-        date: '2024-11-20',
-        author: 'Eytan Benzeno'
-    },
-    'my-favorite-coding-tools': {
-        title: 'My Favorite Coding Tools',
-        date: '2024-11-15',
-        author: 'Eytan Benzeno'
-    }
-};
+let blogPostsData = {};
+let blogContent = {};
 
 // Get post ID from URL
 function getPostId() {
@@ -31,8 +15,49 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString('en-US', options);
 }
 
+// Load blog data
+async function loadBlogData() {
+    try {
+        // Try localStorage first (for local admin edits)
+        const localPosts = localStorage.getItem('blogPosts');
+        const localContent = localStorage.getItem('blogContent');
+
+        if (localPosts) {
+            const posts = JSON.parse(localPosts);
+            posts.forEach(post => {
+                blogPostsData[post.id] = {
+                    title: post.title,
+                    date: post.date,
+                    author: post.author
+                };
+            });
+            if (localContent) {
+                blogContent = JSON.parse(localContent);
+            }
+            return;
+        }
+
+        // Load from JSON file
+        const response = await fetch('data/blog-posts.json');
+        const data = await response.json();
+        const posts = data.posts || [];
+
+        posts.forEach(post => {
+            blogPostsData[post.id] = {
+                title: post.title,
+                date: post.date,
+                author: post.author
+            };
+        });
+    } catch (error) {
+        console.error('Error loading blog data:', error);
+    }
+}
+
 // Load and render blog post
 async function loadBlogPost() {
+    await loadBlogData();
+
     const postId = getPostId();
     const container = document.getElementById('blog-post-container');
 
@@ -50,14 +75,21 @@ async function loadBlogPost() {
     document.getElementById('post-title').textContent = `${postData.title} - Eytan Benzeno`;
 
     try {
-        // Fetch markdown file
-        const response = await fetch(`blog/${postId}.md`);
+        let markdown = '';
 
-        if (!response.ok) {
-            throw new Error('Post not found');
+        // Check localStorage first
+        if (blogContent[postId]) {
+            markdown = blogContent[postId];
+        } else {
+            // Fetch markdown file
+            const response = await fetch(`blog/${postId}.md`);
+
+            if (!response.ok) {
+                throw new Error('Post not found');
+            }
+
+            markdown = await response.text();
         }
-
-        const markdown = await response.text();
 
         // Parse and render markdown
         const htmlContent = marked.parse(markdown);
