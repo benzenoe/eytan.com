@@ -46,8 +46,28 @@ async function loadBlogData() {
 
 // Save data to localStorage
 function saveToLocalStorage() {
-    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-    localStorage.setItem('blogContent', JSON.stringify(blogContent));
+    try {
+        const postsData = JSON.stringify(blogPosts);
+        const contentData = JSON.stringify(blogContent);
+
+        // Check localStorage quota
+        const estimatedSize = postsData.length + contentData.length;
+        console.log('Saving data to localStorage, estimated size:', Math.round(estimatedSize / 1024), 'KB');
+
+        localStorage.setItem('blogPosts', postsData);
+        localStorage.setItem('blogContent', contentData);
+
+        console.log('Data saved successfully');
+    } catch (error) {
+        if (error.name === 'QuotaExceededError') {
+            showAlert('Storage quota exceeded! Images are too large. Try using smaller images or image URLs instead of uploads.', 'error');
+            console.error('localStorage quota exceeded');
+        } else {
+            showAlert('Error saving data: ' + error.message, 'error');
+            console.error('Error saving to localStorage:', error);
+        }
+        throw error;
+    }
 }
 
 // Render posts table
@@ -220,13 +240,22 @@ document.getElementById('post-form').addEventListener('submit', function(e) {
     blogContent[postId] = content;
 
     // Save to localStorage
-    saveToLocalStorage();
+    try {
+        saveToLocalStorage();
 
-    // Update UI
-    renderPostsTable();
-    closeModal();
+        // Log the saved post for debugging
+        console.log('Post saved:', postData);
+        console.log('Image size:', postData.image ? Math.round(postData.image.length / 1024) + 'KB' : 'No image');
 
-    showAlert(currentEditId ? 'Post updated successfully!' : 'Post created successfully!', 'success');
+        // Update UI
+        renderPostsTable();
+        closeModal();
+
+        showAlert(currentEditId ? 'Post updated successfully!' : 'Post created successfully!', 'success');
+    } catch (error) {
+        // Don't close modal if save failed
+        console.error('Failed to save post:', error);
+    }
 });
 
 // Export data as JSON
@@ -278,9 +307,9 @@ document.getElementById('post-image-file').addEventListener('change', function(e
     const file = e.target.files[0];
     if (!file) return;
 
-    // Check file size (max 2MB)
-    if (file.size > 2 * 1024 * 1024) {
-        showAlert('Image must be less than 2MB', 'error');
+    // Check file size (max 1MB for better localStorage compatibility)
+    if (file.size > 1 * 1024 * 1024) {
+        showAlert('Image must be less than 1MB for upload. For larger images, please use an image URL instead.', 'error');
         this.value = '';
         return;
     }
@@ -289,9 +318,15 @@ document.getElementById('post-image-file').addEventListener('change', function(e
     const reader = new FileReader();
     reader.onload = function(event) {
         const base64 = event.target.result;
+        console.log('Image loaded, size:', Math.round(base64.length / 1024), 'KB');
         document.getElementById('post-image-url').value = base64;
         document.getElementById('preview-img').src = base64;
         document.getElementById('image-preview').classList.add('show');
+        showAlert('Image loaded successfully! Remember to save your post.', 'success');
+    };
+    reader.onerror = function(error) {
+        showAlert('Error reading file: ' + error, 'error');
+        console.error('FileReader error:', error);
     };
     reader.readAsDataURL(file);
 });
