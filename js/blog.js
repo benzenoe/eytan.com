@@ -44,9 +44,15 @@ function renderBlogPosts() {
 
     blogGrid.innerHTML = sortedPosts.map(post => `
         <a href="blog-post.html?post=${post.id}" class="blog-card">
-            <div class="blog-card-header">
-                ${post.icon}
-            </div>
+            ${post.image ? `
+                <div class="blog-card-image">
+                    <img src="${post.image}" alt="${post.title}">
+                </div>
+            ` : `
+                <div class="blog-card-header">
+                    ${post.icon}
+                </div>
+            `}
             <div class="blog-card-content">
                 <h3>${post.title}</h3>
                 <div class="blog-meta">

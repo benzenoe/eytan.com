@@ -574,6 +574,23 @@ body {
     color: white;
 }
 
+.blog-card-image {
+    height: 200px;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.05);
+}
+
 .blog-card-content {
     padding: 1.5rem;
 }
@@ -622,6 +639,19 @@ body {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #eee;
+}
+
+.blog-post-featured-image {
+    margin: 2rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.blog-post-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .blog-post-body {

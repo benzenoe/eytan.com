@@ -117,6 +117,7 @@ function openCreateModal() {
     document.getElementById('post-form').reset();
     document.getElementById('post-date').valueAsDate = new Date();
     document.getElementById('post-author').value = 'Eytan Benzeno';
+    document.getElementById('image-preview').classList.remove('show');
     document.getElementById('post-modal').classList.add('active');
 }
 
@@ -132,8 +133,17 @@ function editPost(postId) {
     document.getElementById('post-date').value = post.date;
     document.getElementById('post-author').value = post.author || 'Eytan Benzeno';
     document.getElementById('post-icon').value = post.icon || '';
+    document.getElementById('post-image-url').value = post.image || '';
     document.getElementById('post-excerpt').value = post.excerpt;
     document.getElementById('post-content').value = blogContent[postId] || '';
+
+    // Show image preview if exists
+    if (post.image) {
+        document.getElementById('preview-img').src = post.image;
+        document.getElementById('image-preview').classList.add('show');
+    } else {
+        document.getElementById('image-preview').classList.remove('show');
+    }
 
     document.getElementById('post-modal').classList.add('active');
 }
@@ -165,6 +175,7 @@ document.getElementById('post-form').addEventListener('submit', function(e) {
     const date = document.getElementById('post-date').value;
     const author = document.getElementById('post-author').value.trim();
     const icon = document.getElementById('post-icon').value.trim();
+    const imageUrl = document.getElementById('post-image-url').value.trim();
     const excerpt = document.getElementById('post-excerpt').value.trim();
     const content = document.getElementById('post-content').value.trim();
 
@@ -186,6 +197,7 @@ document.getElementById('post-form').addEventListener('submit', function(e) {
         date: date,
         author: author,
         icon: icon || '📝',
+        image: imageUrl || '',
         excerpt: excerpt
     };
 
@@ -243,6 +255,45 @@ document.getElementById('post-modal').addEventListener('click', function(e) {
     if (e.target === this) {
         closeModal();
     }
+});
+
+// Handle image URL input
+document.getElementById('post-image-url').addEventListener('input', function(e) {
+    const url = e.target.value.trim();
+    const preview = document.getElementById('image-preview');
+    const previewImg = document.getElementById('preview-img');
+
+    if (url) {
+        previewImg.src = url;
+        preview.classList.add('show');
+        // Clear file input
+        document.getElementById('post-image-file').value = '';
+    } else {
+        preview.classList.remove('show');
+    }
+});
+
+// Handle image file upload
+document.getElementById('post-image-file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Check file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+        showAlert('Image must be less than 2MB', 'error');
+        this.value = '';
+        return;
+    }
+
+    // Read file and convert to base64
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const base64 = event.target.result;
+        document.getElementById('post-image-url').value = base64;
+        document.getElementById('preview-img').src = base64;
+        document.getElementById('image-preview').classList.add('show');
+    };
+    reader.readAsDataURL(file);
 });
 
 // Initialize on page load

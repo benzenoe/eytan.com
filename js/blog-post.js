@@ -28,7 +28,8 @@ async function loadBlogData() {
                 blogPostsData[post.id] = {
                     title: post.title,
                     date: post.date,
-                    author: post.author
+                    author: post.author,
+                    image: post.image || ''
                 };
             });
             if (localContent) {
@@ -46,7 +47,8 @@ async function loadBlogData() {
             blogPostsData[post.id] = {
                 title: post.title,
                 date: post.date,
-                author: post.author
+                author: post.author,
+                image: post.image || ''
             };
         });
     } catch (error) {
@@ -101,6 +103,11 @@ async function loadBlogPost() {
                 <i class="far fa-calendar"></i> ${formatDate(postData.date)} •
                 <i class="far fa-user"></i> ${postData.author}
             </div>
+            ${postData.image ? `
+                <div class="blog-post-featured-image">
+                    <img src="${postData.image}" alt="${postData.title}">
+                </div>
+            ` : ''}
             <div class="blog-post-body">
                 ${htmlContent}
             </div>
@@ -112,6 +119,11 @@ async function loadBlogPost() {
                 <i class="far fa-calendar"></i> ${formatDate(postData.date)} •
                 <i class="far fa-user"></i> ${postData.author}
             </div>
+            ${postData.image ? `
+                <div class="blog-post-featured-image">
+                    <img src="${postData.image}" alt="${postData.title}">
+                </div>
+            ` : ''}
             <div class="blog-post-body">
                 <p>This blog post is coming soon! Check back later for the full content.</p>
             </div>

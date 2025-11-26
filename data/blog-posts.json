@@ -6,7 +6,8 @@
       "date": "2024-11-25",
       "author": "Eytan Benzeno",
       "excerpt": "This is my first blog post. Learn about what I plan to write about and why I started this blog.",
-      "icon": "👋"
+      "icon": "👋",
+      "image": ""
     },
     {
       "id": "getting-started-with-web-development",
@@ -14,7 +15,8 @@
       "date": "2024-11-20",
       "author": "Eytan Benzeno",
       "excerpt": "A guide for beginners looking to start their journey in web development. Tips, resources, and advice.",
-      "icon": "💻"
+      "icon": "💻",
+      "image": ""
     },
     {
       "id": "my-favorite-coding-tools",
@@ -22,7 +24,8 @@
       "date": "2024-11-15",
       "author": "Eytan Benzeno",
       "excerpt": "A curated list of my favorite tools and resources that help me be more productive as a developer.",
-      "icon": "🛠"
+      "icon": "🛠",
+      "image": ""
     }
   ]
 }
