@@ -1,9 +1,9 @@
 // Admin Authentication System
 
-// Password hash (SHA-256 of "admin123")
-// To set your own password, visit: https://emn178.github.io/online-tools/sha256.html
+// Password hash (SHA-256 of your custom password)
+// To change password, visit: https://emn178.github.io/online-tools/sha256.html
 // Hash your desired password and replace the value below
-const PASSWORD_HASH = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
+const PASSWORD_HASH = '11c8f75cc035a5b3c3a84ec6812e832d66b7876a0ee798e7b39620244b557ab6';
 
 // Check if user is authenticated
 function isAuthenticated() {
