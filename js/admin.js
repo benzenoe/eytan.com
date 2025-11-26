@@ -307,9 +307,9 @@ document.getElementById('post-image-file').addEventListener('change', function(e
     const file = e.target.files[0];
     if (!file) return;
 
-    // Check file size (max 1MB for better localStorage compatibility)
-    if (file.size > 1 * 1024 * 1024) {
-        showAlert('Image must be less than 1MB for upload. For larger images, please use an image URL instead.', 'error');
+    // Check file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+        showAlert('Image must be less than 2MB for upload. For larger images, please use an image URL instead.', 'error');
         this.value = '';
         return;
     }
