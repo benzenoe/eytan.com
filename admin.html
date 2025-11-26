@@ -258,6 +258,9 @@
                 <button class="btn btn-secondary" onclick="exportData()">
                     <i class="fas fa-download"></i> Export JSON
                 </button>
+                <button class="btn btn-secondary" onclick="window.adminAuth.logout()" style="background: #dc3545;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
         </div>
 
@@ -367,6 +370,15 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/admin-auth.js"></script>
     <script src="js/admin.js"></script>
+    <script>
+        // Initialize authentication before loading admin
+        if (!window.adminAuth.init()) {
+            // If not authenticated, login form will be shown
+            // Prevent admin.js from loading
+            throw new Error('Authentication required');
+        }
+    </script>
 </body>
 </html>
