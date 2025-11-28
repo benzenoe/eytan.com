@@ -111,6 +111,20 @@ async function loadBlogPost() {
             <div class="blog-post-body">
                 ${htmlContent}
             </div>
+            <div class="social-share">
+                <h3>Share this post</h3>
+                <div class="share-buttons">
+                    <button onclick="shareToFacebook()" class="share-btn facebook-btn" title="Share on Facebook">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                    <button onclick="shareToLinkedIn()" class="share-btn linkedin-btn" title="Share on LinkedIn">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </button>
+                    <button onclick="shareToX()" class="share-btn x-btn" title="Share on X">
+                        <span class="x-icon">𝕏</span> X
+                    </button>
+                </div>
+            </div>
         `;
     } catch (error) {
         container.innerHTML = `
@@ -127,8 +141,49 @@ async function loadBlogPost() {
             <div class="blog-post-body">
                 <p>This blog post is coming soon! Check back later for the full content.</p>
             </div>
+            <div class="social-share">
+                <h3>Share this post</h3>
+                <div class="share-buttons">
+                    <button onclick="shareToFacebook()" class="share-btn facebook-btn" title="Share on Facebook">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                    <button onclick="shareToLinkedIn()" class="share-btn linkedin-btn" title="Share on LinkedIn">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </button>
+                    <button onclick="shareToX()" class="share-btn x-btn" title="Share on X">
+                        <span class="x-icon">𝕏</span> X
+                    </button>
+                </div>
+            </div>
         `;
     }
+}
+
+// Social media sharing functions
+function shareToFacebook() {
+    const postId = getPostId();
+    const postData = blogPostsData[postId];
+    const url = encodeURIComponent(window.location.href);
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToLinkedIn() {
+    const postId = getPostId();
+    const postData = blogPostsData[postId];
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(postData.title);
+    const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToX() {
+    const postId = getPostId();
+    const postData = blogPostsData[postId];
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(`Check out "${postData.title}" by Eytan Benzeno`);
+    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
 }
 
 // Initialize on page load

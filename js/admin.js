@@ -58,6 +58,9 @@ function saveToLocalStorage() {
         localStorage.setItem('blogContent', contentData);
 
         console.log('Data saved successfully');
+
+        // Trigger auto-backup
+        autoBackup();
     } catch (error) {
         if (error.name === 'QuotaExceededError') {
             showAlert('Storage quota exceeded! Images are too large. Try using smaller images or image URLs instead of uploads.', 'error');
@@ -258,25 +261,133 @@ document.getElementById('post-form').addEventListener('submit', function(e) {
     }
 });
 
-// Export data as JSON
+// Export data as JSON (Full backup with all files)
 function exportData() {
-    const data = {
-        posts: blogPosts,
-        content: blogContent
-    };
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 
-    // Create downloadable JSON file
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    // 1. Export blog-posts.json
+    const postsJson = {
+        posts: blogPosts
+    };
+    downloadFile('blog-posts.json', JSON.stringify(postsJson, null, 2), 'application/json');
+
+    // 2. Export each markdown file
+    setTimeout(() => {
+        Object.keys(blogContent).forEach((postId, index) => {
+            setTimeout(() => {
+                downloadFile(`${postId}.md`, blogContent[postId], 'text/markdown');
+            }, index * 100); // Stagger downloads
+        });
+    }, 500);
+
+    // 3. Export complete backup
+    setTimeout(() => {
+        const completeBackup = {
+            timestamp: new Date().toISOString(),
+            posts: blogPosts,
+            content: blogContent
+        };
+        downloadFile(`blog-backup-${timestamp}.json`, JSON.stringify(completeBackup, null, 2), 'application/json');
+    }, (Object.keys(blogContent).length + 1) * 100 + 500);
+
+    showAlert('Exporting all files... Check your downloads folder!', 'success');
+}
+
+// Helper function to download files
+function downloadFile(filename, content, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'blog-data-export.json';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
 
-    showAlert('Data exported successfully! Remember to update the files in your repository.', 'success');
+// Import data from backup
+function importData() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+            const text = await file.text();
+            const data = JSON.parse(text);
+
+            // Check if it's a complete backup or just posts
+            if (data.posts && data.content) {
+                // Complete backup
+                blogPosts = data.posts;
+                blogContent = data.content;
+            } else if (data.posts) {
+                // Just posts data
+                blogPosts = data.posts;
+            } else {
+                throw new Error('Invalid backup file format');
+            }
+
+            saveToLocalStorage();
+            renderPostsTable();
+            showAlert('Data imported successfully!', 'success');
+        } catch (error) {
+            showAlert('Error importing data: ' + error.message, 'error');
+            console.error('Import error:', error);
+        }
+    };
+    input.click();
+}
+
+// Auto-backup to prevent data loss
+function autoBackup() {
+    const lastBackup = localStorage.getItem('lastAutoBackup');
+    const now = Date.now();
+
+    // Auto-backup every 30 minutes
+    if (!lastBackup || now - parseInt(lastBackup) > 30 * 60 * 1000) {
+        const backup = {
+            timestamp: new Date().toISOString(),
+            posts: blogPosts,
+            content: blogContent
+        };
+
+        // Save to a separate localStorage key as emergency backup
+        try {
+            localStorage.setItem('blogBackup', JSON.stringify(backup));
+            localStorage.setItem('lastAutoBackup', now.toString());
+            console.log('Auto-backup created at', new Date().toLocaleString());
+        } catch (error) {
+            console.error('Auto-backup failed:', error);
+        }
+    }
+}
+
+// Restore from auto-backup
+function restoreFromBackup() {
+    const backup = localStorage.getItem('blogBackup');
+    if (!backup) {
+        showAlert('No backup found', 'error');
+        return;
+    }
+
+    if (!confirm('This will restore your blog from the last auto-backup. Continue?')) {
+        return;
+    }
+
+    try {
+        const data = JSON.parse(backup);
+        blogPosts = data.posts;
+        blogContent = data.content;
+        saveToLocalStorage();
+        renderPostsTable();
+        showAlert(`Backup restored from ${new Date(data.timestamp).toLocaleString()}`, 'success');
+    } catch (error) {
+        showAlert('Error restoring backup: ' + error.message, 'error');
+    }
 }
 
 // Close modal when clicking outside
