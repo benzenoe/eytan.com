@@ -56,23 +56,23 @@ function renderBlogPosts() {
                 `}
                 <div class="blog-card-content">
                     <h3>${post.title}</h3>
+                    <div class="blog-card-share">
+                        <button onclick="shareBlogPost(event, '${post.id}', '${post.title.replace(/'/g, "\\'")}', 'facebook')" class="share-btn-small facebook-btn" title="Share on Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button onclick="shareBlogPost(event, '${post.id}', '${post.title.replace(/'/g, "\\'")}', 'linkedin')" class="share-btn-small linkedin-btn" title="Share on LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                        <button onclick="shareBlogPost(event, '${post.id}', '${post.title.replace(/'/g, "\\'")}', 'x')" class="share-btn-small x-btn" title="Share on X">
+                            <span class="x-icon">𝕏</span>
+                        </button>
+                    </div>
                     <div class="blog-meta">
                         <i class="far fa-calendar"></i> ${formatDate(post.date)}
                     </div>
                     <p class="blog-excerpt">${post.excerpt}</p>
                 </div>
             </a>
-            <div class="blog-card-share">
-                <button onclick="shareBlogPost(event, '${post.id}', '${post.title.replace(/'/g, "\\'")}', 'facebook')" class="share-btn-small facebook-btn" title="Share on Facebook">
-                    <i class="fab fa-facebook"></i>
-                </button>
-                <button onclick="shareBlogPost(event, '${post.id}', '${post.title.replace(/'/g, "\\'")}', 'linkedin')" class="share-btn-small linkedin-btn" title="Share on LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </button>
-                <button onclick="shareBlogPost(event, '${post.id}', '${post.title.replace(/'/g, "\\'")}', 'x')" class="share-btn-small x-btn" title="Share on X">
-                    <span class="x-icon">𝕏</span>
-                </button>
-            </div>
         </div>
     `).join('');
 }

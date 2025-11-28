@@ -103,14 +103,6 @@ async function loadBlogPost() {
                 <i class="far fa-calendar"></i> ${formatDate(postData.date)} •
                 <i class="far fa-user"></i> ${postData.author}
             </div>
-            ${postData.image ? `
-                <div class="blog-post-featured-image">
-                    <img src="${postData.image}" alt="${postData.title}">
-                </div>
-            ` : ''}
-            <div class="blog-post-body">
-                ${htmlContent}
-            </div>
             <div class="social-share">
                 <h3>Share this post</h3>
                 <div class="share-buttons">
@@ -124,6 +116,14 @@ async function loadBlogPost() {
                         <span class="x-icon">𝕏</span> X
                     </button>
                 </div>
+            </div>
+            ${postData.image ? `
+                <div class="blog-post-featured-image">
+                    <img src="${postData.image}" alt="${postData.title}">
+                </div>
+            ` : ''}
+            <div class="blog-post-body">
+                ${htmlContent}
             </div>
         `;
     } catch (error) {
@@ -133,14 +133,6 @@ async function loadBlogPost() {
                 <i class="far fa-calendar"></i> ${formatDate(postData.date)} •
                 <i class="far fa-user"></i> ${postData.author}
             </div>
-            ${postData.image ? `
-                <div class="blog-post-featured-image">
-                    <img src="${postData.image}" alt="${postData.title}">
-                </div>
-            ` : ''}
-            <div class="blog-post-body">
-                <p>This blog post is coming soon! Check back later for the full content.</p>
-            </div>
             <div class="social-share">
                 <h3>Share this post</h3>
                 <div class="share-buttons">
@@ -154,6 +146,14 @@ async function loadBlogPost() {
                         <span class="x-icon">𝕏</span> X
                     </button>
                 </div>
+            </div>
+            ${postData.image ? `
+                <div class="blog-post-featured-image">
+                    <img src="${postData.image}" alt="${postData.title}">
+                </div>
+            ` : ''}
+            <div class="blog-post-body">
+                <p>This blog post is coming soon! Check back later for the full content.</p>
             </div>
         `;
     }

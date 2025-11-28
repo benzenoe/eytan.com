@@ -1299,16 +1299,17 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.blog-card-share {
+.blog-card-content .blog-card-share {
     display: flex;
     gap: 0.5rem;
-    padding: 1rem;
-    background: white;
-    border-top: 1px solid #e9ecef;
-    border-radius: 0 0 15px 15px;
-    justify-content: center;
+    margin: 1rem 0;
+    justify-content: flex-start;
 }
 
 .share-btn-small {
@@ -1341,16 +1342,11 @@ body {
 
 /* Update blog card to work with wrapper */
 .blog-card {
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px;
+    display: block;
+    width: 100%;
 }
 
 .blog-card-wrapper .blog-card {
     flex: 1;
-}
-
-.blog-card-wrapper {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
