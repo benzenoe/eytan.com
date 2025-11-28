@@ -104,16 +104,15 @@ async function loadBlogPost() {
                 <i class="far fa-user"></i> ${postData.author}
             </div>
             <div class="social-share">
-                <h3>Share this post</h3>
                 <div class="share-buttons">
-                    <button onclick="shareToFacebook()" class="share-btn facebook-btn" title="Share on Facebook">
-                        <i class="fab fa-facebook"></i> Facebook
+                    <button onclick="shareToFacebook()" class="share-btn-icon facebook-btn" title="Share on Facebook">
+                        <i class="fab fa-facebook"></i>
                     </button>
-                    <button onclick="shareToLinkedIn()" class="share-btn linkedin-btn" title="Share on LinkedIn">
-                        <i class="fab fa-linkedin"></i> LinkedIn
+                    <button onclick="shareToLinkedIn()" class="share-btn-icon linkedin-btn" title="Share on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
                     </button>
-                    <button onclick="shareToX()" class="share-btn x-btn" title="Share on X">
-                        <span class="x-icon">𝕏</span> X
+                    <button onclick="shareToX()" class="share-btn-icon x-btn" title="Share on X">
+                        <span class="x-icon">𝕏</span>
                     </button>
                 </div>
             </div>
@@ -134,16 +133,15 @@ async function loadBlogPost() {
                 <i class="far fa-user"></i> ${postData.author}
             </div>
             <div class="social-share">
-                <h3>Share this post</h3>
                 <div class="share-buttons">
-                    <button onclick="shareToFacebook()" class="share-btn facebook-btn" title="Share on Facebook">
-                        <i class="fab fa-facebook"></i> Facebook
+                    <button onclick="shareToFacebook()" class="share-btn-icon facebook-btn" title="Share on Facebook">
+                        <i class="fab fa-facebook"></i>
                     </button>
-                    <button onclick="shareToLinkedIn()" class="share-btn linkedin-btn" title="Share on LinkedIn">
-                        <i class="fab fa-linkedin"></i> LinkedIn
+                    <button onclick="shareToLinkedIn()" class="share-btn-icon linkedin-btn" title="Share on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
                     </button>
-                    <button onclick="shareToX()" class="share-btn x-btn" title="Share on X">
-                        <span class="x-icon">𝕏</span> X
+                    <button onclick="shareToX()" class="share-btn-icon x-btn" title="Share on X">
+                        <span class="x-icon">𝕏</span>
                     </button>
                 </div>
             </div>
