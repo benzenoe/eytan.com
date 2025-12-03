@@ -1,55 +1,71 @@
-// Admin Authentication System
+// Admin Authentication System with Backend API
 
-// Password hash (SHA-256 of your custom password)
-// To change password, visit: https://emn178.github.io/online-tools/sha256.html
-// Hash your desired password and replace the value below
-const PASSWORD_HASH = '11c8f75cc035a5b3c3a84ec6812e832d66b7876a0ee798e7b39620244b557ab6';
+// API Configuration
+const API_URL = localStorage.getItem('API_URL') || 'https://eytan-com-blog-backend-production.up.railway.app/api';
 
 // Check if user is authenticated
-function isAuthenticated() {
-    const authToken = localStorage.getItem('adminAuthToken');
-    const authExpiry = localStorage.getItem('adminAuthExpiry');
+async function isAuthenticated() {
+    try {
+        const response = await fetch(`${API_URL}/auth/status`, {
+            method: 'GET',
+            credentials: 'include' // Important: send session cookies
+        });
 
-    if (!authToken || !authExpiry) {
+        if (response.ok) {
+            const data = await response.json();
+            return data.authenticated === true;
+        }
+
+        return false;
+    } catch (error) {
+        console.error('Auth check error:', error);
         return false;
     }
-
-    // Check if token has expired (24 hours)
-    if (Date.now() > parseInt(authExpiry)) {
-        logout();
-        return false;
-    }
-
-    return authToken === PASSWORD_HASH;
-}
-
-// Hash password using SHA-256
-async function hashPassword(password) {
-    const msgBuffer = new TextEncoder().encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
 }
 
 // Login function
 async function login(password) {
-    const hash = await hashPassword(password);
+    try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include', // Important: send session cookies
+            body: JSON.stringify({ password })
+        });
 
-    if (hash === PASSWORD_HASH) {
-        // Set auth token and expiry (24 hours from now)
-        localStorage.setItem('adminAuthToken', hash);
-        localStorage.setItem('adminAuthExpiry', Date.now() + (24 * 60 * 60 * 1000));
-        return true;
+        if (response.ok) {
+            const data = await response.json();
+            return data.success === true;
+        }
+
+        // Check if it's a rate limit error
+        if (response.status === 429) {
+            const data = await response.json();
+            alert(data.message || 'Too many login attempts. Please try again later.');
+        }
+
+        return false;
+    } catch (error) {
+        console.error('Login error:', error);
+        alert('Failed to connect to server. Please check your connection and try again.');
+        return false;
     }
-
-    return false;
 }
 
 // Logout function
-function logout() {
-    localStorage.removeItem('adminAuthToken');
-    localStorage.removeItem('adminAuthExpiry');
+async function logout() {
+    try {
+        await fetch(`${API_URL}/auth/logout`, {
+            method: 'POST',
+            credentials: 'include'
+        });
+    } catch (error) {
+        console.error('Logout error:', error);
+    }
+
+    // Redirect to login
     window.location.reload();
 }
 
@@ -225,8 +241,10 @@ function showLoginForm() {
 }
 
 // Initialize authentication check
-function initAuth() {
-    if (!isAuthenticated()) {
+async function initAuth() {
+    const authenticated = await isAuthenticated();
+
+    if (!authenticated) {
         showLoginForm();
         return false;
     }
@@ -237,5 +255,10 @@ function initAuth() {
 window.adminAuth = {
     init: initAuth,
     logout: logout,
-    isAuthenticated: isAuthenticated
+    isAuthenticated: isAuthenticated,
+    setApiUrl: (url) => {
+        localStorage.setItem('API_URL', url);
+        window.location.reload();
+    },
+    getApiUrl: () => API_URL
 };
