@@ -1,75 +1,29 @@
-// Blog Admin functionality
+// Blog Admin functionality with Backend API
+
+// API URL - authentication removed
+const API_URL = 'https://api.eytan.com/api';
 
 let blogPosts = [];
-let blogContent = {};
 let currentEditId = null;
 
-// Load blog data from localStorage or JSON file
+// Load blog data from API
 async function loadBlogData() {
     try {
-        // First, try to load from localStorage (for local edits)
-        const localData = localStorage.getItem('blogPosts');
-        const localContent = localStorage.getItem('blogContent');
+        const response = await fetch(`${API_URL}/posts?status=all`, {
+            method: 'GET',
+            credentials: 'include'
+        });
 
-        if (localData) {
-            blogPosts = JSON.parse(localData);
-            blogContent = localContent ? JSON.parse(localContent) : {};
-            renderPostsTable();
-            return;
+        if (!response.ok) {
+            throw new Error(`Failed to load posts: ${response.statusText}`);
         }
 
-        // If no local data, load from JSON file
-        const response = await fetch('data/blog-posts.json');
         const data = await response.json();
         blogPosts = data.posts || [];
-
-        // Load existing markdown content for each post
-        for (const post of blogPosts) {
-            try {
-                const contentResponse = await fetch(`blog/${post.id}.md`);
-                if (contentResponse.ok) {
-                    blogContent[post.id] = await contentResponse.text();
-                }
-            } catch (error) {
-                console.log(`No content file for ${post.id}`);
-            }
-        }
-
-        // Save to localStorage
-        saveToLocalStorage();
         renderPostsTable();
     } catch (error) {
         console.error('Error loading blog data:', error);
-        showAlert('Error loading blog data', 'error');
-    }
-}
-
-// Save data to localStorage
-function saveToLocalStorage() {
-    try {
-        const postsData = JSON.stringify(blogPosts);
-        const contentData = JSON.stringify(blogContent);
-
-        // Check localStorage quota
-        const estimatedSize = postsData.length + contentData.length;
-        console.log('Saving data to localStorage, estimated size:', Math.round(estimatedSize / 1024), 'KB');
-
-        localStorage.setItem('blogPosts', postsData);
-        localStorage.setItem('blogContent', contentData);
-
-        console.log('Data saved successfully');
-
-        // Trigger auto-backup
-        autoBackup();
-    } catch (error) {
-        if (error.name === 'QuotaExceededError') {
-            showAlert('Storage quota exceeded! Images are too large. Try using smaller images or image URLs instead of uploads.', 'error');
-            console.error('localStorage quota exceeded');
-        } else {
-            showAlert('Error saving data: ' + error.message, 'error');
-            console.error('Error saving to localStorage:', error);
-        }
-        throw error;
+        showAlert('Error loading blog data: ' + error.message, 'error');
     }
 }
 
@@ -82,7 +36,7 @@ function renderPostsTable() {
     if (blogPosts.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="5" style="text-align: center; padding: 2rem;">
+                <td colspan="6" style="text-align: center; padding: 2rem;">
                     No blog posts yet. Click "New Post" to create one!
                 </td>
             </tr>
@@ -96,12 +50,23 @@ function renderPostsTable() {
     tbody.innerHTML = sortedPosts.map(post => `
         <tr>
             <td style="font-size: 1.5rem;">${post.icon || '📝'}</td>
-            <td><strong>${post.title}</strong></td>
+            <td>
+                <strong>${post.title}</strong>
+                <br>
+                <span class="status-badge status-${post.status || 'draft'}">
+                    ${post.status === 'published' ? '✓ Published' : '📝 Draft'}
+                </span>
+            </td>
             <td>${formatDate(post.date)}</td>
-            <td>${post.excerpt.substring(0, 80)}${post.excerpt.length > 80 ? '...' : ''}</td>
+            <td>${post.excerpt.substring(0, 60)}${post.excerpt.length > 60 ? '...' : ''}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn-icon btn-edit" onclick="editPost('${post.id}')" title="Edit">
+                    ${post.status !== 'published' ? `
+                    <button class="btn-icon btn-publish" onclick="publishPost('${post.id}')" title="Publish to Live Site">
+                        <i class="fas fa-upload"></i> Publish
+                    </button>
+                    ` : ''}
+                    <button class="btn-icon btn-edit" onclick="editPost('${post.id}')" title="Edit" ${post.status === 'published' ? 'disabled' : ''}>
                         <i class="fas fa-edit"></i>
                     </button>
                     <button class="btn-icon btn-delete" onclick="deletePost('${post.id}')" title="Delete">
@@ -145,52 +110,120 @@ function openCreateModal() {
 }
 
 // Edit post
-function editPost(postId) {
-    const post = blogPosts.find(p => p.id === postId);
-    if (!post) return;
+async function editPost(postId) {
+    try {
+        // Fetch full post details from API
+        const response = await fetch(`${API_URL}/posts/${postId}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
 
-    currentEditId = postId;
-    document.getElementById('modal-title').textContent = 'Edit Post';
-    document.getElementById('post-id').value = post.id;
-    document.getElementById('post-title').value = post.title;
-    document.getElementById('post-date').value = post.date;
-    document.getElementById('post-author').value = post.author || 'Eytan Benzeno';
-    document.getElementById('post-icon').value = post.icon || '';
-    document.getElementById('post-image-url').value = post.image || '';
-    document.getElementById('post-excerpt').value = post.excerpt;
-    document.getElementById('post-content').value = blogContent[postId] || '';
+        if (!response.ok) {
+            throw new Error('Failed to load post');
+        }
 
-    // Show image preview if exists
-    if (post.image) {
-        document.getElementById('preview-img').src = post.image;
-        document.getElementById('image-preview').classList.add('show');
-    } else {
-        document.getElementById('image-preview').classList.remove('show');
+        const data = await response.json();
+        const post = data.post;
+
+        currentEditId = postId;
+        document.getElementById('modal-title').textContent = 'Edit Draft Post';
+        document.getElementById('post-id').value = post.id;
+        document.getElementById('post-id').disabled = true; // Can't change ID when editing
+        document.getElementById('post-title').value = post.title;
+        document.getElementById('post-date').value = post.date;
+        document.getElementById('post-author').value = post.author || 'Eytan Benzeno';
+        document.getElementById('post-icon').value = post.icon || '';
+        document.getElementById('post-image-url').value = post.image || '';
+        document.getElementById('post-excerpt').value = post.excerpt;
+        document.getElementById('post-content').value = post.content || '';
+
+        // Show image preview if exists
+        if (post.image) {
+            document.getElementById('preview-img').src = post.image;
+            document.getElementById('image-preview').classList.add('show');
+        } else {
+            document.getElementById('image-preview').classList.remove('show');
+        }
+
+        document.getElementById('post-modal').classList.add('active');
+    } catch (error) {
+        console.error('Error loading post:', error);
+        showAlert('Error loading post: ' + error.message, 'error');
     }
-
-    document.getElementById('post-modal').classList.add('active');
 }
 
 // Delete post
-function deletePost(postId) {
-    if (!confirm('Are you sure you want to delete this post?')) return;
+async function deletePost(postId) {
+    const post = blogPosts.find(p => p.id === postId);
+    const warningMsg = post && post.status === 'published'
+        ? 'This post is PUBLISHED. Deleting it here will NOT remove it from your live website. Are you sure?'
+        : 'Are you sure you want to delete this post?';
 
-    blogPosts = blogPosts.filter(p => p.id !== postId);
-    delete blogContent[postId];
+    if (!confirm(warningMsg)) return;
 
-    saveToLocalStorage();
-    renderPostsTable();
-    showAlert('Post deleted successfully!', 'success');
+    try {
+        const response = await fetch(`${API_URL}/posts/${postId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete post');
+        }
+
+        await loadBlogData();
+        showAlert('Post deleted successfully!', 'success');
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        showAlert('Error deleting post: ' + error.message, 'error');
+    }
+}
+
+// Publish post to live website
+async function publishPost(postId) {
+    if (!confirm('Publish this post to your live website at eytan.com?\n\nThis will make it visible to everyone within 1-2 minutes.')) {
+        return;
+    }
+
+    const publishBtn = event.target.closest('.btn-publish');
+    if (publishBtn) {
+        publishBtn.disabled = true;
+        publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/posts/${postId}/publish`, {
+            method: 'POST',
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to publish post');
+        }
+
+        const data = await response.json();
+        await loadBlogData();
+        showAlert('Post published successfully! Live in 1-2 minutes at eytan.com', 'success');
+    } catch (error) {
+        console.error('Error publishing post:', error);
+        showAlert('Error publishing post: ' + error.message, 'error');
+        if (publishBtn) {
+            publishBtn.disabled = false;
+            publishBtn.innerHTML = '<i class="fas fa-upload"></i> Publish';
+        }
+    }
 }
 
 // Close modal
 function closeModal() {
     document.getElementById('post-modal').classList.remove('active');
+    document.getElementById('post-id').disabled = false;
     currentEditId = null;
 }
 
 // Handle form submission
-document.getElementById('post-form').addEventListener('submit', function(e) {
+document.getElementById('post-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const postId = document.getElementById('post-id').value.trim();
@@ -208,12 +241,6 @@ document.getElementById('post-form').addEventListener('submit', function(e) {
         return;
     }
 
-    // Check for duplicate ID (only if creating new or changing ID)
-    if (currentEditId !== postId && blogPosts.some(p => p.id === postId)) {
-        showAlert('A post with this ID already exists', 'error');
-        return;
-    }
-
     const postData = {
         id: postId,
         title: title,
@@ -221,76 +248,75 @@ document.getElementById('post-form').addEventListener('submit', function(e) {
         author: author,
         icon: icon || '📝',
         image: imageUrl || '',
-        excerpt: excerpt
+        excerpt: excerpt,
+        content: content
     };
 
-    if (currentEditId && currentEditId !== postId) {
-        // ID changed, remove old post
-        blogPosts = blogPosts.filter(p => p.id !== currentEditId);
-        delete blogContent[currentEditId];
-    } else if (currentEditId) {
-        // Update existing post
-        const index = blogPosts.findIndex(p => p.id === currentEditId);
-        if (index !== -1) {
-            blogPosts[index] = postData;
-        }
-    } else {
-        // Add new post
-        blogPosts.push(postData);
-    }
+    // Disable submit button
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = currentEditId ? 'Updating...' : 'Creating...';
 
-    // Save content
-    blogContent[postId] = content;
-
-    // Save to localStorage
     try {
-        saveToLocalStorage();
+        const url = currentEditId ? `${API_URL}/posts/${currentEditId}` : `${API_URL}/posts`;
+        const method = currentEditId ? 'PUT' : 'POST';
 
-        // Log the saved post for debugging
-        console.log('Post saved:', postData);
-        console.log('Image size:', postData.image ? Math.round(postData.image.length / 1024) + 'KB' : 'No image');
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(postData)
+        });
 
-        // Update UI
-        renderPostsTable();
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to save post');
+        }
+
+        const data = await response.json();
+        console.log('Post saved:', data.post);
+
+        // Reload data and update UI
+        await loadBlogData();
         closeModal();
 
-        showAlert(currentEditId ? 'Post updated successfully!' : 'Post created successfully!', 'success');
+        showAlert(currentEditId ? 'Draft updated successfully!' : 'Draft created successfully!', 'success');
     } catch (error) {
-        // Don't close modal if save failed
         console.error('Failed to save post:', error);
+        showAlert('Error saving post: ' + error.message, 'error');
+        // Re-enable button
+        submitBtn.disabled = false;
+        submitBtn.textContent = currentEditId ? 'Update Draft' : 'Save Draft';
     }
 });
 
-// Export data as JSON (Full backup with all files)
-function exportData() {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-
-    // 1. Export blog-posts.json
-    const postsJson = {
-        posts: blogPosts
-    };
-    downloadFile('blog-posts.json', JSON.stringify(postsJson, null, 2), 'application/json');
-
-    // 2. Export each markdown file
-    setTimeout(() => {
-        Object.keys(blogContent).forEach((postId, index) => {
-            setTimeout(() => {
-                downloadFile(`${postId}.md`, blogContent[postId], 'text/markdown');
-            }, index * 100); // Stagger downloads
+// Export data as JSON (Full backup)
+async function exportData() {
+    try {
+        // Load all posts from API
+        const response = await fetch(`${API_URL}/posts?status=all`, {
+            credentials: 'include'
         });
-    }, 500);
 
-    // 3. Export complete backup
-    setTimeout(() => {
+        if (!response.ok) throw new Error('Failed to load posts');
+
+        const data = await response.json();
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+
+        // Export complete backup
         const completeBackup = {
             timestamp: new Date().toISOString(),
-            posts: blogPosts,
-            content: blogContent
+            posts: data.posts
         };
-        downloadFile(`blog-backup-${timestamp}.json`, JSON.stringify(completeBackup, null, 2), 'application/json');
-    }, (Object.keys(blogContent).length + 1) * 100 + 500);
 
-    showAlert('Exporting all files... Check your downloads folder!', 'success');
+        downloadFile(`blog-backup-${timestamp}.json`, JSON.stringify(completeBackup, null, 2), 'application/json');
+        showAlert('Backup exported successfully!', 'success');
+    } catch (error) {
+        console.error('Export error:', error);
+        showAlert('Error exporting data: ' + error.message, 'error');
+    }
 }
 
 // Helper function to download files
@@ -306,88 +332,14 @@ function downloadFile(filename, content, mimeType) {
     URL.revokeObjectURL(url);
 }
 
-// Import data from backup
+// Import data from backup (disabled - not needed with backend)
 function importData() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    input.onchange = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        try {
-            const text = await file.text();
-            const data = JSON.parse(text);
-
-            // Check if it's a complete backup or just posts
-            if (data.posts && data.content) {
-                // Complete backup
-                blogPosts = data.posts;
-                blogContent = data.content;
-            } else if (data.posts) {
-                // Just posts data
-                blogPosts = data.posts;
-            } else {
-                throw new Error('Invalid backup file format');
-            }
-
-            saveToLocalStorage();
-            renderPostsTable();
-            showAlert('Data imported successfully!', 'success');
-        } catch (error) {
-            showAlert('Error importing data: ' + error.message, 'error');
-            console.error('Import error:', error);
-        }
-    };
-    input.click();
+    showAlert('Import functionality disabled. All data is stored in the database. Use Export for backups.', 'info');
 }
 
-// Auto-backup to prevent data loss
-function autoBackup() {
-    const lastBackup = localStorage.getItem('lastAutoBackup');
-    const now = Date.now();
-
-    // Auto-backup every 30 minutes
-    if (!lastBackup || now - parseInt(lastBackup) > 30 * 60 * 1000) {
-        const backup = {
-            timestamp: new Date().toISOString(),
-            posts: blogPosts,
-            content: blogContent
-        };
-
-        // Save to a separate localStorage key as emergency backup
-        try {
-            localStorage.setItem('blogBackup', JSON.stringify(backup));
-            localStorage.setItem('lastAutoBackup', now.toString());
-            console.log('Auto-backup created at', new Date().toLocaleString());
-        } catch (error) {
-            console.error('Auto-backup failed:', error);
-        }
-    }
-}
-
-// Restore from auto-backup
+// Restore from backup (disabled - not needed with backend)
 function restoreFromBackup() {
-    const backup = localStorage.getItem('blogBackup');
-    if (!backup) {
-        showAlert('No backup found', 'error');
-        return;
-    }
-
-    if (!confirm('This will restore your blog from the last auto-backup. Continue?')) {
-        return;
-    }
-
-    try {
-        const data = JSON.parse(backup);
-        blogPosts = data.posts;
-        blogContent = data.content;
-        saveToLocalStorage();
-        renderPostsTable();
-        showAlert(`Backup restored from ${new Date(data.timestamp).toLocaleString()}`, 'success');
-    } catch (error) {
-        showAlert('Error restoring backup: ' + error.message, 'error');
-    }
+    showAlert('Auto-backup not needed. All data is safely stored in the database and can be exported anytime.', 'info');
 }
 
 // Close modal when clicking outside
