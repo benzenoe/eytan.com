@@ -2,19 +2,11 @@
 
 let blogPosts = [];
 
-// Load blog posts from JSON or localStorage
+// Load blog posts from API
 async function loadBlogPosts() {
     try {
-        // Try localStorage first (for local admin edits)
-        const localData = localStorage.getItem('blogPosts');
-        if (localData) {
-            blogPosts = JSON.parse(localData);
-            renderBlogPosts();
-            return;
-        }
-
-        // Load from JSON file
-        const response = await fetch('data/blog-posts.json');
+        // Load from API - only published posts
+        const response = await fetch('https://api.eytan.com/api/posts?status=published');
         const data = await response.json();
         blogPosts = data.posts || [];
         renderBlogPosts();
