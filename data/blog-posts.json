@@ -3,11 +3,11 @@
     {
       "id": "test3",
       "title": "test3",
-      "date": "2025-12-04",
+      "date": "2025-12-04T00:00:00.000Z",
       "author": "Eytan Benzeno",
-      "excerpt": "test3",
       "icon": "📝",
-      "image": ""
+      "image": "",
+      "excerpt": "test3"
     }
   ]
 }
