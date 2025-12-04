@@ -1,7 +1,7 @@
 // Admin Authentication System with Backend API
 
 // API Configuration
-const API_URL = localStorage.getItem('API_URL') || 'https://eytan-com-blog-backend-production.up.railway.app/api';
+const API_URL = localStorage.getItem('API_URL') || 'https://api.eytan.com/api';
 
 // Check if user is authenticated
 async function isAuthenticated() {
