@@ -90,6 +90,46 @@
             background: #c82333;
         }
 
+        .btn-publish {
+            background: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-publish:hover {
+            background: #218838;
+        }
+
+        .btn-publish:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .btn-edit:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        .status-draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-published {
+            background: #d4edda;
+            color: #155724;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -264,9 +304,6 @@
                 <button class="btn btn-secondary" onclick="restoreFromBackup()" title="Restore from emergency auto-backup" style="background: #28a745;">
                     <i class="fas fa-history"></i> Restore Backup
                 </button>
-                <button class="btn btn-secondary" onclick="window.adminAuth.logout()" style="background: #dc3545;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
             </div>
         </div>
 
@@ -353,7 +390,7 @@
 
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Post</button>
+                    <button type="submit" class="btn btn-primary">Save Draft</button>
                 </div>
             </form>
         </div>
@@ -376,15 +413,10 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/admin-auth.js"></script>
     <script src="js/admin.js"></script>
     <script>
-        // Initialize authentication before loading admin
-        if (!window.adminAuth.init()) {
-            // If not authenticated, login form will be shown
-            // Prevent admin.js from loading
-            throw new Error('Authentication required');
-        }
+        // Authentication disabled - admin page is now open access
+        console.log('Admin page loaded - authentication disabled');
     </script>
 </body>
 </html>
