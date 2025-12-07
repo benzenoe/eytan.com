@@ -366,26 +366,58 @@ document.getElementById('post-image-url').addEventListener('input', function(e) 
 });
 
 // Handle image file upload
-document.getElementById('post-image-file').addEventListener('change', function(e) {
+document.getElementById('post-image-file').addEventListener('change', async function(e) {
     const file = e.target.files[0];
     if (!file) return;
 
     // Check file size (max 2MB)
     if (file.size > 2 * 1024 * 1024) {
-        showAlert('Image must be less than 2MB for upload. For larger images, please use an image URL instead.', 'error');
+        showAlert('Image must be less than 2MB. Please resize or compress the image.', 'error');
         this.value = '';
         return;
     }
 
+    // Show uploading message
+    showAlert('Uploading image to GitHub...', 'info');
+
     // Read file and convert to base64
     const reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = async function(event) {
         const base64 = event.target.result;
         console.log('Image loaded, size:', Math.round(base64.length / 1024), 'KB');
-        document.getElementById('post-image-url').value = base64;
-        document.getElementById('preview-img').src = base64;
-        document.getElementById('image-preview').classList.add('show');
-        showAlert('Image loaded successfully! Remember to save your post.', 'success');
+
+        try {
+            // Upload to GitHub via API
+            const response = await fetch(`${API_URL}/upload/image`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    image: base64,
+                    filename: file.name
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Upload failed');
+            }
+
+            const data = await response.json();
+            console.log('Image uploaded:', data);
+
+            // Use the public URL (not base64)
+            document.getElementById('post-image-url').value = data.url;
+            document.getElementById('preview-img').src = data.fullUrl;
+            document.getElementById('image-preview').classList.add('show');
+            showAlert(`Image uploaded successfully! (${data.size})`, 'success');
+        } catch (error) {
+            console.error('Upload error:', error);
+            showAlert('Failed to upload image: ' + error.message, 'error');
+            document.getElementById('post-image-file').value = '';
+        }
     };
     reader.onerror = function(error) {
         showAlert('Error reading file: ' + error, 'error');
