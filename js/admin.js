@@ -66,7 +66,7 @@ function renderPostsTable() {
                         <i class="fas fa-upload"></i> Publish
                     </button>
                     ` : ''}
-                    <button class="btn-icon btn-edit" onclick="editPost('${post.id}')" title="Edit" ${post.status === 'published' ? 'disabled' : ''}>
+                    <button class="btn-icon btn-edit" onclick="editPost('${post.id}')" title="Edit">
                         <i class="fas fa-edit"></i>
                     </button>
                     <button class="btn-icon btn-delete" onclick="deletePost('${post.id}')" title="Delete">
@@ -126,7 +126,7 @@ async function editPost(postId) {
         const post = data.post;
 
         currentEditId = postId;
-        document.getElementById('modal-title').textContent = 'Edit Draft Post';
+        document.getElementById('modal-title').textContent = post.status === 'published' ? 'Edit Published Post' : 'Edit Draft Post';
         document.getElementById('post-id').value = post.id;
         document.getElementById('post-id').disabled = true; // Can't change ID when editing
         document.getElementById('post-title').value = post.title;
