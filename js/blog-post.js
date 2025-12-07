@@ -38,8 +38,8 @@ async function loadBlogData() {
             return;
         }
 
-        // Load from JSON file
-        const response = await fetch('data/blog-posts.json');
+        // Load from API
+        const response = await fetch('https://api.eytan.com/api/posts?status=published');
         const data = await response.json();
         const posts = data.posts || [];
 
