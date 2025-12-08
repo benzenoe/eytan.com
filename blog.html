@@ -25,6 +25,23 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://eytan.com/blog.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eytan.com/blog.html">
+    <meta property="og:title" content="Blog - Eytan Benzeno">
+    <meta property="og:description" content="Read 2 articles by Eytan Benzeno covering technology, software development, and innovation.">
+    <meta property="og:image" content="https://eytan.com/images/eb-logo1.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://eytan.com/blog.html">
+    <meta property="twitter:title" content="Blog - Eytan Benzeno">
+    <meta property="twitter:description" content="Read 2 articles by Eytan Benzeno covering technology, software development, and innovation.">
+    <meta property="twitter:image" content="https://eytan.com/images/eb-logo1.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://eytan.com/blog.html">
 </head>
 <body>
     <nav class="navbar">
@@ -68,7 +85,58 @@
             </div>
 
             <div class="blog-grid" id="blog-grid">
-                <!-- Blog posts will be loaded here -->
+        <div class="blog-card-wrapper">
+            <a href="blog/test4.html" class="blog-card">
+
+                    <div class="blog-card-image">
+                        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png" alt="Hey Siri, It’s Not Me – It’s You: How Apple’s Assistant Became the Village Idiot in an AI World">
+                    </div>
+                <div class="blog-card-content">
+                    <h3>Hey Siri, It’s Not Me – It’s You: How Apple’s Assistant Became the Village Idiot in an AI World</h3>
+                    <div class="blog-card-share">
+                        <button onclick="shareBlogPost(event, 'test4', 'Hey Siri, It’s Not Me – It’s You: How Apple’s Assistant Became the Village Idiot in an AI World', 'facebook')" class="share-btn-small facebook-btn" title="Share on Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button onclick="shareBlogPost(event, 'test4', 'Hey Siri, It’s Not Me – It’s You: How Apple’s Assistant Became the Village Idiot in an AI World', 'linkedin')" class="share-btn-small linkedin-btn" title="Share on LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                        <button onclick="shareBlogPost(event, 'test4', 'Hey Siri, It’s Not Me – It’s You: How Apple’s Assistant Became the Village Idiot in an AI World', 'x')" class="share-btn-small x-btn" title="Share on X">
+                            <span class="x-icon">𝕏</span>
+                        </button>
+                    </div>
+                    <div class="blog-meta">
+                        <i class="far fa-calendar"></i> October 29, 2025
+                    </div>
+                    <p class="blog-excerpt">The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subreddit and you’ll see post after post with titles like “Siri is a complete disappointment” and “Siri isn’t Siri anymore”</p>
+                </div>
+            </a>
+        </div>
+        <div class="blog-card-wrapper">
+            <a href="blog/welcome.html" class="blog-card">
+
+                    <div class="blog-card-header">
+                        📝
+                    </div>
+                <div class="blog-card-content">
+                    <h3>Welcome to My Blog</h3>
+                    <div class="blog-card-share">
+                        <button onclick="shareBlogPost(event, 'welcome', 'Welcome to My Blog', 'facebook')" class="share-btn-small facebook-btn" title="Share on Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button onclick="shareBlogPost(event, 'welcome', 'Welcome to My Blog', 'linkedin')" class="share-btn-small linkedin-btn" title="Share on LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                        <button onclick="shareBlogPost(event, 'welcome', 'Welcome to My Blog', 'x')" class="share-btn-small x-btn" title="Share on X">
+                            <span class="x-icon">𝕏</span>
+                        </button>
+                    </div>
+                    <div class="blog-meta">
+                        <i class="far fa-calendar"></i> January 4, 2023
+                    </div>
+                    <p class="blog-excerpt">Hello and welcome! I'm excited to launch this blog where I'll be sharing my thoughts, experiences, and insights.</p>
+                </div>
+            </a>
+        </div>
             </div>
         </div>
     </section>
