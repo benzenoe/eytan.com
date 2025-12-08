@@ -152,6 +152,7 @@ async function editPost(postId) {
         document.getElementById('post-author').value = post.author || 'Eytan Benzeno';
         document.getElementById('post-icon').value = post.icon || '';
         document.getElementById('post-image-url').value = post.image || '';
+        document.getElementById('post-hashtags').value = post.hashtags || '';
         document.getElementById('post-excerpt').value = post.excerpt;
         document.getElementById('post-content').value = post.content || '';
 
@@ -302,6 +303,7 @@ document.getElementById('post-form').addEventListener('submit', async function(e
     // Don't trim emoji - it can corrupt multi-codepoint emojis
     const icon = document.getElementById('post-icon').value;
     const imageUrl = document.getElementById('post-image-url').value.trim();
+    const hashtags = document.getElementById('post-hashtags').value.trim();
     const excerpt = document.getElementById('post-excerpt').value.trim();
     const content = document.getElementById('post-content').value.trim();
 
@@ -325,6 +327,7 @@ document.getElementById('post-form').addEventListener('submit', async function(e
         author: author,
         icon: icon || '📝',
         image: imageUrl || '',
+        hashtags: hashtags || '',
         excerpt: excerpt,
         content: content
     };

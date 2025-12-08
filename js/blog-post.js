@@ -58,7 +58,8 @@ async function loadBlogData() {
                 title: post.title,
                 date: post.date,
                 author: post.author,
-                image: post.image || ''
+                image: post.image || '',
+                hashtags: post.hashtags || ''
             };
         });
     } catch (error) {
@@ -172,6 +173,9 @@ function shareToFacebook() {
     const postId = getPostId();
     const postData = blogPostsData[postId];
     const url = encodeURIComponent(window.location.href);
+
+    // Facebook Sharer API has limited parameter support
+    // Hashtags will be included in the page's Open Graph tags
     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
     window.open(shareUrl, '_blank', 'width=600,height=400');
 }
@@ -180,7 +184,9 @@ function shareToLinkedIn() {
     const postId = getPostId();
     const postData = blogPostsData[postId];
     const url = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(postData.title);
+
+    // LinkedIn will pull hashtags from the page content
+    // The share-offsite API doesn't support custom text with hashtags
     const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
     window.open(shareUrl, '_blank', 'width=600,height=400');
 }
@@ -189,8 +195,19 @@ function shareToX() {
     const postId = getPostId();
     const postData = blogPostsData[postId];
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(`Check out "${postData.title}" by Eytan Benzeno`);
-    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+    let text = `Check out "${postData.title}" by Eytan Benzeno`;
+
+    // Add hashtags if present
+    if (postData.hashtags && postData.hashtags.trim()) {
+        const hashtagsFormatted = postData.hashtags
+            .split(' ')
+            .filter(tag => tag.trim().length > 0)
+            .map(tag => `#${tag.trim()}`)
+            .join(' ');
+        text += ` ${hashtagsFormatted}`;
+    }
+
+    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(text)}`;
     window.open(shareUrl, '_blank', 'width=600,height=400');
 }
 
