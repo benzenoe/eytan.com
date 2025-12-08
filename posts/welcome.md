@@ -33,3 +33,7 @@ I don't have all the answers – not even close. But I'm curious, I'm engaged, a
 Have thoughts on anything I write about? Reach out. The best insights come from conversation.
 
 Thanks for being here.
+
+
+
+#QuantumComputing #BlockchainTechnology #AIRevolution #SpaceExploration #BiotechInnovation #CryptoInvesting #RealEstateInvesting #StockMarket #GlobalMarkets #FutureOfBusiness #TravelPortugal #FoodieLife #HomeChef #BoutiqueHotels #LisbonLife #EntrepreneurLife #FitnessJourney #DigitalNomad #LifestyleBlog #CuriousMind #eytan #benzeno
