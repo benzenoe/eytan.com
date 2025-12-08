@@ -61,11 +61,9 @@ function renderPostsTable() {
             <td>${post.excerpt.substring(0, 60)}${post.excerpt.length > 60 ? '...' : ''}</td>
             <td>
                 <div class="action-buttons">
-                    ${post.status !== 'published' ? `
-                    <button class="btn-icon btn-publish" onclick="publishPost('${post.id}')" title="Publish to Live Site">
-                        <i class="fas fa-upload"></i> Publish
+                    <button class="btn-icon btn-publish" onclick="publishPost('${post.id}')" title="${post.status === 'published' ? 'Republish (sync to GitHub)' : 'Publish to Live Site'}">
+                        <i class="fas fa-upload"></i> ${post.status === 'published' ? 'Republish' : 'Publish'}
                     </button>
-                    ` : ''}
                     <button class="btn-icon btn-edit" onclick="editPost('${post.id}')" title="Edit">
                         <i class="fas fa-edit"></i>
                     </button>
