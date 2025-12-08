@@ -231,7 +231,8 @@ document.getElementById('post-form').addEventListener('submit', async function(e
     const title = document.getElementById('post-title').value.trim();
     const date = document.getElementById('post-date').value;
     const author = document.getElementById('post-author').value.trim();
-    const icon = document.getElementById('post-icon').value.trim();
+    // Don't trim emoji - it can corrupt multi-codepoint emojis
+    const icon = document.getElementById('post-icon').value;
     const imageUrl = document.getElementById('post-image-url').value.trim();
     const excerpt = document.getElementById('post-excerpt').value.trim();
     const content = document.getElementById('post-content').value.trim();
