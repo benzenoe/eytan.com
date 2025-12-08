@@ -36,7 +36,7 @@ function renderBlogPosts() {
 
     blogGrid.innerHTML = sortedPosts.map(post => `
         <div class="blog-card-wrapper">
-            <a href="blog-post.html?post=${post.id}" class="blog-card">
+            <a href="blog/${post.id}.html" class="blog-card">
                 ${post.image ? `
                     <div class="blog-card-image">
                         <img src="${post.image}" alt="${post.title}">
@@ -76,7 +76,7 @@ function shareBlogPost(event, postId, postTitle, platform) {
     event.stopPropagation();
 
     const baseUrl = window.location.origin;
-    const postUrl = `${baseUrl}/blog-post.html?post=${postId}`;
+    const postUrl = `${baseUrl}/blog/${postId}.html`;
     const encodedUrl = encodeURIComponent(postUrl);
     const encodedTitle = encodeURIComponent(postTitle);
 

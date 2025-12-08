@@ -1,5 +1,15 @@
 // Individual blog post functionality
 
+// Redirect old URL format to new SEO-optimized format
+(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('post');
+    if (postId) {
+        // Redirect from blog-post.html?post=ID to blog/ID.html
+        window.location.replace(`/blog/${postId}.html`);
+    }
+})();
+
 let blogPostsData = {};
 let blogContent = {};
 
