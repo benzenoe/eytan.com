@@ -14,11 +14,9 @@ I'm endlessly curious about a lot of things, and this blog is my way of making s
 
 **📈 Markets & Investing**: Real estate, stocks, crypto – I'm actively invested and constantly learning. I'll share my perspective as someone operating across different markets and continents, though I'm definitely still figuring plenty of it out.
 
-**🔬 Biotech & Longevity**: The intersection of biology and technology amazes me. CRISPR, new therapies, longevity research – I read everything I can find and try to understand what it means for our future.
-
 **💪 Sports & Fitness**: Staying fit while juggling businesses and travel is an ongoing experiment. I'll share what's working for me, though I'm no elite athlete – just someone trying to optimize health and performance.
 
-**🍽️ Food, Travel & Discoveries**: Living between cultures has exposed me to incredible food, places, and experiences. I cook at home (especially now while renovating my lake house kitchen), seek out great restaurants, and I'm always looking for hotels and destinations that offer something special. I'll share the gems I discover along the way.
+**🍽️ Food, Travel & Discoveries**: Living between cultures has exposed me to incredible food, places, and experiences. I cook at home, seek out great restaurants, and I'm always looking for hotels and destinations that offer something special. I'll share the gems I discover along the way.
 
 ## Why This Blog Exists
 
