@@ -105,6 +105,14 @@ function openCreateModal() {
     document.getElementById('post-author').value = 'Eytan Benzeno';
     document.getElementById('image-preview').classList.remove('show');
     document.getElementById('post-modal').classList.add('active');
+
+    // Reset slug field for auto-generation
+    const slugField = document.getElementById('post-slug');
+    if (slugField) {
+        delete slugField.dataset.manuallyEdited;
+        slugField.value = '';
+        updateSlugPreview('');
+    }
 }
 
 // Edit post
@@ -128,6 +136,15 @@ async function editPost(postId) {
         document.getElementById('post-id').value = post.id;
         document.getElementById('post-id').disabled = true; // Can't change ID when editing
         document.getElementById('post-title').value = post.title;
+
+        // Set slug field
+        const slugField = document.getElementById('post-slug');
+        if (slugField) {
+            slugField.value = post.slug || generateSlug(post.title);
+            slugField.dataset.manuallyEdited = 'true'; // Mark as manually set
+            updateSlugPreview(slugField.value);
+        }
+
         // Convert ISO date to YYYY-MM-DD format for date input
         const dateObj = new Date(post.date);
         const formattedDate = dateObj.toISOString().split('T')[0];
@@ -237,11 +254,48 @@ function closeModal() {
     }
 }
 
+// Generate URL-friendly slug from title
+function generateSlug(title) {
+    return title
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '') // Remove special characters
+        .replace(/\s+/g, '-')      // Replace spaces with hyphens
+        .replace(/-+/g, '-')       // Replace multiple hyphens with single hyphen
+        .substring(0, 200);        // Limit length
+}
+
+// Update slug preview
+function updateSlugPreview(slug) {
+    const preview = document.getElementById('slug-preview');
+    if (preview && slug) {
+        preview.textContent = `https://eytan.com/blog/${slug}.html`;
+    }
+}
+
+// Auto-generate slug from title
+document.getElementById('post-title').addEventListener('input', function(e) {
+    const slugField = document.getElementById('post-slug');
+    // Only auto-generate if slug field is empty or hasn't been manually edited
+    if (!slugField.dataset.manuallyEdited) {
+        const slug = generateSlug(e.target.value);
+        slugField.value = slug;
+        updateSlugPreview(slug);
+    }
+});
+
+// Track manual edits to slug
+document.getElementById('post-slug').addEventListener('input', function(e) {
+    this.dataset.manuallyEdited = 'true';
+    updateSlugPreview(e.target.value);
+});
+
 // Handle form submission
 document.getElementById('post-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const postId = document.getElementById('post-id').value.trim();
+    const slug = document.getElementById('post-slug').value.trim();
     const title = document.getElementById('post-title').value.trim();
     const date = document.getElementById('post-date').value;
     const author = document.getElementById('post-author').value.trim();
@@ -257,8 +311,15 @@ document.getElementById('post-form').addEventListener('submit', async function(e
         return;
     }
 
+    // Validate slug (URL-friendly)
+    if (slug && !/^[a-z0-9-]+$/.test(slug)) {
+        showAlert('URL Slug must be lowercase letters, numbers, and hyphens only', 'error');
+        return;
+    }
+
     const postData = {
         id: postId,
+        slug: slug || generateSlug(title), // Use slug or generate from title
         title: title,
         date: date,
         author: author,

@@ -347,6 +347,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="post-slug">URL Slug (auto-generated from title)</label>
+                    <input type="text" id="post-slug" placeholder="my-awesome-blog-post" pattern="[a-z0-9-]+" title="Only lowercase letters, numbers, and hyphens">
+                    <small style="color: #666; font-size: 0.85em; display: block; margin-top: 0.25rem;">
+                        Preview: <span id="slug-preview" style="color: #667eea; font-weight: 500;">https://eytan.com/blog/my-awesome-blog-post.html</span>
+                    </small>
+                </div>
+
+                <div class="form-group">
                     <label for="post-date">Date</label>
                     <input type="date" id="post-date" required>
                 </div>
