@@ -128,7 +128,10 @@ async function editPost(postId) {
         document.getElementById('post-id').value = post.id;
         document.getElementById('post-id').disabled = true; // Can't change ID when editing
         document.getElementById('post-title').value = post.title;
-        document.getElementById('post-date').value = post.date;
+        // Convert ISO date to YYYY-MM-DD format for date input
+        const dateObj = new Date(post.date);
+        const formattedDate = dateObj.toISOString().split('T')[0];
+        document.getElementById('post-date').value = formattedDate;
         document.getElementById('post-author').value = post.author || 'Eytan Benzeno';
         document.getElementById('post-icon').value = post.icon || '';
         document.getElementById('post-image-url').value = post.image || '';
