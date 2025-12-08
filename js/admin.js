@@ -424,8 +424,9 @@ document.getElementById('post-image-file').addEventListener('change', async func
             const data = await response.json();
             console.log('Image uploaded:', data);
 
-            // Use the public URL (not base64)
-            document.getElementById('post-image-url').value = data.url;
+            // Use the full public URL for the input field (required for type="url" validation)
+            // but store the relative URL in the database (it's set during form submission)
+            document.getElementById('post-image-url').value = data.fullUrl;
             document.getElementById('preview-img').src = data.fullUrl;
             document.getElementById('image-preview').classList.add('show');
             showAlert(`Image uploaded successfully! (${data.size})`, 'success');
