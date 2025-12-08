@@ -146,6 +146,13 @@ async function editPost(postId) {
             document.getElementById('image-preview').classList.remove('show');
         }
 
+        // Reset submit button state
+        const submitBtn = document.querySelector('#post-form button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Update Draft';
+        }
+
         document.getElementById('post-modal').classList.add('active');
     } catch (error) {
         console.error('Error loading post:', error);
@@ -221,6 +228,13 @@ function closeModal() {
     document.getElementById('post-modal').classList.remove('active');
     document.getElementById('post-id').disabled = false;
     currentEditId = null;
+
+    // Reset submit button state
+    const submitBtn = document.querySelector('#post-form button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Save Draft';
+    }
 }
 
 // Handle form submission
