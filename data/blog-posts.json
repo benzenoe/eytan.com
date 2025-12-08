@@ -2,12 +2,12 @@
   "posts": [
     {
       "id": "test4",
-      "title": "test4",
-      "date": "2025-12-07T00:00:00.000Z",
+      "title": "Hey Siri, It’s Not Me – It’s You: How Apple’s Assistant Became the Village Idiot in an AI World",
+      "date": "2025-12-06T20:04:15.210Z",
       "author": "Eytan Benzeno",
       "icon": "📝",
-      "image": "",
-      "excerpt": "test4"
+      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png",
+      "excerpt": "The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subreddit and you’ll see post after post with titles like “Siri is a complete disappointment” and “Siri isn’t Siri anymore”"
     },
     {
       "id": "welcome",
