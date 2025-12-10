@@ -154,10 +154,32 @@
 
                 </div>
 
+                <!-- Share Buttons at Bottom -->
+                <div style="margin-top: 3rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                    <h4 style="margin: 0 0 1rem 0; color: #333; font-size: 1.1rem;">Share This Post</h4>
+                    <div class="share-buttons" style="justify-content: center;">
+                        <button onclick="shareToLinkedIn()" class="share-btn-icon linkedin-btn" title="Share on LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                        <button onclick="shareToX()" class="share-btn-icon x-btn" title="Share on X">
+                            <span class="x-icon">𝕏</span>
+                        </button>
+                        <button onclick="shareToFacebook()" class="share-btn-icon facebook-btn" title="Share on Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button onclick="shareToWhatsApp()" class="share-btn-icon whatsapp-btn" title="Share on WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button onclick="copyLink(this)" class="share-btn-icon copy-btn" title="Copy Link">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Hashtags Section (will be populated by JavaScript) -->
-                <div id="hashtags-section" style="display: none; margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
+                <div id="hashtags-section" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <h4 style="margin: 0; color: #333; font-size: 1.1rem;">📱 Share with Hashtags</h4>
+                        <h4 style="margin: 0; color: #333; font-size: 1.1rem;">📱 Copy Hashtags for Your Post</h4>
                         <button onclick="copyHashtags()" class="btn-icon copy-hashtags-btn" title="Copy all hashtags" style="padding: 0.5rem 1rem; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
                             <i class="fas fa-copy"></i> Copy Hashtags
                         </button>
