@@ -334,6 +334,18 @@ Perhaps the most surprising pillar – Apple acknowledged that Siri alone might 
 <p>#Siri #AppleIntelligence #iPhone #AI #ChatGPT #Apple #VoiceAssistant #iOS #OpenAI #TechNews #ArtificialIntelligence #GoogleAssistant #Alexa #SmartAssistant #TechReview #BigTech #AIRevolution #UserExperience #Innovation #TechFrustration</p>
 
                 </div>
+
+                <!-- Hashtags Section (will be populated by JavaScript) -->
+                <div id="hashtags-section" style="display: none; margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0; color: #333; font-size: 1.1rem;">📱 Share with Hashtags</h4>
+                        <button onclick="copyHashtags()" class="btn-icon copy-hashtags-btn" title="Copy all hashtags" style="padding: 0.5rem 1rem; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-copy"></i> Copy Hashtags
+                        </button>
+                    </div>
+                    <div id="hashtags-display" style="line-height: 1.8; color: #667eea; font-size: 0.95rem;"></div>
+                </div>
+
                 <div style="margin-top: 3rem; text-align: center;">
                     <a href="../blog.html" class="btn btn-secondary">← Back to Blog</a>
                 </div>
@@ -426,6 +438,59 @@ Perhaps the most surprising pillar – Apple acknowledged that Siri alone might 
             alert('Failed to copy link. Please try again.');
         });
     }
+
+    // Extract and display hashtags from blog content
+    function extractAndDisplayHashtags() {
+        const content = document.querySelector('.blog-post-body');
+        if (!content) return;
+
+        const text = content.textContent;
+        // Match hashtags (# followed by letters/numbers, no spaces)
+        const hashtagRegex = /#[A-Za-z0-9_]+/g;
+        const hashtags = text.match(hashtagRegex);
+
+        if (hashtags && hashtags.length > 0) {
+            // Remove duplicates and join with spaces
+            const uniqueHashtags = [...new Set(hashtags)];
+
+            // Display hashtags
+            const hashtagsDisplay = document.getElementById('hashtags-display');
+            hashtagsDisplay.textContent = uniqueHashtags.join(' ');
+
+            // Show the hashtags section
+            document.getElementById('hashtags-section').style.display = 'block';
+
+            // Store hashtags globally for copy function
+            window.postHashtags = uniqueHashtags.join(' ');
+        }
+    }
+
+    // Copy hashtags to clipboard
+    function copyHashtags() {
+        if (!window.postHashtags) return;
+
+        navigator.clipboard.writeText(window.postHashtags).then(() => {
+            const button = document.querySelector('.copy-hashtags-btn');
+            const icon = button.querySelector('i');
+            const originalHTML = button.innerHTML;
+
+            // Change to checkmark
+            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            button.style.background = '#10b981';
+
+            // Reset after 2 seconds
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.background = '#667eea';
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy hashtags:', err);
+            alert('Failed to copy hashtags. Please try again.');
+        });
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', extractAndDisplayHashtags);
     </script>
 
     <!-- Tidio Chatbot -->
