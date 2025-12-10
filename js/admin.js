@@ -62,7 +62,7 @@ function renderPostsTable() {
             <td>
                 <div class="action-buttons">
                     ${post.status === 'published'
-                        ? `<a href="https://eytan.com/blog/${post.id}.html" target="_blank" class="btn-icon btn-view" title="View Live Post">
+                        ? `<a href="https://eytan.com/blog/${post.slug || post.id}.html" target="_blank" class="btn-icon btn-view" title="View Live Post">
                             <i class="fas fa-external-link-alt"></i>
                         </a>`
                         : ''
