@@ -11,21 +11,21 @@
     <meta name="author" content="Eytan Benzeno">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://eytan.com/blog/test4.html">
+    <link rel="canonical" href="https://eytan.com/blog/hey-siri.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://eytan.com/blog/test4.html">
+    <meta property="og:url" content="https://eytan.com/blog/hey-siri.html">
     <meta property="og:title" content="Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution">
     <meta property="og:description" content="The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subred">
     <meta property="og:image" content="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png">
     <meta property="og:site_name" content="Eytan.com">
-    <meta property="article:published_time" content="2025-10-29T00:00:00.000Z">
+    <meta property="article:published_time" content="2025-10-28T16:00:00.000Z">
     <meta property="article:author" content="Eytan Benzeno">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://eytan.com/blog/test4.html">
+    <meta property="twitter:url" content="https://eytan.com/blog/hey-siri.html">
     <meta property="twitter:title" content="Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution">
     <meta property="twitter:description" content="The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subred">
     <meta property="twitter:image" content="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png">
@@ -59,10 +59,10 @@
                 "url": "https://eytan.com/images/eb-logo1.png"
             }
         },
-        "datePublished": "2025-10-29T00:00:00.000Z",
+        "datePublished": "2025-10-28T16:00:00.000Z",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https://eytan.com/blog/test4.html"
+            "@id": "https://eytan.com/blog/hey-siri.html"
         }
     }
     </script>
@@ -106,19 +106,25 @@
             <div class="blog-post-content">
                 <h1>Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution</h1>
                 <div class="blog-post-meta">
-                    <i class="far fa-calendar"></i> <time datetime="2025-10-29T00:00:00.000Z">October 29, 2025</time> •
+                    <i class="far fa-calendar"></i> <time datetime="2025-10-28T16:00:00.000Z">October 29, 2025</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
                 </div>
                 <div class="social-share">
                     <div class="share-buttons">
-                        <button onclick="shareToFacebook()" class="share-btn-icon facebook-btn" title="Share on Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </button>
                         <button onclick="shareToLinkedIn()" class="share-btn-icon linkedin-btn" title="Share on LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </button>
                         <button onclick="shareToX()" class="share-btn-icon x-btn" title="Share on X">
                             <span class="x-icon">𝕏</span>
+                        </button>
+                        <button onclick="shareToFacebook()" class="share-btn-icon facebook-btn" title="Share on Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button onclick="shareToWhatsApp()" class="share-btn-icon whatsapp-btn" title="Share on WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button onclick="copyLink(this)" class="share-btn-icon copy-btn" title="Copy Link">
+                            <i class="fas fa-link"></i>
                         </button>
                     </div>
                 </div>
@@ -379,6 +385,46 @@ Perhaps the most surprising pillar – Apple acknowledged that Siri alone might 
         const url = encodeURIComponent(window.location.href);
         const text = encodeURIComponent('Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution by Eytan Benzeno');
         window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+    }
+
+    function shareToWhatsApp() {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent('Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution by Eytan Benzeno');
+        // Use whatsapp:// for mobile, web.whatsapp.com for desktop
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const whatsappUrl = isMobile
+            ? `whatsapp://send?text=${text}%20${url}`
+            : `https://web.whatsapp.com/send?text=${text}%20${url}`;
+        window.open(whatsappUrl, '_blank');
+    }
+
+    function copyLink(button) {
+        const url = window.location.href;
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(url).then(() => {
+            // Change icon to checkmark
+            const icon = button.querySelector('i');
+            const originalClass = icon.className;
+            icon.className = 'fas fa-check';
+
+            // Change button title
+            const originalTitle = button.title;
+            button.title = 'Copied!';
+
+            // Add visual feedback class
+            button.classList.add('copied');
+
+            // Reset after 2 seconds
+            setTimeout(() => {
+                icon.className = originalClass;
+                button.title = originalTitle;
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy link:', err);
+            alert('Failed to copy link. Please try again.');
+        });
     }
     </script>
 
