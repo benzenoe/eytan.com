@@ -1212,12 +1212,9 @@ body {
         padding: 1.5rem;
     }
 
+    /* Share buttons remain horizontal on mobile */
     .share-buttons {
-        flex-direction: column;
-    }
-
-    .share-btn {
-        width: 100%;
+        justify-content: center;
     }
 }
 
