@@ -1277,6 +1277,26 @@ body {
     background: #333333;
 }
 
+.whatsapp-btn {
+    background: #25D366;
+}
+
+.whatsapp-btn:hover {
+    background: #1da851;
+}
+
+.copy-btn {
+    background: #6c757d;
+}
+
+.copy-btn:hover {
+    background: #5a6268;
+}
+
+.copy-btn.copied {
+    background: #28a745;
+}
+
 .share-btn-icon .x-icon,
 .share-btn-small .x-icon {
     font-size: 1rem;
