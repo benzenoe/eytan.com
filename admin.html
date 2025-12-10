@@ -398,7 +398,12 @@
 
                 <div class="form-group">
                     <label for="post-hashtags">Hashtags (for social sharing)</label>
-                    <input type="text" id="post-hashtags" placeholder="QuantumComputing AIRevolution TravelPortugal">
+                    <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+                        <input type="text" id="post-hashtags" placeholder="QuantumComputing AIRevolution TravelPortugal" style="flex: 1;">
+                        <button type="button" class="btn btn-secondary" onclick="generateHashtags()" style="white-space: nowrap;">
+                            Generate Hashtags
+                        </button>
+                    </div>
                     <small style="color: #666; font-size: 0.85em; display: block; margin-top: 0.25rem;">
                         Enter hashtags separated by spaces, without the # symbol. These will be added when sharing on social media.
                     </small>

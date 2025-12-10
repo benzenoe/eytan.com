@@ -513,5 +513,57 @@ document.getElementById('post-image-file').addEventListener('change', async func
     reader.readAsDataURL(file);
 });
 
+// Generate hashtags using AI
+async function generateHashtags() {
+    const title = document.getElementById('post-title').value.trim();
+    const excerpt = document.getElementById('post-excerpt').value.trim();
+    const content = document.getElementById('post-content').value.trim();
+
+    // Validate that we have at least some content
+    if (!title && !excerpt && !content) {
+        showAlert('Please add a title, excerpt, or content first!', 'error');
+        return;
+    }
+
+    // Show loading state
+    const hashtagsInput = document.getElementById('post-hashtags');
+    const originalValue = hashtagsInput.value;
+    hashtagsInput.value = 'Generating hashtags...';
+    hashtagsInput.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/posts/generate-hashtags`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                excerpt: excerpt,
+                content: content
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to generate hashtags');
+        }
+
+        const data = await response.json();
+
+        // Remove # symbols from the generated hashtags (the API returns them with #)
+        const cleanedHashtags = data.hashtags.replace(/#/g, '').trim();
+        hashtagsInput.value = cleanedHashtags;
+        showAlert('Hashtags generated successfully!', 'success');
+    } catch (error) {
+        console.error('Error generating hashtags:', error);
+        showAlert('Error generating hashtags: ' + error.message, 'error');
+        hashtagsInput.value = originalValue; // Restore original value on error
+    } finally {
+        hashtagsInput.disabled = false;
+    }
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', loadBlogData);
