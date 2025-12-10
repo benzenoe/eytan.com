@@ -105,6 +105,20 @@
             cursor: not-allowed;
         }
 
+        .btn-view {
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-view:hover {
+            background: #0056b3;
+            color: white;
+        }
+
         .btn-edit:disabled {
             background: #e0e0e0;
             color: #999;
@@ -294,15 +308,6 @@
             <div class="admin-actions">
                 <button class="btn btn-primary" onclick="openCreateModal()">
                     <i class="fas fa-plus"></i> New Post
-                </button>
-                <button class="btn btn-secondary" onclick="exportData()" title="Export all blog data and markdown files">
-                    <i class="fas fa-download"></i> Export All Files
-                </button>
-                <button class="btn btn-secondary" onclick="importData()" title="Import blog data from backup file">
-                    <i class="fas fa-upload"></i> Import Backup
-                </button>
-                <button class="btn btn-secondary" onclick="restoreFromBackup()" title="Restore from emergency auto-backup" style="background: #28a745;">
-                    <i class="fas fa-history"></i> Restore Backup
                 </button>
             </div>
         </div>

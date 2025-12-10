@@ -61,6 +61,12 @@ function renderPostsTable() {
             <td>${post.excerpt.substring(0, 60)}${post.excerpt.length > 60 ? '...' : ''}</td>
             <td>
                 <div class="action-buttons">
+                    ${post.status === 'published'
+                        ? `<a href="https://eytan.com/blog/${post.id}.html" target="_blank" class="btn-icon btn-view" title="View Live Post">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>`
+                        : ''
+                    }
                     <button class="btn-icon btn-publish" onclick="publishPost('${post.id}')" title="${post.status === 'published' ? 'Republish (sync to GitHub)' : 'Publish to Live Site'}">
                         <i class="fas fa-upload"></i> ${post.status === 'published' ? 'Republish' : 'Publish'}
                     </button>
