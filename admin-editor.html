@@ -244,8 +244,13 @@
 
             <div class="form-group">
                 <label for="postHashtags">Hashtags (for social sharing)</label>
-                <input type="text" id="postHashtags" placeholder="QuantumComputing AIRevolution">
-                <div class="help-text">Space-separated hashtags without the # symbol</div>
+                <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+                    <input type="text" id="postHashtags" placeholder="QuantumComputing AIRevolution" style="flex: 1;">
+                    <button type="button" class="btn btn-secondary" id="generateHashtagsBtn" style="white-space: nowrap;">
+                        Generate Hashtags
+                    </button>
+                </div>
+                <div class="help-text">Space-separated hashtags without the # symbol. Click "Generate Hashtags" to auto-generate.</div>
             </div>
 
             <div class="form-group">

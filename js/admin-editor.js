@@ -136,6 +136,11 @@ function setupEventListeners() {
             reader.readAsDataURL(file);
         }
     });
+
+    // Generate hashtags button
+    document.getElementById('generateHashtagsBtn').addEventListener('click', async () => {
+        await generateHashtags();
+    });
 }
 
 function startAutoSave() {
@@ -343,4 +348,68 @@ function generateSlug(title) {
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
         .substring(0, 200);
+}
+
+async function generateHashtags() {
+    const title = document.getElementById('postTitle').value.trim();
+    const excerpt = document.getElementById('postExcerpt').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+
+    // Validate that we have at least some content
+    if (!title && !excerpt && !content) {
+        alert('Please add a title, excerpt, or content first!');
+        return;
+    }
+
+    // Show loading state
+    const hashtagsInput = document.getElementById('postHashtags');
+    const generateBtn = document.getElementById('generateHashtagsBtn');
+    const originalValue = hashtagsInput.value;
+
+    hashtagsInput.value = 'Generating hashtags...';
+    hashtagsInput.disabled = true;
+    generateBtn.disabled = true;
+    generateBtn.textContent = 'Generating...';
+
+    try {
+        const response = await fetch(`${API_URL}/posts/generate-hashtags`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                excerpt: excerpt,
+                content: content
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to generate hashtags');
+        }
+
+        const data = await response.json();
+
+        // Remove # symbols from the generated hashtags (the API returns them with #)
+        const cleanedHashtags = data.hashtags.replace(/#/g, '').trim();
+        hashtagsInput.value = cleanedHashtags;
+
+        // Show success message briefly
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = 'Hashtags generated!';
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 2000);
+    } catch (error) {
+        console.error('Error generating hashtags:', error);
+        alert('Error generating hashtags: ' + error.message);
+        hashtagsInput.value = originalValue; // Restore original value on error
+    } finally {
+        hashtagsInput.disabled = false;
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate Hashtags';
+    }
 }
