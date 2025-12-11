@@ -240,6 +240,10 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                    // Store auth token in localStorage as fallback for cross-domain cookies
+                    localStorage.setItem('adminAuth', 'true');
+                    localStorage.setItem('adminAuthTime', new Date().getTime());
+
                     showAlert('Login successful! Redirecting...', 'success');
                     setTimeout(() => {
                         window.location.href = 'admin.html';

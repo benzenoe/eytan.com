@@ -247,32 +247,51 @@
         async function checkAuthentication() {
             try {
                 console.log('Checking authentication...');
-                console.log('Cookies:', document.cookie);
 
+                // Check localStorage first (fallback for cross-domain cookie issues)
+                const adminAuth = localStorage.getItem('adminAuth');
+                const authTime = localStorage.getItem('adminAuthTime');
+
+                // Check if auth is recent (within 7 days)
+                if (adminAuth === 'true' && authTime) {
+                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    const isRecent = (new Date().getTime() - parseInt(authTime)) < sevenDays;
+
+                    if (isRecent) {
+                        console.log('Admin page loaded - authenticated via localStorage');
+                        return true;
+                    } else {
+                        // Auth expired
+                        console.log('Auth expired - clearing localStorage');
+                        localStorage.removeItem('adminAuth');
+                        localStorage.removeItem('adminAuthTime');
+                    }
+                }
+
+                // Fallback: check backend session (for cookie-based auth)
+                console.log('Checking backend session...');
                 const response = await fetch(`${API_URL}/auth/status`, {
                     credentials: 'include'
                 });
 
-                console.log('Auth response status:', response.status);
                 const data = await response.json();
                 console.log('Auth response data:', data);
 
-                if (!data.authenticated) {
-                    // Not authenticated, redirect to login
-                    console.error('Not authenticated - redirecting to login');
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 3000); // Wait 3 seconds so we can see the logs
-                    return false;
+                if (data.authenticated) {
+                    // Backend session valid - store in localStorage too
+                    localStorage.setItem('adminAuth', 'true');
+                    localStorage.setItem('adminAuthTime', new Date().getTime());
+                    console.log('Admin page loaded - authenticated via backend session');
+                    return true;
                 }
 
-                console.log('Admin page loaded - authenticated');
-                return true;
+                // Not authenticated
+                console.error('Not authenticated - redirecting to login');
+                window.location.href = 'login.html';
+                return false;
             } catch (error) {
                 console.error('Auth check error:', error);
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 3000);
+                window.location.href = 'login.html';
                 return false;
             }
         }

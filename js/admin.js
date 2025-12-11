@@ -259,6 +259,11 @@ async function logout() {
     }
 
     try {
+        // Clear localStorage
+        localStorage.removeItem('adminAuth');
+        localStorage.removeItem('adminAuthTime');
+
+        // Call backend logout
         const response = await fetch(`${API_URL}/auth/logout`, {
             method: 'POST',
             credentials: 'include'
@@ -274,7 +279,11 @@ async function logout() {
         }
     } catch (error) {
         console.error('Logout error:', error);
-        showAlert('Error logging out: ' + error.message, 'error');
+        // Even if backend logout fails, we cleared localStorage
+        showAlert('Logged out locally. Redirecting...', 'info');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 500);
     }
 }
 

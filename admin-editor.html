@@ -273,19 +273,37 @@
 
         async function checkAuthentication() {
             try {
+                // Check localStorage first (fallback for cross-domain cookie issues)
+                const adminAuth = localStorage.getItem('adminAuth');
+                const authTime = localStorage.getItem('adminAuthTime');
+
+                // Check if auth is recent (within 7 days)
+                if (adminAuth === 'true' && authTime) {
+                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    const isRecent = (new Date().getTime() - parseInt(authTime)) < sevenDays;
+
+                    if (isRecent) {
+                        return true;
+                    }
+                }
+
+                // Fallback: check backend session
                 const response = await fetch(`${API_URL}/auth/status`, {
                     credentials: 'include'
                 });
                 const data = await response.json();
 
-                if (!data.authenticated) {
-                    // Not authenticated, redirect to login
-                    alert('Please log in to access the editor');
-                    window.location.href = 'login.html';
-                    return false;
+                if (data.authenticated) {
+                    // Store in localStorage
+                    localStorage.setItem('adminAuth', 'true');
+                    localStorage.setItem('adminAuthTime', new Date().getTime());
+                    return true;
                 }
 
-                return true;
+                // Not authenticated
+                alert('Please log in to access the editor');
+                window.location.href = 'login.html';
+                return false;
             } catch (error) {
                 console.error('Auth check error:', error);
                 alert('Authentication error. Please log in.');
