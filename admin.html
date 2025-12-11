@@ -246,14 +246,23 @@
 
         async function checkAuthentication() {
             try {
+                console.log('Checking authentication...');
+                console.log('Cookies:', document.cookie);
+
                 const response = await fetch(`${API_URL}/auth/status`, {
                     credentials: 'include'
                 });
+
+                console.log('Auth response status:', response.status);
                 const data = await response.json();
+                console.log('Auth response data:', data);
 
                 if (!data.authenticated) {
                     // Not authenticated, redirect to login
-                    window.location.href = 'login.html';
+                    console.error('Not authenticated - redirecting to login');
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 3000); // Wait 3 seconds so we can see the logs
                     return false;
                 }
 
@@ -261,7 +270,9 @@
                 return true;
             } catch (error) {
                 console.error('Auth check error:', error);
-                window.location.href = 'login.html';
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 3000);
                 return false;
             }
         }
