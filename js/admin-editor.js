@@ -17,6 +17,8 @@ function loadPostData() {
 
     if (postData) {
         currentPost = JSON.parse(postData);
+        console.log('Loading post data:', currentPost);
+        console.log('Hashtags field:', currentPost.hashtags);
         document.getElementById('page-title').textContent = 'Edit Post';
         populateForm(currentPost);
         document.getElementById('deleteBtn').style.display = 'block';
@@ -64,7 +66,11 @@ function populateForm(post) {
     document.getElementById('postIcon').value = post.icon || '';
     document.getElementById('postImageUrl').value = post.image || '';
     document.getElementById('postExcerpt').value = post.excerpt || '';
-    document.getElementById('postHashtags').value = post.hashtags || '';
+
+    const hashtagsValue = post.hashtags || '';
+    console.log('Setting hashtags to:', hashtagsValue);
+    document.getElementById('postHashtags').value = hashtagsValue;
+
     document.getElementById('postContent').value = post.content || '';
 
     if (post.image) {
