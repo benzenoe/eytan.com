@@ -267,6 +267,41 @@
         </div>
     </div>
 
-    <script src="js/admin-editor.js"></script>
+    <script>
+        // Check authentication before loading editor
+        const API_URL = 'https://api.eytan.com/api';
+
+        async function checkAuthentication() {
+            try {
+                const response = await fetch(`${API_URL}/auth/status`, {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+
+                if (!data.authenticated) {
+                    // Not authenticated, redirect to login
+                    alert('Please log in to access the editor');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                return true;
+            } catch (error) {
+                console.error('Auth check error:', error);
+                alert('Authentication error. Please log in.');
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        // Check auth immediately and load editor script
+        checkAuthentication().then(authenticated => {
+            if (authenticated) {
+                const script = document.createElement('script');
+                script.src = 'js/admin-editor.js';
+                document.body.appendChild(script);
+            }
+        });
+    </script>
 </body>
 </html>

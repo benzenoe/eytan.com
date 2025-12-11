@@ -197,6 +197,9 @@
                 <button class="btn btn-primary" onclick="openCreateModal()">
                     <i class="fas fa-plus"></i> New Post
                 </button>
+                <button class="btn btn-secondary" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
         </div>
 
@@ -237,10 +240,41 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/admin.js"></script>
     <script>
-        // Authentication disabled - admin page is now open access
-        console.log('Admin page loaded - authentication disabled');
+        // Check authentication before loading admin
+        const API_URL = 'https://api.eytan.com/api';
+
+        async function checkAuthentication() {
+            try {
+                const response = await fetch(`${API_URL}/auth/status`, {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+
+                if (!data.authenticated) {
+                    // Not authenticated, redirect to login
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                console.log('Admin page loaded - authenticated');
+                return true;
+            } catch (error) {
+                console.error('Auth check error:', error);
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        // Check auth immediately
+        checkAuthentication().then(authenticated => {
+            if (authenticated) {
+                // Load admin.js only if authenticated
+                const script = document.createElement('script');
+                script.src = 'js/admin.js';
+                document.body.appendChild(script);
+            }
+        });
     </script>
 </body>
 </html>

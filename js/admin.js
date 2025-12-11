@@ -252,5 +252,31 @@ function restoreFromBackup() {
     showAlert('Auto-backup not needed. All data is safely stored in the database and can be exported anytime.', 'info');
 }
 
+// Logout function
+async function logout() {
+    if (!confirm('Are you sure you want to logout?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/auth/logout`, {
+            method: 'POST',
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            showAlert('Logged out successfully. Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 500);
+        } else {
+            throw new Error('Logout failed');
+        }
+    } catch (error) {
+        console.error('Logout error:', error);
+        showAlert('Error logging out: ' + error.message, 'error');
+    }
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', loadBlogData);
