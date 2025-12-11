@@ -392,9 +392,8 @@ async function generateHashtags() {
 
         const data = await response.json();
 
-        // Remove # symbols from the generated hashtags (the API returns them with #)
-        const cleanedHashtags = data.hashtags.replace(/#/g, '').trim();
-        hashtagsInput.value = cleanedHashtags;
+        // Keep the hashtags with # symbols as returned by the API
+        hashtagsInput.value = data.hashtags.trim();
 
         // Show success message briefly
         const autoSaveText = document.getElementById('autoSaveText');
