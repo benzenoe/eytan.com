@@ -1,7 +1,9 @@
 // Blog Admin functionality with Backend API
 
-// API URL - authentication removed
-const API_URL = 'https://api.eytan.com/api';
+// API URL - check if already defined in inline script
+if (typeof API_URL === 'undefined') {
+    var API_URL = 'https://api.eytan.com/api';
+}
 
 let blogPosts = [];
 let currentEditId = null;
