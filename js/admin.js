@@ -1,27 +1,35 @@
 // Blog Admin functionality with Backend API
+console.log('admin.js loaded');
 
 // API URL - check if already defined in inline script
 if (typeof API_URL === 'undefined') {
     var API_URL = 'https://api.eytan.com/api';
 }
+console.log('API_URL:', API_URL);
 
 let blogPosts = [];
 let currentEditId = null;
 
 // Load blog data from API
 async function loadBlogData() {
+    console.log('loadBlogData called');
     try {
+        console.log('Fetching from:', `${API_URL}/posts?status=all`);
         const response = await fetch(`${API_URL}/posts?status=all`, {
             method: 'GET',
             credentials: 'include'
         });
 
+        console.log('Response status:', response.status, response.ok);
         if (!response.ok) {
             throw new Error(`Failed to load posts: ${response.statusText}`);
         }
 
         const data = await response.json();
+        console.log('Data received:', data);
+        console.log('Posts count:', data.posts?.length);
         blogPosts = data.posts || [];
+        console.log('Calling renderPostsTable with', blogPosts.length, 'posts');
         renderPostsTable();
     } catch (error) {
         console.error('Error loading blog data:', error);
