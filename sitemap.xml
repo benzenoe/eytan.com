@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post: test4 -->
+    <url>
+        <loc>https://eytan.com/blog/hey-siri.html</loc>
+        <lastmod>2025-12-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post: intelligence-explosion -->
     <url>
         <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
@@ -71,14 +79,6 @@
     <!-- Blog Post: welcome -->
     <url>
         <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
-        <lastmod>2025-12-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: test4 -->
-    <url>
-        <loc>https://eytan.com/blog/hey-siri.html</loc>
         <lastmod>2025-12-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
