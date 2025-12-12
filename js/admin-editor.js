@@ -244,7 +244,7 @@ async function savePost() {
         }
 
         // Save post
-        const isNewPost = !formData.id;
+        const isNewPost = !currentPost; // Check if editing existing post or creating new
         const url = isNewPost
             ? `${API_URL}/posts`
             : `${API_URL}/posts/${currentPost.id}`; // Use original ID, not from form
