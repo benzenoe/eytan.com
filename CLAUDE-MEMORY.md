@@ -1,6 +1,6 @@
 # Eytan.com Frontend - Quick Reference
 
-**Last Updated:** December 11, 2025 (Session 8 - Password Protection)
+**Last Updated:** December 12, 2025 (Session 9 - Blog Categorization Plan)
 
 ## This Repository
 
@@ -140,6 +140,31 @@ Cross-domain cookie issues between `eytan.com` and `api.eytan.com`:
 - "Fix authentication with localStorage fallback" (11da6ea)
 - "Fix duplicate API_URL declaration" (5c17f93)
 - "Add extensive debugging for post loading issue" (1dacd83)
+
+---
+
+### Session 9 (Dec 12, 2025)
+**Issue:** User requested blog categorization system with category menu and filtering
+
+**Status:** Plan created, NOT YET IMPLEMENTED (waiting for user decision)
+
+**Plan Location:** `C:\Users\eytan_s9t3al\.claude\plans\velvet-meandering-kitten.md`
+
+**Two approaches available:**
+1. **Comprehensive (10-13 hours)** - Dynamic management, multiple categories per post, full CRUD
+2. **Simple (2-3 hours)** ⭐ RECOMMENDED - Hardcoded categories, single category per post, dropdown selector
+
+**Implementation pending:** User deciding which approach based on blog size (currently 5 posts)
+
+**Files to modify when implementing:**
+- `blog.html` - Add sidebar filter
+- `js/blog.js` - Filtering logic
+- `css/styles.css` - Sidebar styles
+- `admin-editor.html` - Category selector
+- `js/admin-editor.js` - Category selection logic
+- `blog-post-template.html` - Category display
+
+See backend CLAUDE-MEMORY.md for full details.
 
 ---
 
