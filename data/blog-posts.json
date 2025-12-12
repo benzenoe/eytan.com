@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "id": "the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade",
+      "title": "The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade",
+      "date": "2025-12-12T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "📻",
+      "image": "https://eytan.com/images/blog/1765550169089-cacddb-83a1-7644-704f-a5f32fd74c42-screenshot-2024-11-17-at-9.webp",
+      "excerpt": "The pace of technology is breathtaking. Ten years ago, the world was a different place. Back then, the idea of a smartphone that could do everything from ordering groceries to navigating traffic seemed like a distant dream. "
+    },
+    {
       "id": "test4",
       "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
       "date": "2025-10-29T00:00:00.000Z",
