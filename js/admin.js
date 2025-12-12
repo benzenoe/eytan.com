@@ -1,10 +1,8 @@
 // Blog Admin functionality with Backend API
 console.log('admin.js loaded');
 
-// API URL - check if already defined in inline script
-if (typeof API_URL === 'undefined') {
-    var API_URL = 'https://api.eytan.com/api';
-}
+// API_URL is defined in admin.html inline script
+// No need to declare it here - just use the global variable
 console.log('API_URL:', API_URL);
 
 let blogPosts = [];
