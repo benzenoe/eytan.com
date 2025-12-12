@@ -82,6 +82,14 @@ function populateForm(post) {
 
     document.getElementById('postContent').value = post.content || '';
 
+    // Populate SEO fields
+    document.getElementById('seoTitle').value = post.seo_title || '';
+    document.getElementById('metaDescription').value = post.meta_description || '';
+    document.getElementById('metaKeywords').value = post.meta_keywords || '';
+    document.getElementById('focusKeyword').value = post.focus_keyword || '';
+    document.getElementById('imageAlt').value = post.image_alt || '';
+    document.getElementById('socialPreview').value = post.social_preview || '';
+
     if (post.image) {
         document.getElementById('currentImageDisplay').textContent = post.image;
         document.getElementById('imagePreview').src = post.image;
@@ -215,7 +223,13 @@ function getFormData() {
         image: document.getElementById('postImageUrl').value,
         excerpt: document.getElementById('postExcerpt').value,
         hashtags: document.getElementById('postHashtags').value,
-        content: document.getElementById('postContent').value
+        content: document.getElementById('postContent').value,
+        seoTitle: document.getElementById('seoTitle').value,
+        metaDescription: document.getElementById('metaDescription').value,
+        metaKeywords: document.getElementById('metaKeywords').value,
+        focusKeyword: document.getElementById('focusKeyword').value,
+        imageAlt: document.getElementById('imageAlt').value,
+        socialPreview: document.getElementById('socialPreview').value
     };
 }
 
