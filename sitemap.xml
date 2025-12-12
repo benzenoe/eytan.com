@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post: test-1234 -->
+    <url>
+        <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
+        <lastmod>2025-12-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post: sphere-of-influence -->
     <url>
         <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
