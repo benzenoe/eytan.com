@@ -331,17 +331,22 @@
         const hashtags = text.match(hashtagRegex);
 
         if (hashtags && hashtags.length > 0) {
-            // Remove duplicates and join with spaces
+            // Remove duplicates
             const uniqueHashtags = [...new Set(hashtags)];
 
-            // Display hashtags
+            // Display hashtags as clickable Facebook links
             const hashtagsDisplay = document.getElementById('hashtags-display');
-            hashtagsDisplay.textContent = uniqueHashtags.join(' ');
+            hashtagsDisplay.innerHTML = uniqueHashtags.map(tag => {
+                // Remove # and convert to lowercase for URL
+                const hashtagText = tag.substring(1).toLowerCase();
+                const facebookUrl = `https://www.facebook.com/hashtag/${hashtagText}`;
+                return `<a href="${facebookUrl}" target="_blank" rel="noopener noreferrer" style="color: #667eea; text-decoration: none; margin-right: 0.5rem; transition: color 0.2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='#667eea'">${tag}</a>`;
+            }).join(' ');
 
             // Show the hashtags section
             document.getElementById('hashtags-section').style.display = 'block';
 
-            // Store hashtags globally for copy function
+            // Store hashtags as plain text for copy function (no links)
             window.postHashtags = uniqueHashtags.join(' ');
         }
     }
