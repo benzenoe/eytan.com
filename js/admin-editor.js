@@ -1,4 +1,4 @@
-const API_URL = 'https://api.eytan.com/api';
+// API_URL is defined globally in admin-editor.html
 let currentPost = null;
 let autoSaveInterval = null;
 let hasUnsavedChanges = false;
