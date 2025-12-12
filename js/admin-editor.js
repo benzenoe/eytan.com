@@ -197,10 +197,13 @@ function setupBeforeUnload() {
 }
 
 function getFormData() {
+    const slug = document.getElementById('postSlug').value;
+    const postId = document.getElementById('postId').value;
+
     return {
-        id: document.getElementById('postId').value || null,
+        id: postId || slug, // Use slug as ID for new posts
         title: document.getElementById('postTitle').value,
-        slug: document.getElementById('postSlug').value,
+        slug: slug,
         date: document.getElementById('postDate').value,
         author: document.getElementById('postAuthor').value,
         icon: document.getElementById('postIcon').value || '📝',
