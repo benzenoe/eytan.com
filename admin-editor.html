@@ -293,6 +293,52 @@
                 <textarea id="postContent" required placeholder="# Your blog post content in markdown..."></textarea>
                 <div class="help-text">Full markdown content of the post</div>
             </div>
+
+            <!-- SEO Metadata Section -->
+            <div class="form-group" style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="margin: 0; color: #333; font-size: 1.2rem;">🔍 SEO Metadata (Optional)</h3>
+                    <button type="button" class="btn btn-secondary" id="generateSEOBtn" style="white-space: nowrap;">
+                        Generate SEO
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label for="seoTitle">SEO Title (50-60 characters)</label>
+                    <input type="text" id="seoTitle" placeholder="SEO-optimized title with focus keyword" maxlength="60">
+                    <div class="help-text">Alternative title optimized for search engines</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="metaDescription">Meta Description (150-160 characters)</label>
+                    <textarea id="metaDescription" rows="2" placeholder="Compelling description for search results" maxlength="160"></textarea>
+                    <div class="help-text">Appears in Google search results - optimize for click-through</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="metaKeywords">Meta Keywords (comma-separated)</label>
+                    <input type="text" id="metaKeywords" placeholder="keyword1, keyword2, keyword3, ...">
+                    <div class="help-text">10-15 relevant keywords for SEO</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="focusKeyword">Focus Keyword</label>
+                    <input type="text" id="focusKeyword" placeholder="Main SEO keyword">
+                    <div class="help-text">Primary keyword to target for this post</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageAlt">Image Alt Text</label>
+                    <input type="text" id="imageAlt" placeholder="Descriptive alt text for featured image">
+                    <div class="help-text">Accessibility + SEO for featured image</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="socialPreview">Social Media Preview (200 characters)</label>
+                    <textarea id="socialPreview" rows="2" placeholder="Text optimized for social media sharing" maxlength="200"></textarea>
+                    <div class="help-text">For Facebook, LinkedIn previews (different from meta description)</div>
+                </div>
+            </div>
         </form>
 
         <div class="form-actions">

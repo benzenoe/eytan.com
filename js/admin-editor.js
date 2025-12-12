@@ -156,6 +156,11 @@ function setupEventListeners() {
     document.getElementById('generateHashtagsBtn').addEventListener('click', async () => {
         await generateHashtags();
     });
+
+    // Generate SEO button
+    document.getElementById('generateSEOBtn').addEventListener('click', async () => {
+        await generateSEO();
+    });
 }
 
 function startAutoSave() {
@@ -428,5 +433,71 @@ async function generateHashtags() {
         hashtagsInput.disabled = false;
         generateBtn.disabled = false;
         generateBtn.textContent = 'Generate Hashtags';
+    }
+}
+
+async function generateSEO() {
+    const title = document.getElementById('postTitle').value.trim();
+    const excerpt = document.getElementById('postExcerpt').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+    const image = document.getElementById('postImageUrl').value.trim();
+
+    // Validate that we have at least some content
+    if (!title && !excerpt && !content) {
+        alert('Please add a title, excerpt, or content first!');
+        return;
+    }
+
+    // Show loading state
+    const generateBtn = document.getElementById('generateSEOBtn');
+    generateBtn.disabled = true;
+    generateBtn.textContent = 'Generating...';
+
+    try {
+        const response = await fetch(`${API_URL}/posts/generate-seo`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                excerpt: excerpt,
+                content: content,
+                image: image
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to generate SEO metadata');
+        }
+
+        const data = await response.json();
+        const seo = data.seo;
+
+        // Populate all SEO fields
+        document.getElementById('seoTitle').value = seo.seoTitle || '';
+        document.getElementById('metaDescription').value = seo.metaDescription || '';
+        document.getElementById('metaKeywords').value = Array.isArray(seo.metaKeywords)
+            ? seo.metaKeywords.join(', ')
+            : seo.metaKeywords || '';
+        document.getElementById('focusKeyword').value = seo.focusKeyword || '';
+        document.getElementById('imageAlt').value = seo.imageAlt || '';
+        document.getElementById('socialPreview').value = seo.socialPreview || '';
+
+        // Show success message
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = 'SEO metadata generated!';
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 2000);
+    } catch (error) {
+        console.error('Error generating SEO:', error);
+        alert('Error generating SEO metadata: ' + error.message);
+    } finally {
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate SEO';
     }
 }
