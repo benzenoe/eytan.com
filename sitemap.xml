@@ -28,17 +28,17 @@
         <priority>0.7</priority>
     </url>
 
-    <!-- Blog Post: intelligence-explosion -->
+    <!-- Blog Post: mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
     <url>
-        <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
+        <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
         <lastmod>2025-12-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Blog Post: mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <!-- Blog Post: intelligence-explosion -->
     <url>
-        <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
+        <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
         <lastmod>2025-12-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
