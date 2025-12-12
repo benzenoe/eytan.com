@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post: welcome -->
+    <url>
+        <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
+        <lastmod>2025-12-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post: test-1234 -->
+    <url>
+        <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
+        <lastmod>2025-12-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post: test4 -->
     <url>
         <loc>https://eytan.com/blog/hey-siri.html</loc>
@@ -63,22 +79,6 @@
     <!-- Blog Post: the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
     <url>
         <loc>https://eytan.com/blog/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
-        <lastmod>2025-12-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: test-1234 -->
-    <url>
-        <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
-        <lastmod>2025-12-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: welcome -->
-    <url>
-        <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
         <lastmod>2025-12-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
