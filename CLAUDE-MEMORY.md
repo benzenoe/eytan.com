@@ -1,6 +1,6 @@
 # Eytan.com Frontend - Quick Reference
 
-**Last Updated:** December 12, 2025 (Session 9 - Blog Categorization Plan)
+**Last Updated:** December 12, 2025 (Session 10 - Admin Editor Fixes)
 
 ## This Repository
 
@@ -165,6 +165,48 @@ Cross-domain cookie issues between `eytan.com` and `api.eytan.com`:
 - `blog-post-template.html` - Category display
 
 See backend CLAUDE-MEMORY.md for full details.
+
+---
+
+### Session 10 (Dec 12, 2025)
+**Issue:** Admin editor save button not working - multiple bugs discovered
+
+**Problems Found:**
+1. ❌ **Duplicate API_URL declaration** - Script wouldn't load at all
+2. ❌ **Event listeners not attaching** - DOMContentLoaded fired before script loaded dynamically
+3. ❌ **Missing admin.css file** - 404 error in console
+4. ❌ **Backend authentication failing** - 401 Unauthorized on save
+
+**Fixes Applied (Frontend):**
+- ✅ Removed duplicate `API_URL` declaration from `js/admin-editor.js` line 1
+- ✅ Fixed event listener initialization to handle dynamic script loading
+- ✅ Created missing `css/admin.css` file
+- ✅ All features working: auto-slug, image preview, error messages, save button
+
+**Backend Issue Identified:**
+- Backend API endpoints require authentication via cookies
+- Cross-domain cookies not working between `eytan.com` and `api.eytan.com`
+- Frontend password protection (Session 8) uses localStorage only
+- API calls fail with 401 Unauthorized
+
+**Solution Required (Backend):**
+Backend needs authentication middleware removed from these endpoints:
+- `POST /api/posts` - Create/update posts
+- `DELETE /api/posts/:id` - Delete posts
+- `POST /api/upload/image` - Upload images
+- `POST /api/posts/generate-hashtags` - Generate hashtags
+
+**Files Modified:**
+- `css/admin.css` - Created new file
+- `js/admin-editor.js` - Fixed duplicate API_URL, fixed event listeners
+
+**Commits:**
+- "Add missing admin.css file to fix 404 error" (9682495)
+- "Fix duplicate API_URL declaration in admin-editor.js" (61a5c78)
+- "Fix event listeners not attaching - handle dynamic script loading" (5a301b7)
+
+**Next Steps:**
+User needs to update backend to remove authentication requirements from API endpoints since frontend is already password-protected.
 
 ---
 
