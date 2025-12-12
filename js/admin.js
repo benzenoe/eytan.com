@@ -296,4 +296,11 @@ async function logout() {
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', loadBlogData);
+// Since admin.js is loaded dynamically after authentication,
+// DOMContentLoaded may have already fired, so check document state
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadBlogData);
+} else {
+    // DOM is already loaded, call immediately
+    loadBlogData();
+}
