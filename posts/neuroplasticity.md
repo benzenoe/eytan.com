@@ -247,6 +247,22 @@ In practical terms, this means you become less emotionally volatile when things 
 
 A daily mindfulness practice will help you develop the ability to observe
 
+-------
+
+## Want Support as You Build These Skills?
+
+If you’d like ongoing guidance while you put these ideas into practice, you’re welcome to join my weekly mastermind at **[REIGNation.com](https://www.reignation.com)**.
+
+We meet **every Wednesday at 9:00** on Zoom. It’s a small, supportive group where we work through:
+
+* Real-world challenges
+* Mindset strengthening
+* Skill development
+* Consistent habits and accountability
+
+No pressure, no hype — just a space to get a little better each week, alongside people who are trying to do the same.
+
+
 ------
 ## Citations
 
