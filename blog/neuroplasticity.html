@@ -289,6 +289,17 @@
 <p>In practical terms, this means you become less emotionally volatile when things go wrong. You can face a setback and maintain composure and clarity.</p>
 <p>A daily mindfulness practice will help you develop the ability to observe</p>
 <hr>
+<h2 id="want-support-as-you-build-these-skills">Want Support as You Build These Skills?</h2>
+<p>If you’d like ongoing guidance while you put these ideas into practice, you’re welcome to join my weekly mastermind at <strong><a href="https://www.reignation.com">REIGNation.com</a></strong>.</p>
+<p>We meet <strong>every Wednesday at 9:00</strong> on Zoom. It’s a small, supportive group where we work through:</p>
+<ul>
+<li>Real-world challenges</li>
+<li>Mindset strengthening</li>
+<li>Skill development</li>
+<li>Consistent habits and accountability</li>
+</ul>
+<p>No pressure, no hype — just a space to get a little better each week, alongside people who are trying to do the same.</p>
+<hr>
 <h2 id="citations">Citations</h2>
 <p>Neuroplasticity and Sales: How to Rewire the Brain for Success - Braintrust Growth</p>
 <p><a href="https://braintrustgrowth.com/neuroplasticity-and-sales-how-to-rewire-the-brain-for-success/">https://braintrustgrowth.com/neuroplasticity-and-sales-how-to-rewire-the-brain-for-success/</a></p>
@@ -409,14 +420,14 @@
                             </div>
                         </div>
                     </a>
-                    <a href="welcome-to-my-blog.html" class="more-post-card">
+                    <a href="mastering-your-sphere-of-influence-in-real-estate.html" class="more-post-card">
                         <div class="more-post-image">
-                            <img src="https://eytan.com/images/blog/1765207698147-eytan-image.png" alt="Welcome to My Blog">
+                            <img src="https://eytan.com/images/blog/1765426081595-abda255-4a2-4024-a7cc-6771dcd073a-screenshot-2025-02-18-at-10.webp" alt="Mastering Your Sphere of Influence in Real Estate">
                         </div>
                         <div class="more-post-info">
-                            <h4>Welcome to My Blog</h4>
+                            <h4>Mastering Your Sphere of Influence in Real Estate</h4>
                             <div class="more-post-date">
-                                <i class="far fa-calendar"></i> January 4, 2023
+                                <i class="far fa-calendar"></i> February 18, 2025
                             </div>
                         </div>
                     </a>
@@ -527,17 +538,22 @@
         const hashtags = text.match(hashtagRegex);
 
         if (hashtags && hashtags.length > 0) {
-            // Remove duplicates and join with spaces
+            // Remove duplicates
             const uniqueHashtags = [...new Set(hashtags)];
 
-            // Display hashtags
+            // Display hashtags as clickable Facebook links
             const hashtagsDisplay = document.getElementById('hashtags-display');
-            hashtagsDisplay.textContent = uniqueHashtags.join(' ');
+            hashtagsDisplay.innerHTML = uniqueHashtags.map(tag => {
+                // Remove # and convert to lowercase for URL
+                const hashtagText = tag.substring(1).toLowerCase();
+                const facebookUrl = `https://www.facebook.com/hashtag/${hashtagText}`;
+                return `<a href="${facebookUrl}" target="_blank" rel="noopener noreferrer" style="color: #667eea; text-decoration: none; margin-right: 0.5rem; transition: color 0.2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='#667eea'">${tag}</a>`;
+            }).join(' ');
 
             // Show the hashtags section
             document.getElementById('hashtags-section').style.display = 'block';
 
-            // Store hashtags globally for copy function
+            // Store hashtags as plain text for copy function (no links)
             window.postHashtags = uniqueHashtags.join(' ');
         }
     }
