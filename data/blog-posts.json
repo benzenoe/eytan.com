@@ -1,15 +1,6 @@
 {
   "posts": [
     {
-      "id": "the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade",
-      "title": "The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade",
-      "date": "2025-12-12T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "📻",
-      "image": "https://eytan.com/images/blog/1765550169089-cacddb-83a1-7644-704f-a5f32fd74c42-screenshot-2024-11-17-at-9.webp",
-      "excerpt": "The pace of technology is breathtaking. Ten years ago, the world was a different place. Back then, the idea of a smartphone that could do everything from ordering groceries to navigating traffic seemed like a distant dream. "
-    },
-    {
       "id": "test4",
       "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
       "date": "2025-10-29T00:00:00.000Z",
@@ -44,6 +35,15 @@
       "icon": "🌍",
       "image": "https://eytan.com/images/blog/1765426081595-abda255-4a2-4024-a7cc-6771dcd073a-screenshot-2025-02-18-at-10.webp",
       "excerpt": "When it comes to real estate success, the most powerful tool in your arsenal isn’t cold leads or expensive ads — it’s your sphere of influence (SOI)."
+    },
+    {
+      "id": "the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade",
+      "title": "The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade",
+      "date": "2024-11-18T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "📻",
+      "image": "https://eytan.com/images/blog/1765550169089-cacddb-83a1-7644-704f-a5f32fd74c42-screenshot-2024-11-17-at-9.webp",
+      "excerpt": "The pace of technology is breathtaking. Ten years ago, the world was a different place. Back then, the idea of a smartphone that could do everything from ordering groceries to navigating traffic seemed like a distant dream. "
     },
     {
       "id": "test-1234",
