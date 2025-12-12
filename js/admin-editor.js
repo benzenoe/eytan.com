@@ -1,15 +1,24 @@
-const API_URL = 'https://api.eytan.com/api';
+// API_URL is defined globally in admin-editor.html
 let currentPost = null;
 let autoSaveInterval = null;
 let hasUnsavedChanges = false;
 
-// Load post data on page load
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize the editor
+function initEditor() {
     loadPostData();
     setupEventListeners();
     startAutoSave();
     setupBeforeUnload();
-});
+}
+
+// Load post data on page load
+// Check if DOM is already loaded (since this script loads dynamically)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEditor);
+} else {
+    // DOM already loaded, run immediately
+    initEditor();
+}
 
 function loadPostData() {
     // Check if we're editing an existing post or creating new
