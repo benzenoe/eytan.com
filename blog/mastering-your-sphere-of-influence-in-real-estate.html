@@ -273,18 +273,6 @@
                     </div>
                     <div class="more-posts-grid">
                         
-                    <a href="hey-siri.html" class="more-post-card">
-                        <div class="more-post-image">
-                            <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png" alt="Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution">
-                        </div>
-                        <div class="more-post-info">
-                            <h4>Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution</h4>
-                            <p class="more-post-excerpt">The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. B...</p>
-                            <div class="more-post-date">
-                                <i class="far fa-calendar"></i> October 29, 2025
-                            </div>
-                        </div>
-                    </a>
                     <a href="mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html" class="more-post-card">
                         <div class="more-post-image">
                             <img src="https://eytan.com/images/blog/1765563600907-558568527-10163076632612489-1172771175808045523-n.jpg" alt="Mini Nuclear Reactors: Deep Dive into Key Players, Tech & Market Trends">
@@ -330,6 +318,18 @@
                             <p class="more-post-excerpt">The pace of technology is breathtaking. Ten years ago, the world was a different place. Back then, the idea of a smartph...</p>
                             <div class="more-post-date">
                                 <i class="far fa-calendar"></i> November 18, 2024
+                            </div>
+                        </div>
+                    </a>
+                    <a href="hey-siri.html" class="more-post-card">
+                        <div class="more-post-image">
+                            <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png" alt="Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution">
+                        </div>
+                        <div class="more-post-info">
+                            <h4>Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution</h4>
+                            <p class="more-post-excerpt">The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. B...</p>
+                            <div class="more-post-date">
+                                <i class="far fa-calendar"></i> October 29, 2025
                             </div>
                         </div>
                     </a>
@@ -534,7 +534,7 @@
     // Run on page load
     // Display post tags
     function displayPostTags() {
-        const tagsData = [];
+        const tagsData = ["AI","Business","Energy","Real Estate","Personal Development","Sustainability"];
         if (tagsData && tagsData.length > 0) {
             const tagsSection = document.getElementById('post-tags-section');
             const tagsDisplay = document.getElementById('post-tags-display');
