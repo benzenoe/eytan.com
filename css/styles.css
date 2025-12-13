@@ -660,6 +660,31 @@ body {
     border-bottom: 2px solid #eee;
 }
 
+.post-tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.post-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
 .blog-post-featured-image {
     margin: 2rem 0;
     border-radius: 10px;
