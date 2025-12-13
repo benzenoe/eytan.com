@@ -110,6 +110,13 @@
                     <i class="far fa-calendar"></i> <time datetime="2025-09-30T16:00:00.000Z">October 1, 2025</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
                 </div>
+
+                <!-- Tags Section -->
+                <div id="post-tags-section" class="post-tags" style="display: none; margin: 1rem 0;">
+                    <i class="fas fa-tags" style="color: #667eea; margin-right: 0.5rem;"></i>
+                    <span id="post-tags-display"></span>
+                </div>
+
                 <div class="social-share">
                     <div class="share-buttons">
                         <button onclick="shareToLinkedIn()" class="share-btn-icon linkedin-btn" title="Share on LinkedIn">
@@ -644,7 +651,26 @@ Yahoo/TipRanks: Rolls-Royce analyst average target ~1173p vs 1163p current, high
     }
 
     // Run on page load
-    document.addEventListener('DOMContentLoaded', extractAndDisplayHashtags);
+    // Display post tags
+    function displayPostTags() {
+        const tagsData = [];
+        if (tagsData && tagsData.length > 0) {
+            const tagsSection = document.getElementById('post-tags-section');
+            const tagsDisplay = document.getElementById('post-tags-display');
+
+            const tagsHtml = tagsData.map(tag => {
+                return `<a href="../blog.html?tag=${encodeURIComponent(tag)}" class="post-tag">${tag}</a>`;
+            }).join('');
+
+            tagsDisplay.innerHTML = tagsHtml;
+            tagsSection.style.display = 'flex';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        displayPostTags();
+        extractAndDisplayHashtags();
+    });
     </script>
 
     <!-- Tidio Chatbot -->
