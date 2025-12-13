@@ -282,6 +282,10 @@ Based on recent data, GE Hitachi, NuScale, and Rolls-Royce SMR appear relatively
 
 As the next six months unfold, expect more volatility. Positive catalysts (e.g., an SMR startup hitting a milestone early) could send stocks soaring further, while negative news (e.g., a regulatory setback or a dilutive capital raise) could trigger sharp sell-offs. This sector is not for the faint of heart – but for those with a long vision and the ability to tolerate swings, it may transform the energy landscape and reward the winners handsomely. For now, cautious optimism with an eye on each company’s execution and cash burn is warranted. The mini-nuclear gold rush has begun; which companies strike gold will become clearer with each passing quarter of progress (or lack thereof).
 
+# Read the full research paper: https://chatgpt.com/s/dr_68dcf14419c4819199764af2beca8cd3
+
+------
+
 Sources:
 
 Investor analysis of NuScale’s recent momentum and risks; Trefis, Sept 25, 2025.
