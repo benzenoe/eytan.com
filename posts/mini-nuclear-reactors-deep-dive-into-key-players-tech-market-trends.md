@@ -1,8 +1,7 @@
-# Mini Nuclear Reactors: Deep Dive into Key Players, Tech & Market Trends
-
 ## Sector Overview: Resurgence of Small Reactors and the AI Energy Wave
 
 ### Read the full research paper: https://chatgpt.com/s/dr_68dcf14419c4819199764af2beca8cd3
+
 
 Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution. In the past year, investor enthusiasm has surged due to rising electricity demand from AI data centers and favorable policies supporting nuclear energy. (<a href="https://prnewswire.com" target="_blank" rel="noopener noreferrer">prnewswire.com</a>).
 
