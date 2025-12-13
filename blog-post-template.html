@@ -155,7 +155,7 @@
                     </div>
                 </div>
 
-                <!-- Hashtags Section (will be populated by JavaScript) -->
+                <!-- Hashtags Section -->
                 <div id="hashtags-section" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                         <h4 style="margin: 0; color: #333; font-size: 1.1rem;">📱 Copy Hashtags for Your Post</h4>
@@ -163,7 +163,7 @@
                             <i class="fas fa-copy"></i> Copy Hashtags
                         </button>
                     </div>
-                    <div id="hashtags-display" style="line-height: 1.8; color: #667eea; font-size: 0.95rem;"></div>
+                    <div id="hashtags-display" style="line-height: 1.8; color: #667eea; font-size: 0.95rem;">{{HASHTAGS}}</div>
                 </div>
 
                 <!-- More Posts Section -->
@@ -262,34 +262,52 @@
         });
     }
 
-    // Extract and display hashtags from blog content
+    // Extract and display hashtags from database or blog content
     function extractAndDisplayHashtags() {
-        const content = document.querySelector('.blog-post-body');
-        if (!content) return;
+        const hashtagsDisplay = document.getElementById('hashtags-display');
+        const hashtagsSection = document.getElementById('hashtags-section');
 
-        const text = content.textContent;
-        // Match hashtags (# followed by letters/numbers, no spaces)
-        const hashtagRegex = /#[A-Za-z0-9_]+/g;
-        const hashtags = text.match(hashtagRegex);
+        // First, check if hashtags exist in the database (pre-populated in the template)
+        let hashtagsText = hashtagsDisplay.textContent.trim();
 
-        if (hashtags && hashtags.length > 0) {
-            // Remove duplicates
-            const uniqueHashtags = [...new Set(hashtags)];
+        // If no database hashtags, try to extract from blog content
+        if (!hashtagsText) {
+            const content = document.querySelector('.blog-post-body');
+            if (content) {
+                const text = content.textContent;
+                // Match hashtags (# followed by letters/numbers, no spaces)
+                const hashtagRegex = /#[A-Za-z0-9_]+/g;
+                const hashtags = text.match(hashtagRegex);
+                if (hashtags && hashtags.length > 0) {
+                    hashtagsText = [...new Set(hashtags)].join(' ');
+                }
+            }
+        }
 
-            // Display hashtags as clickable Facebook links
-            const hashtagsDisplay = document.getElementById('hashtags-display');
-            hashtagsDisplay.innerHTML = uniqueHashtags.map(tag => {
-                // Remove # and convert to lowercase for URL
-                const hashtagText = tag.substring(1).toLowerCase();
-                const facebookUrl = `https://www.facebook.com/hashtag/${hashtagText}`;
-                return `<a href="${facebookUrl}" target="_blank" rel="noopener noreferrer" style="color: #667eea; text-decoration: none; margin-right: 0.5rem; transition: color 0.2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='#667eea'">${tag}</a>`;
-            }).join(' ');
+        // If we have hashtags (from database or content), display them
+        if (hashtagsText) {
+            // Parse hashtags from text
+            const hashtagRegex = /#[A-Za-z0-9_]+/g;
+            const hashtags = hashtagsText.match(hashtagRegex);
 
-            // Show the hashtags section
-            document.getElementById('hashtags-section').style.display = 'block';
+            if (hashtags && hashtags.length > 0) {
+                // Remove duplicates
+                const uniqueHashtags = [...new Set(hashtags)];
 
-            // Store hashtags as plain text for copy function (no links)
-            window.postHashtags = uniqueHashtags.join(' ');
+                // Display hashtags as clickable Facebook links
+                hashtagsDisplay.innerHTML = uniqueHashtags.map(tag => {
+                    // Remove # and convert to lowercase for URL
+                    const hashtagText = tag.substring(1).toLowerCase();
+                    const facebookUrl = `https://www.facebook.com/hashtag/${hashtagText}`;
+                    return `<a href="${facebookUrl}" target="_blank" rel="noopener noreferrer" style="color: #667eea; text-decoration: none; margin-right: 0.5rem; transition: color 0.2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='#667eea'">${tag}</a>`;
+                }).join(' ');
+
+                // Show the hashtags section
+                hashtagsSection.style.display = 'block';
+
+                // Store hashtags as plain text for copy function (no links)
+                window.postHashtags = uniqueHashtags.join(' ');
+            }
         }
     }
 
