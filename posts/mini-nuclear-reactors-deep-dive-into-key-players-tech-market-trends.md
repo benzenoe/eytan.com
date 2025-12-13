@@ -2,6 +2,8 @@
 
 ## Sector Overview: Resurgence of Small Reactors and the AI Energy Wave
 
+### Read the full research paper: https://chatgpt.com/s/dr_68dcf14419c4819199764af2beca8cd3
+
 Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution. In the past year, investor enthusiasm has surged due to rising electricity demand from AI data centers and favorable policies supporting nuclear energy. (<a href="https://prnewswire.com" target="_blank" rel="noopener noreferrer">prnewswire.com</a>).
 
 For example, a recent U.S. deal will deploy up to 6 GW of new SMR capacity in the Tennessee Valley Authority region, enough to power “60 new data centers” amid unprecedented demand from AI and tech industries. (<a href="https://prnewswire.com" target="_blank" rel="noopener noreferrer">prnewswire.com</a>).
