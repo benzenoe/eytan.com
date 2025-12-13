@@ -76,6 +76,10 @@ function populateForm(post) {
     document.getElementById('postImageUrl').value = post.image || '';
     document.getElementById('postExcerpt').value = post.excerpt || '';
 
+    // Handle tags (convert array to comma-separated string)
+    const tagsValue = post.tags ? (Array.isArray(post.tags) ? post.tags.join(', ') : post.tags) : '';
+    document.getElementById('postTags').value = tagsValue;
+
     const hashtagsValue = post.hashtags || '';
     console.log('Setting hashtags to:', hashtagsValue);
     document.getElementById('postHashtags').value = hashtagsValue;
@@ -222,6 +226,7 @@ function getFormData() {
         icon: document.getElementById('postIcon').value || '📝',
         image: document.getElementById('postImageUrl').value,
         excerpt: document.getElementById('postExcerpt').value,
+        tags: document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(t => t),
         hashtags: document.getElementById('postHashtags').value,
         content: document.getElementById('postContent').value,
         seoTitle: document.getElementById('seoTitle').value,
@@ -513,5 +518,24 @@ async function generateSEO() {
     } finally {
         generateBtn.disabled = false;
         generateBtn.textContent = 'Generate SEO';
+    }
+}
+
+// Helper function for tag suggestions
+function addTag(tagName) {
+    const tagsInput = document.getElementById('postTags');
+    const currentTags = tagsInput.value.trim();
+
+    // Check if tag already exists
+    const tagsArray = currentTags.split(',').map(t => t.trim()).filter(t => t);
+    if (tagsArray.includes(tagName)) {
+        return; // Tag already added
+    }
+
+    // Add tag
+    if (currentTags) {
+        tagsInput.value = currentTags + ', ' + tagName;
+    } else {
+        tagsInput.value = tagName;
     }
 }
