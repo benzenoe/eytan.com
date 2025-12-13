@@ -1,6 +1,7 @@
 // Blog listing functionality
 
 let blogPosts = [];
+let currentTagFilter = 'all';
 
 // Load blog posts from API
 async function loadBlogPosts() {
@@ -9,7 +10,19 @@ async function loadBlogPosts() {
         const response = await fetch('https://api.eytan.com/api/posts?status=published');
         const data = await response.json();
         blogPosts = data.posts || [];
+
+        // Populate tag filters
+        populateTagFilters();
+
+        // Check for tag filter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const tagParam = urlParams.get('tag');
+        if (tagParam) {
+            currentTagFilter = tagParam;
+        }
+
         renderBlogPosts();
+        updateActiveTagFilter();
     } catch (error) {
         console.error('Error loading blog posts:', error);
         const blogGrid = document.getElementById('blog-grid');
@@ -17,6 +30,64 @@ async function loadBlogPosts() {
             blogGrid.innerHTML = '<p style="text-align: center; color: #6c757d;">Error loading blog posts. Please try again later.</p>';
         }
     }
+}
+
+// Populate tag filters dynamically
+function populateTagFilters() {
+    const tagFilters = document.getElementById('tag-filters');
+    if (!tagFilters) return;
+
+    // Collect all unique tags
+    const allTags = new Set();
+    blogPosts.forEach(post => {
+        if (post.tags && Array.isArray(post.tags)) {
+            post.tags.forEach(tag => allTags.add(tag));
+        }
+    });
+
+    // Sort tags alphabetically
+    const sortedTags = Array.from(allTags).sort();
+
+    // Add tag filter buttons (keep "All Posts" button)
+    const tagButtons = sortedTags.map(tag =>
+        `<button class="tag-filter" data-tag="${tag}" onclick="filterByTag('${tag}')">${tag}</button>`
+    ).join('');
+
+    // Insert after "All Posts" button
+    const allPostsBtn = tagFilters.querySelector('[data-tag="all"]');
+    if (allPostsBtn) {
+        allPostsBtn.insertAdjacentHTML('afterend', tagButtons);
+    }
+}
+
+// Filter posts by tag
+function filterByTag(tag) {
+    currentTagFilter = tag;
+
+    // Update URL without reload
+    const url = new URL(window.location);
+    if (tag === 'all') {
+        url.searchParams.delete('tag');
+    } else {
+        url.searchParams.set('tag', tag);
+    }
+    window.history.pushState({}, '', url);
+
+    updateActiveTagFilter();
+    renderBlogPosts();
+}
+
+// Update active tag filter button
+function updateActiveTagFilter() {
+    const tagButtons = document.querySelectorAll('.tag-filter');
+    tagButtons.forEach(btn => {
+        const btnTag = btn.getAttribute('data-tag');
+        if (btnTag === currentTagFilter) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 }
 
 // Format date
@@ -31,11 +102,29 @@ function renderBlogPosts() {
 
     if (!blogGrid) return;
 
+    // Filter posts by tag
+    let filteredPosts = blogPosts;
+    if (currentTagFilter !== 'all') {
+        filteredPosts = blogPosts.filter(post =>
+            post.tags && post.tags.includes(currentTagFilter)
+        );
+    }
+
     // Sort posts by date (newest first)
-    const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+    const sortedPosts = [...filteredPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     blogGrid.innerHTML = sortedPosts.map(post => {
         const slug = post.slug || post.id;
+
+        // Generate tags HTML
+        const tagsHtml = post.tags && post.tags.length > 0
+            ? `<div class="blog-card-tags">
+                ${post.tags.map(tag =>
+                    `<span class="blog-card-tag">${tag}</span>`
+                ).join('')}
+               </div>`
+            : '';
+
         return `
         <div class="blog-card-wrapper">
             <a href="blog/${slug}.html" class="blog-card">
@@ -71,6 +160,7 @@ function renderBlogPosts() {
                         <i class="far fa-calendar"></i> ${formatDate(post.date)}
                     </div>
                     <p class="blog-excerpt">${post.excerpt}</p>
+                    ${tagsHtml}
                 </div>
             </a>
         </div>
