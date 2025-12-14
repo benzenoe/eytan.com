@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post: hydrogen-energy-powering-a-global-green-revolution -->
+    <url>
+        <loc>https://eytan.com/blog/hydrogen-energy-powering-a-global-green-revolution.html</loc>
+        <lastmod>2025-12-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post: bitcoins-24hour-price-explosion -->
     <url>
         <loc>https://eytan.com/blog/bitcoins-24hour-price-explosion.html</loc>
