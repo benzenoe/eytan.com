@@ -1,3 +1,9 @@
+-----------------------
+
+See full essay: https://chatgpt.com/s/dr_6928f48ae8e8819183e8ea9b511bd876
+
+-----------------------
+
 <h1>Hydrogen Energy: Powering a Global Green Revolution</h1>
 
 <p>Figure: A fuel-cell vehicle (Toyota Mirai) refueling at a California hydrogen station, while an Air Products “SmartFuel” hydrogen delivery truck supplies the fuel. Hydrogen enables zero-emission transport with fast refueling similar to conventional fuels.</p>
@@ -83,6 +89,12 @@
 <p>Hydrogen energy is no longer a distant dream or a buzzword – it’s becoming a tangible reality across the globe, driving a new era of clean innovation. From the fueling stations of California and Tokyo to the steel mills of Sweden and the vast solar farms of Australia, hydrogen is steadily weaving into the fabric of our energy and industrial systems.</p>
 
 <p>Hydrogen energy offers a path to fuel the world without burning the planet. By explaining its types, demystifying safety, showcasing its wide applications, and highlighting the massive investments and policies backing it, we see a compelling picture of an energy revolution underway.</p>
+
+-----------------------
+
+See full essay: https://chatgpt.com/s/dr_6928f48ae8e8819183e8ea9b511bd876
+
+-----------------------
 
 <h2>Sources</h2>
 
