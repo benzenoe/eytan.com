@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post: f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2025-12-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post: hydrogen-energy-powering-a-global-green-revolution -->
     <url>
         <loc>https://eytan.com/blog/hydrogen-energy-powering-a-global-green-revolution.html</loc>
