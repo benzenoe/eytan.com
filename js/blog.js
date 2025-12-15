@@ -138,7 +138,7 @@ function renderBlogPosts() {
                     </div>
                 `}
                 <div class="blog-card-content">
-                    <h3>${post.title}</h3>
+                    <h3><span class="blog-card-icon">${post.icon || ''}</span> ${post.title}</h3>
                     <div class="blog-card-share">
                         <button onclick="shareBlogPost(event, '${slug}', '${post.title.replace(/'/g, "\\'")}', 'linkedin')" class="share-btn-small linkedin-btn" title="Share on LinkedIn">
                             <i class="fab fa-linkedin"></i>

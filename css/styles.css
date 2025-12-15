@@ -619,6 +619,11 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.blog-card-icon {
+    font-size: 1.3rem;
+    margin-right: 0.3rem;
+}
+
 .blog-meta {
     color: var(--gray);
     font-size: 0.9rem;
@@ -651,6 +656,13 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.post-icon {
+    font-size: 2.3rem;
+    margin-right: 0.5rem;
+    filter: none;
+    -webkit-text-fill-color: initial;
 }
 
 .blog-post-meta {
