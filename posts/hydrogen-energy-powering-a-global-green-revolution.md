@@ -12,11 +12,8 @@
 
 <p>Hydrogen  comes  in  many  colors (figuratively)  depending  on  how  it’s  produced.  Traditionally  most hydrogen has been grey, made from natural gas without capturing emissions, but newer low-carbon types are rising . The key varieties are:</p>
 
- <img
-    src="http://eytan.com/images/hydro-graph-2.jpg"
-    alt="Hydro graph"
-    loading="lazy"
-  />
+<img src="http://eytan.com/images/hydro-graph-2.jpg" alt="Hydro graph" style="max-width:100%; height:auto;" />
+
 
 <p><strong>Green hydrogen:</strong> Produced by splitting water (electrolysis) using renewable electricity (solar , wind, etc.), yielding hydrogen and oxygen with zero CO<sub>2</sub> emissions. Green hydrogen is currently a small share of supply (it’s still costly), but like solar and wind power , its cost is expected to fall sharply with scale.</p>
 
