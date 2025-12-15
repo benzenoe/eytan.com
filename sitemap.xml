@@ -36,6 +36,14 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Blog Post: sphere-of-influence -->
+    <url>
+        <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
+        <lastmod>2025-12-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post: f9c286408f400b79 -->
     <url>
         <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
@@ -87,14 +95,6 @@
     <!-- Blog Post: neuroplasticity -->
     <url>
         <loc>https://eytan.com/blog/neuroplasticity.html</loc>
-        <lastmod>2025-12-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: sphere-of-influence -->
-    <url>
-        <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
         <lastmod>2025-12-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
