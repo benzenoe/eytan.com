@@ -12,6 +12,12 @@
 
 <p>Hydrogen  comes  in  many  colors (figuratively)  depending  on  how  it’s  produced.  Traditionally  most hydrogen has been grey, made from natural gas without capturing emissions, but newer low-carbon types are rising . The key varieties are:</p>
 
+ <img
+    src="http://eytan.com/images/hydro-graph-2.jpg"
+    alt="Hydro graph"
+    loading="lazy"
+  />
+
 <p><strong>Green hydrogen:</strong> Produced by splitting water (electrolysis) using renewable electricity (solar , wind, etc.), yielding hydrogen and oxygen with zero CO<sub>2</sub> emissions. Green hydrogen is currently a small share of supply (it’s still costly), but like solar and wind power , its cost is expected to fall sharply with scale.</p>
 
 <p><strong>Blue hydrogen:</strong> Made from fossil fuels (usually natural gas) via steam methane reforming, paired with carbon capture to trap the CO<sub>2</sub> byproduct. Blue hydrogen is considered “low- carbon” – it still generates CO<sub>2</sub> during production, but captures most of it for storage instead of releasing it. It’s a bridge solution leveraging existing natural gas resources while cutting most emissions.</p>
@@ -92,7 +98,7 @@
 
 -----------------------
 
-See full essay: https://chatgpt.com/s/dr_6928f48ae8e8819183e8ea9b511bd876
+### See full essay: https://chatgpt.com/s/dr_6928f48ae8e8819183e8ea9b511bd876
 
 -----------------------
 
