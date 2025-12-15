@@ -19,15 +19,6 @@
       "excerpt": "The real estate industry underwent a major transformation in 2024. Learn everything you need to know about the new buyer-broker agreement requirements."
     },
     {
-      "id": "hydrogen-energy-powering-a-global-green-revolution",
-      "title": "Hydrogen Energy: Powering a Global Green Revolution",
-      "date": "2025-12-14T03:18:46.598Z",
-      "author": "Eytan Benzeno",
-      "icon": "⛽️",
-      "image": "https://eytan.com/images/blog/1765711124777-img-7243.jpeg",
-      "excerpt": "Discover the different types of hydrogen energy - green, blue, and white - and how they are powering the global green revolution. Learn about the potential of hydrogen as a clean energy source."
-    },
-    {
       "id": "bitcoins-24hour-price-explosion",
       "title": "Bitcoin’s 24‑Hour Price Explosion: Decoding the Breakout and the Road Ahead",
       "date": "2025-12-14T02:21:10.006Z",
@@ -107,6 +98,15 @@
       "icon": "📝",
       "image": "https://eytan.com/images/blog/1765207698147-eytan-image.png",
       "excerpt": "Hello and welcome! I'm excited to launch this blog where I'll be sharing my thoughts, experiences, and insights."
+    },
+    {
+      "id": "hydrogen-energy-powering-a-global-green-revolution",
+      "title": "Hydrogen Energy: Powering a Global Green Revolution",
+      "date": "2025-07-10T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "⛽️",
+      "image": "https://eytan.com/images/blog/1765811569444-034d41da-0930-4421-b18b-ef5baadebb60.png",
+      "excerpt": "Discover the different types of hydrogen energy - green, blue, and white - and how they are powering the global green revolution. Learn about the potential of hydrogen as a clean energy source."
     }
   ]
 }
