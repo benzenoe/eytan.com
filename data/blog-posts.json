@@ -1,108 +1,108 @@
 {
   "posts": [
     {
-      "id": "test4",
-      "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
-      "date": "2025-10-29T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "🤖",
-      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png",
-      "excerpt": "The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subreddit and you’ll see post after post with titles like “Siri is a complete disappointment” and “Siri isn’t Siri anymore”"
-    },
-    {
-      "id": "mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends",
-      "title": "Mini Nuclear Reactors: Deep Dive into Key Players, Tech & Market Trends",
-      "date": "2025-10-01T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "☢️",
-      "image": "https://eytan.com/images/blog/1765563600907-558568527-10163076632612489-1172771175808045523-n.jpg",
-      "excerpt": "Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution."
-    },
-    {
-      "id": "bitcoins-24hour-price-explosion",
-      "title": "Bitcoin’s 24‑Hour Price Explosion: Decoding the Breakout and the Road Ahead",
-      "date": "2025-07-11T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "🤩",
-      "image": "https://eytan.com/images/blog/1765707667736-img-7233.jpeg",
-      "excerpt": "Discover the reasons behind Bitcoin's 24-hour price explosion to a new all-time high of $118,500. Explore the market analysis and potential risks and opportunities ahead."
-    },
-    {
-      "id": "hydrogen-energy-powering-a-global-green-revolution",
-      "title": "Hydrogen Energy: Powering a Global Green Revolution",
-      "date": "2025-07-10T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "⛽️",
-      "image": "https://eytan.com/images/blog/1765711124777-img-7243.jpeg",
-      "excerpt": "Discover the different types of hydrogen energy - green, blue, and white - and how they are powering the global green revolution. Learn about the potential of hydrogen as a clean energy source."
-    },
-    {
-      "id": "intelligence-explosion",
-      "title": "The Intelligence Explosion: How AI's Exponential Growth Will Transform Every Business (Including Yours)",
-      "date": "2025-06-06T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "🤓",
-      "image": "http://eytan.com/images/blog/intelligence-explosion.jpg",
-      "excerpt": "Artificial intelligence isn’t “coming someday”—it’s already reshaping the foundations of every business, from real estate to consulting to digital commerce. In 2018, GPT-2 performed like a preschooler; by 2025, GPT-4 operates at the level of a smart high-schooler. "
-    },
-    {
-      "id": "neuroplasticity",
-      "title": "Neuroplasticity: A Guide to Rewire Your Brain for Success",
-      "date": "2025-04-25T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "🤯",
-      "image": "https://eytan.com/images/blog/1765423275453-neuroplasticity-1b.png",
-      "excerpt": "Neuroplasticity is the brain’s ability to reorganize itself by forming new neural connections throughout life​"
-    },
-    {
-      "id": "sphere-of-influence",
-      "title": "Mastering Your Sphere of Influence in Real Estate",
-      "date": "2025-02-18T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "🌍",
-      "image": "https://eytan.com/images/blog/1765426081595-abda255-4a2-4024-a7cc-6771dcd073a-screenshot-2025-02-18-at-10.webp",
-      "excerpt": "When it comes to real estate success, the most powerful tool in your arsenal isn’t cold leads or expensive ads — it’s your sphere of influence (SOI)."
-    },
-    {
-      "id": "the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade",
-      "title": "The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade",
-      "date": "2024-11-18T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "📻",
-      "image": "https://eytan.com/images/blog/1765550169089-cacddb-83a1-7644-704f-a5f32fd74c42-screenshot-2024-11-17-at-9.webp",
-      "excerpt": "The pace of technology is breathtaking. Ten years ago, the world was a different place. Back then, the idea of a smartphone that could do everything from ordering groceries to navigating traffic seemed like a distant dream. "
-    },
-    {
-      "id": "f9c286408f400b79",
-      "title": "Understanding Buyer-Broker Agreements: What Changed in 2024",
-      "date": "2024-10-30T00:00:00.000Z",
-      "author": "Eytan Benzeno",
-      "icon": "🏠",
-      "image": "https://eytan.com/images/blog/1765777393233-486371412-676400928236683-177352345992979064-n-1-.jpg",
-      "excerpt": "The real estate industry underwent a major transformation in 2024. Learn everything you need to know about the new buyer-broker agreement requirements."
-    },
-    {
       "id": "88feb7a0a2e214e0",
       "title": "Low-Cost Strategies to Win Real Estate Listings: Proven Tactics That Actually Work",
-      "date": "2024-07-17T00:00:00.000Z",
+      "date": "2025-12-15T06:03:06.521Z",
       "author": "Eytan Benzeno",
       "icon": "🏆",
       "image": "https://eytan.com/images/blog/1765808072932-3fa70e3-37aa-0aed-1d8e-071741dc3d1-b42a1698-62c1-42d7-8f64-4c6f5feb69c9.webp",
       "excerpt": "You don't need a massive marketing budget to secure quality listings. Learn proven low-cost tactics including the Magic Buyer Letter strategy that can help you win more listings without breaking the bank."
     },
     {
+      "id": "f9c286408f400b79",
+      "title": "Understanding Buyer-Broker Agreements: What Changed in 2024",
+      "date": "2025-12-14T21:33:56.421Z",
+      "author": "Eytan Benzeno",
+      "icon": "🏠",
+      "image": "https://eytan.com/images/blog/1765777393233-486371412-676400928236683-177352345992979064-n-1-.jpg",
+      "excerpt": "The real estate industry underwent a major transformation in 2024. Learn everything you need to know about the new buyer-broker agreement requirements."
+    },
+    {
+      "id": "hydrogen-energy-powering-a-global-green-revolution",
+      "title": "Hydrogen Energy: Powering a Global Green Revolution",
+      "date": "2025-12-14T03:18:46.598Z",
+      "author": "Eytan Benzeno",
+      "icon": "⛽️",
+      "image": "https://eytan.com/images/blog/1765711124777-img-7243.jpeg",
+      "excerpt": "Discover the different types of hydrogen energy - green, blue, and white - and how they are powering the global green revolution. Learn about the potential of hydrogen as a clean energy source."
+    },
+    {
+      "id": "bitcoins-24hour-price-explosion",
+      "title": "Bitcoin’s 24‑Hour Price Explosion: Decoding the Breakout and the Road Ahead",
+      "date": "2025-12-14T02:21:10.006Z",
+      "author": "Eytan Benzeno",
+      "icon": "🤩",
+      "image": "https://eytan.com/images/blog/1765707667736-img-7233.jpeg",
+      "excerpt": "Discover the reasons behind Bitcoin's 24-hour price explosion to a new all-time high of $118,500. Explore the market analysis and potential risks and opportunities ahead."
+    },
+    {
+      "id": "mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends",
+      "title": "Mini Nuclear Reactors: Deep Dive into Key Players, Tech & Market Trends",
+      "date": "2025-12-12T10:20:02.638Z",
+      "author": "Eytan Benzeno",
+      "icon": "☢️",
+      "image": "https://eytan.com/images/blog/1765563600907-558568527-10163076632612489-1172771175808045523-n.jpg",
+      "excerpt": "Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution."
+    },
+    {
+      "id": "the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade",
+      "title": "The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade",
+      "date": "2025-12-12T06:36:12.330Z",
+      "author": "Eytan Benzeno",
+      "icon": "📻",
+      "image": "https://eytan.com/images/blog/1765550169089-cacddb-83a1-7644-704f-a5f32fd74c42-screenshot-2024-11-17-at-9.webp",
+      "excerpt": "The pace of technology is breathtaking. Ten years ago, the world was a different place. Back then, the idea of a smartphone that could do everything from ordering groceries to navigating traffic seemed like a distant dream. "
+    },
+    {
       "id": "test-1234",
       "title": "Exploring the AI Universe and all its layers",
-      "date": "2024-06-27T00:00:00.000Z",
+      "date": "2025-12-12T06:00:15.988Z",
       "author": "Eytan Benzeno",
       "icon": "🪟",
       "image": "https://eytan.com/images/blog/1765548314497-d18287-6865-1ee8-ff56-db4d375e847-ai-uni.jpg",
       "excerpt": "Artificial Intelligence (AI) is no longer a futuristic concept; it's an integral part of various industries, including real estate. To better understand how AI can revolutionize your business, let's delve into the AI Universe using the insightful illustration shared above. "
     },
     {
+      "id": "sphere-of-influence",
+      "title": "Mastering Your Sphere of Influence in Real Estate",
+      "date": "2025-12-10T20:08:25.967Z",
+      "author": "Eytan Benzeno",
+      "icon": "🌍",
+      "image": "https://eytan.com/images/blog/1765426081595-abda255-4a2-4024-a7cc-6771dcd073a-screenshot-2025-02-18-at-10.webp",
+      "excerpt": "When it comes to real estate success, the most powerful tool in your arsenal isn’t cold leads or expensive ads — it’s your sphere of influence (SOI)."
+    },
+    {
+      "id": "neuroplasticity",
+      "title": "Neuroplasticity: A Guide to Rewire Your Brain for Success",
+      "date": "2025-12-10T08:13:16.790Z",
+      "author": "Eytan Benzeno",
+      "icon": "🤯",
+      "image": "https://eytan.com/images/blog/1765423275453-neuroplasticity-1b.png",
+      "excerpt": "Neuroplasticity is the brain’s ability to reorganize itself by forming new neural connections throughout life​"
+    },
+    {
+      "id": "intelligence-explosion",
+      "title": "The Intelligence Explosion: How AI's Exponential Growth Will Transform Every Business (Including Yours)",
+      "date": "2025-12-10T06:42:37.577Z",
+      "author": "Eytan Benzeno",
+      "icon": "🤓",
+      "image": "http://eytan.com/images/blog/intelligence-explosion.jpg",
+      "excerpt": "Artificial intelligence isn’t “coming someday”—it’s already reshaping the foundations of every business, from real estate to consulting to digital commerce. In 2018, GPT-2 performed like a preschooler; by 2025, GPT-4 operates at the level of a smart high-schooler. "
+    },
+    {
+      "id": "test4",
+      "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
+      "date": "2025-12-06T20:04:15.210Z",
+      "author": "Eytan Benzeno",
+      "icon": "🤖",
+      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png",
+      "excerpt": "The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subreddit and you’ll see post after post with titles like “Siri is a complete disappointment” and “Siri isn’t Siri anymore”"
+    },
+    {
       "id": "welcome",
       "title": "Welcome to My Blog",
-      "date": "2023-01-04T00:00:00.000Z",
+      "date": "2025-12-04T15:11:53.494Z",
       "author": "Eytan Benzeno",
       "icon": "📝",
       "image": "https://eytan.com/images/blog/1765207698147-eytan-image.png",
