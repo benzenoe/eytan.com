@@ -671,7 +671,7 @@ body {
 #post-tags-display {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .post-tag {
