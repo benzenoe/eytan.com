@@ -668,6 +668,12 @@ body {
     margin: 1rem 0;
 }
 
+#post-tags-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
 .post-tag {
     display: inline-block;
     padding: 4px 12px;
