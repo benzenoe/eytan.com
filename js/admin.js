@@ -44,7 +44,7 @@ function renderPostsTable() {
     if (blogPosts.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="6" style="text-align: center; padding: 2rem;">
+                <td colspan="7" style="text-align: center; padding: 2rem;">
                     No blog posts yet. Click "New Post" to create one!
                 </td>
             </tr>
@@ -58,6 +58,11 @@ function renderPostsTable() {
     tbody.innerHTML = sortedPosts.map(post => `
         <tr>
             <td style="font-size: 1.5rem;">${post.icon || '📝'}</td>
+            <td>
+                ${post.image
+                    ? `<img src="${post.image}" alt="Thumbnail" class="admin-thumbnail" />`
+                    : '<div class="admin-thumbnail-placeholder">No Image</div>'}
+            </td>
             <td>
                 <strong>${post.title}</strong>
                 <br>
