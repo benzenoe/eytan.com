@@ -289,7 +289,6 @@ function restoreFromBackup() {
 // ======================================
 
 let currentPublishingPostId = null;
-let isPreviewInProgress = false;
 
 // Open social publishing inline (beneath the post row)
 async function openSocialPublishModal(postId) {
@@ -438,12 +437,24 @@ function closeSocialModal() {
 
 // Preview AI-generated social media content
 async function previewSocialContent() {
-    // Prevent concurrent preview executions (prevents double-clicks)
-    if (isPreviewInProgress) {
+    // Get the button first to check if already in progress
+    const expandableRow = document.getElementById('social-publish-row');
+    if (!expandableRow) {
+        showAlert('No publishing interface found', 'error');
+        return;
+    }
+
+    const previewBtn = expandableRow.querySelector('#previewSocialBtn');
+
+    // Use button's disabled state as the lock - check and set atomically
+    if (previewBtn.disabled) {
         console.log('Preview already in progress, ignoring click');
         return;
     }
-    isPreviewInProgress = true;
+
+    // Disable IMMEDIATELY to prevent race conditions
+    previewBtn.disabled = true;
+    previewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
     try {
         const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
@@ -451,32 +462,21 @@ async function previewSocialContent() {
 
         if (selectedPlatforms.length === 0) {
             showAlert('Please select at least one platform to preview', 'error');
-            isPreviewInProgress = false;
+            previewBtn.disabled = false;
+            previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
             return;
         }
 
         if (!currentPublishingPostId) {
             showAlert('No post selected', 'error');
-            isPreviewInProgress = false;
+            previewBtn.disabled = false;
+            previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
             return;
         }
 
-        // Get elements within the current expandable row
-        const expandableRow = document.getElementById('social-publish-row');
-        if (!expandableRow) {
-            showAlert('No publishing interface found', 'error');
-            isPreviewInProgress = false;
-            return;
-        }
-
-        const previewBtn = expandableRow.querySelector('#previewSocialBtn');
         const previewSection = expandableRow.querySelector('#socialPreviewInline');
         const previewContent = expandableRow.querySelector('#socialPreviewContentInline');
         const resultsSection = expandableRow.querySelector('#socialResultsInline');
-
-        // Disable preview button to prevent double-clicks
-        previewBtn.disabled = true;
-        previewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
         // Clear any existing preview content
         previewContent.innerHTML = '';
@@ -592,39 +592,28 @@ async function previewSocialContent() {
             showAlert(data.error || 'Preview generation failed', 'error');
         }
 
-        // Re-enable button and reset flag
+        // Re-enable button
         previewBtn.disabled = false;
         previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
-        isPreviewInProgress = false;
 
     } catch (error) {
         console.error('Preview error:', error);
 
-        // Get elements again in case of error before they were set
-        const expandableRow = document.getElementById('social-publish-row');
-        if (expandableRow) {
-            const previewBtn = expandableRow.querySelector('#previewSocialBtn');
-            const previewContent = expandableRow.querySelector('#socialPreviewContentInline');
+        const previewContent = expandableRow.querySelector('#socialPreviewContentInline');
 
-            if (previewContent) {
-                previewContent.innerHTML = `
-                    <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
-                        <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
-                    </div>
-                `;
-            }
-
-            // Re-enable button
-            if (previewBtn) {
-                previewBtn.disabled = false;
-                previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
-            }
+        if (previewContent) {
+            previewContent.innerHTML = `
+                <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                    <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
+                </div>
+            `;
         }
 
         showAlert('Preview error: ' + error.message, 'error');
 
-        // Reset flag
-        isPreviewInProgress = false;
+        // Re-enable button
+        previewBtn.disabled = false;
+        previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
     }
 }
 
