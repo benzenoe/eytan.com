@@ -450,17 +450,31 @@ async function previewSocialContent() {
         return;
     }
 
-    // Disable preview button
-    const previewBtn = document.getElementById('previewSocialBtn');
+    // Get elements within the current expandable row
+    const expandableRow = document.getElementById('social-publish-row');
+    if (!expandableRow) {
+        showAlert('No publishing interface found', 'error');
+        return;
+    }
+
+    const previewBtn = expandableRow.querySelector('#previewSocialBtn');
+    const previewSection = expandableRow.querySelector('#socialPreviewInline');
+    const previewContent = expandableRow.querySelector('#socialPreviewContentInline');
+    const resultsSection = expandableRow.querySelector('#socialResultsInline');
+
+    // Disable preview button to prevent double-clicks
     previewBtn.disabled = true;
     previewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
+    // Clear any existing preview content
+    previewContent.innerHTML = '';
+
     // Show preview section with loading state
-    document.getElementById('socialPreviewInline').style.display = 'block';
-    document.getElementById('socialPreviewContentInline').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating AI content for ' + selectedPlatforms.join(', ') + '...</p>';
+    previewSection.style.display = 'block';
+    previewContent.innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating AI content for ' + selectedPlatforms.join(', ') + '...</p>';
 
     // Hide results section
-    document.getElementById('socialResultsInline').style.display = 'none';
+    resultsSection.style.display = 'none';
 
     try {
         const response = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
@@ -477,8 +491,40 @@ async function previewSocialContent() {
         const data = await response.json();
 
         if (response.ok && data.success) {
+            // Fetch post details to show image and link
+            const postResponse = await fetch(`${API_URL}/posts/${currentPublishingPostId}`, {
+                credentials: 'include'
+            });
+            const postData = await postResponse.json();
+            const post = postData.post;
+
             // Display previews
             let previewHTML = '';
+
+            // Show post image and link at the top
+            if (post.image || post.slug) {
+                previewHTML += `
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; border: 2px solid #dee2e6;">
+                        <h4 style="margin: 0 0 0.75rem 0; color: #333; font-size: 0.95rem;">Post Details:</h4>
+                        ${post.image ? `
+                            <div style="margin-bottom: 0.75rem;">
+                                <strong style="font-size: 0.9rem; color: #6c757d;">Image to be shared:</strong>
+                                <div style="margin-top: 0.5rem;">
+                                    <img src="${post.image}" alt="Post image" style="max-width: 100%; max-height: 200px; border-radius: 4px; border: 1px solid #dee2e6;">
+                                </div>
+                            </div>
+                        ` : ''}
+                        <div>
+                            <strong style="font-size: 0.9rem; color: #6c757d;">Blog post URL:</strong>
+                            <div style="margin-top: 0.5rem;">
+                                <a href="https://eytan.com/blog/${post.slug}.html" target="_blank" style="color: #667eea; font-size: 0.9rem; word-break: break-all;">
+                                    https://eytan.com/blog/${post.slug}.html
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
 
             data.previews.forEach(preview => {
                 if (preview.status === 'success') {
@@ -524,11 +570,11 @@ async function previewSocialContent() {
                 }
             });
 
-            document.getElementById('socialPreviewContentInline').innerHTML = previewHTML;
+            previewContent.innerHTML = previewHTML;
             showAlert('Preview generated successfully!', 'success');
 
         } else {
-            document.getElementById('socialPreviewContentInline').innerHTML = `
+            previewContent.innerHTML = `
                 <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
                     <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> ${data.error || data.message || 'Preview generation failed'}</p>
                 </div>
@@ -542,7 +588,7 @@ async function previewSocialContent() {
 
     } catch (error) {
         console.error('Preview error:', error);
-        document.getElementById('socialPreviewContentInline').innerHTML = `
+        previewContent.innerHTML = `
             <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
                 <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
             </div>
