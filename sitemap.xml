@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post: 88feb7a0a2e214e0 -->
+    <url>
+        <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
+        <lastmod>2025-12-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post: - -->
     <url>
         <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
@@ -47,14 +55,6 @@
     <!-- Blog Post: hydrogen-energy-powering-a-global-green-revolution -->
     <url>
         <loc>https://eytan.com/blog/hydrogen-energy-powering-a-global-green-revolution.html</loc>
-        <lastmod>2025-12-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: 88feb7a0a2e214e0 -->
-    <url>
-        <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
         <lastmod>2025-12-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
