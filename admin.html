@@ -287,65 +287,6 @@
         </div>
     </div>
 
-    <!-- Social Publishing Modal -->
-    <div id="socialPublishModal" class="modal" style="display: none;">
-        <div class="modal-content" style="max-width: 600px;">
-            <div class="modal-header">
-                <div>
-                    <h2>Publish to Social Media</h2>
-                    <p id="socialPostTitle" style="margin: 0.5rem 0 0 0; font-size: 0.95rem; color: #6c757d; font-weight: normal;"></p>
-                </div>
-                <span class="modal-close" onclick="closeSocialModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <p style="margin-bottom: 1.5rem; color: #6c757d;">
-                    Select the platforms you want to publish this post to. AI will automatically optimize the content for each platform.
-                </p>
-
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Select Platforms:</h3>
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: background 0.2s;">
-                            <input type="checkbox" class="platform-check" value="twitter" checked style="width: 18px; height: 18px; cursor: pointer;">
-                            <i class="fab fa-twitter" style="color: #1DA1F2; font-size: 1.2rem;"></i>
-                            <span style="font-weight: 500;">Twitter/X</span>
-                            <span style="margin-left: auto; font-size: 0.85rem; color: #6c757d;">(280 characters)</span>
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: background 0.2s;">
-                            <input type="checkbox" class="platform-check" value="facebook" checked style="width: 18px; height: 18px; cursor: pointer;">
-                            <i class="fab fa-facebook" style="color: #4267B2; font-size: 1.2rem;"></i>
-                            <span style="font-weight: 500;">Facebook</span>
-                            <span style="margin-left: auto; font-size: 0.85rem; color: #6c757d;">(150-250 words)</span>
-                        </label>
-                        <label id="instagram-label" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: background 0.2s;">
-                            <input type="checkbox" class="platform-check" value="instagram" checked style="width: 18px; height: 18px; cursor: pointer;">
-                            <i class="fab fa-instagram" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.2rem;"></i>
-                            <span style="font-weight: 500;">Instagram</span>
-                            <span style="margin-left: auto; font-size: 0.85rem; color: #6c757d;">(Requires image)</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div id="socialResults" style="margin-top: 1.5rem; display: none;">
-                    <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Publishing Results:</h3>
-                    <div id="socialResultsContent"></div>
-                </div>
-
-                <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 4px; border-left: 4px solid #667eea;">
-                    <p style="margin: 0; font-size: 0.9rem; color: #495057;">
-                        <strong>Note:</strong> Content will be automatically optimized for each platform using AI. Make sure your API credentials are configured in the backend.
-                    </p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeSocialModal()">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="publishToSocial()" id="publishSocialBtn">
-                    <i class="fas fa-share-alt"></i> Publish Now
-                </button>
-            </div>
-        </div>
-    </div>
-
     <footer class="footer">
         <div class="container">
             <div class="footer-content">

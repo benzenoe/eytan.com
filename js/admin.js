@@ -457,10 +457,18 @@ async function previewSocialContent() {
     previewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
     try {
-        const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
+        // Get selected platforms from within the current expandable row only
+        const selectedPlatforms = Array.from(expandableRow.querySelectorAll('.platform-check:checked'))
             .map(cb => cb.value);
 
-        if (selectedPlatforms.length === 0) {
+        // Remove duplicates (in case of any issues)
+        const uniquePlatforms = [...new Set(selectedPlatforms)];
+
+        console.log('Selected platforms:', selectedPlatforms);
+        console.log('Unique platforms:', uniquePlatforms);
+        console.log('Checkboxes found:', expandableRow.querySelectorAll('.platform-check').length);
+
+        if (uniquePlatforms.length === 0) {
             showAlert('Please select at least one platform to preview', 'error');
             previewBtn.disabled = false;
             previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
@@ -483,7 +491,7 @@ async function previewSocialContent() {
 
         // Show preview section with loading state
         previewSection.style.display = 'block';
-        previewContent.innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating AI content for ' + selectedPlatforms.join(', ') + '...</p>';
+        previewContent.innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating AI content for ' + uniquePlatforms.join(', ') + '...</p>';
 
         // Hide results section
         resultsSection.style.display = 'none';
@@ -494,7 +502,7 @@ async function previewSocialContent() {
             },
             credentials: 'include',
             body: JSON.stringify({
-                platforms: selectedPlatforms
+                platforms: uniquePlatforms
             })
         });
 
@@ -514,18 +522,21 @@ async function previewSocialContent() {
             // Show post image and link at the top
             if (post.image || post.slug) {
                 previewHTML += `
-                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; border: 2px solid #dee2e6;">
-                        <h4 style="margin: 0 0 0.75rem 0; color: #333; font-size: 0.95rem;">Post Details:</h4>
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 8px; border: 2px solid #ffc107; border-left: 4px solid #ffc107;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #856404; font-size: 0.95rem;"><i class="fas fa-info-circle"></i> What Will Be Published:</h4>
+                        <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: #856404;">
+                            When you click "Publish Now", AI will generate <strong>fresh content</strong> for each platform (similar but may vary slightly from this preview). The content will be posted to your social media accounts.
+                        </p>
                         ${post.image ? `
                             <div style="margin-bottom: 0.75rem;">
-                                <strong style="font-size: 0.9rem; color: #6c757d;">Image to be shared:</strong>
+                                <strong style="font-size: 0.9rem; color: #856404;">Image that will be shared:</strong>
                                 <div style="margin-top: 0.5rem;">
                                     <img src="${post.image}" alt="Post image" style="max-width: 100%; max-height: 200px; border-radius: 4px; border: 1px solid #dee2e6;">
                                 </div>
                             </div>
                         ` : ''}
                         <div>
-                            <strong style="font-size: 0.9rem; color: #6c757d;">Blog post URL:</strong>
+                            <strong style="font-size: 0.9rem; color: #856404;">Blog URL in posts:</strong>
                             <div style="margin-top: 0.5rem;">
                                 <a href="https://eytan.com/blog/${post.slug}.html" target="_blank" style="color: #667eea; font-size: 0.9rem; word-break: break-all;">
                                     https://eytan.com/blog/${post.slug}.html
