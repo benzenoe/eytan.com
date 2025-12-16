@@ -28,17 +28,17 @@
         <priority>0.7</priority>
     </url>
 
-    <!-- Blog Post: - -->
+    <!-- Blog Post: is-tesla-stock-on-the-road-to-500 -->
     <url>
-        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
+        <loc>https://eytan.com/blog/is-tesla-stock-on-the-road-to-500.html</loc>
         <lastmod>2025-12-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Blog Post: is-tesla-stock-on-the-road-to-500 -->
+    <!-- Blog Post: - -->
     <url>
-        <loc>https://eytan.com/blog/is-tesla-stock-on-the-road-to-500.html</loc>
+        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
         <lastmod>2025-12-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
