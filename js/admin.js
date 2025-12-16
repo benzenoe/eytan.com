@@ -307,7 +307,8 @@ async function openSocialPublishModal(postId) {
         });
 
         if (response.ok) {
-            const post = await response.json();
+            const data = await response.json();
+            const post = data.post; // API returns { success: true, post: {...} }
             const instagramCheckbox = document.querySelector('.platform-check[value="instagram"]');
             const instagramLabel = document.getElementById('instagram-label');
 
