@@ -379,6 +379,11 @@ async function openSocialPublishModal(postId) {
                             </div>
                         </div>
 
+                        <div id="socialPreviewInline" style="margin-top: 1.5rem; display: none;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1rem; color: #333;">Content Preview:</h4>
+                            <div id="socialPreviewContentInline"></div>
+                        </div>
+
                         <div id="socialResultsInline" style="margin-top: 1.5rem; display: none;">
                             <h4 style="margin-bottom: 1rem; font-size: 1rem; color: #333;">Publishing Results:</h4>
                             <div id="socialResultsContentInline"></div>
@@ -392,6 +397,9 @@ async function openSocialPublishModal(postId) {
 
                         <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: flex-end;">
                             <button onclick="closeSocialModal()" style="padding: 0.75rem 1.5rem; background: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">Cancel</button>
+                            <button onclick="previewSocialContent()" id="previewSocialBtn" style="padding: 0.75rem 1.5rem; background: #17a2b8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='#138496'" onmouseout="this.style.background='#17a2b8'">
+                                <i class="fas fa-eye"></i> Preview Content
+                            </button>
                             <button onclick="publishToSocialInline()" id="publishSocialBtnInline" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                                 <i class="fas fa-share-alt"></i> Publish Now
                             </button>
@@ -425,6 +433,126 @@ function closeSocialModal() {
         }, 300);
     }
     currentPublishingPostId = null;
+}
+
+// Preview AI-generated social media content
+async function previewSocialContent() {
+    const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
+        .map(cb => cb.value);
+
+    if (selectedPlatforms.length === 0) {
+        showAlert('Please select at least one platform to preview', 'error');
+        return;
+    }
+
+    if (!currentPublishingPostId) {
+        showAlert('No post selected', 'error');
+        return;
+    }
+
+    // Disable preview button
+    const previewBtn = document.getElementById('previewSocialBtn');
+    previewBtn.disabled = true;
+    previewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+    // Show preview section with loading state
+    document.getElementById('socialPreviewInline').style.display = 'block';
+    document.getElementById('socialPreviewContentInline').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating AI content for ' + selectedPlatforms.join(', ') + '...</p>';
+
+    // Hide results section
+    document.getElementById('socialResultsInline').style.display = 'none';
+
+    try {
+        const response = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                platforms: selectedPlatforms
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            // Display previews
+            let previewHTML = '';
+
+            data.previews.forEach(preview => {
+                if (preview.status === 'success') {
+                    // Platform-specific styling
+                    const platformStyles = {
+                        twitter: {
+                            icon: 'fab fa-twitter',
+                            color: '#1DA1F2',
+                            bg: '#e7f5fe'
+                        },
+                        facebook: {
+                            icon: 'fab fa-facebook',
+                            color: '#4267B2',
+                            bg: '#e8f0fe'
+                        },
+                        instagram: {
+                            icon: 'fab fa-instagram',
+                            color: '#E1306C',
+                            bg: '#fce8f3'
+                        }
+                    };
+
+                    const style = platformStyles[preview.platform];
+
+                    previewHTML += `
+                        <div style="margin-bottom: 1rem; border: 2px solid ${style.color}; border-radius: 8px; overflow: hidden; background: white;">
+                            <div style="background: ${style.bg}; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid ${style.color};">
+                                <i class="${style.icon}" style="color: ${style.color}; font-size: 1.2rem;"></i>
+                                <strong style="text-transform: capitalize; color: #333;">${preview.platform}</strong>
+                                <span style="margin-left: auto; font-size: 0.85rem; color: #6c757d;">${preview.characterCount} characters</span>
+                            </div>
+                            <div style="padding: 1rem; white-space: pre-wrap; line-height: 1.6; color: #333; font-size: 0.95rem; max-height: 300px; overflow-y: auto;">
+                                ${preview.content}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    previewHTML += `
+                        <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <strong style="text-transform: capitalize;">${preview.platform}</strong>: ${preview.error}
+                        </div>
+                    `;
+                }
+            });
+
+            document.getElementById('socialPreviewContentInline').innerHTML = previewHTML;
+            showAlert('Preview generated successfully!', 'success');
+
+        } else {
+            document.getElementById('socialPreviewContentInline').innerHTML = `
+                <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                    <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> ${data.error || data.message || 'Preview generation failed'}</p>
+                </div>
+            `;
+            showAlert(data.error || 'Preview generation failed', 'error');
+        }
+
+        // Re-enable button
+        previewBtn.disabled = false;
+        previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
+
+    } catch (error) {
+        console.error('Preview error:', error);
+        document.getElementById('socialPreviewContentInline').innerHTML = `
+            <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
+            </div>
+        `;
+        showAlert('Preview error: ' + error.message, 'error');
+
+        // Re-enable button
+        previewBtn.disabled = false;
+        previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
+    }
 }
 
 // Publish to social media from inline interface
