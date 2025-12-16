@@ -1,4 +1,4 @@
-# When Aging, Assets, and Reality No Longer Align  
+## When Aging, Assets, and Reality No Longer Align  
 ### A Professional Commitment to Navigating Dementia, Family Deadlock, and Complex Real Estate Decisions
 
 Real estate is often described as a business of numbers, markets, and timing. In reality, some of the most consequential moments in this profession unfold far from spreadsheets and comparable sales. They unfold in living rooms, hospital corridors, and family conversations shaped by aging, illness, fear, and responsibility.
@@ -87,8 +87,7 @@ Situations like this are difficult precisely because they sit at the intersectio
 
 If you are confronted with a similar dilemma—particularly one involving complex or international assets, aging family members, or decisions complicated by cognitive decline—and need thoughtful guidance grounded in professional experience and research, feel free to reach out.
 
-You can contact me directly here:  
-**https://eytan.com/contact.html**
+You can contact me directly **[here](https://eytan.com/contact.html)**:  
 
 ---
 
