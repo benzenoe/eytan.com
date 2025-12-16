@@ -312,6 +312,9 @@ async function openSocialPublishModal(postId) {
             const instagramCheckbox = document.querySelector('.platform-check[value="instagram"]');
             const instagramLabel = document.getElementById('instagram-label');
 
+            // Display post title in modal header
+            document.getElementById('socialPostTitle').textContent = post.title;
+
             if (!post.image) {
                 instagramCheckbox.checked = false;
                 instagramCheckbox.disabled = true;
@@ -334,6 +337,7 @@ async function openSocialPublishModal(postId) {
 // Close social publishing modal
 function closeSocialModal() {
     document.getElementById('socialPublishModal').style.display = 'none';
+    document.getElementById('socialPostTitle').textContent = ''; // Clear post title
     currentPublishingPostId = null;
 }
 
