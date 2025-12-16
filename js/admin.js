@@ -390,6 +390,28 @@ async function publishToSocial() {
                             ${result.url ? `<a href="${result.url}" target="_blank" style="color: #0066cc; font-size: 0.9rem;">View post <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></a>` : ''}
                         </div>
                     `;
+                } else if (result.status === 'manual') {
+                    // Manual posting (Twitter) - show content with copy button
+                    const contentId = 'manual-content-' + result.platform;
+                    resultsHTML += `
+                        <div style="padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                <i class="fas fa-copy" style="color: #856404;"></i>
+                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <span style="color: #856404;">- Ready for manual posting</span>
+                            </div>
+                            <div style="background: white; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; white-space: pre-wrap; border: 1px solid #dee2e6;">
+                                <div id="${contentId}" style="color: #495057;">${result.content}</div>
+                            </div>
+                            <button onclick="copyToClipboard('${contentId}', '${result.platform}')"
+                                    style="background: #ffc107; color: #000; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 500;">
+                                <i class="fas fa-copy"></i> Copy to Clipboard
+                            </button>
+                            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #856404;">
+                                <i class="fas fa-info-circle"></i> Paste this into Twitter/X manually to avoid $100/month API cost
+                            </p>
+                        </div>
+                    `;
                 } else {
                     resultsHTML += `
                         <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.5rem;">
@@ -472,6 +494,50 @@ async function loadSocialStatus(postId) {
     } catch (error) {
         console.error('Failed to load social status:', error);
         return '';
+    }
+}
+
+// Copy to clipboard function
+function copyToClipboard(elementId, platform) {
+    const element = document.getElementById(elementId);
+    const text = element.textContent;
+
+    // Modern clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                showAlert(`${platform} content copied to clipboard! Paste it manually.`, 'success');
+                // Visual feedback
+                const button = event.target.closest('button');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.style.background = '#28a745';
+                button.style.color = 'white';
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.style.background = '#ffc107';
+                    button.style.color = '#000';
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Failed to copy:', err);
+                showAlert('Failed to copy. Please select and copy manually.', 'error');
+            });
+    } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showAlert(`${platform} content copied to clipboard! Paste it manually.`, 'success');
+        } catch (err) {
+            showAlert('Failed to copy. Please select and copy manually.', 'error');
+        }
+        document.body.removeChild(textArea);
     }
 }
 
