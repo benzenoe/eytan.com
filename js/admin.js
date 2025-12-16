@@ -36,7 +36,7 @@ async function loadBlogData() {
 }
 
 // Render posts table
-function renderPostsTable() {
+async function renderPostsTable() {
     const tbody = document.getElementById('posts-table-body');
 
     if (!tbody) return;
@@ -55,6 +55,7 @@ function renderPostsTable() {
     // Sort posts by date (newest first)
     const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Render table first
     tbody.innerHTML = sortedPosts.map(post => `
         <tr>
             <td style="font-size: 1.5rem;">${post.icon || '📝'}</td>
@@ -69,6 +70,7 @@ function renderPostsTable() {
                 <span class="status-badge status-${post.status || 'draft'}">
                     ${post.status === 'published' ? '✓ Published' : '📝 Draft'}
                 </span>
+                <div id="social-status-${post.id}" style="margin-top: 0.5rem;"></div>
             </td>
             <td>${formatDate(post.date)}</td>
             <td>${post.excerpt.substring(0, 60)}${post.excerpt.length > 60 ? '...' : ''}</td>
@@ -83,6 +85,12 @@ function renderPostsTable() {
                     <button class="btn-icon btn-publish" onclick="publishPost('${post.id}')" title="${post.status === 'published' ? 'Republish (sync to GitHub)' : 'Publish to Live Site'}">
                         <i class="fas fa-upload"></i> ${post.status === 'published' ? 'Republish' : 'Publish'}
                     </button>
+                    ${post.status === 'published'
+                        ? `<button class="btn-icon" style="background: #17a2b8; color: white;" onclick="openSocialPublishModal('${post.id}')" title="Share to Social Media">
+                            <i class="fas fa-share-alt"></i>
+                        </button>`
+                        : ''
+                    }
                     <button class="btn-icon btn-edit" onclick="editPost('${post.id}')" title="Edit">
                         <i class="fas fa-edit"></i>
                     </button>
@@ -93,6 +101,17 @@ function renderPostsTable() {
             </td>
         </tr>
     `).join('');
+
+    // Load social status for each published post
+    sortedPosts.forEach(async (post) => {
+        if (post.status === 'published') {
+            const statusHTML = await loadSocialStatus(post.id);
+            const statusDiv = document.getElementById(`social-status-${post.id}`);
+            if (statusDiv) {
+                statusDiv.innerHTML = statusHTML;
+            }
+        }
+    });
 }
 
 // Format date
@@ -263,6 +282,197 @@ function importData() {
 // Restore from backup (disabled - not needed with backend)
 function restoreFromBackup() {
     showAlert('Auto-backup not needed. All data is safely stored in the database and can be exported anytime.', 'info');
+}
+
+// ======================================
+// SOCIAL MEDIA PUBLISHING FUNCTIONS
+// ======================================
+
+let currentPublishingPostId = null;
+
+// Open social publishing modal
+async function openSocialPublishModal(postId) {
+    currentPublishingPostId = postId;
+
+    // Reset modal state
+    document.querySelectorAll('.platform-check').forEach(cb => cb.checked = true);
+    document.getElementById('socialResults').style.display = 'none';
+    document.getElementById('socialResultsContent').innerHTML = '';
+    document.getElementById('publishSocialBtn').disabled = false;
+
+    // Check if post has image (for Instagram)
+    try {
+        const response = await fetch(`${API_URL}/posts/${postId}`, {
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            const post = await response.json();
+            const instagramCheckbox = document.querySelector('.platform-check[value="instagram"]');
+            const instagramLabel = document.getElementById('instagram-label');
+
+            if (!post.image) {
+                instagramCheckbox.checked = false;
+                instagramCheckbox.disabled = true;
+                instagramLabel.style.opacity = '0.5';
+                instagramLabel.title = 'This post has no image. Instagram requires an image.';
+            } else {
+                instagramCheckbox.disabled = false;
+                instagramLabel.style.opacity = '1';
+                instagramLabel.title = '';
+            }
+        }
+    } catch (error) {
+        console.error('Failed to fetch post details:', error);
+    }
+
+    // Show modal
+    document.getElementById('socialPublishModal').style.display = 'flex';
+}
+
+// Close social publishing modal
+function closeSocialModal() {
+    document.getElementById('socialPublishModal').style.display = 'none';
+    currentPublishingPostId = null;
+}
+
+// Publish to selected social media platforms
+async function publishToSocial() {
+    const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
+        .map(cb => cb.value);
+
+    if (selectedPlatforms.length === 0) {
+        showAlert('Please select at least one platform', 'error');
+        return;
+    }
+
+    if (!currentPublishingPostId) {
+        showAlert('No post selected for publishing', 'error');
+        return;
+    }
+
+    // Disable publish button
+    const publishBtn = document.getElementById('publishSocialBtn');
+    publishBtn.disabled = true;
+    publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+
+    // Show results section
+    document.getElementById('socialResults').style.display = 'block';
+    document.getElementById('socialResultsContent').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Publishing to ' + selectedPlatforms.join(', ') + '...</p>';
+
+    try {
+        const response = await fetch(`${API_URL}/social/publish/${currentPublishingPostId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                platforms: selectedPlatforms
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            // Display results
+            let resultsHTML = '';
+
+            data.results.forEach(result => {
+                if (result.status === 'success') {
+                    resultsHTML += `
+                        <div style="padding: 1rem; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <span style="color: #155724;">- Published successfully!</span>
+                            </div>
+                            ${result.url ? `<a href="${result.url}" target="_blank" style="color: #0066cc; font-size: 0.9rem;">View post <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></a>` : ''}
+                        </div>
+                    `;
+                } else {
+                    resultsHTML += `
+                        <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-exclamation-circle" style="color: #dc3545;"></i>
+                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <span style="color: #721c24;">- Failed</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.9rem; color: #721c24;">${result.error}</p>
+                        </div>
+                    `;
+                }
+            });
+
+            document.getElementById('socialResultsContent').innerHTML = resultsHTML;
+
+            // Update table to show social media status
+            loadBlogData();
+
+            showAlert(`Published to ${data.summary.succeeded} platform(s). ${data.summary.failed} failed.`, data.summary.failed === 0 ? 'success' : 'info');
+        } else {
+            throw new Error(data.message || 'Publishing failed');
+        }
+
+    } catch (error) {
+        console.error('Publishing error:', error);
+        document.getElementById('socialResultsContent').innerHTML = `
+            <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                <i class="fas fa-exclamation-circle" style="color: #dc3545;"></i>
+                <strong>Error:</strong> ${error.message}
+            </div>
+        `;
+        showAlert('Publishing failed: ' + error.message, 'error');
+    } finally {
+        // Re-enable button
+        publishBtn.disabled = false;
+        publishBtn.innerHTML = '<i class="fas fa-share-alt"></i> Publish Now';
+    }
+}
+
+// Load social media status for a post
+async function loadSocialStatus(postId) {
+    try {
+        const response = await fetch(`${API_URL}/social/status/${postId}`, {
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            return '';
+        }
+
+        const data = await response.json();
+        let statusHTML = '<div style="display: flex; gap: 0.25rem; margin-top: 0.25rem;">';
+
+        // Twitter
+        if (data.status.twitter && data.status.twitter.status === 'published') {
+            statusHTML += `<a href="${data.status.twitter.platform_url}" target="_blank" title="Posted on Twitter/X"><i class="fab fa-twitter" style="color: #1DA1F2;"></i></a>`;
+        } else if (data.status.twitter && data.status.twitter.status === 'failed') {
+            statusHTML += `<i class="fab fa-twitter" style="color: #dc3545;" title="Twitter publish failed"></i>`;
+        }
+
+        // Facebook
+        if (data.status.facebook && data.status.facebook.status === 'published') {
+            statusHTML += `<a href="${data.status.facebook.platform_url}" target="_blank" title="Posted on Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a>`;
+        } else if (data.status.facebook && data.status.facebook.status === 'failed') {
+            statusHTML += `<i class="fab fa-facebook" style="color: #dc3545;" title="Facebook publish failed"></i>`;
+        }
+
+        // Instagram
+        if (data.status.instagram && data.status.instagram.status === 'published') {
+            statusHTML += `<a href="${data.status.instagram.platform_url}" target="_blank" title="Posted on Instagram"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>`;
+        } else if (data.status.instagram && data.status.instagram.status === 'failed') {
+            statusHTML += `<i class="fab fa-instagram" style="color: #dc3545;" title="Instagram publish failed"></i>`;
+        }
+
+        statusHTML += '</div>';
+
+        return statusHTML;
+
+    } catch (error) {
+        console.error('Failed to load social status:', error);
+        return '';
+    }
 }
 
 // Logout function
