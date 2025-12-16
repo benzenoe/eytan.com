@@ -290,58 +290,274 @@ function restoreFromBackup() {
 
 let currentPublishingPostId = null;
 
-// Open social publishing modal
+// Open social publishing inline (beneath the post row)
 async function openSocialPublishModal(postId) {
+    // If clicking the same post, close it (toggle)
+    const existingRow = document.getElementById('social-publish-row');
+    if (existingRow && currentPublishingPostId === postId) {
+        closeSocialModal();
+        return;
+    }
+
+    // Remove any existing expanded row
+    if (existingRow) {
+        existingRow.remove();
+    }
+
     currentPublishingPostId = postId;
 
-    // Reset modal state
-    document.querySelectorAll('.platform-check').forEach(cb => cb.checked = true);
-    document.getElementById('socialResults').style.display = 'none';
-    document.getElementById('socialResultsContent').innerHTML = '';
-    document.getElementById('publishSocialBtn').disabled = false;
-
-    // Check if post has image (for Instagram)
+    // Fetch post details
     try {
         const response = await fetch(`${API_URL}/posts/${postId}`, {
             credentials: 'include'
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            const post = data.post; // API returns { success: true, post: {...} }
-            const instagramCheckbox = document.querySelector('.platform-check[value="instagram"]');
-            const instagramLabel = document.getElementById('instagram-label');
-
-            // Display post title in modal header
-            document.getElementById('socialPostTitle').textContent = post.title;
-
-            if (!post.image) {
-                instagramCheckbox.checked = false;
-                instagramCheckbox.disabled = true;
-                instagramLabel.style.opacity = '0.5';
-                instagramLabel.title = 'This post has no image. Instagram requires an image.';
-            } else {
-                instagramCheckbox.disabled = false;
-                instagramLabel.style.opacity = '1';
-                instagramLabel.title = '';
-            }
+        if (!response.ok) {
+            showAlert('Failed to load post details', 'error');
+            return;
         }
+
+        const data = await response.json();
+        const post = data.post;
+
+        // Find the post row in the table
+        const tbody = document.getElementById('posts-table-body');
+        const rows = tbody.querySelectorAll('tr');
+        let targetRow = null;
+
+        // Find the row containing this post's ID
+        rows.forEach(row => {
+            if (row.innerHTML.includes(`'${postId}'`)) {
+                targetRow = row;
+            }
+        });
+
+        if (!targetRow) {
+            showAlert('Could not find post row', 'error');
+            return;
+        }
+
+        // Create the expandable row
+        const expandableRow = document.createElement('tr');
+        expandableRow.id = 'social-publish-row';
+        expandableRow.innerHTML = `
+            <td colspan="6" style="padding: 0; background: #f8f9fa; border-top: 2px solid #667eea;">
+                <div style="padding: 1.5rem; animation: slideDown 0.3s ease-out;">
+                    <div style="background: white; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 2px solid #e9ecef;">
+                            <div>
+                                <h3 style="margin: 0; color: #333; font-size: 1.2rem;">Publish to Social Media</h3>
+                                <p style="margin: 0.5rem 0 0 0; color: #6c757d; font-size: 0.9rem;">${post.title}</p>
+                            </div>
+                            <button onclick="closeSocialModal()" style="background: none; border: none; font-size: 1.5rem; color: #6c757d; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; transition: color 0.2s;" onmouseover="this.style.color='#333'" onmouseout="this.style.color='#6c757d'">&times;</button>
+                        </div>
+
+                        <p style="margin-bottom: 1.5rem; color: #6c757d; font-size: 0.9rem;">
+                            Select the platforms you want to publish this post to. AI will automatically optimize the content for each platform.
+                        </p>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
+                                    <input type="checkbox" class="platform-check" value="twitter" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <i class="fab fa-twitter" style="color: #1DA1F2; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">Twitter/X</span>
+                                    <span style="font-size: 0.85rem; color: #6c757d;">(280 characters)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
+                                    <input type="checkbox" class="platform-check" value="facebook" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <i class="fab fa-facebook" style="color: #4267B2; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">Facebook</span>
+                                    <span style="font-size: 0.85rem; color: #6c757d;">(150-250 words)</span>
+                                </label>
+                                <label id="instagram-label-inline" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
+                                    <input type="checkbox" class="platform-check" value="instagram" ${post.image ? 'checked' : 'disabled'} style="width: 18px; height: 18px; cursor: pointer;">
+                                    <i class="fab fa-instagram" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">Instagram</span>
+                                    <span style="font-size: 0.85rem; color: ${post.image ? '#6c757d' : '#dc3545'};">${post.image ? '(Requires image)' : '(No image - disabled)'}</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="socialResultsInline" style="margin-top: 1.5rem; display: none;">
+                            <h4 style="margin-bottom: 1rem; font-size: 1rem; color: #333;">Publishing Results:</h4>
+                            <div id="socialResultsContentInline"></div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #667eea;">
+                            <p style="margin: 0; font-size: 0.85rem; color: #495057;">
+                                <strong>Note:</strong> Content will be automatically optimized for each platform using AI. Make sure your API credentials are configured in the backend.
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: flex-end;">
+                            <button onclick="closeSocialModal()" style="padding: 0.75rem 1.5rem; background: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">Cancel</button>
+                            <button onclick="publishToSocialInline()" id="publishSocialBtnInline" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                <i class="fas fa-share-alt"></i> Publish Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        `;
+
+        // Insert after the target row
+        targetRow.insertAdjacentElement('afterend', expandableRow);
+
+        // Scroll to the expanded row smoothly
+        setTimeout(() => {
+            expandableRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+
     } catch (error) {
         console.error('Failed to fetch post details:', error);
+        showAlert('Failed to load post details', 'error');
     }
-
-    // Show modal
-    document.getElementById('socialPublishModal').style.display = 'flex';
 }
 
-// Close social publishing modal
+// Close social publishing inline row
 function closeSocialModal() {
-    document.getElementById('socialPublishModal').style.display = 'none';
-    document.getElementById('socialPostTitle').textContent = ''; // Clear post title
+    const expandableRow = document.getElementById('social-publish-row');
+    if (expandableRow) {
+        expandableRow.style.animation = 'slideUp 0.3s ease-out';
+        setTimeout(() => {
+            expandableRow.remove();
+        }, 300);
+    }
     currentPublishingPostId = null;
 }
 
-// Publish to selected social media platforms
+// Publish to social media from inline interface
+async function publishToSocialInline() {
+    const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
+        .map(cb => cb.value);
+
+    if (selectedPlatforms.length === 0) {
+        showAlert('Please select at least one platform', 'error');
+        return;
+    }
+
+    if (!currentPublishingPostId) {
+        showAlert('No post selected for publishing', 'error');
+        return;
+    }
+
+    // Disable publish button
+    const publishBtn = document.getElementById('publishSocialBtnInline');
+    publishBtn.disabled = true;
+    publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+
+    // Show results section
+    document.getElementById('socialResultsInline').style.display = 'block';
+    document.getElementById('socialResultsContentInline').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Publishing to ' + selectedPlatforms.join(', ') + '...</p>';
+
+    try {
+        const response = await fetch(`${API_URL}/social/publish/${currentPublishingPostId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                platforms: selectedPlatforms
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            // Display results
+            let resultsHTML = '';
+
+            data.results.forEach(result => {
+                if (result.status === 'success') {
+                    resultsHTML += `
+                        <div style="padding: 1rem; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <span style="color: #155724;">- Published successfully!</span>
+                            </div>
+                            ${result.url ? `<a href="${result.url}" target="_blank" style="color: #0066cc; font-size: 0.9rem;">View post <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></a>` : ''}
+                        </div>
+                    `;
+                } else if (result.status === 'manual') {
+                    const contentId = 'manual-content-' + result.platform;
+                    resultsHTML += `
+                        <div style="padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                <i class="fas fa-copy" style="color: #856404;"></i>
+                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <span style="color: #856404;">- Ready for manual posting</span>
+                            </div>
+                            <div style="background: white; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; white-space: pre-wrap; border: 1px solid #dee2e6;">
+                                <div id="${contentId}" style="color: #495057;">${result.content}</div>
+                            </div>
+                            <button onclick="copyToClipboard('${contentId}', '${result.platform}')"
+                                    style="background: #ffc107; color: #000; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 500;">
+                                <i class="fas fa-copy"></i> Copy to Clipboard
+                            </button>
+                            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #856404;">
+                                <i class="fas fa-info-circle"></i> Paste this into Twitter/X manually to avoid $100/month API cost
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    resultsHTML += `
+                        <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-times-circle" style="color: #dc3545;"></i>
+                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <span style="color: #721c24;">- Failed</span>
+                            </div>
+                            <p style="margin: 0; color: #721c24; font-size: 0.9rem;">${result.error}</p>
+                        </div>
+                    `;
+                }
+            });
+
+            document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
+            showAlert(data.message, 'success');
+
+            // Reload social status for this post
+            setTimeout(() => {
+                loadSocialStatus(currentPublishingPostId).then(statusHTML => {
+                    const statusDiv = document.getElementById(`social-status-${currentPublishingPostId}`);
+                    if (statusDiv) {
+                        statusDiv.innerHTML = statusHTML;
+                    }
+                });
+            }, 1000);
+
+        } else {
+            document.getElementById('socialResultsContentInline').innerHTML = `
+                <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                    <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> ${data.message || 'Publishing failed'}</p>
+                </div>
+            `;
+            showAlert(data.message || 'Publishing failed', 'error');
+        }
+
+        // Re-enable button
+        publishBtn.disabled = false;
+        publishBtn.innerHTML = '<i class="fas fa-share-alt"></i> Publish Now';
+
+    } catch (error) {
+        console.error('Publishing error:', error);
+        document.getElementById('socialResultsContentInline').innerHTML = `
+            <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
+            </div>
+        `;
+        showAlert('Publishing error: ' + error.message, 'error');
+
+        // Re-enable button
+        publishBtn.disabled = false;
+        publishBtn.innerHTML = '<i class="fas fa-share-alt"></i> Publish Now';
+    }
+}
+
+// Publish to selected social media platforms (legacy modal version - kept for compatibility)
 async function publishToSocial() {
     const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
         .map(cb => cb.value);
