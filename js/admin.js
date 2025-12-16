@@ -289,6 +289,7 @@ function restoreFromBackup() {
 // ======================================
 
 let currentPublishingPostId = null;
+let isPreviewInProgress = false;
 
 // Open social publishing inline (beneath the post row)
 async function openSocialPublishModal(postId) {
@@ -437,46 +438,55 @@ function closeSocialModal() {
 
 // Preview AI-generated social media content
 async function previewSocialContent() {
-    const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
-        .map(cb => cb.value);
-
-    if (selectedPlatforms.length === 0) {
-        showAlert('Please select at least one platform to preview', 'error');
+    // Prevent concurrent preview executions (prevents double-clicks)
+    if (isPreviewInProgress) {
+        console.log('Preview already in progress, ignoring click');
         return;
     }
-
-    if (!currentPublishingPostId) {
-        showAlert('No post selected', 'error');
-        return;
-    }
-
-    // Get elements within the current expandable row
-    const expandableRow = document.getElementById('social-publish-row');
-    if (!expandableRow) {
-        showAlert('No publishing interface found', 'error');
-        return;
-    }
-
-    const previewBtn = expandableRow.querySelector('#previewSocialBtn');
-    const previewSection = expandableRow.querySelector('#socialPreviewInline');
-    const previewContent = expandableRow.querySelector('#socialPreviewContentInline');
-    const resultsSection = expandableRow.querySelector('#socialResultsInline');
-
-    // Disable preview button to prevent double-clicks
-    previewBtn.disabled = true;
-    previewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-
-    // Clear any existing preview content
-    previewContent.innerHTML = '';
-
-    // Show preview section with loading state
-    previewSection.style.display = 'block';
-    previewContent.innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating AI content for ' + selectedPlatforms.join(', ') + '...</p>';
-
-    // Hide results section
-    resultsSection.style.display = 'none';
+    isPreviewInProgress = true;
 
     try {
+        const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
+            .map(cb => cb.value);
+
+        if (selectedPlatforms.length === 0) {
+            showAlert('Please select at least one platform to preview', 'error');
+            isPreviewInProgress = false;
+            return;
+        }
+
+        if (!currentPublishingPostId) {
+            showAlert('No post selected', 'error');
+            isPreviewInProgress = false;
+            return;
+        }
+
+        // Get elements within the current expandable row
+        const expandableRow = document.getElementById('social-publish-row');
+        if (!expandableRow) {
+            showAlert('No publishing interface found', 'error');
+            isPreviewInProgress = false;
+            return;
+        }
+
+        const previewBtn = expandableRow.querySelector('#previewSocialBtn');
+        const previewSection = expandableRow.querySelector('#socialPreviewInline');
+        const previewContent = expandableRow.querySelector('#socialPreviewContentInline');
+        const resultsSection = expandableRow.querySelector('#socialResultsInline');
+
+        // Disable preview button to prevent double-clicks
+        previewBtn.disabled = true;
+        previewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+        // Clear any existing preview content
+        previewContent.innerHTML = '';
+
+        // Show preview section with loading state
+        previewSection.style.display = 'block';
+        previewContent.innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating AI content for ' + selectedPlatforms.join(', ') + '...</p>';
+
+        // Hide results section
+        resultsSection.style.display = 'none';
         const response = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
             method: 'POST',
             headers: {
@@ -582,22 +592,39 @@ async function previewSocialContent() {
             showAlert(data.error || 'Preview generation failed', 'error');
         }
 
-        // Re-enable button
+        // Re-enable button and reset flag
         previewBtn.disabled = false;
         previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
+        isPreviewInProgress = false;
 
     } catch (error) {
         console.error('Preview error:', error);
-        previewContent.innerHTML = `
-            <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
-                <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
-            </div>
-        `;
+
+        // Get elements again in case of error before they were set
+        const expandableRow = document.getElementById('social-publish-row');
+        if (expandableRow) {
+            const previewBtn = expandableRow.querySelector('#previewSocialBtn');
+            const previewContent = expandableRow.querySelector('#socialPreviewContentInline');
+
+            if (previewContent) {
+                previewContent.innerHTML = `
+                    <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                        <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+
+            // Re-enable button
+            if (previewBtn) {
+                previewBtn.disabled = false;
+                previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
+            }
+        }
+
         showAlert('Preview error: ' + error.message, 'error');
 
-        // Re-enable button
-        previewBtn.disabled = false;
-        previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
+        // Reset flag
+        isPreviewInProgress = false;
     }
 }
 
