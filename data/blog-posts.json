@@ -28,15 +28,6 @@
       "excerpt": "Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution."
     },
     {
-      "id": "test-1234",
-      "title": "Exploring the AI Universe and all its layers",
-      "date": "2025-12-12T06:00:15.988Z",
-      "author": "Eytan Benzeno",
-      "icon": "🪟",
-      "image": "https://eytan.com/images/blog/1765548314497-d18287-6865-1ee8-ff56-db4d375e847-ai-uni.jpg",
-      "excerpt": "Artificial Intelligence (AI) is no longer a futuristic concept; it's an integral part of various industries, including real estate. To better understand how AI can revolutionize your business, let's delve into the AI Universe using the insightful illustration shared above. "
-    },
-    {
       "id": "test4",
       "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
       "date": "2025-12-06T20:04:15.210Z",
@@ -125,6 +116,15 @@
       "icon": "⚡",
       "image": "https://eytan.com/images/blog/1765821295693-517029794-10162637791567489-3905475053592606919-n.jpg",
       "excerpt": "\nExplore the potential gains and shorting opportunities of Tesla stock on the road to $500. Dive into the FSD technology, Robotaxi network, and new revenue streams."
+    },
+    {
+      "id": "test-1234",
+      "title": "Exploring the AI Universe and all its layers",
+      "date": "2024-06-27T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "🪟",
+      "image": "https://eytan.com/images/blog/1765548314497-d18287-6865-1ee8-ff56-db4d375e847-ai-uni.jpg",
+      "excerpt": "Artificial Intelligence (AI) is no longer a futuristic concept; it's an integral part of various industries, including real estate. To better understand how AI can revolutionize your business, let's delve into the AI Universe using the insightful illustration shared above. "
     }
   ]
 }
