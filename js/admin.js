@@ -376,6 +376,12 @@ async function openSocialPublishModal(postId) {
                                     <span style="font-weight: 500; flex: 1;">Instagram</span>
                                     <span style="font-size: 0.85rem; color: ${post.image ? '#6c757d' : '#dc3545'};">${post.image ? '(Requires image)' : '(No image - disabled)'}</span>
                                 </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
+                                    <input type="checkbox" class="platform-check" value="linkedin" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <i class="fab fa-linkedin" style="color: #0A66C2; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">LinkedIn</span>
+                                    <span style="font-size: 0.85rem; color: #6c757d;">(200-300 words)</span>
+                                </label>
                             </div>
                         </div>
 
@@ -565,6 +571,11 @@ async function previewSocialContent() {
                             icon: 'fab fa-instagram',
                             color: '#E1306C',
                             bg: '#fce8f3'
+                        },
+                        linkedin: {
+                            icon: 'fab fa-linkedin',
+                            color: '#0A66C2',
+                            bg: '#e8f4fc'
                         }
                     };
 
@@ -907,6 +918,13 @@ async function loadSocialStatus(postId) {
             statusHTML += `<a href="${data.status.instagram.platform_url}" target="_blank" title="Posted on Instagram"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>`;
         } else if (data.status.instagram && data.status.instagram.status === 'failed') {
             statusHTML += `<i class="fab fa-instagram" style="color: #dc3545;" title="Instagram publish failed"></i>`;
+        }
+
+        // LinkedIn
+        if (data.status.linkedin && data.status.linkedin.status === 'published') {
+            statusHTML += `<a href="${data.status.linkedin.platform_url}" target="_blank" title="Posted on LinkedIn"><i class="fab fa-linkedin" style="color: #0A66C2;"></i></a>`;
+        } else if (data.status.linkedin && data.status.linkedin.status === 'failed') {
+            statusHTML += `<i class="fab fa-linkedin" style="color: #dc3545;" title="LinkedIn publish failed"></i>`;
         }
 
         statusHTML += '</div>';
