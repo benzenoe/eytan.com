@@ -64,7 +64,8 @@ The risk? Public conflicts are also public failures. Smart DAOs turn this into e
 - **Dispute Resolution**: Internal arbitration, some using decentralized courts like **Kleros**
 - **IP/Licensing**: Managing collective intellectual property rights
 
-![DOA Governance](https://eytan.com/images/82c08390-b0ac-4f3b-af9a-f4ed52003e95.png)
+<img src="https://eytan.com/images/82c08390-b0ac-4f3b-af9a-f4ed52003e95.png" alt="DOA Governance" style="max-width: 100%; height: auto;" />
+
 ---
 
 ## The Social Credit System: How Reputation Replaces Résumés
@@ -83,8 +84,8 @@ At the heart of the DAO-Firm model is an **on-chain reputation system** that tra
 **The result?** Your blockchain record becomes your résumé. Trust is automated.
 
 ---
+<img src="https://eytan.com/images/b8849b19-4aef-4bff-b2da-c3083d26cd5d.png" alt="The Partner Track" style="max-width: 100%; height: auto;" />
 
-![The Partner Track](https://eytan.com/images/b8849b19-4aef-4bff-b2da-c3083d26cd5d.png)
 
 ## The Partner Track: From Contributor to Steward
 
