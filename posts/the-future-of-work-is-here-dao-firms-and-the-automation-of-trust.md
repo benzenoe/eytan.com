@@ -1,6 +1,5 @@
-# The Future of Work is Here: DAO-Firms and the Automation of Trust
 
-## How Decentralized Organizations Are Replacing Traditional Companies
+## How Decentralized Organizations will Replace Traditional Companies
 
 ---
 
@@ -22,7 +21,7 @@ Traditional companies rely on hierarchies, employment contracts, and centralized
 - **Automated trust**: Smart contracts handle payments, voting, and coordination
 - **Flexible partnerships**: Earn your way to ownership through proven contributions
 
-As of 2024, **over $30 billion** sits in DAO treasuries globally, up from $18 billion in mid-2023. This isn't theory—it's happening now.
+As of 2024, **over $30 billion** sits in DAO treasuries globally, up from $18 billion in mid-2023. This isn't theory—it's happening soon.
 
 ---
 
