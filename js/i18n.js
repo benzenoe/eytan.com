@@ -76,6 +76,22 @@ const translations = {
       builtWith: 'Built with'
     },
 
+    // About Section
+    about: {
+      title: 'About Me',
+      intro: "I'm an entrepreneur and consultant with a diverse portfolio spanning e-commerce, real estate, technology, and personal development. With over 20 years of pioneering experience, my unique combination of expertise allows me to help individuals and businesses grow across multiple dimensions.",
+      realEstateTitle: '🏡 Real Estate',
+      realEstateText: 'As a licensed broker in South Florida and Founder & Managing Partner of SoldHere, LDA in Portugal, I help clients navigate international property transactions across two vibrant markets. With expertise in property management and short-term rentals, I provide comprehensive real estate services from acquisition to operations. Whether you\'re investing in sunny South Florida through SoldHere.com or exploring opportunities in beautiful Portugal via SoldHere.pt, I bring local expertise and global perspective.',
+      aiMarketingTitle: '🤖 AI & Marketing',
+      aiMarketingText: 'As Managing Partner and Chief AI Transformation Strategist at Bogen.ai, I provide cutting-edge marketing and AI integration consulting. I help businesses leverage artificial intelligence to optimize their marketing strategies, automate processes, and stay ahead in an increasingly tech-driven marketplace.',
+      ecommerceTitle: '🛒 E-commerce Pioneer',
+      ecommerceText: 'With over 20 years of experience in e-commerce, I\'ve been at the forefront of online retail evolution. As an e-commerce specialist, I bring deep expertise in operations, logistics management, customer service excellence, and building scalable online businesses. From the early days of online commerce to today\'s sophisticated platforms, I\'ve helped countless businesses optimize their operations and deliver exceptional customer experiences.',
+      coachingTitle: '💡 Coaching & Mastermind',
+      coachingText: 'As a partner and manager at Reignation.com, I facilitate transformative coaching experiences and mastermind groups. I\'m passionate about helping leaders and entrepreneurs unlock their potential and achieve breakthrough results.',
+      viewResume: 'View Resume',
+      readBlog: 'Read Blog'
+    },
+
     // Common
     common: {
       readMore: 'Read More',
@@ -160,6 +176,22 @@ const translations = {
     footer: {
       rights: 'Tous droits réservés',
       builtWith: 'Créé avec'
+    },
+
+    // About Section
+    about: {
+      title: 'À Propos de Moi',
+      intro: "Je suis un entrepreneur et consultant avec un portefeuille diversifié couvrant le e-commerce, l'immobilier, la technologie et le développement personnel. Avec plus de 20 ans d'expérience pionnière, ma combinaison unique d'expertise me permet d'aider les individus et les entreprises à croître sur plusieurs dimensions.",
+      realEstateTitle: '🏡 Immobilier',
+      realEstateText: "En tant que courtier agréé dans le sud de la Floride et Fondateur & Associé Gérant de SoldHere, LDA au Portugal, j'aide les clients à naviguer dans les transactions immobilières internationales sur deux marchés dynamiques. Avec une expertise en gestion immobilière et locations court terme, je fournis des services immobiliers complets de l'acquisition aux opérations. Que vous investissiez dans le sud ensoleillé de la Floride via SoldHere.com ou que vous exploriez des opportunités au beau Portugal via SoldHere.pt, j'apporte une expertise locale et une perspective mondiale.",
+      aiMarketingTitle: '🤖 IA & Marketing',
+      aiMarketingText: "En tant qu'Associé Gérant et Stratège en Chef de la Transformation IA chez Bogen.ai, je fournis du conseil de pointe en marketing et intégration de l'IA. J'aide les entreprises à tirer parti de l'intelligence artificielle pour optimiser leurs stratégies marketing, automatiser les processus et rester en avance dans un marché de plus en plus axé sur la technologie.",
+      ecommerceTitle: '🛒 Pionnier du E-commerce',
+      ecommerceText: "Avec plus de 20 ans d'expérience en e-commerce, j'ai été à l'avant-garde de l'évolution du commerce en ligne. En tant que spécialiste du e-commerce, j'apporte une expertise approfondie en opérations, gestion logistique, excellence du service client et construction d'entreprises en ligne évolutives. Des débuts du commerce en ligne aux plateformes sophistiquées d'aujourd'hui, j'ai aidé d'innombrables entreprises à optimiser leurs opérations et à offrir des expériences client exceptionnelles.",
+      coachingTitle: '💡 Coaching & Mastermind',
+      coachingText: "En tant que partenaire et gestionnaire chez Reignation.com, je facilite des expériences de coaching transformatrices et des groupes mastermind. Je suis passionné par l'aide aux leaders et entrepreneurs à libérer leur potentiel et obtenir des résultats exceptionnels.",
+      viewResume: 'Voir le CV',
+      readBlog: 'Lire le Blog'
     },
 
     // Common
