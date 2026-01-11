@@ -6,10 +6,15 @@ let currentTagFilter = 'all';
 // Load blog posts from API
 async function loadBlogPosts() {
     try {
-        // Load from API - only published posts
-        const response = await fetch('https://api.eytan.com/api/posts?status=published');
+        // Get current language from i18n system
+        const currentLang = (typeof i18n !== 'undefined') ? i18n.getLanguage() : 'en';
+
+        // Load from API - only published posts, with language parameter
+        const response = await fetch(`https://api.eytan.com/api/posts?status=published&lang=${currentLang}`);
         const data = await response.json();
         blogPosts = data.posts || [];
+
+        console.log(`📚 Loaded ${blogPosts.length} blog posts in ${data.language || currentLang}`);
 
         // Populate tag filters
         populateTagFilters();
@@ -233,3 +238,9 @@ function shareBlogPost(event, postSlug, postTitle, platform) {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', loadBlogPosts);
+
+// Listen for language changes and reload blog posts
+window.addEventListener('languageChanged', (event) => {
+    console.log(`🌍 Language changed to: ${event.detail.language}`);
+    loadBlogPosts(); // Reload blog posts in new language
+});
