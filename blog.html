@@ -3425,10 +3425,10 @@
             </div>
             <div class="nav-right">
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html" class="active">Blog</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="blog.html" class="active" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="resume.html" data-i18n="nav.resume">Resume</a></li>
+                    <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
                 </ul>
                 <div class="social-icons-header">
                     <a href="https://www.facebook.com/benzeno" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
@@ -3439,6 +3439,14 @@
                     <a href="https://api.whatsapp.com/send/?phone=351939995889" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     <a href="tel:+13055344242" title="Call"><i class="fas fa-phone"></i></a>
                 </div>
+                <div class="language-switcher">
+                    <button class="lang-switch" data-lang="en">
+                        <span>EN</span>
+                    </button>
+                    <button class="lang-switch" data-lang="fr">
+                        <span>FR</span>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -3446,8 +3454,8 @@
     <section class="blog-section">
         <div class="container">
             <div class="blog-header">
-                <h1>Eytan's Blog</h1>
-                <p style="color: #6c757d; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+                <h1 data-i18n="blog.title">Eytan's Blog</h1>
+                <p style="color: #6c757d; font-size: 1.2rem; max-width: 700px; margin: 0 auto;" data-i18n="blog.subtitle">
                     <strong>Welcome to My Corner of the Internet</strong><br>
                     I'm Eytan, and I'm glad you're here. This is where I share insights, experiences, and reflections from my journey through tech, business, and life. Pull up a chair, grab a coffee, dive in and explore.
                 </p>
@@ -3456,7 +3464,7 @@
             <div class="blog-grid" id="blog-grid">
                 <p style="text-align: center; color: #6c757d; padding: 3rem;">
                     <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i><br><br>
-                    Loading posts...
+                    <span data-i18n="blog.loading">Loading posts...</span>
                 </p>
             </div>
         </div>
@@ -3493,6 +3501,9 @@
 
     <script src="js/main.js"></script>
     <script src="js/blog.js"></script>
+
+    <!-- i18n (Internationalization) System -->
+    <script src="js/i18n.js"></script>
 
     <!-- Tidio Chatbot -->
     <script src="//code.tidio.co/mrlssbhzk3lc4tbjjinryaqueto6ezrr.js" async></script>
