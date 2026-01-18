@@ -28,138 +28,274 @@
         <priority>0.7</priority>
     </url>
 
-    <!-- Blog Post: the-future-of-work-is-here-dao-firms-and-the-automation-of-trust -->
-    <url>
-        <loc>https://eytan.com/blog/the-future-of-work-is-here-dao-firms-and-the-automation-of-trust.html</loc>
-        <lastmod>2025-12-29</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: when-aging-assets-and-reality-diverge -->
-    <url>
-        <loc>https://eytan.com/blog/when-aging-assets-and-reality-diverge.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
-    <url>
-        <loc>https://eytan.com/blog/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: test-1234 -->
-    <url>
-        <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
-    <url>
-        <loc>https://eytan.com/blog/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: sphere-of-influence -->
-    <url>
-        <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: neuroplasticity -->
-    <url>
-        <loc>https://eytan.com/blog/neuroplasticity.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: intelligence-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: 88feb7a0a2e214e0 -->
-    <url>
-        <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: - -->
-    <url>
-        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: is-tesla-stock-on-the-road-to-500 -->
-    <url>
-        <loc>https://eytan.com/blog/is-tesla-stock-on-the-road-to-500.html</loc>
-        <lastmod>2025-12-16</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: hydrogen-energy-powering-a-global-green-revolution -->
-    <url>
-        <loc>https://eytan.com/blog/hydrogen-energy-powering-a-global-green-revolution.html</loc>
-        <lastmod>2025-12-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: test4 -->
-    <url>
-        <loc>https://eytan.com/blog/hey-siri.html</loc>
-        <lastmod>2025-12-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post: welcome -->
+    <!-- Blog Post (EN): welcome -->
     <url>
         <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
-        <lastmod>2025-12-15</lastmod>
+        <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Blog Post: f9c286408f400b79 -->
+    <!-- Blog Post (FR): welcome -->
+    <url>
+        <loc>https://eytan.com/blog/fr/welcome-to-my-blog.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): test-1234 -->
+    <url>
+        <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): test-1234 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/artificial-intelligence.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): is-tesla-stock-on-the-road-to-500 -->
+    <url>
+        <loc>https://eytan.com/blog/is-tesla-stock-on-the-road-to-500.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): is-tesla-stock-on-the-road-to-500 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/is-tesla-stock-on-the-road-to-500.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): - -->
+    <url>
+        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): - -->
+    <url>
+        <loc>https://eytan.com/blog/fr/bitcoin-to-700k.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): 88feb7a0a2e214e0 -->
+    <url>
+        <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): 88feb7a0a2e214e0 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/low-cost-strategies-to-win-real-estate-listings.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): f9c286408f400b79 -->
     <url>
         <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
-        <lastmod>2025-12-15</lastmod>
+        <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Blog Post: bitcoins-24hour-price-explosion -->
+    <!-- Blog Post (FR): f9c286408f400b79 -->
     <url>
-        <loc>https://eytan.com/blog/bitcoins-24hour-price-explosion.html</loc>
-        <lastmod>2025-12-14</lastmod>
+        <loc>https://eytan.com/blog/fr/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Blog Post: mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <!-- Blog Post (EN): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
+    <url>
+        <loc>https://eytan.com/blog/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
+    <url>
+        <loc>https://eytan.com/blog/fr/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): sphere-of-influence -->
+    <url>
+        <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): sphere-of-influence -->
+    <url>
+        <loc>https://eytan.com/blog/fr/mastering-your-sphere-of-influence-in-real-estate.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/neuroplasticity.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/fr/neuroplasticity.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): intelligence-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): intelligence-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/fr/intelligence-explosion.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): when-aging-assets-and-reality-diverge -->
+    <url>
+        <loc>https://eytan.com/blog/when-aging-assets-and-reality-diverge.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): when-aging-assets-and-reality-diverge -->
+    <url>
+        <loc>https://eytan.com/blog/fr/when-aging-assets-and-reality-diverge.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): hydrogen-energy-powering-a-global-green-revolution -->
+    <url>
+        <loc>https://eytan.com/blog/hydrogen-energy-powering-a-global-green-revolution.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): hydrogen-energy-powering-a-global-green-revolution -->
+    <url>
+        <loc>https://eytan.com/blog/fr/hydrogen-energy-powering-a-global-green-revolution.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
     <url>
         <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
-        <lastmod>2025-12-13</lastmod>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <url>
+        <loc>https://eytan.com/blog/fr/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/hey-siri.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/hey-siri.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): bitcoins-24hour-price-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/bitcoins-24hour-price-explosion.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): bitcoins-24hour-price-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/fr/bitcoins-24hour-price-explosion.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
+    <url>
+        <loc>https://eytan.com/blog/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
+    <url>
+        <loc>https://eytan.com/blog/fr/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): the-future-of-work-is-here-dao-firms-and-the-automation-of-trust -->
+    <url>
+        <loc>https://eytan.com/blog/the-future-of-work-is-here-dao-firms-and-the-automation-of-trust.html</loc>
+        <lastmod>2026-01-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): the-future-of-work-is-here-dao-firms-and-the-automation-of-trust -->
+    <url>
+        <loc>https://eytan.com/blog/fr/the-future-of-work-is-here-dao-firms-and-the-automation-of-trust.html</loc>
+        <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
