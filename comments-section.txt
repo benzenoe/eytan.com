@@ -1,0 +1,17 @@
+
+                <!-- Comments Section -->
+                <div style="margin: 4rem 0; padding: 2rem 0; border-top: 2px solid #e9ecef;">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #2c3e50; text-align: center;">
+                        💬 Join the Discussion
+                    </h2>
+                    <p style="text-align: center; color: #6c757d; margin-bottom: 2rem;">
+                        Have thoughts on this article? Share them below! Sign in with your GitHub account to leave a comment.
+                    </p>
+                    <script src="https://utteranc.es/client.js"
+                            repo="benzenoe/eytan.com"
+                            issue-term="pathname"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </div>

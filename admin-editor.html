@@ -254,8 +254,19 @@
             <input type="hidden" id="postId">
 
             <div class="form-group">
-                <label for="postTitle">Title *</label>
+                <label for="postTitle">Title (English) *</label>
                 <input type="text" id="postTitle" required>
+            </div>
+
+            <div class="form-group">
+                <label for="postTitleFr">Title (French)</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="postTitleFr" placeholder="Titre en français..." style="flex: 1;">
+                    <button type="button" class="btn btn-secondary" onclick="translateField('title')" style="white-space: nowrap;">
+                        🌍 Translate
+                    </button>
+                </div>
+                <div class="help-text">French translation of the title (optional - can be auto-translated)</div>
             </div>
 
             <div class="form-group">
@@ -289,9 +300,20 @@
             </div>
 
             <div class="form-group">
-                <label for="postExcerpt">Excerpt *</label>
+                <label for="postExcerpt">Excerpt (English) *</label>
                 <textarea id="postExcerpt" rows="3" required placeholder="A brief description of your post..."></textarea>
                 <div class="help-text">Short description for listings and social media</div>
+            </div>
+
+            <div class="form-group">
+                <label for="postExcerptFr">Excerpt (French)</label>
+                <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                    <textarea id="postExcerptFr" rows="3" placeholder="Brève description en français..."></textarea>
+                    <button type="button" class="btn btn-secondary" onclick="translateField('excerpt')" style="align-self: flex-start; white-space: nowrap;">
+                        🌍 Translate
+                    </button>
+                </div>
+                <div class="help-text">French translation of the excerpt (optional - can be auto-translated)</div>
             </div>
 
             <div class="form-group">
@@ -325,9 +347,29 @@
             </div>
 
             <div class="form-group">
-                <label for="postContent">Content (Markdown) *</label>
+                <label for="postContent">Content (English Markdown) *</label>
                 <textarea id="postContent" required placeholder="# Your blog post content in markdown..."></textarea>
                 <div class="help-text">Full markdown content of the post</div>
+            </div>
+
+            <div class="form-group">
+                <label for="postContentFr">Content (French Markdown)</label>
+                <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                    <textarea id="postContentFr" placeholder="# Votre contenu de blog en markdown..."></textarea>
+                    <button type="button" class="btn btn-secondary" onclick="translateField('content')" style="align-self: flex-start; white-space: nowrap;">
+                        🌍 Translate
+                    </button>
+                </div>
+                <div class="help-text">French translation of the content (optional - can be auto-translated)</div>
+            </div>
+
+            <div class="form-group" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 8px; color: white;">
+                <button type="button" class="btn" onclick="translateAllFields()" style="background: white; color: #667eea; font-weight: bold; width: 100%;">
+                    🌍 Translate All Fields to French
+                </button>
+                <div class="help-text" style="color: white; margin-top: 0.5rem;">
+                    Automatically translate title, excerpt, and content to French using AI
+                </div>
             </div>
 
             <!-- SEO Metadata Section -->

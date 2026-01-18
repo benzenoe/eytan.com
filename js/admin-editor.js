@@ -86,6 +86,11 @@ function populateForm(post) {
 
     document.getElementById('postContent').value = post.content || '';
 
+    // Populate French fields
+    document.getElementById('postTitleFr').value = post.title_fr || '';
+    document.getElementById('postExcerptFr').value = post.excerpt_fr || '';
+    document.getElementById('postContentFr').value = post.content_fr || '';
+
     // Populate SEO fields
     document.getElementById('seoTitle').value = post.seo_title || '';
     document.getElementById('metaDescription').value = post.meta_description || '';
@@ -229,6 +234,9 @@ function getFormData() {
         tags: document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(t => t),
         hashtags: document.getElementById('postHashtags').value,
         content: document.getElementById('postContent').value,
+        title_fr: document.getElementById('postTitleFr').value,
+        excerpt_fr: document.getElementById('postExcerptFr').value,
+        content_fr: document.getElementById('postContentFr').value,
         seoTitle: document.getElementById('seoTitle').value,
         metaDescription: document.getElementById('metaDescription').value,
         metaKeywords: document.getElementById('metaKeywords').value,
@@ -537,5 +545,160 @@ function addTag(tagName) {
         tagsInput.value = currentTags + ', ' + tagName;
     } else {
         tagsInput.value = tagName;
+    }
+}
+
+// Translation functions
+async function translateField(fieldType) {
+    let sourceText = '';
+    let targetFieldId = '';
+
+    // Get source text based on field type
+    switch (fieldType) {
+        case 'title':
+            sourceText = document.getElementById('postTitle').value.trim();
+            targetFieldId = 'postTitleFr';
+            break;
+        case 'excerpt':
+            sourceText = document.getElementById('postExcerpt').value.trim();
+            targetFieldId = 'postExcerptFr';
+            break;
+        case 'content':
+            sourceText = document.getElementById('postContent').value.trim();
+            targetFieldId = 'postContentFr';
+            break;
+        default:
+            alert('Invalid field type');
+            return;
+    }
+
+    // Validate source text
+    if (!sourceText) {
+        alert(`Please enter ${fieldType} in English first!`);
+        return;
+    }
+
+    const targetField = document.getElementById(targetFieldId);
+    const originalValue = targetField.value;
+
+    // Show loading state
+    targetField.value = 'Translating...';
+    targetField.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/translate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                text: sourceText,
+                type: fieldType
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Translation failed');
+        }
+
+        const data = await response.json();
+        targetField.value = data.translation;
+
+        // Mark as having unsaved changes
+        hasUnsavedChanges = true;
+
+        // Show success message
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} translated!`;
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 2000);
+    } catch (error) {
+        console.error('Translation error:', error);
+        alert('Translation error: ' + error.message);
+        targetField.value = originalValue; // Restore original value on error
+    } finally {
+        targetField.disabled = false;
+    }
+}
+
+async function translateAllFields() {
+    const title = document.getElementById('postTitle').value.trim();
+    const excerpt = document.getElementById('postExcerpt').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+
+    // Validate that we have content
+    if (!title || !excerpt || !content) {
+        alert('Please fill in all English fields (Title, Excerpt, Content) before translating!');
+        return;
+    }
+
+    // Confirm before proceeding (this will cost API credits)
+    if (!confirm('This will translate Title, Excerpt, and Content to French using AI. Continue?')) {
+        return;
+    }
+
+    // Show loading state
+    const titleFr = document.getElementById('postTitleFr');
+    const excerptFr = document.getElementById('postExcerptFr');
+    const contentFr = document.getElementById('postContentFr');
+
+    titleFr.value = 'Translating...';
+    excerptFr.value = 'Translating...';
+    contentFr.value = 'Translating...';
+    titleFr.disabled = true;
+    excerptFr.disabled = true;
+    contentFr.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/translate/bulk`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                excerpt: excerpt,
+                content: content
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Bulk translation failed');
+        }
+
+        const data = await response.json();
+
+        // Populate French fields
+        titleFr.value = data.title_fr || '';
+        excerptFr.value = data.excerpt_fr || '';
+        contentFr.value = data.content_fr || '';
+
+        // Mark as having unsaved changes
+        hasUnsavedChanges = true;
+
+        // Show success message
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = '✅ All fields translated to French!';
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 3000);
+    } catch (error) {
+        console.error('Bulk translation error:', error);
+        alert('Translation error: ' + error.message);
+        // Clear "Translating..." text on error
+        titleFr.value = '';
+        excerptFr.value = '';
+        contentFr.value = '';
+    } finally {
+        titleFr.disabled = false;
+        excerptFr.disabled = false;
+        contentFr.disabled = false;
     }
 }
