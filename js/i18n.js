@@ -64,7 +64,8 @@ const translations = {
       socialLinks: 'Social Links',
       qrTitle: 'Quick Connect',
       qrSubtitle: 'Scan this QR code to save my contact info',
-      qrInstructions: 'Point your camera at the code'
+      qrInstructions: 'Point your camera at the code',
+      downloadVCard: 'Download Contact Card'
     },
 
     // Resume Page
@@ -174,7 +175,8 @@ const translations = {
       socialLinks: 'Liens Sociaux',
       qrTitle: 'Connexion Rapide',
       qrSubtitle: 'Scannez ce code QR pour enregistrer mes informations de contact',
-      qrInstructions: 'Pointez votre appareil photo sur le code'
+      qrInstructions: 'Pointez votre appareil photo sur le code',
+      downloadVCard: 'Télécharger la Carte de Contact'
     },
 
     // Resume Page
