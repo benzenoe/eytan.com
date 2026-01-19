@@ -118,8 +118,13 @@ function renderBlogPosts() {
     // Sort posts by date (newest first)
     const sortedPosts = [...filteredPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Get current language
+    const currentLang = (typeof i18n !== 'undefined') ? i18n.getLanguage() : 'en';
+    const isFrench = currentLang === 'fr';
+
     blogGrid.innerHTML = sortedPosts.map(post => {
         const slug = post.slug || post.id;
+        const postUrl = isFrench ? `blog/fr/${slug}.html` : `blog/${slug}.html`;
 
         // Generate tags HTML
         const tagsHtml = post.tags && post.tags.length > 0
@@ -132,7 +137,7 @@ function renderBlogPosts() {
 
         return `
         <div class="blog-card-wrapper">
-            <a href="blog/${slug}.html" class="blog-card">
+            <a href="${postUrl}" class="blog-card" data-slug="${slug}">
                 ${post.image ? `
                     <div class="blog-card-image">
                         <img src="${post.image}" alt="${post.title}">
