@@ -95,6 +95,7 @@ function populateForm(post) {
     document.getElementById('seoTitle').value = post.seo_title || '';
     document.getElementById('metaDescription').value = post.meta_description || '';
     document.getElementById('metaKeywords').value = post.meta_keywords || '';
+    document.getElementById('metaKeywordsFr').value = post.meta_keywords_fr || '';
     document.getElementById('focusKeyword').value = post.focus_keyword || '';
     document.getElementById('imageAlt').value = post.image_alt || '';
     document.getElementById('socialPreview').value = post.social_preview || '';
@@ -240,6 +241,7 @@ function getFormData() {
         seoTitle: document.getElementById('seoTitle').value,
         metaDescription: document.getElementById('metaDescription').value,
         metaKeywords: document.getElementById('metaKeywords').value,
+        metaKeywordsFr: document.getElementById('metaKeywordsFr').value,
         focusKeyword: document.getElementById('focusKeyword').value,
         imageAlt: document.getElementById('imageAlt').value,
         socialPreview: document.getElementById('socialPreview').value
@@ -509,6 +511,9 @@ async function generateSEO() {
         document.getElementById('metaKeywords').value = Array.isArray(seo.metaKeywords)
             ? seo.metaKeywords.join(', ')
             : seo.metaKeywords || '';
+        document.getElementById('metaKeywordsFr').value = Array.isArray(seo.metaKeywordsFr)
+            ? seo.metaKeywordsFr.join(', ')
+            : seo.metaKeywordsFr || '';
         document.getElementById('focusKeyword').value = seo.focusKeyword || '';
         document.getElementById('imageAlt').value = seo.imageAlt || '';
         document.getElementById('socialPreview').value = seo.socialPreview || '';
