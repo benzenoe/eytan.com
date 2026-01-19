@@ -310,8 +310,35 @@ class I18n {
       document.title = this.t(key);
     }
 
+    // Update blog post links for language
+    this.updateBlogPostLinks();
+
     // Update language switcher active state
     this.updateLanguageSwitcher();
+  }
+
+  // Update blog post links based on language
+  updateBlogPostLinks() {
+    const isFrench = this.currentLanguage === 'fr';
+
+    // Update links on blog listing page
+    const blogCards = document.querySelectorAll('.blog-card[href]');
+    blogCards.forEach(card => {
+      const href = card.getAttribute('href');
+
+      // Skip if not a blog post link
+      if (!href.includes('blog/')) return;
+
+      // Extract the slug from the current href
+      let slug = href.replace(/^blog\/(fr\/)?/, '').replace('.html', '');
+
+      // Update href based on language
+      if (isFrench) {
+        card.setAttribute('href', `blog/fr/${slug}.html`);
+      } else {
+        card.setAttribute('href', `blog/${slug}.html`);
+      }
+    });
   }
 
   // Update language switcher buttons
