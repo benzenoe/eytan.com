@@ -1593,6 +1593,14 @@ body {
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
 }
 
+.lang-switch .fi-us {
+    background-image: url('https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/us.svg') !important;
+}
+
+.lang-switch .fi-fr {
+    background-image: url('https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/fr.svg') !important;
+}
+
 /* Tooltip on hover */
 .lang-switch::after {
     content: attr(title);
