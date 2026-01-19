@@ -45,18 +45,23 @@ const translations = {
     // Contact Page
     contact: {
       title: 'Get In Touch',
-      subtitle: "Let's connect and explore opportunities together",
-      name: 'Your Name',
-      email: 'Your Email',
-      message: 'Your Message',
+      subtitle: "I'd love to hear from you. Send me a message and I'll get back to you as soon as possible.",
+      scheduleTitle: 'Schedule a Meeting',
+      scheduleText: 'Want to discuss your project, explore opportunities, or just chat? Book a convenient time slot for a meeting with me.',
+      bookMeeting: 'Book a Meeting with Eytan',
+      name: 'Name',
+      email: 'Email',
+      phone: 'Phone',
+      subject: 'Subject',
+      message: 'Message',
       send: 'Send Message',
       sending: 'Sending...',
       success: 'Message sent successfully!',
       error: 'Failed to send message. Please try again.',
-      or: 'Or reach me directly',
-      phone: 'Phone',
-      whatsapp: 'WhatsApp',
-      location: 'Location'
+      phoneLabel: 'Phone',
+      whatsappLabel: 'WhatsApp',
+      whatsappLink: 'Message on WhatsApp',
+      socialLinks: 'Social Links'
     },
 
     // Resume Page
@@ -146,19 +151,24 @@ const translations = {
 
     // Contact Page
     contact: {
-      title: 'Contactez-Moi',
-      subtitle: 'Connectons-nous et explorons les opportunités ensemble',
-      name: 'Votre Nom',
-      email: 'Votre Email',
-      message: 'Votre Message',
+      title: 'Entrer en Contact',
+      subtitle: 'J\'aimerais avoir de vos nouvelles. Envoyez-moi un message et je vous répondrai dès que possible.',
+      scheduleTitle: 'Planifier une Réunion',
+      scheduleText: 'Vous souhaitez discuter de votre projet, explorer des opportunités ou simplement discuter ? Réservez un créneau horaire qui vous convient pour une réunion avec moi.',
+      bookMeeting: 'Réserver une Réunion avec Eytan',
+      name: 'Nom',
+      email: 'Email',
+      phone: 'Téléphone',
+      subject: 'Sujet',
+      message: 'Message',
       send: 'Envoyer le Message',
       sending: 'Envoi en cours...',
       success: 'Message envoyé avec succès!',
       error: 'Échec de l\'envoi du message. Veuillez réessayer.',
-      or: 'Ou contactez-moi directement',
-      phone: 'Téléphone',
-      whatsapp: 'WhatsApp',
-      location: 'Localisation'
+      phoneLabel: 'Téléphone',
+      whatsappLabel: 'WhatsApp',
+      whatsappLink: 'Message sur WhatsApp',
+      socialLinks: 'Liens Sociaux'
     },
 
     // Resume Page
