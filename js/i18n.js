@@ -322,15 +322,9 @@ class I18n {
     const isFrench = this.currentLanguage === 'fr';
 
     // Update links on blog listing page
-    const blogCards = document.querySelectorAll('.blog-card[href]');
+    const blogCards = document.querySelectorAll('.blog-card[data-slug]');
     blogCards.forEach(card => {
-      const href = card.getAttribute('href');
-
-      // Skip if not a blog post link
-      if (!href.includes('blog/')) return;
-
-      // Extract the slug from the current href
-      let slug = href.replace(/^blog\/(fr\/)?/, '').replace('.html', '');
+      const slug = card.getAttribute('data-slug');
 
       // Update href based on language
       if (isFrench) {
