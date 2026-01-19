@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{LANG}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,11 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{URL}}">
+
+    <!-- Alternate Language Versions (hreflang) -->
+    <link rel="alternate" hreflang="en" href="{{URL_EN}}">
+    <link rel="alternate" hreflang="fr" href="{{URL_FR}}">
+    <link rel="alternate" hreflang="x-default" href="{{URL_EN}}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
