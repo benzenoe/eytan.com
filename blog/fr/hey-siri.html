@@ -674,6 +674,52 @@ Discover the future of education with AI-driven, self-paced learning. Earn a ful
     });
     </script>
 
+    <!-- Blog Post Language Switcher -->
+    <script>
+    // Handle language switching on blog post pages
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname;
+        const isFrench = currentPath.includes('/blog/fr/');
+        const slug = 'hey-siri';
+
+        // Set active language button
+        const langButtons = document.querySelectorAll('.lang-switch');
+        langButtons.forEach(button => {
+            const buttonLang = button.getAttribute('data-lang');
+            if ((isFrench && buttonLang === 'fr') || (!isFrench && buttonLang === 'en')) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+
+        // Override language switcher behavior to navigate to the correct version
+        langButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const targetLang = button.getAttribute('data-lang');
+
+                // Don't navigate if already on that language
+                if ((isFrench && targetLang === 'fr') || (!isFrench && targetLang === 'en')) {
+                    return;
+                }
+
+                // Update localStorage for consistency
+                localStorage.setItem('language', targetLang);
+
+                // Navigate to the correct version
+                if (targetLang === 'fr') {
+                    window.location.href = `../blog/fr/${slug}.html`;
+                } else {
+                    window.location.href = `../${slug}.html`;
+                }
+            });
+        });
+    });
+    </script>
+
     <!-- i18n (Internationalization) System -->
     <script src="../../js/i18n.js"></script>
 
