@@ -61,7 +61,9 @@ const translations = {
       phoneLabel: 'Phone',
       whatsappLabel: 'WhatsApp',
       whatsappLink: 'Message on WhatsApp',
-      socialLinks: 'Social Links'
+      socialLinks: 'Social Links',
+      qrTitle: 'Quick Connect',
+      qrSubtitle: 'Scan this QR code to save my contact info'
     },
 
     // Resume Page
@@ -168,7 +170,9 @@ const translations = {
       phoneLabel: 'Téléphone',
       whatsappLabel: 'WhatsApp',
       whatsappLink: 'Message sur WhatsApp',
-      socialLinks: 'Liens Sociaux'
+      socialLinks: 'Liens Sociaux',
+      qrTitle: 'Connexion Rapide',
+      qrSubtitle: 'Scannez ce code QR pour enregistrer mes informations de contact'
     },
 
     // Resume Page
