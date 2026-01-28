@@ -42,6 +42,10 @@ function populateTagFilters() {
     const tagFilters = document.getElementById('tag-filters');
     if (!tagFilters) return;
 
+    // Remove existing dynamic tag buttons (keep only "All Posts" button)
+    const existingTags = tagFilters.querySelectorAll('.tag-filter:not([data-tag="all"])');
+    existingTags.forEach(tag => tag.remove());
+
     // Collect all unique tags
     const allTags = new Set();
     blogPosts.forEach(post => {
