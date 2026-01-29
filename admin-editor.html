@@ -462,39 +462,37 @@
 
         async function checkAuthentication() {
             try {
-                // Check localStorage first (fallback for cross-domain cookie issues)
-                const adminAuth = localStorage.getItem('adminAuth');
-                const authTime = localStorage.getItem('adminAuthTime');
-
-                // Check if auth is recent (within 7 days)
-                if (adminAuth === 'true' && authTime) {
-                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
-                    const isRecent = (new Date().getTime() - parseInt(authTime)) < sevenDays;
-
-                    if (isRecent) {
-                        return true;
-                    }
-                }
-
-                // Fallback: check backend session
+                // Always verify with the server to ensure session is valid
                 const response = await fetch(`${API_URL}/auth/status`, {
                     credentials: 'include'
                 });
                 const data = await response.json();
 
                 if (data.authenticated) {
-                    // Store in localStorage
+                    // Store in localStorage as backup indicator
                     localStorage.setItem('adminAuth', 'true');
                     localStorage.setItem('adminAuthTime', new Date().getTime());
                     return true;
                 }
 
-                // Not authenticated
+                // Server says not authenticated - clear localStorage and redirect
+                localStorage.removeItem('adminAuth');
+                localStorage.removeItem('adminAuthTime');
                 alert('Please log in to access the editor');
                 window.location.href = 'login.html';
                 return false;
             } catch (error) {
                 console.error('Auth check error:', error);
+                // On network error, check localStorage as fallback
+                const adminAuth = localStorage.getItem('adminAuth');
+                const authTime = localStorage.getItem('adminAuthTime');
+                if (adminAuth === 'true' && authTime) {
+                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    if ((new Date().getTime() - parseInt(authTime)) < sevenDays) {
+                        console.log('Using localStorage auth (server unreachable)');
+                        return true;
+                    }
+                }
                 alert('Authentication error. Please log in.');
                 window.location.href = 'login.html';
                 return false;
