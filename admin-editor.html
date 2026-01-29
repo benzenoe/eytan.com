@@ -322,15 +322,9 @@
                 <div class="help-text">Enter tags separated by commas. These help organize posts and show related content.</div>
                 <div style="margin-top: 0.5rem;">
                     <strong style="font-size: 0.9rem; color: #666;">Common tags:</strong>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
-                        <button type="button" class="tag-suggestion" onclick="addTag('Technology')">Technology</button>
-                        <button type="button" class="tag-suggestion" onclick="addTag('AI')">AI</button>
-                        <button type="button" class="tag-suggestion" onclick="addTag('Business')">Business</button>
-                        <button type="button" class="tag-suggestion" onclick="addTag('Science')">Science</button>
-                        <button type="button" class="tag-suggestion" onclick="addTag('Real Estate')">Real Estate</button>
-                        <button type="button" class="tag-suggestion" onclick="addTag('Personal Development')">Personal Development</button>
-                        <button type="button" class="tag-suggestion" onclick="addTag('Energy')">Energy</button>
-                        <button type="button" class="tag-suggestion" onclick="addTag('Finance')">Finance</button>
+                    <div id="common-tags-container" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+                        <!-- Tags will be loaded dynamically -->
+                        <span style="color: #999; font-size: 0.85rem;">Loading tags...</span>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,49 @@ function initEditor() {
     setupEventListeners();
     startAutoSave();
     setupBeforeUnload();
+    loadCommonTags();
+}
+
+// Load common tags dynamically from existing posts
+async function loadCommonTags() {
+    const container = document.getElementById('common-tags-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch(`${API_URL}/posts?status=all`, {
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch posts');
+        }
+
+        const data = await response.json();
+        const posts = data.posts || [];
+
+        // Collect all unique tags
+        const allTags = new Set();
+        posts.forEach(post => {
+            if (post.tags && Array.isArray(post.tags)) {
+                post.tags.forEach(tag => allTags.add(tag));
+            }
+        });
+
+        // Sort tags alphabetically
+        const sortedTags = Array.from(allTags).sort();
+
+        // Generate buttons HTML
+        if (sortedTags.length > 0) {
+            container.innerHTML = sortedTags.map(tag =>
+                `<button type="button" class="tag-suggestion" onclick="addTag('${tag.replace(/'/g, "\\'")}')">${tag}</button>`
+            ).join('');
+        } else {
+            container.innerHTML = '<span style="color: #999; font-size: 0.85rem;">No tags yet. Create some by adding tags to your posts.</span>';
+        }
+    } catch (error) {
+        console.error('Error loading common tags:', error);
+        container.innerHTML = '<span style="color: #999; font-size: 0.85rem;">Could not load tags</span>';
+    }
 }
 
 // Load post data on page load
