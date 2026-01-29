@@ -125,9 +125,9 @@ function renderBlogPosts() {
         const count = filteredPosts.length;
         const total = blogPosts.length;
         if (currentTagFilter === 'all') {
-            resultsCounter.textContent = `Showing ${count} post${count !== 1 ? 's' : ''}`;
+            resultsCounter.textContent = `Showing all ${count} posts`;
         } else {
-            resultsCounter.textContent = `Showing ${count} of ${total} posts tagged "${currentTagFilter}"`;
+            resultsCounter.textContent = `Showing ${count} of ${total} posts in ${currentTagFilter}`;
         }
     }
 
