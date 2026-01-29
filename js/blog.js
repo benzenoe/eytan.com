@@ -127,7 +127,7 @@ function renderBlogPosts() {
         if (currentTagFilter === 'all') {
             resultsCounter.textContent = `Showing all ${count} posts`;
         } else {
-            resultsCounter.textContent = `Showing ${count} of ${total} posts in ${currentTagFilter}`;
+            resultsCounter.textContent = `Showing ${count} post${count !== 1 ? 's' : ''} tagged "${currentTagFilter}" out of ${total}`;
         }
     }
 
