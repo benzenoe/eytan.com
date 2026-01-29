@@ -119,6 +119,18 @@ function renderBlogPosts() {
         );
     }
 
+    // Update results counter
+    const resultsCounter = document.getElementById('results-counter');
+    if (resultsCounter) {
+        const count = filteredPosts.length;
+        const total = blogPosts.length;
+        if (currentTagFilter === 'all') {
+            resultsCounter.textContent = `Showing ${count} post${count !== 1 ? 's' : ''}`;
+        } else {
+            resultsCounter.textContent = `Showing ${count} of ${total} posts tagged "${currentTagFilter}"`;
+        }
+    }
+
     // Sort posts by date (newest first)
     const sortedPosts = [...filteredPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
 
