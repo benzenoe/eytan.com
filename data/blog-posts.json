@@ -82,15 +82,6 @@
       "excerpt": "Discover the reasons behind Bitcoin's 24-hour price explosion to a new all-time high of $118,500. Explore the market analysis and potential risks and opportunities ahead."
     },
     {
-      "id": "mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends",
-      "title": "Mini Nuclear Reactors: Deep Dive into Key Players, Tech & Market Trends",
-      "date": "2025-12-12T17:20:02.638Z",
-      "author": "Eytan Benzeno",
-      "icon": "☢️",
-      "image": "https://eytan.com/images/blog/1765563600907-558568527-10163076632612489-1172771175808045523-n.jpg",
-      "excerpt": "Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution."
-    },
-    {
       "id": "the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade",
       "title": "The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade",
       "date": "2025-12-12T13:36:12.330Z",
@@ -152,6 +143,15 @@
       "icon": "📝",
       "image": "https://eytan.com/images/blog/1765207698147-eytan-image.png",
       "excerpt": "Hello and welcome! I'm excited to launch this blog where I'll be sharing my thoughts, experiences, and insights."
+    },
+    {
+      "id": "mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends",
+      "title": "Mini Nuclear Reactors (SMRs): Deep Dive into Key Players, Tech & Market Trends",
+      "date": "2025-10-01T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "☢️",
+      "image": "https://eytan.com/images/blog/1765563600907-558568527-10163076632612489-1172771175808045523-n.jpg",
+      "excerpt": "Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution."
     }
   ]
 }
