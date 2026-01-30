@@ -325,7 +325,28 @@
             try {
                 console.log('Checking authentication...');
 
-                // Always verify with the server to ensure session is valid
+                // Check localStorage first (fallback for cross-domain cookie issues)
+                const adminAuth = localStorage.getItem('adminAuth');
+                const authTime = localStorage.getItem('adminAuthTime');
+
+                // Check if auth is recent (within 7 days)
+                if (adminAuth === 'true' && authTime) {
+                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+                    const isRecent = (new Date().getTime() - parseInt(authTime)) < sevenDays;
+
+                    if (isRecent) {
+                        console.log('Admin page loaded - authenticated via localStorage');
+                        return true;
+                    } else {
+                        // Auth expired
+                        console.log('Auth expired - clearing localStorage');
+                        localStorage.removeItem('adminAuth');
+                        localStorage.removeItem('adminAuthTime');
+                    }
+                }
+
+                // Fallback: check backend session (for cookie-based auth)
+                console.log('Checking backend session...');
                 const response = await fetch(`${API_URL}/auth/status`, {
                     credentials: 'include'
                 });
@@ -334,31 +355,19 @@
                 console.log('Auth response data:', data);
 
                 if (data.authenticated) {
-                    // Backend session valid - store in localStorage as backup
+                    // Backend session valid - store in localStorage too
                     localStorage.setItem('adminAuth', 'true');
                     localStorage.setItem('adminAuthTime', new Date().getTime());
                     console.log('Admin page loaded - authenticated via backend session');
                     return true;
                 }
 
-                // Server says not authenticated - clear localStorage and redirect
+                // Not authenticated
                 console.error('Not authenticated - redirecting to login');
-                localStorage.removeItem('adminAuth');
-                localStorage.removeItem('adminAuthTime');
                 window.location.href = 'login.html';
                 return false;
             } catch (error) {
                 console.error('Auth check error:', error);
-                // On network error, check localStorage as fallback
-                const adminAuth = localStorage.getItem('adminAuth');
-                const authTime = localStorage.getItem('adminAuthTime');
-                if (adminAuth === 'true' && authTime) {
-                    const sevenDays = 7 * 24 * 60 * 60 * 1000;
-                    if ((new Date().getTime() - parseInt(authTime)) < sevenDays) {
-                        console.log('Using localStorage auth (server unreachable)');
-                        return true;
-                    }
-                }
                 window.location.href = 'login.html';
                 return false;
             }
