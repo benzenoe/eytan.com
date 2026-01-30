@@ -28,6 +28,38 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <url>
+        <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
+        <lastmod>2026-01-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <url>
+        <loc>https://eytan.com/blog/fr/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
+        <lastmod>2026-01-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/hey-siri.html</loc>
+        <lastmod>2026-01-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/hey-siri.html</loc>
+        <lastmod>2026-01-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): welcome -->
     <url>
         <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
@@ -215,38 +247,6 @@
     <!-- Blog Post (FR): hydrogen-energy-powering-a-global-green-revolution -->
     <url>
         <loc>https://eytan.com/blog/fr/hydrogen-energy-powering-a-global-green-revolution.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
-    <url>
-        <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
-    <url>
-        <loc>https://eytan.com/blog/fr/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): test4 -->
-    <url>
-        <loc>https://eytan.com/blog/hey-siri.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): test4 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/hey-siri.html</loc>
         <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
