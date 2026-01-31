@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): - -->
+    <url>
+        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): - -->
+    <url>
+        <loc>https://eytan.com/blog/fr/bitcoin-to-700k.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): 88feb7a0a2e214e0 -->
     <url>
         <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
@@ -279,22 +295,6 @@
     <!-- Blog Post (FR): is-tesla-stock-on-the-road-to-500 -->
     <url>
         <loc>https://eytan.com/blog/fr/is-tesla-stock-on-the-road-to-500.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): - -->
-    <url>
-        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): - -->
-    <url>
-        <loc>https://eytan.com/blog/fr/bitcoin-to-700k.html</loc>
         <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
