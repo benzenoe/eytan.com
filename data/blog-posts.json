@@ -73,15 +73,6 @@
       "excerpt": "Discover the different types of hydrogen energy - green, blue, and white - and how they are powering the global green revolution. Learn about the potential of hydrogen as a clean energy source."
     },
     {
-      "id": "bitcoins-24hour-price-explosion",
-      "title": "Bitcoin’s 24‑Hour Price Explosion: Decoding the Breakout and the Road Ahead",
-      "date": "2025-12-14T09:21:10.006Z",
-      "author": "Eytan Benzeno",
-      "icon": "🤩",
-      "image": "https://eytan.com/images/blog/1765707667736-img-7233.jpeg",
-      "excerpt": "Discover the reasons behind Bitcoin's 24-hour price explosion to a new all-time high of $118,500. Explore the market analysis and potential risks and opportunities ahead."
-    },
-    {
       "id": "the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade",
       "title": "The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade",
       "date": "2025-12-12T13:36:12.330Z",
@@ -152,6 +143,15 @@
       "icon": "☢️",
       "image": "https://eytan.com/images/blog/1765563600907-558568527-10163076632612489-1172771175808045523-n.jpg",
       "excerpt": "Small modular reactors (SMRs) and microreactors – essentially “mini” nuclear power plants – are gaining momentum as a carbon-free energy solution."
+    },
+    {
+      "id": "bitcoins-24hour-price-explosion",
+      "title": "Bitcoin’s 24‑Hour Price Explosion: Decoding the Breakout and the Road Ahead",
+      "date": "2025-07-11T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "🤩",
+      "image": "https://eytan.com/images/blog/1765707667736-img-7233.jpeg",
+      "excerpt": "Discover the reasons behind Bitcoin's 24-hour price explosion to a new all-time high of $118,500. Explore the market analysis and potential risks and opportunities ahead."
     }
   ]
 }
