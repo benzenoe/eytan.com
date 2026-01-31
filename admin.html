@@ -273,6 +273,9 @@
                 <button class="btn btn-primary" onclick="openCreateModal()">
                     <i class="fas fa-plus"></i> New Post
                 </button>
+                <button class="btn btn-warning" id="republishAllBtn" onclick="republishAllOutdated()" style="display: none; background: #ffc107; color: #000;">
+                    <i class="fas fa-sync"></i> Republish All Outdated (<span id="outdatedCount">0</span>)
+                </button>
                 <button class="btn btn-secondary" onclick="logout()">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>

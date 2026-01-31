@@ -348,7 +348,29 @@ async function savePost() {
         localStorage.removeItem('postDraft');
         hasUnsavedChanges = false;
 
-        alert(isNewPost ? 'Post created successfully!' : 'Post updated successfully!');
+        // Auto-republish if this was an already-published post
+        if (!isNewPost && currentPost && currentPost.status === 'published') {
+            saveBtn.textContent = 'Publishing changes...';
+
+            try {
+                const publishResponse = await fetch(`${API_URL}/posts/${currentPost.id}/publish`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+
+                if (publishResponse.ok) {
+                    alert('Post saved and republished! Changes will be live in 1-2 minutes.');
+                } else {
+                    alert('Post saved but republish failed. Please republish manually from the admin panel.');
+                }
+            } catch (publishError) {
+                console.error('Auto-republish failed:', publishError);
+                alert('Post saved but republish failed. Please republish manually from the admin panel.');
+            }
+        } else {
+            alert(isNewPost ? 'Post created successfully!' : 'Post updated successfully!');
+        }
+
         window.location.href = 'admin.html';
     } catch (error) {
         console.error('Error saving post:', error);

@@ -58,12 +58,10 @@ async function renderPostsTable() {
     // Render table first
     tbody.innerHTML = sortedPosts.map(post => {
         // Check if post needs republishing (updated after last publish)
-        const needsRepublish = post.status === 'published' &&
-            post.updated_at && post.published_at &&
-            new Date(post.updated_at) > new Date(post.published_at);
+        const postNeedsRepublish = needsRepublish(post);
 
         return `
-        <tr${needsRepublish ? ' style="background: #fff3cd;"' : ''}>
+        <tr${postNeedsRepublish ? ' style="background: #fff3cd;"' : ''}>
             <td style="font-size: 1.5rem;">${post.icon || '📝'}</td>
             <td>
                 ${post.image
@@ -76,7 +74,7 @@ async function renderPostsTable() {
                 <span class="status-badge status-${post.status || 'draft'}">
                     ${post.status === 'published' ? '✓ Published' : '📝 Draft'}
                 </span>
-                ${needsRepublish ? `
+                ${postNeedsRepublish ? `
                     <br>
                     <span style="background: #dc3545; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">
                         ⚠️ NEEDS REPUBLISH
@@ -84,7 +82,13 @@ async function renderPostsTable() {
                 ` : ''}
                 <div id="social-status-${post.id}" style="margin-top: 0.5rem;"></div>
             </td>
-            <td>${formatDate(post.date)}</td>
+            <td>
+                <div style="font-size: 0.9rem;">${formatDate(post.date)}</div>
+                <div style="font-size: 0.75rem; color: #6c757d; margin-top: 4px;">
+                    <div title="Last edited">✏️ ${formatDateTime(post.updated_at)}</div>
+                    ${post.status === 'published' ? `<div title="Last published">🚀 ${formatDateTime(post.published_at)}</div>` : ''}
+                </div>
+            </td>
             <td>${post.excerpt.substring(0, 60)}${post.excerpt.length > 60 ? '...' : ''}</td>
             <td>
                 <div class="action-buttons">
@@ -94,8 +98,8 @@ async function renderPostsTable() {
                         </a>`
                         : ''
                     }
-                    <button class="btn-icon btn-publish${needsRepublish ? ' btn-republish-needed' : ''}" onclick="publishPost('${post.id}')" title="${post.status === 'published' ? 'Republish (sync to GitHub)' : 'Publish to Live Site'}" ${needsRepublish ? 'style="background: #dc3545; animation: pulse 1.5s infinite;"' : ''}>
-                        <i class="fas fa-upload"></i> ${needsRepublish ? '⚠️ Republish!' : (post.status === 'published' ? 'Republish' : 'Publish')}
+                    <button class="btn-icon btn-publish${postNeedsRepublish ? ' btn-republish-needed' : ''}" onclick="publishPost('${post.id}')" title="${post.status === 'published' ? 'Republish (sync to GitHub)' : 'Publish to Live Site'}" ${postNeedsRepublish ? 'style="background: #dc3545; animation: pulse 1.5s infinite;"' : ''}>
+                        <i class="fas fa-upload"></i> ${postNeedsRepublish ? '⚠️ Republish!' : (post.status === 'published' ? 'Republish' : 'Publish')}
                     </button>
                     ${post.status === 'published'
                         ? `<button class="btn-icon" style="background: #17a2b8; color: white;" onclick="openSocialPublishModal('${post.id}')" title="Share to Social Media">
@@ -115,6 +119,9 @@ async function renderPostsTable() {
     `;
     }).join('');
 
+    // Update the republish all button
+    updateRepublishAllButton();
+
     // Load social status for each published post
     sortedPosts.forEach(async (post) => {
         if (post.status === 'published') {
@@ -131,6 +138,86 @@ async function renderPostsTable() {
 function formatDate(dateString) {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+// Format date with time
+function formatDateTime(dateString) {
+    if (!dateString) return 'Never';
+    const options = { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+// Check if post needs republishing
+function needsRepublish(post) {
+    return post.status === 'published' &&
+        post.updated_at && post.published_at &&
+        new Date(post.updated_at) > new Date(post.published_at);
+}
+
+// Update the republish all button visibility
+function updateRepublishAllButton() {
+    const outdatedPosts = blogPosts.filter(needsRepublish);
+    const btn = document.getElementById('republishAllBtn');
+    const countSpan = document.getElementById('outdatedCount');
+
+    if (outdatedPosts.length > 0) {
+        btn.style.display = 'inline-flex';
+        countSpan.textContent = outdatedPosts.length;
+    } else {
+        btn.style.display = 'none';
+    }
+}
+
+// Republish all outdated posts
+async function republishAllOutdated() {
+    const outdatedPosts = blogPosts.filter(needsRepublish);
+
+    if (outdatedPosts.length === 0) {
+        showAlert('No posts need republishing!', 'info');
+        return;
+    }
+
+    if (!confirm(`Republish ${outdatedPosts.length} post(s) that have been edited since last publish?\n\nThis will update all static pages on the live site.`)) {
+        return;
+    }
+
+    const btn = document.getElementById('republishAllBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Republishing...';
+
+    let succeeded = 0;
+    let failed = 0;
+
+    for (const post of outdatedPosts) {
+        try {
+            const response = await fetch(`${API_URL}/posts/${post.id}/publish`, {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                succeeded++;
+                showAlert(`Republished: ${post.title.substring(0, 30)}...`, 'success');
+            } else {
+                failed++;
+                console.error(`Failed to republish ${post.id}`);
+            }
+        } catch (error) {
+            failed++;
+            console.error(`Error republishing ${post.id}:`, error);
+        }
+
+        // Small delay to avoid overwhelming the API
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-sync"></i> Republish All Outdated (<span id="outdatedCount">0</span>)';
+
+    // Reload data to update the UI
+    await loadBlogData();
+
+    showAlert(`Republished ${succeeded} post(s). ${failed} failed. Changes live in 1-2 minutes.`, failed === 0 ? 'success' : 'warning');
 }
 
 // Show alert message
