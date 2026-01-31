@@ -10,15 +10,6 @@
       "excerpt": "Explore how DAO-Firms will reshape traditional companies in the future of work. Learn about the automation of trust and decentralized organizations."
     },
     {
-      "id": "when-aging-assets-and-reality-diverge",
-      "title": "Beyond Transactions: A Real Estate Professional’s Role in Complex Family and Aging-Related Decisions",
-      "date": "2025-12-16T08:25:36.724Z",
-      "author": "Eytan Benzeno",
-      "icon": "👴",
-      "image": "https://eytan.com/images/blog/1765877308256-aging.jpg",
-      "excerpt": "Explore the challenges of navigating dementia, family deadlock, and real estate decisions in this thought-provoking blog post."
-    },
-    {
       "id": "the-rise-of-the-ai-university-a-bold-vision-for-5k-learning",
       "title": "The Rise of the AI University: A Bold Vision for $5K Learning",
       "date": "2025-12-16T00:00:00.000Z",
@@ -152,6 +143,15 @@
       "icon": "⛽️",
       "image": "https://eytan.com/images/blog/1765811569444-034d41da-0930-4421-b18b-ef5baadebb60.png",
       "excerpt": "Discover the different types of hydrogen energy - green, blue, and white - and how they are powering the global green revolution. Learn about the potential of hydrogen as a clean energy source."
+    },
+    {
+      "id": "when-aging-assets-and-reality-diverge",
+      "title": "Beyond Transactions: A Real Estate Professional’s Role in Complex Family and Aging-Related Decisions",
+      "date": "2025-06-18T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "👴",
+      "image": "https://eytan.com/images/blog/1765877308256-aging.jpg",
+      "excerpt": "Explore the challenges of navigating dementia, family deadlock, and real estate decisions in this thought-provoking blog post."
     }
   ]
 }
