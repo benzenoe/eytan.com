@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
     <url>
         <loc>https://eytan.com/blog/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
@@ -279,22 +295,6 @@
     <!-- Blog Post (FR): 88feb7a0a2e214e0 -->
     <url>
         <loc>https://eytan.com/blog/fr/low-cost-strategies-to-win-real-estate-listings.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/understanding-buyer-broker-agreements-2024.html</loc>
         <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
