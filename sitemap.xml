@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): when-aging-assets-and-reality-diverge -->
+    <url>
+        <loc>https://eytan.com/blog/when-aging-assets-and-reality-diverge.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): when-aging-assets-and-reality-diverge -->
+    <url>
+        <loc>https://eytan.com/blog/fr/when-aging-assets-and-reality-diverge.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): hydrogen-energy-powering-a-global-green-revolution -->
     <url>
         <loc>https://eytan.com/blog/hydrogen-energy-powering-a-global-green-revolution.html</loc>
@@ -279,22 +295,6 @@
     <!-- Blog Post (FR): intelligence-explosion -->
     <url>
         <loc>https://eytan.com/blog/fr/intelligence-explosion.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): when-aging-assets-and-reality-diverge -->
-    <url>
-        <loc>https://eytan.com/blog/when-aging-assets-and-reality-diverge.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): when-aging-assets-and-reality-diverge -->
-    <url>
-        <loc>https://eytan.com/blog/fr/when-aging-assets-and-reality-diverge.html</loc>
         <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
