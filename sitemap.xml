@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): test-1234 -->
+    <url>
+        <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): test-1234 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/artificial-intelligence.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): is-tesla-stock-on-the-road-to-500 -->
     <url>
         <loc>https://eytan.com/blog/is-tesla-stock-on-the-road-to-500.html</loc>
@@ -279,22 +295,6 @@
     <!-- Blog Post (FR): welcome -->
     <url>
         <loc>https://eytan.com/blog/fr/welcome-to-my-blog.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): test-1234 -->
-    <url>
-        <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): test-1234 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/artificial-intelligence.html</loc>
         <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
