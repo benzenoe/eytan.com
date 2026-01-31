@@ -127,15 +127,6 @@
       "excerpt": "Artificial intelligence isn’t “coming someday”—it’s already reshaping the foundations of every business, from real estate to consulting to digital commerce. In 2018, GPT-2 performed like a preschooler; by 2025, GPT-4 operates at the level of a smart high-schooler. "
     },
     {
-      "id": "test4",
-      "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
-      "date": "2025-12-07T03:04:15.210Z",
-      "author": "Eytan Benzeno",
-      "icon": "🤖",
-      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png",
-      "excerpt": "The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subreddit and you’ll see post after post with titles like “Siri is a complete disappointment” and “Siri isn’t Siri anymore”"
-    },
-    {
       "id": "welcome",
       "title": "Welcome to My Blog",
       "date": "2025-12-04T22:11:53.494Z",
@@ -143,6 +134,15 @@
       "icon": "📝",
       "image": "https://eytan.com/images/blog/1765207698147-eytan-image.png",
       "excerpt": "Hello and welcome! I'm excited to launch this blog where I'll be sharing my thoughts, experiences, and insights."
+    },
+    {
+      "id": "test4",
+      "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
+      "date": "2025-10-29T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "🤖",
+      "image": "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147737498/images/aab2e4b-2af-201e-1e2-323a6de04f5a_heysiri.png",
+      "excerpt": "The AI landscape of 2024–2025 has left Siri in the dust, and countless iPhone users are voicing the same exasperation. Browse any Apple forum or the Siri subreddit and you’ll see post after post with titles like “Siri is a complete disappointment” and “Siri isn’t Siri anymore”"
     },
     {
       "id": "mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends",
