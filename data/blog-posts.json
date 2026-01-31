@@ -19,15 +19,6 @@
       "excerpt": "\nDiscover the future of education with AI-driven, self-paced learning. Earn a fully accredited certification for just $5K in 6 months. Revolutionize your career now!"
     },
     {
-      "id": "welcome",
-      "title": "Welcome to My Blog",
-      "date": "2025-12-04T22:11:53.494Z",
-      "author": "Eytan Benzeno",
-      "icon": "📝",
-      "image": "https://eytan.com/images/blog/1765207698147-eytan-image.png",
-      "excerpt": "Hello and welcome! I'm excited to launch this blog where I'll be sharing my thoughts, experiences, and insights."
-    },
-    {
       "id": "test4",
       "title": "Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution",
       "date": "2025-10-29T00:00:00.000Z",
@@ -152,6 +143,15 @@
       "icon": "🪟",
       "image": "https://eytan.com/images/blog/1765548314497-d18287-6865-1ee8-ff56-db4d375e847-ai-uni.jpg",
       "excerpt": "Artificial Intelligence (AI) is no longer a futuristic concept; it's an integral part of various industries, including real estate. To better understand how AI can revolutionize your business, let's delve into the AI Universe using the insightful illustration shared above. "
+    },
+    {
+      "id": "welcome",
+      "title": "Welcome to My Blog",
+      "date": "2023-01-04T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "📝",
+      "image": "https://eytan.com/images/blog/1765207698147-eytan-image.png",
+      "excerpt": "Hello and welcome! I'm excited to launch this blog where I'll be sharing my thoughts, experiences, and insights."
     }
   ]
 }
