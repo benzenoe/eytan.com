@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): sphere-of-influence -->
+    <url>
+        <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): sphere-of-influence -->
+    <url>
+        <loc>https://eytan.com/blog/fr/mastering-your-sphere-of-influence-in-real-estate.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): neuroplasticity -->
     <url>
         <loc>https://eytan.com/blog/neuroplasticity.html</loc>
@@ -279,22 +295,6 @@
     <!-- Blog Post (FR): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
     <url>
         <loc>https://eytan.com/blog/fr/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): sphere-of-influence -->
-    <url>
-        <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): sphere-of-influence -->
-    <url>
-        <loc>https://eytan.com/blog/fr/mastering-your-sphere-of-influence-in-real-estate.html</loc>
         <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
