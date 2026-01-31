@@ -73,15 +73,6 @@
       "excerpt": "Artificial Intelligence (AI) is no longer a futuristic concept; it's an integral part of various industries, including real estate. To better understand how AI can revolutionize your business, let's delve into the AI Universe using the insightful illustration shared above. "
     },
     {
-      "id": "sphere-of-influence",
-      "title": "Mastering Your Sphere of Influence in Real Estate",
-      "date": "2025-12-11T03:08:25.967Z",
-      "author": "Eytan Benzeno",
-      "icon": "🌍",
-      "image": "https://eytan.com/images/blog/1765426081595-abda255-4a2-4024-a7cc-6771dcd073a-screenshot-2025-02-18-at-10.webp",
-      "excerpt": "When it comes to real estate success, the most powerful tool in your arsenal isn’t cold leads or expensive ads — it’s your sphere of influence (SOI)."
-    },
-    {
       "id": "welcome",
       "title": "Welcome to My Blog",
       "date": "2025-12-04T22:11:53.494Z",
@@ -152,6 +143,15 @@
       "icon": "🤯",
       "image": "https://eytan.com/images/blog/1765423275453-neuroplasticity-1b.png",
       "excerpt": "Neuroplasticity is the brain’s ability to reorganize itself by forming new neural connections throughout life​"
+    },
+    {
+      "id": "sphere-of-influence",
+      "title": "Mastering Your Sphere of Influence in Real Estate",
+      "date": "2025-02-18T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "🌍",
+      "image": "https://eytan.com/images/blog/1765426081595-abda255-4a2-4024-a7cc-6771dcd073a-screenshot-2025-02-18-at-10.webp",
+      "excerpt": "When it comes to real estate success, the most powerful tool in your arsenal isn’t cold leads or expensive ads — it’s your sphere of influence (SOI)."
     }
   ]
 }
