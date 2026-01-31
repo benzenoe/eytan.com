@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): bitcoins-24hour-price-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/bitcoins-24hour-price-explosion.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): bitcoins-24hour-price-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/fr/bitcoins-24hour-price-explosion.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): test4 -->
     <url>
         <loc>https://eytan.com/blog/hey-siri.html</loc>
@@ -279,22 +295,6 @@
     <!-- Blog Post (FR): hydrogen-energy-powering-a-global-green-revolution -->
     <url>
         <loc>https://eytan.com/blog/fr/hydrogen-energy-powering-a-global-green-revolution.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): bitcoins-24hour-price-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/bitcoins-24hour-price-explosion.html</loc>
-        <lastmod>2026-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): bitcoins-24hour-price-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/fr/bitcoins-24hour-price-explosion.html</loc>
         <lastmod>2026-01-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
