@@ -56,8 +56,14 @@ async function renderPostsTable() {
     const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     // Render table first
-    tbody.innerHTML = sortedPosts.map(post => `
-        <tr>
+    tbody.innerHTML = sortedPosts.map(post => {
+        // Check if post needs republishing (updated after last publish)
+        const needsRepublish = post.status === 'published' &&
+            post.updated_at && post.published_at &&
+            new Date(post.updated_at) > new Date(post.published_at);
+
+        return `
+        <tr${needsRepublish ? ' style="background: #fff3cd;"' : ''}>
             <td style="font-size: 1.5rem;">${post.icon || '📝'}</td>
             <td>
                 ${post.image
@@ -70,6 +76,12 @@ async function renderPostsTable() {
                 <span class="status-badge status-${post.status || 'draft'}">
                     ${post.status === 'published' ? '✓ Published' : '📝 Draft'}
                 </span>
+                ${needsRepublish ? `
+                    <br>
+                    <span style="background: #dc3545; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">
+                        ⚠️ NEEDS REPUBLISH
+                    </span>
+                ` : ''}
                 <div id="social-status-${post.id}" style="margin-top: 0.5rem;"></div>
             </td>
             <td>${formatDate(post.date)}</td>
@@ -82,8 +94,8 @@ async function renderPostsTable() {
                         </a>`
                         : ''
                     }
-                    <button class="btn-icon btn-publish" onclick="publishPost('${post.id}')" title="${post.status === 'published' ? 'Republish (sync to GitHub)' : 'Publish to Live Site'}">
-                        <i class="fas fa-upload"></i> ${post.status === 'published' ? 'Republish' : 'Publish'}
+                    <button class="btn-icon btn-publish${needsRepublish ? ' btn-republish-needed' : ''}" onclick="publishPost('${post.id}')" title="${post.status === 'published' ? 'Republish (sync to GitHub)' : 'Publish to Live Site'}" ${needsRepublish ? 'style="background: #dc3545; animation: pulse 1.5s infinite;"' : ''}>
+                        <i class="fas fa-upload"></i> ${needsRepublish ? '⚠️ Republish!' : (post.status === 'published' ? 'Republish' : 'Publish')}
                     </button>
                     ${post.status === 'published'
                         ? `<button class="btn-icon" style="background: #17a2b8; color: white;" onclick="openSocialPublishModal('${post.id}')" title="Share to Social Media">
@@ -100,7 +112,8 @@ async function renderPostsTable() {
                 </div>
             </td>
         </tr>
-    `).join('');
+    `;
+    }).join('');
 
     // Load social status for each published post
     sortedPosts.forEach(async (post) => {

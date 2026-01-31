@@ -215,6 +215,19 @@
                 max-height: 0;
             }
         }
+
+        /* Pulse animation for republish needed */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+
+        .btn-republish-needed {
+            background: #dc3545 !important;
+            color: white !important;
+            animation: pulse 1.5s infinite;
+        }
     </style>
 </head>
 <body>
