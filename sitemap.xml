@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/hey-siri.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/hey-siri.html</loc>
+        <lastmod>2026-01-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
     <url>
         <loc>https://eytan.com/blog/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
@@ -72,22 +88,6 @@
     <url>
         <loc>https://eytan.com/blog/fr/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
         <lastmod>2026-01-31</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): test4 -->
-    <url>
-        <loc>https://eytan.com/blog/hey-siri.html</loc>
-        <lastmod>2026-01-29</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): test4 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/hey-siri.html</loc>
-        <lastmod>2026-01-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
