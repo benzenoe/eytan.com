@@ -28,6 +28,22 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): had-you-heard-of-notion-have-you-used-it -->
+    <url>
+        <loc>https://eytan.com/blog/had-you-heard-of-notion-have-you-used-it.html</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): had-you-heard-of-notion-have-you-used-it -->
+    <url>
+        <loc>https://eytan.com/blog/fr/had-you-heard-of-notion-have-you-used-it.html</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): hydrogen-energy-powering-a-global-green-revolution -->
     <url>
         <loc>https://eytan.com/blog/hydrogen-energy-powering-a-global-green-revolution.html</loc>
