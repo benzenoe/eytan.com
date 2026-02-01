@@ -13,7 +13,7 @@ Notion is not simply helping people write notes faster. It is attempting to beco
 ---
 
 Read the full Original Deep Research Thread:
-https://chatgpt.com/s/dr_697e5daf11348191b15f532bd5f8aae8
+[https://chatgpt.com/s/dr_697e5daf11348191b15f532bd5f8aae8](https://chatgpt.com/s/dr_697e5daf11348191b15f532bd5f8aae8)
 
 ---
 
