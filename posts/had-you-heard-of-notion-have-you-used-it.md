@@ -1,4 +1,4 @@
-# Had You Heard of Notion, Have You Used It?
+## Had You Heard of Notion, Have You Used It?
 
 Most people have heard the name Notion by now. It shows up everywhere: in startup culture, creator workflows, universities, productivity circles, and increasingly inside real organizations that run serious operations. But hearing about Notion and actually using it are two completely different things, because if you have not lived inside it, you will almost certainly miscategorize it.
 
