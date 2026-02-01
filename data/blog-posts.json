@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "id": "had-you-heard-of-notion-have-you-used-it",
+      "title": "Had You Heard of Notion, Have You Used It?",
+      "date": "2026-02-01T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "📝",
+      "image": "https://eytan.com/images/blog/1769906265700-notion.png",
+      "excerpt": "Discover the true power of Notion as an all-in-one collaborative workspace platform. Learn how it revolutionizes knowledge work and productivity."
+    },
+    {
       "id": "the-future-of-work-is-here-dao-firms-and-the-automation-of-trust",
       "title": "The Future of Work is Here: DAO-Firms and the Automation of Trust",
       "date": "2025-12-29T00:00:00.000Z",
