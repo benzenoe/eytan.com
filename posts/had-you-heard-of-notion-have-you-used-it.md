@@ -10,6 +10,9 @@ According to *Notion Labs, Inc.: A Comprehensive Research Report (2026)*, Notion
 
 Notion is not simply helping people write notes faster. It is attempting to become the cognitive layer where organizations store knowledge, coordinate execution, and activate intelligence.
 
+Read the full Original Deep Research Thread:
+https://chatgpt.com/s/dr_697e5daf11348191b15f532bd5f8aae8
+
 ---
 
 ## The Breakthrough Was Architectural, Not Cosmetic
