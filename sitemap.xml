@@ -36,6 +36,14 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Blog Post (FR): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
+    <url>
+        <loc>https://eytan.com/blog/fr/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
+        <lastmod>2026-02-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): had-you-heard-of-notion-have-you-used-it -->
     <url>
         <loc>https://eytan.com/blog/had-you-heard-of-notion-have-you-used-it.html</loc>
