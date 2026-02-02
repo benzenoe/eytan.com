@@ -637,6 +637,10 @@ async function translateField(fieldType) {
             sourceText = document.getElementById('postContent').value.trim();
             targetFieldId = 'postContentFr';
             break;
+        case 'metaKeywords':
+            sourceText = document.getElementById('metaKeywords').value.trim();
+            targetFieldId = 'metaKeywordsFr';
+            break;
         default:
             alert('Invalid field type');
             return;
@@ -699,6 +703,7 @@ async function translateAllFields() {
     const title = document.getElementById('postTitle').value.trim();
     const excerpt = document.getElementById('postExcerpt').value.trim();
     const content = document.getElementById('postContent').value.trim();
+    const metaKeywords = document.getElementById('metaKeywords').value.trim();
 
     // Validate that we have content
     if (!title || !excerpt || !content) {
@@ -707,7 +712,7 @@ async function translateAllFields() {
     }
 
     // Confirm before proceeding (this will cost API credits)
-    if (!confirm('This will translate Title, Excerpt, and Content to French using AI. Continue?')) {
+    if (!confirm('This will translate Title, Excerpt, Content, and Meta Keywords to French using AI. Continue?')) {
         return;
     }
 
@@ -715,15 +720,21 @@ async function translateAllFields() {
     const titleFr = document.getElementById('postTitleFr');
     const excerptFr = document.getElementById('postExcerptFr');
     const contentFr = document.getElementById('postContentFr');
+    const metaKeywordsFr = document.getElementById('metaKeywordsFr');
 
     titleFr.value = 'Translating...';
     excerptFr.value = 'Translating...';
     contentFr.value = 'Translating...';
+    if (metaKeywords) {
+        metaKeywordsFr.value = 'Translating...';
+        metaKeywordsFr.disabled = true;
+    }
     titleFr.disabled = true;
     excerptFr.disabled = true;
     contentFr.disabled = true;
 
     try {
+        // Translate main content fields
         const response = await fetch(`${API_URL}/translate/bulk`, {
             method: 'POST',
             headers: {
@@ -749,6 +760,31 @@ async function translateAllFields() {
         excerptFr.value = data.excerpt_fr || '';
         contentFr.value = data.content_fr || '';
 
+        // Translate meta keywords separately if present
+        if (metaKeywords) {
+            try {
+                const keywordsResponse = await fetch(`${API_URL}/translate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        text: metaKeywords,
+                        type: 'metaKeywords'
+                    })
+                });
+
+                if (keywordsResponse.ok) {
+                    const keywordsData = await keywordsResponse.json();
+                    metaKeywordsFr.value = keywordsData.translation || '';
+                }
+            } catch (keywordsError) {
+                console.error('Meta keywords translation error:', keywordsError);
+                // Don't fail the whole operation for keywords
+            }
+        }
+
         // Mark as having unsaved changes
         hasUnsavedChanges = true;
 
@@ -766,9 +802,11 @@ async function translateAllFields() {
         titleFr.value = '';
         excerptFr.value = '';
         contentFr.value = '';
+        metaKeywordsFr.value = '';
     } finally {
         titleFr.disabled = false;
         excerptFr.disabled = false;
         contentFr.disabled = false;
+        metaKeywordsFr.disabled = false;
     }
 }

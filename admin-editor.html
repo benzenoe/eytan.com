@@ -395,7 +395,12 @@
 
                 <div class="form-group">
                     <label for="metaKeywordsFr">Meta Keywords - French (comma-separated)</label>
-                    <input type="text" id="metaKeywordsFr" placeholder="mot-clé1, mot-clé2, mot-clé3, ...">
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="metaKeywordsFr" placeholder="mot-clé1, mot-clé2, mot-clé3, ..." style="flex: 1;">
+                        <button type="button" class="btn btn-secondary" onclick="translateField('metaKeywords')" style="white-space: nowrap;">
+                            🌍 Translate
+                        </button>
+                    </div>
                     <div class="help-text">10-15 mots-clés pertinents pour le référencement</div>
                 </div>
 
