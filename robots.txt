@@ -7,3 +7,4 @@ Disallow: /admin/
 
 # Sitemap
 Sitemap: https://eytan.com/sitemap.xml
+
