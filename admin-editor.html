@@ -88,6 +88,10 @@
             resize: vertical;
         }
 
+        .form-group textarea.short {
+            min-height: 80px;
+        }
+
         .form-group input[type="checkbox"] {
             width: auto;
             margin-right: 8px;
@@ -205,6 +209,149 @@
             color: white;
             border-color: #667eea;
         }
+
+        /* Language Tabs Styling */
+        .language-tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 0;
+            background: #f8f9fa;
+            padding: 0 30px;
+        }
+
+        .language-tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            position: relative;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-tab:hover {
+            color: #2c3e50;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .language-tab.active {
+            color: #667eea;
+            background: white;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .language-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #667eea;
+        }
+
+        .language-tab .flag {
+            font-size: 18px;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* SEO Section */
+        .seo-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .seo-section h4 {
+            margin: 0 0 1.5rem 0;
+            color: #333;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Translate All Button */
+        .translate-all-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .translate-all-section .btn {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .translate-all-section .help-text {
+            color: white;
+            margin-top: 0.5rem;
+        }
+
+        /* Input with button */
+        .input-with-button {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-with-button input,
+        .input-with-button textarea {
+            flex: 1;
+        }
+
+        .input-with-button .btn {
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+
+        /* Textarea with button below */
+        .textarea-with-button {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .textarea-with-button .btn {
+            align-self: flex-start;
+        }
     </style>
 </head>
 <body>
@@ -243,227 +390,256 @@
 
     <div class="editor-container">
         <div class="editor-header">
-            <a href="admin.html" class="back-button">← Back to Posts</a>
+            <a href="admin.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Posts</a>
             <h1 id="page-title">Edit Post</h1>
             <div class="auto-save-indicator" id="autoSaveIndicator">
                 <span id="autoSaveText">Ready</span>
             </div>
         </div>
 
+        <!-- Language Tabs -->
+        <div class="language-tabs">
+            <button class="language-tab active" data-tab="general" onclick="switchTab('general')">
+                <i class="fas fa-cog"></i> General
+            </button>
+            <button class="language-tab" data-tab="english" onclick="switchTab('english')">
+                <span class="flag">🇺🇸</span> English
+            </button>
+            <button class="language-tab" data-tab="french" onclick="switchTab('french')">
+                <span class="flag">🇫🇷</span> French
+            </button>
+        </div>
+
         <form class="editor-form" id="editorForm">
             <input type="hidden" id="postId">
 
-            <div class="form-group">
-                <label for="postTitle">Title (English) *</label>
-                <input type="text" id="postTitle" required>
-            </div>
-
-            <div class="form-group">
-                <label for="postTitleFr">Title (French)</label>
-                <div style="display: flex; gap: 0.5rem;">
-                    <input type="text" id="postTitleFr" placeholder="Titre en français..." style="flex: 1;">
-                    <button type="button" class="btn btn-secondary" onclick="translateField('title')" style="white-space: nowrap;">
-                        🌍 Translate
-                    </button>
+            <!-- GENERAL TAB -->
+            <div class="tab-content active" id="tab-general">
+                <div class="section-header">
+                    <h3><i class="fas fa-info-circle"></i> Post Settings</h3>
                 </div>
-                <div class="help-text">French translation of the title (optional - can be auto-translated)</div>
-            </div>
 
-            <div class="form-group">
-                <label for="postSlug">Slug *</label>
-                <input type="text" id="postSlug" required pattern="[a-z0-9\-]+" title="Only lowercase letters, numbers, and hyphens">
-                <div class="help-text">URL-friendly version (e.g., "my-awesome-post")</div>
-            </div>
-
-            <div class="form-group">
-                <label for="postDate">Date *</label>
-                <input type="date" id="postDate" required>
-            </div>
-
-            <div class="form-group">
-                <label for="postAuthor">Author *</label>
-                <input type="text" id="postAuthor" value="Eytan Benzeno" required>
-            </div>
-
-            <div class="form-group">
-                <label for="postIcon">Icon (emoji)</label>
-                <input type="text" id="postIcon" placeholder="📝" maxlength="10">
-                <div class="help-text">Optional emoji icon for the post</div>
-            </div>
-
-            <div class="form-group image-upload-section">
-                <label>Featured Image</label>
-                <input type="url" id="postImageUrl" placeholder="https://example.com/image.jpg" style="margin-bottom: 10px;">
-                <input type="file" id="postImageFile" accept="image/*">
-                <img id="imagePreview" class="image-preview" alt="Image preview">
-                <div class="help-text">Current image: <span id="currentImageDisplay">None</span></div>
-            </div>
-
-            <div class="form-group">
-                <label for="postExcerpt">Excerpt (English) *</label>
-                <textarea id="postExcerpt" rows="3" required placeholder="A brief description of your post..."></textarea>
-                <div class="help-text">Short description for listings and social media</div>
-            </div>
-
-            <div class="form-group">
-                <label for="postExcerptFr">Excerpt (French)</label>
-                <div style="display: flex; gap: 0.5rem; flex-direction: column;">
-                    <textarea id="postExcerptFr" rows="3" placeholder="Brève description en français..."></textarea>
-                    <button type="button" class="btn btn-secondary" onclick="translateField('excerpt')" style="align-self: flex-start; white-space: nowrap;">
-                        🌍 Translate
-                    </button>
+                <div class="form-group">
+                    <label for="postSlug">Slug *</label>
+                    <input type="text" id="postSlug" required pattern="[a-z0-9\-]+" title="Only lowercase letters, numbers, and hyphens">
+                    <div class="help-text">URL-friendly version (e.g., "my-awesome-post")</div>
                 </div>
-                <div class="help-text">French translation of the excerpt (optional - can be auto-translated)</div>
-            </div>
 
-            <div class="form-group">
-                <label for="postTags">Tags / Categories</label>
-                <input type="text" id="postTags" placeholder="Technology, AI, Business, Science">
-                <div class="help-text">Enter tags separated by commas. These help organize posts and show related content.</div>
-                <div style="margin-top: 0.5rem;">
-                    <strong style="font-size: 0.9rem; color: #666;">Common tags:</strong>
-                    <div id="common-tags-container" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
-                        <!-- Tags will be loaded dynamically -->
-                        <span style="color: #999; font-size: 0.85rem;">Loading tags...</span>
+                <div class="form-group">
+                    <label for="postDate">Date *</label>
+                    <input type="date" id="postDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="postAuthor">Author *</label>
+                    <input type="text" id="postAuthor" value="Eytan Benzeno" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="postIcon">Icon (emoji)</label>
+                    <input type="text" id="postIcon" placeholder="📝" maxlength="10">
+                    <div class="help-text">Optional emoji icon for the post</div>
+                </div>
+
+                <div class="form-group image-upload-section">
+                    <label>Featured Image</label>
+                    <input type="url" id="postImageUrl" placeholder="https://example.com/image.jpg" style="margin-bottom: 10px;">
+                    <input type="file" id="postImageFile" accept="image/*">
+                    <img id="imagePreview" class="image-preview" alt="Image preview">
+                    <div class="help-text">Current image: <span id="currentImageDisplay">None</span></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postTags">Tags / Categories</label>
+                    <input type="text" id="postTags" placeholder="Technology, AI, Business, Science">
+                    <div class="help-text">Enter tags separated by commas. These help organize posts and show related content.</div>
+                    <div style="margin-top: 0.5rem;">
+                        <strong style="font-size: 0.9rem; color: #666;">Common tags:</strong>
+                        <div id="common-tags-container" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+                            <span style="color: #999; font-size: 0.85rem;">Loading tags...</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="postHashtags">Hashtags (for social sharing)</label>
-                <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
-                    <input type="text" id="postHashtags" placeholder="#QuantumComputing #AIRevolution #TechTrends" style="flex: 1;">
-                    <button type="button" class="btn btn-secondary" id="generateHashtagsBtn" style="white-space: nowrap;">
-                        Generate Hashtags
-                    </button>
-                </div>
-                <div class="help-text">Enter hashtags with the # symbol, separated by spaces. Click "Generate Hashtags" to auto-generate.</div>
-            </div>
-
-            <div class="form-group">
-                <label for="postContent">Content (English Markdown) *</label>
-                <textarea id="postContent" required placeholder="# Your blog post content in markdown..."></textarea>
-                <div class="help-text">Full markdown content of the post</div>
-            </div>
-
-            <div class="form-group">
-                <label for="postContentFr">Content (French Markdown)</label>
-                <div style="display: flex; gap: 0.5rem; flex-direction: column;">
-                    <textarea id="postContentFr" placeholder="# Votre contenu de blog en markdown..."></textarea>
-                    <button type="button" class="btn btn-secondary" onclick="translateField('content')" style="align-self: flex-start; white-space: nowrap;">
-                        🌍 Translate
-                    </button>
-                </div>
-                <div class="help-text">French translation of the content (optional - can be auto-translated)</div>
-            </div>
-
-            <div class="form-group" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 8px; color: white;">
-                <button type="button" class="btn" onclick="translateAllFields()" style="background: white; color: #667eea; font-weight: bold; width: 100%;">
-                    🌍 Translate All Fields to French
-                </button>
-                <div class="help-text" style="color: white; margin-top: 0.5rem;">
-                    Automatically translate title, excerpt, and content to French using AI
-                </div>
-            </div>
-
-            <!-- SEO Metadata Section -->
-            <div class="form-group" style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3 style="margin: 0; color: #333; font-size: 1.2rem;">🔍 SEO Metadata (Optional)</h3>
-                    <button type="button" class="btn btn-secondary" id="generateSEOBtn" style="white-space: nowrap;">
-                        Generate SEO
-                    </button>
-                </div>
 
                 <div class="form-group">
-                    <label for="seoTitle">SEO Title - English (50-60 characters)</label>
-                    <input type="text" id="seoTitle" placeholder="SEO-optimized title with focus keyword" maxlength="60">
-                    <div class="help-text">Alternative title optimized for search engines</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="seoTitleFr">SEO Title - French (50-60 characters)</label>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <input type="text" id="seoTitleFr" placeholder="Titre SEO optimisé avec mot-clé principal" maxlength="60" style="flex: 1;">
-                        <button type="button" class="btn btn-secondary" onclick="translateField('seoTitle')" style="white-space: nowrap;">
-                            🌍 Translate
+                    <label for="postHashtags">Hashtags (for social sharing)</label>
+                    <div class="input-with-button">
+                        <input type="text" id="postHashtags" placeholder="#QuantumComputing #AIRevolution #TechTrends">
+                        <button type="button" class="btn btn-secondary" id="generateHashtagsBtn">
+                            Generate Hashtags
                         </button>
                     </div>
-                    <div class="help-text">Titre alternatif optimisé pour les moteurs de recherche</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="metaDescription">Meta Description - English (150-160 characters)</label>
-                    <textarea id="metaDescription" rows="2" placeholder="Compelling description for search results" maxlength="160"></textarea>
-                    <div class="help-text">Appears in Google search results - optimize for click-through</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="metaDescriptionFr">Meta Description - French (150-160 characters)</label>
-                    <div style="display: flex; gap: 0.5rem; flex-direction: column;">
-                        <textarea id="metaDescriptionFr" rows="2" placeholder="Description attrayante pour les résultats de recherche" maxlength="160"></textarea>
-                        <button type="button" class="btn btn-secondary" onclick="translateField('metaDescription')" style="align-self: flex-start; white-space: nowrap;">
-                            🌍 Translate
-                        </button>
-                    </div>
-                    <div class="help-text">Apparaît dans les résultats de recherche Google</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="metaKeywords">Meta Keywords - English (comma-separated)</label>
-                    <input type="text" id="metaKeywords" placeholder="keyword1, keyword2, keyword3, ...">
-                    <div class="help-text">10-15 relevant keywords for SEO</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="metaKeywordsFr">Meta Keywords - French (comma-separated)</label>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <input type="text" id="metaKeywordsFr" placeholder="mot-clé1, mot-clé2, mot-clé3, ..." style="flex: 1;">
-                        <button type="button" class="btn btn-secondary" onclick="translateField('metaKeywords')" style="white-space: nowrap;">
-                            🌍 Translate
-                        </button>
-                    </div>
-                    <div class="help-text">10-15 mots-clés pertinents pour le référencement</div>
+                    <div class="help-text">Enter hashtags with the # symbol, separated by spaces.</div>
                 </div>
 
                 <div class="form-group">
                     <label for="focusKeyword">Focus Keyword</label>
-                    <input type="text" id="focusKeyword" placeholder="Main SEO keyword">
-                    <div class="help-text">Primary keyword to target for this post</div>
+                    <input type="text" id="focusKeyword" placeholder="Main SEO keyword for this post">
+                    <div class="help-text">Primary keyword to target for SEO</div>
+                </div>
+            </div>
+
+            <!-- ENGLISH TAB -->
+            <div class="tab-content" id="tab-english">
+                <div class="section-header">
+                    <h3><span class="flag">🇺🇸</span> English Content</h3>
+                    <button type="button" class="btn btn-secondary" id="generateSEOBtn">
+                        <i class="fas fa-magic"></i> Generate SEO
+                    </button>
                 </div>
 
                 <div class="form-group">
-                    <label for="imageAlt">Image Alt Text - English</label>
-                    <input type="text" id="imageAlt" placeholder="Descriptive alt text for featured image">
-                    <div class="help-text">Accessibility + SEO for featured image</div>
+                    <label for="postTitle">Title *</label>
+                    <input type="text" id="postTitle" required placeholder="Enter post title...">
                 </div>
 
                 <div class="form-group">
-                    <label for="imageAltFr">Image Alt Text - French</label>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <input type="text" id="imageAltFr" placeholder="Texte alternatif descriptif pour l'image principale" style="flex: 1;">
-                        <button type="button" class="btn btn-secondary" onclick="translateField('imageAlt')" style="white-space: nowrap;">
-                            🌍 Translate
+                    <label for="postExcerpt">Excerpt *</label>
+                    <textarea id="postExcerpt" rows="3" class="short" required placeholder="A brief description of your post..."></textarea>
+                    <div class="help-text">Short description for listings and social media</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postContent">Content (Markdown) *</label>
+                    <textarea id="postContent" required placeholder="# Your blog post content in markdown..."></textarea>
+                    <div class="help-text">Full markdown content of the post</div>
+                </div>
+
+                <!-- English SEO Section -->
+                <div class="seo-section">
+                    <h4><i class="fas fa-search"></i> SEO Metadata</h4>
+
+                    <div class="form-group">
+                        <label for="seoTitle">SEO Title (50-60 characters)</label>
+                        <input type="text" id="seoTitle" placeholder="SEO-optimized title with focus keyword" maxlength="60">
+                        <div class="help-text">Alternative title optimized for search engines</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaDescription">Meta Description (150-160 characters)</label>
+                        <textarea id="metaDescription" rows="2" class="short" placeholder="Compelling description for search results" maxlength="160"></textarea>
+                        <div class="help-text">Appears in Google search results</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaKeywords">Meta Keywords (comma-separated)</label>
+                        <input type="text" id="metaKeywords" placeholder="keyword1, keyword2, keyword3, ...">
+                        <div class="help-text">10-15 relevant keywords for SEO</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageAlt">Image Alt Text</label>
+                        <input type="text" id="imageAlt" placeholder="Descriptive alt text for featured image">
+                        <div class="help-text">Accessibility + SEO for featured image</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="socialPreview">Social Media Preview (200 characters)</label>
+                        <textarea id="socialPreview" rows="2" class="short" placeholder="Text optimized for social media sharing" maxlength="200"></textarea>
+                        <div class="help-text">For Facebook, LinkedIn previews</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRENCH TAB -->
+            <div class="tab-content" id="tab-french">
+                <div class="section-header">
+                    <h3><span class="flag">🇫🇷</span> French Content</h3>
+                </div>
+
+                <!-- Translate All Button -->
+                <div class="translate-all-section">
+                    <button type="button" class="btn" onclick="translateAllFields()">
+                        <i class="fas fa-language"></i> Translate All Fields from English
+                    </button>
+                    <div class="help-text">
+                        Automatically translate title, excerpt, content, and SEO fields to French using AI
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postTitleFr">Title</label>
+                    <div class="input-with-button">
+                        <input type="text" id="postTitleFr" placeholder="Titre en français...">
+                        <button type="button" class="btn btn-secondary" onclick="translateField('title')">
+                            <i class="fas fa-language"></i> Translate
                         </button>
                     </div>
-                    <div class="help-text">Accessibilité + SEO pour l'image principale</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="socialPreview">Social Media Preview - English (200 characters)</label>
-                    <textarea id="socialPreview" rows="2" placeholder="Text optimized for social media sharing" maxlength="200"></textarea>
-                    <div class="help-text">For Facebook, LinkedIn previews (different from meta description)</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="socialPreviewFr">Social Media Preview - French (200 characters)</label>
-                    <div style="display: flex; gap: 0.5rem; flex-direction: column;">
-                        <textarea id="socialPreviewFr" rows="2" placeholder="Texte optimisé pour le partage sur les réseaux sociaux" maxlength="200"></textarea>
-                        <button type="button" class="btn btn-secondary" onclick="translateField('socialPreview')" style="align-self: flex-start; white-space: nowrap;">
-                            🌍 Translate
+                    <label for="postExcerptFr">Excerpt</label>
+                    <div class="textarea-with-button">
+                        <textarea id="postExcerptFr" rows="3" class="short" placeholder="Brève description en français..."></textarea>
+                        <button type="button" class="btn btn-secondary" onclick="translateField('excerpt')">
+                            <i class="fas fa-language"></i> Translate
                         </button>
                     </div>
-                    <div class="help-text">Pour les aperçus Facebook, LinkedIn</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postContentFr">Content (Markdown)</label>
+                    <div class="textarea-with-button">
+                        <textarea id="postContentFr" placeholder="# Votre contenu de blog en markdown..."></textarea>
+                        <button type="button" class="btn btn-secondary" onclick="translateField('content')">
+                            <i class="fas fa-language"></i> Translate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- French SEO Section -->
+                <div class="seo-section">
+                    <h4><i class="fas fa-search"></i> SEO Metadata (French)</h4>
+
+                    <div class="form-group">
+                        <label for="seoTitleFr">SEO Title (50-60 characters)</label>
+                        <div class="input-with-button">
+                            <input type="text" id="seoTitleFr" placeholder="Titre SEO optimisé" maxlength="60">
+                            <button type="button" class="btn btn-secondary" onclick="translateField('seoTitle')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaDescriptionFr">Meta Description (150-160 characters)</label>
+                        <div class="textarea-with-button">
+                            <textarea id="metaDescriptionFr" rows="2" class="short" placeholder="Description pour les résultats de recherche" maxlength="160"></textarea>
+                            <button type="button" class="btn btn-secondary" onclick="translateField('metaDescription')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaKeywordsFr">Meta Keywords (comma-separated)</label>
+                        <div class="input-with-button">
+                            <input type="text" id="metaKeywordsFr" placeholder="mot-clé1, mot-clé2, mot-clé3, ...">
+                            <button type="button" class="btn btn-secondary" onclick="translateField('metaKeywords')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageAltFr">Image Alt Text</label>
+                        <div class="input-with-button">
+                            <input type="text" id="imageAltFr" placeholder="Texte alternatif pour l'image">
+                            <button type="button" class="btn btn-secondary" onclick="translateField('imageAlt')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="socialPreviewFr">Social Media Preview (200 characters)</label>
+                        <div class="textarea-with-button">
+                            <textarea id="socialPreviewFr" rows="2" class="short" placeholder="Texte pour partage sur réseaux sociaux" maxlength="200"></textarea>
+                            <button type="button" class="btn btn-secondary" onclick="translateField('socialPreview')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
@@ -506,6 +682,36 @@
 
     <script src="js/main.js"></script>
     <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.language-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Add active class to clicked tab button
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+            // Store current tab in sessionStorage
+            sessionStorage.setItem('currentEditorTab', tabName);
+        }
+
+        // Restore last active tab on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTab = sessionStorage.getItem('currentEditorTab');
+            if (savedTab) {
+                switchTab(savedTab);
+            }
+        });
+
         // Check authentication before loading editor
         const API_URL = 'https://api.eytan.com/api';
 
