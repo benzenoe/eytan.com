@@ -28,18 +28,10 @@
         <priority>0.7</priority>
     </url>
 
-    <!-- Blog Post (EN): the-great-housing-reset -->
-    <url>
-        <loc>https://eytan.com/blog/the-great-housing-reset.html</loc>
-        <lastmod>2026-02-02</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
     <!-- Blog Post (EN): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
     <url>
         <loc>https://eytan.com/blog/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-02-03</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -47,6 +39,14 @@
     <!-- Blog Post (FR): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
     <url>
         <loc>https://eytan.com/blog/fr/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
+        <lastmod>2026-02-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): the-great-housing-reset -->
+    <url>
+        <loc>https://eytan.com/blog/the-great-housing-reset.html</loc>
         <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
