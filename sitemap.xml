@@ -44,14 +44,6 @@
         <priority>0.8</priority>
     </url>
 
-    <!-- Blog Post (EN): the-great-housing-reset -->
-    <url>
-        <loc>https://eytan.com/blog/the-great-housing-reset.html</loc>
-        <lastmod>2026-02-03</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
     <!-- Blog Post (EN): had-you-heard-of-notion-have-you-used-it -->
     <url>
         <loc>https://eytan.com/blog/had-you-heard-of-notion-have-you-used-it.html</loc>
