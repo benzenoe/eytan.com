@@ -134,14 +134,20 @@ function populateForm(post) {
     document.getElementById('postExcerptFr').value = post.excerpt_fr || '';
     document.getElementById('postContentFr').value = post.content_fr || '';
 
-    // Populate SEO fields
+    // Populate SEO fields - English
     document.getElementById('seoTitle').value = post.seo_title || '';
     document.getElementById('metaDescription').value = post.meta_description || '';
     document.getElementById('metaKeywords').value = post.meta_keywords || '';
-    document.getElementById('metaKeywordsFr').value = post.meta_keywords_fr || '';
     document.getElementById('focusKeyword').value = post.focus_keyword || '';
     document.getElementById('imageAlt').value = post.image_alt || '';
     document.getElementById('socialPreview').value = post.social_preview || '';
+
+    // Populate SEO fields - French
+    document.getElementById('seoTitleFr').value = post.seo_title_fr || '';
+    document.getElementById('metaDescriptionFr').value = post.meta_description_fr || '';
+    document.getElementById('metaKeywordsFr').value = post.meta_keywords_fr || '';
+    document.getElementById('imageAltFr').value = post.image_alt_fr || '';
+    document.getElementById('socialPreviewFr').value = post.social_preview_fr || '';
 
     if (post.image) {
         document.getElementById('currentImageDisplay').textContent = post.image;
@@ -284,10 +290,15 @@ function getFormData() {
         seoTitle: document.getElementById('seoTitle').value,
         metaDescription: document.getElementById('metaDescription').value,
         metaKeywords: document.getElementById('metaKeywords').value,
-        metaKeywordsFr: document.getElementById('metaKeywordsFr').value,
         focusKeyword: document.getElementById('focusKeyword').value,
         imageAlt: document.getElementById('imageAlt').value,
-        socialPreview: document.getElementById('socialPreview').value
+        socialPreview: document.getElementById('socialPreview').value,
+        // French SEO fields
+        seoTitleFr: document.getElementById('seoTitleFr').value,
+        metaDescriptionFr: document.getElementById('metaDescriptionFr').value,
+        metaKeywordsFr: document.getElementById('metaKeywordsFr').value,
+        imageAltFr: document.getElementById('imageAltFr').value,
+        socialPreviewFr: document.getElementById('socialPreviewFr').value
     };
 }
 
@@ -640,6 +651,22 @@ async function translateField(fieldType) {
         case 'metaKeywords':
             sourceText = document.getElementById('metaKeywords').value.trim();
             targetFieldId = 'metaKeywordsFr';
+            break;
+        case 'seoTitle':
+            sourceText = document.getElementById('seoTitle').value.trim();
+            targetFieldId = 'seoTitleFr';
+            break;
+        case 'metaDescription':
+            sourceText = document.getElementById('metaDescription').value.trim();
+            targetFieldId = 'metaDescriptionFr';
+            break;
+        case 'imageAlt':
+            sourceText = document.getElementById('imageAlt').value.trim();
+            targetFieldId = 'imageAltFr';
+            break;
+        case 'socialPreview':
+            sourceText = document.getElementById('socialPreview').value.trim();
+            targetFieldId = 'socialPreviewFr';
             break;
         default:
             alert('Invalid field type');

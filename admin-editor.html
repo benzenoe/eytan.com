@@ -376,15 +376,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="seoTitle">SEO Title (50-60 characters)</label>
+                    <label for="seoTitle">SEO Title - English (50-60 characters)</label>
                     <input type="text" id="seoTitle" placeholder="SEO-optimized title with focus keyword" maxlength="60">
                     <div class="help-text">Alternative title optimized for search engines</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="metaDescription">Meta Description (150-160 characters)</label>
+                    <label for="seoTitleFr">SEO Title - French (50-60 characters)</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="seoTitleFr" placeholder="Titre SEO optimisé avec mot-clé principal" maxlength="60" style="flex: 1;">
+                        <button type="button" class="btn btn-secondary" onclick="translateField('seoTitle')" style="white-space: nowrap;">
+                            🌍 Translate
+                        </button>
+                    </div>
+                    <div class="help-text">Titre alternatif optimisé pour les moteurs de recherche</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="metaDescription">Meta Description - English (150-160 characters)</label>
                     <textarea id="metaDescription" rows="2" placeholder="Compelling description for search results" maxlength="160"></textarea>
                     <div class="help-text">Appears in Google search results - optimize for click-through</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="metaDescriptionFr">Meta Description - French (150-160 characters)</label>
+                    <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                        <textarea id="metaDescriptionFr" rows="2" placeholder="Description attrayante pour les résultats de recherche" maxlength="160"></textarea>
+                        <button type="button" class="btn btn-secondary" onclick="translateField('metaDescription')" style="align-self: flex-start; white-space: nowrap;">
+                            🌍 Translate
+                        </button>
+                    </div>
+                    <div class="help-text">Apparaît dans les résultats de recherche Google</div>
                 </div>
 
                 <div class="form-group">
@@ -411,15 +433,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="imageAlt">Image Alt Text</label>
+                    <label for="imageAlt">Image Alt Text - English</label>
                     <input type="text" id="imageAlt" placeholder="Descriptive alt text for featured image">
                     <div class="help-text">Accessibility + SEO for featured image</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="socialPreview">Social Media Preview (200 characters)</label>
+                    <label for="imageAltFr">Image Alt Text - French</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="imageAltFr" placeholder="Texte alternatif descriptif pour l'image principale" style="flex: 1;">
+                        <button type="button" class="btn btn-secondary" onclick="translateField('imageAlt')" style="white-space: nowrap;">
+                            🌍 Translate
+                        </button>
+                    </div>
+                    <div class="help-text">Accessibilité + SEO pour l'image principale</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="socialPreview">Social Media Preview - English (200 characters)</label>
                     <textarea id="socialPreview" rows="2" placeholder="Text optimized for social media sharing" maxlength="200"></textarea>
                     <div class="help-text">For Facebook, LinkedIn previews (different from meta description)</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="socialPreviewFr">Social Media Preview - French (200 characters)</label>
+                    <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                        <textarea id="socialPreviewFr" rows="2" placeholder="Texte optimisé pour le partage sur les réseaux sociaux" maxlength="200"></textarea>
+                        <button type="button" class="btn btn-secondary" onclick="translateField('socialPreview')" style="align-self: flex-start; white-space: nowrap;">
+                            🌍 Translate
+                        </button>
+                    </div>
+                    <div class="help-text">Pour les aperçus Facebook, LinkedIn</div>
                 </div>
             </div>
         </form>
