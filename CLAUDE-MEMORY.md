@@ -1,6 +1,6 @@
 # Eytan.com Frontend - Quick Reference
 
-**Last Updated:** January 28, 2026
+**Last Updated:** February 3, 2026
 
 ---
 
@@ -83,6 +83,9 @@ Tell user to hard refresh: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
 | Tag filtering | 10 | ✅ |
 | Bilingual (EN/FR) | 11 | ✅ |
 | Social media | 12 | ✅ |
+| Auth fixes | 13 | ✅ |
+| Blog automation skill | 14 | ✅ |
+| Tabbed admin editor | 14 | ✅ |
 
 ---
 
