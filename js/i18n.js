@@ -1,5 +1,5 @@
 // i18n (Internationalization) System for eytan.com
-// Handles bilingual English/French content
+// Handles trilingual English/French/Portuguese content
 
 // Translation dictionary
 const translations = {
@@ -223,6 +223,117 @@ const translations = {
       edit: 'Modifier',
       delete: 'Supprimer'
     }
+  },
+
+  pt: {
+    // Navigation
+    nav: {
+      home: 'Início',
+      blog: 'Blog',
+      resume: 'Currículo',
+      contact: 'Contacto'
+    },
+
+    // Homepage Hero
+    hero: {
+      greeting: 'Olá, sou Eytan Benzeno',
+      subtitle: 'Consultor de IA e Marketing | Corretor Imobiliário | Pioneiro do E-commerce',
+      experience: '20+ anos de experiência em E-commerce e Imobiliário | Especialista em IA, Logística e Serviço ao Cliente'
+    },
+
+    // Blog Page
+    blog: {
+      title: 'O Blog do Eytan',
+      subtitle: "Bem-vindo ao Meu Cantinho da Internet\nSou o Eytan e fico feliz por estar aqui. É aqui que partilho ideias, experiências e reflexões da minha jornada através da tecnologia, negócios e vida. Sente-se, pegue num café e explore.",
+      allPosts: 'Todos os Artigos',
+      readMore: 'Ler Mais',
+      minuteRead: 'min de leitura',
+      publishedOn: 'Publicado em',
+      by: 'por',
+      loading: 'A carregar artigos...',
+      noPosts: 'Nenhum artigo encontrado',
+      tags: 'Etiquetas'
+    },
+
+    // Blog Post
+    post: {
+      shareOn: 'Partilhar em',
+      relatedPosts: 'Mais Artigos',
+      backToBlog: '← Voltar ao Blog',
+      publishedOn: 'Publicado em',
+      readTime: 'min de leitura'
+    },
+
+    // Contact Page
+    contact: {
+      title: 'Entre em Contacto',
+      subtitle: 'Adoraria ter notícias suas. Envie-me uma mensagem e responderei o mais breve possível.',
+      scheduleTitle: 'Agendar uma Reunião',
+      scheduleText: 'Quer discutir o seu projeto, explorar oportunidades ou simplesmente conversar? Reserve um horário conveniente para uma reunião comigo.',
+      bookMeeting: 'Agendar uma Reunião com Eytan',
+      name: 'Nome',
+      email: 'Email',
+      phone: 'Telefone',
+      subject: 'Assunto',
+      message: 'Mensagem',
+      send: 'Enviar Mensagem',
+      sending: 'A enviar...',
+      success: 'Mensagem enviada com sucesso!',
+      error: 'Falha ao enviar a mensagem. Por favor, tente novamente.',
+      phoneLabel: 'Telefone',
+      whatsappLabel: 'WhatsApp',
+      whatsappLink: 'Mensagem no WhatsApp',
+      socialLinks: 'Redes Sociais',
+      qrTitle: 'Ligação Rápida',
+      qrSubtitle: 'Digitalize este código QR para guardar os meus dados de contacto',
+      qrInstructions: 'Aponte a câmara para o código',
+      downloadVCard: 'Descarregar Cartão de Contacto'
+    },
+
+    // Resume Page
+    resume: {
+      title: 'Currículo',
+      download: 'Descarregar PDF',
+      experience: 'Experiência',
+      education: 'Formação',
+      skills: 'Competências',
+      languages: 'Idiomas',
+      present: 'Presente'
+    },
+
+    // Footer
+    footer: {
+      rights: 'Todos os direitos reservados',
+      builtWith: 'Criado com'
+    },
+
+    // About Section
+    about: {
+      title: 'Sobre Mim',
+      intro: "Sou um empreendedor e consultor com um portfólio diversificado que abrange e-commerce, imobiliário, tecnologia e desenvolvimento pessoal. Com mais de 20 anos de experiência pioneira, a minha combinação única de especialização permite-me ajudar indivíduos e empresas a crescer em múltiplas dimensões.",
+      realEstateTitle: '🏡 Imobiliário',
+      realEstateText: "Como corretor licenciado no sul da Flórida e Fundador e Sócio-Gerente da SoldHere, LDA em Portugal, ajudo clientes a navegar em transações imobiliárias internacionais em dois mercados vibrantes. Com experiência em gestão de propriedades e arrendamentos de curta duração, forneço serviços imobiliários completos desde a aquisição até às operações. Quer esteja a investir no ensolarado sul da Flórida através do SoldHere.com ou a explorar oportunidades no belo Portugal via SoldHere.pt, trago experiência local e perspetiva global.",
+      aiMarketingTitle: '🤖 IA e Marketing',
+      aiMarketingText: "Como Sócio-Gerente e Estratega-Chefe de Transformação de IA na Bogen.ai, forneço consultoria de ponta em marketing e integração de IA. Ajudo empresas a aproveitar a inteligência artificial para otimizar as suas estratégias de marketing, automatizar processos e manter-se à frente num mercado cada vez mais orientado pela tecnologia.",
+      ecommerceTitle: '🛒 Pioneiro do E-commerce',
+      ecommerceText: "Com mais de 20 anos de experiência em e-commerce, estive na vanguarda da evolução do retalho online. Como especialista em e-commerce, trago profunda experiência em operações, gestão logística, excelência no serviço ao cliente e construção de negócios online escaláveis. Desde os primeiros dias do comércio online até às plataformas sofisticadas de hoje, ajudei inúmeras empresas a otimizar as suas operações e a proporcionar experiências excecionais aos clientes.",
+      coachingTitle: '💡 Coaching e Mastermind',
+      coachingText: "Como parceiro e gestor na Reignation.com, facilito experiências de coaching transformadoras e grupos mastermind. Sou apaixonado por ajudar líderes e empreendedores a desbloquear o seu potencial e alcançar resultados excecionais.",
+      viewResume: 'Ver Currículo',
+      readBlog: 'Ler Blog'
+    },
+
+    // Common
+    common: {
+      readMore: 'Ler Mais',
+      learnMore: 'Saber Mais',
+      viewMore: 'Ver Mais',
+      close: 'Fechar',
+      cancel: 'Cancelar',
+      save: 'Guardar',
+      edit: 'Editar',
+      delete: 'Eliminar'
+    }
   }
 };
 
@@ -319,7 +430,7 @@ class I18n {
 
   // Update blog post links based on language
   updateBlogPostLinks() {
-    const isFrench = this.currentLanguage === 'fr';
+    const lang = this.currentLanguage;
 
     // Update links on blog listing page
     const blogCards = document.querySelectorAll('.blog-card[data-slug]');
@@ -327,8 +438,10 @@ class I18n {
       const slug = card.getAttribute('data-slug');
 
       // Update href based on language
-      if (isFrench) {
+      if (lang === 'fr') {
         card.setAttribute('href', `blog/fr/${slug}.html`);
+      } else if (lang === 'pt') {
+        card.setAttribute('href', `blog/pt/${slug}.html`);
       } else {
         card.setAttribute('href', `blog/${slug}.html`);
       }
