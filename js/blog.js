@@ -136,11 +136,18 @@ function renderBlogPosts() {
 
     // Get current language
     const currentLang = (typeof i18n !== 'undefined') ? i18n.getLanguage() : 'en';
-    const isFrench = currentLang === 'fr';
 
     blogGrid.innerHTML = sortedPosts.map(post => {
         const slug = post.slug || post.id;
-        const postUrl = isFrench ? `blog/fr/${slug}.html` : `blog/${slug}.html`;
+        // Build URL based on language
+        let postUrl;
+        if (currentLang === 'fr') {
+            postUrl = `blog/fr/${slug}.html`;
+        } else if (currentLang === 'pt') {
+            postUrl = `blog/pt/${slug}.html`;
+        } else {
+            postUrl = `blog/${slug}.html`;
+        }
 
         // Generate tags HTML
         const tagsHtml = post.tags && post.tags.length > 0
