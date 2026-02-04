@@ -405,6 +405,9 @@
             <button class="language-tab" data-tab="french" onclick="switchTab('french')">
                 <span class="flag">🇫🇷</span> French
             </button>
+            <button class="language-tab" data-tab="portuguese" onclick="switchTab('portuguese')">
+                <span class="flag">🇵🇹</span> Portuguese
+            </button>
         </div>
 
         <form class="editor-form" id="editorForm">
@@ -662,6 +665,133 @@
                     </div>
                 </div>
             </div>
+
+            <!-- PORTUGUESE TAB -->
+            <div class="tab-content" id="tab-portuguese">
+                <div class="section-header">
+                    <h3><span class="flag">🇵🇹</span> Portuguese Content</h3>
+                </div>
+
+                <!-- Translate All Button -->
+                <div class="translate-all-section">
+                    <button type="button" class="btn" onclick="translateAllFieldsPt()">
+                        <i class="fas fa-language"></i> Translate All Fields from English
+                    </button>
+                    <div class="help-text">
+                        Automatically translate title, excerpt, content, and SEO fields to Portuguese using AI
+                    </div>
+                </div>
+
+                <!-- Shared fields (read-only) -->
+                <div class="shared-fields-readonly" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; opacity: 0.7;">
+                    <div style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">
+                        <i class="fas fa-lock"></i> Shared settings (edit on English tab)
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Slug</label>
+                            <input type="text" id="postSlugPt" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Date</label>
+                            <input type="date" id="postDatePt" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Author</label>
+                            <input type="text" id="postAuthorPt" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Tags</label>
+                            <input type="text" id="postTagsPt" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postTitlePt">Title</label>
+                    <div class="input-with-button">
+                        <input type="text" id="postTitlePt" placeholder="Título em português...">
+                        <button type="button" class="btn btn-secondary" onclick="translateFieldPt('title')">
+                            <i class="fas fa-language"></i> Translate
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postExcerptPt">Excerpt</label>
+                    <div class="textarea-with-button">
+                        <textarea id="postExcerptPt" rows="3" class="short" placeholder="Breve descrição em português..."></textarea>
+                        <button type="button" class="btn btn-secondary" onclick="translateFieldPt('excerpt')">
+                            <i class="fas fa-language"></i> Translate
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postContentPt">Content (Markdown)</label>
+                    <div class="textarea-with-button">
+                        <textarea id="postContentPt" placeholder="# O seu conteúdo do blog em markdown..."></textarea>
+                        <button type="button" class="btn btn-secondary" onclick="translateFieldPt('content')">
+                            <i class="fas fa-language"></i> Translate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portuguese SEO Section -->
+                <div class="seo-section">
+                    <h4><i class="fas fa-search"></i> SEO Metadata (Portuguese)</h4>
+
+                    <div class="form-group">
+                        <label for="seoTitlePt">SEO Title (50-60 characters)</label>
+                        <div class="input-with-button">
+                            <input type="text" id="seoTitlePt" placeholder="Título SEO otimizado" maxlength="60">
+                            <button type="button" class="btn btn-secondary" onclick="translateFieldPt('seoTitle')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaDescriptionPt">Meta Description (150-160 characters)</label>
+                        <div class="textarea-with-button">
+                            <textarea id="metaDescriptionPt" rows="2" class="short" placeholder="Descrição para os resultados de pesquisa" maxlength="160"></textarea>
+                            <button type="button" class="btn btn-secondary" onclick="translateFieldPt('metaDescription')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metaKeywordsPt">Meta Keywords (comma-separated)</label>
+                        <div class="input-with-button">
+                            <input type="text" id="metaKeywordsPt" placeholder="palavra-chave1, palavra-chave2, palavra-chave3, ...">
+                            <button type="button" class="btn btn-secondary" onclick="translateFieldPt('metaKeywords')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageAltPt">Image Alt Text</label>
+                        <div class="input-with-button">
+                            <input type="text" id="imageAltPt" placeholder="Texto alternativo para a imagem">
+                            <button type="button" class="btn btn-secondary" onclick="translateFieldPt('imageAlt')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="socialPreviewPt">Social Media Preview (200 characters)</label>
+                        <div class="textarea-with-button">
+                            <textarea id="socialPreviewPt" rows="2" class="short" placeholder="Texto para partilha nas redes sociais" maxlength="200"></textarea>
+                            <button type="button" class="btn btn-secondary" onclick="translateFieldPt('socialPreview')">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
 
         <div class="form-actions">
@@ -720,12 +850,18 @@
             // Add active class to clicked tab button
             document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
 
-            // Sync shared fields to French tab (read-only display)
+            // Sync shared fields to French/Portuguese tabs (read-only display)
             if (tabName === 'french') {
                 document.getElementById('postSlugFr').value = document.getElementById('postSlug').value || '';
                 document.getElementById('postDateFr').value = document.getElementById('postDate').value || '';
                 document.getElementById('postAuthorFr').value = document.getElementById('postAuthor').value || '';
                 document.getElementById('postTagsFr').value = document.getElementById('postTags').value || '';
+            }
+            if (tabName === 'portuguese') {
+                document.getElementById('postSlugPt').value = document.getElementById('postSlug').value || '';
+                document.getElementById('postDatePt').value = document.getElementById('postDate').value || '';
+                document.getElementById('postAuthorPt').value = document.getElementById('postAuthor').value || '';
+                document.getElementById('postTagsPt').value = document.getElementById('postTags').value || '';
             }
 
             // Store current tab in sessionStorage

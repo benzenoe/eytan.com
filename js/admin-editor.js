@@ -149,6 +149,18 @@ function populateForm(post) {
     document.getElementById('imageAltFr').value = post.image_alt_fr || '';
     document.getElementById('socialPreviewFr').value = post.social_preview_fr || '';
 
+    // Populate Portuguese fields
+    document.getElementById('postTitlePt').value = post.title_pt || '';
+    document.getElementById('postExcerptPt').value = post.excerpt_pt || '';
+    document.getElementById('postContentPt').value = post.content_pt || '';
+
+    // Populate SEO fields - Portuguese
+    document.getElementById('seoTitlePt').value = post.seo_title_pt || '';
+    document.getElementById('metaDescriptionPt').value = post.meta_description_pt || '';
+    document.getElementById('metaKeywordsPt').value = post.meta_keywords_pt || '';
+    document.getElementById('imageAltPt').value = post.image_alt_pt || '';
+    document.getElementById('socialPreviewPt').value = post.social_preview_pt || '';
+
     if (post.image) {
         document.getElementById('currentImageDisplay').textContent = post.image;
         document.getElementById('imagePreview').src = post.image;
@@ -298,7 +310,17 @@ function getFormData() {
         metaDescriptionFr: document.getElementById('metaDescriptionFr').value,
         metaKeywordsFr: document.getElementById('metaKeywordsFr').value,
         imageAltFr: document.getElementById('imageAltFr').value,
-        socialPreviewFr: document.getElementById('socialPreviewFr').value
+        socialPreviewFr: document.getElementById('socialPreviewFr').value,
+        // Portuguese content fields
+        title_pt: document.getElementById('postTitlePt').value,
+        excerpt_pt: document.getElementById('postExcerptPt').value,
+        content_pt: document.getElementById('postContentPt').value,
+        // Portuguese SEO fields
+        seoTitlePt: document.getElementById('seoTitlePt').value,
+        metaDescriptionPt: document.getElementById('metaDescriptionPt').value,
+        metaKeywordsPt: document.getElementById('metaKeywordsPt').value,
+        imageAltPt: document.getElementById('imageAltPt').value,
+        socialPreviewPt: document.getElementById('socialPreviewPt').value
     };
 }
 
@@ -835,5 +857,217 @@ async function translateAllFields() {
         excerptFr.disabled = false;
         contentFr.disabled = false;
         metaKeywordsFr.disabled = false;
+    }
+}
+
+// Portuguese translation functions
+async function translateFieldPt(fieldType) {
+    let sourceText = '';
+    let targetFieldId = '';
+
+    // Get source text based on field type
+    switch (fieldType) {
+        case 'title':
+            sourceText = document.getElementById('postTitle').value.trim();
+            targetFieldId = 'postTitlePt';
+            break;
+        case 'excerpt':
+            sourceText = document.getElementById('postExcerpt').value.trim();
+            targetFieldId = 'postExcerptPt';
+            break;
+        case 'content':
+            sourceText = document.getElementById('postContent').value.trim();
+            targetFieldId = 'postContentPt';
+            break;
+        case 'metaKeywords':
+            sourceText = document.getElementById('metaKeywords').value.trim();
+            targetFieldId = 'metaKeywordsPt';
+            break;
+        case 'seoTitle':
+            sourceText = document.getElementById('seoTitle').value.trim();
+            targetFieldId = 'seoTitlePt';
+            break;
+        case 'metaDescription':
+            sourceText = document.getElementById('metaDescription').value.trim();
+            targetFieldId = 'metaDescriptionPt';
+            break;
+        case 'imageAlt':
+            sourceText = document.getElementById('imageAlt').value.trim();
+            targetFieldId = 'imageAltPt';
+            break;
+        case 'socialPreview':
+            sourceText = document.getElementById('socialPreview').value.trim();
+            targetFieldId = 'socialPreviewPt';
+            break;
+        default:
+            alert('Invalid field type');
+            return;
+    }
+
+    // Validate source text
+    if (!sourceText) {
+        alert(`Please enter ${fieldType} in English first!`);
+        return;
+    }
+
+    const targetField = document.getElementById(targetFieldId);
+    const originalValue = targetField.value;
+
+    // Show loading state
+    targetField.value = 'Translating...';
+    targetField.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/translate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                text: sourceText,
+                type: fieldType,
+                targetLang: 'pt'
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Translation failed');
+        }
+
+        const data = await response.json();
+        targetField.value = data.translation;
+
+        // Mark as having unsaved changes
+        hasUnsavedChanges = true;
+
+        // Show success message
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = `${fieldType.charAt(0).toUpperCase() + fieldType.slice(1)} translated to Portuguese!`;
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 2000);
+    } catch (error) {
+        console.error('Translation error:', error);
+        alert('Translation error: ' + error.message);
+        targetField.value = originalValue; // Restore original value on error
+    } finally {
+        targetField.disabled = false;
+    }
+}
+
+async function translateAllFieldsPt() {
+    const title = document.getElementById('postTitle').value.trim();
+    const excerpt = document.getElementById('postExcerpt').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+    const metaKeywords = document.getElementById('metaKeywords').value.trim();
+
+    // Validate that we have content
+    if (!title || !excerpt || !content) {
+        alert('Please fill in all English fields (Title, Excerpt, Content) before translating!');
+        return;
+    }
+
+    // Confirm before proceeding (this will cost API credits)
+    if (!confirm('This will translate Title, Excerpt, Content, and Meta Keywords to Portuguese using AI. Continue?')) {
+        return;
+    }
+
+    // Show loading state
+    const titlePt = document.getElementById('postTitlePt');
+    const excerptPt = document.getElementById('postExcerptPt');
+    const contentPt = document.getElementById('postContentPt');
+    const metaKeywordsPt = document.getElementById('metaKeywordsPt');
+
+    titlePt.value = 'Translating...';
+    excerptPt.value = 'Translating...';
+    contentPt.value = 'Translating...';
+    if (metaKeywords) {
+        metaKeywordsPt.value = 'Translating...';
+        metaKeywordsPt.disabled = true;
+    }
+    titlePt.disabled = true;
+    excerptPt.disabled = true;
+    contentPt.disabled = true;
+
+    try {
+        // Translate main content fields
+        const response = await fetch(`${API_URL}/translate/bulk`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                excerpt: excerpt,
+                content: content,
+                targetLang: 'pt'
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Bulk translation failed');
+        }
+
+        const data = await response.json();
+
+        // Populate Portuguese fields
+        titlePt.value = data.title_pt || '';
+        excerptPt.value = data.excerpt_pt || '';
+        contentPt.value = data.content_pt || '';
+
+        // Translate meta keywords separately if present
+        if (metaKeywords) {
+            try {
+                const keywordsResponse = await fetch(`${API_URL}/translate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        text: metaKeywords,
+                        type: 'metaKeywords',
+                        targetLang: 'pt'
+                    })
+                });
+
+                if (keywordsResponse.ok) {
+                    const keywordsData = await keywordsResponse.json();
+                    metaKeywordsPt.value = keywordsData.translation || '';
+                }
+            } catch (keywordsError) {
+                console.error('Meta keywords translation error:', keywordsError);
+                // Don't fail the whole operation for keywords
+            }
+        }
+
+        // Mark as having unsaved changes
+        hasUnsavedChanges = true;
+
+        // Show success message
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = '✅ All fields translated to Portuguese!';
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 3000);
+    } catch (error) {
+        console.error('Bulk translation error:', error);
+        alert('Translation error: ' + error.message);
+        // Clear "Translating..." text on error
+        titlePt.value = '';
+        excerptPt.value = '';
+        contentPt.value = '';
+        metaKeywordsPt.value = '';
+    } finally {
+        titlePt.disabled = false;
+        excerptPt.disabled = false;
+        contentPt.disabled = false;
+        metaKeywordsPt.disabled = false;
     }
 }
