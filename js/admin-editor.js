@@ -1318,3 +1318,170 @@ async function generateHashtags(language) {
         hashtagField.disabled = false;
     }
 }
+
+/**
+ * Generate a complete localized page for a language
+ * 1. Translates content from English (title, excerpt, content)
+ * 2. Generates native hashtags based on translated content
+ * 3. Generates native SEO based on translated content
+ * @param {string} language - 'fr' or 'pt'
+ */
+async function generateFullPage(language) {
+    const langName = language === 'fr' ? 'French' : 'Portuguese';
+    const langSuffix = language === 'fr' ? 'Fr' : 'Pt';
+
+    // Get English content
+    const title = document.getElementById('postTitle').value.trim();
+    const excerpt = document.getElementById('postExcerpt').value.trim();
+    const content = document.getElementById('postContent').value.trim();
+
+    // Validate English content exists
+    if (!title || !excerpt || !content) {
+        alert('Please fill in all English fields (Title, Excerpt, Content) before generating.');
+        return;
+    }
+
+    // Confirm before proceeding
+    if (!confirm(`Generate complete ${langName} page?\n\nThis will:\n1. Translate content from English\n2. Generate native ${langName} hashtags\n3. Generate native ${langName} SEO\n\nContinue?`)) {
+        return;
+    }
+
+    // Get all target field elements
+    const titleTarget = document.getElementById(`postTitle${langSuffix}`);
+    const excerptTarget = document.getElementById(`postExcerpt${langSuffix}`);
+    const contentTarget = document.getElementById(`postContent${langSuffix}`);
+    const hashtagsTarget = document.getElementById(`postHashtags${langSuffix}`);
+    const seoTitleTarget = document.getElementById(`seoTitle${langSuffix}`);
+    const metaDescriptionTarget = document.getElementById(`metaDescription${langSuffix}`);
+    const metaKeywordsTarget = document.getElementById(`metaKeywords${langSuffix}`);
+    const imageAltTarget = document.getElementById(`imageAlt${langSuffix}`);
+    const socialPreviewTarget = document.getElementById(`socialPreview${langSuffix}`);
+
+    // Show loading state for all fields
+    const allFields = [titleTarget, excerptTarget, contentTarget, hashtagsTarget,
+                       seoTitleTarget, metaDescriptionTarget, metaKeywordsTarget,
+                       imageAltTarget, socialPreviewTarget];
+
+    allFields.forEach(field => {
+        field.value = 'Generating...';
+        field.disabled = true;
+    });
+
+    // Update status indicator
+    const autoSaveText = document.getElementById('autoSaveText');
+    const originalStatusText = autoSaveText.textContent;
+
+    try {
+        // STEP 1: Translate content
+        autoSaveText.textContent = `⏳ Step 1/3: Translating to ${langName}...`;
+
+        const translateResponse = await fetch(`${API_URL}/translate/bulk`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                excerpt: excerpt,
+                content: content,
+                targetLang: language
+            })
+        });
+
+        if (!translateResponse.ok) {
+            const error = await translateResponse.json();
+            throw new Error(error.error || 'Translation failed');
+        }
+
+        const translateData = await translateResponse.json();
+        const langKey = language === 'fr' ? '_fr' : '_pt';
+
+        // Populate translated content
+        const translatedTitle = translateData[`title${langKey}`] || '';
+        const translatedExcerpt = translateData[`excerpt${langKey}`] || '';
+        const translatedContent = translateData[`content${langKey}`] || '';
+
+        titleTarget.value = translatedTitle;
+        excerptTarget.value = translatedExcerpt;
+        contentTarget.value = translatedContent;
+
+        // STEP 2: Generate hashtags based on translated content
+        autoSaveText.textContent = `⏳ Step 2/3: Generating ${langName} hashtags...`;
+
+        const hashtagsResponse = await fetch(`${API_URL}/generate/hashtags`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: translatedTitle,
+                content: translatedContent,
+                excerpt: translatedExcerpt,
+                language: language,
+                platform: 'all'
+            })
+        });
+
+        if (hashtagsResponse.ok) {
+            const hashtagsData = await hashtagsResponse.json();
+            hashtagsTarget.value = hashtagsData.hashtags || '';
+        } else {
+            console.error('Hashtag generation failed, continuing...');
+            hashtagsTarget.value = '';
+        }
+
+        // STEP 3: Generate SEO based on translated content
+        autoSaveText.textContent = `⏳ Step 3/3: Generating ${langName} SEO...`;
+
+        const seoResponse = await fetch(`${API_URL}/generate/seo`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: translatedTitle,
+                content: translatedContent,
+                excerpt: translatedExcerpt,
+                language: language
+            })
+        });
+
+        if (seoResponse.ok) {
+            const seoData = await seoResponse.json();
+            seoTitleTarget.value = seoData.seoTitle || '';
+            metaDescriptionTarget.value = seoData.metaDescription || '';
+            metaKeywordsTarget.value = seoData.metaKeywords || '';
+            imageAltTarget.value = seoData.imageAlt || '';
+            socialPreviewTarget.value = seoData.socialPreview || '';
+        } else {
+            console.error('SEO generation failed, continuing...');
+            seoTitleTarget.value = '';
+            metaDescriptionTarget.value = '';
+            metaKeywordsTarget.value = '';
+            imageAltTarget.value = '';
+            socialPreviewTarget.value = '';
+        }
+
+        // Mark as having unsaved changes
+        hasUnsavedChanges = true;
+
+        // Show success
+        autoSaveText.textContent = `✅ ${langName} page generated!`;
+        setTimeout(() => {
+            autoSaveText.textContent = originalStatusText;
+        }, 4000);
+
+    } catch (error) {
+        console.error('Generate page error:', error);
+        alert(`Error generating ${langName} page: ${error.message}`);
+
+        // Clear all fields on error
+        allFields.forEach(field => {
+            field.value = '';
+        });
+
+        autoSaveText.textContent = originalStatusText;
+    } finally {
+        // Re-enable all fields
+        allFields.forEach(field => {
+            field.disabled = false;
+        });
+    }
+}
