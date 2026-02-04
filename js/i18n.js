@@ -356,8 +356,21 @@ class I18n {
       return;
     }
 
-    this.currentLanguage = lang;
+    // Store language preference
     localStorage.setItem('language', lang);
+
+    // Check if we're on a blog post page and need to redirect
+    const path = window.location.pathname;
+    const blogPostRedirect = this.getBlogPostRedirectUrl(path, lang);
+
+    if (blogPostRedirect) {
+      // Redirect to the language-specific blog post
+      window.location.href = blogPostRedirect;
+      return;
+    }
+
+    // Not a blog post page, just update translations in place
+    this.currentLanguage = lang;
     document.documentElement.lang = lang;
 
     // Dispatch custom event for language change
@@ -365,6 +378,37 @@ class I18n {
 
     // Update all translatable elements
     this.updatePageTranslations();
+  }
+
+  // Get redirect URL for blog posts when switching language
+  getBlogPostRedirectUrl(path, targetLang) {
+    // Check if this is a blog post page (not blog.html listing)
+    // Patterns: /blog/slug.html, /blog/fr/slug.html, /blog/pt/slug.html
+    const blogPostPattern = /^\/blog\/(fr\/|pt\/)?([^\/]+)\.html$/;
+    const match = path.match(blogPostPattern);
+
+    if (!match) {
+      return null; // Not a blog post page
+    }
+
+    const currentLangPrefix = match[1] || ''; // 'fr/', 'pt/', or ''
+    const slug = match[2]; // The post slug
+
+    // Don't redirect if already on the correct language version
+    const currentLang = currentLangPrefix === 'fr/' ? 'fr' : (currentLangPrefix === 'pt/' ? 'pt' : 'en');
+    if (currentLang === targetLang) {
+      return null;
+    }
+
+    // Build the new URL
+    let newPath;
+    if (targetLang === 'en') {
+      newPath = `/blog/${slug}.html`;
+    } else {
+      newPath = `/blog/${targetLang}/${slug}.html`;
+    }
+
+    return newPath;
   }
 
   // Get current language
