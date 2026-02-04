@@ -399,10 +399,7 @@
 
         <!-- Language Tabs -->
         <div class="language-tabs">
-            <button class="language-tab active" data-tab="general" onclick="switchTab('general')">
-                <i class="fas fa-cog"></i> General
-            </button>
-            <button class="language-tab" data-tab="english" onclick="switchTab('english')">
+            <button class="language-tab active" data-tab="english" onclick="switchTab('english')">
                 <span class="flag">🇺🇸</span> English
             </button>
             <button class="language-tab" data-tab="french" onclick="switchTab('french')">
@@ -413,8 +410,8 @@
         <form class="editor-form" id="editorForm">
             <input type="hidden" id="postId">
 
-            <!-- GENERAL TAB -->
-            <div class="tab-content active" id="tab-general">
+            <!-- ENGLISH TAB -->
+            <div class="tab-content active" id="tab-english">
                 <div class="section-header">
                     <h3><i class="fas fa-info-circle"></i> Post Settings</h3>
                 </div>
@@ -477,10 +474,8 @@
                     <input type="text" id="focusKeyword" placeholder="Main SEO keyword for this post">
                     <div class="help-text">Primary keyword to target for SEO</div>
                 </div>
-            </div>
 
-            <!-- ENGLISH TAB -->
-            <div class="tab-content" id="tab-english">
+                <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
                 <div class="section-header">
                     <h3><span class="flag">🇺🇸</span> English Content</h3>
                     <button type="button" class="btn btn-secondary" id="generateSEOBtn">
@@ -554,6 +549,31 @@
                     </button>
                     <div class="help-text">
                         Automatically translate title, excerpt, content, and SEO fields to French using AI
+                    </div>
+                </div>
+
+                <!-- Shared fields (read-only) -->
+                <div class="shared-fields-readonly" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; opacity: 0.7;">
+                    <div style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">
+                        <i class="fas fa-lock"></i> Shared settings (edit on English tab)
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Slug</label>
+                            <input type="text" id="postSlugFr" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Date</label>
+                            <input type="date" id="postDateFr" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Author</label>
+                            <input type="text" id="postAuthorFr" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.75rem; color: #888;">Tags</label>
+                            <input type="text" id="postTagsFr" disabled style="background: #e9ecef; cursor: not-allowed;">
+                        </div>
                     </div>
                 </div>
 
@@ -700,6 +720,14 @@
             // Add active class to clicked tab button
             document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
 
+            // Sync shared fields to French tab (read-only display)
+            if (tabName === 'french') {
+                document.getElementById('postSlugFr').value = document.getElementById('postSlug').value || '';
+                document.getElementById('postDateFr').value = document.getElementById('postDate').value || '';
+                document.getElementById('postAuthorFr').value = document.getElementById('postAuthor').value || '';
+                document.getElementById('postTagsFr').value = document.getElementById('postTags').value || '';
+            }
+
             // Store current tab in sessionStorage
             sessionStorage.setItem('currentEditorTab', tabName);
         }
@@ -707,8 +735,11 @@
         // Restore last active tab on page load
         document.addEventListener('DOMContentLoaded', function() {
             const savedTab = sessionStorage.getItem('currentEditorTab');
-            if (savedTab) {
+            // Default to english, ignore old 'general' tab setting
+            if (savedTab && savedTab !== 'general') {
                 switchTab(savedTab);
+            } else {
+                switchTab('english');
             }
         });
 
