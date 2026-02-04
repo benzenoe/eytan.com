@@ -752,7 +752,11 @@ async function translateAllFields() {
     const title = document.getElementById('postTitle').value.trim();
     const excerpt = document.getElementById('postExcerpt').value.trim();
     const content = document.getElementById('postContent').value.trim();
+    const seoTitle = document.getElementById('seoTitle').value.trim();
+    const metaDescription = document.getElementById('metaDescription').value.trim();
     const metaKeywords = document.getElementById('metaKeywords').value.trim();
+    const imageAlt = document.getElementById('imageAlt').value.trim();
+    const socialPreview = document.getElementById('socialPreview').value.trim();
 
     // Validate that we have content
     if (!title || !excerpt || !content) {
@@ -761,26 +765,33 @@ async function translateAllFields() {
     }
 
     // Confirm before proceeding (this will cost API credits)
-    if (!confirm('This will translate Title, Excerpt, Content, and Meta Keywords to French using AI. Continue?')) {
+    if (!confirm('This will translate all content and SEO fields to French using AI. Continue?')) {
         return;
     }
 
-    // Show loading state
+    // Get all French field elements
     const titleFr = document.getElementById('postTitleFr');
     const excerptFr = document.getElementById('postExcerptFr');
     const contentFr = document.getElementById('postContentFr');
+    const seoTitleFr = document.getElementById('seoTitleFr');
+    const metaDescriptionFr = document.getElementById('metaDescriptionFr');
     const metaKeywordsFr = document.getElementById('metaKeywordsFr');
+    const imageAltFr = document.getElementById('imageAltFr');
+    const socialPreviewFr = document.getElementById('socialPreviewFr');
 
+    // Show loading state for all fields
     titleFr.value = 'Translating...';
     excerptFr.value = 'Translating...';
     contentFr.value = 'Translating...';
-    if (metaKeywords) {
-        metaKeywordsFr.value = 'Translating...';
-        metaKeywordsFr.disabled = true;
-    }
     titleFr.disabled = true;
     excerptFr.disabled = true;
     contentFr.disabled = true;
+
+    if (seoTitle) { seoTitleFr.value = 'Translating...'; seoTitleFr.disabled = true; }
+    if (metaDescription) { metaDescriptionFr.value = 'Translating...'; metaDescriptionFr.disabled = true; }
+    if (metaKeywords) { metaKeywordsFr.value = 'Translating...'; metaKeywordsFr.disabled = true; }
+    if (imageAlt) { imageAltFr.value = 'Translating...'; imageAltFr.disabled = true; }
+    if (socialPreview) { socialPreviewFr.value = 'Translating...'; socialPreviewFr.disabled = true; }
 
     try {
         // Translate main content fields
@@ -804,33 +815,36 @@ async function translateAllFields() {
 
         const data = await response.json();
 
-        // Populate French fields
+        // Populate French content fields
         titleFr.value = data.title_fr || '';
         excerptFr.value = data.excerpt_fr || '';
         contentFr.value = data.content_fr || '';
 
-        // Translate meta keywords separately if present
-        if (metaKeywords) {
-            try {
-                const keywordsResponse = await fetch(`${API_URL}/translate`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify({
-                        text: metaKeywords,
-                        type: 'metaKeywords'
-                    })
-                });
+        // Translate SEO fields individually
+        const seoFields = [
+            { source: seoTitle, target: seoTitleFr, type: 'seoTitle' },
+            { source: metaDescription, target: metaDescriptionFr, type: 'metaDescription' },
+            { source: metaKeywords, target: metaKeywordsFr, type: 'metaKeywords' },
+            { source: imageAlt, target: imageAltFr, type: 'imageAlt' },
+            { source: socialPreview, target: socialPreviewFr, type: 'socialPreview' }
+        ];
 
-                if (keywordsResponse.ok) {
-                    const keywordsData = await keywordsResponse.json();
-                    metaKeywordsFr.value = keywordsData.translation || '';
+        for (const field of seoFields) {
+            if (field.source) {
+                try {
+                    const seoResponse = await fetch(`${API_URL}/translate`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({ text: field.source, type: field.type })
+                    });
+                    if (seoResponse.ok) {
+                        const seoData = await seoResponse.json();
+                        field.target.value = seoData.translation || '';
+                    }
+                } catch (seoError) {
+                    console.error(`${field.type} translation error:`, seoError);
                 }
-            } catch (keywordsError) {
-                console.error('Meta keywords translation error:', keywordsError);
-                // Don't fail the whole operation for keywords
             }
         }
 
@@ -851,12 +865,15 @@ async function translateAllFields() {
         titleFr.value = '';
         excerptFr.value = '';
         contentFr.value = '';
-        metaKeywordsFr.value = '';
     } finally {
         titleFr.disabled = false;
         excerptFr.disabled = false;
         contentFr.disabled = false;
+        seoTitleFr.disabled = false;
+        metaDescriptionFr.disabled = false;
         metaKeywordsFr.disabled = false;
+        imageAltFr.disabled = false;
+        socialPreviewFr.disabled = false;
     }
 }
 
@@ -963,6 +980,10 @@ async function translateAllFieldsPt() {
     const excerpt = document.getElementById('postExcerpt').value.trim();
     const content = document.getElementById('postContent').value.trim();
     const metaKeywords = document.getElementById('metaKeywords').value.trim();
+    const seoTitle = document.getElementById('seoTitle').value.trim();
+    const metaDescription = document.getElementById('metaDescription').value.trim();
+    const imageAlt = document.getElementById('imageAlt').value.trim();
+    const socialPreview = document.getElementById('socialPreview').value.trim();
 
     // Validate that we have content
     if (!title || !excerpt || !content) {
@@ -971,26 +992,54 @@ async function translateAllFieldsPt() {
     }
 
     // Confirm before proceeding (this will cost API credits)
-    if (!confirm('This will translate Title, Excerpt, Content, and Meta Keywords to Portuguese using AI. Continue?')) {
+    if (!confirm('This will translate all content and SEO fields to Portuguese using AI. Continue?')) {
         return;
     }
 
-    // Show loading state
+    // Show loading state for main fields
     const titlePt = document.getElementById('postTitlePt');
     const excerptPt = document.getElementById('postExcerptPt');
     const contentPt = document.getElementById('postContentPt');
     const metaKeywordsPt = document.getElementById('metaKeywordsPt');
+    const seoTitlePt = document.getElementById('seoTitlePt');
+    const metaDescriptionPt = document.getElementById('metaDescriptionPt');
+    const imageAltPt = document.getElementById('imageAltPt');
+    const socialPreviewPt = document.getElementById('socialPreviewPt');
 
     titlePt.value = 'Translating...';
     excerptPt.value = 'Translating...';
     contentPt.value = 'Translating...';
-    if (metaKeywords) {
-        metaKeywordsPt.value = 'Translating...';
-        metaKeywordsPt.disabled = true;
-    }
     titlePt.disabled = true;
     excerptPt.disabled = true;
     contentPt.disabled = true;
+
+    // Set up loading state for SEO fields
+    const seoFieldsToTranslate = [];
+    if (metaKeywords) {
+        metaKeywordsPt.value = 'Translating...';
+        metaKeywordsPt.disabled = true;
+        seoFieldsToTranslate.push({ source: metaKeywords, target: metaKeywordsPt, type: 'metaKeywords' });
+    }
+    if (seoTitle) {
+        seoTitlePt.value = 'Translating...';
+        seoTitlePt.disabled = true;
+        seoFieldsToTranslate.push({ source: seoTitle, target: seoTitlePt, type: 'seoTitle' });
+    }
+    if (metaDescription) {
+        metaDescriptionPt.value = 'Translating...';
+        metaDescriptionPt.disabled = true;
+        seoFieldsToTranslate.push({ source: metaDescription, target: metaDescriptionPt, type: 'metaDescription' });
+    }
+    if (imageAlt) {
+        imageAltPt.value = 'Translating...';
+        imageAltPt.disabled = true;
+        seoFieldsToTranslate.push({ source: imageAlt, target: imageAltPt, type: 'imageAlt' });
+    }
+    if (socialPreview) {
+        socialPreviewPt.value = 'Translating...';
+        socialPreviewPt.disabled = true;
+        seoFieldsToTranslate.push({ source: socialPreview, target: socialPreviewPt, type: 'socialPreview' });
+    }
 
     try {
         // Translate main content fields
@@ -1020,29 +1069,29 @@ async function translateAllFieldsPt() {
         excerptPt.value = data.excerpt_pt || '';
         contentPt.value = data.content_pt || '';
 
-        // Translate meta keywords separately if present
-        if (metaKeywords) {
+        // Translate all SEO fields
+        for (const field of seoFieldsToTranslate) {
             try {
-                const keywordsResponse = await fetch(`${API_URL}/translate`, {
+                const fieldResponse = await fetch(`${API_URL}/translate`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     credentials: 'include',
                     body: JSON.stringify({
-                        text: metaKeywords,
-                        type: 'metaKeywords',
+                        text: field.source,
+                        type: field.type,
                         targetLang: 'pt'
                     })
                 });
 
-                if (keywordsResponse.ok) {
-                    const keywordsData = await keywordsResponse.json();
-                    metaKeywordsPt.value = keywordsData.translation || '';
+                if (fieldResponse.ok) {
+                    const fieldData = await fieldResponse.json();
+                    field.target.value = fieldData.translation || '';
                 }
-            } catch (keywordsError) {
-                console.error('Meta keywords translation error:', keywordsError);
-                // Don't fail the whole operation for keywords
+            } catch (fieldError) {
+                console.error(`${field.type} translation error:`, fieldError);
+                // Don't fail the whole operation for individual SEO fields
             }
         }
 
@@ -1064,10 +1113,18 @@ async function translateAllFieldsPt() {
         excerptPt.value = '';
         contentPt.value = '';
         metaKeywordsPt.value = '';
+        seoTitlePt.value = '';
+        metaDescriptionPt.value = '';
+        imageAltPt.value = '';
+        socialPreviewPt.value = '';
     } finally {
         titlePt.disabled = false;
         excerptPt.disabled = false;
         contentPt.disabled = false;
         metaKeywordsPt.disabled = false;
+        seoTitlePt.disabled = false;
+        metaDescriptionPt.disabled = false;
+        imageAltPt.disabled = false;
+        socialPreviewPt.disabled = false;
     }
 }
