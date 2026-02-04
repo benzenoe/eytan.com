@@ -133,6 +133,7 @@ function populateForm(post) {
     document.getElementById('postTitleFr').value = post.title_fr || '';
     document.getElementById('postExcerptFr').value = post.excerpt_fr || '';
     document.getElementById('postContentFr').value = post.content_fr || '';
+    document.getElementById('postHashtagsFr').value = post.hashtags_fr || '';
 
     // Populate SEO fields - English
     document.getElementById('seoTitle').value = post.seo_title || '';
@@ -153,6 +154,7 @@ function populateForm(post) {
     document.getElementById('postTitlePt').value = post.title_pt || '';
     document.getElementById('postExcerptPt').value = post.excerpt_pt || '';
     document.getElementById('postContentPt').value = post.content_pt || '';
+    document.getElementById('postHashtagsPt').value = post.hashtags_pt || '';
 
     // Populate SEO fields - Portuguese
     document.getElementById('seoTitlePt').value = post.seo_title_pt || '';
@@ -299,6 +301,7 @@ function getFormData() {
         title_fr: document.getElementById('postTitleFr').value,
         excerpt_fr: document.getElementById('postExcerptFr').value,
         content_fr: document.getElementById('postContentFr').value,
+        hashtagsFr: document.getElementById('postHashtagsFr').value,
         seoTitle: document.getElementById('seoTitle').value,
         metaDescription: document.getElementById('metaDescription').value,
         metaKeywords: document.getElementById('metaKeywords').value,
@@ -315,6 +318,7 @@ function getFormData() {
         title_pt: document.getElementById('postTitlePt').value,
         excerpt_pt: document.getElementById('postExcerptPt').value,
         content_pt: document.getElementById('postContentPt').value,
+        hashtagsPt: document.getElementById('postHashtagsPt').value,
         // Portuguese SEO fields
         seoTitlePt: document.getElementById('seoTitlePt').value,
         metaDescriptionPt: document.getElementById('metaDescriptionPt').value,
@@ -1126,5 +1130,191 @@ async function translateAllFieldsPt() {
         metaDescriptionPt.disabled = false;
         imageAltPt.disabled = false;
         socialPreviewPt.disabled = false;
+    }
+}
+
+/**
+ * Generate native SEO content for a specific language
+ * Uses AI to create optimized SEO fields based on the post content
+ * @param {string} language - 'en', 'fr', or 'pt'
+ */
+async function generateSEO(language) {
+    // Get the content fields based on language
+    const langSuffix = language === 'en' ? '' : (language === 'fr' ? 'Fr' : 'Pt');
+    const langName = language === 'en' ? 'English' : (language === 'fr' ? 'French' : 'Portuguese');
+
+    const title = document.getElementById(`postTitle${langSuffix}`).value.trim();
+    const content = document.getElementById(`postContent${langSuffix}`).value.trim();
+    const excerpt = document.getElementById(`postExcerpt${langSuffix}`).value.trim();
+
+    // Validate content exists
+    if (!title || !content) {
+        alert(`Please fill in the ${langName} title and content before generating SEO.`);
+        return;
+    }
+
+    // Confirm before proceeding
+    if (!confirm(`Generate native ${langName} SEO content optimized for ${langName}-speaking markets? This uses AI.`)) {
+        return;
+    }
+
+    // Get SEO field elements
+    const seoTitle = document.getElementById(`seoTitle${langSuffix}`);
+    const metaDescription = document.getElementById(`metaDescription${langSuffix}`);
+    const metaKeywords = document.getElementById(`metaKeywords${langSuffix}`);
+    const imageAlt = document.getElementById(`imageAlt${langSuffix}`);
+    const socialPreview = document.getElementById(`socialPreview${langSuffix}`);
+
+    // Show loading state
+    const originalValues = {
+        seoTitle: seoTitle.value,
+        metaDescription: metaDescription.value,
+        metaKeywords: metaKeywords.value,
+        imageAlt: imageAlt.value,
+        socialPreview: socialPreview.value
+    };
+
+    seoTitle.value = 'Generating...';
+    metaDescription.value = 'Generating...';
+    metaKeywords.value = 'Generating...';
+    imageAlt.value = 'Generating...';
+    socialPreview.value = 'Generating...';
+
+    seoTitle.disabled = true;
+    metaDescription.disabled = true;
+    metaKeywords.disabled = true;
+    imageAlt.disabled = true;
+    socialPreview.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/generate/seo`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                content: content,
+                excerpt: excerpt,
+                language: language
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'SEO generation failed');
+        }
+
+        const data = await response.json();
+
+        // Populate fields with generated content
+        seoTitle.value = data.seoTitle || '';
+        metaDescription.value = data.metaDescription || '';
+        metaKeywords.value = data.metaKeywords || '';
+        imageAlt.value = data.imageAlt || '';
+        socialPreview.value = data.socialPreview || '';
+
+        // Mark as having unsaved changes
+        hasUnsavedChanges = true;
+
+        // Show success message
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = `✅ ${langName} SEO generated!`;
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 3000);
+
+    } catch (error) {
+        console.error('SEO generation error:', error);
+        alert('SEO generation error: ' + error.message);
+        // Restore original values on error
+        seoTitle.value = originalValues.seoTitle;
+        metaDescription.value = originalValues.metaDescription;
+        metaKeywords.value = originalValues.metaKeywords;
+        imageAlt.value = originalValues.imageAlt;
+        socialPreview.value = originalValues.socialPreview;
+    } finally {
+        seoTitle.disabled = false;
+        metaDescription.disabled = false;
+        metaKeywords.disabled = false;
+        imageAlt.disabled = false;
+        socialPreview.disabled = false;
+    }
+}
+
+/**
+ * Generate native hashtags for a specific language
+ * Uses AI to create hashtags relevant to that language's social media landscape
+ * @param {string} language - 'en', 'fr', or 'pt'
+ */
+async function generateHashtags(language) {
+    // Get the content fields based on language
+    const langSuffix = language === 'en' ? '' : (language === 'fr' ? 'Fr' : 'Pt');
+    const langName = language === 'en' ? 'English' : (language === 'fr' ? 'French' : 'Portuguese');
+
+    const title = document.getElementById(`postTitle${langSuffix}`).value.trim();
+    const content = document.getElementById(`postContent${langSuffix}`).value.trim();
+    const excerpt = document.getElementById(`postExcerpt${langSuffix}`).value.trim();
+
+    // Validate content exists
+    if (!title || !content) {
+        alert(`Please fill in the ${langName} title and content before generating hashtags.`);
+        return;
+    }
+
+    // Get hashtag field
+    const hashtagField = document.getElementById(`postHashtags${langSuffix}`);
+
+    // Show loading state
+    const originalValue = hashtagField.value;
+    hashtagField.value = 'Generating...';
+    hashtagField.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/generate/hashtags`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                title: title,
+                content: content,
+                excerpt: excerpt,
+                language: language,
+                platform: 'all'
+            })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Hashtag generation failed');
+        }
+
+        const data = await response.json();
+
+        // Populate field with generated hashtags
+        hashtagField.value = data.hashtags || '';
+
+        // Mark as having unsaved changes
+        hasUnsavedChanges = true;
+
+        // Show success message
+        const autoSaveText = document.getElementById('autoSaveText');
+        const originalText = autoSaveText.textContent;
+        autoSaveText.textContent = `✅ ${langName} hashtags generated!`;
+        setTimeout(() => {
+            autoSaveText.textContent = originalText;
+        }, 3000);
+
+    } catch (error) {
+        console.error('Hashtag generation error:', error);
+        alert('Hashtag generation error: ' + error.message);
+        // Restore original value on error
+        hashtagField.value = originalValue;
+    } finally {
+        hashtagField.disabled = false;
     }
 }

@@ -465,11 +465,11 @@
                     <label for="postHashtags">Hashtags (for social sharing)</label>
                     <div class="input-with-button">
                         <input type="text" id="postHashtags" placeholder="#QuantumComputing #AIRevolution #TechTrends">
-                        <button type="button" class="btn btn-secondary" id="generateHashtagsBtn">
-                            Generate Hashtags
+                        <button type="button" class="btn btn-secondary" onclick="generateHashtags('en')">
+                            <i class="fas fa-hashtag"></i> Generate
                         </button>
                     </div>
-                    <div class="help-text">Enter hashtags with the # symbol, separated by spaces.</div>
+                    <div class="help-text">Native English hashtags optimized for social media</div>
                 </div>
 
                 <div class="form-group">
@@ -481,7 +481,7 @@
                 <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
                 <div class="section-header">
                     <h3><span class="flag">🇺🇸</span> English Content</h3>
-                    <button type="button" class="btn btn-secondary" id="generateSEOBtn">
+                    <button type="button" class="btn btn-secondary" onclick="generateSEO('en')">
                         <i class="fas fa-magic"></i> Generate SEO
                     </button>
                 </div>
@@ -610,9 +610,25 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="postHashtagsFr">Hashtags (for social sharing)</label>
+                    <div class="input-with-button">
+                        <input type="text" id="postHashtagsFr" placeholder="#MarketingDigital #TendancesTech #Innovation">
+                        <button type="button" class="btn btn-secondary" onclick="generateHashtags('fr')">
+                            <i class="fas fa-hashtag"></i> Generate
+                        </button>
+                    </div>
+                    <div class="help-text">Native French hashtags optimized for francophone social media</div>
+                </div>
+
                 <!-- French SEO Section -->
                 <div class="seo-section">
-                    <h4><i class="fas fa-search"></i> SEO Metadata (French)</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0;"><i class="fas fa-search"></i> SEO Metadata (French)</h4>
+                        <button type="button" class="btn btn-secondary" onclick="generateSEO('fr')">
+                            <i class="fas fa-magic"></i> Generate SEO
+                        </button>
+                    </div>
 
                     <div class="form-group">
                         <label for="seoTitleFr">SEO Title (50-60 characters)</label>
@@ -737,9 +753,25 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="postHashtagsPt">Hashtags (for social sharing)</label>
+                    <div class="input-with-button">
+                        <input type="text" id="postHashtagsPt" placeholder="#MarketingDigital #TendênciasTech #Inovação">
+                        <button type="button" class="btn btn-secondary" onclick="generateHashtags('pt')">
+                            <i class="fas fa-hashtag"></i> Generate
+                        </button>
+                    </div>
+                    <div class="help-text">Native Portuguese hashtags optimized for lusophone social media</div>
+                </div>
+
                 <!-- Portuguese SEO Section -->
                 <div class="seo-section">
-                    <h4><i class="fas fa-search"></i> SEO Metadata (Portuguese)</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0;"><i class="fas fa-search"></i> SEO Metadata (Portuguese)</h4>
+                        <button type="button" class="btn btn-secondary" onclick="generateSEO('pt')">
+                            <i class="fas fa-magic"></i> Generate SEO
+                        </button>
+                    </div>
 
                     <div class="form-group">
                         <label for="seoTitlePt">SEO Title (50-60 characters)</label>
