@@ -44,6 +44,14 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Blog Post (PT): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
+    <url>
+        <loc>https://eytan.com/blog/pt/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
+        <lastmod>2026-02-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): is-tesla-stock-on-the-road-to-500 -->
     <url>
         <loc>https://eytan.com/blog/is-tesla-stock-on-the-road-to-500.html</loc>
@@ -63,7 +71,7 @@
     <!-- Blog Post (EN): had-you-heard-of-notion-have-you-used-it -->
     <url>
         <loc>https://eytan.com/blog/had-you-heard-of-notion-have-you-used-it.html</loc>
-        <lastmod>2026-01-31</lastmod>
+        <lastmod>2026-02-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -71,7 +79,7 @@
     <!-- Blog Post (FR): had-you-heard-of-notion-have-you-used-it -->
     <url>
         <loc>https://eytan.com/blog/fr/had-you-heard-of-notion-have-you-used-it.html</loc>
-        <lastmod>2026-01-31</lastmod>
+        <lastmod>2026-02-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
