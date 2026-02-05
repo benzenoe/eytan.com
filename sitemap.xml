@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
+    <url>
+        <loc>https://eytan.com/blog/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
+    <url>
+        <loc>https://eytan.com/blog/fr/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
+    <url>
+        <loc>https://eytan.com/blog/pt/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): sphere-of-influence -->
     <url>
         <loc>https://eytan.com/blog/mastering-your-sphere-of-influence-in-real-estate.html</loc>
@@ -431,30 +455,6 @@
     <!-- Blog Post (PT): is-tesla-stock-on-the-road-to-500 -->
     <url>
         <loc>https://eytan.com/blog/pt/is-tesla-stock-on-the-road-to-500.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
-    <url>
-        <loc>https://eytan.com/blog/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
-    <url>
-        <loc>https://eytan.com/blog/fr/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
-    <url>
-        <loc>https://eytan.com/blog/pt/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
