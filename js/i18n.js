@@ -126,7 +126,7 @@ const translations = {
     // Homepage Hero
     hero: {
       greeting: 'Bonjour, je suis Eytan Benzeno',
-      subtitle: 'Consultant IA & Marketing | Courtier Immobilier | Pionnier du E-commerce',
+      subtitle: 'Technologue | Opérateur | Courtier Immobilier | Pionnier du E-commerce | Spécialiste IA & Marketing',
       experience: '20+ ans d\'expérience en E-commerce et Immobilier | Expert en IA, Logistique & Service Client'
     },
 
@@ -237,7 +237,7 @@ const translations = {
     // Homepage Hero
     hero: {
       greeting: 'Olá, sou Eytan Benzeno',
-      subtitle: 'Consultor de IA e Marketing | Corretor Imobiliário | Pioneiro do E-commerce',
+      subtitle: 'Tecnólogo | Operador | Corretor Imobiliário | Pioneiro do E-commerce | Especialista em IA & Marketing',
       experience: '20+ anos de experiência em E-commerce e Imobiliário | Especialista em IA, Logística e Serviço ao Cliente'
     },
 
