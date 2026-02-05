@@ -15,7 +15,7 @@ const translations = {
     // Homepage Hero
     hero: {
       greeting: "Hi, I'm Eytan Benzeno",
-      subtitle: 'AI & Marketing Consultant | Real Estate Broker | E-commerce Pioneer',
+      subtitle: 'Technologist | Operator | Real Estate Broker | E-commerce Pioneer | AI & Marketing Specialist',
       experience: '20+ Years E-commerce and Real Estate Experience | AI, Logistics & Customer Service Expert'
     },
 
