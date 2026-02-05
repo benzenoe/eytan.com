@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): welcome -->
+    <url>
+        <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): welcome -->
+    <url>
+        <loc>https://eytan.com/blog/fr/welcome-to-my-blog.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): welcome -->
+    <url>
+        <loc>https://eytan.com/blog/pt/welcome-to-my-blog.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): - -->
     <url>
         <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
@@ -288,30 +312,6 @@
     <url>
         <loc>https://eytan.com/blog/pt/had-you-heard-of-notion-have-you-used-it.html</loc>
         <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): welcome -->
-    <url>
-        <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): welcome -->
-    <url>
-        <loc>https://eytan.com/blog/fr/welcome-to-my-blog.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): welcome -->
-    <url>
-        <loc>https://eytan.com/blog/pt/welcome-to-my-blog.html</loc>
-        <lastmod>2026-02-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
