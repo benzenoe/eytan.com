@@ -2,7 +2,7 @@ BEGIN:VCARD
 VERSION:3.0
 FN:Eytan Benzeno
 N:Benzeno;Eytan;;;
-TITLE:E-commerce Pioneer | Real Estate Broker | AI & Marketing Consultant
+TITLE:Technologist | Operator | Real Estate Broker | E-commerce Pioneer | AI & Marketing Specialist
 ORG:SoldHere.com, Bogen.ai, Reignation.com
 TEL;TYPE=CELL:+17867270696
 TEL;TYPE=WORK,VOICE:+351939995889
@@ -13,5 +13,5 @@ URL;TYPE=Instagram:https://www.instagram.com/benzenoe/
 URL;TYPE=Twitter:https://x.com/benzeno
 URL;TYPE=GitHub:https://github.com/benzenoe
 PHOTO;VALUE=URI:https://eytan.com/images/profile.jpg
-NOTE:20+ Years E-commerce and Real Estate Experience\nAI & Marketing Consultant\nCoach & Entrepreneur
+NOTE:20+ Years E-commerce and Real Estate Experience\nAI & Marketing Specialist\nCoach & Entrepreneur
 END:VCARD
