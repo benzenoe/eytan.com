@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
+    <url>
+        <loc>https://eytan.com/blog/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
+    <url>
+        <loc>https://eytan.com/blog/fr/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
+    <url>
+        <loc>https://eytan.com/blog/pt/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): welcome -->
     <url>
         <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
@@ -431,30 +455,6 @@
     <!-- Blog Post (PT): intelligence-explosion -->
     <url>
         <loc>https://eytan.com/blog/pt/intelligence-explosion.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
-    <url>
-        <loc>https://eytan.com/blog/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
-    <url>
-        <loc>https://eytan.com/blog/fr/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
-    <url>
-        <loc>https://eytan.com/blog/pt/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
