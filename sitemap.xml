@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/neuroplasticity.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/fr/neuroplasticity.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/pt/neuroplasticity.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): when-aging-assets-and-reality-diverge -->
     <url>
         <loc>https://eytan.com/blog/when-aging-assets-and-reality-diverge.html</loc>
@@ -383,30 +407,6 @@
     <!-- Blog Post (PT): sphere-of-influence -->
     <url>
         <loc>https://eytan.com/blog/pt/mastering-your-sphere-of-influence-in-real-estate.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): neuroplasticity -->
-    <url>
-        <loc>https://eytan.com/blog/neuroplasticity.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): neuroplasticity -->
-    <url>
-        <loc>https://eytan.com/blog/fr/neuroplasticity.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): neuroplasticity -->
-    <url>
-        <loc>https://eytan.com/blog/pt/neuroplasticity.html</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
