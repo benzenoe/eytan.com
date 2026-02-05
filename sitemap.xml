@@ -28,6 +28,78 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): - -->
+    <url>
+        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): - -->
+    <url>
+        <loc>https://eytan.com/blog/fr/bitcoin-to-700k.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): - -->
+    <url>
+        <loc>https://eytan.com/blog/pt/bitcoin-to-700k.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): 88feb7a0a2e214e0 -->
+    <url>
+        <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): 88feb7a0a2e214e0 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/low-cost-strategies-to-win-real-estate-listings.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): 88feb7a0a2e214e0 -->
+    <url>
+        <loc>https://eytan.com/blog/pt/low-cost-strategies-to-win-real-estate-listings.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (EN): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/pt/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): neuroplasticity -->
     <url>
         <loc>https://eytan.com/blog/neuroplasticity.html</loc>
@@ -287,78 +359,6 @@
     <!-- Blog Post (PT): is-tesla-stock-on-the-road-to-500 -->
     <url>
         <loc>https://eytan.com/blog/pt/is-tesla-stock-on-the-road-to-500.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): - -->
-    <url>
-        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): - -->
-    <url>
-        <loc>https://eytan.com/blog/fr/bitcoin-to-700k.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): - -->
-    <url>
-        <loc>https://eytan.com/blog/pt/bitcoin-to-700k.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): 88feb7a0a2e214e0 -->
-    <url>
-        <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): 88feb7a0a2e214e0 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/low-cost-strategies-to-win-real-estate-listings.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): 88feb7a0a2e214e0 -->
-    <url>
-        <loc>https://eytan.com/blog/pt/low-cost-strategies-to-win-real-estate-listings.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/understanding-buyer-broker-agreements-2024.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/pt/understanding-buyer-broker-agreements-2024.html</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
