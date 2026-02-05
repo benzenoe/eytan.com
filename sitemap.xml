@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): intelligence-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): intelligence-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/fr/intelligence-explosion.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): intelligence-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/pt/intelligence-explosion.html</loc>
+        <lastmod>2026-02-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
     <url>
         <loc>https://eytan.com/blog/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
@@ -431,30 +455,6 @@
     <!-- Blog Post (PT): sphere-of-influence -->
     <url>
         <loc>https://eytan.com/blog/pt/mastering-your-sphere-of-influence-in-real-estate.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): intelligence-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): intelligence-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/fr/intelligence-explosion.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): intelligence-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/pt/intelligence-explosion.html</loc>
         <lastmod>2026-02-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
