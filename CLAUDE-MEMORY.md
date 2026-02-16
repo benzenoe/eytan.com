@@ -1,6 +1,6 @@
 # Eytan.com Frontend - Quick Reference
 
-**Last Updated:** February 3, 2026
+**Last Updated:** February 16, 2026
 
 ---
 
@@ -15,7 +15,7 @@ File: CLAUDE-MEMORY.md
 
 This contains:
 - Full system architecture
-- All 12 session histories
+- All session histories
 - Troubleshooting guides
 - Database schema
 - API endpoints
@@ -48,11 +48,12 @@ This contains:
 ├── js/
 │   ├── blog.js         # Blog logic + filtering
 │   ├── admin.js        # Admin panel logic
-│   └── i18n.js         # Internationalization (EN/FR)
+│   └── i18n.js         # Internationalization (EN/FR/PT)
 ├── css/styles.css      # All styles
 ├── blog/               # SEO static pages
 │   ├── {slug}.html     # English pages
-│   └── fr/{slug}.html  # French pages
+│   ├── fr/{slug}.html  # French pages
+│   └── pt/{slug}.html  # Portuguese pages
 ├── posts/{slug}.md     # Markdown content
 ├── images/blog/        # Uploaded images
 └── data/blog-posts.json # Post metadata
@@ -86,6 +87,7 @@ Tell user to hard refresh: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
 | Auth fixes | 13 | ✅ |
 | Blog automation skill | 14 | ✅ |
 | Tabbed admin editor | 14 | ✅ |
+| Trilingual (EN/FR/PT) | 15 | ✅ |
 
 ---
 
@@ -115,6 +117,11 @@ git clone https://github.com/benzenoe/eytan-com-blog-backend.git
 1. Check `js/i18n.js` is loaded
 2. Clear localStorage
 3. Hard refresh
+
+### Portuguese SEO pages missing
+1. Backend: `node regenerate-all.js`
+2. Pages generate to `blog/pt/{slug}.html`
+3. Push this repo: `git push`
 
 ### SEO pages outdated
 1. Backend: `node regenerate-all.js`
