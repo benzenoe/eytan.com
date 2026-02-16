@@ -693,11 +693,26 @@ class I18n {
       document.title = this.t(key);
     }
 
+    // Update resume PDF download link
+    this.updateResumePdfLink();
+
     // Update blog post links for language
     this.updateBlogPostLinks();
 
     // Update language switcher active state
     this.updateLanguageSwitcher();
+  }
+
+  // Update resume PDF download link based on language
+  updateResumePdfLink() {
+    const link = document.getElementById('resume-pdf-link');
+    if (!link) return;
+    const pdfMap = {
+      en: 'Eytan-Benzeno-Resume.pdf',
+      fr: 'Eytan-Benzeno-Resume-FR.pdf',
+      pt: 'Eytan-Benzeno-Resume-PT.pdf'
+    };
+    link.href = pdfMap[this.currentLanguage] || pdfMap.en;
   }
 
   // Update blog post links based on language
