@@ -1650,24 +1650,30 @@ body {
 }
 
 /* Resume Download Modal - button overrides */
-#resume-download-modal .btn-primary {
+#resume-download-modal .btn-primary,
+#resume-download-modal .btn-primary:link,
+#resume-download-modal .btn-primary:visited {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
+    color: white !important;
     border: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 #resume-download-modal .btn-primary:hover {
-    background: linear-gradient(135deg, #5a6fd6, #6b3fa0);
+    background: linear-gradient(135deg, #5a6fd6, #6b3fa0) !important;
+    color: white !important;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(102, 126, 234, 0.55);
 }
 
 #resume-download-modal .btn-primary:active {
+    background: linear-gradient(135deg, #4f5fc4, #5e2d8c) !important;
+    color: white !important;
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
 }
