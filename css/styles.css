@@ -1648,3 +1648,62 @@ body {
         display: none;
     }
 }
+
+/* Resume Download Modal */
+.resume-version-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.resume-version-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.resume-version-card.modern {
+    border-color: #667eea;
+}
+
+.resume-version-card.modern:hover {
+    border-color: #764ba2;
+    box-shadow: 0 8px 24px rgba(102,126,234,0.25);
+}
+
+.resume-version-card.classic:hover {
+    border-color: #a0aec0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.resume-version-card .btn-classic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    background: #e2e8f0;
+    color: #2d3748;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.resume-version-card .btn-classic:hover {
+    background: #cbd5e0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.resume-version-card .btn-classic:active,
+.resume-version-card .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
