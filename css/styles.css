@@ -1659,12 +1659,8 @@ body {
     flex-direction: column;
     gap: 0.75rem;
     cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.resume-version-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
 }
 
 .resume-version-card.modern {
@@ -1672,16 +1668,36 @@ body {
 }
 
 .resume-version-card.modern:hover {
-    border-color: #764ba2;
-    box-shadow: 0 8px 24px rgba(102,126,234,0.25);
+    background: #f0f0ff;
+    border-color: #5a67d8;
+    border-width: 3px;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(102,126,234,0.35);
+}
+
+.resume-version-card.modern:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+}
+
+.resume-version-card.classic {
+    border-color: #cbd5e0;
 }
 
 .resume-version-card.classic:hover {
-    border-color: #a0aec0;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    background: #f7f8fa;
+    border-color: #667eea;
+    border-width: 3px;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
 }
 
-.resume-version-card .btn-classic {
+.resume-version-card.classic:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn-classic {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1693,17 +1709,16 @@ body {
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.resume-version-card .btn-classic:hover {
-    background: #cbd5e0;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.btn-classic:hover {
+    background: #667eea;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(102,126,234,0.4);
 }
 
-.resume-version-card .btn-classic:active,
-.resume-version-card .btn-primary:active {
-    transform: translateY(0);
+.btn-classic:active {
+    background: #5a67d8;
     box-shadow: none;
 }
