@@ -1,6 +1,6 @@
 # Eytan.com Frontend - Quick Reference
 
-**Last Updated:** February 16, 2026
+**Last Updated:** February 19, 2026 (Session 15)
 
 ---
 
@@ -15,7 +15,7 @@ File: CLAUDE-MEMORY.md
 
 This contains:
 - Full system architecture
-- All session histories
+- All 15 session histories
 - Troubleshooting guides
 - Database schema
 - API endpoints
@@ -88,6 +88,8 @@ Tell user to hard refresh: `Ctrl+Shift+R` (Windows) or `Cmd+Shift+R` (Mac)
 | Blog automation skill | 14 | ✅ |
 | Tabbed admin editor | 14 | ✅ |
 | Trilingual (EN/FR/PT) | 15 | ✅ |
+| Portuguese SEO pages | 15 | ✅ |
+| Trilingual resume PDFs | 15 | ✅ |
 
 ---
 
@@ -127,6 +129,11 @@ git clone https://github.com/benzenoe/eytan-com-blog-backend.git
 1. Backend: `node regenerate-all.js`
 2. Push this repo: `git push`
 3. Wait 2 min
+
+### Resume PDF wrong language
+- Download button serves PDF based on current language selection
+- Switch language first, then click download
+- PDFs: `Eytan-Benzeno-Resume.pdf` (EN), `-FR.pdf`, `-PT.pdf`
 
 ---
 
