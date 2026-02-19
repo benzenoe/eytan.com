@@ -1683,7 +1683,7 @@ body {
 
 /* Resume Download Modal */
 .resume-version-card {
-    border: 2px solid #e2e8f0;
+    border: 2px solid #667eea;
     border-radius: 12px;
     padding: 1.5rem;
     text-align: center;
@@ -1691,42 +1691,19 @@ body {
     flex-direction: column;
     gap: 0.75rem;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     background: #fff;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.resume-version-card.modern {
-    border-color: #667eea;
-}
-
-.resume-version-card.modern:hover {
+.resume-version-card:hover {
     background: #f0f0ff;
-    border-color: #5a67d8;
-    border-width: 3px;
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(102,126,234,0.35);
+    box-shadow: 0 12px 32px rgba(102,126,234,0.3);
 }
 
-.resume-version-card.modern:active {
+.resume-version-card:active {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102,126,234,0.3);
-}
-
-.resume-version-card.classic {
-    border-color: #cbd5e0;
-}
-
-.resume-version-card.classic:hover {
-    background: #f7f8fa;
-    border-color: #667eea;
-    border-width: 3px;
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-}
-
-.resume-version-card.classic:active {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(102,126,234,0.2);
 }
 
 .btn-classic {
