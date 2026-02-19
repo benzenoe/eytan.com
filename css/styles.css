@@ -1649,6 +1649,29 @@ body {
     }
 }
 
+/* Resume Download Modal - button overrides */
+#resume-download-modal .btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#resume-download-modal .btn-primary:hover {
+    background: linear-gradient(135deg, #5a6fd6, #6b3fa0);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.55);
+}
+
+#resume-download-modal .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
 /* Resume Download Modal */
 .resume-version-card {
     border: 2px solid #e2e8f0;
