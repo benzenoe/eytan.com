@@ -1649,31 +1649,34 @@ body {
     }
 }
 
-/* Resume Download Modal - button overrides */
-#resume-download-modal .btn-primary,
-#resume-download-modal .btn-primary:link,
-#resume-download-modal .btn-primary:visited {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white !important;
-    border: none;
+/* Resume Download Modal - buttons */
+.resume-dl-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#resume-download-modal .btn-primary:hover {
-    background: linear-gradient(135deg, #5a6fd6, #6b3fa0) !important;
-    color: white !important;
+.resume-dl-btn:hover {
+    background: linear-gradient(135deg, #5a6fd6, #6b3fa0);
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(102, 126, 234, 0.55);
 }
 
-#resume-download-modal .btn-primary:active {
-    background: linear-gradient(135deg, #4f5fc4, #5e2d8c) !important;
-    color: white !important;
+.resume-dl-btn:active {
+    background: linear-gradient(135deg, #4f5fc4, #5e2d8c);
+    color: white;
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
 }

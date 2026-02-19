@@ -727,10 +727,10 @@ class I18n {
     this.updateLanguageSwitcher();
   }
 
-  // Update resume PDF download links based on language
+  // Update resume PDF download buttons based on language
   updateResumePdfLink() {
-    const modernLink = document.getElementById('resume-modern-link');
-    const classicLink = document.getElementById('resume-classic-link');
+    const modernBtn = document.getElementById('resume-modern-btn');
+    const classicBtn = document.getElementById('resume-classic-btn');
     const modernMap = {
       en: 'Eytan-Benzeno-Resume-EN-Modern.pdf',
       fr: 'Eytan-Benzeno-Resume-FR-Modern.pdf',
@@ -741,8 +741,8 @@ class I18n {
       fr: 'Eytan-Benzeno-Resume-FR.pdf',
       pt: 'Eytan-Benzeno-Resume-PT.pdf'
     };
-    if (modernLink) modernLink.href = modernMap[this.currentLanguage] || modernMap.en;
-    if (classicLink) classicLink.href = classicMap[this.currentLanguage] || classicMap.en;
+    if (modernBtn) modernBtn.setAttribute('data-pdf', modernMap[this.currentLanguage] || modernMap.en);
+    if (classicBtn) classicBtn.setAttribute('data-pdf', classicMap[this.currentLanguage] || classicMap.en);
   }
 
   // Update blog post links based on language
