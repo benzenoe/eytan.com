@@ -1701,6 +1701,10 @@ body {
     box-shadow: 0 12px 32px rgba(102,126,234,0.3);
 }
 
+.resume-version-card:hover h3 {
+    color: #1a1a2e !important;
+}
+
 .resume-version-card:active {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(102,126,234,0.2);
