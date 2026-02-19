@@ -1710,6 +1710,17 @@ body {
     box-shadow: 0 4px 12px rgba(102,126,234,0.2);
 }
 
+.resume-version-card.selected {
+    background: #f0f0ff;
+    border-width: 3px;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102,126,234,0.3);
+}
+
+.resume-version-card.selected h3 {
+    color: #1a1a2e !important;
+}
+
 .btn-classic {
     display: inline-flex;
     align-items: center;

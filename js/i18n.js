@@ -78,6 +78,8 @@ const translations = {
       modernTitle: 'Modern · Short',
       modernDesc: '1-page executive layout. Clean, visual, optimized for quick reads.',
       downloadModern: 'Download Modern',
+      previewBtn: 'Preview',
+      backBtn: 'Back',
       classicTitle: 'Classic · Long',
       classicDesc: 'Full career history. Detailed and comprehensive for formal applications.',
       downloadClassic: 'Download Classic',
@@ -273,6 +275,8 @@ const translations = {
       modernTitle: 'Moderne · Court',
       modernDesc: 'Mise en page executive 1 page. Épuré, visuel, optimisé pour une lecture rapide.',
       downloadModern: 'Télécharger Moderne',
+      previewBtn: 'Aperçu',
+      backBtn: 'Retour',
       classicTitle: 'Classique · Long',
       classicDesc: 'Historique complet de carrière. Détaillé et exhaustif pour les candidatures formelles.',
       downloadClassic: 'Télécharger Classique',
@@ -468,6 +472,8 @@ const translations = {
       modernTitle: 'Moderno · Curto',
       modernDesc: 'Layout executivo de 1 página. Limpo, visual, otimizado para leitura rápida.',
       downloadModern: 'Descarregar Moderno',
+      previewBtn: 'Pré-visualizar',
+      backBtn: 'Voltar',
       classicTitle: 'Clássico · Longo',
       classicDesc: 'Historial completo de carreira. Detalhado e abrangente para candidaturas formais.',
       downloadClassic: 'Descarregar Clássico',
@@ -727,10 +733,8 @@ class I18n {
     this.updateLanguageSwitcher();
   }
 
-  // Update resume PDF download buttons based on language
+  // Update resume PDF paths based on language
   updateResumePdfLink() {
-    const modernBtn = document.getElementById('resume-modern-btn');
-    const classicBtn = document.getElementById('resume-classic-btn');
     const modernMap = {
       en: 'Eytan-Benzeno-Resume-EN-Modern.pdf',
       fr: 'Eytan-Benzeno-Resume-FR-Modern.pdf',
@@ -741,8 +745,16 @@ class I18n {
       fr: 'Eytan-Benzeno-Resume-FR.pdf',
       pt: 'Eytan-Benzeno-Resume-PT.pdf'
     };
-    if (modernBtn) modernBtn.setAttribute('data-pdf', modernMap[this.currentLanguage] || modernMap.en);
-    if (classicBtn) classicBtn.setAttribute('data-pdf', classicMap[this.currentLanguage] || classicMap.en);
+    const lang = this.currentLanguage;
+    if (window._resumePdfMap) {
+      window._resumePdfMap.modern = modernMap[lang] || modernMap.en;
+      window._resumePdfMap.classic = classicMap[lang] || classicMap.en;
+    } else {
+      window._resumePdfMap = {
+        modern: modernMap[lang] || modernMap.en,
+        classic: classicMap[lang] || classicMap.en
+      };
+    }
   }
 
   // Update blog post links based on language
