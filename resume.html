@@ -85,10 +85,42 @@
             <div class="resume-header">
                 <h1 data-i18n="resume.heading">Resume</h1>
                 <p style="color: #6c757d; font-size: 1.1rem;">
-                    <a id="resume-pdf-link" href="Eytan-Benzeno-Resume.pdf" download class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <button onclick="document.getElementById('resume-download-modal').style.display='flex'" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer;">
                         <i class="fas fa-download"></i> <span data-i18n="resume.downloadBtn">Download PDF Resume</span>
-                    </a>
+                    </button>
                 </p>
+            </div>
+
+            <!-- Resume Download Modal -->
+            <div id="resume-download-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:1rem;" onclick="if(event.target===this)this.style.display='none'">
+                <div style="background:#fff; border-radius:16px; padding:2rem; max-width:580px; width:100%; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                    <button onclick="document.getElementById('resume-download-modal').style.display='none'" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#6c757d; line-height:1;">&times;</button>
+
+                    <h2 style="margin:0 0 0.4rem 0; font-size:1.4rem; color:#2d3748;" data-i18n="resume.modalTitle">Choose Your Version</h2>
+                    <p style="margin:0 0 1.5rem 0; color:#6c757d; font-size:0.9rem;" data-i18n="resume.modalSubtitle">Select the format that best fits your needs</p>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                        <!-- Modern / Short -->
+                        <div style="border:2px solid #667eea; border-radius:12px; padding:1.5rem; text-align:center; display:flex; flex-direction:column; gap:0.75rem;">
+                            <div style="font-size:2rem;">⚡</div>
+                            <h3 style="margin:0; color:#667eea; font-size:1.05rem;" data-i18n="resume.modernTitle">Modern · Short</h3>
+                            <p style="margin:0; color:#6c757d; font-size:0.85rem; flex:1;" data-i18n="resume.modernDesc">1-page executive layout. Clean, visual, optimized for quick reads.</p>
+                            <a id="resume-modern-link" href="Eytan-Benzeno-Resume-EN-Modern.pdf" download class="btn btn-primary" style="display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.9rem; padding:0.6rem 1rem;">
+                                <i class="fas fa-download"></i> <span data-i18n="resume.downloadModern">Download Modern</span>
+                            </a>
+                        </div>
+
+                        <!-- Classic / Long -->
+                        <div style="border:2px solid #e2e8f0; border-radius:12px; padding:1.5rem; text-align:center; display:flex; flex-direction:column; gap:0.75rem;">
+                            <div style="font-size:2rem;">📄</div>
+                            <h3 style="margin:0; color:#2d3748; font-size:1.05rem;" data-i18n="resume.classicTitle">Classic · Long</h3>
+                            <p style="margin:0; color:#6c757d; font-size:0.85rem; flex:1;" data-i18n="resume.classicDesc">Full career history. Detailed and comprehensive for formal applications.</p>
+                            <a id="resume-classic-link" href="Eytan-Benzeno-Resume.pdf" download style="display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.9rem; padding:0.6rem 1rem; background:#e2e8f0; color:#2d3748; border-radius:8px; text-decoration:none; font-weight:600;">
+                                <i class="fas fa-download"></i> <span data-i18n="resume.downloadClassic">Download Classic</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Resume Header Card: Photo + Contact Info -->

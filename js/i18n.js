@@ -73,6 +73,14 @@ const translations = {
       title: 'Resume',
       heading: 'Resume',
       downloadBtn: 'Download PDF Resume',
+      modalTitle: 'Choose Your Version',
+      modalSubtitle: 'Select the format that best fits your needs',
+      modernTitle: 'Modern · Short',
+      modernDesc: '1-page executive layout. Clean, visual, optimized for quick reads.',
+      downloadModern: 'Download Modern',
+      classicTitle: 'Classic · Long',
+      classicDesc: 'Full career history. Detailed and comprehensive for formal applications.',
+      downloadClassic: 'Download Classic',
       headerLocationsLabel: 'Locations:',
       headerLocations: 'Lisbon, Luxembourg, Miami',
       headerTitle: 'Technologist, Operator, Marketer',
@@ -260,6 +268,14 @@ const translations = {
       title: 'Curriculum Vitae',
       heading: 'Curriculum Vitae',
       downloadBtn: 'Télécharger le CV en PDF',
+      modalTitle: 'Choisissez votre version',
+      modalSubtitle: 'Sélectionnez le format qui correspond le mieux à vos besoins',
+      modernTitle: 'Moderne · Court',
+      modernDesc: 'Mise en page executive 1 page. Épuré, visuel, optimisé pour une lecture rapide.',
+      downloadModern: 'Télécharger Moderne',
+      classicTitle: 'Classique · Long',
+      classicDesc: 'Historique complet de carrière. Détaillé et exhaustif pour les candidatures formelles.',
+      downloadClassic: 'Télécharger Classique',
       headerLocationsLabel: 'Lieux :',
       headerLocations: 'Lisbonne, Luxembourg, Miami',
       headerTitle: 'Technologue, Opérateur, Marketeur',
@@ -447,6 +463,14 @@ const translations = {
       title: 'Currículo',
       heading: 'Currículo',
       downloadBtn: 'Descarregar CV em PDF',
+      modalTitle: 'Escolha a sua versão',
+      modalSubtitle: 'Selecione o formato que melhor se adequa às suas necessidades',
+      modernTitle: 'Moderno · Curto',
+      modernDesc: 'Layout executivo de 1 página. Limpo, visual, otimizado para leitura rápida.',
+      downloadModern: 'Descarregar Moderno',
+      classicTitle: 'Clássico · Longo',
+      classicDesc: 'Historial completo de carreira. Detalhado e abrangente para candidaturas formais.',
+      downloadClassic: 'Descarregar Clássico',
       headerLocationsLabel: 'Localizações:',
       headerLocations: 'Lisboa, Luxemburgo, Miami',
       headerTitle: 'Tecnólogo, Operador, Marketeer',
@@ -703,16 +727,22 @@ class I18n {
     this.updateLanguageSwitcher();
   }
 
-  // Update resume PDF download link based on language
+  // Update resume PDF download links based on language
   updateResumePdfLink() {
-    const link = document.getElementById('resume-pdf-link');
-    if (!link) return;
-    const pdfMap = {
+    const modernLink = document.getElementById('resume-modern-link');
+    const classicLink = document.getElementById('resume-classic-link');
+    const modernMap = {
+      en: 'Eytan-Benzeno-Resume-EN-Modern.pdf',
+      fr: 'Eytan-Benzeno-Resume-FR-Modern.pdf',
+      pt: 'Eytan-Benzeno-Resume-PT-Modern.pdf'
+    };
+    const classicMap = {
       en: 'Eytan-Benzeno-Resume.pdf',
       fr: 'Eytan-Benzeno-Resume-FR.pdf',
       pt: 'Eytan-Benzeno-Resume-PT.pdf'
     };
-    link.href = pdfMap[this.currentLanguage] || pdfMap.en;
+    if (modernLink) modernLink.href = modernMap[this.currentLanguage] || modernMap.en;
+    if (classicLink) classicLink.href = classicMap[this.currentLanguage] || classicMap.en;
   }
 
   // Update blog post links based on language
