@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): ai-acceleration-power-race-2026 -->
+    <url>
+        <loc>https://eytan.com/blog/ai-acceleration-power-race-2026.html</loc>
+        <lastmod>2026-02-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): test-1234 -->
     <url>
         <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
