@@ -136,6 +136,15 @@ async function loadBlogPost() {
                 ${htmlContent}
             </div>
         `;
+
+        // Re-execute any <script> tags injected via innerHTML (they don't run automatically)
+        container.querySelectorAll('script').forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.textContent = oldScript.textContent;
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+
     } catch (error) {
         container.innerHTML = `
             <h1>${postData.title}</h1>
