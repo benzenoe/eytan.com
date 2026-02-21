@@ -16,7 +16,7 @@ That's not an incremental upgrade. That's a qualitative shift in what these syst
 
 GPT-5.3-Codex was "instrumental in creating itself" — used internally to debug its own training, manage its own deployment, and diagnose its own evaluations. The feedback loop is no longer theoretical.
 
-> 📄 **Read the full deep-dive research report this post is based on:** [AI Acceleration 2026–2035: Evidence Review](https://github.com/benzenoe/eytan-com-blog-backend/blob/main/ai-part-1-deep-research-report.md)
+> 📄 **Read the full deep-dive research report this post is based on:** [AI Acceleration 2026–2035: Evidence Review](https://eytan.com/blog/ai-research-report.html)
 
 <div style="background:#fff;border-radius:12px;padding:1.5rem;margin:2rem 0;box-shadow:0 4px 20px rgba(102,126,234,0.12);">
   <h4 style="margin:0 0 0.25rem;color:#2d3748;">🚀 AI Training Compute — Key Milestones (Log Scale)</h4>
@@ -37,7 +37,7 @@ GPT-5.3-Codex was "instrumental in creating itself" — used internally to debug
         borderColor:'#667eea',
         backgroundColor:'rgba(102,126,234,0.12)',
         fill:true,tension:0.4,pointRadius:7,
-        pointBackgroundColor:(c,i)=>i>=5?'#764ba2':'#667eea',
+        pointBackgroundColor:(c)=>c.dataIndex>=5?'#764ba2':'#667eea',
         borderWidth:3
       }]
     },
@@ -208,7 +208,7 @@ Here's what I'd tell my own clients right now:
 3. **Invest in skills AI cannot easily replace.** Accountability, physical presence, complex stakeholder relationships, regulated judgment.
 4. **Redesign your workflows — not just your tool stack.** The 80% of value that comes from process redesign is where your competitive edge lives.
 
-The full evidence review backing this post is available here: [AI Acceleration 2026–2035: Full Research Report](https://github.com/benzenoe/eytan-com-blog-backend/blob/main/ai-part-1-deep-research-report.md)
+The full evidence review backing this post is available here: [AI Acceleration 2026–2035: Full Research Report](https://eytan.com/blog/ai-research-report.html)
 
 If you're ready to build an AI strategy for your business — or you want to be around operators who are already navigating this transition — reach out at **eytan@benzeno.com** or join the **REIGNation** community at **[https://reignation.com](https://reignation.com)**.
 
