@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Acceleration, the 'Power Race,' and Near-Term Societal Shock Risk Through 2035 — Deep Research Report by Eytan Benzeno">
+    <title>AI Acceleration Research Report – Eytan Benzeno</title>
+    <link rel="icon" type="image/png" href="images/eb-logo1.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { background: #f8f9fa; }
+        .report-page {
+            max-width: 860px;
+            margin: 6rem auto 4rem;
+            padding: 0 1.5rem;
+        }
+        .report-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+        .report-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        .report-header .report-meta {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+        .report-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .report-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        .report-btn-outline {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        .report-btn-outline:hover {
+            background: rgba(255,255,255,0.3);
+            color: #fff;
+        }
+        .report-body {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 24px rgba(102,126,234,0.10);
+            line-height: 1.8;
+        }
+        .report-body h1, .report-body h2, .report-body h3 {
+            color: #2d3748;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .report-body h2 {
+            font-size: 1.4rem;
+            border-bottom: 2px solid #f0f0ff;
+            padding-bottom: 0.4rem;
+        }
+        .report-body h3 { font-size: 1.15rem; color: #667eea; }
+        .report-body p { margin-bottom: 1rem; color: #4a5568; }
+        .report-body ul, .report-body ol { margin-bottom: 1rem; padding-left: 1.5rem; color: #4a5568; }
+        .report-body li { margin-bottom: 0.4rem; }
+        .report-body strong { color: #2d3748; }
+        .report-body blockquote {
+            border-left: 4px solid #667eea;
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background: #f8f9ff;
+            border-radius: 0 8px 8px 0;
+            color: #4a5568;
+            font-style: italic;
+        }
+        .report-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .report-body th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 0.6rem 1rem;
+            text-align: left;
+        }
+        .report-body td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+        .report-body tr:nth-child(even) td { background: #f8f9ff; }
+        .report-body code {
+            background: #f0f0ff;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.88em;
+            color: #667eea;
+        }
+        .report-body pre code {
+            background: #2d3748;
+            color: #e2e8f0;
+            display: block;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .report-body a { color: #667eea; }
+        .report-body a:hover { color: #764ba2; }
+        .loading-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #6c757d;
+        }
+        .loading-state .spinner {
+            width: 40px; height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .back-link:hover { color: #764ba2; }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/profile.jpg" alt="Eytan Benzeno" class="profile-thumb">
+            </a>
+            <a href="index.html" style="text-decoration: none;">
+                <span style="font-weight: 700; font-size: 1.1rem; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Eytan Benzeno</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="report-page">
+    <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+
+    <div class="report-header">
+        <h1>AI Acceleration, the "Power Race," and Near-Term Societal Shock Risk Through 2035</h1>
+        <div class="report-meta">
+            <i class="far fa-calendar"></i> February 2026 &nbsp;·&nbsp;
+            <i class="far fa-user"></i> Eytan Benzeno &nbsp;·&nbsp;
+            <i class="fas fa-book-open"></i> Deep Research Report
+        </div>
+        <div class="report-actions">
+            <a href="ai-charts.html" class="report-btn report-btn-outline">
+                <i class="fas fa-chart-line"></i> Interactive Charts
+            </a>
+            <a href="index.html#blog" class="report-btn report-btn-outline">
+                <i class="fas fa-newspaper"></i> Read the Blog Post
+            </a>
+        </div>
+    </div>
+
+    <div class="report-body" id="report-content">
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading research report…</p>
+        </div>
+    </div>
+</div>
+
+<script>
+(async function() {
+    const container = document.getElementById('report-content');
+    try {
+        const res = await fetch('https://api.eytan.com/api/research/ai-acceleration-part-1');
+        if (!res.ok) throw new Error('Failed to load');
+        const markdown = await res.text();
+        container.innerHTML = marked.parse(markdown);
+    } catch (e) {
+        container.innerHTML = '<p style="color:#e53e3e;text-align:center;padding:2rem;">Unable to load report. Please try again later.</p>';
+    }
+})();
+</script>
+</body>
+</html>
