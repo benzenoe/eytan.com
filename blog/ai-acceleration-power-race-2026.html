@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -187,7 +188,7 @@
         borderColor:'#667eea',
         backgroundColor:'rgba(102,126,234,0.12)',
         fill:true,tension:0.4,pointRadius:7,
-        pointBackgroundColor:(c,i)=>i>=5?'#764ba2':'#667eea',
+        pointBackgroundColor:(c)=>c.dataIndex>=5?'#764ba2':'#667eea',
         borderWidth:3
       }]
     },
