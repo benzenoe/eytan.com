@@ -79,6 +79,8 @@
             margin-bottom: 1.5rem; font-size: 0.95rem;
         }
         .back-link:hover { color: #764ba2; }
+        .mermaid { margin: 1.5rem 0; text-align: center; }
+        .mermaid svg { max-width: 100%; height: auto; }
     </style>
 </head>
 <body>
@@ -264,7 +266,8 @@ flowchart TD
 </div>
 </div>
 <script>
-mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#667eea', primaryTextColor: '#2d3748', primaryBorderColor: '#764ba2', lineColor: '#764ba2', secondaryColor: '#f0f0ff' } });
+mermaid.initialize({ startOnLoad: false, theme: 'base', themeVariables: { primaryColor: '#667eea', primaryTextColor: '#2d3748', primaryBorderColor: '#764ba2', lineColor: '#764ba2', secondaryColor: '#f0f0ff' } });
+mermaid.run({ querySelector: '.mermaid' });
 </script>
 </body>
 </html>
