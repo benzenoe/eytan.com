@@ -1509,34 +1509,78 @@ async function generateFullPage(language) {
     const originalStatusText = autoSaveText.textContent;
 
     try {
-        // STEP 1: Translate content
+        // STEP 1: Translate content (with chunking for long content)
         autoSaveText.textContent = `⏳ Step 1/3: Translating to ${langName}...`;
 
-        const translateResponse = await fetch(`${API_URL}/translate/bulk`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({
-                title: title,
-                excerpt: excerpt,
-                content: content,
-                targetLang: language
-            })
-        });
+        const contentChunks = splitContentIntoChunks(content);
+        const needsChunking = contentChunks.length > 1;
 
-        if (!translateResponse.ok) {
-            const error = await translateResponse.json();
-            throw new Error(error.error || 'Translation failed');
+        let translatedTitle = '';
+        let translatedExcerpt = '';
+        let translatedContent = '';
+
+        if (needsChunking) {
+            // Translate in chunks with progress indicator
+            for (let i = 0; i < contentChunks.length; i++) {
+                autoSaveText.textContent = `⏳ Step 1/3: Translating to ${langName}... (chunk ${i + 1}/${contentChunks.length})`;
+                contentTarget.value = `Translating... (chunk ${i + 1}/${contentChunks.length})`;
+
+                const chunkResponse = await fetch(`${API_URL}/translate/bulk`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        title: i === 0 ? title : '', // Only send title with first chunk
+                        excerpt: i === 0 ? excerpt : '', // Only send excerpt with first chunk
+                        content: contentChunks[i],
+                        targetLang: language
+                    })
+                });
+
+                if (!chunkResponse.ok) {
+                    const error = await chunkResponse.json();
+                    throw new Error(error.error || `Translation chunk ${i + 1} failed`);
+                }
+
+                const chunkData = await chunkResponse.json();
+                const langKey = language === 'fr' ? '_fr' : '_pt';
+
+                // Collect translated content
+                if (i === 0) {
+                    translatedTitle = chunkData[`title${langKey}`] || '';
+                    translatedExcerpt = chunkData[`excerpt${langKey}`] || '';
+                }
+
+                translatedContent += (translatedContent ? '\n\n' : '') + chunkData[`content${langKey}`];
+            }
+        } else {
+            // Translate normally (content is short enough)
+            const translateResponse = await fetch(`${API_URL}/translate/bulk`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({
+                    title: title,
+                    excerpt: excerpt,
+                    content: content,
+                    targetLang: language
+                })
+            });
+
+            if (!translateResponse.ok) {
+                const error = await translateResponse.json();
+                throw new Error(error.error || 'Translation failed');
+            }
+
+            const translateData = await translateResponse.json();
+            const langKey = language === 'fr' ? '_fr' : '_pt';
+
+            translatedTitle = translateData[`title${langKey}`] || '';
+            translatedExcerpt = translateData[`excerpt${langKey}`] || '';
+            translatedContent = translateData[`content${langKey}`] || '';
         }
 
-        const translateData = await translateResponse.json();
-        const langKey = language === 'fr' ? '_fr' : '_pt';
-
         // Populate translated content
-        const translatedTitle = translateData[`title${langKey}`] || '';
-        const translatedExcerpt = translateData[`excerpt${langKey}`] || '';
-        const translatedContent = translateData[`content${langKey}`] || '';
-
         titleTarget.value = translatedTitle;
         excerptTarget.value = translatedExcerpt;
         contentTarget.value = translatedContent;
