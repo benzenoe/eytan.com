@@ -752,6 +752,31 @@ async function translateField(fieldType) {
     }
 }
 
+// Helper function to split long content into chunks
+function splitContentIntoChunks(content, maxCharsPerChunk = 8000) {
+    // Split by double newlines (paragraphs) first
+    const paragraphs = content.split(/\n\n+/);
+    const chunks = [];
+    let currentChunk = '';
+
+    for (const paragraph of paragraphs) {
+        // If adding this paragraph would exceed the limit, save current chunk and start new one
+        if (currentChunk.length + paragraph.length + 2 > maxCharsPerChunk && currentChunk.length > 0) {
+            chunks.push(currentChunk.trim());
+            currentChunk = paragraph;
+        } else {
+            currentChunk += (currentChunk ? '\n\n' : '') + paragraph;
+        }
+    }
+
+    // Add the last chunk
+    if (currentChunk) {
+        chunks.push(currentChunk.trim());
+    }
+
+    return chunks.length > 0 ? chunks : [content];
+}
+
 async function translateAllFields() {
     const title = document.getElementById('postTitle').value.trim();
     const excerpt = document.getElementById('postExcerpt').value.trim();
@@ -798,26 +823,73 @@ async function translateAllFields() {
     if (socialPreview) { socialPreviewFr.value = 'Translating...'; socialPreviewFr.disabled = true; }
 
     try {
-        // Translate main content fields
-        const response = await fetch(`${API_URL}/translate/bulk`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                title: title,
-                excerpt: excerpt,
-                content: content
-            })
-        });
+        // Check if content needs chunking
+        const contentChunks = splitContentIntoChunks(content);
+        const needsChunking = contentChunks.length > 1;
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Bulk translation failed');
+        let translatedContent = '';
+
+        if (needsChunking) {
+            // Translate in chunks
+            contentFr.value = `Translating... (chunk 0/${contentChunks.length})`;
+
+            for (let i = 0; i < contentChunks.length; i++) {
+                contentFr.value = `Translating... (chunk ${i + 1}/${contentChunks.length})`;
+
+                const chunkResponse = await fetch(`${API_URL}/translate/bulk`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        title: i === 0 ? title : '', // Only send title with first chunk
+                        excerpt: i === 0 ? excerpt : '', // Only send excerpt with first chunk
+                        content: contentChunks[i]
+                    })
+                });
+
+                if (!chunkResponse.ok) {
+                    const error = await chunkResponse.json();
+                    throw new Error(error.error || `Chunk ${i + 1} translation failed`);
+                }
+
+                const chunkData = await chunkResponse.json();
+
+                // Collect translated content
+                if (i === 0) {
+                    titleFr.value = chunkData.title_fr || '';
+                    excerptFr.value = chunkData.excerpt_fr || '';
+                }
+
+                translatedContent += (translatedContent ? '\n\n' : '') + chunkData.content_fr;
+            }
+
+            contentFr.value = translatedContent;
+
+        } else {
+            // Translate normally (content is short enough)
+            const response = await fetch(`${API_URL}/translate/bulk`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    title: title,
+                    excerpt: excerpt,
+                    content: content
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Bulk translation failed');
+            }
+
+            const data = await response.json();
+            titleFr.value = data.title_fr || '';
+            excerptFr.value = data.excerpt_fr || '';
+            contentFr.value = data.content_fr || '';
         }
-
-        const data = await response.json();
 
         // Populate French content fields
         titleFr.value = data.title_fr || '';
@@ -1046,32 +1118,77 @@ async function translateAllFieldsPt() {
     }
 
     try {
-        // Translate main content fields
-        const response = await fetch(`${API_URL}/translate/bulk`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                title: title,
-                excerpt: excerpt,
-                content: content,
-                targetLang: 'pt'
-            })
-        });
+        // Check if content needs chunking
+        const contentChunks = splitContentIntoChunks(content);
+        const needsChunking = contentChunks.length > 1;
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Bulk translation failed');
+        let translatedContent = '';
+
+        if (needsChunking) {
+            // Translate in chunks
+            contentPt.value = `Translating... (chunk 0/${contentChunks.length})`;
+
+            for (let i = 0; i < contentChunks.length; i++) {
+                contentPt.value = `Translating... (chunk ${i + 1}/${contentChunks.length})`;
+
+                const chunkResponse = await fetch(`${API_URL}/translate/bulk`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        title: i === 0 ? title : '', // Only send title with first chunk
+                        excerpt: i === 0 ? excerpt : '', // Only send excerpt with first chunk
+                        content: contentChunks[i],
+                        targetLang: 'pt'
+                    })
+                });
+
+                if (!chunkResponse.ok) {
+                    const error = await chunkResponse.json();
+                    throw new Error(error.error || `Chunk ${i + 1} translation failed`);
+                }
+
+                const chunkData = await chunkResponse.json();
+
+                // Collect translated content
+                if (i === 0) {
+                    titlePt.value = chunkData.title_pt || '';
+                    excerptPt.value = chunkData.excerpt_pt || '';
+                }
+
+                translatedContent += (translatedContent ? '\n\n' : '') + chunkData.content_pt;
+            }
+
+            contentPt.value = translatedContent;
+
+        } else {
+            // Translate normally (content is short enough)
+            const response = await fetch(`${API_URL}/translate/bulk`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    title: title,
+                    excerpt: excerpt,
+                    content: content,
+                    targetLang: 'pt'
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Bulk translation failed');
+            }
+
+            const data = await response.json();
+
+            // Populate Portuguese fields
+            titlePt.value = data.title_pt || '';
+            excerptPt.value = data.excerpt_pt || '';
+            contentPt.value = data.content_pt || '';
         }
-
-        const data = await response.json();
-
-        // Populate Portuguese fields
-        titlePt.value = data.title_pt || '';
-        excerptPt.value = data.excerpt_pt || '';
-        contentPt.value = data.content_pt || '';
 
         // Translate all SEO fields
         for (const field of seoFieldsToTranslate) {
