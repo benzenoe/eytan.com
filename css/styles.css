@@ -761,22 +761,32 @@ body {
 /* Footnote/Reference styling */
 sup,
 .blog-post-body sup,
+h1 sup,
 h2 sup,
 h3 sup,
 h4 sup,
-p sup {
-    font-size: 0.6em !important;
+h5 sup,
+h6 sup,
+p sup,
+li sup,
+div sup {
+    font-size: 11px !important;
     vertical-align: super;
     line-height: 0;
 }
 
 sup a,
 .blog-post-body sup a,
+h1 sup a,
 h2 sup a,
 h3 sup a,
 h4 sup a,
-p sup a {
-    font-size: 1em !important;
+h5 sup a,
+h6 sup a,
+p sup a,
+li sup a,
+div sup a {
+    font-size: 11px !important;
     font-weight: 600;
     text-decoration: none;
     color: #667eea;
@@ -785,10 +795,15 @@ p sup a {
 
 sup a:hover,
 .blog-post-body sup a:hover,
+h1 sup a:hover,
 h2 sup a:hover,
 h3 sup a:hover,
 h4 sup a:hover,
-p sup a:hover {
+h5 sup a:hover,
+h6 sup a:hover,
+p sup a:hover,
+li sup a:hover,
+div sup a:hover {
     color: #764ba2;
 }
 
