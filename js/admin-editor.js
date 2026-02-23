@@ -1581,13 +1581,14 @@ async function generateFullPage(language) {
         // STEP 2: Generate hashtags based on translated content
         autoSaveText.textContent = `⏳ Step 2/3: Generating ${langName} hashtags...`;
 
+        // Use only title and excerpt to avoid token limits
         const hashtagsResponse = await fetch(`${API_URL}/generate/hashtags`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({
                 title: translatedTitle,
-                content: translatedContent,
+                content: translatedExcerpt, // Use excerpt instead of full content to avoid token limits
                 excerpt: translatedExcerpt,
                 language: language,
                 platform: 'all'
@@ -1605,13 +1606,14 @@ async function generateFullPage(language) {
         // STEP 3: Generate SEO based on translated content
         autoSaveText.textContent = `⏳ Step 3/3: Generating ${langName} SEO...`;
 
+        // Use only title and excerpt to avoid token limits
         const seoResponse = await fetch(`${API_URL}/generate/seo`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({
                 title: translatedTitle,
-                content: translatedContent,
+                content: translatedExcerpt, // Use excerpt instead of full content to avoid token limits
                 excerpt: translatedExcerpt,
                 language: language
             })
