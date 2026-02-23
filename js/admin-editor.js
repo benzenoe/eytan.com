@@ -1159,6 +1159,7 @@ async function generateSEO(language) {
     }
 
     // Get SEO field elements
+    const focusKeyword = language === 'en' ? document.getElementById('focusKeyword') : null;
     const seoTitle = document.getElementById(`seoTitle${langSuffix}`);
     const metaDescription = document.getElementById(`metaDescription${langSuffix}`);
     const metaKeywords = document.getElementById(`metaKeywords${langSuffix}`);
@@ -1167,6 +1168,7 @@ async function generateSEO(language) {
 
     // Show loading state
     const originalValues = {
+        focusKeyword: focusKeyword ? focusKeyword.value : '',
         seoTitle: seoTitle.value,
         metaDescription: metaDescription.value,
         metaKeywords: metaKeywords.value,
@@ -1174,6 +1176,10 @@ async function generateSEO(language) {
         socialPreview: socialPreview.value
     };
 
+    if (focusKeyword) {
+        focusKeyword.value = 'Generating...';
+        focusKeyword.disabled = true;
+    }
     seoTitle.value = 'Generating...';
     metaDescription.value = 'Generating...';
     metaKeywords.value = 'Generating...';
@@ -1215,6 +1221,14 @@ async function generateSEO(language) {
         imageAlt.value = data.imageAlt || '';
         socialPreview.value = data.socialPreview || '';
 
+        // Extract focus keyword from metaKeywords (first keyword) for English only
+        if (focusKeyword && data.metaKeywords) {
+            const keywords = data.metaKeywords.split(',').map(k => k.trim());
+            if (keywords.length > 0) {
+                focusKeyword.value = keywords[0];
+            }
+        }
+
         // Mark as having unsaved changes
         hasUnsavedChanges = true;
 
@@ -1230,12 +1244,18 @@ async function generateSEO(language) {
         console.error('SEO generation error:', error);
         alert('SEO generation error: ' + error.message);
         // Restore original values on error
+        if (focusKeyword) {
+            focusKeyword.value = originalValues.focusKeyword;
+        }
         seoTitle.value = originalValues.seoTitle;
         metaDescription.value = originalValues.metaDescription;
         metaKeywords.value = originalValues.metaKeywords;
         imageAlt.value = originalValues.imageAlt;
         socialPreview.value = originalValues.socialPreview;
     } finally {
+        if (focusKeyword) {
+            focusKeyword.disabled = false;
+        }
         seoTitle.disabled = false;
         metaDescription.disabled = false;
         metaKeywords.disabled = false;

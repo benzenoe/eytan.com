@@ -472,18 +472,9 @@
                     <div class="help-text">Native English hashtags optimized for social media</div>
                 </div>
 
-                <div class="form-group">
-                    <label for="focusKeyword">Focus Keyword</label>
-                    <input type="text" id="focusKeyword" placeholder="Main SEO keyword for this post">
-                    <div class="help-text">Primary keyword to target for SEO</div>
-                </div>
-
                 <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e0e0e0;">
                 <div class="section-header">
                     <h3><span class="flag">🇺🇸</span> English Content</h3>
-                    <button type="button" class="btn btn-secondary" onclick="generateSEO('en')">
-                        <i class="fas fa-magic"></i> Generate SEO
-                    </button>
                 </div>
 
                 <div class="form-group">
@@ -505,7 +496,18 @@
 
                 <!-- English SEO Section -->
                 <div class="seo-section">
-                    <h4><i class="fas fa-search"></i> SEO Metadata</h4>
+                    <div class="section-header">
+                        <h4><i class="fas fa-search"></i> SEO Metadata</h4>
+                        <button type="button" class="btn btn-secondary" onclick="generateSEO('en')">
+                            <i class="fas fa-magic"></i> Generate SEO
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="focusKeyword">Focus Keyword</label>
+                        <input type="text" id="focusKeyword" placeholder="Main SEO keyword for this post">
+                        <div class="help-text">Primary keyword to target for SEO (auto-populated when SEO is generated)</div>
+                    </div>
 
                     <div class="form-group">
                         <label for="seoTitle">SEO Title (50-60 characters)</label>
