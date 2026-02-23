@@ -45,3 +45,17 @@ git push
 
 Created: February 23, 2026
 Last Updated: February 23, 2026
+
+## Standalone Backup Page
+
+A **standalone backup version** of all interactive charts has been created at:
+- **URL**: `blog/ai-charts-interactive.html`
+- **Live**: https://eytan.com/blog/ai-charts-interactive.html
+
+This page contains ONLY the charts and cannot be accidentally overwritten by the admin editor.
+If the blog post charts are lost, you can:
+1. Use the standalone page as reference
+2. Restore from git commit `d267a55`
+3. Link to the standalone page from other blog posts
+
+The standalone page includes all 4 interactive charts with full functionality.
