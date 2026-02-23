@@ -701,6 +701,230 @@ Discover the future of education with AI-driven, self-paced learning. Earn a ful
     <!-- i18n (Internationalization) System -->
     <script src="../js/i18n.js"></script>
 
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Chart Rendering Scripts -->
+    <script>
+// Brand colors
+const purple   = '#667eea';
+const violet   = '#764ba2';
+const pink     = '#f093fb';
+const teal     = '#43e97b';
+const red      = '#f5576c';
+const dark     = '#2d3748';
+const gridCol  = 'rgba(0,0,0,0.06)';
+
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+Chart.defaults.color = '#6c757d';
+
+// Chart 1: AI Training Compute Scaling
+if (document.getElementById('eb-chart-compute')) {
+    new Chart(document.getElementById('eb-chart-compute'), {
+        type: 'line',
+        data: {
+            labels: ['GPT-1\n2018', 'GPT-2\n2019', 'GPT-3\n2020', 'GPT-4\n2023', 'Claude 3\n2024', 'GPT-5.3\n2026', 'Projected\n2028', 'Projected\n2030', 'Est. AGI\n2032'],
+            datasets: [{
+                label: 'Training Compute (log₁₀ FLOPs)',
+                data: [18.5, 21, 23.5, 24.7, 25.2, 26.8, 27.9, 29.0, 30.5],
+                borderColor: purple,
+                backgroundColor: ctx => {
+                    const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 300);
+                    gradient.addColorStop(0, 'rgba(102,126,234,0.35)');
+                    gradient.addColorStop(1, 'rgba(118,75,162,0.03)');
+                    return gradient;
+                },
+                fill: true,
+                tension: 0.4,
+                pointRadius: 6,
+                pointBackgroundColor: (ctx) => ctx.dataIndex >= 6 ? violet : purple,
+                pointStyle: (ctx) => ctx.dataIndex >= 6 ? 'triangle' : 'circle',
+                borderWidth: 3,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ~10^${ctx.parsed.y.toFixed(1)} FLOPs`,
+                        afterLabel: ctx => ctx.dataIndex >= 6 ? ' (projected)' : ''
+                    }
+                }
+            },
+            scales: {
+                x: { grid: { color: gridCol } },
+                y: {
+                    grid: { color: gridCol },
+                    title: { display: true, text: 'log₁₀(FLOPs)' },
+                    ticks: { callback: v => '10^' + v }
+                }
+            }
+        }
+    });
+}
+
+// Chart 2: Road to AGI Expert Timeline
+if (document.getElementById('eb-chart-agi')) {
+    new Chart(document.getElementById('eb-chart-agi'), {
+        type: 'bar',
+        data: {
+            labels: ['Dario Amodei\n(Anthropic CEO)', 'Sam Altman\n(OpenAI CEO)', 'Demis Hassabis\n(DeepMind CEO)', 'Yann LeCun\n(Meta Chief AI)'],
+            datasets: [
+                {
+                    label: 'Offset (invisible)',
+                    data: [2026, 2027, 2030, 2034],
+                    backgroundColor: 'transparent',
+                    borderColor: 'transparent',
+                },
+                {
+                    label: 'AGI Window',
+                    data: [2, 2, 5, 3],
+                    backgroundColor: [
+                        'rgba(102,126,234,0.80)',
+                        'rgba(118,75,162,0.80)',
+                        'rgba(240,147,251,0.80)',
+                        'rgba(67,233,123,0.80)',
+                    ],
+                    borderColor: [purple, violet, pink, teal],
+                    borderWidth: 2,
+                    borderRadius: 8,
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => {
+                            if (ctx.datasetIndex === 0) return null;
+                            const starts = [2026, 2027, 2030, 2034];
+                            const ends   = [2028, 2029, 2035, 2037];
+                            const i = ctx.dataIndex;
+                            return ` ~${starts[i]} – ${ends[i]}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    min: 2025, max: 2038,
+                    grid: { color: gridCol },
+                    ticks: { stepSize: 1, callback: v => v }
+                },
+                y: { stacked: true, grid: { display: false } }
+            }
+        }
+    });
+}
+
+// Chart 3: Job Displacement vs Creation
+if (document.getElementById('eb-chart-jobs')) {
+    new Chart(document.getElementById('eb-chart-jobs'), {
+        type: 'bar',
+        data: {
+            labels: ['2025', '2026', '2027', '2028', '2029', '2030'],
+            datasets: [
+                {
+                    label: 'Jobs Displaced (M)',
+                    data: [12, 25, 42, 60, 76, 92],
+                    backgroundColor: 'rgba(245,87,108,0.80)',
+                    borderColor: red,
+                    borderWidth: 2,
+                    borderRadius: 6,
+                },
+                {
+                    label: 'New Jobs Created (M)',
+                    data: [18, 35, 65, 100, 138, 170],
+                    backgroundColor: 'rgba(67,233,123,0.80)',
+                    borderColor: teal,
+                    borderWidth: 2,
+                    borderRadius: 6,
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: {
+                    callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}M` }
+                }
+            },
+            scales: {
+                x: { grid: { color: gridCol } },
+                y: {
+                    grid: { color: gridCol },
+                    ticks: { callback: v => v + 'M' },
+                    title: { display: true, text: 'Millions of Jobs' }
+                }
+            }
+        }
+    });
+}
+
+// Chart 4: Global Data Center Power Demand
+if (document.getElementById('eb-chart-power')) {
+    new Chart(document.getElementById('eb-chart-power'), {
+        type: 'line',
+        data: {
+            labels: ['2019','2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032','2033','2034','2035'],
+            datasets: [
+                {
+                    label: 'Actual (TWh)',
+                    data: [180, 195, 210, 230, 265, 415, null, null, null, null, null, null, null, null, null, null, null],
+                    borderColor: purple,
+                    backgroundColor: 'rgba(102,126,234,0.18)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: purple,
+                    borderWidth: 3,
+                },
+                {
+                    label: 'Projected (TWh)',
+                    data: [null, null, null, null, null, 415, 580, 680, 760, 840, 895, 945, 1010, 1065, 1115, 1160, 1200],
+                    borderColor: violet,
+                    backgroundColor: 'rgba(118,75,162,0.10)',
+                    fill: true,
+                    tension: 0.4,
+                    borderDash: [6, 4],
+                    pointRadius: 4,
+                    pointBackgroundColor: violet,
+                    borderWidth: 2.5,
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y ? ctx.parsed.y + ' TWh' : '—'}`
+                    }
+                }
+            },
+            scales: {
+                x: { grid: { color: gridCol } },
+                y: {
+                    grid: { color: gridCol },
+                    ticks: { callback: v => v + ' TWh' },
+                    title: { display: true, text: 'Terawatt-hours (TWh)' }
+                }
+            }
+        }
+    });
+}
+    </script>
+
     <!-- Tidio Chatbot -->
     <script src="//code.tidio.co/mrlssbhzk3lc4tbjjinryaqueto6ezrr.js" async></script>
 </body>
