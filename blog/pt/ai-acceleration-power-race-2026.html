@@ -1313,6 +1313,65 @@ if (document.getElementById('eb-chart-power')) {
                     labels: {
                         usePointStyle: true,
                         padding: 12,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true,
+                        padding: 12,
+                        font: { size: 11, weight: '600' }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y} TWh`,
+                        footer: items => {
+                            const total = items.reduce((sum, item) => sum + item.parsed.y, 0);
+                            return `Total: ${total} TWh`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: gridCol },
+                    ticks: { font: { size: 10 } }
+                },
+                y: {
+                    stacked: true,
+                    grid: { color: gridCol },
+                    ticks: {
+                        callback: v => v + ' TWh',
+                        font: { size: 11 }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Power Consumption (TWh)',
+                        font: { size: 12, weight: '600' }
+                    }
+                }
+            }
+        }
+    });
+
+    // Toggle functionality
+    const toggleEnergyBtn = document.getElementById('toggle-energy-sources');
+    const toggleGridBtn = document.getElementById('toggle-grid-private');
+
+    if (toggleEnergyBtn && toggleGridBtn) {
+        toggleEnergyBtn.addEventListener('click', () => {
+            toggleEnergyBtn.classList.add('active');
+            toggleGridBtn.classList.remove('active');
+
+            powerChart.data.datasets = energySourcesData.datasets;
+            powerChart.update();
+        });
+
         toggleGridBtn.addEventListener('click', () => {
             toggleGridBtn.classList.add('active');
             toggleEnergyBtn.classList.remove('active');
