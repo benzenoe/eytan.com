@@ -961,7 +961,7 @@
         checkAuthentication().then(authenticated => {
             if (authenticated) {
                 const script = document.createElement('script');
-                script.src = 'js/admin-editor.js?v=' + Date.now();
+                script.src = 'js/admin-editor-v2.js';
                 document.body.appendChild(script);
             }
         });
