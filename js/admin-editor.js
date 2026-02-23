@@ -891,11 +891,6 @@ async function translateAllFields() {
             contentFr.value = data.content_fr || '';
         }
 
-        // Populate French content fields
-        titleFr.value = data.title_fr || '';
-        excerptFr.value = data.excerpt_fr || '';
-        contentFr.value = data.content_fr || '';
-
         // Translate SEO fields individually
         const seoFields = [
             { source: seoTitle, target: seoTitleFr, type: 'seoTitle' },
@@ -1183,8 +1178,6 @@ async function translateAllFieldsPt() {
             }
 
             const data = await response.json();
-
-            // Populate Portuguese fields
             titlePt.value = data.title_pt || '';
             excerptPt.value = data.excerpt_pt || '';
             contentPt.value = data.content_pt || '';
