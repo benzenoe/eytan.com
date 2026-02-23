@@ -802,24 +802,6 @@ if (document.getElementById('eb-chart-compute')) {
                             return ` ${ctx.dataset.label}: ~10^${ctx.parsed.y.toFixed(1)} FLOPs`;
                         }
                     }
-                },
-                annotation: {
-                    annotations: {
-                        divergenceLabel: {
-                            type: 'label',
-                            xValue: 6,
-                            yValue: 27,
-                            content: ['Estimates', 'Diverge'],
-                            font: {
-                                size: 10,
-                                weight: 'bold'
-                            },
-                            color: '#667eea',
-                            backgroundColor: 'rgba(255,255,255,0.9)',
-                            borderRadius: 4,
-                            padding: 4
-                        }
-                    }
                 }
             },
             scales: {
