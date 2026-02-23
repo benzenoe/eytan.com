@@ -850,24 +850,25 @@ if (document.getElementById('eb-chart-agi')) {
     new Chart(document.getElementById('eb-chart-agi'), {
         type: 'bar',
         data: {
-            labels: ['Dario Amodei\n(Anthropic CEO)', 'Sam Altman\n(OpenAI CEO)', 'Demis Hassabis\n(DeepMind CEO)', 'Yann LeCun\n(Meta Chief AI)'],
+            labels: ['Dario Amodei\n(Anthropic CEO)', 'Sam Altman\n(OpenAI CEO)', 'Demis Hassabis\n(DeepMind CEO)', 'Yann LeCun\n(Meta Chief AI)', 'Geoffrey Hinton\n(Google DeepMind)'],
             datasets: [
                 {
                     label: 'Offset (invisible)',
-                    data: [2026, 2027, 2030, 2034],
+                    data: [2026, 2027, 2030, 2034, 2031],
                     backgroundColor: 'transparent',
                     borderColor: 'transparent',
                 },
                 {
                     label: 'AGI Window',
-                    data: [2, 2, 5, 3],
+                    data: [2, 2, 5, 3, 15],
                     backgroundColor: [
                         'rgba(102,126,234,0.80)',
                         'rgba(118,75,162,0.80)',
                         'rgba(240,147,251,0.80)',
                         'rgba(67,233,123,0.80)',
+                        'rgba(246,211,101,0.80)',
                     ],
-                    borderColor: [purple, violet, pink, teal],
+                    borderColor: [purple, violet, pink, teal, gold],
                     borderWidth: 2,
                     borderRadius: 8,
                 }
@@ -882,8 +883,8 @@ if (document.getElementById('eb-chart-agi')) {
                     callbacks: {
                         label: (ctx) => {
                             if (ctx.datasetIndex === 0) return null;
-                            const starts = [2026, 2027, 2030, 2034];
-                            const ends   = [2028, 2029, 2035, 2037];
+                            const starts = [2026, 2027, 2030, 2034, 2031];
+                            const ends   = [2028, 2029, 2035, 2037, 2046];
                             const i = ctx.dataIndex;
                             return ` ~${starts[i]} – ${ends[i]}`;
                         }
@@ -893,9 +894,9 @@ if (document.getElementById('eb-chart-agi')) {
             scales: {
                 x: {
                     stacked: true,
-                    min: 2025, max: 2038,
+                    min: 2025, max: 2047,
                     grid: { color: gridCol },
-                    ticks: { stepSize: 1, callback: v => v }
+                    ticks: { stepSize: 2, callback: v => v }
                 },
                 y: { stacked: true, grid: { display: false } }
             }
