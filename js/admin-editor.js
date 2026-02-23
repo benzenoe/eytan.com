@@ -535,7 +535,7 @@ async function generateHashtags() {
             body: JSON.stringify({
                 title: title,
                 excerpt: excerpt,
-                content: content
+                content: excerpt // Use excerpt instead of full content to avoid token limits
             })
         });
 
@@ -594,7 +594,7 @@ async function generateSEO() {
             body: JSON.stringify({
                 title: title,
                 excerpt: excerpt,
-                content: content,
+                content: excerpt, // Use excerpt instead of full content to avoid token limits
                 image: image
             })
         });
@@ -1311,7 +1311,7 @@ async function generateSEO(language) {
             credentials: 'include',
             body: JSON.stringify({
                 title: title,
-                content: content,
+                content: excerpt, // Use excerpt instead of full content to avoid token limits
                 excerpt: excerpt,
                 language: language
             })
@@ -1411,7 +1411,7 @@ async function generateHashtags(language) {
             credentials: 'include',
             body: JSON.stringify({
                 title: title,
-                content: content,
+                content: excerpt, // Use excerpt instead of full content to avoid token limits
                 excerpt: excerpt,
                 language: language,
                 platform: 'all'
