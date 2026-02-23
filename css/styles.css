@@ -851,6 +851,58 @@ div sup a:hover {
     height: 650px !important;
 }
 
+/* Power Chart Toggle Buttons */
+.power-chart-toggle {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+}
+
+.toggle-btn {
+    flex: 1;
+    max-width: 200px;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    background: white;
+    color: #6c757d;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.toggle-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.toggle-btn.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+.toggle-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.toggle-icon {
+    font-size: 1.1rem;
+}
+
 /* Year Selector for Interactive Charts */
 .year-selector-container {
     margin: 1.5rem 0;
@@ -954,6 +1006,15 @@ div sup a:hover {
 
     .year-marks {
         font-size: 0.75rem;
+    }
+
+    .power-chart-toggle {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .toggle-btn {
+        max-width: 100%;
     }
 }
 
