@@ -753,7 +753,7 @@ async function translateField(fieldType) {
 }
 
 // Helper function to split long content into chunks
-function splitContentIntoChunks(content, maxCharsPerChunk = 2000) {
+function splitContentIntoChunks(content, maxCharsPerChunk = 1000) {
     // Split by double newlines (paragraphs) first
     const paragraphs = content.split(/\n\n+/);
     const chunks = [];
