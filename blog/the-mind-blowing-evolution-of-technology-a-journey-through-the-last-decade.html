@@ -73,6 +73,12 @@
         }
     }
     </script>
+    <style>
+        /* Footnote annotation sizing — sup elements stay small regardless of parent heading size */
+        .blog-post-body sup { font-size: 0.65rem; line-height: 1; vertical-align: super; }
+        .blog-post-body sup a { color: #667eea; text-decoration: none; font-weight: 700; margin: 0 1px; }
+        .blog-post-body sup a:hover { color: #764ba2; text-decoration: underline; }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -122,7 +128,7 @@
     <article class="blog-post">
         <div class="container">
             <div class="blog-post-content">
-                <h1><span class="post-icon">📻</span> Real Estate Technology Evolution: A Decade of Innovation</h1>
+                <h1><span class="post-icon">📻</span> The Mind-Blowing Evolution of Technology: A Journey Through the Last Decade</h1>
                 <div class="blog-post-meta">
                     <i class="far fa-calendar"></i> <time datetime="2024-11-18T00:00:00.000Z">November 18, 2024</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
@@ -220,6 +226,21 @@
                     </div>
                     <div class="more-posts-grid">
                         
+                    <a href="ai-acceleration-power-race-2026.html" class="more-post-card">
+                        <div class="more-post-image">
+                            <img src="https://eytan.com/images/blog/AI-race.png" alt="AI Acceleration, the "Power Race," and Near-Term Societal Shock Risk Through 2035 (Part 1: Short-Term Vision)">
+                        </div>
+                        <div class="more-post-info">
+                            <h4>AI Acceleration, the "Power Race," and Near-Term Societal Shock Risk Through 2035 (Part 1: Short-Term Vision)</h4>
+                            <p class="more-post-excerpt">The full unabridged deep research report - Part 1, Short-Term Vision: AI acceleration, the power race, and societal shoc...</p>
+                            <div class="more-post-tags">
+                            <span class="more-post-tag">AI</span><span class="more-post-tag">Technology</span><span class="more-post-tag">Business</span><span class="more-post-tag">Energy</span>
+                           </div>
+                            <div class="more-post-date">
+                                <i class="far fa-calendar"></i> February 20, 2026
+                            </div>
+                        </div>
+                    </a>
                     <a href="had-you-heard-of-notion-have-you-used-it.html" class="more-post-card">
                         <div class="more-post-image">
                             <img src="https://eytan.com/images/blog/1769906265700-notion.png" alt="Had You Heard of Notion? Have You Used It?  It is the early shape of the cognitive work">
@@ -292,21 +313,6 @@
                            </div>
                             <div class="more-post-date">
                                 <i class="far fa-calendar"></i> July 11, 2025
-                            </div>
-                        </div>
-                    </a>
-                    <a href="hydrogen-energy-powering-a-global-green-revolution.html" class="more-post-card">
-                        <div class="more-post-image">
-                            <img src="https://eytan.com/images/blog/1765811569444-034d41da-0930-4421-b18b-ef5baadebb60.png" alt="Hydrogen Energy: Storage for Renewable Energy">
-                        </div>
-                        <div class="more-post-info">
-                            <h4>Hydrogen Energy: Storage for Renewable Energy</h4>
-                            <p class="more-post-excerpt">Discover the different types of hydrogen energy - green, blue, and white - and how they are powering the global green re...</p>
-                            <div class="more-post-tags">
-                            <span class="more-post-tag">Energy</span><span class="more-post-tag">Business</span><span class="more-post-tag">Technology</span><span class="more-post-tag">Science</span>
-                           </div>
-                            <div class="more-post-date">
-                                <i class="far fa-calendar"></i> July 10, 2025
                             </div>
                         </div>
                     </a>
@@ -567,6 +573,92 @@
 
     <!-- i18n (Internationalization) System -->
     <script src="../js/i18n.js"></script>
+
+    <!-- Chart.js — only activates when canvas elements are present in content -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+    (function() {
+      function initCharts() {
+        var ctxCompute = document.getElementById('eb-chart-compute');
+        if (ctxCompute) {
+          new Chart(ctxCompute, {
+            type: 'line',
+            data: {
+              labels: ['GPT-2\n2019','GPT-3\n2020','PaLM\n2022','GPT-4\n2023','Gemini Ultra\n2024','Claude 3 Opus\n2024','GPT-5.3-Codex\n2025','Claude Opus 4.6\n2026 \u25b2'],
+              datasets: [{
+                label: 'Training FLOPs',
+                data: [3.14e22,3.14e23,2.5e24,2.1e25,5e25,8e25,3e26,1e27],
+                borderColor:'#667eea',backgroundColor:'rgba(102,126,234,0.12)',
+                pointBackgroundColor:function(c){return c.dataIndex>=6?'#764ba2':'#667eea';},
+                pointRadius:function(c){return c.dataIndex>=6?7:5;},
+                pointStyle:function(c){return c.dataIndex>=6?'triangle':'circle';},
+                tension:0.3,fill:true
+              }]
+            },
+            options:{responsive:true,maintainAspectRatio:false,
+              scales:{y:{type:'logarithmic',title:{display:true,text:'Training FLOPs (log scale)',color:'#718096',font:{size:11}},
+                ticks:{callback:function(v){var e=Math.round(Math.log10(v));return[22,23,24,25,26,27].includes(e)?'10^'+e:null;}}},
+                x:{ticks:{font:{size:10},maxRotation:0}}},
+              plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){var e=Math.floor(Math.log10(c.raw));return'FLOPs: ~10^'+e;}}}}}
+          });
+        }
+        var ctxAgi = document.getElementById('eb-chart-agi');
+        if (ctxAgi) {
+          new Chart(ctxAgi, {
+            type:'bar',
+            data:{
+              labels:['Dario Amodei','Sam Altman','Demis Hassabis','Geoffrey Hinton','Yann LeCun'],
+              datasets:[
+                {label:'Earliest estimate',data:[0,0,3,2,4],backgroundColor:'rgba(102,126,234,0.25)',barPercentage:0.5},
+                {label:'Latest estimate',data:[2,2,9,19,14],backgroundColor:'rgba(118,75,162,0.7)',barPercentage:0.5}
+              ]
+            },
+            options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+              scales:{x:{title:{display:true,text:'Years from 2026',color:'#718096',font:{size:11}},min:0,max:22,
+                ticks:{callback:function(v){return 2026+v;}}},y:{ticks:{font:{size:11}}}},
+              plugins:{legend:{position:'top',labels:{font:{size:11}}},
+                tooltip:{callbacks:{label:function(c){return c.dataset.label+': ~'+(2026+c.raw);}}}}}
+          });
+        }
+        var ctxJobs = document.getElementById('eb-chart-jobs');
+        if (ctxJobs) {
+          new Chart(ctxJobs, {
+            type:'bar',
+            data:{
+              labels:['Clerical / Admin','Customer Service','Professional Svcs','Manufacturing','Tech & AI','Creative & Care'],
+              datasets:[
+                {label:'Jobs displaced (M)',data:[-46,-22,-18,-14,-5,-3],backgroundColor:'rgba(220,38,38,0.7)',borderRadius:4},
+                {label:'New jobs created (M)',data:[4,6,12,8,40,18],backgroundColor:'rgba(22,163,74,0.7)',borderRadius:4}
+              ]
+            },
+            options:{responsive:true,maintainAspectRatio:false,
+              scales:{y:{title:{display:true,text:'Millions of jobs (cumulative to 2030)',color:'#718096',font:{size:11}},
+                ticks:{callback:function(v){return(v>=0?'+':'')+v+'M';}}},x:{ticks:{font:{size:10},maxRotation:20}}},
+              plugins:{legend:{position:'top',labels:{font:{size:11}}},
+                tooltip:{callbacks:{label:function(c){var v=c.raw;return c.dataset.label+': '+(v>=0?'+':'')+v+'M';}}}}}
+          });
+        }
+        var ctxPower = document.getElementById('eb-chart-power');
+        if (ctxPower) {
+          new Chart(ctxPower, {
+            type:'line',
+            data:{
+              labels:['2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030'],
+              datasets:[
+                {label:'Historical (TWh)',data:[400,425,460,500,530,null,null,null,null,null,null],borderColor:'#667eea',backgroundColor:'rgba(102,126,234,0.15)',pointRadius:4,tension:0.3,fill:true},
+                {label:'Projected \u2014 Base (TWh)',data:[null,null,null,null,530,650,800,830,870,910,945],borderColor:'#764ba2',borderDash:[6,3],backgroundColor:'rgba(118,75,162,0.08)',pointRadius:4,pointStyle:'triangle',tension:0.3,fill:true},
+                {label:'Projected \u2014 High (TWh)',data:[null,null,null,null,530,750,1000,1200,1450,1700,1900],borderColor:'#dc2626',borderDash:[3,3],backgroundColor:'rgba(220,38,38,0.05)',pointRadius:4,pointStyle:'triangle',tension:0.3,fill:false}
+              ]
+            },
+            options:{responsive:true,maintainAspectRatio:false,
+              scales:{y:{title:{display:true,text:'TWh per year',color:'#718096',font:{size:11}},min:0}},
+              plugins:{legend:{position:'top',labels:{font:{size:11}}},tooltip:{mode:'index',intersect:false}}}
+          });
+        }
+      }
+      if (document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCharts);}else{initCharts();}
+    })();
+    </script>
 
     <!-- Tidio Chatbot -->
     <script src="//code.tidio.co/mrlssbhzk3lc4tbjjinryaqueto6ezrr.js" async></script>
