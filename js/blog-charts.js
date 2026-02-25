@@ -1,0 +1,618 @@
+            height: 20px;
+            border-radius: 50%;
+            background: #fbbf24;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+            border: none;
+        }
+        
+        .year-markers {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(251, 191, 36, 0.2);
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            color: #fbbf24;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            
+            .chart-card {
+                padding: 1rem;
+            }
+            
+            .chart-wrap {
+                height: 300px;
+            }
+            
+            .chart-wrap-sm {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 AI Acceleration Interactive Charts & Diagrams</h1>
+        <p class="subtitle">Societal Shock Risk Analysis Through 2035</p>
+        
+        <!-- Chart 1: AI Training Compute Scaling -->
+        <div class="chart-card">
+            <h2 class="chart-title">🚀 AI Training Compute Scaling (2015–2027)</h2>
+            <div class="chart-src">Sources: Epoch AI, OpenAI, Anthropic — Shaded area = projected</div>
+            <div class="chart-wrap"><canvas id="eb-chart-compute"></canvas></div>
+        </div>
+        
+        <!-- Chart 2: Road to AGI Timeline -->
+        <div class="chart-card">
+            <h2 class="chart-title">🧠 Road to AGI — Expert Timeline Estimates</h2>
+            <div class="chart-src">Based on public statements by leading AI researchers, 2024–2026</div>
+            <div class="chart-wrap chart-wrap-sm"><canvas id="eb-chart-agi"></canvas></div>
+        </div>
+        
+        <!-- Chart 3: Job Displacement with Year Slider -->
+        <div class="chart-card">
+            <h2 class="chart-title">👷 AI Job Displacement vs New Jobs Created</h2>
+            <div class="chart-src">Sources: WEF Future of Jobs 2025, IMF, ILO — Use slider to explore year-by-year changes</div>
+
+            <div class="chart-wrap"><canvas id="eb-chart-jobs"></canvas></div>
+
+            <div class="year-slider-container">
+                <div class="slider-label">
+                    <span>Select Year:</span>
+                    <span class="year-display" id="selected-year">2025</span>
+                </div>
+                <input type="range" id="year-slider" min="2025" max="2035" value="2025" step="1">
+                <div class="year-markers">
+                    <span>2025</span>
+                    <span>2028</span>
+                    <span>2031</span>
+                    <span>2035</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chart 4: Power Demand with Toggle -->
+        <div class="chart-card">
+            <h2 class="chart-title">⚡ Global Data Center Power Demand (TWh)</h2>
+            <div class="chart-src">Sources: IEA Energy & AI Report 2025, Goldman Sachs, EIA — Toggle between views</div>
+            
+            <div class="power-chart-toggle">
+                <button id="toggle-energy-sources" class="toggle-btn active">
+                    <span class="toggle-icon">🔋</span> Energy Sources
+                </button>
+                <button id="toggle-grid-private" class="toggle-btn">
+                    <span class="toggle-icon">⚡</span> Grid vs Private
+                </button>
+            </div>
+            
+            <div class="chart-wrap"><canvas id="eb-chart-power"></canvas></div>
+        </div>
+        
+        
+        <!-- Chart 5: Causal Diagram -->
+        <div class="chart-card">
+            <h2 class="chart-title">🔄 Causal Diagram: The "Race for Power"</h2>
+            <div class="chart-src">How the race for power drives both AI acceleration and backlash — feedback loops between frontier AI development, energy infrastructure, and societal response</div>
+            <div style="margin-top: 1.5rem;">
+                <iframe src="ai-diagram.html" style="width:100%; max-width:760px; aspect-ratio:760/820; height:auto; border:none; display:block; margin:0 auto; border-radius:8px; background: white;" scrolling="no"></iframe>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Part of the comprehensive analysis: <a href="ai-acceleration-power-race-2026.html" target="_blank">AI Acceleration & Societal Shock Risk Through 2035</a></p>
+            <p style="margin-top: 0.5rem;">© 2026 <a href="https://eytan.com" target="_blank">Eytan Benzeno</a> | Data visualization powered by Chart.js</p>
+        </div>
+    </div>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+    
+// Brand colors
+const purple   = '#667eea';
+const violet   = '#764ba2';
+const pink     = '#f093fb';
+const teal     = '#43e97b';
+const red      = '#f5576c';
+const gold     = '#f6d365';
+const dark     = '#2d3748';
+const gridCol  = 'rgba(0,0,0,0.06)';
+
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+Chart.defaults.color = '#6c757d';
+
+// Chart 1: AI Training Compute Scaling with Divergent Projections
+if (document.getElementById('eb-chart-compute')) {
+    new Chart(document.getElementById('eb-chart-compute'), {
+        type: 'line',
+        data: {
+            labels: ['2018\nGPT-1', '2019\nGPT-2', '2020\nGPT-3', '2023\nGPT-4', '2024\nClaude 3', '2026\nGPT-5.3', '2027', '2028', '2029', '2030', '2031', '2032', '2033', '2034', '2035'],
+            datasets: [
+                {
+                    label: 'Historical Data',
+                    data: [18.5, 21, 23.5, 24.7, 25.2, 26.8, null, null, null, null, null, null, null, null, null],
+                    borderColor: purple,
+                    backgroundColor: 'rgba(102,126,234,0.15)',
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: purple,
+                    pointStyle: 'circle',
+                    borderWidth: 3,
+                    spanGaps: false
+                },
+                {
+                    label: 'Low Estimate (Conservative Scaling)',
+                    data: [null, null, null, null, null, 26.8, 27.5, 28.2, 28.8, 29.4, 29.9, 30.4, 30.8, 31.2, 31.5],
+                    borderColor: teal,
+                    backgroundColor: 'rgba(67,233,123,0.08)',
+                    fill: '+1',
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: teal,
+                    pointStyle: 'triangle',
+                    borderWidth: 2.5,
+                    borderDash: [6, 4],
+                    spanGaps: false
+                },
+                {
+                    label: 'High Estimate (Aggressive Scaling)',
+                    data: [null, null, null, null, null, 26.8, 28.2, 29.5, 30.8, 32.0, 33.2, 34.3, 35.4, 36.4, 37.3],
+                    borderColor: red,
+                    backgroundColor: 'rgba(245,87,108,0.08)',
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: red,
+                    pointStyle: 'triangle',
+                    borderWidth: 2.5,
+                    borderDash: [6, 4],
+                    spanGaps: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true,
+                        font: { size: 12, weight: '600' },
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => {
+                            if (ctx.parsed.y === null) return null;
+                            return ` ${ctx.dataset.label}: ~10^${ctx.parsed.y.toFixed(1)} FLOPs`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: gridCol },
+                    ticks: {
+                        font: { size: 10 }
+                    }
+                },
+                y: {
+                    grid: { color: gridCol },
+                    title: {
+                        display: true,
+                        text: 'Training Compute (log₁₀ FLOPs)',
+                        font: { size: 12, weight: '600' }
+                    },
+                    ticks: {
+                        callback: v => '10^' + v,
+                        font: { size: 11 }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Chart 2: Road to AGI Expert Timeline
+if (document.getElementById('eb-chart-agi')) {
+    new Chart(document.getElementById('eb-chart-agi'), {
+        type: 'bar',
+        data: {
+            labels: ['Dario Amodei\n(Anthropic CEO)', 'Sam Altman\n(OpenAI CEO)', 'Demis Hassabis\n(DeepMind CEO)', 'Yann LeCun\n(Meta Chief AI)', 'Geoffrey Hinton\n(Google DeepMind)'],
+            datasets: [
+                {
+                    label: 'Offset (invisible)',
+                    data: [2026, 2027, 2030, 2034, 2031],
+                    backgroundColor: 'transparent',
+                    borderColor: 'transparent',
+                },
+                {
+                    label: 'AGI Window',
+                    data: [2, 2, 5, 3, 15],
+                    backgroundColor: [
+                        'rgba(102,126,234,0.80)',
+                        'rgba(118,75,162,0.80)',
+                        'rgba(240,147,251,0.80)',
+                        'rgba(67,233,123,0.80)',
+                        'rgba(246,211,101,0.80)',
+                    ],
+                    borderColor: [purple, violet, pink, teal, gold],
+                    borderWidth: 2,
+                    borderRadius: 8,
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => {
+                            if (ctx.datasetIndex === 0) return null;
+                            const starts = [2026, 2027, 2030, 2034, 2031];
+                            const ends   = [2028, 2029, 2035, 2037, 2046];
+                            const i = ctx.dataIndex;
+                            return ` ~${starts[i]} – ${ends[i]}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    min: 2025, max: 2047,
+                    grid: { color: gridCol },
+                    ticks: { stepSize: 2, callback: v => v }
+                },
+                y: { stacked: true, grid: { display: false } }
+            }
+        }
+    });
+}
+
+// Chart 3: Interactive Job Displacement by Sector (Diverging Bar Chart)
+if (document.getElementById('eb-chart-jobs')) {
+    // Sector-based job data by year (in millions)
+    const jobData = {
+        2025: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-2.5, -1.8, -2.2, -1.5, -0.8, -0.9, -1.2, -0.3, -0.2, -0.4, -0.2, -0.1, 0, 0, 0, 0, 0, 0],
+            gains: [0.3, 0.5, 0.1, 0.4, 1.2, 0.2, 0.4, 0.8, 1.5, 0.3, 0.9, 2.5, 3.2, 1.8, 1.5, 1.2, 1.0, 0.8]
+        },
+        2026: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-4.8, -3.5, -4.2, -3.0, -1.5, -1.8, -2.5, -0.8, -0.5, -0.9, -0.5, -0.3, -0.1, 0, 0, 0, 0, 0],
+            gains: [0.5, 0.9, 0.2, 0.8, 2.2, 0.5, 0.8, 1.5, 2.8, 0.6, 1.8, 4.5, 5.8, 3.2, 2.8, 2.2, 1.9, 1.5]
+        },
+        2027: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-7.5, -5.8, -6.5, -5.2, -2.8, -3.2, -4.5, -1.8, -1.2, -1.8, -1.2, -0.8, -0.3, 0, 0, 0, -0.1, 0],
+            gains: [0.8, 1.5, 0.3, 1.5, 3.8, 1.2, 1.5, 2.8, 5.2, 1.2, 3.5, 7.5, 9.8, 5.5, 4.8, 3.8, 3.5, 2.8]
+        },
+        2028: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-10.2, -8.5, -8.8, -7.5, -4.5, -5.2, -6.8, -3.5, -2.5, -3.2, -2.5, -1.8, -0.8, -0.1, 0, 0, -0.2, -0.1],
+            gains: [1.2, 2.5, 0.5, 2.5, 6.2, 2.5, 2.8, 4.8, 8.5, 2.2, 5.8, 11.5, 14.8, 8.5, 7.2, 5.8, 5.5, 4.5]
+        },
+        2029: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-12.5, -11.2, -10.8, -9.5, -6.5, -7.2, -8.8, -5.8, -4.2, -5.2, -4.5, -3.5, -1.8, -0.3, -0.1, 0, -0.4, -0.2],
+            gains: [1.5, 3.5, 0.8, 3.5, 9.2, 4.2, 4.5, 7.2, 12.5, 3.5, 8.5, 15.8, 19.5, 11.5, 9.8, 8.2, 7.8, 6.5]
+        },
+        2030: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-14.5, -13.8, -12.5, -11.2, -8.5, -9.2, -10.5, -8.2, -6.2, -7.2, -6.8, -5.5, -3.2, -0.8, -0.3, -0.1, -0.6, -0.4],
+            gains: [2.0, 4.5, 1.2, 4.5, 12.5, 6.2, 6.5, 10.2, 16.5, 5.2, 11.5, 20.5, 24.5, 14.5, 12.5, 10.8, 10.2, 8.5]
+        },
+        2031: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-15.8, -15.5, -13.5, -12.5, -10.2, -10.8, -11.8, -10.5, -8.2, -9.2, -8.8, -7.8, -5.2, -1.5, -0.8, -0.3, -0.9, -0.6],
+            gains: [2.5, 5.5, 1.5, 5.5, 15.2, 8.2, 8.5, 13.2, 20.5, 7.2, 14.5, 25.5, 29.5, 17.5, 15.5, 13.8, 13.2, 10.5]
+        },
+        2032: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-16.5, -16.8, -14.2, -13.5, -11.8, -11.8, -12.5, -12.5, -10.2, -11.2, -10.8, -10.2, -7.5, -2.8, -1.5, -0.8, -1.2, -0.9],
+            gains: [3.0, 6.5, 2.0, 6.5, 17.8, 10.2, 10.5, 16.2, 24.5, 9.2, 17.5, 30.5, 34.5, 20.5, 18.5, 16.8, 16.2, 12.5]
+        },
+        2033: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-16.8, -17.5, -14.5, -14.2, -13.2, -12.5, -13.2, -14.2, -12.2, -13.2, -12.8, -12.8, -10.2, -4.5, -2.5, -1.5, -1.6, -1.2],
+            gains: [3.5, 7.5, 2.5, 7.5, 20.2, 12.2, 12.5, 19.2, 28.5, 11.2, 20.5, 35.5, 39.5, 23.5, 21.5, 19.8, 19.2, 14.5]
+        },
+        2034: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-17.0, -18.0, -14.8, -14.8, -14.5, -13.2, -13.8, -15.8, -14.2, -15.2, -14.8, -15.5, -13.2, -6.5, -3.8, -2.5, -2.2, -1.6],
+            gains: [4.0, 8.5, 3.0, 8.5, 22.5, 14.2, 14.5, 22.2, 32.5, 13.2, 23.5, 40.5, 44.5, 26.5, 24.5, 22.8, 22.2, 16.5]
+        },
+        2035: {
+            sectors: ['Administrative & Clerical', 'Customer Service', 'Data Entry & Processing', 'Basic Finance & Accounting', 'Content Creation & Media', 'Manufacturing & Assembly', 'Retail & Sales', 'Transportation & Logistics', 'Healthcare Support', 'Legal Services', 'Education & Training', 'Software Development', 'Data Science & Analytics', 'AI/ML Engineering', 'Cybersecurity', 'Renewable Energy', 'Healthcare (Advanced)', 'Creative & Strategy'],
+            losses: [-17.2, -18.5, -15.0, -15.2, -15.5, -13.8, -14.2, -17.2, -16.2, -17.2, -16.8, -18.2, -16.2, -8.8, -5.2, -3.8, -2.8, -2.2],
+            gains: [4.5, 9.5, 3.5, 9.5, 24.8, 16.2, 16.5, 25.2, 36.5, 15.2, 26.5, 45.5, 49.5, 29.5, 27.5, 25.8, 25.2, 18.5]
+        }
+    };
+
+    let jobChart = null;
+
+    function updateJobChart(year) {
+        const data = jobData[year];
+
+        if (jobChart) {
+            jobChart.data.labels = data.sectors;
+            jobChart.data.datasets[0].data = data.losses;
+            jobChart.data.datasets[1].data = data.gains;
+            jobChart.update();
+        } else {
+            jobChart = new Chart(document.getElementById('eb-chart-jobs'), {
+                type: 'bar',
+                data: {
+                    labels: data.sectors,
+                    datasets: [
+                        {
+                            label: 'Jobs Lost',
+                            data: data.losses,
+                            backgroundColor: 'rgba(245,87,108,0.85)',
+                            borderColor: red,
+                            borderWidth: 2,
+                            borderRadius: 6,
+                        },
+                        {
+                            label: 'New Jobs Created',
+                            data: data.gains,
+                            backgroundColor: 'rgba(67,233,123,0.85)',
+                            borderColor: teal,
+                            borderWidth: 2,
+                            borderRadius: 6,
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 13, weight: '600' }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => {
+                                    const value = Math.abs(ctx.parsed.x);
+                                    return ` ${ctx.dataset.label}: ${value.toFixed(1)}M`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: gridCol },
+                            ticks: {
+                                callback: v => {
+                                    const abs = Math.abs(v);
+                                    return v === 0 ? '0' : (v < 0 ? '-' : '+') + abs + 'M';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Job Losses (left) ← | → New Jobs Created (right)',
+                                font: { size: 12, weight: '600' }
+                            }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    // Initialize chart with 2026 data
+    updateJobChart(2026);
+
+    // Year slider interaction
+    const yearSlider = document.getElementById('year-slider');
+    const selectedYearDisplay = document.getElementById('selected-year');
+
+    if (yearSlider && selectedYearDisplay) {
+        yearSlider.addEventListener('input', (e) => {
+            const year = parseInt(e.target.value);
+            selectedYearDisplay.textContent = year;
+            updateJobChart(year);
+        });
+    }
+}
+
+// Chart 4: Global Data Center Power Demand with Toggle
+if (document.getElementById('eb-chart-power')) {
+    const labels = ['2019','2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032','2033','2034','2035'];
+
+    // Data for Energy Sources view
+    const energySourcesData = {
+        datasets: [
+            {
+                label: 'Coal',
+                data: [65, 65, 63, 60, 55, 62, 55, 48, 42, 38, 35, 32, 28, 25, 22, 20, 18],
+                backgroundColor: 'rgba(66, 66, 66, 0.85)',
+                borderColor: '#424242',
+                borderWidth: 1,
+                fill: true,
+                tension: 0.4,
+            },
+            {
+                label: 'Natural Gas',
+                data: [72, 78, 84, 92, 106, 166, 203, 238, 266, 294, 313, 330, 354, 372, 390, 406, 420],
+                backgroundColor: 'rgba(245, 87, 108, 0.75)',
+                borderColor: red,
+                borderWidth: 1,
+                fill: true,
+                tension: 0.4,
+            },
+            {
+                label: 'Nuclear',
+                data: [18, 20, 21, 23, 27, 42, 58, 75, 91, 109, 125, 142, 162, 186, 212, 240, 270],
+                backgroundColor: 'rgba(102, 126, 234, 0.75)',
+                borderColor: purple,
+                borderWidth: 1,
+                fill: true,
+                tension: 0.4,
+            },
+            {
+                label: 'Renewables (Solar/Wind/Hydro)',
+                data: [20, 27, 36, 48, 68, 132, 246, 297, 336, 370, 390, 406, 428, 442, 448, 448, 445],
+                backgroundColor: 'rgba(67, 233, 123, 0.85)',
+                borderColor: teal,
+                borderWidth: 1,
+                fill: true,
+                tension: 0.4,
+            },
+            {
+                label: 'Other/Grid Mix',
+                data: [5, 5, 6, 7, 9, 13, 18, 22, 25, 29, 32, 35, 38, 40, 43, 46, 47],
+                backgroundColor: 'rgba(246, 211, 101, 0.75)',
+                borderColor: gold,
+                borderWidth: 1,
+                fill: true,
+                tension: 0.4,
+            }
+        ]
+    };
+
+    // Data for Grid vs Private view
+    const gridPrivateData = {
+        datasets: [
+            {
+                label: 'Public Grid Supply',
+                data: [175, 188, 198, 215, 245, 365, 450, 490, 515, 530, 535, 535, 530, 520, 505, 485, 460],
+                backgroundColor: 'rgba(37, 99, 235, 0.75)',
+                borderColor: '#2563eb',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+            },
+            {
+                label: 'Private/Dedicated Generation',
+                data: [5, 7, 12, 15, 20, 50, 130, 190, 245, 310, 360, 410, 480, 545, 610, 675, 740],
+                backgroundColor: 'rgba(220, 38, 38, 0.75)',
+                borderColor: '#dc2626',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+            }
+        ]
+    };
+
+    let powerChart = new Chart(document.getElementById('eb-chart-power'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: energySourcesData.datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true,
+                        padding: 12,
+                        font: { size: 11, weight: '600' }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y} TWh`,
+                        footer: items => {
+                            const total = items.reduce((sum, item) => sum + item.parsed.y, 0);
+                            return `Total: ${total} TWh`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: gridCol },
+                    ticks: { font: { size: 10 } }
+                },
+                y: {
+                    stacked: true,
+                    grid: { color: gridCol },
+                    ticks: {
+                        callback: v => v + ' TWh',
+                        font: { size: 11 }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Power Consumption (TWh)',
+                        font: { size: 12, weight: '600' }
+                    }
+                }
+            }
+        }
+    });
+
+    // Toggle functionality
+    const toggleEnergyBtn = document.getElementById('toggle-energy-sources');
+    const toggleGridBtn = document.getElementById('toggle-grid-private');
+
+    if (toggleEnergyBtn && toggleGridBtn) {
+        toggleEnergyBtn.addEventListener('click', () => {
+            toggleEnergyBtn.classList.add('active');
+            toggleGridBtn.classList.remove('active');
+
+            powerChart.data.datasets = energySourcesData.datasets;
+            powerChart.update();
+        });
+
+        toggleGridBtn.addEventListener('click', () => {
+            toggleGridBtn.classList.add('active');
+            toggleEnergyBtn.classList.remove('active');
+
+            powerChart.data.datasets = gridPrivateData.datasets;
+            powerChart.update();
+        });
+    }
+}
+    </script>
+</body></html>
