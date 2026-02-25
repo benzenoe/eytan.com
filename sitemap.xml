@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): ai-acceleration-part-1-short-term-vision -->
+    <url>
+        <loc>https://eytan.com/blog/ai-acceleration-part-1-short-term-vision.html</loc>
+        <lastmod>2026-02-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): ai-acceleration-power-race-2026 -->
     <url>
         <loc>https://eytan.com/blog/ai-acceleration-the-power-race-and-near-term-societal-shock-risk-through-2035-part-1-short-term-vision.html</loc>
@@ -47,14 +55,6 @@
     <!-- Blog Post (PT): ai-acceleration-power-race-2026 -->
     <url>
         <loc>https://eytan.com/blog/pt/ai-acceleration-the-power-race-and-near-term-societal-shock-risk-through-2035-part-1-short-term-vision.html</loc>
-        <lastmod>2026-02-25</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): ai-acceleration-part-1-short-term-vision -->
-    <url>
-        <loc>https://eytan.com/blog/ai-acceleration-part-1-short-term-vision.html</loc>
         <lastmod>2026-02-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
