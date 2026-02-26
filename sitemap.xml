@@ -52,22 +52,6 @@
         <priority>0.8</priority>
     </url>
 
-    <!-- Blog Post (EN): ai-acceleration-part-1-short-term-vision -->
-    <url>
-        <loc>https://eytan.com/blog/ai-acceleration-part-1-short-term-vision.html</loc>
-        <lastmod>2026-02-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): ai-acceleration-part-1-short-term-vision -->
-    <url>
-        <loc>https://eytan.com/blog/fr/ai-acceleration-part-1-short-term-vision.html</loc>
-        <lastmod>2026-02-26</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
     <!-- Blog Post (EN): test-1234 -->
     <url>
         <loc>https://eytan.com/blog/artificial-intelligence.html</loc>
