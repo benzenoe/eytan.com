@@ -1,6 +1,6 @@
 # Eytan.com Blog System - Claude Memory Guide
 
-**Last Updated:** March 6, 2026 (Session 16 Complete)
+**Last Updated:** March 6, 2026 (Session 17 Complete)
 
 ---
 
@@ -1001,6 +1001,75 @@ Fixed multiple translation issues:
 - ✅ Chart.js protected from SEO regeneration
 - ✅ Encoding issues in French/Portuguese posts
 - ✅ H1 titles now use real post title (not SEO title)
+
+---
+
+### Session 17 (Mar 6, 2026)
+**Focus:** Notion MCP Server Integration for eytan.com Project Management
+
+**Objective:** Set up Notion integration to manage eytan.com teamspace and journal
+
+**Completed:**
+- ✅ Installed official Notion MCP server (`@notionhq/notion-mcp-server`)
+- ✅ Created Notion Internal Integration: "Claude Code (eytan)"
+- ✅ Configured Notion API token securely in user-level MCP config
+- ✅ Verified MCP server connection (Status: ✓ Connected)
+
+**Integration Configuration:**
+- **Integration Name:** Claude Code (eytan)
+- **Workspace:** Dave T Productions
+- **Company:** eytan.com
+- **MCP Scope:** User-level (available in all projects)
+- **Transport:** stdio (npx -y @notionhq/notion-mcp-server)
+- **Config Location:** ~/.claude.json
+
+**Capabilities Enabled:**
+- ✅ Read content - View Notion pages and databases
+- ✅ Update content - Modify existing pages
+- ✅ Insert content - Create new pages and blocks
+- ✅ Read user information (including email addresses)
+
+**Available Notion Tools (after session restart):**
+- `search` - Search Notion workspace for pages
+- `get_page` - Retrieve page content and details
+- `list_pages` - List all accessible pages
+- `create_page` - Create new pages in workspace
+- `update_page` - Modify existing page content
+- `create_database` - Create new databases
+- `query_database` - Query database entries
+- `move_page` - Move pages to different locations
+
+**Integration Setup Steps:**
+1. Created integration at notion.so/my-integrations
+2. Named: "Claude Code (eytan)"
+3. Associated workspace: Dave T Productions
+4. Copied Internal Integration Token
+5. Installed MCP server: `claude mcp add --scope user --transport stdio notion --env NOTION_TOKEN=*** -- npx -y @notionhq/notion-mcp-server`
+6. Verified: `claude mcp list` shows ✓ Connected
+
+**Active Goals:**
+- Create Notion teamspace for eytan.com project
+- Move "eytan.com Journal" into the teamspace
+- Set up Notion workspace structure for project management
+
+**Next Steps:**
+1. **Restart Claude Code** to load Notion MCP tools in active session
+2. **Share pages with integration:**
+   - Open Notion → Find "eytan.com Journal"
+   - Click "..." → "Connections" → Select "Claude Code (eytan)"
+3. **Verify journal location** - Check if already in teamspace
+4. **Create teamspace structure** for eytan.com organization
+
+**Technical Notes:**
+- MCP servers configured after session start require restart to load tools
+- Notion teamspaces cannot be created via API (must use Notion UI manually)
+- Integration must be explicitly shared with pages before API access is granted
+- Token stored securely in ~/.claude.json with env var NOTION_TOKEN
+- MCP commands: `claude mcp list`, `claude mcp get notion`, `claude mcp remove notion -s user`
+
+**Important Limitation:**
+- Teamspaces are Notion UI-only features (no API support for creation)
+- Alternative: Create top-level parent pages to organize content hierarchically
 
 ---
 
