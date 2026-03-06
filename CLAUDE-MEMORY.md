@@ -1,6 +1,6 @@
 # Eytan.com Blog System - Claude Memory Guide
 
-**Last Updated:** February 19, 2026 (Session 15 Complete)
+**Last Updated:** March 6, 2026 (Session 16 Complete)
 
 ---
 
@@ -181,19 +181,22 @@ npm install
 │   ├── auth.js               # Login/logout/status
 │   ├── upload.js             # Image upload to GitHub
 │   ├── social.js             # Social media publishing
-│   └── translate.js          # Translation endpoints
+│   ├── translate.js          # Translation endpoints (with chunking)
+│   └── research.js           # Research report endpoints (Session 16)
 ├── services/
 │   ├── database.js           # PostgreSQL connection & queries
 │   ├── github.js             # GitHub API (publish posts)
-│   ├── seo.js                # SEO page generation
+│   ├── seo.js                # SEO page generation (H1 title fix)
 │   └── social-media.js       # Social platform APIs
 ├── middleware/
 │   └── auth.js               # Authentication middleware
 ├── migrations/
 │   ├── add-french-content-fields.js
+│   ├── add-portuguese-content-fields.js
 │   └── add-social-posts-table.js
 ├── scripts/
-│   └── translate-posts-to-french.js
+│   ├── translate-posts-to-french.js
+│   └── translate-posts-to-portuguese.js
 ├── *.js                      # Diagnostic & utility scripts
 └── CLAUDE-MEMORY.md          # This file
 ```
@@ -206,26 +209,36 @@ npm install
 ├── admin.html                # Admin panel
 ├── admin-editor.html         # Post editor
 ├── login.html                # Login page
-├── resume.html               # Resume page
+├── resume.html               # Resume page with download modal
 ├── contact.html              # Contact page
+├── ai-charts.html            # Standalone interactive charts page
 ├── js/
 │   ├── blog.js               # Blog listing logic + filtering
 │   ├── blog-post.js          # Post display logic
+│   ├── blog-charts.js        # Chart.js initialization (Session 16)
 │   ├── admin.js              # Admin panel logic
 │   ├── admin-editor.js       # Editor logic
 │   ├── i18n.js               # Internationalization
 │   └── main.js               # Common utilities
 ├── css/
-│   └── styles.css            # All styles
+│   └── styles.css            # All styles + resume modal
 ├── blog/
 │   ├── {slug}.html           # English SEO pages
-│   └── fr/{slug}.html        # French SEO pages
+│   ├── fr/{slug}.html        # French SEO pages
+│   └── pt/{slug}.html        # Portuguese SEO pages
 ├── posts/
 │   └── {slug}.md             # Markdown content
 ├── images/
-│   └── blog/                 # Uploaded images
+│   ├── blog/                 # Uploaded images
+│   └── ai-acceleration-causal-diagram.svg  # Research diagrams
 ├── data/
 │   └── blog-posts.json       # Post metadata
+├── Eytan-Benzeno-Resume.pdf      # Modern resume (EN)
+├── Eytan-Benzeno-Resume-FR.pdf   # Modern resume (FR)
+├── Eytan-Benzeno-Resume-PT.pdf   # Modern resume (PT)
+├── Eytan-Benzeno-Resume-Classic.pdf     # Classic resume (EN)
+├── Eytan-Benzeno-Resume-Classic-FR.pdf  # Classic resume (FR)
+├── Eytan-Benzeno-Resume-Classic-PT.pdf  # Classic resume (PT)
 ├── sitemap.xml
 ├── robots.txt
 └── CLAUDE-MEMORY.md          # Quick reference
@@ -790,12 +803,12 @@ Fixed French SEO page generation issues:
 
 ---
 
-## Current Status (Feb 2026)
+## Current Status (Mar 2026)
 
 ### Blog Stats
-- **Published Posts:** 19
-- **Languages:** 2 (English + French)
-- **SEO Pages:** 38 (19 EN + 19 FR)
+- **Published Posts:** 21
+- **Languages:** 3 (English + French + Portuguese)
+- **SEO Pages:** 63 (21 EN + 21 FR + 21 PT)
 - **Tags:** 8 categories
 
 ### Features Complete
@@ -808,7 +821,10 @@ Fixed French SEO page generation issues:
 - ✅ Social media publishing
 - ✅ Share buttons (LinkedIn, X, FB, WhatsApp, Copy)
 - ✅ Blog Post Automation Skill (content creation guide)
-- ✅ Tabbed admin editor (General/English/French)
+- ✅ Tabbed admin editor (General/English/French/Portuguese)
+- ✅ Resume download modal (Modern/Classic versions, trilingual PDFs)
+- ✅ Interactive Chart.js visualizations (5 charts with toggles/sliders)
+- ✅ Research report system with citations
 
 ### Pending
 - ⏳ Blog categorization UI (Session 9 plan exists)
@@ -865,11 +881,126 @@ Complete overhaul of resume page with trilingual PDF support:
 
 ---
 
-### Recently Fixed (Session 15)
-- ✅ Portuguese SEO pages generation
-- ✅ Trilingual resume page (EN/FR/PT)
-- ✅ Language-specific PDF downloads
-- ✅ Modern executive resume design
+### Session 16 (Feb 19 - Mar 6, 2026)
+**Focus:** Resume Modal System + Interactive Chart.js Visualizations + Research Reports
+
+**Part 1 - Resume Download Modal (Feb 19)**
+
+Created dual-version resume download system with preview:
+- Modal popup with **two resume versions:**
+  - **Modern Resume:** Executive design with navy sidebar (EN/FR/PT)
+  - **Classic Resume:** Traditional long-form layout (EN/FR/PT)
+- In-modal PDF preview before download
+- Improved UX with hover states and animations
+- Body scroll lock when modal is open
+- 6 total PDFs served based on language + version selection
+
+**Files Modified (Frontend):**
+- `resume.html` - Added modal markup and dual-version logic
+- Added 3 new Classic PDFs: `Eytan-Benzeno-Resume-Classic-*.pdf` (EN/FR/PT)
+- `css/styles.css` - Modal styles, hover states, scroll lock
+
+**Part 2 - Interactive Chart.js Visualizations (Feb 20-25)**
+
+Implemented interactive data visualization system for blog posts:
+- **5 interactive charts** for AI acceleration post:
+  1. **AI Compute Scaling** - Exponential growth with divergent projections
+  2. **Road to AGI Timeline** - Key milestones (includes Geoffrey Hinton)
+  3. **Energy Demand** - Grid vs private generation, power source breakdown
+  4. **Job Displacement by Sector** - Interactive year slider (2025-2035)
+  5. **Causal Diagram** - AI → Power → Societal Impact flowchart
+- Toggle buttons for switching between data views
+- Year slider for temporal analysis
+- Standalone charts page: `ai-charts.html`
+- **Chart.js protected in SEO template** - survives all regenerations
+- External JavaScript file: `js/blog-charts.js`
+
+**Technical Challenges Solved:**
+- Fixed Chart.js race condition with script loading
+- Removed annotation plugin causing conflicts
+- Fixed missing gold color variable breaking charts
+- Fixed 179 SVG render errors in flowchart
+- Prevented duplicate/simplified chart code
+- Ensured Chart.js CDN loads before chart initialization
+
+**Files Created (Frontend):**
+- `ai-charts.html` - Standalone interactive charts page
+- `js/blog-charts.js` - Chart initialization code
+- `images/ai-acceleration-causal-diagram.svg` - Causal flowchart
+
+**Files Modified (Frontend):**
+- `blog-post-template.html` - Added Chart.js CDN and canvas placeholders
+- SEO pages for AI acceleration posts (EN/FR/PT)
+
+**Part 3 - Research Report System (Feb 20-21)**
+
+Created endpoint for long-form research reports with citations:
+- New API endpoint: `/api/research/ai-acceleration-part-1`
+- Public research page with deep analysis
+- **62 real source citations** extracted from original PDF
+- SVG flowchart diagrams (no JavaScript dependencies)
+- Stripped Claude citation markers and PUA artifacts
+- HTML-based reports served from database
+
+**Files Created (Backend):**
+- New route handler for research reports
+- Database entries for research content
+
+**Part 4 - Translation System Improvements (Feb 23-24)**
+
+Fixed multiple translation issues:
+- Implemented proper backend chunking (1200 char hard limit)
+- Fixed `gpt-3.5-turbo-16k` token limit errors
+- Added safety net with backend content truncation
+- Fixed H1 to use real post title instead of SEO title
+- Don't run `marked.parse()` on database HTML content
+
+**Files Modified (Backend):**
+- `routes/translate.js` - Chunking logic and token limits
+- `services/seo.js` - H1 title fix
+
+**Part 5 - New Blog Posts Published**
+
+**Post #20:** "The AI Acceleration Nobody Is Ready For (And the Power Grid That Can't Keep Up)"
+- Published: Feb 20, 2026
+- First post with embedded interactive charts
+- Trilingual (EN/FR/PT)
+
+**Post #21:** "AI Acceleration, the "Power Race," and Near-Term Societal Shock Risk Through 2035 (Part 1: Short-Term Vision)"
+- Published: Feb 22-25, 2026 (multiple refinements)
+- Title shortened to "AI Acceleration - Part 1: Short-Term Vision"
+- All 5 interactive visualizations embedded
+- Trilingual with full Chart.js support
+- 127KB HTML file with embedded charts
+
+**Part 6 - Bug Fixes**
+
+**Encoding Issues (Feb 25):**
+- Removed corrupted UTF-8 characters from AI acceleration post
+- Emergency rebuild of French/Portuguese corrupted posts
+- Restored full Portuguese content after corruption
+
+**Chart.js Fixes (Feb 23-25):**
+- Fixed missing script tags preventing rendering
+- Fixed CDN cache issues
+- Removed duplicate chart code
+- Fixed annotation plugin conflicts
+
+**Deployment Stats:**
+- **970+ commits** to frontend (SEO page updates, chart fixes, modal improvements)
+- **13 commits** to backend (translation fixes, research reports)
+- All changes deployed to production via GitHub Pages + Railway
+
+---
+
+### Recently Fixed (Session 16)
+- ✅ Resume download modal with Modern/Classic versions
+- ✅ Interactive Chart.js visualizations (5 charts with toggles/sliders)
+- ✅ Research report system with 62 source citations
+- ✅ Translation chunking (fixed token limit errors)
+- ✅ Chart.js protected from SEO regeneration
+- ✅ Encoding issues in French/Portuguese posts
+- ✅ H1 titles now use real post title (not SEO title)
 
 ---
 
