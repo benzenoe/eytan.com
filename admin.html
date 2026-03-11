@@ -36,6 +36,13 @@
             overflow: hidden;
         }
 
+        @media (max-width: 768px) {
+            .hide-mobile { display: none; }
+            .action-buttons { flex-wrap: wrap; gap: 0.4rem; }
+            .btn-icon { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
+            .posts-table th, .posts-table td { padding: 0.6rem 0.5rem; }
+        }
+
         .posts-table table {
             width: 100%;
             border-collapse: collapse;
@@ -286,11 +293,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Icon</th>
-                        <th>Thumbnail</th>
+                        <th class="hide-mobile">Icon</th>
+                        <th class="hide-mobile">Thumbnail</th>
                         <th>Title</th>
                         <th>Date</th>
-                        <th>Excerpt</th>
+                        <th class="hide-mobile">Excerpt</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

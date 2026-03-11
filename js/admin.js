@@ -62,8 +62,8 @@ async function renderPostsTable() {
 
         return `
         <tr${postNeedsRepublish ? ' style="background: #fff3cd;"' : ''}>
-            <td style="font-size: 1.5rem;">${post.icon || '📝'}</td>
-            <td>
+            <td class="hide-mobile" style="font-size: 1.5rem;">${post.icon || '📝'}</td>
+            <td class="hide-mobile">
                 ${post.image
                     ? `<img src="${post.image}" alt="Thumbnail" class="admin-thumbnail" />`
                     : '<div class="admin-thumbnail-placeholder">No Image</div>'}
@@ -89,7 +89,7 @@ async function renderPostsTable() {
                     ${post.status === 'published' ? `<div title="Last published">🚀 ${formatDateTime(post.published_at)}</div>` : ''}
                 </div>
             </td>
-            <td>${post.excerpt.substring(0, 60)}${post.excerpt.length > 60 ? '...' : ''}</td>
+            <td class="hide-mobile">${post.excerpt.substring(0, 60)}${post.excerpt.length > 60 ? '...' : ''}</td>
             <td>
                 <div class="action-buttons">
                     ${post.status === 'published'
