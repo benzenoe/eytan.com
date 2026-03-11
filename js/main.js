@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.className = 'hamburger';
         hamburger.setAttribute('aria-label', 'Toggle menu');
         hamburger.innerHTML = '<span></span><span></span><span></span>';
-        navContainer.appendChild(hamburger);
+        const navRight = navContainer.querySelector('.nav-right');
+        navContainer.insertBefore(hamburger, navRight);
 
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('open');
