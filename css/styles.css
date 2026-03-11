@@ -1648,7 +1648,14 @@ div sup a:hover {
     }
 
     .blog-post-content {
-        padding: 1.5rem;
+        padding: 0;
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .blog-post {
+        padding: 20px 0;
     }
 
     .blog-post h1 {
