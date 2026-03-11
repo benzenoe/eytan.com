@@ -147,21 +147,22 @@ body {
 
 /* Hero Section */
 .hero {
-    padding: 100px 0;
-    background: url('../images/hero-bg.png') center center / cover no-repeat;
-    position: relative;
+    padding: 0;
+    background: none;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+.hero-banner {
+    width: 100%;
+    display: block;
+    max-height: 600px;
+    object-fit: cover;
+    object-position: center top;
 }
 
-.hero .container {
-    position: relative;
-    z-index: 1;
+.hero-intro {
+    padding: 60px 0 50px;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    text-align: center;
 }
 
 .hero-content {
@@ -183,7 +184,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--gray);
     margin-bottom: 2rem;
 }
 
@@ -1556,6 +1557,10 @@ div sup a:hover {
     .profile-image {
         width: 150px;
         height: 150px;
+    }
+
+    .hero-banner {
+        max-height: 300px;
     }
 
     .hero h1 {
