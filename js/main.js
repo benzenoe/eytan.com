@@ -25,6 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         }
     });
+
+    // Inject hamburger button into navbar
+    const navbar = document.querySelector('.navbar');
+    const navContainer = document.querySelector('.navbar .container');
+    if (navbar && navContainer) {
+        const hamburger = document.createElement('button');
+        hamburger.className = 'hamburger';
+        hamburger.setAttribute('aria-label', 'Toggle menu');
+        hamburger.innerHTML = '<span></span><span></span><span></span>';
+        navContainer.appendChild(hamburger);
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navbar.classList.toggle('nav-open');
+        });
+
+        // Close menu when a nav link is clicked
+        navContainer.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navbar.classList.remove('nav-open');
+            });
+        });
+    }
 });
 
 // Add animation on scroll

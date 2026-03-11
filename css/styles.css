@@ -1516,17 +1516,65 @@ div sup a:hover {
     font-size: 0.95rem;
 }
 
+/* Hamburger button (hidden on desktop) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: auto;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--dark);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
     .navbar .container {
         flex-wrap: wrap;
+        align-items: center;
     }
 
     .nav-right {
         flex-direction: column;
         gap: 1rem;
         width: 100%;
-        margin-top: 1rem;
+        margin-top: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0;
+    }
+
+    .navbar.nav-open .nav-right {
+        max-height: 300px;
+        padding: 1rem 0;
     }
 
     .nav-links {
