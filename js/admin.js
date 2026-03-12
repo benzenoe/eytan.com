@@ -470,6 +470,12 @@ async function openSocialPublishModal(postId) {
                                     <span style="font-weight: 500; flex: 1;">Facebook</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(150-250 words)</span>
                                 </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
+                                    <input type="checkbox" class="platform-check" value="facebook-personal" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <i class="fab fa-facebook" style="color: #1877F2; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">Facebook (Personal Profile)</span>
+                                    <span style="font-size: 0.85rem; color: #6c757d;">(Opens share dialog)</span>
+                                </label>
                                 <label id="instagram-label-inline" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
                                     <input type="checkbox" class="platform-check" value="instagram" ${post.image ? 'checked' : 'disabled'} style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-instagram" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;"></i>
@@ -754,6 +760,20 @@ async function publishToSocialInline() {
         return;
     }
 
+    // Handle Facebook Personal Share (native share dialog, no API needed)
+    if (selectedPlatforms.includes('facebook-personal')) {
+        const post = blogPosts.find(p => p.id === currentPublishingPostId);
+        if (post && post.slug) {
+            const postUrl = `https://eytan.com/blog/${post.slug}.html`;
+            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
+            window.open(shareUrl, 'facebook-share', 'width=600,height=500,resizable=yes');
+        }
+    }
+
+    // Filter out facebook-personal before sending to API
+    const apiPlatforms = selectedPlatforms.filter(p => p !== 'facebook-personal');
+    if (apiPlatforms.length === 0) return;
+
     // Disable publish button
     const publishBtn = document.getElementById('publishSocialBtnInline');
     publishBtn.disabled = true;
@@ -761,7 +781,7 @@ async function publishToSocialInline() {
 
     // Show results section
     document.getElementById('socialResultsInline').style.display = 'block';
-    document.getElementById('socialResultsContentInline').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Publishing to ' + selectedPlatforms.join(', ') + '...</p>';
+    document.getElementById('socialResultsContentInline').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Publishing to ' + apiPlatforms.join(', ') + '...</p>';
 
     try {
         const response = await fetch(`${API_URL}/social/publish/${currentPublishingPostId}`, {
@@ -771,7 +791,7 @@ async function publishToSocialInline() {
             },
             credentials: 'include',
             body: JSON.stringify({
-                platforms: selectedPlatforms
+                platforms: apiPlatforms
             })
         });
 
