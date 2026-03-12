@@ -460,9 +460,9 @@ async function openSocialPublishModal(postId) {
                             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
                                     <input type="checkbox" class="platform-check" value="twitter" checked style="width: 18px; height: 18px; cursor: pointer;">
-                                    <i class="fab fa-twitter" style="color: #1DA1F2; font-size: 1.3rem;"></i>
-                                    <span style="font-weight: 500; flex: 1;">Twitter/X</span>
-                                    <span style="font-size: 0.85rem; color: #6c757d;">(280 characters)</span>
+                                    <i class="fab fa-x-twitter" style="color: #000; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">X (Twitter)</span>
+                                    <span style="font-size: 0.85rem; color: #6c757d;">(Opens pre-filled compose)</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
                                     <input type="checkbox" class="platform-check" value="facebook" checked style="width: 18px; height: 18px; cursor: pointer;">
@@ -760,6 +760,32 @@ async function publishToSocialInline() {
         return;
     }
 
+    // Handle Twitter/X — generate AI tweet, open X compose window pre-filled
+    if (selectedPlatforms.includes('twitter')) {
+        const post = blogPosts.find(p => p.id === currentPublishingPostId);
+        if (post && post.slug) {
+            try {
+                const previewResponse = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ platforms: ['twitter'] })
+                });
+                const previewData = await previewResponse.json();
+                const twPreview = previewData.previews && previewData.previews.find(p => p.platform === 'twitter');
+
+                if (twPreview && twPreview.content) {
+                    const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(twPreview.content)}`;
+                    window.open(tweetUrl, 'x-share', 'width=600,height=420,resizable=yes');
+                    showAlert('✅ X compose window opened with your tweet!', 'success');
+                }
+            } catch (e) {
+                const postUrl = `https://eytan.com/blog/${post.slug}.html`;
+                window.open(`https://x.com/intent/tweet?url=${encodeURIComponent(postUrl)}`, 'x-share', 'width=600,height=420,resizable=yes');
+            }
+        }
+    }
+
     // Handle Facebook Personal Share — generate AI caption, copy to clipboard, open share dialog
     if (selectedPlatforms.includes('facebook-personal')) {
         const post = blogPosts.find(p => p.id === currentPublishingPostId);
@@ -790,8 +816,8 @@ async function publishToSocialInline() {
         }
     }
 
-    // Filter out facebook-personal before sending to API
-    const apiPlatforms = selectedPlatforms.filter(p => p !== 'facebook-personal');
+    // Filter out client-side platforms before sending to API
+    const apiPlatforms = selectedPlatforms.filter(p => p !== 'facebook-personal' && p !== 'twitter');
     if (apiPlatforms.length === 0) return;
 
     // Disable publish button
