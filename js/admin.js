@@ -760,13 +760,33 @@ async function publishToSocialInline() {
         return;
     }
 
-    // Handle Facebook Personal Share (native share dialog, no API needed)
+    // Handle Facebook Personal Share — generate AI caption, copy to clipboard, open share dialog
     if (selectedPlatforms.includes('facebook-personal')) {
         const post = blogPosts.find(p => p.id === currentPublishingPostId);
         if (post && post.slug) {
             const postUrl = `https://eytan.com/blog/${post.slug}.html`;
             const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
-            window.open(shareUrl, 'facebook-share', 'width=600,height=500,resizable=yes');
+
+            try {
+                // Generate AI caption for Facebook
+                const previewResponse = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ platforms: ['facebook'] })
+                });
+                const previewData = await previewResponse.json();
+                const fbPreview = previewData.previews && previewData.previews.find(p => p.platform === 'facebook');
+
+                if (fbPreview && fbPreview.content) {
+                    await navigator.clipboard.writeText(fbPreview.content);
+                    showAlert('✅ Facebook caption copied to clipboard! Paste it into the share dialog.', 'success');
+                }
+            } catch (e) {
+                showAlert('Opening Facebook share dialog...', 'info');
+            }
+
+            window.open(shareUrl, 'facebook-share', 'width=620,height=540,resizable=yes');
         }
     }
 
