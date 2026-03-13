@@ -390,6 +390,43 @@ function restoreFromBackup() {
 
 let currentPublishingPostId = null;
 
+// Load Facebook pages from backend and render checkboxes in the modal
+async function loadFacebookPagesIntoModal() {
+    const container = document.getElementById('fb-pages-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch(`${API_URL}/social/facebook/pages`, {
+            credentials: 'include'
+        });
+        const data = await response.json();
+
+        if (!data.pages || data.pages.length === 0) {
+            container.innerHTML = `<span style="color: #6c757d; font-size: 0.85rem;"><i class="fab fa-facebook" style="color: #4267B2;"></i> No Facebook pages found</span>`;
+            return;
+        }
+
+        const labelStyle = `display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; border-radius: 4px; transition: background 0.2s;`;
+        container.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #dee2e6;">
+                <i class="fab fa-facebook" style="color: #4267B2; font-size: 1.1rem;"></i>
+                <span style="font-weight: 600; font-size: 0.9rem; color: #333;">Facebook Pages</span>
+                <span style="font-size: 0.8rem; color: #6c757d;">(auto-published)</span>
+            </div>
+            ${data.pages.map(page => `
+                <label style="${labelStyle}" onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background='transparent'">
+                    <input type="checkbox" class="platform-check" value="facebook:${page.id}" checked style="width: 16px; height: 16px; cursor: pointer;">
+                    <span style="font-size: 0.9rem; flex: 1;">${page.name}</span>
+                    <span style="font-size: 0.75rem; color: #6c757d;">${page.category}</span>
+                </label>
+            `).join('')}
+        `;
+    } catch (error) {
+        console.error('Failed to load Facebook pages:', error);
+        container.innerHTML = `<span style="color: #dc3545; font-size: 0.85rem;"><i class="fab fa-facebook"></i> Failed to load pages</span>`;
+    }
+}
+
 // Open social publishing inline (beneath the post row)
 async function openSocialPublishModal(postId) {
     // If clicking the same post, close it (toggle)
@@ -464,12 +501,12 @@ async function openSocialPublishModal(postId) {
                                     <span style="font-weight: 500; flex: 1;">X (Twitter)</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(Opens pre-filled compose)</span>
                                 </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
-                                    <input type="checkbox" class="platform-check" value="facebook" checked style="width: 18px; height: 18px; cursor: pointer;">
-                                    <i class="fab fa-facebook" style="color: #4267B2; font-size: 1.3rem;"></i>
-                                    <span style="font-weight: 500; flex: 1;">Facebook</span>
-                                    <span style="font-size: 0.85rem; color: #6c757d;">(150-250 words)</span>
-                                </label>
+                                <div id="fb-pages-container" style="display: flex; flex-direction: column; gap: 0.5rem; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; background: #f8f9fa;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #6c757d; font-size: 0.9rem;">
+                                        <i class="fab fa-facebook" style="color: #4267B2; font-size: 1.1rem;"></i>
+                                        <span>Loading Facebook pages...</span>
+                                    </div>
+                                </div>
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
                                     <input type="checkbox" class="platform-check" value="facebook-personal" checked style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-facebook" style="color: #1877F2; font-size: 1.3rem;"></i>
@@ -523,6 +560,9 @@ async function openSocialPublishModal(postId) {
 
         // Insert after the target row
         targetRow.insertAdjacentElement('afterend', expandableRow);
+
+        // Load Facebook pages dynamically
+        loadFacebookPagesIntoModal();
 
         // Scroll to the expanded row smoothly
         setTimeout(() => {
