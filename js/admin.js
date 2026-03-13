@@ -513,6 +513,26 @@ async function openSocialPublishModal(postId) {
                                     <span style="font-weight: 500; flex: 1;">Facebook (Personal Profile)</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(Opens share dialog)</span>
                                 </label>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; background: #f8f9fa;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #dee2e6;">
+                                        <i class="fab fa-facebook-square" style="color: #1877F2; font-size: 1.1rem;"></i>
+                                        <span style="font-weight: 600; font-size: 0.9rem; color: #333;">Facebook Groups</span>
+                                        <span style="font-size: 0.8rem; color: #6c757d;">(copies caption + opens group)</span>
+                                    </div>
+                                    ${[
+                                        { name: 'My name is Eytan', url: 'https://www.facebook.com/groups/208780250279' },
+                                        { name: 'REIGNation', url: 'https://www.facebook.com/groups/reignation' },
+                                        { name: 'ChatGPT and Real Estate Mastermind', url: 'https://www.facebook.com/groups/6064131423672561' },
+                                        { name: 'New to Lisbon and the Surrounding Area', url: 'https://www.facebook.com/groups/1884805645306198' },
+                                        { name: 'New to Surfside / Bal Harbour / Bay Harbor Islands', url: 'https://www.facebook.com/groups/871719803845126' },
+                                        { name: 'Benzeno Group', url: 'https://www.facebook.com/groups/benzeno' }
+                                    ].map(g => `
+                                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.4rem 0.5rem; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#e8f0fe'" onmouseout="this.style.background='transparent'">
+                                            <input type="checkbox" class="platform-check" value="facebook-group:${g.url}" checked style="width: 15px; height: 15px; cursor: pointer;">
+                                            <span style="font-size: 0.88rem; flex: 1;">${g.name}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
                                 <label id="instagram-label-inline" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
                                     <input type="checkbox" class="platform-check" value="instagram" ${post.image ? 'checked' : 'disabled'} style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-instagram" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;"></i>
@@ -856,8 +876,38 @@ async function publishToSocialInline() {
         }
     }
 
-    // Filter out client-side platforms before sending to API
-    const apiPlatforms = selectedPlatforms.filter(p => p !== 'facebook-personal' && p !== 'twitter');
+    // Handle Facebook Groups — generate AI caption, copy to clipboard, open each group tab
+    const groupPlatforms = selectedPlatforms.filter(p => p.startsWith('facebook-group:'));
+    if (groupPlatforms.length > 0) {
+        try {
+            const previewResponse = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ platforms: ['facebook'] })
+            });
+            const previewData = await previewResponse.json();
+            const fbPreview = previewData.previews && previewData.previews.find(p => p.platform === 'facebook');
+
+            if (fbPreview && fbPreview.content) {
+                await navigator.clipboard.writeText(fbPreview.content);
+                showAlert(`✅ Caption copied! Opening ${groupPlatforms.length} group(s) — paste into each tab.`, 'success');
+            }
+        } catch (e) {
+            showAlert(`Opening ${groupPlatforms.length} Facebook group(s)...`, 'info');
+        }
+
+        // Open each group in a new tab (small delay between each to avoid popup blocker)
+        groupPlatforms.forEach((p, i) => {
+            const groupUrl = p.replace('facebook-group:', '');
+            setTimeout(() => window.open(groupUrl, '_blank'), i * 400);
+        });
+    }
+
+    // Filter out all client-side-only platforms before sending to API
+    const apiPlatforms = selectedPlatforms.filter(p =>
+        p !== 'facebook-personal' && p !== 'twitter' && !p.startsWith('facebook-group:')
+    );
     if (apiPlatforms.length === 0) return;
 
     // Disable publish button
