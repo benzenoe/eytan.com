@@ -1558,8 +1558,27 @@ const ORANGE = '#FF9900';
 // ── FADE IN ──
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+}, { threshold: 0.01, rootMargin: "0px 0px -10px 0px" });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Instantly show section if navigated to via anchor link
+function revealAnchorTarget() {
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector(hash);
+    if (target) {
+      target.classList.add('visible');
+      // Also reveal all previous sections
+      document.querySelectorAll('.fade-in').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight + 200) {
+          el.classList.add('visible');
+        }
+      });
+    }
+  }
+}
+window.addEventListener('hashchange', revealAnchorTarget);
+window.addEventListener('load', revealAnchorTarget);
 
 // ── TAB SWITCH ──
 function switchTab(name) {
