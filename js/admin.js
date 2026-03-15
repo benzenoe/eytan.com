@@ -854,15 +854,21 @@ async function publishToSocialInline() {
         }
     }
 
-    // Handle Facebook Personal Share — generate AI caption, copy to clipboard, open share dialog
-    if (selectedPlatforms.includes('facebook-personal')) {
+    // Collect all platforms that need an AI Facebook caption shown in a modal
+    const needsFbCaption =
+        selectedPlatforms.includes('facebook-personal') ||
+        selectedPlatforms.includes('whatsapp') ||
+        selectedPlatforms.some(p => p.startsWith('facebook-group:'));
+
+    if (needsFbCaption) {
         const post = blogPosts.find(p => p.id === currentPublishingPostId);
         if (post && post.slug) {
             const postUrl = `https://eytan.com/blog/${post.slug}.html`;
-            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
+            const groupPlatforms = selectedPlatforms.filter(p => p.startsWith('facebook-group:'));
 
+            // Generate AI caption
+            let caption = '';
             try {
-                // Generate AI caption for Facebook
                 const previewResponse = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -871,72 +877,50 @@ async function publishToSocialInline() {
                 });
                 const previewData = await previewResponse.json();
                 const fbPreview = previewData.previews && previewData.previews.find(p => p.platform === 'facebook');
+                if (fbPreview && fbPreview.content) caption = fbPreview.content;
+            } catch (e) { /* caption stays empty */ }
 
-                if (fbPreview && fbPreview.content) {
-                    await navigator.clipboard.writeText(fbPreview.content);
-                    showAlert('✅ Caption copied! In the Facebook dialog: click the text field → press Cmd+V (Mac) or Ctrl+V (Windows) to paste.', 'success');
-                }
-            } catch (e) {
-                showAlert('Opening Facebook share dialog...', 'info');
-            }
+            // Build modal with the caption visible + action buttons
+            const fbPersonalBtn = selectedPlatforms.includes('facebook-personal')
+                ? `<button onclick="navigator.clipboard.writeText(document.getElementById('fb-caption-text').value); document.getElementById('fb-caption-text').select(); window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}','fb-share','width=620,height=540,resizable=yes'); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> Open Facebook Personal</button>`
+                : '';
 
-            window.open(shareUrl, 'facebook-share', 'width=620,height=540,resizable=yes');
-        }
-    }
+            const groupBtns = groupPlatforms.map((p, i) => {
+                const url = p.replace('facebook-group:', '');
+                const label = url.includes('reignation') ? 'REIGNation' :
+                              url.includes('benzeno') ? 'Benzeno Group' :
+                              url.includes('208780250279') ? 'My name is Eytan' :
+                              url.includes('6064131423672561') ? 'ChatGPT & RE Mastermind' :
+                              url.includes('1884805645306198') ? 'New to Lisbon' :
+                              url.includes('871719803845126') ? 'New to Surfside' : `Group ${i+1}`;
+                return `<button onclick="window.open('${url}','_blank'); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> ${label}</button>`;
+            }).join('');
 
-    // Handle Facebook Groups — generate AI caption, copy to clipboard, open each group tab
-    const groupPlatforms = selectedPlatforms.filter(p => p.startsWith('facebook-group:'));
-    if (groupPlatforms.length > 0) {
-        try {
-            const previewResponse = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ platforms: ['facebook'] })
-            });
-            const previewData = await previewResponse.json();
-            const fbPreview = previewData.previews && previewData.previews.find(p => p.platform === 'facebook');
+            const waBtn = selectedPlatforms.includes('whatsapp')
+                ? `<button onclick="const msg=document.getElementById('fb-caption-text').value+'\\n\\n${postUrl}'; navigator.clipboard.writeText(msg); window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(msg),'_blank'); this.textContent='✅ Opened!';" style="background:#25D366;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-whatsapp"></i> Open WhatsApp</button>`
+                : '';
 
-            if (fbPreview && fbPreview.content) {
-                await navigator.clipboard.writeText(fbPreview.content);
-                showAlert(`✅ Caption copied! Opening ${groupPlatforms.length} group(s) — paste into each tab.`, 'success');
-            }
-        } catch (e) {
-            showAlert(`Opening ${groupPlatforms.length} Facebook group(s)...`, 'info');
-        }
-
-        // Open each group in a new tab (small delay between each to avoid popup blocker)
-        groupPlatforms.forEach((p, i) => {
-            const groupUrl = p.replace('facebook-group:', '');
-            setTimeout(() => window.open(groupUrl, '_blank'), i * 400);
-        });
-    }
-
-    // Handle WhatsApp — generate AI caption, copy to clipboard, open share dialog
-    if (selectedPlatforms.includes('whatsapp')) {
-        const post = blogPosts.find(p => p.id === currentPublishingPostId);
-        if (post && post.slug) {
-            const postUrl = `https://eytan.com/blog/${post.slug}.html`;
-            try {
-                const previewResponse = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                    body: JSON.stringify({ platforms: ['facebook'] })
-                });
-                const previewData = await previewResponse.json();
-                const waPreview = previewData.previews && previewData.previews.find(p => p.platform === 'facebook');
-                if (waPreview && waPreview.content) {
-                    const fullMessage = waPreview.content + '\n\n' + postUrl;
-                    await navigator.clipboard.writeText(fullMessage);
-                    showAlert('✅ WhatsApp message copied! Opening share dialog...', 'success');
-                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(fullMessage)}`, '_blank');
-                } else {
-                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(postUrl)}`, '_blank');
-                }
-            } catch (e) {
-                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`https://eytan.com/blog/${post.slug}.html`)}`, '_blank');
-            }
+            const modal = document.createElement('div');
+            modal.id = 'fb-caption-modal';
+            modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;';
+            modal.innerHTML = `
+                <div style="background:white;border-radius:12px;padding:2rem;max-width:600px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                        <h3 style="margin:0;color:#1877F2;"><i class="fab fa-facebook"></i> AI-Generated Caption</h3>
+                        <button onclick="document.getElementById('fb-caption-modal').remove();" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#6c757d;">✕</button>
+                    </div>
+                    <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.5rem;">Select all → Copy → Paste into the Facebook/WhatsApp dialog:</p>
+                    <textarea id="fb-caption-text" style="width:100%;height:180px;padding:0.75rem;border:2px solid #1877F2;border-radius:8px;font-size:0.9rem;line-height:1.6;resize:vertical;box-sizing:border-box;">${caption}</textarea>
+                    <div style="display:flex;gap:0.5rem;margin-top:0.75rem;">
+                        <button onclick="document.getElementById('fb-caption-text').select(); document.execCommand('copy'); this.textContent='✅ Copied!'; setTimeout(()=>this.textContent='📋 Copy Caption',2000);" style="background:#667eea;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">📋 Copy Caption</button>
+                    </div>
+                    <hr style="margin:1rem 0;border-color:#dee2e6;">
+                    <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.75rem;">Click to open each destination. Caption will be auto-copied when you click:</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                        ${fbPersonalBtn}${groupBtns}${waBtn}
+                    </div>
+                </div>`;
+            document.body.appendChild(modal);
         }
     }
 
