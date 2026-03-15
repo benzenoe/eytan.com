@@ -545,6 +545,12 @@ async function openSocialPublishModal(postId) {
                                     <span style="font-weight: 500; flex: 1;">LinkedIn</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(200-300 words)</span>
                                 </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#25D366'; this.style.background='#f0fff4'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
+                                    <input type="checkbox" class="platform-check" value="whatsapp" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">WhatsApp</span>
+                                    <span style="font-size: 0.85rem; color: #6c757d;">(AI caption + opens share)</span>
+                                </label>
                             </div>
                         </div>
 
@@ -904,9 +910,37 @@ async function publishToSocialInline() {
         });
     }
 
+    // Handle WhatsApp — generate AI caption, copy to clipboard, open share dialog
+    if (selectedPlatforms.includes('whatsapp')) {
+        const post = blogPosts.find(p => p.id === currentPublishingPostId);
+        if (post && post.slug) {
+            const postUrl = `https://eytan.com/blog/${post.slug}.html`;
+            try {
+                const previewResponse = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ platforms: ['facebook'] })
+                });
+                const previewData = await previewResponse.json();
+                const waPreview = previewData.previews && previewData.previews.find(p => p.platform === 'facebook');
+                if (waPreview && waPreview.content) {
+                    const fullMessage = waPreview.content + '\n\n' + postUrl;
+                    await navigator.clipboard.writeText(fullMessage);
+                    showAlert('✅ WhatsApp message copied! Opening share dialog...', 'success');
+                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(fullMessage)}`, '_blank');
+                } else {
+                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(postUrl)}`, '_blank');
+                }
+            } catch (e) {
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`https://eytan.com/blog/${post.slug}.html`)}`, '_blank');
+            }
+        }
+    }
+
     // Filter out all client-side-only platforms before sending to API
     const apiPlatforms = selectedPlatforms.filter(p =>
-        p !== 'facebook-personal' && p !== 'twitter' && !p.startsWith('facebook-group:')
+        p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' && !p.startsWith('facebook-group:')
     );
     if (apiPlatforms.length === 0) return;
 
