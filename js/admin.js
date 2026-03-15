@@ -1177,6 +1177,14 @@ async function publishToSocial() {
 }
 
 // Load social media status for a post
+function fbIconFallback(el, border, label) {
+    const span = document.createElement('span');
+    span.style.cssText = `display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#1877F2;font-size:9px;color:white;font-weight:bold;`;
+    span.title = el.title;
+    span.textContent = label;
+    el.parentNode && el.parentNode.replaceChild(span, el);
+}
+
 async function loadSocialStatus(postId) {
     try {
         const response = await fetch(`${API_URL}/social/status/${postId}`, {
@@ -1210,7 +1218,9 @@ async function loadSocialStatus(postId) {
                 iconHTML = `<img src="${API_URL}/social/facebook/picture/benzeno" style="${iconStyle}border-radius:50%;" title="${title}" onerror="this.src='images/profile.jpg'">`;
             } else if (sp.platform.startsWith('facebook:')) {
                 const pageId = sp.platform.split(':')[1];
-                iconHTML = `<img src="${API_URL}/social/facebook/picture/${pageId}" style="${iconStyle}" title="${title}" onerror="this.style.display='none'">`;
+                const pageName = (typeof fbPageNames !== 'undefined' && fbPageNames[pageId]) || '';
+                const pageLabel = pageName ? pageName[0].toUpperCase() : 'F';
+                iconHTML = `<img src="${API_URL}/social/facebook/picture/${pageId}" style="${iconStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','${pageLabel}')">`;
             } else if (sp.platform.startsWith('facebook-group:')) {
                 const groupUrl = sp.platform.replace('facebook-group:', '');
                 const groupId = groupUrl.includes('208780250279') ? '208780250279' :
@@ -1220,7 +1230,7 @@ async function loadSocialStatus(postId) {
                                 groupUrl.includes('reignation') ? 'reignation' :
                                 groupUrl.includes('benzeno') ? 'benzeno' : null;
                 iconHTML = groupId
-                    ? `<img src="${API_URL}/social/facebook/picture/${groupId}" style="${iconStyle}" title="${title}" onerror="this.style.display='none'">`
+                    ? `<img src="${API_URL}/social/facebook/picture/${groupId}" style="${iconStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','G')">`
                     : `<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#1877F2;font-size:10px;color:white;font-weight:bold;" title="${title}">G</span>`;
             } else {
                 // Generic Facebook fallback
