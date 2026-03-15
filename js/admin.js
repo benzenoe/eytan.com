@@ -7,7 +7,8 @@ console.log('API_URL:', API_URL);
 
 let blogPosts = [];
 let currentEditId = null;
-const fbPageNames = {}; // map of page ID → page name
+const fbPageNames = {};    // page ID → page name
+const fbPagePictures = {}; // page ID → direct CDN picture URL
 
 // Load blog data from API
 async function prefetchFacebookPageNames() {
@@ -15,7 +16,11 @@ async function prefetchFacebookPageNames() {
         const response = await fetch(`${API_URL}/social/facebook/pages`, { credentials: 'include' });
         if (!response.ok) return;
         const data = await response.json();
-        (data.pages || []).forEach(page => { fbPageNames[page.id] = page.name; });
+        (data.pages || []).forEach(page => {
+            fbPageNames[page.id] = page.name;
+            const url = page.picture?.data?.url;
+            if (url) fbPagePictures[page.id] = url;
+        });
     } catch (e) { /* silent — icons fall back gracefully */ }
 }
 
@@ -1235,7 +1240,9 @@ function buildSocialIconInner(sp) {
         const pageId = sp.platform.split(':')[1];
         const pageName = fbPageNames[pageId] || '';
         const pageLabel = pageName ? pageName[0].toUpperCase() : 'F';
-        return `<img src="${API_URL}/social/facebook/picture/${pageId}" style="${imgStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','${pageLabel}')">`;
+        // Use direct CDN URL from pages API (most reliable); proxy as fallback
+        const picUrl = fbPagePictures[pageId] || `${API_URL}/social/facebook/picture/${pageId}`;
+        return `<img src="${picUrl}" style="${imgStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','${pageLabel}')">`;
     }
     if (sp.platform.startsWith('facebook-group:')) {
         const groupId = extractGroupId(sp.platform.replace('facebook-group:', ''));
