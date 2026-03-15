@@ -166,6 +166,40 @@
     .highlight:hover .highlight-ring { transform: scale(1.05); }
     .highlight-label { font-size: 0.7rem; text-align: center; max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+    /* ── Link buttons ── */
+    .linkbtns-wrap {
+      max-width: 600px;
+      margin: 0.5rem auto 0.25rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .linkbtn {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 12px;
+      background: white;
+      border: 1px solid #dbdbdb;
+      text-decoration: none;
+      color: #262626;
+      font-size: 0.9rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .linkbtn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .linkbtn-ai  { border-left: 4px solid #667eea; }
+    .linkbtn-re  { border-left: 4px solid #28a745; }
+    .linkbtn-reign { border-left: 4px solid #d4a017; }
+    .linkbtn-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .linkbtn-text { flex: 1; line-height: 1.3; }
+    .linkbtn-arrow { color: #8e8e8e; font-size: 1.2rem; flex-shrink: 0; }
+
     /* ── Tab nav ── */
     .tab-nav {
       max-width: 935px;
@@ -363,7 +397,7 @@
     </div>
   </div>
 
-  <!-- Highlights -->
+  <!-- Highlights / Stories -->
   <div class="highlights">
     <a class="highlight" href="https://eytan.com/blog?tag=AI" target="_blank">
       <div class="highlight-ring">🤖</div>
@@ -387,11 +421,44 @@
     </a>
     <a class="highlight" href="https://soldhere.com" target="_blank">
       <div class="highlight-ring">🏡</div>
-      <span class="highlight-label">SoldHere</span>
+      <span class="highlight-label">SoldHere US</span>
+    </a>
+    <a class="highlight" href="https://soldhere.pt" target="_blank">
+      <div class="highlight-ring">🇵🇹</div>
+      <span class="highlight-label">SoldHere PT</span>
     </a>
     <a class="highlight" href="https://reignation.com" target="_blank">
       <div class="highlight-ring">👑</div>
       <span class="highlight-label">REIGNation</span>
+    </a>
+  </div>
+
+  <!-- Link buttons -->
+  <div class="linkbtns-wrap">
+    <a class="linkbtn" href="https://eytan.com" target="_blank">
+      <span class="linkbtn-icon">🌐</span>
+      <span class="linkbtn-text"><strong>Eytan.com</strong> — Personal Site &amp; Blog</span>
+      <span class="linkbtn-arrow">›</span>
+    </a>
+    <a class="linkbtn linkbtn-ai" href="https://bogen.ai" target="_blank">
+      <span class="linkbtn-icon">🧠</span>
+      <span class="linkbtn-text"><strong>Bogen.ai</strong> — AI Consulting &amp; Marketing Automation</span>
+      <span class="linkbtn-arrow">›</span>
+    </a>
+    <a class="linkbtn linkbtn-re" href="https://soldhere.com" target="_blank">
+      <span class="linkbtn-icon">🏡</span>
+      <span class="linkbtn-text"><strong>SoldHere.com</strong> — Real Estate USA &amp; Florida</span>
+      <span class="linkbtn-arrow">›</span>
+    </a>
+    <a class="linkbtn linkbtn-re" href="https://soldhere.pt" target="_blank">
+      <span class="linkbtn-icon">🇵🇹</span>
+      <span class="linkbtn-text"><strong>SoldHere.pt</strong> — Real Estate Portugal</span>
+      <span class="linkbtn-arrow">›</span>
+    </a>
+    <a class="linkbtn linkbtn-reign" href="https://reignation.com" target="_blank">
+      <span class="linkbtn-icon">👑</span>
+      <span class="linkbtn-text"><strong>REIGNation.com</strong> — Coaching &amp; Mastermind</span>
+      <span class="linkbtn-arrow">›</span>
     </a>
   </div>
 
