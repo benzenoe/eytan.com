@@ -893,7 +893,9 @@ async function publishToSocialInline() {
                               url.includes('6064131423672561') ? 'ChatGPT & RE Mastermind' :
                               url.includes('1884805645306198') ? 'New to Lisbon' :
                               url.includes('871719803845126') ? 'New to Surfside' : `Group ${i+1}`;
-                return `<button onclick="window.open('${url}','_blank'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})}); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> ${label}</button>`;
+                const gid = url.includes('208780250279') ? '208780250279' : url.includes('6064131423672561') ? '6064131423672561' : url.includes('1884805645306198') ? '1884805645306198' : url.includes('871719803845126') ? '871719803845126' : url.includes('reignation') ? 'reignation' : url.includes('benzeno') ? 'benzeno' : null;
+                const gImg = gid ? `<img src="${API_URL}/social/facebook/picture/${gid}" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;margin-right:4px;" onerror="this.style.display='none'">` : '<i class="fab fa-facebook" style="margin-right:4px;"></i>';
+                return `<button onclick="window.open('${url}','_blank'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})}); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">${gImg}${label}</button>`;
             }).join('');
 
             const waBtn = selectedPlatforms.includes('whatsapp')
@@ -1193,19 +1195,21 @@ async function loadSocialStatus(postId) {
             } else if (sp.platform === 'linkedin') {
                 iconHTML = `<i class="fab fa-linkedin" style="font-size:18px;color:${failed ? '#dc3545' : '#0A66C2'};"></i>`;
             } else if (sp.platform === 'facebook-personal') {
-                iconHTML = `<img src="images/profile.jpg" style="${iconStyle}border-radius:50%;" title="${title}">`;
+                iconHTML = `<img src="${API_URL}/social/facebook/picture/benzeno" style="${iconStyle}border-radius:50%;" title="${title}" onerror="this.src='images/profile.jpg'">`;
             } else if (sp.platform.startsWith('facebook:')) {
                 const pageId = sp.platform.split(':')[1];
-                iconHTML = `<img src="https://graph.facebook.com/${pageId}/picture?type=square" style="${iconStyle}" title="${title}" onerror="this.style.display='none'">`;
+                iconHTML = `<img src="${API_URL}/social/facebook/picture/${pageId}" style="${iconStyle}" title="${title}" onerror="this.style.display='none'">`;
             } else if (sp.platform.startsWith('facebook-group:')) {
                 const groupUrl = sp.platform.replace('facebook-group:', '');
-                const label = groupUrl.includes('reignation') ? 'R' :
-                              groupUrl.includes('benzeno') ? 'B' :
-                              groupUrl.includes('208780250279') ? 'E' :
-                              groupUrl.includes('6064131423672561') ? 'AI' :
-                              groupUrl.includes('1884805645306198') ? 'L' :
-                              groupUrl.includes('871719803845126') ? 'S' : 'G';
-                iconHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#1877F2;font-size:10px;color:white;font-weight:bold;" title="${title}">${label}</span>`;
+                const groupId = groupUrl.includes('208780250279') ? '208780250279' :
+                                groupUrl.includes('6064131423672561') ? '6064131423672561' :
+                                groupUrl.includes('1884805645306198') ? '1884805645306198' :
+                                groupUrl.includes('871719803845126') ? '871719803845126' :
+                                groupUrl.includes('reignation') ? 'reignation' :
+                                groupUrl.includes('benzeno') ? 'benzeno' : null;
+                iconHTML = groupId
+                    ? `<img src="${API_URL}/social/facebook/picture/${groupId}" style="${iconStyle}" title="${title}" onerror="this.style.display='none'">`
+                    : `<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#1877F2;font-size:10px;color:white;font-weight:bold;" title="${title}">G</span>`;
             } else {
                 // Generic Facebook fallback
                 iconHTML = `<i class="fab fa-facebook" style="font-size:18px;color:${failed ? '#dc3545' : '#1877F2'};"></i>`;
