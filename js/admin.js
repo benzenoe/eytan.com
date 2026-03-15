@@ -1264,8 +1264,9 @@ function buildSocialIconInner(sp) {
     }
     if (sp.platform.startsWith('facebook-group:')) {
         const groupId = extractGroupId(sp.platform.replace('facebook-group:', ''));
-        if (groupId) return `<img src="${API_URL}/social/facebook/picture/${groupId}" style="${imgStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','G')">`;
-        return `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:${border};background:#1877F2;font-size:9px;color:white;font-weight:bold;" title="${title}">G</span>`;
+        const label = socialPlatformLabel(sp.platform)[0] || 'G';
+        if (groupId) return `<img src="${API_URL}/social/facebook/cover/${groupId}" style="${imgStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','${label}')">`;
+        return `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:${border};background:#1877F2;font-size:9px;color:white;font-weight:bold;" title="${title}">${label}</span>`;
     }
     if (sp.platform === 'twitter') {
         return `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:${border};background:#000;font-size:10px;color:white;font-weight:bold;" title="${title}">𝕏</span>`;
