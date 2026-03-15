@@ -7,6 +7,7 @@ console.log('API_URL:', API_URL);
 
 let blogPosts = [];
 let currentEditId = null;
+const fbPageNames = {}; // map of page ID → page name
 
 // Load blog data from API
 async function loadBlogData() {
@@ -405,6 +406,9 @@ async function loadFacebookPagesIntoModal() {
             container.innerHTML = `<span style="color: #6c757d; font-size: 0.85rem;"><i class="fab fa-facebook" style="color: #4267B2;"></i> No Facebook pages found</span>`;
             return;
         }
+
+        // Store page names for use in results display
+        data.pages.forEach(page => { fbPageNames[page.id] = page.name; });
 
         const labelStyle = `display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; border-radius: 4px; transition: background 0.2s;`;
         container.innerHTML = `
@@ -972,7 +976,7 @@ async function publishToSocialInline() {
                         <div style="padding: 1rem; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 0.5rem;">
                             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                                 <i class="fas fa-check-circle" style="color: #28a745;"></i>
-                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
                                 <span style="color: #155724;">- Published successfully!</span>
                             </div>
                             ${result.url ? `<a href="${result.url}" target="_blank" style="color: #0066cc; font-size: 0.9rem;">View post <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></a>` : ''}
@@ -984,7 +988,7 @@ async function publishToSocialInline() {
                         <div style="padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem;">
                             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
                                 <i class="fas fa-copy" style="color: #856404;"></i>
-                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
                                 <span style="color: #856404;">- Ready for manual posting</span>
                             </div>
                             <div style="background: white; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; white-space: pre-wrap; border: 1px solid #dee2e6;">
@@ -1004,7 +1008,7 @@ async function publishToSocialInline() {
                         <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.5rem;">
                             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                                 <i class="fas fa-times-circle" style="color: #dc3545;"></i>
-                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
                                 <span style="color: #721c24;">- Failed</span>
                             </div>
                             <p style="margin: 0; color: #721c24; font-size: 0.9rem;">${result.error}</p>
@@ -1102,7 +1106,7 @@ async function publishToSocial() {
                         <div style="padding: 1rem; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 0.5rem;">
                             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                                 <i class="fas fa-check-circle" style="color: #28a745;"></i>
-                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
                                 <span style="color: #155724;">- Published successfully!</span>
                             </div>
                             ${result.url ? `<a href="${result.url}" target="_blank" style="color: #0066cc; font-size: 0.9rem;">View post <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></a>` : ''}
@@ -1115,7 +1119,7 @@ async function publishToSocial() {
                         <div style="padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem;">
                             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
                                 <i class="fas fa-copy" style="color: #856404;"></i>
-                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
                                 <span style="color: #856404;">- Ready for manual posting</span>
                             </div>
                             <div style="background: white; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; white-space: pre-wrap; border: 1px solid #dee2e6;">
@@ -1135,7 +1139,7 @@ async function publishToSocial() {
                         <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.5rem;">
                             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                                 <i class="fas fa-exclamation-circle" style="color: #dc3545;"></i>
-                                <strong style="text-transform: capitalize;">${result.platform}</strong>
+                                <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
                                 <span style="color: #721c24;">- Failed</span>
                             </div>
                             <p style="margin: 0; font-size: 0.9rem; color: #721c24;">${result.error}</p>
