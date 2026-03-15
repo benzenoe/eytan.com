@@ -1221,7 +1221,16 @@ function socialPlatformLabel(platform) {
         const pid = platform.split(':')[1];
         return fbPageNames[pid] || 'Facebook Page';
     }
-    if (platform.startsWith('facebook-group:')) return 'Facebook Group';
+    if (platform.startsWith('facebook-group:')) {
+        const u = platform.replace('facebook-group:', '');
+        if (u.includes('208780250279'))    return 'My name is Eytan';
+        if (u.includes('6064131423672561')) return 'ChatGPT & RE Mastermind';
+        if (u.includes('1884805645306198')) return 'New to Lisbon';
+        if (u.includes('871719803845126')) return 'New to Surfside';
+        if (u.includes('reignation'))      return 'REIGNation';
+        if (u.includes('benzeno'))         return 'Benzeno Group';
+        return 'Facebook Group';
+    }
     return platform;
 }
 
