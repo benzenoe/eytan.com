@@ -639,8 +639,10 @@ async function previewSocialContent() {
         const selectedPlatforms = Array.from(expandableRow.querySelectorAll('.platform-check:checked'))
             .map(cb => cb.value);
 
-        // Remove duplicates (in case of any issues)
-        const uniquePlatforms = [...new Set(selectedPlatforms)];
+        // Remove duplicates and filter out client-side-only platforms
+        const uniquePlatforms = [...new Set(
+            selectedPlatforms.filter(p => p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' && !p.startsWith('facebook-group:'))
+        )];
 
         console.log('Selected platforms:', selectedPlatforms);
         console.log('Unique platforms:', uniquePlatforms);
