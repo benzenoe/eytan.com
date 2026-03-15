@@ -913,6 +913,7 @@ async function publishToSocialInline() {
                     <textarea id="fb-caption-text" style="width:100%;height:180px;padding:0.75rem;border:2px solid #1877F2;border-radius:8px;font-size:0.9rem;line-height:1.6;resize:vertical;box-sizing:border-box;">${caption}</textarea>
                     <div style="display:flex;gap:0.5rem;margin-top:0.75rem;">
                         <button onclick="document.getElementById('fb-caption-text').select(); document.execCommand('copy'); this.textContent='✅ Copied!'; setTimeout(()=>this.textContent='📋 Copy Caption',2000);" style="background:#667eea;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">📋 Copy Caption</button>
+                        <button id="fb-regenerate-btn" onclick="regenerateFbCaption('${currentPublishingPostId}')" style="background:#f8f9fa;color:#495057;border:2px solid #dee2e6;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">🔄 Regenerate</button>
                     </div>
                     <hr style="margin:1rem 0;border-color:#dee2e6;">
                     <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.75rem;">Click to open each destination. Caption will be auto-copied when you click:</p>
@@ -1211,6 +1212,37 @@ async function loadSocialStatus(postId) {
         console.error('Failed to load social status:', error);
         return '';
     }
+}
+
+// Regenerate AI caption in the Facebook caption modal
+async function regenerateFbCaption(postId) {
+    const btn = document.getElementById('fb-regenerate-btn');
+    const textarea = document.getElementById('fb-caption-text');
+    if (!btn || !textarea) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Regenerating...';
+
+    try {
+        const response = await fetch(`${API_URL}/social/preview/${postId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ platforms: ['facebook'] })
+        });
+        const data = await response.json();
+        const fbPreview = data.previews && data.previews.find(p => p.platform === 'facebook');
+        if (fbPreview && fbPreview.content) {
+            textarea.value = fbPreview.content;
+        } else {
+            showAlert('Regeneration failed: ' + (data.error || 'Unknown error'), 'error');
+        }
+    } catch (e) {
+        showAlert('Regeneration failed: ' + e.message, 'error');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '🔄 Regenerate';
 }
 
 // Copy to clipboard function
