@@ -10,9 +10,21 @@ let currentEditId = null;
 const fbPageNames = {}; // map of page ID → page name
 
 // Load blog data from API
+async function prefetchFacebookPageNames() {
+    try {
+        const response = await fetch(`${API_URL}/social/facebook/pages`, { credentials: 'include' });
+        if (!response.ok) return;
+        const data = await response.json();
+        (data.pages || []).forEach(page => { fbPageNames[page.id] = page.name; });
+    } catch (e) { /* silent — icons fall back gracefully */ }
+}
+
 async function loadBlogData() {
     console.log('loadBlogData called');
     try {
+        // Prefetch Facebook page names so status icons show correct tooltips
+        await prefetchFacebookPageNames();
+
         console.log('Fetching from:', `${API_URL}/posts?status=all`);
         const response = await fetch(`${API_URL}/posts?status=all`, {
             method: 'GET',
@@ -1202,7 +1214,19 @@ async function loadSocialStatus(postId) {
         for (const sp of posts) {
             const failed = sp.status === 'failed';
             const border = failed ? '2px solid #dc3545' : '2px solid #28a745';
-            const title = failed ? `${sp.platform} — FAILED` : `Posted: ${sp.platform}`;
+            // Build a human-readable platform label for the tooltip
+            let platformLabel = sp.platform;
+            if (sp.platform === 'twitter') platformLabel = 'X / Twitter';
+            else if (sp.platform === 'instagram') platformLabel = 'Instagram';
+            else if (sp.platform === 'linkedin') platformLabel = 'LinkedIn';
+            else if (sp.platform === 'facebook-personal') platformLabel = 'Facebook (Personal)';
+            else if (sp.platform.startsWith('facebook:')) {
+                const pid = sp.platform.split(':')[1];
+                platformLabel = fbPageNames[pid] ? `Facebook: ${fbPageNames[pid]}` : `Facebook Page`;
+            } else if (sp.platform.startsWith('facebook-group:')) {
+                platformLabel = 'Facebook Group';
+            }
+            const title = failed ? `${platformLabel} — FAILED` : `Posted: ${platformLabel}`;
             const link = sp.platform_url && !failed ? sp.platform_url : null;
             const iconStyle = `width:20px;height:20px;border-radius:4px;border:${border};object-fit:cover;vertical-align:middle;`;
 
