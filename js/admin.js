@@ -874,7 +874,7 @@ async function publishToSocialInline() {
 
                 if (fbPreview && fbPreview.content) {
                     await navigator.clipboard.writeText(fbPreview.content);
-                    showAlert('✅ Facebook caption copied to clipboard! Paste it into the share dialog.', 'success');
+                    showAlert('✅ Caption copied! In the Facebook dialog: click the text field → press Cmd+V (Mac) or Ctrl+V (Windows) to paste.', 'success');
                 }
             } catch (e) {
                 showAlert('Opening Facebook share dialog...', 'info');
