@@ -217,6 +217,45 @@
         </div>
     </section>
 
+    <!-- Latest on Instagram -->
+    <section style="padding: 4rem 0; background: #f8f9fa;">
+        <div class="container">
+            <h2 style="text-align:center; margin-bottom: 0.5rem; font-size: 1.8rem; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Latest on Instagram</h2>
+            <p style="text-align:center; color: #666; margin-bottom: 2rem;">
+                <a href="https://www.instagram.com/benzenoe/" target="_blank" style="color: #667eea; text-decoration: none;">@benzenoe</a>
+            </p>
+            <div id="ig-feed-home" style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
+                <div style="color: #999; font-size: 0.9rem; padding: 2rem;">Loading Instagram posts...</div>
+            </div>
+            <div style="text-align:center; margin-top: 1.5rem;">
+                <a href="https://www.instagram.com/benzenoe/" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #667eea, #764ba2); border: none; color: white; padding: 0.75rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600;">Follow on Instagram</a>
+            </div>
+        </div>
+    </section>
+    <script>
+    (function() {
+        const feed = document.getElementById('ig-feed-home');
+        fetch('https://api.eytan.com/api/social/instagram/feed?limit=6')
+            .then(r => r.json())
+            .then(data => {
+                const posts = data.posts || [];
+                if (!posts.length) { feed.innerHTML = '<div style="color:#999;padding:2rem;">No posts yet.</div>'; return; }
+                feed.innerHTML = posts.map(p => {
+                    const imgSrc = p.media_type === 'VIDEO' ? (p.thumbnail_url || p.media_url) : p.media_url;
+                    const caption = (p.caption || '').slice(0, 80) + ((p.caption || '').length > 80 ? '…' : '');
+                    return `<a href="${p.permalink}" target="_blank" rel="noopener" style="flex:0 0 200px; scroll-snap-align:start; text-decoration:none; color:inherit; border-radius:12px; overflow:hidden; background:#fff; box-shadow:0 2px 12px rgba(0,0,0,0.08); display:block;">
+                        <div style="width:200px; height:200px; overflow:hidden; background:#eee; position:relative;">
+                            <img src="${imgSrc}" alt="" style="width:100%; height:100%; object-fit:cover;" loading="lazy" onerror="this.style.display='none'">
+                            ${p.media_type === 'VIDEO' ? '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem;opacity:0.85;">▶</div>' : ''}
+                        </div>
+                        <div style="padding:0.75rem; font-size:0.78rem; color:#555; line-height:1.4;">${caption}</div>
+                    </a>`;
+                }).join('');
+            })
+            .catch(() => { feed.innerHTML = '<div style="color:#999;padding:2rem;">Could not load Instagram posts.</div>'; });
+    })();
+    </script>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
