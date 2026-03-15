@@ -845,6 +845,12 @@ async function publishToSocialInline() {
                 if (twPreview && twPreview.content) {
                     const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(twPreview.content)}`;
                     window.open(tweetUrl, 'x-share', 'width=600,height=420,resizable=yes');
+                    fetch(`${API_URL}/social/log-share`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({ postId: currentPublishingPostId, platform: 'twitter', url: 'https://x.com/benzeno' })
+                    });
                     showAlert('✅ X compose window opened with your tweet!', 'success');
                 }
             } catch (e) {
