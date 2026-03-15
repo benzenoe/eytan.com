@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@benzeno • Eytan Benzeno</title>
+  <meta name="description" content="Eytan Benzeno – Technologist, Operator, Real Estate Broker, AI & Marketing Specialist">
+  <link rel="icon" href="images/profile.jpg" type="image/jpeg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #fafafa;
+      color: #262626;
+      min-height: 100vh;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #dbdbdb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1rem;
+      height: 44px;
+    }
+    .topbar-handle {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+    .topbar-icons {
+      position: absolute;
+      right: 1rem;
+      display: flex;
+      gap: 1rem;
+      font-size: 1.4rem;
+    }
+    .topbar-icons a { color: #262626; text-decoration: none; }
+
+    /* ── Profile section ── */
+    .profile {
+      max-width: 935px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+    .profile-avatar-wrap {
+      flex-shrink: 0;
+      position: relative;
+      width: 86px;
+      height: 86px;
+    }
+    /* Instagram gradient ring */
+    .profile-avatar-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      z-index: 0;
+    }
+    .profile-avatar-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 50%;
+      background: #fafafa;
+      z-index: 1;
+    }
+    .profile-avatar {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 2;
+      display: block;
+    }
+
+    .profile-info { flex: 1; }
+    .profile-handle-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+    .profile-handle {
+      font-size: 1.25rem;
+      font-weight: 300;
+      letter-spacing: -0.2px;
+    }
+    .profile-btn {
+      padding: 0.3rem 1rem;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      background: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      color: #262626;
+      transition: background 0.15s;
+    }
+    .profile-btn:hover { background: #f0f0f0; }
+
+    .profile-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-bottom: 0.9rem;
+    }
+    .profile-stat { font-size: 0.9rem; color: #262626; }
+    .profile-stat strong { font-weight: 600; }
+
+    .profile-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+    .profile-bio {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #262626;
+      max-width: 480px;
+    }
+    .profile-bio a { color: #00376b; text-decoration: none; }
+    .profile-bio a:hover { text-decoration: underline; }
+
+    /* ── Highlights / Stories ── */
+    .highlights {
+      max-width: 935px;
+      margin: 0 auto 0.5rem;
+      padding: 0.5rem 1rem;
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .highlights::-webkit-scrollbar { display: none; }
+    .highlight {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      text-decoration: none;
+      color: #262626;
+    }
+    .highlight-ring {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1px solid #dbdbdb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: white;
+      transition: transform 0.15s;
+    }
+    .highlight:hover .highlight-ring { transform: scale(1.05); }
+    .highlight-label { font-size: 0.7rem; text-align: center; max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* ── Tab nav ── */
+    .tab-nav {
+      max-width: 935px;
+      margin: 0 auto;
+      border-top: 1px solid #dbdbdb;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+    }
+    .tab-btn {
+      padding: 0.75rem 0;
+      border: none;
+      border-top: 1px solid transparent;
+      background: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #8e8e8e;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: -1px;
+    }
+    .tab-btn.active {
+      border-top-color: #262626;
+      color: #262626;
+    }
+
+    /* ── Grid ── */
+    .grid-wrap {
+      max-width: 935px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .grid-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: #efefef;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .grid-item:hover img { transform: scale(1.04); }
+    .grid-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.2s ease;
+      padding: 1rem;
+    }
+    .grid-item:hover .grid-item-overlay {
+      background: rgba(0,0,0,0.45);
+    }
+    .grid-item-overlay-content {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      text-align: center;
+      color: white;
+    }
+    .grid-item:hover .grid-item-overlay-content { opacity: 1; }
+    .grid-item-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .grid-item-tag {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      margin-top: 0.25rem;
+    }
+
+    /* Placeholder for posts without image */
+    .grid-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .grid-placeholder-title {
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* ── Loading / empty ── */
+    .loading {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 3rem;
+      color: #8e8e8e;
+      font-size: 0.9rem;
+    }
+    .loading-spinner {
+      width: 28px; height: 28px;
+      border: 2px solid #dbdbdb;
+      border-top-color: #262626;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 0.75rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .profile { gap: 1.2rem; }
+      .profile-avatar-wrap { width: 74px; height: 74px; }
+      .profile-avatar { width: 74px; height: 74px; }
+      .profile-stats { gap: 1.5rem; }
+      .tab-nav { gap: 1.5rem; }
+    }
+
+    /* ── Bottom nav (mobile) ── */
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 49px;
+      background: white;
+      border-top: 1px solid #dbdbdb;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 1rem;
+      z-index: 100;
+    }
+    .bottom-nav a {
+      color: #262626;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      .bottom-nav { display: flex; }
+      body { padding-bottom: 49px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <span class="topbar-handle">benzeno</span>
+    <div class="topbar-icons">
+      <a href="https://eytan.com" title="eytan.com">🌐</a>
+    </div>
+  </div>
+
+  <!-- Profile -->
+  <div class="profile">
+    <div class="profile-avatar-wrap">
+      <img class="profile-avatar" src="images/eytan-profile-large.jpg" alt="Eytan Benzeno" onerror="this.src='images/profile.jpg'">
+    </div>
+    <div class="profile-info">
+      <div class="profile-handle-row">
+        <span class="profile-handle">benzeno</span>
+        <a class="profile-btn" href="https://eytan.com">Visit Site</a>
+        <a class="profile-btn" href="https://www.instagram.com/benzeno" target="_blank">Follow</a>
+      </div>
+      <div class="profile-stats">
+        <div class="profile-stat"><span id="post-count">—</span> <strong>posts</strong></div>
+        <div class="profile-stat"><strong>Eytan.com</strong></div>
+      </div>
+      <div class="profile-name">Eytan Benzeno — ĒīB</div>
+      <div class="profile-bio">
+        Technologist · Operator · Real Estate · AI &amp; Marketing<br>
+        🌍 Portugal &amp; USA &nbsp;|&nbsp; 🏢 <a href="https://bogen.ai" target="_blank">Bogen.ai</a> · <a href="https://soldhere.com" target="_blank">SoldHere</a> · <a href="https://reignation.com" target="_blank">REIGNation</a><br>
+        ✍️ <a href="https://eytan.com/blog">eytan.com/blog</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Highlights -->
+  <div class="highlights">
+    <a class="highlight" href="https://eytan.com/blog?tag=AI" target="_blank">
+      <div class="highlight-ring">🤖</div>
+      <span class="highlight-label">AI</span>
+    </a>
+    <a class="highlight" href="https://eytan.com/blog?tag=Real+Estate" target="_blank">
+      <div class="highlight-ring">🏠</div>
+      <span class="highlight-label">Real Estate</span>
+    </a>
+    <a class="highlight" href="https://eytan.com/blog?tag=Technology" target="_blank">
+      <div class="highlight-ring">💡</div>
+      <span class="highlight-label">Tech</span>
+    </a>
+    <a class="highlight" href="https://eytan.com/blog?tag=Business" target="_blank">
+      <div class="highlight-ring">📈</div>
+      <span class="highlight-label">Business</span>
+    </a>
+    <a class="highlight" href="https://bogen.ai" target="_blank">
+      <div class="highlight-ring">🧠</div>
+      <span class="highlight-label">Bogen.ai</span>
+    </a>
+    <a class="highlight" href="https://soldhere.com" target="_blank">
+      <div class="highlight-ring">🏡</div>
+      <span class="highlight-label">SoldHere</span>
+    </a>
+    <a class="highlight" href="https://reignation.com" target="_blank">
+      <div class="highlight-ring">👑</div>
+      <span class="highlight-label">REIGNation</span>
+    </a>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-nav">
+    <button class="tab-btn active">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
+      Posts
+    </button>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid-wrap">
+    <div class="grid" id="post-grid">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        Loading posts…
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile bottom nav -->
+  <div class="bottom-nav">
+    <a href="https://eytan.com" title="Home">🏠</a>
+    <a href="https://eytan.com/blog" title="Blog">✍️</a>
+    <a href="https://www.instagram.com/benzeno" target="_blank" title="Instagram">📷</a>
+    <a href="https://bogen.ai" target="_blank" title="Bogen.ai">🧠</a>
+  </div>
+
+  <script>
+    const API = 'https://api.eytan.com';
+
+    async function loadPosts() {
+      const grid = document.getElementById('post-grid');
+      try {
+        const res = await fetch(`${API}/posts?status=published`);
+        const data = await res.json();
+        const posts = (data.posts || []).filter(p => p.status === 'published');
+
+        document.getElementById('post-count').textContent = posts.length;
+
+        if (!posts.length) {
+          grid.innerHTML = '<div class="loading">No posts yet.</div>';
+          return;
+        }
+
+        grid.innerHTML = posts.map(post => {
+          const url = `https://eytan.com/blog/${post.slug}.html`;
+          const tag = post.tags?.[0] || '';
+          const title = post.title || '';
+
+          if (post.image) {
+            return `
+              <a class="grid-item" href="${url}" target="_blank">
+                <img src="${post.image}" alt="${title}" loading="lazy">
+                <div class="grid-item-overlay">
+                  <div class="grid-item-overlay-content">
+                    <div class="grid-item-title">${title}</div>
+                    ${tag ? `<div class="grid-item-tag">#${tag.replace(/\s+/g,'')}</div>` : ''}
+                  </div>
+                </div>
+              </a>`;
+          } else {
+            return `
+              <a class="grid-item" href="${url}" target="_blank">
+                <div class="grid-placeholder">
+                  <div class="grid-placeholder-title">${title}</div>
+                </div>
+                <div class="grid-item-overlay">
+                  <div class="grid-item-overlay-content">
+                    ${tag ? `<div class="grid-item-tag">#${tag.replace(/\s+/g,'')}</div>` : ''}
+                  </div>
+                </div>
+              </a>`;
+          }
+        }).join('');
+
+      } catch (e) {
+        grid.innerHTML = '<div class="loading">Failed to load posts.</div>';
+      }
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
