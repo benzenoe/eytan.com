@@ -924,7 +924,13 @@ async function publishToSocialInline() {
                               url.includes('871719803845126') ? 'New to Surfside' : `Group ${i+1}`;
                 const gid = url.includes('208780250279') ? '208780250279' : url.includes('6064131423672561') ? '6064131423672561' : url.includes('1884805645306198') ? '1884805645306198' : url.includes('871719803845126') ? '871719803845126' : url.includes('reignation') ? 'reignation' : url.includes('benzeno') ? 'benzeno' : null;
                 const gImg = gid ? `<img src="${API_URL}/social/facebook/picture/${gid}" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;margin-right:4px;" onerror="this.style.display='none'">` : '<i class="fab fa-facebook" style="margin-right:4px;"></i>';
-                return `<button onclick="window.open('${url}','_blank'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})}); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">${gImg}${label}</button>`;
+                return `<button onclick="
+                    navigator.clipboard.writeText(document.getElementById('fb-caption-text').value);
+                    window.open('${url}','fb-group-${i}','width=900,height=700,resizable=yes,scrollbars=yes');
+                    fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})});
+                    document.getElementById('fb-group-hint').style.display='block';
+                    this.style.opacity='0.7'; this.innerHTML='✅ ${label} — Paste in group';
+                " style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">${gImg}${label}</button>`;
             }).join('');
 
             const waBtn = selectedPlatforms.includes('whatsapp')
@@ -945,6 +951,9 @@ async function publishToSocialInline() {
                     <div style="display:flex;gap:0.5rem;margin-top:0.75rem;">
                         <button onclick="document.getElementById('fb-caption-text').select(); document.execCommand('copy'); this.textContent='✅ Copied!'; setTimeout(()=>this.textContent='📋 Copy Caption',2000);" style="background:#667eea;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">📋 Copy Caption</button>
                         <button id="fb-regenerate-btn" onclick="regenerateFbCaption('${currentPublishingPostId}')" style="background:#f8f9fa;color:#495057;border:2px solid #dee2e6;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">🔄 Regenerate</button>
+                    </div>
+                    <div id="fb-group-hint" style="display:none;background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:0.6rem 1rem;margin-top:0.75rem;font-size:0.85rem;color:#856404;">
+                        <strong>Caption copied!</strong> In the group popup: click <em>"Write something…"</em> and press <strong>Cmd+V</strong> (Mac) or <strong>Ctrl+V</strong> (Windows) to paste.
                     </div>
                     <hr style="margin:1rem 0;border-color:#dee2e6;">
                     <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.75rem;">Click to open each destination. Caption will be auto-copied when you click:</p>
