@@ -759,14 +759,16 @@ async function previewSocialContent() {
 
                     const style = platformStyles[preview.platform];
 
+                    const previewId = `preview-content-${preview.platform}`;
                     previewHTML += `
                         <div style="margin-bottom: 1rem; border: 2px solid ${style.color}; border-radius: 8px; overflow: hidden; background: white;">
                             <div style="background: ${style.bg}; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid ${style.color};">
                                 <i class="${style.icon}" style="color: ${style.color}; font-size: 1.2rem;"></i>
                                 <strong style="text-transform: capitalize; color: #333;">${preview.platform}</strong>
-                                <span style="margin-left: auto; font-size: 0.85rem; color: #6c757d;">${preview.characterCount} characters</span>
+                                <span style="font-size: 0.85rem; color: #6c757d;">${preview.characterCount} characters</span>
+                                <button onclick="regeneratePreview('${preview.platform}', '${currentPublishingPostId}', '${previewId}')" style="margin-left: auto; background: white; border: 1px solid ${style.color}; color: ${style.color}; padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">🔄 Regenerate</button>
                             </div>
-                            <div style="padding: 1rem; white-space: pre-wrap; line-height: 1.6; color: #333; font-size: 0.95rem; max-height: 300px; overflow-y: auto;">
+                            <div id="${previewId}" style="padding: 1rem; white-space: pre-wrap; line-height: 1.6; color: #333; font-size: 0.95rem; max-height: 300px; overflow-y: auto;">
                                 ${preview.content}
                             </div>
                         </div>
@@ -1237,6 +1239,38 @@ async function loadSocialStatus(postId) {
         console.error('Failed to load social status:', error);
         return '';
     }
+}
+
+// Regenerate a single platform's preview content
+async function regeneratePreview(platform, postId, containerId) {
+    const container = document.getElementById(containerId);
+    const btn = container ? container.closest('[style*="border: 2px"]').querySelector('button') : null;
+    if (!container) return;
+
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Regenerating...'; }
+    container.innerHTML = '<span style="color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating new content...</span>';
+
+    try {
+        const response = await fetch(`${API_URL}/social/preview/${postId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ platforms: [platform] })
+        });
+        const data = await response.json();
+        const preview = data.previews && data.previews.find(p => p.platform === platform);
+        if (preview && preview.content) {
+            container.textContent = preview.content;
+            const charSpan = container.closest('[style*="border: 2px"]').querySelector('span[style*="6c757d"]');
+            if (charSpan) charSpan.textContent = preview.content.length + ' characters';
+        } else {
+            container.textContent = 'Regeneration failed.';
+        }
+    } catch (e) {
+        container.textContent = 'Error: ' + e.message;
+    }
+
+    if (btn) { btn.disabled = false; btn.textContent = '🔄 Regenerate'; }
 }
 
 // Regenerate AI caption in the Facebook caption modal
