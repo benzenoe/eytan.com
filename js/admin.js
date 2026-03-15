@@ -415,7 +415,7 @@ async function loadFacebookPagesIntoModal() {
             </div>
             ${data.pages.map(page => `
                 <label style="${labelStyle}" onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background='transparent'">
-                    <input type="checkbox" class="platform-check" value="facebook:${page.id}" checked style="width: 16px; height: 16px; cursor: pointer;">
+                    <input type="checkbox" class="platform-check" value="facebook:${page.id}" style="width: 16px; height: 16px; cursor: pointer;">
                     <span style="font-size: 0.9rem; flex: 1;">${page.name}</span>
                     <span style="font-size: 0.75rem; color: #6c757d;">${page.category}</span>
                 </label>
@@ -496,7 +496,7 @@ async function openSocialPublishModal(postId) {
                         <div style="margin-bottom: 1.5rem;">
                             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
-                                    <input type="checkbox" class="platform-check" value="twitter" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <input type="checkbox" class="platform-check" value="twitter" style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-x-twitter" style="color: #000; font-size: 1.3rem;"></i>
                                     <span style="font-weight: 500; flex: 1;">X (Twitter)</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(Opens pre-filled compose)</span>
@@ -508,7 +508,7 @@ async function openSocialPublishModal(postId) {
                                     </div>
                                 </div>
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
-                                    <input type="checkbox" class="platform-check" value="facebook-personal" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <input type="checkbox" class="platform-check" value="facebook-personal" style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-facebook" style="color: #1877F2; font-size: 1.3rem;"></i>
                                     <span style="font-weight: 500; flex: 1;">Facebook (Personal Profile)</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(Opens share dialog)</span>
@@ -528,25 +528,25 @@ async function openSocialPublishModal(postId) {
                                         { name: 'Benzeno Group', url: 'https://www.facebook.com/groups/benzeno' }
                                     ].map(g => `
                                         <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.4rem 0.5rem; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#e8f0fe'" onmouseout="this.style.background='transparent'">
-                                            <input type="checkbox" class="platform-check" value="facebook-group:${g.url}" checked style="width: 15px; height: 15px; cursor: pointer;">
+                                            <input type="checkbox" class="platform-check" value="facebook-group:${g.url}" style="width: 15px; height: 15px; cursor: pointer;">
                                             <span style="font-size: 0.88rem; flex: 1;">${g.name}</span>
                                         </label>
                                     `).join('')}
                                 </div>
                                 <label id="instagram-label-inline" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
-                                    <input type="checkbox" class="platform-check" value="instagram" ${post.image ? 'checked' : 'disabled'} style="width: 18px; height: 18px; cursor: pointer;">
+                                    <input type="checkbox" class="platform-check" value="instagram" ${post.image ? '' : 'disabled'} style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-instagram" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;"></i>
                                     <span style="font-weight: 500; flex: 1;">Instagram</span>
                                     <span style="font-size: 0.85rem; color: ${post.image ? '#6c757d' : '#dc3545'};">${post.image ? '(Requires image)' : '(No image - disabled)'}</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#667eea'; this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
-                                    <input type="checkbox" class="platform-check" value="linkedin" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <input type="checkbox" class="platform-check" value="linkedin" style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-linkedin" style="color: #0A66C2; font-size: 1.3rem;"></i>
                                     <span style="font-weight: 500; flex: 1;">LinkedIn</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(200-300 words)</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#25D366'; this.style.background='#f0fff4'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
-                                    <input type="checkbox" class="platform-check" value="whatsapp" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                    <input type="checkbox" class="platform-check" value="whatsapp" style="width: 18px; height: 18px; cursor: pointer;">
                                     <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.3rem;"></i>
                                     <span style="font-weight: 500; flex: 1;">WhatsApp</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(AI caption + opens share)</span>
