@@ -893,7 +893,7 @@ async function publishToSocialInline() {
                               url.includes('6064131423672561') ? 'ChatGPT & RE Mastermind' :
                               url.includes('1884805645306198') ? 'New to Lisbon' :
                               url.includes('871719803845126') ? 'New to Surfside' : `Group ${i+1}`;
-                return `<button onclick="window.open('${url}','_blank'); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> ${label}</button>`;
+                return `<button onclick="window.open('${url}','_blank'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})}); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> ${label}</button>`;
             }).join('');
 
             const waBtn = selectedPlatforms.includes('whatsapp')
@@ -1169,43 +1169,54 @@ async function loadSocialStatus(postId) {
             credentials: 'include'
         });
 
-        if (!response.ok) {
-            return '';
-        }
+        if (!response.ok) return '';
 
         const data = await response.json();
-        let statusHTML = '<div style="display: flex; gap: 0.25rem; margin-top: 0.25rem;">';
+        const posts = data.socialPosts || [];
+        if (posts.length === 0) return '';
 
-        // Twitter
-        if (data.status.twitter && data.status.twitter.status === 'published') {
-            statusHTML += `<a href="${data.status.twitter.platform_url}" target="_blank" title="Posted on Twitter/X"><i class="fab fa-twitter" style="color: #1DA1F2;"></i></a>`;
-        } else if (data.status.twitter && data.status.twitter.status === 'failed') {
-            statusHTML += `<i class="fab fa-twitter" style="color: #dc3545;" title="Twitter publish failed"></i>`;
-        }
+        let statusHTML = '<div style="display: flex; gap: 0.3rem; margin-top: 0.3rem; flex-wrap: wrap; align-items: center;">';
 
-        // Facebook
-        if (data.status.facebook && data.status.facebook.status === 'published') {
-            statusHTML += `<a href="${data.status.facebook.platform_url}" target="_blank" title="Posted on Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a>`;
-        } else if (data.status.facebook && data.status.facebook.status === 'failed') {
-            statusHTML += `<i class="fab fa-facebook" style="color: #dc3545;" title="Facebook publish failed"></i>`;
-        }
+        for (const sp of posts) {
+            const failed = sp.status === 'failed';
+            const border = failed ? '2px solid #dc3545' : '2px solid #28a745';
+            const title = failed ? `${sp.platform} — FAILED` : `Posted: ${sp.platform}`;
+            const link = sp.platform_url && !failed ? sp.platform_url : null;
+            const iconStyle = `width:20px;height:20px;border-radius:4px;border:${border};object-fit:cover;vertical-align:middle;`;
 
-        // Instagram
-        if (data.status.instagram && data.status.instagram.status === 'published') {
-            statusHTML += `<a href="${data.status.instagram.platform_url}" target="_blank" title="Posted on Instagram"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>`;
-        } else if (data.status.instagram && data.status.instagram.status === 'failed') {
-            statusHTML += `<i class="fab fa-instagram" style="color: #dc3545;" title="Instagram publish failed"></i>`;
-        }
+            let iconHTML = '';
 
-        // LinkedIn
-        if (data.status.linkedin && data.status.linkedin.status === 'published') {
-            statusHTML += `<a href="${data.status.linkedin.platform_url}" target="_blank" title="Posted on LinkedIn"><i class="fab fa-linkedin" style="color: #0A66C2;"></i></a>`;
-        } else if (data.status.linkedin && data.status.linkedin.status === 'failed') {
-            statusHTML += `<i class="fab fa-linkedin" style="color: #dc3545;" title="LinkedIn publish failed"></i>`;
+            if (sp.platform === 'twitter') {
+                iconHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#000;font-size:11px;color:white;font-weight:bold;">𝕏</span>`;
+            } else if (sp.platform === 'instagram') {
+                iconHTML = `<i class="fab fa-instagram" style="font-size:18px;color:${failed ? '#dc3545' : '#E1306C'};"></i>`;
+            } else if (sp.platform === 'linkedin') {
+                iconHTML = `<i class="fab fa-linkedin" style="font-size:18px;color:${failed ? '#dc3545' : '#0A66C2'};"></i>`;
+            } else if (sp.platform === 'facebook-personal') {
+                iconHTML = `<img src="images/profile.jpg" style="${iconStyle}border-radius:50%;" title="${title}">`;
+            } else if (sp.platform.startsWith('facebook:')) {
+                const pageId = sp.platform.split(':')[1];
+                iconHTML = `<img src="https://graph.facebook.com/${pageId}/picture?type=square" style="${iconStyle}" title="${title}" onerror="this.style.display='none'">`;
+            } else if (sp.platform.startsWith('facebook-group:')) {
+                const groupUrl = sp.platform.replace('facebook-group:', '');
+                const label = groupUrl.includes('reignation') ? 'R' :
+                              groupUrl.includes('benzeno') ? 'B' :
+                              groupUrl.includes('208780250279') ? 'E' :
+                              groupUrl.includes('6064131423672561') ? 'AI' :
+                              groupUrl.includes('1884805645306198') ? 'L' :
+                              groupUrl.includes('871719803845126') ? 'S' : 'G';
+                iconHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#1877F2;font-size:10px;color:white;font-weight:bold;" title="${title}">${label}</span>`;
+            } else {
+                // Generic Facebook fallback
+                iconHTML = `<i class="fab fa-facebook" style="font-size:18px;color:${failed ? '#dc3545' : '#1877F2'};"></i>`;
+            }
+
+            statusHTML += link
+                ? `<a href="${link}" target="_blank" title="${title}">${iconHTML}</a>`
+                : `<span title="${title}">${iconHTML}</span>`;
         }
 
         statusHTML += '</div>';
-
         return statusHTML;
 
     } catch (error) {
