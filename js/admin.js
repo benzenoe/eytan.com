@@ -1188,83 +1188,133 @@ async function publishToSocial() {
     }
 }
 
-// Load social media status for a post
+// Fallback for Facebook profile photos that fail to load — shows a round coloured badge
 function fbIconFallback(el, border, label) {
     const span = document.createElement('span');
-    span.style.cssText = `display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#1877F2;font-size:9px;color:white;font-weight:bold;`;
+    span.style.cssText = `display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:${border};background:#1877F2;font-size:9px;color:white;font-weight:bold;flex-shrink:0;`;
     span.title = el.title;
     span.textContent = label;
     el.parentNode && el.parentNode.replaceChild(span, el);
 }
 
+// Returns a human-readable label for a social platform string
+function socialPlatformLabel(platform) {
+    if (platform === 'twitter') return 'X / Twitter';
+    if (platform === 'instagram') return 'Instagram';
+    if (platform === 'linkedin') return 'LinkedIn';
+    if (platform === 'facebook-personal') return 'Eytan Benzeno (Personal)';
+    if (platform.startsWith('facebook:')) {
+        const pid = platform.split(':')[1];
+        return fbPageNames[pid] || 'Facebook Page';
+    }
+    if (platform.startsWith('facebook-group:')) return 'Facebook Group';
+    return platform;
+}
+
+// Extracts a usable ID from a facebook-group: platform string
+function extractGroupId(groupUrl) {
+    const match = groupUrl.match(/(\d{8,})/);
+    if (match) return match[1];
+    if (groupUrl.includes('reignation')) return 'reignation';
+    if (groupUrl.includes('benzeno')) return 'benzeno';
+    return null;
+}
+
+// Builds the inner <img> or badge for a single social post icon (round, 22px)
+function buildSocialIconInner(sp) {
+    const failed = sp.status === 'failed';
+    const border = failed ? '2px solid #dc3545' : '2px solid #28a745';
+    const label = socialPlatformLabel(sp.platform);
+    const title = failed ? `${label} — FAILED` : label;
+    const imgStyle = `width:22px;height:22px;border-radius:50%;border:${border};object-fit:cover;display:block;flex-shrink:0;`;
+
+    if (sp.platform === 'facebook-personal') {
+        return `<img src="${API_URL}/social/facebook/picture/benzeno" style="${imgStyle}" title="${title}" onerror="this.src='images/profile.jpg'">`;
+    }
+    if (sp.platform.startsWith('facebook:')) {
+        const pageId = sp.platform.split(':')[1];
+        const pageName = fbPageNames[pageId] || '';
+        const pageLabel = pageName ? pageName[0].toUpperCase() : 'F';
+        return `<img src="${API_URL}/social/facebook/picture/${pageId}" style="${imgStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','${pageLabel}')">`;
+    }
+    if (sp.platform.startsWith('facebook-group:')) {
+        const groupId = extractGroupId(sp.platform.replace('facebook-group:', ''));
+        if (groupId) return `<img src="${API_URL}/social/facebook/picture/${groupId}" style="${imgStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','G')">`;
+        return `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:${border};background:#1877F2;font-size:9px;color:white;font-weight:bold;" title="${title}">G</span>`;
+    }
+    if (sp.platform === 'twitter') {
+        return `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:${border};background:#000;font-size:10px;color:white;font-weight:bold;" title="${title}">𝕏</span>`;
+    }
+    if (sp.platform === 'instagram') {
+        const col = failed ? '#dc3545' : '#E1306C';
+        return `<i class="fab fa-instagram" style="font-size:20px;color:${col};" title="${title}"></i>`;
+    }
+    if (sp.platform === 'linkedin') {
+        const col = failed ? '#dc3545' : '#0A66C2';
+        return `<i class="fab fa-linkedin" style="font-size:20px;color:${col};" title="${title}"></i>`;
+    }
+    return `<i class="fab fa-facebook" style="font-size:20px;color:${failed ? '#dc3545' : '#1877F2'};" title="${title}"></i>`;
+}
+
+// Renders a stacked cluster: [platform logo] [overlapping account avatars]
+function buildPlatformCluster(posts, logoHTML) {
+    const anySuccess = posts.some(sp => sp.status !== 'failed');
+    let avatarsHTML = '';
+    posts.forEach((sp, i) => {
+        const failed = sp.status === 'failed';
+        const link = sp.platform_url && !failed ? sp.platform_url : null;
+        const marginLeft = i === 0 ? '3px' : '-8px';
+        const zIndex = posts.length - i + 1;
+        const inner = buildSocialIconInner(sp);
+        const wrapStyle = `display:inline-block;margin-left:${marginLeft};position:relative;z-index:${zIndex};flex-shrink:0;`;
+        avatarsHTML += link
+            ? `<a href="${link}" target="_blank" style="${wrapStyle}">${inner}</a>`
+            : `<span style="${wrapStyle}">${inner}</span>`;
+    });
+    return `<div style="display:inline-flex;align-items:center;">${logoHTML}${avatarsHTML}</div>`;
+}
+
 async function loadSocialStatus(postId) {
     try {
-        const response = await fetch(`${API_URL}/social/status/${postId}`, {
-            credentials: 'include'
-        });
-
+        const response = await fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' });
         if (!response.ok) return '';
 
         const data = await response.json();
         const posts = data.socialPosts || [];
         if (posts.length === 0) return '';
 
-        let statusHTML = '<div style="display: flex; gap: 0.3rem; margin-top: 0.3rem; flex-wrap: wrap; align-items: center;">';
+        // Group by platform type
+        const fbPosts      = posts.filter(sp => sp.platform.startsWith('facebook'));
+        const twitterPosts = posts.filter(sp => sp.platform === 'twitter');
+        const igPosts      = posts.filter(sp => sp.platform === 'instagram');
+        const liPosts      = posts.filter(sp => sp.platform === 'linkedin');
 
-        for (const sp of posts) {
-            const failed = sp.status === 'failed';
-            const border = failed ? '2px solid #dc3545' : '2px solid #28a745';
-            // Build a human-readable platform label for the tooltip
-            let platformLabel = sp.platform;
-            if (sp.platform === 'twitter') platformLabel = 'X / Twitter';
-            else if (sp.platform === 'instagram') platformLabel = 'Instagram';
-            else if (sp.platform === 'linkedin') platformLabel = 'LinkedIn';
-            else if (sp.platform === 'facebook-personal') platformLabel = 'Facebook (Personal)';
-            else if (sp.platform.startsWith('facebook:')) {
-                const pid = sp.platform.split(':')[1];
-                platformLabel = fbPageNames[pid] ? `Facebook: ${fbPageNames[pid]}` : `Facebook Page`;
-            } else if (sp.platform.startsWith('facebook-group:')) {
-                platformLabel = 'Facebook Group';
-            }
-            const title = failed ? `${platformLabel} — FAILED` : `Posted: ${platformLabel}`;
-            const link = sp.platform_url && !failed ? sp.platform_url : null;
-            const iconStyle = `width:20px;height:20px;border-radius:4px;border:${border};object-fit:cover;vertical-align:middle;`;
+        let statusHTML = '<div style="display:flex;gap:0.5rem;margin-top:0.3rem;flex-wrap:wrap;align-items:center;">';
 
-            let iconHTML = '';
-
-            if (sp.platform === 'twitter') {
-                iconHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#000;font-size:11px;color:white;font-weight:bold;">𝕏</span>`;
-            } else if (sp.platform === 'instagram') {
-                iconHTML = `<i class="fab fa-instagram" style="font-size:18px;color:${failed ? '#dc3545' : '#E1306C'};"></i>`;
-            } else if (sp.platform === 'linkedin') {
-                iconHTML = `<i class="fab fa-linkedin" style="font-size:18px;color:${failed ? '#dc3545' : '#0A66C2'};"></i>`;
-            } else if (sp.platform === 'facebook-personal') {
-                iconHTML = `<img src="${API_URL}/social/facebook/picture/benzeno" style="${iconStyle}border-radius:50%;" title="${title}" onerror="this.src='images/profile.jpg'">`;
-            } else if (sp.platform.startsWith('facebook:')) {
-                const pageId = sp.platform.split(':')[1];
-                const pageName = (typeof fbPageNames !== 'undefined' && fbPageNames[pageId]) || '';
-                const pageLabel = pageName ? pageName[0].toUpperCase() : 'F';
-                iconHTML = `<img src="${API_URL}/social/facebook/picture/${pageId}" style="${iconStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','${pageLabel}')">`;
-            } else if (sp.platform.startsWith('facebook-group:')) {
-                const groupUrl = sp.platform.replace('facebook-group:', '');
-                const groupId = groupUrl.includes('208780250279') ? '208780250279' :
-                                groupUrl.includes('6064131423672561') ? '6064131423672561' :
-                                groupUrl.includes('1884805645306198') ? '1884805645306198' :
-                                groupUrl.includes('871719803845126') ? '871719803845126' :
-                                groupUrl.includes('reignation') ? 'reignation' :
-                                groupUrl.includes('benzeno') ? 'benzeno' : null;
-                iconHTML = groupId
-                    ? `<img src="${API_URL}/social/facebook/picture/${groupId}" style="${iconStyle}" title="${title}" onerror="fbIconFallback(this,'${border}','G')">`
-                    : `<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;border:${border};background:#1877F2;font-size:10px;color:white;font-weight:bold;" title="${title}">G</span>`;
-            } else {
-                // Generic Facebook fallback
-                iconHTML = `<i class="fab fa-facebook" style="font-size:18px;color:${failed ? '#dc3545' : '#1877F2'};"></i>`;
-            }
-
-            statusHTML += link
-                ? `<a href="${link}" target="_blank" title="${title}">${iconHTML}</a>`
-                : `<span title="${title}">${iconHTML}</span>`;
+        if (fbPosts.length > 0) {
+            const anyFbSuccess = fbPosts.some(sp => sp.status !== 'failed');
+            const fbColor = anyFbSuccess ? '#1877F2' : '#dc3545';
+            const fbLogo = `<i class="fab fa-facebook" style="font-size:18px;color:${fbColor};flex-shrink:0;" title="${fbPosts.length} Facebook share(s)"></i>`;
+            statusHTML += buildPlatformCluster(fbPosts, fbLogo);
         }
+        twitterPosts.forEach(sp => {
+            const failed = sp.status === 'failed';
+            const link = sp.platform_url && !failed ? sp.platform_url : null;
+            const inner = buildSocialIconInner(sp);
+            statusHTML += link ? `<a href="${link}" target="_blank">${inner}</a>` : inner;
+        });
+        igPosts.forEach(sp => {
+            const failed = sp.status === 'failed';
+            const link = sp.platform_url && !failed ? sp.platform_url : null;
+            const inner = buildSocialIconInner(sp);
+            statusHTML += link ? `<a href="${link}" target="_blank">${inner}</a>` : inner;
+        });
+        liPosts.forEach(sp => {
+            const failed = sp.status === 'failed';
+            const link = sp.platform_url && !failed ? sp.platform_url : null;
+            const inner = buildSocialIconInner(sp);
+            statusHTML += link ? `<a href="${link}" target="_blank">${inner}</a>` : inner;
+        });
 
         statusHTML += '</div>';
         return statusHTML;
