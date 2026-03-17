@@ -1325,16 +1325,20 @@ function getPlatformLabel(platform) {
 async function loadSocialHistoryPanel(postId) {
     const container = document.getElementById('socialHistoryContent');
     if (!container) return;
+    container.innerHTML = '<span style="color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Loading history…</span>';
     try {
-        // Load DB records and Facebook duplicate scan in parallel
-        const [statusRes, scanRes] = await Promise.all([
+        // Load DB records, platform verification, and duplicate scan in parallel
+        const [statusRes, verifyRes, scanRes] = await Promise.all([
             fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' }),
+            fetch(`${API_URL}/social/verify/${postId}`, { credentials: 'include' }),
             fetch(`${API_URL}/social/scan/${postId}`, { credentials: 'include' })
         ]);
 
         const data = statusRes.ok ? await statusRes.json() : { socialPosts: [] };
+        const verifyData = verifyRes.ok ? await verifyRes.json() : { platformStatus: {} };
         const scanData = scanRes.ok ? await scanRes.json() : { duplicates: [] };
         const posts = data.socialPosts || [];
+        const platformStatus = verifyData.platformStatus || {};
         const duplicates = scanData.duplicates || [];
 
         if (posts.length === 0 && duplicates.length === 0) {
@@ -1346,27 +1350,39 @@ async function loadSocialHistoryPanel(postId) {
         const rows = posts.map(sp => {
             const { icon, color, label } = getPlatformLabel(sp.platform);
             const date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
-            const statusBadge = sp.status === 'published'
-                ? `<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Published</span>`
-                : `<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Failed</span>`;
+            const platformExists = platformStatus[sp.id]; // true | false | null (unknown/twitter)
+
+            let statusBadge, rowBg = '', buttons;
+            if (sp.status !== 'published') {
+                statusBadge = `<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Failed</span>`;
+                buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;margin-left:4px;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
+            } else if (platformExists === false) {
+                statusBadge = `<span style="background:#fff3cd;color:#856404;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Deleted on platform</span>`;
+                rowBg = 'background:#fffdf0;';
+                buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
+            } else {
+                statusBadge = `<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Published</span>`;
+                buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',false)" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>
+                    <button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;margin-left:4px;" title="Remove from records only"><i class="fas fa-times"></i> Remove</button>`;
+            }
+
             const linkBtn = sp.platform_url
                 ? `<a href="${sp.platform_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a>`
                 : `<span style="color:#adb5bd;">No link</span>`;
-            const delBtn = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>`;
-            return `<tr style="border-bottom:1px solid #e9ecef;">
+
+            return `<tr style="border-bottom:1px solid #e9ecef;${rowBg}">
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;"><i class="${icon}" style="color:${color};margin-right:0.3rem;"></i>${label}</td>
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;color:#495057;">${date}</td>
                 <td style="padding:0.5rem 0.75rem;">${statusBadge}</td>
                 <td style="padding:0.5rem 0.75rem;">${linkBtn}</td>
-                <td style="padding:0.5rem 0.75rem;">${delBtn}</td>
+                <td style="padding:0.5rem 0.75rem;white-space:nowrap;">${buttons}</td>
             </tr>`;
         }).join('');
 
-        // Duplicate (untracked) posts rows
+        // Untracked duplicate rows
         const dupRows = duplicates.map(dup => {
             const date = new Date(dup.created_time).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
-            const pageId = dup.page_id;
-            const delBtn = `<button onclick="deletePlatformPost('${dup.platform_post_id}','${pageId}','${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>`;
+            const delBtn = `<button onclick="deletePlatformPost('${dup.platform_post_id}','${dup.page_id}','${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>`;
             return `<tr style="border-bottom:1px solid #e9ecef;background:#fff8e1;">
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;"><i class="fab fa-facebook" style="color:#1877F2;margin-right:0.3rem;"></i>${dup.page_name}</td>
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;color:#495057;">${date}</td>
@@ -1414,14 +1430,19 @@ async function deletePlatformPost(platformPostId, pageId, postId) {
     }
 }
 
-async function deleteSocialPostFromPanel(socialPostId, postId) {
-    if (!confirm('Delete this post from the platform and remove from records?')) return;
+async function deleteSocialPostFromPanel(socialPostId, postId, dbOnly) {
+    const msg = dbOnly
+        ? 'Remove this record from history? (The post stays on the platform.)'
+        : 'Delete this post from the platform and remove from records?';
+    if (!confirm(msg)) return;
     try {
-        const res = await fetch(`${API_URL}/social/${socialPostId}`, { method: 'DELETE', credentials: 'include' });
+        const url = dbOnly
+            ? `${API_URL}/social/${socialPostId}?db_only=true`
+            : `${API_URL}/social/${socialPostId}`;
+        const res = await fetch(url, { method: 'DELETE', credentials: 'include' });
         const data = await res.json();
         if (data.success) {
             showNotification(data.message, 'success');
-            // Refresh both the panel history and the row icons
             loadSocialHistoryPanel(postId);
             const cell = document.getElementById(`social-status-${postId}`);
             if (cell) { const html = await loadSocialStatus(postId); cell.innerHTML = html || ''; }
