@@ -1326,14 +1326,23 @@ async function loadSocialHistoryPanel(postId) {
     const container = document.getElementById('socialHistoryContent');
     if (!container) return;
     try {
-        const response = await fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' });
-        if (!response.ok) { container.innerHTML = '<span style="color:#6c757d;">No history available.</span>'; return; }
-        const data = await response.json();
+        // Load DB records and Facebook duplicate scan in parallel
+        const [statusRes, scanRes] = await Promise.all([
+            fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' }),
+            fetch(`${API_URL}/social/scan/${postId}`, { credentials: 'include' })
+        ]);
+
+        const data = statusRes.ok ? await statusRes.json() : { socialPosts: [] };
+        const scanData = scanRes.ok ? await scanRes.json() : { duplicates: [] };
         const posts = data.socialPosts || [];
-        if (posts.length === 0) {
+        const duplicates = scanData.duplicates || [];
+
+        if (posts.length === 0 && duplicates.length === 0) {
             container.innerHTML = '<span style="color:#6c757d;">No posts published yet.</span>';
             return;
         }
+
+        // Tracked posts rows
         const rows = posts.map(sp => {
             const { icon, color, label } = getPlatformLabel(sp.platform);
             const date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
@@ -1341,33 +1350,67 @@ async function loadSocialHistoryPanel(postId) {
                 ? `<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Published</span>`
                 : `<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Failed</span>`;
             const linkBtn = sp.platform_url
-                ? `<a href="${sp.platform_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="View post"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a>`
+                ? `<a href="${sp.platform_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a>`
                 : `<span style="color:#adb5bd;">No link</span>`;
-            const delBtn = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;" title="Delete"><i class="fas fa-trash-alt"></i> Delete</button>`;
+            const delBtn = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>`;
             return `<tr style="border-bottom:1px solid #e9ecef;">
-                <td style="padding:0.5rem 0.75rem;white-space:nowrap;">
-                    <i class="${icon}" style="color:${color};margin-right:0.3rem;"></i>${label}
-                </td>
+                <td style="padding:0.5rem 0.75rem;white-space:nowrap;"><i class="${icon}" style="color:${color};margin-right:0.3rem;"></i>${label}</td>
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;color:#495057;">${date}</td>
                 <td style="padding:0.5rem 0.75rem;">${statusBadge}</td>
                 <td style="padding:0.5rem 0.75rem;">${linkBtn}</td>
                 <td style="padding:0.5rem 0.75rem;">${delBtn}</td>
             </tr>`;
         }).join('');
+
+        // Duplicate (untracked) posts rows
+        const dupRows = duplicates.map(dup => {
+            const date = new Date(dup.created_time).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+            const pageId = dup.page_id;
+            const delBtn = `<button onclick="deletePlatformPost('${dup.platform_post_id}','${pageId}','${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>`;
+            return `<tr style="border-bottom:1px solid #e9ecef;background:#fff8e1;">
+                <td style="padding:0.5rem 0.75rem;white-space:nowrap;"><i class="fab fa-facebook" style="color:#1877F2;margin-right:0.3rem;"></i>${dup.page_name}</td>
+                <td style="padding:0.5rem 0.75rem;white-space:nowrap;color:#495057;">${date}</td>
+                <td style="padding:0.5rem 0.75rem;"><span style="background:#fff3cd;color:#856404;padding:2px 8px;border-radius:10px;font-size:0.78rem;">⚠️ Untracked duplicate</span></td>
+                <td style="padding:0.5rem 0.75rem;"><a href="${dup.permalink_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a></td>
+                <td style="padding:0.5rem 0.75rem;">${delBtn}</td>
+            </tr>`;
+        }).join('');
+
         container.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
             <thead>
                 <tr style="background:#f8f9fa;font-weight:600;color:#495057;">
-                    <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Platform</th>
+                    <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Platform / Page</th>
                     <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Date</th>
                     <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Status</th>
                     <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Link</th>
                     <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;"></th>
                 </tr>
             </thead>
-            <tbody>${rows}</tbody>
+            <tbody>${rows}${dupRows}</tbody>
         </table>`;
     } catch (e) {
         container.innerHTML = '<span style="color:#dc3545;">Failed to load history.</span>';
+    }
+}
+
+async function deletePlatformPost(platformPostId, pageId, postId) {
+    if (!confirm('Delete this untracked post from Facebook?')) return;
+    try {
+        const res = await fetch(`${API_URL}/social/platform-post`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ platform_post_id: platformPostId, page_id: pageId })
+        });
+        const data = await res.json();
+        if (data.success) {
+            showNotification('Deleted from Facebook', 'success');
+            loadSocialHistoryPanel(postId);
+        } else {
+            showNotification('Delete failed: ' + data.error, 'error');
+        }
+    } catch (e) {
+        showNotification('Delete failed: ' + e.message, 'error');
     }
 }
 
