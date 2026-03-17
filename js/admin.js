@@ -1293,9 +1293,10 @@ function buildPlatformCluster(posts, logoHTML) {
         const zIndex = posts.length - i + 1;
         const inner = buildSocialIconInner(sp);
         const wrapStyle = `display:inline-block;margin-left:${marginLeft};position:relative;z-index:${zIndex};flex-shrink:0;`;
+        const delBtn = `<span class="social-del-btn" onclick="deleteSocialPost(${sp.id},'${sp.post_id}')" title="Delete from Facebook">×</span>`;
         avatarsHTML += link
-            ? `<a href="${link}" target="_blank" style="${wrapStyle}">${inner}</a>`
-            : `<span style="${wrapStyle}">${inner}</span>`;
+            ? `<span style="${wrapStyle};position:relative;" class="social-icon-wrap"><a href="${link}" target="_blank">${inner}</a>${delBtn}</span>`
+            : `<span style="${wrapStyle};position:relative;" class="social-icon-wrap">${inner}${delBtn}</span>`;
     });
     return `<div style="display:inline-flex;align-items:center;">${logoHTML}${avatarsHTML}</div>`;
 }
@@ -1327,19 +1328,28 @@ async function loadSocialStatus(postId) {
             const failed = sp.status === 'failed';
             const link = sp.platform_url && !failed ? sp.platform_url : null;
             const inner = buildSocialIconInner(sp);
-            statusHTML += link ? `<a href="${link}" target="_blank">${inner}</a>` : inner;
+            statusHTML += `<span style="position:relative;display:inline-flex;align-items:center;" class="social-icon-wrap" data-id="${sp.id}" data-postid="${postId}">
+                ${link ? `<a href="${link}" target="_blank">${inner}</a>` : inner}
+                <span class="social-del-btn" onclick="deleteSocialPost(${sp.id},'${postId}')" title="Delete from X">×</span>
+            </span>`;
         });
         igPosts.forEach(sp => {
             const failed = sp.status === 'failed';
             const link = sp.platform_url && !failed ? sp.platform_url : null;
             const inner = buildSocialIconInner(sp);
-            statusHTML += link ? `<a href="${link}" target="_blank">${inner}</a>` : inner;
+            statusHTML += `<span style="position:relative;display:inline-flex;align-items:center;" class="social-icon-wrap" data-id="${sp.id}" data-postid="${postId}">
+                ${link ? `<a href="${link}" target="_blank">${inner}</a>` : inner}
+                <span class="social-del-btn" onclick="deleteSocialPost(${sp.id},'${postId}')" title="Delete from Instagram">×</span>
+            </span>`;
         });
         liPosts.forEach(sp => {
             const failed = sp.status === 'failed';
             const link = sp.platform_url && !failed ? sp.platform_url : null;
             const inner = buildSocialIconInner(sp);
-            statusHTML += link ? `<a href="${link}" target="_blank">${inner}</a>` : inner;
+            statusHTML += `<span style="position:relative;display:inline-flex;align-items:center;" class="social-icon-wrap" data-id="${sp.id}" data-postid="${postId}">
+                ${link ? `<a href="${link}" target="_blank">${inner}</a>` : inner}
+                <span class="social-del-btn" onclick="deleteSocialPost(${sp.id},'${postId}')" title="Delete from LinkedIn">×</span>
+            </span>`;
         });
 
         statusHTML += '</div>';
@@ -1348,6 +1358,37 @@ async function loadSocialStatus(postId) {
     } catch (error) {
         console.error('Failed to load social status:', error);
         return '';
+    }
+}
+
+// Inject delete button styles once
+(function() {
+    const s = document.createElement('style');
+    s.textContent = `.social-icon-wrap .social-del-btn { display:none; position:absolute; top:-6px; right:-6px; background:#dc3545; color:white; border-radius:50%; width:14px; height:14px; font-size:10px; line-height:14px; text-align:center; cursor:pointer; z-index:10; } .social-icon-wrap:hover .social-del-btn { display:block; }`;
+    document.head.appendChild(s);
+})();
+
+async function deleteSocialPost(socialPostId, postId) {
+    if (!confirm('Delete this post from the platform and remove from records?')) return;
+    try {
+        const res = await fetch(`${API_URL}/social/${socialPostId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+        const data = await res.json();
+        if (data.success) {
+            showNotification(data.message, 'success');
+            // Reload social icons for this post
+            const cell = document.getElementById(`social-status-${postId}`);
+            if (cell) {
+                const html = await loadSocialStatus(postId);
+                cell.innerHTML = html || '';
+            }
+        } else {
+            showNotification('Delete failed: ' + (data.message || data.error), 'error');
+        }
+    } catch (e) {
+        showNotification('Delete failed: ' + e.message, 'error');
     }
 }
 
