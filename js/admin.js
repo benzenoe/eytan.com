@@ -588,6 +588,7 @@ async function openSocialPublishModal(postId) {
                         <div id="socialHistoryPanel" style="margin-top: 1.5rem;">
                             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
                                 <h4 style="margin:0;font-size:1rem;color:#333;"><i class="fas fa-history" style="margin-right:0.4rem;color:#667eea;"></i>Publishing History</h4>
+                                <button onclick="refreshFacebookCache()" id="fbScrapeBtn" style="background:#1877F2;color:white;border:none;border-radius:4px;padding:4px 10px;font-size:0.8rem;cursor:pointer;"><i class="fab fa-facebook"></i> Refresh Facebook Cache</button>
                             </div>
                             <div id="socialHistoryContent" style="font-size:0.85rem;color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Loading history…</div>
                         </div>
@@ -1457,6 +1458,38 @@ async function deleteSocialPostFromPanel(socialPostId, postId, dbOnly) {
         }
     } catch (e) {
         showNotification('Delete failed: ' + e.message, 'error');
+    }
+}
+
+async function refreshFacebookCache() {
+    if (!currentPublishingPostId) return;
+    const btn = document.getElementById('fbScrapeBtn');
+    const origText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing…';
+    try {
+        // Get the blog post slug from the current post
+        const postRes = await fetch(`${API_URL}/posts/${currentPublishingPostId}`, { credentials: 'include' });
+        const postData = await postRes.json();
+        const slug = postData.post?.slug || currentPublishingPostId;
+        const url = `https://eytan.com/blog/${slug}.html`;
+        const res = await fetch(`${API_URL}/social/scrape`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+        if (data.success) {
+            showNotification('Facebook cache refreshed — new shares will show the correct image', 'success');
+        } else {
+            showNotification('Refresh failed: ' + data.error, 'error');
+        }
+    } catch (e) {
+        showNotification('Refresh failed: ' + e.message, 'error');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = origText;
     }
 }
 
