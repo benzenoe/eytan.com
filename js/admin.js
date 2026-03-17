@@ -1327,16 +1327,19 @@ async function loadSocialHistoryPanel(postId) {
     if (!container) return;
     container.innerHTML = '<span style="color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Loading history…</span>';
     try {
-        // Load DB records, platform verification, and duplicate scan in parallel
-        const [statusRes, verifyRes, scanRes] = await Promise.all([
-            fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' }),
+        // Load DB records first (required), then verify + scan in parallel (best-effort)
+        const statusRes = await fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' });
+        const data = statusRes.ok ? await statusRes.json() : { socialPosts: [] };
+
+        const [verifyRes, scanRes] = await Promise.allSettled([
             fetch(`${API_URL}/social/verify/${postId}`, { credentials: 'include' }),
             fetch(`${API_URL}/social/scan/${postId}`, { credentials: 'include' })
         ]);
 
-        const data = statusRes.ok ? await statusRes.json() : { socialPosts: [] };
-        const verifyData = verifyRes.ok ? await verifyRes.json() : { platformStatus: {} };
-        const scanData = scanRes.ok ? await scanRes.json() : { duplicates: [] };
+        const verifyData = (verifyRes.status === 'fulfilled' && verifyRes.value.ok)
+            ? await verifyRes.value.json() : { platformStatus: {} };
+        const scanData = (scanRes.status === 'fulfilled' && scanRes.value.ok)
+            ? await scanRes.value.json() : { duplicates: [] };
         const posts = data.socialPosts || [];
         const platformStatus = verifyData.platformStatus || {};
         const duplicates = scanData.duplicates || [];
@@ -1443,9 +1446,12 @@ async function deleteSocialPostFromPanel(socialPostId, postId, dbOnly) {
         const data = await res.json();
         if (data.success) {
             showNotification(data.message, 'success');
-            loadSocialHistoryPanel(postId);
-            const cell = document.getElementById(`social-status-${postId}`);
-            if (cell) { const html = await loadSocialStatus(postId); cell.innerHTML = html || ''; }
+            // Reload independently — don't let reload errors mask a successful delete
+            loadSocialHistoryPanel(postId).catch(() => {});
+            loadSocialStatus(postId).then(html => {
+                const cell = document.getElementById(`social-status-${postId}`);
+                if (cell) cell.innerHTML = html || '';
+            }).catch(() => {});
         } else {
             showNotification('Delete failed: ' + (data.message || data.error), 'error');
         }
