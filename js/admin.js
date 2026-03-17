@@ -585,6 +585,13 @@ async function openSocialPublishModal(postId) {
                             <div id="socialResultsContentInline"></div>
                         </div>
 
+                        <div id="socialHistoryPanel" style="margin-top: 1.5rem;">
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+                                <h4 style="margin:0;font-size:1rem;color:#333;"><i class="fas fa-history" style="margin-right:0.4rem;color:#667eea;"></i>Publishing History</h4>
+                            </div>
+                            <div id="socialHistoryContent" style="font-size:0.85rem;color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Loading history…</div>
+                        </div>
+
                         <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #667eea;">
                             <p style="margin: 0; font-size: 0.85rem; color: #495057;">
                                 <strong>Note:</strong> Content will be automatically optimized for each platform using AI. Make sure your API credentials are configured in the backend.
@@ -610,6 +617,9 @@ async function openSocialPublishModal(postId) {
 
         // Load Facebook pages dynamically
         loadFacebookPagesIntoModal();
+
+        // Load publishing history into the panel
+        loadSocialHistoryPanel(post.id);
 
         // Scroll to the expanded row smoothly
         setTimeout(() => {
@@ -1048,14 +1058,13 @@ async function publishToSocialInline() {
             document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
             showAlert(data.message, 'success');
 
-            // Reload social status for this post
+            // Reload social status icons and history panel
             setTimeout(() => {
                 loadSocialStatus(currentPublishingPostId).then(statusHTML => {
                     const statusDiv = document.getElementById(`social-status-${currentPublishingPostId}`);
-                    if (statusDiv) {
-                        statusDiv.innerHTML = statusHTML;
-                    }
+                    if (statusDiv) statusDiv.innerHTML = statusHTML;
                 });
+                loadSocialHistoryPanel(currentPublishingPostId);
             }, 1000);
 
         } else {
@@ -1299,6 +1308,86 @@ function buildPlatformCluster(posts, logoHTML) {
             : `<span style="${wrapStyle};position:relative;" class="social-icon-wrap">${inner}${delBtn}</span>`;
     });
     return `<div style="display:inline-flex;align-items:center;">${logoHTML}${avatarsHTML}</div>`;
+}
+
+function getPlatformLabel(platform) {
+    if (platform === 'twitter') return { icon: 'fab fa-x-twitter', color: '#000', label: 'X (Twitter)' };
+    if (platform === 'instagram') return { icon: 'fab fa-instagram', color: '#E1306C', label: 'Instagram' };
+    if (platform === 'linkedin') return { icon: 'fab fa-linkedin', color: '#0A66C2', label: 'LinkedIn' };
+    if (platform.startsWith('facebook')) {
+        const pageId = platform.split(':')[1];
+        const name = pageId ? (fbPageNames[pageId] || pageId) : 'Facebook';
+        return { icon: 'fab fa-facebook', color: '#1877F2', label: name };
+    }
+    return { icon: 'fas fa-share-alt', color: '#667eea', label: platform };
+}
+
+async function loadSocialHistoryPanel(postId) {
+    const container = document.getElementById('socialHistoryContent');
+    if (!container) return;
+    try {
+        const response = await fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' });
+        if (!response.ok) { container.innerHTML = '<span style="color:#6c757d;">No history available.</span>'; return; }
+        const data = await response.json();
+        const posts = data.socialPosts || [];
+        if (posts.length === 0) {
+            container.innerHTML = '<span style="color:#6c757d;">No posts published yet.</span>';
+            return;
+        }
+        const rows = posts.map(sp => {
+            const { icon, color, label } = getPlatformLabel(sp.platform);
+            const date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
+            const statusBadge = sp.status === 'published'
+                ? `<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Published</span>`
+                : `<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Failed</span>`;
+            const linkBtn = sp.platform_url
+                ? `<a href="${sp.platform_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="View post"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a>`
+                : `<span style="color:#adb5bd;">No link</span>`;
+            const delBtn = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;" title="Delete"><i class="fas fa-trash-alt"></i> Delete</button>`;
+            return `<tr style="border-bottom:1px solid #e9ecef;">
+                <td style="padding:0.5rem 0.75rem;white-space:nowrap;">
+                    <i class="${icon}" style="color:${color};margin-right:0.3rem;"></i>${label}
+                </td>
+                <td style="padding:0.5rem 0.75rem;white-space:nowrap;color:#495057;">${date}</td>
+                <td style="padding:0.5rem 0.75rem;">${statusBadge}</td>
+                <td style="padding:0.5rem 0.75rem;">${linkBtn}</td>
+                <td style="padding:0.5rem 0.75rem;">${delBtn}</td>
+            </tr>`;
+        }).join('');
+        container.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+            <thead>
+                <tr style="background:#f8f9fa;font-weight:600;color:#495057;">
+                    <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Platform</th>
+                    <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Date</th>
+                    <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Status</th>
+                    <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Link</th>
+                    <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;"></th>
+                </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+        </table>`;
+    } catch (e) {
+        container.innerHTML = '<span style="color:#dc3545;">Failed to load history.</span>';
+    }
+}
+
+async function deleteSocialPostFromPanel(socialPostId, postId) {
+    if (!confirm('Delete this post from the platform and remove from records?')) return;
+    try {
+        const res = await fetch(`${API_URL}/social/${socialPostId}`, { method: 'DELETE', credentials: 'include' });
+        const data = await res.json();
+        if (data.success) {
+            showNotification(data.message, 'success');
+            // Refresh both the panel history and the row icons
+            loadSocialHistoryPanel(postId);
+            const cell = document.getElementById(`social-status-${postId}`);
+            if (cell) { const html = await loadSocialStatus(postId); cell.innerHTML = html || ''; }
+        } else {
+            showNotification('Delete failed: ' + (data.message || data.error), 'error');
+        }
+    } catch (e) {
+        showNotification('Delete failed: ' + e.message, 'error');
+    }
 }
 
 async function loadSocialStatus(postId) {
