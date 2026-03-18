@@ -1344,7 +1344,7 @@ function getPlatformLabel(platform) {
     return { icon: 'fas fa-share-alt', color: '#667eea', label: platform };
 }
 
-function renderHistoryTable(container, posts, duplicates, platformStatus) {
+function renderHistoryTable(container, posts, duplicates, platformStatus, postId) {
     if (posts.length === 0 && duplicates.length === 0) {
         container.innerHTML = '<span style="color:#6c757d;">No posts published yet.</span>';
         return;
@@ -1418,7 +1418,7 @@ async function loadSocialHistoryPanel(postId) {
         const statusRes = await fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' });
         const data = statusRes.ok ? await statusRes.json() : { socialPosts: [] };
         const posts = data.socialPosts || [];
-        renderHistoryTable(container, posts, [], {});
+        renderHistoryTable(container, posts, [], {}, postId);
 
         // Phase 2: verify + scan in background, then re-render with updated status
         const [verifyRes, scanRes] = await Promise.allSettled([
@@ -1434,7 +1434,7 @@ async function loadSocialHistoryPanel(postId) {
         const duplicates = scanData.duplicates || [];
 
         // Re-render with verified status + duplicates
-        renderHistoryTable(container, posts, duplicates, platformStatus);
+        renderHistoryTable(container, posts, duplicates, platformStatus, postId);
     } catch (e) {
         if (!container.querySelector('table')) {
             container.innerHTML = '<span style="color:#dc3545;">Failed to load history.</span>';
