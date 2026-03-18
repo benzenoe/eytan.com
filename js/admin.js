@@ -956,7 +956,7 @@ async function publishToSocialInline() {
             }).join('');
 
             const waBtn = selectedPlatforms.includes('whatsapp')
-                ? `<button onclick="const msg=document.getElementById('fb-caption-text').value+'\\n\\n${postUrl}'; navigator.clipboard.writeText(msg); window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(msg),'_blank'); this.textContent='✅ Opened!';" style="background:#25D366;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-whatsapp"></i> Open WhatsApp</button>`
+                ? `<button onclick="const msg=document.getElementById('fb-caption-text').value+'\\n\\n${postUrl}'; navigator.clipboard.writeText(msg); window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(msg),'_blank'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'whatsapp',url:'https://api.whatsapp.com/send'})}); this.textContent='✅ Opened!';" style="background:#25D366;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-whatsapp"></i> Open WhatsApp</button>`
                 : '';
 
             const modal = document.createElement('div');
@@ -1334,6 +1334,8 @@ function getPlatformLabel(platform) {
     if (platform === 'twitter') return { icon: 'fab fa-x-twitter', color: '#000', label: 'X (Twitter)' };
     if (platform === 'instagram') return { icon: 'fab fa-instagram', color: '#E1306C', label: 'Instagram' };
     if (platform === 'linkedin') return { icon: 'fab fa-linkedin', color: '#0A66C2', label: 'LinkedIn' };
+    if (platform === 'whatsapp') return { icon: 'fab fa-whatsapp', color: '#25D366', label: 'WhatsApp' };
+    if (platform === 'facebook-personal') return { icon: 'fab fa-facebook', color: '#1877F2', label: 'Facebook (Personal)' };
     if (platform.startsWith('facebook')) {
         const pageId = platform.split(':')[1];
         const name = pageId ? (fbPageNames[pageId] || pageId) : 'Facebook';
