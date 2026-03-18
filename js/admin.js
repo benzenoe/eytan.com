@@ -1532,10 +1532,12 @@ async function loadSocialStatus(postId) {
         if (posts.length === 0) return '';
 
         // Group by platform type
-        const fbPosts      = posts.filter(sp => sp.platform.startsWith('facebook'));
+        const fbPosts      = posts.filter(sp => sp.platform.startsWith('facebook') && sp.platform !== 'facebook-personal');
         const twitterPosts = posts.filter(sp => sp.platform === 'twitter');
         const igPosts      = posts.filter(sp => sp.platform === 'instagram');
         const liPosts      = posts.filter(sp => sp.platform === 'linkedin');
+        const waPosts      = posts.filter(sp => sp.platform === 'whatsapp');
+        const fbPersonal   = posts.filter(sp => sp.platform === 'facebook-personal');
 
         let statusHTML = '<div style="display:flex;gap:0.5rem;margin-top:0.3rem;flex-wrap:wrap;align-items:center;">';
 
@@ -1570,6 +1572,21 @@ async function loadSocialStatus(postId) {
             statusHTML += `<span style="position:relative;display:inline-flex;align-items:center;" class="social-icon-wrap" data-id="${sp.id}" data-postid="${postId}">
                 ${link ? `<a href="${link}" target="_blank">${inner}</a>` : inner}
                 <span class="social-del-btn" onclick="deleteSocialPost(${sp.id},'${postId}')" title="Delete from LinkedIn">×</span>
+            </span>`;
+        });
+        waPosts.forEach(sp => {
+            const inner = `<i class="fab fa-whatsapp" style="font-size:18px;color:#25D366;" title="Shared on WhatsApp"></i>`;
+            statusHTML += `<span style="position:relative;display:inline-flex;align-items:center;" class="social-icon-wrap" data-id="${sp.id}" data-postid="${postId}">
+                ${inner}
+                <span class="social-del-btn" onclick="deleteSocialPost(${sp.id},'${postId}')" title="Remove WhatsApp record">×</span>
+            </span>`;
+        });
+        fbPersonal.forEach(sp => {
+            const link = sp.platform_url || null;
+            const inner = `<i class="fab fa-facebook" style="font-size:18px;color:#1877F2;" title="Shared on Facebook Personal"></i>`;
+            statusHTML += `<span style="position:relative;display:inline-flex;align-items:center;" class="social-icon-wrap" data-id="${sp.id}" data-postid="${postId}">
+                ${link ? `<a href="${link}" target="_blank">${inner}</a>` : inner}
+                <span class="social-del-btn" onclick="deleteSocialPost(${sp.id},'${postId}')" title="Remove Facebook Personal record">×</span>
             </span>`;
         });
 
