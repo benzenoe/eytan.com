@@ -599,7 +599,16 @@ async function openSocialPublishModal(postId) {
                             </p>
                         </div>
 
-                        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: flex-end;">
+                        <div style="margin-top: 1.5rem; padding: 0.75rem 1rem; background: #f0f4ff; border-radius: 6px; border: 1px solid #c5cff7; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            <label style="font-size:0.85rem;font-weight:600;color:#495057;white-space:nowrap;"><i class="fas fa-calendar-alt" style="color:#667eea;margin-right:0.3rem;"></i> Schedule for:</label>
+                            <input type="datetime-local" id="scheduleDatetimeInput" style="padding:0.4rem 0.6rem;border:1px solid #ced4da;border-radius:4px;font-size:0.85rem;color:#495057;" />
+                            <button onclick="scheduleToSocialInline()" id="scheduleSocialBtn" style="padding:0.5rem 1rem;background:#28a745;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:500;font-size:0.85rem;white-space:nowrap;">
+                                <i class="fas fa-clock"></i> Schedule Post
+                            </button>
+                            <span style="font-size:0.78rem;color:#6c757d;">or publish immediately below</span>
+                        </div>
+
+                        <div style="margin-top: 0.75rem; display: flex; gap: 0.75rem; justify-content: flex-end;">
                             <button onclick="closeSocialModal()" style="padding: 0.75rem 1.5rem; background: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">Cancel</button>
                             <button onclick="previewSocialContent()" id="previewSocialBtn" style="padding: 0.75rem 1.5rem; background: #17a2b8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='#138496'" onmouseout="this.style.background='#17a2b8'">
                                 <i class="fas fa-eye"></i> Preview Content
@@ -1114,6 +1123,95 @@ async function publishToSocialInline() {
     }
 }
 
+// Schedule a social post for future publishing
+async function scheduleToSocialInline() {
+    const datetimeInput = document.getElementById('scheduleDatetimeInput');
+    if (!datetimeInput || !datetimeInput.value) {
+        showAlert('Please pick a date and time to schedule', 'error');
+        return;
+    }
+
+    const scheduledAt = new Date(datetimeInput.value).toISOString();
+    if (new Date(scheduledAt) <= new Date()) {
+        showAlert('Scheduled time must be in the future', 'error');
+        return;
+    }
+
+    const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked')).map(cb => cb.value);
+    if (selectedPlatforms.length === 0) {
+        showAlert('Please select at least one platform', 'error');
+        return;
+    }
+    if (!currentPublishingPostId) {
+        showAlert('No post selected', 'error');
+        return;
+    }
+
+    // Only API-publishable platforms can be scheduled
+    const apiPlatforms = selectedPlatforms.filter(p =>
+        p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' && !p.startsWith('facebook-group:')
+    );
+    if (apiPlatforms.length === 0) {
+        showAlert('Scheduling is only supported for Facebook pages, Instagram, and LinkedIn', 'error');
+        return;
+    }
+
+    // Collect any edited preview content
+    const overrideContent = {};
+    document.querySelectorAll('[data-platform][contenteditable]').forEach(el => {
+        const platform = el.dataset.platform;
+        const text = el.innerText.trim();
+        if (platform && text) overrideContent[platform] = text;
+    });
+
+    const scheduleBtn = document.getElementById('scheduleSocialBtn');
+    scheduleBtn.disabled = true;
+    scheduleBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scheduling...';
+
+    try {
+        const response = await fetch(`${API_URL}/social/schedule/${currentPublishingPostId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ platforms: apiPlatforms, scheduledAt, overrideContent })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            showAlert(`✅ ${data.message}`, 'success');
+            datetimeInput.value = '';
+            loadSocialHistoryPanel(currentPublishingPostId);
+        } else {
+            showAlert(data.error || 'Scheduling failed', 'error');
+        }
+    } catch (error) {
+        showAlert('Scheduling error: ' + error.message, 'error');
+    } finally {
+        scheduleBtn.disabled = false;
+        scheduleBtn.innerHTML = '<i class="fas fa-clock"></i> Schedule Post';
+    }
+}
+
+// Cancel a scheduled post
+async function cancelScheduledPost(id, postId) {
+    if (!confirm('Cancel this scheduled post?')) return;
+    try {
+        const response = await fetch(`${API_URL}/social/cancel-scheduled/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+        const data = await response.json();
+        if (response.ok && data.success) {
+            showAlert('Scheduled post cancelled', 'success');
+            loadSocialHistoryPanel(postId);
+        } else {
+            showAlert(data.error || 'Failed to cancel', 'error');
+        }
+    } catch (error) {
+        showAlert('Error: ' + error.message, 'error');
+    }
+}
+
 // Publish to selected social media platforms (legacy modal version - kept for compatibility)
 async function publishToSocial() {
     const selectedPlatforms = Array.from(document.querySelectorAll('.platform-check:checked'))
@@ -1362,18 +1460,26 @@ function renderHistoryTable(container, posts, duplicates, platformStatus, postId
 
     const rows = posts.map(sp => {
         const { icon, color, label } = getPlatformLabel(sp.platform);
-        const date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
         const platformExists = platformStatus[sp.id]; // true | false | null (unknown/twitter)
 
-        let statusBadge, rowBg = '', buttons;
-        if (sp.status !== 'published') {
+        let statusBadge, rowBg = '', buttons, date;
+
+        if (sp.status === 'scheduled') {
+            date = sp.scheduled_at ? 'Scheduled: ' + new Date(sp.scheduled_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
+            statusBadge = `<span style="background:#cce5ff;color:#004085;padding:2px 8px;border-radius:10px;font-size:0.78rem;"><i class="fas fa-clock" style="font-size:0.7rem;margin-right:2px;"></i>Scheduled</span>`;
+            rowBg = 'background:#f0f7ff;';
+            buttons = `<button onclick="cancelScheduledPost(${sp.id},'${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-ban"></i> Cancel</button>`;
+        } else if (sp.status !== 'published') {
+            date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
             statusBadge = `<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Failed</span>`;
             buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;margin-left:4px;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
         } else if (platformExists === false) {
+            date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
             statusBadge = `<span style="background:#fff3cd;color:#856404;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Deleted on platform</span>`;
             rowBg = 'background:#fffdf0;';
             buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
         } else {
+            date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
             const verifying = Object.keys(platformStatus).length === 0;
             statusBadge = `<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Published</span>${verifying ? ' <span style="color:#adb5bd;font-size:0.75rem;" title="Verifying…">↻</span>' : ''}`;
             buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',false)" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>
