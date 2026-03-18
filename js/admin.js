@@ -933,7 +933,7 @@ async function publishToSocialInline() {
 
             // Build modal with the caption visible + action buttons
             const fbPersonalBtn = selectedPlatforms.includes('facebook-personal')
-                ? `<button onclick="navigator.clipboard.writeText(document.getElementById('fb-caption-text').value); document.getElementById('fb-caption-text').select(); window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}','fb-share','width=620,height=540,resizable=yes'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'facebook-personal',url:'https://www.facebook.com/benzeno'})}).then(()=>loadSocialHistoryPanel('${currentPublishingPostId}')); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> Open Facebook Personal</button>`
+                ? `<button onclick="var ta=document.getElementById('fb-caption-text'); ta.select(); document.execCommand('copy'); window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}','fb-share','width=620,height=540,resizable=yes'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'facebook-personal',url:'https://www.facebook.com/benzeno'})}).then(()=>loadSocialHistoryPanel('${currentPublishingPostId}')); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> Open Facebook Personal</button>`
                 : '';
 
             const groupBtns = groupPlatforms.map((p, i) => {
@@ -947,7 +947,7 @@ async function publishToSocialInline() {
                 const gid = url.includes('208780250279') ? '208780250279' : url.includes('6064131423672561') ? '6064131423672561' : url.includes('1884805645306198') ? '1884805645306198' : url.includes('871719803845126') ? '871719803845126' : url.includes('reignation') ? 'reignation' : url.includes('benzeno') ? 'benzeno' : null;
                 const gImg = gid ? `<img src="${API_URL}/social/facebook/picture/${gid}" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;margin-right:4px;" onerror="this.style.display='none'">` : '<i class="fab fa-facebook" style="margin-right:4px;"></i>';
                 return `<button onclick="
-                    navigator.clipboard.writeText(document.getElementById('fb-caption-text').value);
+                    var ta=document.getElementById('fb-caption-text'); ta.select(); document.execCommand('copy');
                     window.open('${url}?focus=discussion','fb-group-${i}','width=900,height=700,resizable=yes,scrollbars=yes');
                     fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})}).then(()=>loadSocialHistoryPanel('${currentPublishingPostId}'));
                     document.getElementById('fb-group-hint').style.display='block';
