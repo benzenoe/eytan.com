@@ -895,7 +895,7 @@ async function publishToSocialInline() {
                         headers: { 'Content-Type': 'application/json' },
                         credentials: 'include',
                         body: JSON.stringify({ postId: currentPublishingPostId, platform: 'twitter', url: 'https://x.com/benzeno' })
-                    });
+                    }).then(() => loadSocialHistoryPanel(currentPublishingPostId));
                     showAlert('✅ X compose window opened with your tweet!', 'success');
                 }
             } catch (e) {
@@ -933,7 +933,7 @@ async function publishToSocialInline() {
 
             // Build modal with the caption visible + action buttons
             const fbPersonalBtn = selectedPlatforms.includes('facebook-personal')
-                ? `<button onclick="navigator.clipboard.writeText(document.getElementById('fb-caption-text').value); document.getElementById('fb-caption-text').select(); window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}','fb-share','width=620,height=540,resizable=yes'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'facebook-personal',url:'https://www.facebook.com/benzeno'})}); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> Open Facebook Personal</button>`
+                ? `<button onclick="navigator.clipboard.writeText(document.getElementById('fb-caption-text').value); document.getElementById('fb-caption-text').select(); window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}','fb-share','width=620,height=540,resizable=yes'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'facebook-personal',url:'https://www.facebook.com/benzeno'})}).then(()=>loadSocialHistoryPanel('${currentPublishingPostId}')); this.textContent='✅ Opened!';" style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> Open Facebook Personal</button>`
                 : '';
 
             const groupBtns = groupPlatforms.map((p, i) => {
@@ -949,14 +949,14 @@ async function publishToSocialInline() {
                 return `<button onclick="
                     navigator.clipboard.writeText(document.getElementById('fb-caption-text').value);
                     window.open('${url}?focus=discussion','fb-group-${i}','width=900,height=700,resizable=yes,scrollbars=yes');
-                    fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})});
+                    fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})}).then(()=>loadSocialHistoryPanel('${currentPublishingPostId}'));
                     document.getElementById('fb-group-hint').style.display='block';
                     this.style.opacity='0.7'; this.innerHTML='✅ ${label} — Paste in group';
                 " style="background:#1877F2;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;">${gImg}${label}</button>`;
             }).join('');
 
             const waBtn = selectedPlatforms.includes('whatsapp')
-                ? `<button onclick="const msg=document.getElementById('fb-caption-text').value+'\\n\\n${postUrl}'; navigator.clipboard.writeText(msg); window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(msg),'_blank'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'whatsapp',url:'https://api.whatsapp.com/send'})}); this.textContent='✅ Opened!';" style="background:#25D366;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-whatsapp"></i> Open WhatsApp</button>`
+                ? `<button onclick="const msg=document.getElementById('fb-caption-text').value+'\\n\\n${postUrl}'; navigator.clipboard.writeText(msg); window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(msg),'_blank'); fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'whatsapp',url:'https://api.whatsapp.com/send'})}).then(()=>loadSocialHistoryPanel('${currentPublishingPostId}')); this.textContent='✅ Opened!';" style="background:#25D366;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-whatsapp"></i> Open WhatsApp</button>`
                 : '';
 
             const modal = document.createElement('div');
