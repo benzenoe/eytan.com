@@ -1059,14 +1059,12 @@ async function publishToSocialInline() {
             document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
             showAlert(data.message, 'success');
 
-            // Reload social status icons and history panel
-            setTimeout(() => {
-                loadSocialStatus(currentPublishingPostId).then(statusHTML => {
-                    const statusDiv = document.getElementById(`social-status-${currentPublishingPostId}`);
-                    if (statusDiv) statusDiv.innerHTML = statusHTML;
-                });
-                loadSocialHistoryPanel(currentPublishingPostId);
-            }, 1000);
+            // Reload social status icons and history panel immediately
+            loadSocialStatus(currentPublishingPostId).then(statusHTML => {
+                const statusDiv = document.getElementById(`social-status-${currentPublishingPostId}`);
+                if (statusDiv) statusDiv.innerHTML = statusHTML;
+            });
+            loadSocialHistoryPanel(currentPublishingPostId);
 
         } else {
             document.getElementById('socialResultsContentInline').innerHTML = `
@@ -1188,8 +1186,9 @@ async function publishToSocial() {
 
             document.getElementById('socialResultsContent').innerHTML = resultsHTML;
 
-            // Update table to show social media status
+            // Update table and history panel
             loadBlogData();
+            loadSocialHistoryPanel(currentPublishingPostId);
 
             showAlert(`Published to ${data.summary.succeeded} platform(s). ${data.summary.failed} failed.`, data.summary.failed === 0 ? 'success' : 'info');
         } else {
@@ -1323,80 +1322,58 @@ function getPlatformLabel(platform) {
     return { icon: 'fas fa-share-alt', color: '#667eea', label: platform };
 }
 
-async function loadSocialHistoryPanel(postId) {
-    const container = document.getElementById('socialHistoryContent');
-    if (!container) return;
-    container.innerHTML = '<span style="color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Loading history…</span>';
-    try {
-        // Load DB records first (required), then verify + scan in parallel (best-effort)
-        const statusRes = await fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' });
-        const data = statusRes.ok ? await statusRes.json() : { socialPosts: [] };
+function renderHistoryTable(container, posts, duplicates, platformStatus) {
+    if (posts.length === 0 && duplicates.length === 0) {
+        container.innerHTML = '<span style="color:#6c757d;">No posts published yet.</span>';
+        return;
+    }
 
-        const [verifyRes, scanRes] = await Promise.allSettled([
-            fetch(`${API_URL}/social/verify/${postId}`, { credentials: 'include' }),
-            fetch(`${API_URL}/social/scan/${postId}`, { credentials: 'include' })
-        ]);
+    const rows = posts.map(sp => {
+        const { icon, color, label } = getPlatformLabel(sp.platform);
+        const date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
+        const platformExists = platformStatus[sp.id]; // true | false | null (unknown/twitter)
 
-        const verifyData = (verifyRes.status === 'fulfilled' && verifyRes.value.ok)
-            ? await verifyRes.value.json() : { platformStatus: {} };
-        const scanData = (scanRes.status === 'fulfilled' && scanRes.value.ok)
-            ? await scanRes.value.json() : { duplicates: [] };
-        const posts = data.socialPosts || [];
-        const platformStatus = verifyData.platformStatus || {};
-        const duplicates = scanData.duplicates || [];
-
-        if (posts.length === 0 && duplicates.length === 0) {
-            container.innerHTML = '<span style="color:#6c757d;">No posts published yet.</span>';
-            return;
+        let statusBadge, rowBg = '', buttons;
+        if (sp.status !== 'published') {
+            statusBadge = `<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Failed</span>`;
+            buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;margin-left:4px;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
+        } else if (platformExists === false) {
+            statusBadge = `<span style="background:#fff3cd;color:#856404;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Deleted on platform</span>`;
+            rowBg = 'background:#fffdf0;';
+            buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
+        } else {
+            const verifying = Object.keys(platformStatus).length === 0;
+            statusBadge = `<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Published</span>${verifying ? ' <span style="color:#adb5bd;font-size:0.75rem;" title="Verifying…">↻</span>' : ''}`;
+            buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',false)" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>
+                    <button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;margin-left:4px;" title="Remove from records only"><i class="fas fa-times"></i> Remove</button>`;
         }
 
-        // Tracked posts rows
-        const rows = posts.map(sp => {
-            const { icon, color, label } = getPlatformLabel(sp.platform);
-            const date = sp.published_at ? new Date(sp.published_at).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—';
-            const platformExists = platformStatus[sp.id]; // true | false | null (unknown/twitter)
+        const linkBtn = sp.platform_url
+            ? `<a href="${sp.platform_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a>`
+            : `<span style="color:#adb5bd;">No link</span>`;
 
-            let statusBadge, rowBg = '', buttons;
-            if (sp.status !== 'published') {
-                statusBadge = `<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Failed</span>`;
-                buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;margin-left:4px;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
-            } else if (platformExists === false) {
-                statusBadge = `<span style="background:#fff3cd;color:#856404;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Deleted on platform</span>`;
-                rowBg = 'background:#fffdf0;';
-                buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;" title="Remove from records"><i class="fas fa-times"></i> Remove</button>`;
-            } else {
-                statusBadge = `<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:10px;font-size:0.78rem;">Published</span>`;
-                buttons = `<button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',false)" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>
-                    <button onclick="deleteSocialPostFromPanel(${sp.id},'${postId}',true)" style="background:#6c757d;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;margin-left:4px;" title="Remove from records only"><i class="fas fa-times"></i> Remove</button>`;
-            }
-
-            const linkBtn = sp.platform_url
-                ? `<a href="${sp.platform_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a>`
-                : `<span style="color:#adb5bd;">No link</span>`;
-
-            return `<tr style="border-bottom:1px solid #e9ecef;${rowBg}">
+        return `<tr style="border-bottom:1px solid #e9ecef;${rowBg}">
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;"><i class="${icon}" style="color:${color};margin-right:0.3rem;"></i>${label}</td>
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;color:#495057;">${date}</td>
                 <td style="padding:0.5rem 0.75rem;">${statusBadge}</td>
                 <td style="padding:0.5rem 0.75rem;">${linkBtn}</td>
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;">${buttons}</td>
             </tr>`;
-        }).join('');
+    }).join('');
 
-        // Untracked duplicate rows
-        const dupRows = duplicates.map(dup => {
-            const date = new Date(dup.created_time).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
-            const delBtn = `<button onclick="deletePlatformPost('${dup.platform_post_id}','${dup.page_id}','${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>`;
-            return `<tr style="border-bottom:1px solid #e9ecef;background:#fff8e1;">
+    const dupRows = duplicates.map(dup => {
+        const date = new Date(dup.created_time).toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+        const delBtn = `<button onclick="deletePlatformPost('${dup.platform_post_id}','${dup.page_id}','${postId}')" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:2px 8px;font-size:0.78rem;cursor:pointer;"><i class="fas fa-trash-alt"></i> Delete</button>`;
+        return `<tr style="border-bottom:1px solid #e9ecef;background:#fff8e1;">
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;"><i class="fab fa-facebook" style="color:#1877F2;margin-right:0.3rem;"></i>${dup.page_name}</td>
                 <td style="padding:0.5rem 0.75rem;white-space:nowrap;color:#495057;">${date}</td>
                 <td style="padding:0.5rem 0.75rem;"><span style="background:#fff3cd;color:#856404;padding:2px 8px;border-radius:10px;font-size:0.78rem;">⚠️ Untracked duplicate</span></td>
                 <td style="padding:0.5rem 0.75rem;"><a href="${dup.permalink_url}" target="_blank" style="color:#667eea;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fas fa-external-link-alt" style="font-size:0.8rem;"></i> View</a></td>
                 <td style="padding:0.5rem 0.75rem;">${delBtn}</td>
             </tr>`;
-        }).join('');
+    }).join('');
 
-        container.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+    container.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
             <thead>
                 <tr style="background:#f8f9fa;font-weight:600;color:#495057;">
                     <th style="padding:0.4rem 0.75rem;text-align:left;border-bottom:2px solid #dee2e6;">Platform / Page</th>
@@ -1408,8 +1385,38 @@ async function loadSocialHistoryPanel(postId) {
             </thead>
             <tbody>${rows}${dupRows}</tbody>
         </table>`;
+}
+
+async function loadSocialHistoryPanel(postId) {
+    const container = document.getElementById('socialHistoryContent');
+    if (!container) return;
+    container.innerHTML = '<span style="color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Loading history…</span>';
+    try {
+        // Phase 1: render from DB immediately
+        const statusRes = await fetch(`${API_URL}/social/status/${postId}`, { credentials: 'include' });
+        const data = statusRes.ok ? await statusRes.json() : { socialPosts: [] };
+        const posts = data.socialPosts || [];
+        renderHistoryTable(container, posts, [], {});
+
+        // Phase 2: verify + scan in background, then re-render with updated status
+        const [verifyRes, scanRes] = await Promise.allSettled([
+            fetch(`${API_URL}/social/verify/${postId}`, { credentials: 'include' }),
+            fetch(`${API_URL}/social/scan/${postId}`, { credentials: 'include' })
+        ]);
+
+        const verifyData = (verifyRes.status === 'fulfilled' && verifyRes.value.ok)
+            ? await verifyRes.value.json() : { platformStatus: {} };
+        const scanData = (scanRes.status === 'fulfilled' && scanRes.value.ok)
+            ? await scanRes.value.json() : { duplicates: [] };
+        const platformStatus = verifyData.platformStatus || {};
+        const duplicates = scanData.duplicates || [];
+
+        // Re-render with verified status + duplicates
+        renderHistoryTable(container, posts, duplicates, platformStatus);
     } catch (e) {
-        container.innerHTML = '<span style="color:#dc3545;">Failed to load history.</span>';
+        if (!container.querySelector('table')) {
+            container.innerHTML = '<span style="color:#dc3545;">Failed to load history.</span>';
+        }
     }
 }
 
