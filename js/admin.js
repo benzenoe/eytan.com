@@ -948,7 +948,7 @@ async function publishToSocialInline() {
                 const gImg = gid ? `<img src="${API_URL}/social/facebook/picture/${gid}" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;margin-right:4px;" onerror="this.style.display='none'">` : '<i class="fab fa-facebook" style="margin-right:4px;"></i>';
                 return `<button onclick="
                     navigator.clipboard.writeText(document.getElementById('fb-caption-text').value);
-                    window.open('${url}','fb-group-${i}','width=900,height=700,resizable=yes,scrollbars=yes');
+                    window.open('${url}?focus=discussion','fb-group-${i}','width=900,height=700,resizable=yes,scrollbars=yes');
                     fetch('${API_URL}/social/log-share',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({postId:'${currentPublishingPostId}',platform:'${p}',url:'${url}'})}).then(()=>loadSocialHistoryPanel('${currentPublishingPostId}'));
                     document.getElementById('fb-group-hint').style.display='block';
                     this.style.opacity='0.7'; this.innerHTML='✅ ${label} — Paste in group';
