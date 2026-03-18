@@ -788,16 +788,27 @@ async function previewSocialContent() {
                     const style = platformStyles[preview.platform];
 
                     const previewId = `preview-content-${preview.platform}`;
+                    const reviseInputId = `revise-input-${preview.platform}`;
                     previewHTML += `
                         <div style="margin-bottom: 1rem; border: 2px solid ${style.color}; border-radius: 8px; overflow: hidden; background: white;">
                             <div style="background: ${style.bg}; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 2px solid ${style.color};">
                                 <i class="${style.icon}" style="color: ${style.color}; font-size: 1.2rem;"></i>
                                 <strong style="text-transform: capitalize; color: #333;">${preview.platform}</strong>
-                                <span style="font-size: 0.85rem; color: #6c757d;">${preview.characterCount} characters</span>
+                                <span id="${previewId}-chars" style="font-size: 0.85rem; color: #6c757d;">${preview.characterCount} characters</span>
                                 <button onclick="regeneratePreview('${preview.platform}', '${currentPublishingPostId}', '${previewId}')" style="margin-left: auto; background: white; border: 1px solid ${style.color}; color: ${style.color}; padding: 0.25rem 0.75rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">🔄 Regenerate</button>
                             </div>
-                            <div id="${previewId}" style="padding: 1rem; white-space: pre-wrap; line-height: 1.6; color: #333; font-size: 0.95rem; max-height: 300px; overflow-y: auto;">
-                                ${preview.content}
+                            <div id="${previewId}" contenteditable="true" spellcheck="true"
+                                oninput="document.getElementById('${previewId}-chars').textContent = this.innerText.length + ' characters'"
+                                style="padding: 1rem; white-space: pre-wrap; line-height: 1.6; color: #333; font-size: 0.95rem; max-height: 300px; overflow-y: auto; outline: none; cursor: text; min-height: 80px;"
+                                data-platform="${preview.platform}">${preview.content}</div>
+                            <div style="padding: 0.6rem 1rem; background: #f8f9fa; border-top: 1px solid #dee2e6; display: flex; gap: 0.5rem; align-items: center;">
+                                <input id="${reviseInputId}" type="text" placeholder="Revise with AI: e.g. make it more casual, shorter, focus on real estate…"
+                                    style="flex: 1; padding: 0.4rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; font-size: 0.85rem; outline: none;"
+                                    onkeydown="if(event.key==='Enter') revisePreviewContent('${preview.platform}', '${previewId}', '${reviseInputId}')">
+                                <button onclick="revisePreviewContent('${preview.platform}', '${previewId}', '${reviseInputId}')"
+                                    style="background: ${style.color}; color: white; border: none; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; font-size: 0.82rem; font-weight: 600; white-space: nowrap;">
+                                    ✨ Revise
+                                </button>
                             </div>
                         </div>
                     `;
@@ -991,6 +1002,14 @@ async function publishToSocialInline() {
     document.getElementById('socialResultsInline').style.display = 'block';
     document.getElementById('socialResultsContentInline').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Publishing to ' + apiPlatforms.join(', ') + '...</p>';
 
+    // Collect any edited preview content
+    const overrideContent = {};
+    document.querySelectorAll('[data-platform][contenteditable]').forEach(el => {
+        const platform = el.dataset.platform;
+        const text = el.innerText.trim();
+        if (platform && text) overrideContent[platform] = text;
+    });
+
     try {
         const response = await fetch(`${API_URL}/social/publish/${currentPublishingPostId}`, {
             method: 'POST',
@@ -999,7 +1018,8 @@ async function publishToSocialInline() {
             },
             credentials: 'include',
             body: JSON.stringify({
-                platforms: apiPlatforms
+                platforms: apiPlatforms,
+                overrideContent
             })
         });
 
@@ -1594,11 +1614,12 @@ async function deleteSocialPost(socialPostId, postId) {
 // Regenerate a single platform's preview content
 async function regeneratePreview(platform, postId, containerId) {
     const container = document.getElementById(containerId);
-    const btn = container ? container.closest('[style*="border: 2px"]').querySelector('button') : null;
+    const card = container ? container.closest('[style*="border: 2px"]') : null;
+    const btn = card ? card.querySelector('button') : null;
     if (!container) return;
 
-    if (btn) { btn.disabled = true; btn.textContent = '⏳ Regenerating...'; }
-    container.innerHTML = '<span style="color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Generating new content...</span>';
+    if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
+    container.innerText = 'Generating new content…';
 
     try {
         const response = await fetch(`${API_URL}/social/preview/${postId}`, {
@@ -1610,17 +1631,56 @@ async function regeneratePreview(platform, postId, containerId) {
         const data = await response.json();
         const preview = data.previews && data.previews.find(p => p.platform === platform);
         if (preview && preview.content) {
-            container.textContent = preview.content;
-            const charSpan = container.closest('[style*="border: 2px"]').querySelector('span[style*="6c757d"]');
+            container.innerText = preview.content;
+            const charSpan = document.getElementById(`${containerId}-chars`);
             if (charSpan) charSpan.textContent = preview.content.length + ' characters';
         } else {
-            container.textContent = 'Regeneration failed.';
+            container.innerText = 'Regeneration failed.';
         }
     } catch (e) {
-        container.textContent = 'Error: ' + e.message;
+        container.innerText = 'Error: ' + e.message;
     }
 
     if (btn) { btn.disabled = false; btn.textContent = '🔄 Regenerate'; }
+}
+
+async function revisePreviewContent(platform, containerId, inputId) {
+    const container = document.getElementById(containerId);
+    const input = document.getElementById(inputId);
+    if (!container || !input) return;
+
+    const revisionPrompt = input.value.trim();
+    if (!revisionPrompt) { input.focus(); return; }
+
+    const currentContent = container.innerText.trim();
+    const card = container.closest('[style*="border: 2px"]');
+    const reviseBtn = card ? card.querySelector('button[onclick*="revisePreview"]') : null;
+
+    if (reviseBtn) { reviseBtn.disabled = true; reviseBtn.textContent = '⏳ Revising…'; }
+    container.style.opacity = '0.5';
+
+    try {
+        const res = await fetch(`${API_URL}/social/revise`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ platform, currentContent, revisionPrompt })
+        });
+        const data = await res.json();
+        if (data.success && data.content) {
+            container.innerText = data.content;
+            const charSpan = document.getElementById(`${containerId}-chars`);
+            if (charSpan) charSpan.textContent = data.content.length + ' characters';
+            input.value = '';
+        } else {
+            showAlert('Revision failed: ' + (data.message || 'Unknown error'), 'error');
+        }
+    } catch (e) {
+        showAlert('Revision error: ' + e.message, 'error');
+    }
+
+    container.style.opacity = '1';
+    if (reviseBtn) { reviseBtn.disabled = false; reviseBtn.textContent = '✨ Revise'; }
 }
 
 // Regenerate AI caption in the Facebook caption modal
