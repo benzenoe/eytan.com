@@ -1,6 +1,6 @@
 # Eytan.com Blog System - Claude Memory Guide
 
-**Last Updated:** March 6, 2026 (Session 17 Complete)
+**Last Updated:** March 18, 2026 (Session 18 Complete)
 
 ---
 
@@ -163,11 +163,18 @@ npm install
 - localStorage persistence
 - Trilingual resume PDFs with language-specific downloads
 
-### 7. Social Media Publishing (Session 12)
-- AI-generated platform-specific content
-- Supports: Twitter/X, Facebook, Instagram, LinkedIn
-- Status tracking in database
-- Retry logic with exponential backoff
+### 7. Social Media Publishing (Sessions 12 & 18)
+- AI-generated platform-specific content (editable before publish)
+- Supports: Twitter/X, Facebook Pages, Instagram, LinkedIn
+- Manual shares tracked: WhatsApp, Facebook Personal, Facebook Groups
+- Publishing history panel with status badges per platform
+- Platform verification (checks if posts still exist after deletion)
+- Duplicate detection (finds untracked posts on Facebook pages)
+- Delete from platform + DB, or DB-only removal
+- Per-platform revision prompt: type instruction → AI rewrites content
+- Auto Facebook cache scrape 90s after publish
+- `overrideContent` map: user edits bypass AI regeneration on publish
+- `og:image` URLs use `?v=2` to bust Facebook link preview cache
 
 ---
 
@@ -603,6 +610,7 @@ FACEBOOK_PAGE_ACCESS_TOKEN=xxxxx
 INSTAGRAM_ACCOUNT_ID=xxxxx
 LINKEDIN_ACCESS_TOKEN=xxxxx
 LINKEDIN_PERSON_URN=urn:li:person:xxxxx
+FACEBOOK_USER_TOKEN=xxxxx    # Used for force-scrape (triggerFacebookScrape)
 
 # Server
 PORT=3000
@@ -688,8 +696,15 @@ expire TIMESTAMP NOT NULL
 | DELETE | /api/posts/:id | Delete post |
 | POST | /api/posts/:id/publish | Publish to GitHub |
 | POST | /api/upload/image | Upload image |
-| POST | /api/social/publish/:id | Publish to social media |
+| POST | /api/social/publish/:id | Publish to social media (accepts overrideContent) |
 | GET | /api/social/status/:id | Get social status |
+| GET | /api/social/verify/:id | Verify tracked posts still exist on platforms |
+| GET | /api/social/scan/:id | Find untracked duplicate posts on Facebook pages |
+| DELETE | /api/social/:socialPostId | Delete from platform + DB (?db_only=true for DB only) |
+| DELETE | /api/social/platform-post | Delete FB post by platform_post_id (no DB record) |
+| POST | /api/social/scrape | Force Facebook to re-scrape a URL |
+| POST | /api/social/log-share | Log manual shares (WhatsApp, Twitter, FB Personal/Groups) |
+| POST | /api/social/revise | Revise AI-generated content with user prompt |
 
 ### Authentication
 | Method | Endpoint | Description |
@@ -802,32 +817,6 @@ Fixed French SEO page generation issues:
 - `eytan-com-blog-backend/services/seo.js`
 
 ---
-
-## Current Status (Mar 2026)
-
-### Blog Stats
-- **Published Posts:** 21
-- **Languages:** 3 (English + French + Portuguese)
-- **SEO Pages:** 63 (21 EN + 21 FR + 21 PT)
-- **Tags:** 8 categories
-
-### Features Complete
-- ✅ Blog CRUD with admin panel
-- ✅ Image upload system
-- ✅ SEO static pages
-- ✅ Password protection
-- ✅ Tag filtering
-- ✅ Trilingual (EN/FR/PT)
-- ✅ Social media publishing
-- ✅ Share buttons (LinkedIn, X, FB, WhatsApp, Copy)
-- ✅ Blog Post Automation Skill (content creation guide)
-- ✅ Tabbed admin editor (General/English/French/Portuguese)
-- ✅ Resume download modal (Modern/Classic versions, trilingual PDFs)
-- ✅ Interactive Chart.js visualizations (5 charts with toggles/sliders)
-- ✅ Research report system with citations
-
-### Pending
-- ⏳ Blog categorization UI (Session 9 plan exists)
 
 ### Session 15 (Feb 4-16, 2026)
 **Focus:** Portuguese Language Support + Trilingual Resume System
@@ -993,17 +982,6 @@ Fixed multiple translation issues:
 
 ---
 
-### Recently Fixed (Session 16)
-- ✅ Resume download modal with Modern/Classic versions
-- ✅ Interactive Chart.js visualizations (5 charts with toggles/sliders)
-- ✅ Research report system with 62 source citations
-- ✅ Translation chunking (fixed token limit errors)
-- ✅ Chart.js protected from SEO regeneration
-- ✅ Encoding issues in French/Portuguese posts
-- ✅ H1 titles now use real post title (not SEO title)
-
----
-
 ### Session 17 (Mar 6, 2026)
 **Focus:** Notion MCP Server Integration for eytan.com Project Management
 
@@ -1070,6 +1048,114 @@ Fixed multiple translation issues:
 **Important Limitation:**
 - Teamspaces are Notion UI-only features (no API support for creation)
 - Alternative: Create top-level parent pages to organize content hierarchically
+
+---
+
+### Session 18 (Mar 17-18, 2026)
+**Focus:** Social Media Admin Panel — Full Overhaul
+
+**Part 1 - Delete Functionality**
+- `deleteSocialPostById(id)` in `services/database.js` now does real SQL DELETE (was incorrectly updating status)
+- `DELETE /:socialPostId` — deletes from platform AND DB; `?db_only=true` removes DB record only
+- `DELETE /platform-post` — deletes a FB post by `platform_post_id` without a DB record; MUST be declared BEFORE `/:socialPostId` wildcard to avoid route conflict
+- Facebook page post deletion: fetches page access token from `/me/accounts` (user token won't work)
+- LinkedIn deletion: auto-detects endpoint — `urn:li:share:*` → `/v2/shares/`, `urn:li:ugcPost:*` → `/v2/ugcPosts/`
+
+**Part 2 - Publishing History Panel**
+- Two-phase render: Phase 1 renders from DB immediately; Phase 2 runs verify+scan in background and updates status badges
+- `renderHistoryTable(container, posts, duplicates, platformStatus, postId)` — extracted as top-level function; `postId` MUST be 5th param (was causing "Failed to load history" when missing from closure)
+- Status badges: Published (green), Deleted on platform (yellow), Failed (red), ⚠️ Untracked duplicate
+- Delete button removes from platform + DB; Remove button removes DB only
+- History refreshes automatically after every publish, delete, or manual share action
+
+**Part 3 - Platform Verification & Duplicate Detection**
+- `GET /verify/:postId` — checks if all tracked posts for a blog post still exist on each platform
+- `GET /scan/:postId` — finds untracked duplicate posts on Facebook pages (detects double-publishes)
+- LinkedIn verify uses same URN-based endpoint detection as delete
+
+**Part 4 - Editable AI Preview + Per-Platform Revision**
+- Preview content divs are `contenteditable="true"` — click to edit directly in admin
+- Live character count updates as you type
+- Revision prompt bar per platform card: type instruction + Enter or click ✨ Revise
+- `POST /revise` — calls `reviseContent()` via GPT-3.5, rewrites content with tone/narrative guidance
+- `reviseContent(currentContent, platform, revisionPrompt)` added to `services/social-media.js`
+- On publish, edited content collected as `overrideContent` map and sent to `POST /publish/:postId`
+- `publishToSocialMedia()` signature: `async function publishToSocialMedia(postId, platforms, getPostById, saveSocialPost, overrideContent = {})`
+
+**Part 5 - Facebook OG Image & Cache Fixes**
+- `?v=2` appended to all `og:image` URLs in `services/seo.js` → forces Facebook to treat as new uncached URL
+- `triggerFacebookScrape(slug)` added to `services/seo.js` — fires async with 90s delay after publish
+- `handlePublishSEO()` now calls `triggerFacebookScrape` automatically
+- `POST /scrape` endpoint — manually force Facebook re-scrape for any URL
+- Fixed `intelligence-explosion` image: `http://` → `https://`
+- Fixed `ai-acceleration` image: `www.eytan.com` → `eytan.com`
+- `article:author` meta tag: changed from plain text "Eytan Benzeno" to URL `https://eytan.com`
+- Batch-scraped all 21 blog posts to populate Facebook link preview cache
+
+**Part 6 - Manual Share Logging & Status Badges**
+- `POST /log-share` — logs manual shares: WhatsApp, Twitter, Facebook Personal, Facebook Groups
+- All manual share buttons (WhatsApp, FB Personal, FB Groups) now call `loadSocialHistoryPanel()` after logging
+- `loadSocialStatus()` in `admin.js` now handles: facebook, facebook-personal, whatsapp, linkedin, instagram, twitter
+- `getPlatformLabel()` — added `facebook-group:` handler BEFORE generic `facebook` handler (critical order); added whatsapp and facebook-personal
+
+**Part 7 - Facebook Group Posting Fix**
+- **Root cause:** `navigator.clipboard.writeText()` is async — `window.open()` fires immediately and steals focus before clipboard write completes → clipboard was empty
+- **Fix:** Switched to synchronous `textarea.select() + document.execCommand('copy')` BEFORE `window.open()`
+- Group label was showing "https" because `platform.split(':')[1]` on `facebook-group:https://...` splits on ALL colons → Fixed by using `platform.replace('facebook-group:', '')` instead
+
+**Key Bug Fixes (Session 18)**
+| Bug | Root Cause | Fix |
+|-----|-----------|-----|
+| Delete not working | Used status update instead of DELETE | Real SQL DELETE in `deleteSocialPostById` |
+| Facebook page post delete failed | Used user token, not page token | Fetch page token from `/me/accounts` |
+| Route conflict `/platform-post` vs `/:id` | Route ordering | Move `/platform-post` before `/:socialPostId` |
+| LinkedIn always "Deleted on platform" | `/v2/ugcPosts/` used for `urn:li:share:` URNs → 403 | Auto-detect endpoint from URN prefix |
+| History shows "Failed to load" | `postId` not in scope after extracting `renderHistoryTable` | Add `postId` as 5th parameter |
+| WhatsApp/group clipboard empty | `async clipboard.writeText()` loses focus to popup | Synchronous `select()+execCommand('copy')` |
+| Group label shows "https" | `platform.split(':')[1]` on `facebook-group:https://...` → "https" | Handle `facebook-group:` prefix separately |
+| Wrong OG image on Facebook | Facebook cached headshot; `og:image` never validated | `?v=2` cache bust + batch scrape all posts |
+
+**Files Modified (Backend):**
+- `services/database.js` — `deleteSocialPostById` uses real SQL DELETE
+- `services/seo.js` — `triggerFacebookScrape`, `?v=2` on og:image URLs, `handlePublishSEO` calls scrape
+- `services/social-media.js` — `reviseContent()` new function; `publishToSocialMedia()` accepts `overrideContent`
+- `routes/social.js` — all new/updated endpoints listed above
+
+**Files Modified (Frontend):**
+- `js/admin.js` — publishing history panel, editable preview, revision prompt, social status badges, group clipboard fix
+
+---
+
+## Current Status (Mar 2026)
+
+### Blog Stats
+- **Published Posts:** 21
+- **Languages:** 3 (English + French + Portuguese)
+- **SEO Pages:** 63 (21 EN + 21 FR + 21 PT)
+- **Tags:** 8 categories
+
+### Features Complete
+- ✅ Blog CRUD with admin panel
+- ✅ Image upload system
+- ✅ SEO static pages
+- ✅ Password protection
+- ✅ Tag filtering
+- ✅ Trilingual (EN/FR/PT)
+- ✅ Social media auto-publishing (Twitter/X, Facebook, Instagram, LinkedIn)
+- ✅ Manual share tracking (WhatsApp, FB Personal, FB Groups)
+- ✅ Publishing history panel with verification + duplicate detection
+- ✅ Editable AI preview with per-platform revision prompts
+- ✅ Facebook OG image cache management (`?v=2` + force scrape)
+- ✅ Share buttons on blog posts (LinkedIn, X, FB, WhatsApp, Copy)
+- ✅ Blog Post Automation Skill (content creation guide)
+- ✅ Tabbed admin editor (General/English/French/Portuguese)
+- ✅ Resume download modal (Modern/Classic versions, trilingual PDFs)
+- ✅ Interactive Chart.js visualizations (5 charts with toggles/sliders)
+- ✅ Research report system with citations
+- ✅ Notion MCP integration
+
+### Pending
+- ⏳ Blog categorization UI (Session 9 plan exists)
 
 ---
 
