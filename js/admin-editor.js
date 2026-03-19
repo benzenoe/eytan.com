@@ -2,9 +2,49 @@
 let currentPost = null;
 let autoSaveInterval = null;
 let hasUnsavedChanges = false;
+let existingKeywords = []; // { id, cal_keyword } for uniqueness validation
+
+// Prefetch all existing cal_keywords so we can validate without extra round-trips
+async function fetchExistingKeywords() {
+    try {
+        const res = await fetch(`${API_URL}/posts/keywords`, { credentials: 'include' });
+        if (res.ok) {
+            const data = await res.json();
+            existingKeywords = data.keywords || [];
+        }
+    } catch (e) { /* silent */ }
+}
+
+// Auto-suggest a keyword from the current title
+function suggestCalKeyword() {
+    const title = document.getElementById('postTitle').value.trim();
+    if (!title) { alert('Enter a title first'); return; }
+    const stopWords = new Set(['the','a','an','of','in','on','at','for','to','and','or','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','can','how','why','what','when','where','who','this','that','these','those','it','its','my','your','his','her','our','their','with','by','as','from','into','through','about','after','before','over','under','up','down','not','no','more','most','some','any','all','each','both','few','many','much','new','great','big','old','own','other','such','so','just']);
+    const words = title.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/);
+    const keyword = words.find(w => w.length >= 3 && !stopWords.has(w)) || words[0] || '';
+    document.getElementById('calKeyword').value = keyword.substring(0, 20);
+    validateCalKeyword();
+}
+
+function validateCalKeyword() {
+    const input = document.getElementById('calKeyword');
+    const status = document.getElementById('calKeywordStatus');
+    const val = input.value.trim();
+    if (!val) { status.textContent = ''; return; }
+    const currentPostId = document.getElementById('postId').value;
+    const conflict = existingKeywords.find(k => k.cal_keyword === val && k.id !== currentPostId);
+    if (conflict) {
+        status.innerHTML = `<span style="color:#dc3545;">✗ Already used by "${conflict.title}"</span>`;
+        input.style.borderColor = '#dc3545';
+    } else {
+        status.innerHTML = `<span style="color:#28a745;">✓ Available</span>`;
+        input.style.borderColor = '#28a745';
+    }
+}
 
 // Initialize the editor
 function initEditor() {
+    fetchExistingKeywords();
     loadPostData();
     setupEventListeners();
     startAutoSave();
@@ -116,6 +156,7 @@ function populateForm(post) {
 
     document.getElementById('postAuthor').value = post.author || 'Eytan Benzeno';
     document.getElementById('postIcon').value = post.icon || '';
+    document.getElementById('calKeyword').value = post.cal_keyword || '';
     document.getElementById('postImageUrl').value = post.image || '';
     document.getElementById('postExcerpt').value = post.excerpt || '';
 
@@ -324,7 +365,8 @@ function getFormData() {
         metaDescriptionPt: document.getElementById('metaDescriptionPt').value,
         metaKeywordsPt: document.getElementById('metaKeywordsPt').value,
         imageAltPt: document.getElementById('imageAltPt').value,
-        socialPreviewPt: document.getElementById('socialPreviewPt').value
+        socialPreviewPt: document.getElementById('socialPreviewPt').value,
+        calKeyword: document.getElementById('calKeyword').value.trim() || null
     };
 }
 
@@ -1661,3 +1703,4 @@ async function generateFullPage(language) {
         });
     }
 }
+

@@ -441,6 +441,18 @@
                     <div class="help-text">Optional emoji icon for the post</div>
                 </div>
 
+                <div class="form-group">
+                    <label for="calKeyword">Calendar ID <span style="font-weight:400;color:#6c757d;">(unique short keyword)</span></label>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <input type="text" id="calKeyword" placeholder="e.g. welcome, notion, housing" maxlength="20"
+                               style="font-family:monospace;text-transform:lowercase;"
+                               oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'');validateCalKeyword()">
+                        <span id="calKeywordStatus" style="font-size:0.85rem;white-space:nowrap;"></span>
+                        <button type="button" onclick="suggestCalKeyword()" style="padding:0.3rem 0.7rem;font-size:0.8rem;background:#764ba2;color:white;border:none;border-radius:4px;cursor:pointer;white-space:nowrap;">✨ Suggest</button>
+                    </div>
+                    <div class="help-text">Short unique label shown on the social media calendar. Lowercase letters, numbers, hyphens only. Max 20 chars.</div>
+                </div>
+
                 <div class="form-group image-upload-section">
                     <label>Featured Image</label>
                     <input type="url" id="postImageUrl" placeholder="https://example.com/image.jpg" style="margin-bottom: 10px;">

@@ -2051,7 +2051,7 @@ function renderCalendarCells(posts, year, month) {
 
         const cell = document.createElement('div');
         cell.className = 'cal-cell' + (isToday ? ' today' : '');
-        cell.onclick = () => openCalModal(new Date(year, month, day));
+        cell.onclick = () => openDayView(new Date(year, month, day), dayPosts);
 
         const dateDiv = document.createElement('div');
         dateDiv.className = 'cal-cell-date';
@@ -2065,10 +2065,10 @@ function renderCalendarCells(posts, year, month) {
             const chip = document.createElement('div');
             chip.className = `cal-chip status-${p.status}`;
             const postTitle = p.title || p.post_id || '(untitled)';
+            const displayLabel = p.cal_keyword || p.icon || postTitle.split(' ')[0];
             chip.title = `${postTitle} → ${platformLabel} (${p.status})`;
             const time = new Date(p.scheduled_at || p.published_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-            const postIcon = p.icon ? `${p.icon} ` : '';
-            chip.innerHTML = `${avatar}<span style="overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;">${postIcon}${postTitle}</span><span style="flex-shrink:0;opacity:0.7;margin-left:2px;">${time}</span>`;
+            chip.innerHTML = `${avatar}<span style="overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;font-weight:500;">${displayLabel}</span><span style="flex-shrink:0;opacity:0.7;margin-left:2px;">${time}</span>`;
             chip.onclick = (e) => { e.stopPropagation(); showPostChipDetail(p); };
             cell.appendChild(chip);
         });
@@ -2131,6 +2131,67 @@ function calendarPrev() {
 function calendarNext() {
     calCurrentDate.setMonth(calCurrentDate.getMonth() + 1);
     loadCalendar();
+}
+
+// ── Day View ─────────────────────────────────────────────────
+
+function openDayView(date, dayPosts) {
+    const modal = document.getElementById('cal-schedule-modal');
+    const title = document.getElementById('cal-modal-title');
+    const body = document.getElementById('cal-modal-body');
+
+    title.textContent = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    modal.style.display = 'flex';
+
+    if (dayPosts.length === 0) {
+        body.innerHTML = `
+            <div style="text-align:center;padding:2rem;color:#6c757d;">
+                <i class="fas fa-calendar-day" style="font-size:2rem;margin-bottom:0.75rem;display:block;"></i>
+                No posts scheduled for this day.
+            </div>
+            <button onclick="openCalModalForDate(new Date(${date.getTime()}))" style="width:100%;padding:0.65rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;font-weight:600;font-size:0.9rem;cursor:pointer;margin-top:0.5rem;">
+                <i class="fas fa-plus"></i> Schedule a Post for This Day
+            </button>`;
+        return;
+    }
+
+    const rows = dayPosts.map(p => {
+        const { label: platformLabel } = getPlatformLabel(p.platform);
+        const avatar = buildCalChipAvatar(p.platform, 28);
+        const time = new Date(p.scheduled_at || p.published_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const postTitle = p.title || p.post_id || '(untitled)';
+        const keyword = p.cal_keyword ? `<span style="font-family:monospace;font-size:0.75rem;background:#f0f4ff;color:#667eea;padding:1px 5px;border-radius:3px;margin-left:4px;">${p.cal_keyword}</span>` : '';
+        const statusColors = { scheduled:'#cce5ff|#004085', reminder_due:'#fff3cd|#856404', published:'#d4edda|#155724', failed:'#f8d7da|#721c24', pending:'#e2e3e5|#383d41' };
+        const [bg, fg] = (statusColors[p.status] || '#e2e3e5|#383d41').split('|');
+        let actionBtn = '';
+        if (p.status === 'scheduled') {
+            actionBtn = `<button onclick="cancelFromCalendar(${p.id});closeCalModal();" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:3px 10px;font-size:0.78rem;cursor:pointer;"><i class='fas fa-ban'></i> Cancel</button>`;
+        } else if (p.status === 'reminder_due') {
+            actionBtn = `<button onclick="openReminderAction(${p.id})" style="background:#ffc107;color:#000;border:none;border-radius:4px;padding:3px 10px;font-size:0.78rem;cursor:pointer;"><i class='fas fa-bell'></i> Action</button>`;
+        } else if (p.platform_url) {
+            actionBtn = `<a href="${p.platform_url}" target="_blank" style="background:#28a745;color:white;border-radius:4px;padding:3px 10px;font-size:0.78rem;text-decoration:none;"><i class='fas fa-external-link-alt'></i> View</a>`;
+        }
+        return `<div style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem;border:1px solid #e9ecef;border-radius:6px;margin-bottom:0.5rem;">
+            ${avatar}
+            <div style="flex:1;min-width:0;">
+                <div style="font-weight:600;font-size:0.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.icon ? p.icon + ' ' : ''}${postTitle}${keyword}</div>
+                <div style="font-size:0.78rem;color:#6c757d;">${platformLabel} &nbsp;·&nbsp; ${time} &nbsp;·&nbsp;
+                    <span style="background:${bg};color:${fg};padding:1px 6px;border-radius:10px;">${p.status}</span>
+                </div>
+            </div>
+            ${actionBtn}
+        </div>`;
+    }).join('');
+
+    body.innerHTML = `
+        ${rows}
+        <button onclick="openCalModalForDate(new Date(${date.getTime()}))" style="width:100%;padding:0.6rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;font-weight:600;font-size:0.85rem;cursor:pointer;margin-top:0.5rem;">
+            <i class="fas fa-plus"></i> Schedule Another Post for This Day
+        </button>`;
+}
+
+function openCalModalForDate(date) {
+    openCalModal(date);
 }
 
 // ── Calendar Schedule Modal ──────────────────────────────────
