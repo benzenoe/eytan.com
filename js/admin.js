@@ -1939,6 +1939,51 @@ let calSelectedDate = null;      // date clicked by user
 // Calendar uses getPlatformLabel (defined above) — same logic as the social console,
 // so page/group names resolve from fbPageNames map instead of showing raw IDs.
 
+// Returns an avatar/icon HTML for a platform string (used in calendar chips & reminder banner)
+// size: pixel size for images/badges (default 16); iconSize: font-size for FA icons
+function buildCalChipAvatar(platform, size = 16) {
+    const iconSize = Math.round(size * 0.85);
+    const s = `width:${size}px;height:${size}px;border-radius:50%;object-fit:cover;flex-shrink:0;vertical-align:middle;`;
+    const fallbackBadge = (color, text) =>
+        `<span style="display:inline-flex;align-items:center;justify-content:center;${s}background:${color};font-size:${Math.round(size*0.5)}px;color:white;font-weight:bold;">${text}</span>`;
+
+    if (platform === 'instagram')
+        return `<i class="fab fa-instagram" style="color:#E1306C;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+    if (platform === 'linkedin')
+        return `<i class="fab fa-linkedin" style="color:#0A66C2;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+    if (platform === 'twitter')
+        return `<span style="font-size:${Math.round(size*0.7)}px;font-weight:700;flex-shrink:0;line-height:1;">𝕏</span>`;
+    if (platform === 'whatsapp')
+        return `<i class="fab fa-whatsapp" style="color:#25D366;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+    if (platform === 'facebook-personal')
+        return `<img src="${API_URL}/social/facebook/picture/benzeno" style="${s}" onerror="this.src='images/profile.jpg'" title="Facebook Personal">`;
+    if (platform === 'facebook' || platform === 'facebook:')
+        return `<i class="fab fa-facebook" style="color:#1877F2;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+    if (platform.startsWith('facebook:')) {
+        const pageId = platform.split(':')[1];
+        const picUrl = fbPagePictures[pageId] || `${API_URL}/social/facebook/picture/${pageId}`;
+        const letter = (fbPageNames[pageId] || 'F')[0].toUpperCase();
+        return `<img src="${picUrl}" style="${s}" onerror="fbCalAvatarFallback(this,${size},'${letter}')" title="${fbPageNames[pageId] || pageId}">`;
+    }
+    if (platform.startsWith('facebook-group:')) {
+        const groupId = extractGroupId(platform.replace('facebook-group:', ''));
+        const name = socialPlatformLabel(platform);
+        const letter = name[0].toUpperCase();
+        const groupImgStyle = `width:${size}px;height:${size}px;border-radius:3px;object-fit:cover;flex-shrink:0;`;
+        if (groupId)
+            return `<img src="${API_URL}/social/facebook/cover/${groupId}" style="${groupImgStyle}" onerror="fbCalAvatarFallback(this,${size},'${letter}')" title="${name}">`;
+        return fallbackBadge('#1877F2', letter);
+    }
+    return `<i class="fab fa-facebook" style="color:#1877F2;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+}
+
+function fbCalAvatarFallback(el, size, letter) {
+    const span = document.createElement('span');
+    span.style.cssText = `display:inline-flex;align-items:center;justify-content:center;width:${size}px;height:${size}px;border-radius:50%;background:#1877F2;font-size:${Math.round(size*0.5)}px;color:white;font-weight:bold;flex-shrink:0;`;
+    span.textContent = letter;
+    el.parentNode && el.parentNode.replaceChild(span, el);
+}
+
 async function toggleCalendar() {
     calendarOpen = !calendarOpen;
     const section = document.getElementById('calendar-section');
@@ -2011,12 +2056,13 @@ function renderCalendarCells(posts, year, month) {
 
         const dayPosts = byDay[dateKey] || [];
         dayPosts.slice(0, 4).forEach(p => {
-            const { icon, color, label } = getPlatformLabel(p.platform);
+            const { label } = getPlatformLabel(p.platform);
+            const avatar = buildCalChipAvatar(p.platform);
             const chip = document.createElement('div');
             chip.className = `cal-chip status-${p.status}`;
             chip.title = `${p.title || p.post_id} — ${label} (${p.status})`;
             const time = new Date(p.scheduled_at || p.published_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-            chip.innerHTML = `<i class="${icon}" style="color:${color};flex-shrink:0;"></i><span style="overflow:hidden;text-overflow:ellipsis;max-width:70px;">${label}</span><span style="flex-shrink:0;opacity:0.75;">${time}</span>`;
+            chip.innerHTML = `${avatar}<span style="overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;">${label}</span><span style="flex-shrink:0;opacity:0.75;">${time}</span>`;
             chip.onclick = (e) => { e.stopPropagation(); showPostChipDetail(p); };
             cell.appendChild(chip);
         });
@@ -2042,7 +2088,7 @@ function showPostChipDetail(p) {
     } else if (p.platform_url) {
         actions = `<a href="${p.platform_url}" target="_blank" style="background:#28a745;color:white;border-radius:4px;padding:4px 12px;font-size:0.82rem;text-decoration:none;margin-top:0.5rem;display:inline-block;"><i class='fas fa-external-link-alt'></i> View Post</a>`;
     }
-    showAlert(`<i class="${icon}" style="color:${color};margin-right:4px;"></i><strong>${label}</strong> — ${p.title || p.post_id}<br>${time} — <em>${p.status}</em>${actions ? '<br>' + actions : ''}`, 'info', 8000);
+    showAlert(`<span style="display:inline-flex;align-items:center;gap:6px;">${buildCalChipAvatar(p.platform, 20)}<strong>${label}</strong></span> — ${p.title || p.post_id}<br>${time} — <em>${p.status}</em>${actions ? '<br>' + actions : ''}`, 'info', 8000);
 }
 
 async function cancelFromCalendar(id) {
@@ -2192,7 +2238,7 @@ async function loadReminders() {
             }
 
             return `<div class="reminder-item">
-                <div class="reminder-platform-icon"><i class="${rIcon}" style="color:${rColor};font-size:1.1rem;"></i></div>
+                <div class="reminder-platform-icon">${buildCalChipAvatar(r.platform, 32)}</div>
                 <div class="reminder-content">
                     <div class="reminder-title"><strong>${rLabel}</strong> — ${r.title || r.post_id} <span style="font-weight:400;color:#6c757d;font-size:0.8rem;">${time ? '— ' + time : ''}</span></div>
                     <div class="reminder-text">${content.substring(0, 200)}${content.length > 200 ? '…' : ''}</div>
