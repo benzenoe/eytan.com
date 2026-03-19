@@ -1936,24 +1936,8 @@ let calendarOpen = false;
 let calCurrentDate = new Date(); // tracks which month to show
 let calSelectedDate = null;      // date clicked by user
 
-const PLATFORM_META = {
-    'facebook':          { icon: '🔵', label: 'FB Page',    color: '#1877f2' },
-    'facebook:':         { icon: '🔵', label: 'FB Page',    color: '#1877f2' },
-    'instagram':         { icon: '📸', label: 'IG',         color: '#e1306c' },
-    'linkedin':          { icon: '💼', label: 'LinkedIn',   color: '#0077b5' },
-    'twitter':           { icon: '𝕏', label: 'X',          color: '#000' },
-    'whatsapp':          { icon: '💬', label: 'WhatsApp',   color: '#25d366' },
-    'facebook-personal': { icon: '👤', label: 'FB Personal', color: '#1877f2' },
-    'facebook-group':    { icon: '👥', label: 'FB Group',   color: '#1877f2' },
-};
-
-function getPlatformMeta(platform) {
-    if (!platform) return { icon: '📢', label: platform, color: '#6c757d' };
-    for (const key of Object.keys(PLATFORM_META)) {
-        if (platform === key || platform.startsWith(key + ':')) return PLATFORM_META[key];
-    }
-    return { icon: '📢', label: platform, color: '#6c757d' };
-}
+// Calendar uses getPlatformLabel (defined above) — same logic as the social console,
+// so page/group names resolve from fbPageNames map instead of showing raw IDs.
 
 async function toggleCalendar() {
     calendarOpen = !calendarOpen;
@@ -2027,12 +2011,12 @@ function renderCalendarCells(posts, year, month) {
 
         const dayPosts = byDay[dateKey] || [];
         dayPosts.slice(0, 4).forEach(p => {
-            const meta = getPlatformMeta(p.platform);
+            const { icon, color, label } = getPlatformLabel(p.platform);
             const chip = document.createElement('div');
             chip.className = `cal-chip status-${p.status}`;
-            chip.title = `${p.title || p.post_id} — ${p.platform} (${p.status})`;
+            chip.title = `${p.title || p.post_id} — ${label} (${p.status})`;
             const time = new Date(p.scheduled_at || p.published_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-            chip.innerHTML = `${meta.icon} ${time}`;
+            chip.innerHTML = `<i class="${icon}" style="color:${color};flex-shrink:0;"></i><span style="overflow:hidden;text-overflow:ellipsis;max-width:70px;">${label}</span><span style="flex-shrink:0;opacity:0.75;">${time}</span>`;
             chip.onclick = (e) => { e.stopPropagation(); showPostChipDetail(p); };
             cell.appendChild(chip);
         });
@@ -2048,7 +2032,7 @@ function renderCalendarCells(posts, year, month) {
 }
 
 function showPostChipDetail(p) {
-    const meta = getPlatformMeta(p.platform);
+    const { icon, color, label } = getPlatformLabel(p.platform);
     const time = new Date(p.scheduled_at || p.published_at).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     let actions = '';
     if (p.status === 'scheduled') {
@@ -2058,7 +2042,7 @@ function showPostChipDetail(p) {
     } else if (p.platform_url) {
         actions = `<a href="${p.platform_url}" target="_blank" style="background:#28a745;color:white;border-radius:4px;padding:4px 12px;font-size:0.82rem;text-decoration:none;margin-top:0.5rem;display:inline-block;"><i class='fas fa-external-link-alt'></i> View Post</a>`;
     }
-    showAlert(`${meta.icon} <strong>${p.platform}</strong> — ${p.title || p.post_id}<br>${time} — <em>${p.status}</em>${actions ? '<br>' + actions : ''}`, 'info', 8000);
+    showAlert(`<i class="${icon}" style="color:${color};margin-right:4px;"></i><strong>${label}</strong> — ${p.title || p.post_id}<br>${time} — <em>${p.status}</em>${actions ? '<br>' + actions : ''}`, 'info', 8000);
 }
 
 async function cancelFromCalendar(id) {
@@ -2187,7 +2171,7 @@ async function loadReminders() {
 
         banner.classList.add('show');
         list.innerHTML = reminders.map(r => {
-            const meta = getPlatformMeta(r.platform);
+            const { icon: rIcon, color: rColor, label: rLabel } = getPlatformLabel(r.platform);
             const content = r.content || '(auto-generate content on publish)';
             const postUrl = r.slug ? `https://eytan.com/posts/${r.slug}` : '';
             const time = r.scheduled_at ? new Date(r.scheduled_at).toLocaleString('en-US', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
@@ -2208,9 +2192,9 @@ async function loadReminders() {
             }
 
             return `<div class="reminder-item">
-                <div class="reminder-platform-icon">${meta.icon}</div>
+                <div class="reminder-platform-icon"><i class="${rIcon}" style="color:${rColor};font-size:1.1rem;"></i></div>
                 <div class="reminder-content">
-                    <div class="reminder-title">${r.title || r.post_id} <span style="font-weight:400;color:#6c757d;font-size:0.8rem;">${time ? '— ' + time : ''}</span></div>
+                    <div class="reminder-title"><strong>${rLabel}</strong> — ${r.title || r.post_id} <span style="font-weight:400;color:#6c757d;font-size:0.8rem;">${time ? '— ' + time : ''}</span></div>
                     <div class="reminder-text">${content.substring(0, 200)}${content.length > 200 ? '…' : ''}</div>
                     <div class="reminder-actions">
                         ${shareBtn}
