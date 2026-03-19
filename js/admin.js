@@ -1940,45 +1940,46 @@ let calSelectedDate = null;      // date clicked by user
 // so page/group names resolve from fbPageNames map instead of showing raw IDs.
 
 // Returns an avatar/icon HTML for a platform string (used in calendar chips & reminder banner)
-// size: pixel size for images/badges (default 16); iconSize: font-size for FA icons
+// size: pixel size for images/badges (default 16)
+// Always includes a title attribute with the full resolved platform name for hover tooltips.
 function buildCalChipAvatar(platform, size = 16) {
     const iconSize = Math.round(size * 0.85);
     const s = `width:${size}px;height:${size}px;border-radius:50%;object-fit:cover;flex-shrink:0;vertical-align:middle;`;
+    const fullName = getPlatformLabel(platform).label; // resolved name (e.g. "Eytan.com", "REIGNation")
     const fallbackBadge = (color, text) =>
-        `<span style="display:inline-flex;align-items:center;justify-content:center;${s}background:${color};font-size:${Math.round(size*0.5)}px;color:white;font-weight:bold;">${text}</span>`;
+        `<span style="display:inline-flex;align-items:center;justify-content:center;${s}background:${color};font-size:${Math.round(size*0.5)}px;color:white;font-weight:bold;" title="${fullName}">${text}</span>`;
 
     if (platform === 'instagram')
-        return `<i class="fab fa-instagram" style="color:#E1306C;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+        return `<i class="fab fa-instagram" style="color:#E1306C;font-size:${iconSize}px;flex-shrink:0;" title="${fullName}"></i>`;
     if (platform === 'linkedin')
-        return `<i class="fab fa-linkedin" style="color:#0A66C2;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+        return `<i class="fab fa-linkedin" style="color:#0A66C2;font-size:${iconSize}px;flex-shrink:0;" title="${fullName}"></i>`;
     if (platform === 'twitter')
-        return `<span style="font-size:${Math.round(size*0.7)}px;font-weight:700;flex-shrink:0;line-height:1;">𝕏</span>`;
+        return `<span style="font-size:${Math.round(size*0.7)}px;font-weight:700;flex-shrink:0;line-height:1;" title="${fullName}">𝕏</span>`;
     if (platform === 'whatsapp')
-        return `<i class="fab fa-whatsapp" style="color:#25D366;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+        return `<i class="fab fa-whatsapp" style="color:#25D366;font-size:${iconSize}px;flex-shrink:0;" title="${fullName}"></i>`;
     if (platform === 'facebook-personal')
-        return `<img src="${API_URL}/social/facebook/picture/benzeno" style="${s}" onerror="this.src='images/profile.jpg'" title="Facebook Personal">`;
+        return `<img src="${API_URL}/social/facebook/picture/benzeno" style="${s}" onerror="this.src='images/profile.jpg'" title="${fullName}">`;
     if (platform === 'facebook' || platform === 'facebook:') {
-        // Try to use the profile pic of the first known page (single-page setup)
         const firstPic = Object.values(fbPagePictures)[0];
-        if (firstPic) return `<img src="${firstPic}" style="${s}" onerror="fbCalAvatarFallback(this,${size},'F')" title="Facebook Page">`;
-        return `<i class="fab fa-facebook" style="color:#1877F2;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+        const firstName = Object.keys(fbPagePictures)[0] ? (fbPageNames[Object.keys(fbPagePictures)[0]] || fullName) : fullName;
+        if (firstPic) return `<img src="${firstPic}" style="${s}" onerror="fbCalAvatarFallback(this,${size},'F')" title="${firstName}">`;
+        return `<i class="fab fa-facebook" style="color:#1877F2;font-size:${iconSize}px;flex-shrink:0;" title="${fullName}"></i>`;
     }
     if (platform.startsWith('facebook:')) {
         const pageId = platform.split(':')[1];
         const picUrl = fbPagePictures[pageId] || `${API_URL}/social/facebook/picture/${pageId}`;
         const letter = (fbPageNames[pageId] || 'F')[0].toUpperCase();
-        return `<img src="${picUrl}" style="${s}" onerror="fbCalAvatarFallback(this,${size},'${letter}')" title="${fbPageNames[pageId] || pageId}">`;
+        return `<img src="${picUrl}" style="${s}" onerror="fbCalAvatarFallback(this,${size},'${letter}')" title="${fullName}">`;
     }
     if (platform.startsWith('facebook-group:')) {
         const groupId = extractGroupId(platform.replace('facebook-group:', ''));
-        const name = socialPlatformLabel(platform);
-        const letter = name[0].toUpperCase();
+        const letter = fullName[0].toUpperCase();
         const groupImgStyle = `width:${size}px;height:${size}px;border-radius:3px;object-fit:cover;flex-shrink:0;`;
         if (groupId)
-            return `<img src="${API_URL}/social/facebook/cover/${groupId}" style="${groupImgStyle}" onerror="fbCalAvatarFallback(this,${size},'${letter}')" title="${name}">`;
+            return `<img src="${API_URL}/social/facebook/cover/${groupId}" style="${groupImgStyle}" onerror="fbCalAvatarFallback(this,${size},'${letter}')" title="${fullName}">`;
         return fallbackBadge('#1877F2', letter);
     }
-    return `<i class="fab fa-facebook" style="color:#1877F2;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+    return `<i class="fab fa-facebook" style="color:#1877F2;font-size:${iconSize}px;flex-shrink:0;" title="${fullName}"></i>`;
 }
 
 function fbCalAvatarFallback(el, size, letter) {
@@ -2143,15 +2144,22 @@ function openDayView(date, dayPosts) {
     title.textContent = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
     modal.style.display = 'flex';
 
+    // Can only schedule for today or future days
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const isFutureOrToday = date >= today;
+    const scheduleBtn = isFutureOrToday
+        ? `<button onclick="openCalModalForDate(new Date(${date.getTime()}))" style="width:100%;padding:0.65rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;font-weight:600;font-size:0.9rem;cursor:pointer;margin-top:0.5rem;">
+                <i class="fas fa-plus"></i> Schedule a Post for This Day
+           </button>`
+        : '';
+
     if (dayPosts.length === 0) {
         body.innerHTML = `
             <div style="text-align:center;padding:2rem;color:#6c757d;">
                 <i class="fas fa-calendar-day" style="font-size:2rem;margin-bottom:0.75rem;display:block;"></i>
                 No posts scheduled for this day.
             </div>
-            <button onclick="openCalModalForDate(new Date(${date.getTime()}))" style="width:100%;padding:0.65rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;font-weight:600;font-size:0.9rem;cursor:pointer;margin-top:0.5rem;">
-                <i class="fas fa-plus"></i> Schedule a Post for This Day
-            </button>`;
+            ${scheduleBtn}`;
         return;
     }
 
@@ -2183,11 +2191,12 @@ function openDayView(date, dayPosts) {
         </div>`;
     }).join('');
 
-    body.innerHTML = `
-        ${rows}
-        <button onclick="openCalModalForDate(new Date(${date.getTime()}))" style="width:100%;padding:0.6rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;font-weight:600;font-size:0.85rem;cursor:pointer;margin-top:0.5rem;">
-            <i class="fas fa-plus"></i> Schedule Another Post for This Day
-        </button>`;
+    const addMoreBtn = isFutureOrToday
+        ? `<button onclick="openCalModalForDate(new Date(${date.getTime()}))" style="width:100%;padding:0.6rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;font-weight:600;font-size:0.85rem;cursor:pointer;margin-top:0.5rem;">
+               <i class="fas fa-plus"></i> Schedule Another Post for This Day
+           </button>`
+        : '';
+    body.innerHTML = `${rows}${addMoreBtn}`;
 }
 
 function openCalModalForDate(date) {
