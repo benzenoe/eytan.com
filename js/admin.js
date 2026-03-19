@@ -238,18 +238,18 @@ async function republishAllOutdated() {
     showAlert(`Republished ${succeeded} post(s). ${failed} failed. Changes live in 1-2 minutes.`, failed === 0 ? 'success' : 'warning');
 }
 
-// Show alert message
-function showAlert(message, type = 'success') {
+// Show alert message (supports HTML content and custom duration)
+function showAlert(message, type = 'success', duration = 3000) {
     const container = document.getElementById('alert-container');
     const alert = document.createElement('div');
     alert.className = `alert alert-${type} show`;
-    alert.textContent = message;
+    alert.innerHTML = message;
     container.appendChild(alert);
 
     setTimeout(() => {
         alert.classList.remove('show');
         setTimeout(() => alert.remove(), 300);
-    }, 3000);
+    }, duration);
 }
 
 // Open create modal
@@ -1928,12 +1928,348 @@ async function logout() {
     }
 }
 
+// ══════════════════════════════════════════════════════════════
+// CALENDAR & REMINDER SYSTEM
+// ══════════════════════════════════════════════════════════════
+
+let calendarOpen = false;
+let calCurrentDate = new Date(); // tracks which month to show
+let calSelectedDate = null;      // date clicked by user
+
+const PLATFORM_META = {
+    'facebook':          { icon: '🔵', label: 'FB Page',    color: '#1877f2' },
+    'facebook:':         { icon: '🔵', label: 'FB Page',    color: '#1877f2' },
+    'instagram':         { icon: '📸', label: 'IG',         color: '#e1306c' },
+    'linkedin':          { icon: '💼', label: 'LinkedIn',   color: '#0077b5' },
+    'twitter':           { icon: '𝕏', label: 'X',          color: '#000' },
+    'whatsapp':          { icon: '💬', label: 'WhatsApp',   color: '#25d366' },
+    'facebook-personal': { icon: '👤', label: 'FB Personal', color: '#1877f2' },
+    'facebook-group':    { icon: '👥', label: 'FB Group',   color: '#1877f2' },
+};
+
+function getPlatformMeta(platform) {
+    if (!platform) return { icon: '📢', label: platform, color: '#6c757d' };
+    for (const key of Object.keys(PLATFORM_META)) {
+        if (platform === key || platform.startsWith(key + ':')) return PLATFORM_META[key];
+    }
+    return { icon: '📢', label: platform, color: '#6c757d' };
+}
+
+async function toggleCalendar() {
+    calendarOpen = !calendarOpen;
+    const section = document.getElementById('calendar-section');
+    if (calendarOpen) {
+        section.classList.add('open');
+        await loadCalendar();
+    } else {
+        section.classList.remove('open');
+    }
+}
+
+async function loadCalendar() {
+    const year = calCurrentDate.getFullYear();
+    const month = calCurrentDate.getMonth();
+
+    // Show full month range plus buffer for adjacent month cells
+    const start = new Date(year, month, 1);
+    const end = new Date(year, month + 1, 0, 23, 59, 59);
+
+    document.getElementById('cal-month-label').textContent =
+        start.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+    try {
+        const res = await fetch(`${API_URL}/social/calendar?start=${start.toISOString()}&end=${end.toISOString()}`, { credentials: 'include' });
+        const data = res.ok ? await res.json() : { posts: [] };
+        renderCalendarCells(data.posts || [], year, month);
+    } catch (e) {
+        renderCalendarCells([], year, month);
+    }
+}
+
+function renderCalendarCells(posts, year, month) {
+    const container = document.getElementById('cal-cells');
+    container.innerHTML = '';
+
+    const today = new Date();
+    const firstDay = new Date(year, month, 1).getDay();  // 0=Sun
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Group posts by local date string YYYY-MM-DD
+    const byDay = {};
+    posts.forEach(p => {
+        const dt = p.scheduled_at || p.published_at;
+        if (!dt) return;
+        const d = new Date(dt);
+        const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        if (!byDay[key]) byDay[key] = [];
+        byDay[key].push(p);
+    });
+
+    // Blank cells for days before first of month
+    for (let i = 0; i < firstDay; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-cell other-month';
+        container.appendChild(cell);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateKey = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day;
+
+        const cell = document.createElement('div');
+        cell.className = 'cal-cell' + (isToday ? ' today' : '');
+        cell.onclick = () => openCalModal(new Date(year, month, day));
+
+        const dateDiv = document.createElement('div');
+        dateDiv.className = 'cal-cell-date';
+        dateDiv.textContent = day;
+        cell.appendChild(dateDiv);
+
+        const dayPosts = byDay[dateKey] || [];
+        dayPosts.slice(0, 4).forEach(p => {
+            const meta = getPlatformMeta(p.platform);
+            const chip = document.createElement('div');
+            chip.className = `cal-chip status-${p.status}`;
+            chip.title = `${p.title || p.post_id} — ${p.platform} (${p.status})`;
+            const time = new Date(p.scheduled_at || p.published_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            chip.innerHTML = `${meta.icon} ${time}`;
+            chip.onclick = (e) => { e.stopPropagation(); showPostChipDetail(p); };
+            cell.appendChild(chip);
+        });
+        if (dayPosts.length > 4) {
+            const more = document.createElement('div');
+            more.style.cssText = 'font-size:0.68rem;color:#667eea;padding-left:4px;';
+            more.textContent = `+${dayPosts.length - 4} more`;
+            cell.appendChild(more);
+        }
+
+        container.appendChild(cell);
+    }
+}
+
+function showPostChipDetail(p) {
+    const meta = getPlatformMeta(p.platform);
+    const time = new Date(p.scheduled_at || p.published_at).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    let actions = '';
+    if (p.status === 'scheduled') {
+        actions = `<button onclick="cancelFromCalendar(${p.id})" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:4px 12px;font-size:0.82rem;cursor:pointer;margin-top:0.5rem;"><i class='fas fa-ban'></i> Cancel</button>`;
+    } else if (p.status === 'reminder_due') {
+        actions = `<button onclick="openReminderAction(${p.id})" style="background:#ffc107;color:#000;border:none;border-radius:4px;padding:4px 12px;font-size:0.82rem;cursor:pointer;margin-top:0.5rem;"><i class='fas fa-bell'></i> Take Action</button>`;
+    } else if (p.platform_url) {
+        actions = `<a href="${p.platform_url}" target="_blank" style="background:#28a745;color:white;border-radius:4px;padding:4px 12px;font-size:0.82rem;text-decoration:none;margin-top:0.5rem;display:inline-block;"><i class='fas fa-external-link-alt'></i> View Post</a>`;
+    }
+    showAlert(`${meta.icon} <strong>${p.platform}</strong> — ${p.title || p.post_id}<br>${time} — <em>${p.status}</em>${actions ? '<br>' + actions : ''}`, 'info', 8000);
+}
+
+async function cancelFromCalendar(id) {
+    if (!confirm('Cancel this scheduled post?')) return;
+    try {
+        const res = await fetch(`${API_URL}/social/cancel-scheduled/${id}`, { method: 'DELETE', credentials: 'include' });
+        const data = await res.json();
+        if (res.ok) {
+            showAlert('Scheduled post cancelled.', 'success');
+            await loadCalendar();
+        } else {
+            showAlert('Error: ' + data.error, 'error');
+        }
+    } catch (e) {
+        showAlert('Request failed', 'error');
+    }
+}
+
+function calendarPrev() {
+    calCurrentDate.setMonth(calCurrentDate.getMonth() - 1);
+    loadCalendar();
+}
+
+function calendarNext() {
+    calCurrentDate.setMonth(calCurrentDate.getMonth() + 1);
+    loadCalendar();
+}
+
+// ── Calendar Schedule Modal ──────────────────────────────────
+
+function openCalModal(date) {
+    calSelectedDate = date;
+    const modal = document.getElementById('cal-schedule-modal');
+    modal.style.display = 'flex';
+
+    // Populate post dropdown
+    const select = document.getElementById('cal-post-select');
+    select.innerHTML = '<option value="">Select a post...</option>';
+    const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+    sorted.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `${p.date ? p.date.substring(0,10) : ''} — ${p.title}`;
+        select.appendChild(opt);
+    });
+
+    // Set default datetime to noon on selected date
+    const dt = new Date(date);
+    dt.setHours(12, 0, 0, 0);
+    const localISO = new Date(dt.getTime() - dt.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+    document.getElementById('cal-modal-datetime').value = localISO;
+
+    document.getElementById('cal-modal-title').textContent = `Schedule Post — ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+
+    // Uncheck all platforms
+    document.querySelectorAll('#cal-platform-checkboxes input[type=checkbox]').forEach(cb => cb.checked = false);
+    document.getElementById('cal-content-override').value = '';
+}
+
+function closeCalModal() {
+    document.getElementById('cal-schedule-modal').style.display = 'none';
+}
+
+async function submitCalSchedule() {
+    const postId = document.getElementById('cal-post-select').value;
+    const datetimeVal = document.getElementById('cal-modal-datetime').value;
+    const overrideContent = document.getElementById('cal-content-override').value.trim();
+
+    if (!postId) { showAlert('Please select a blog post', 'error'); return; }
+    if (!datetimeVal) { showAlert('Please pick a date and time', 'error'); return; }
+
+    const platforms = Array.from(document.querySelectorAll('#cal-platform-checkboxes input[type=checkbox]:checked')).map(cb => cb.value);
+    if (platforms.length === 0) { showAlert('Please select at least one platform', 'error'); return; }
+
+    const scheduledAt = new Date(datetimeVal).toISOString();
+    const body = { platforms, scheduledAt };
+    if (overrideContent) {
+        body.overrideContent = {};
+        platforms.forEach(p => { body.overrideContent[p] = overrideContent; });
+    }
+
+    try {
+        const res = await fetch(`${API_URL}/social/schedule/${postId}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (res.ok) {
+            showAlert(`✅ ${data.message}`, 'success');
+            closeCalModal();
+            await loadCalendar();
+        } else {
+            showAlert('Error: ' + (data.error || data.message), 'error');
+        }
+    } catch (e) {
+        showAlert('Request failed: ' + e.message, 'error');
+    }
+}
+
+// ── Reminder Banner ──────────────────────────────────────────
+
+async function loadReminders() {
+    try {
+        const res = await fetch(`${API_URL}/social/reminders`, { credentials: 'include' });
+        if (!res.ok) return;
+        const data = await res.json();
+        const reminders = data.reminders || [];
+
+        const badge = document.getElementById('reminder-badge');
+        if (reminders.length > 0) {
+            badge.textContent = reminders.length;
+            badge.style.display = 'inline';
+        } else {
+            badge.style.display = 'none';
+        }
+
+        const banner = document.getElementById('reminder-banner');
+        const list = document.getElementById('reminder-list');
+
+        if (reminders.length === 0) {
+            banner.classList.remove('show');
+            return;
+        }
+
+        banner.classList.add('show');
+        list.innerHTML = reminders.map(r => {
+            const meta = getPlatformMeta(r.platform);
+            const content = r.content || '(auto-generate content on publish)';
+            const postUrl = r.slug ? `https://eytan.com/posts/${r.slug}` : '';
+            const time = r.scheduled_at ? new Date(r.scheduled_at).toLocaleString('en-US', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
+
+            let shareBtn = '';
+            if (r.platform === 'twitter') {
+                const tweet = encodeURIComponent(content + (postUrl ? ' ' + postUrl : ''));
+                shareBtn = `<a href="https://x.com/intent/tweet?text=${tweet}" target="_blank" class="btn" style="background:#000;color:white;font-size:0.78rem;padding:4px 10px;text-decoration:none;border-radius:4px;"><span style="font-weight:700;">𝕏</span> Share on X</a>`;
+            } else if (r.platform === 'whatsapp') {
+                const msg = encodeURIComponent(content + (postUrl ? '\n' + postUrl : ''));
+                shareBtn = `<a href="https://wa.me/?text=${msg}" target="_blank" class="btn" style="background:#25d366;color:white;font-size:0.78rem;padding:4px 10px;text-decoration:none;border-radius:4px;"><i class='fab fa-whatsapp'></i> Share on WhatsApp</a>`;
+            } else if (r.platform === 'facebook-personal') {
+                const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
+                shareBtn = `<button onclick="copyAndOpen('${encodeURIComponent(content)}','${fbUrl}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open FB</button>`;
+            } else if (r.platform.startsWith('facebook-group:')) {
+                const groupUrl = r.platform.split(':')[1];
+                shareBtn = `<button onclick="copyAndOpen('${encodeURIComponent(content)}','${groupUrl}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open Group</button>`;
+            }
+
+            return `<div class="reminder-item">
+                <div class="reminder-platform-icon">${meta.icon}</div>
+                <div class="reminder-content">
+                    <div class="reminder-title">${r.title || r.post_id} <span style="font-weight:400;color:#6c757d;font-size:0.8rem;">${time ? '— ' + time : ''}</span></div>
+                    <div class="reminder-text">${content.substring(0, 200)}${content.length > 200 ? '…' : ''}</div>
+                    <div class="reminder-actions">
+                        ${shareBtn}
+                        <button onclick="markReminderDone(${r.id})" class="btn" style="background:#28a745;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fas fa-check'></i> Mark Done</button>
+                        <button onclick="cancelFromCalendar(${r.id})" class="btn" style="background:#dc3545;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fas fa-trash'></i> Delete</button>
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+    } catch (e) { /* silent */ }
+}
+
+async function openReminderAction(id) {
+    // Scroll to reminder banner and highlight
+    const banner = document.getElementById('reminder-banner');
+    if (!banner.classList.contains('show')) await loadReminders();
+    banner.scrollIntoView({ behavior: 'smooth' });
+    banner.style.boxShadow = '0 0 0 3px #ffc107';
+    setTimeout(() => { banner.style.boxShadow = ''; }, 2000);
+}
+
+function copyAndOpen(encodedContent, url) {
+    const content = decodeURIComponent(encodedContent);
+    // Synchronous copy before popup (async fails when popup steals focus)
+    const ta = document.createElement('textarea');
+    ta.value = content;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    window.open(url, '_blank');
+    showAlert('✅ Content copied to clipboard — paste it in the popup!', 'success');
+}
+
+async function markReminderDone(id) {
+    try {
+        const res = await fetch(`${API_URL}/social/mark-reminder-done/${id}`, { method: 'POST', credentials: 'include' });
+        const data = await res.json();
+        if (res.ok) {
+            showAlert('✅ Marked as published!', 'success');
+            await loadReminders();
+            if (calendarOpen) await loadCalendar();
+        } else {
+            showAlert('Error: ' + data.error, 'error');
+        }
+    } catch (e) {
+        showAlert('Request failed', 'error');
+    }
+}
+
 // Initialize on page load
 // Since admin.js is loaded dynamically after authentication,
 // DOMContentLoaded may have already fired, so check document state
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadBlogData);
+    document.addEventListener('DOMContentLoaded', () => { loadBlogData(); loadReminders(); });
 } else {
     // DOM is already loaded, call immediately
     loadBlogData();
+    loadReminders();
 }

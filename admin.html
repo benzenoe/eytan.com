@@ -174,6 +174,18 @@
             border: 1px solid #f5c6cb;
         }
 
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffc107;
+        }
+
         .admin-thumbnail {
             width: 80px;
             height: 60px;
@@ -235,6 +247,160 @@
             color: white !important;
             animation: pulse 1.5s infinite;
         }
+
+        /* ── Calendar ────────────────────────────────────── */
+        #calendar-section {
+            display: none;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        #calendar-section.open { display: block; }
+
+        .cal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .cal-header h2 { margin: 0; font-size: 1.1rem; }
+        .cal-nav-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .cal-nav-btn:hover { background: rgba(255,255,255,0.35); }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .cal-day-label {
+            padding: 0.6rem;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #6c757d;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            text-transform: uppercase;
+        }
+        .cal-cell {
+            min-height: 90px;
+            border: 1px solid #e9ecef;
+            padding: 0.3rem;
+            vertical-align: top;
+            cursor: pointer;
+            transition: background 0.15s;
+            position: relative;
+        }
+        .cal-cell:hover { background: #f0f4ff; }
+        .cal-cell.today { background: #fff8e1; }
+        .cal-cell.other-month .cal-cell-date { color: #ccc; }
+        .cal-cell-date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.2rem;
+        }
+        .cal-cell.today .cal-cell-date {
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cal-chip {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.68rem;
+            padding: 1px 5px;
+            border-radius: 3px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+        .cal-chip.status-scheduled { background: #cce5ff; color: #004085; }
+        .cal-chip.status-reminder_due { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+        .cal-chip.status-published { background: #d4edda; color: #155724; }
+        .cal-chip.status-failed { background: #f8d7da; color: #721c24; }
+        .cal-chip.status-pending { background: #e2e3e5; color: #383d41; }
+
+        /* Reminder banner */
+        #reminder-banner {
+            display: none;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+        }
+        #reminder-banner.show { display: block; }
+        .reminder-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.6rem;
+            background: white;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            border: 1px solid #ffeeba;
+            flex-wrap: wrap;
+        }
+        .reminder-platform-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+        .reminder-content { flex: 1; min-width: 200px; }
+        .reminder-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .reminder-text { font-size: 0.82rem; color: #495057; margin-bottom: 0.5rem; white-space: pre-wrap; }
+        .reminder-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+
+        /* Calendar badge on button */
+        .cal-badge {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 1px 5px;
+            margin-left: 4px;
+            vertical-align: top;
+        }
+
+        /* Schedule modal */
+        #cal-schedule-modal .modal-body { max-height: 70vh; overflow-y: auto; }
+        .platform-checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .platform-checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .platform-checkbox-item:has(input:checked) {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
     </style>
 </head>
 <body>
@@ -280,12 +446,87 @@
                 <button class="btn btn-primary" onclick="openCreateModal()">
                     <i class="fas fa-plus"></i> New Post
                 </button>
+                <button class="btn" id="calendarToggleBtn" onclick="toggleCalendar()" style="background:#764ba2;color:white;">
+                    <i class="fas fa-calendar-alt"></i> Calendar<span id="reminder-badge" class="cal-badge" style="display:none;">0</span>
+                </button>
                 <button class="btn btn-warning" id="republishAllBtn" onclick="republishAllOutdated()" style="display: none; background: #ffc107; color: #000;">
                     <i class="fas fa-sync"></i> Republish All Outdated (<span id="outdatedCount">0</span>)
                 </button>
                 <button class="btn btn-secondary" onclick="logout()">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
+            </div>
+        </div>
+
+        <!-- Reminder Banner -->
+        <div id="reminder-banner">
+            <strong><i class="fas fa-bell" style="color:#856404;margin-right:0.4rem;"></i>Action Required — Manual Posts Ready to Share</strong>
+            <div id="reminder-list"></div>
+        </div>
+
+        <!-- Calendar Section -->
+        <div id="calendar-section">
+            <div class="cal-header">
+                <button class="cal-nav-btn" onclick="calendarPrev()">&#8592;</button>
+                <h2 id="cal-month-label">Loading...</h2>
+                <button class="cal-nav-btn" onclick="calendarNext()">&#8594;</button>
+            </div>
+            <div class="cal-grid">
+                <div class="cal-day-label">Sun</div>
+                <div class="cal-day-label">Mon</div>
+                <div class="cal-day-label">Tue</div>
+                <div class="cal-day-label">Wed</div>
+                <div class="cal-day-label">Thu</div>
+                <div class="cal-day-label">Fri</div>
+                <div class="cal-day-label">Sat</div>
+            </div>
+            <div class="cal-grid" id="cal-cells"></div>
+            <div style="padding:0.75rem 1rem;background:#f8f9fa;border-top:1px solid #e9ecef;display:flex;gap:1rem;flex-wrap:wrap;font-size:0.78rem;">
+                <span><span style="background:#cce5ff;color:#004085;padding:1px 6px;border-radius:3px;">●</span> Scheduled (auto)</span>
+                <span><span style="background:#fff3cd;color:#856404;padding:1px 6px;border-radius:3px;border:1px solid #ffc107;">●</span> Reminder (manual)</span>
+                <span><span style="background:#d4edda;color:#155724;padding:1px 6px;border-radius:3px;">●</span> Published</span>
+                <span><span style="background:#f8d7da;color:#721c24;padding:1px 6px;border-radius:3px;">●</span> Failed</span>
+                <span style="margin-left:auto;color:#667eea;font-weight:600;">Click any day to schedule a new post</span>
+            </div>
+        </div>
+
+        <!-- Calendar Schedule Modal -->
+        <div id="cal-schedule-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;">
+            <div style="background:white;border-radius:8px;width:min(560px,95vw);max-height:90vh;overflow-y:auto;">
+                <div style="padding:1rem 1.5rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:center;">
+                    <h3 style="margin:0;font-size:1rem;" id="cal-modal-title">Schedule Post</h3>
+                    <button onclick="closeCalModal()" style="background:none;border:none;color:white;font-size:1.3rem;cursor:pointer;">&times;</button>
+                </div>
+                <div style="padding:1.5rem;" id="cal-modal-body">
+                    <div style="margin-bottom:1rem;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.4rem;">Blog Post</label>
+                        <select id="cal-post-select" style="width:100%;padding:0.5rem;border:1px solid #ced4da;border-radius:4px;font-size:0.9rem;">
+                            <option value="">Select a post...</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.4rem;">Date &amp; Time</label>
+                        <input type="datetime-local" id="cal-modal-datetime" style="width:100%;padding:0.5rem;border:1px solid #ced4da;border-radius:4px;font-size:0.9rem;" />
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.4rem;">Platforms</label>
+                        <div class="platform-checkbox-grid" id="cal-platform-checkboxes">
+                            <label class="platform-checkbox-item"><input type="checkbox" value="facebook"> <i class="fab fa-facebook" style="color:#1877f2;"></i> Facebook Page</label>
+                            <label class="platform-checkbox-item"><input type="checkbox" value="instagram"> <i class="fab fa-instagram" style="color:#e1306c;"></i> Instagram</label>
+                            <label class="platform-checkbox-item"><input type="checkbox" value="linkedin"> <i class="fab fa-linkedin" style="color:#0077b5;"></i> LinkedIn</label>
+                            <label class="platform-checkbox-item"><input type="checkbox" value="twitter"> <span style="font-weight:700;color:#000;">𝕏</span> Twitter/X</label>
+                            <label class="platform-checkbox-item"><input type="checkbox" value="whatsapp"> <i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp</label>
+                            <label class="platform-checkbox-item"><input type="checkbox" value="facebook-personal"> <i class="fab fa-facebook" style="color:#1877f2;"></i> FB Personal</label>
+                        </div>
+                    </div>
+                    <div style="margin-bottom:1rem;" id="cal-content-override-section" style="display:none;">
+                        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.4rem;">Override Content <span style="font-weight:400;color:#6c757d;">(optional — leave blank to auto-generate)</span></label>
+                        <textarea id="cal-content-override" rows="4" style="width:100%;padding:0.5rem;border:1px solid #ced4da;border-radius:4px;font-size:0.85rem;resize:vertical;" placeholder="Custom post content..."></textarea>
+                    </div>
+                    <button onclick="submitCalSchedule()" style="width:100%;padding:0.75rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:6px;font-weight:600;font-size:0.9rem;cursor:pointer;">
+                        <i class="fas fa-clock"></i> Schedule Post
+                    </button>
+                </div>
             </div>
         </div>
 
