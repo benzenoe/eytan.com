@@ -2205,6 +2205,68 @@ function openCalModalForDate(date) {
 
 // ── Calendar Schedule Modal ──────────────────────────────────
 
+const FB_GROUPS = [
+    { name: 'My name is Eytan',                              url: 'https://www.facebook.com/groups/208780250279' },
+    { name: 'REIGNation',                                    url: 'https://www.facebook.com/groups/reignation' },
+    { name: 'ChatGPT and Real Estate Mastermind',            url: 'https://www.facebook.com/groups/6064131423672561' },
+    { name: 'New to Lisbon and the Surrounding Area',        url: 'https://www.facebook.com/groups/1884805645306198' },
+    { name: 'New to Surfside / Bal Harbour / Bay Harbor Islands', url: 'https://www.facebook.com/groups/871719803845126' },
+    { name: 'Benzeno Group',                                 url: 'https://www.facebook.com/groups/benzeno' },
+];
+
+// Builds the full platform checklist (same options as the inline social panel)
+function buildCalPlatformList() {
+    const row = (value, iconHtml, name, badge = '', badgeColor = '#6c757d') => {
+        const badgeHtml = badge ? `<span style="font-size:0.72rem;color:${badgeColor};margin-left:auto;white-space:nowrap;">${badge}</span>` : '';
+        return `<label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;padding:0.45rem 0.6rem;border:1px solid #dee2e6;border-radius:6px;background:white;transition:border-color 0.15s;" onmouseover="this.style.borderColor='#667eea';this.style.background='#f8f9ff'" onmouseout="this.style.borderColor='#dee2e6';this.style.background='white'">
+            <input type="checkbox" class="cal-plat-cb" value="${value}" style="flex-shrink:0;">
+            ${iconHtml}
+            <span style="font-size:0.85rem;font-weight:500;flex:1;">${name}</span>
+            ${badgeHtml}
+        </label>`;
+    };
+
+    // Section header
+    const sectionHdr = (label) =>
+        `<div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#6c757d;padding:0.3rem 0 0.1rem 2px;margin-top:0.3rem;">${label}</div>`;
+
+    let html = sectionHdr('Auto-publish (API)');
+
+    // Facebook pages — use prefetched fbPageNames/fbPagePictures
+    const pageIds = Object.keys(fbPageNames);
+    if (pageIds.length > 0) {
+        pageIds.forEach(pageId => {
+            const name = fbPageNames[pageId] || 'Facebook Page';
+            const picUrl = fbPagePictures[pageId] || '';
+            const imgHtml = picUrl
+                ? `<img src="${picUrl}" style="width:18px;height:18px;border-radius:50%;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">`
+                : `<i class="fab fa-facebook" style="color:#1877F2;flex-shrink:0;"></i>`;
+            html += row(`facebook:${pageId}`, imgHtml, name, 'auto', '#28a745');
+        });
+    } else {
+        html += row('facebook', `<i class="fab fa-facebook" style="color:#1877F2;flex-shrink:0;"></i>`, 'Facebook Page', 'auto', '#28a745');
+    }
+
+    html += row('instagram', `<i class="fab fa-instagram" style="color:#E1306C;flex-shrink:0;"></i>`, 'Instagram', 'auto', '#28a745');
+    html += row('linkedin',  `<i class="fab fa-linkedin"  style="color:#0A66C2;flex-shrink:0;"></i>`, 'LinkedIn',  'auto', '#28a745');
+
+    html += sectionHdr('Manual / Reminder (scheduled → you share)');
+    html += row('twitter',           `<span style="font-weight:700;font-size:0.9rem;flex-shrink:0;">𝕏</span>`,                        'X / Twitter',    'reminder', '#856404');
+    html += row('whatsapp',          `<i class="fab fa-whatsapp"  style="color:#25D366;flex-shrink:0;"></i>`,                         'WhatsApp',       'reminder', '#856404');
+    html += row('facebook-personal', `<i class="fab fa-facebook"  style="color:#1877F2;flex-shrink:0;"></i>`,                         'Facebook Personal', 'reminder', '#856404');
+
+    html += sectionHdr('Facebook Groups (reminder)');
+    FB_GROUPS.forEach(g => {
+        const groupId = extractGroupId(g.url.replace('https://www.facebook.com/groups/', ''));
+        const imgHtml = groupId
+            ? `<img src="${API_URL}/social/facebook/cover/${groupId}" style="width:18px;height:18px;border-radius:3px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">`
+            : `<i class="fab fa-facebook" style="color:#1877F2;flex-shrink:0;"></i>`;
+        html += row(`facebook-group:${g.url}`, imgHtml, g.name, 'reminder', '#856404');
+    });
+
+    return html;
+}
+
 function openCalModal(date) {
     calSelectedDate = date;
     const modal = document.getElementById('cal-schedule-modal');
@@ -2229,8 +2291,8 @@ function openCalModal(date) {
 
     document.getElementById('cal-modal-title').textContent = `Schedule Post — ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
 
-    // Uncheck all platforms
-    document.querySelectorAll('#cal-platform-checkboxes input[type=checkbox]').forEach(cb => cb.checked = false);
+    // Render the full platform list
+    document.getElementById('cal-platform-checkboxes').innerHTML = buildCalPlatformList();
     document.getElementById('cal-content-override').value = '';
 }
 
@@ -2246,7 +2308,7 @@ async function submitCalSchedule() {
     if (!postId) { showAlert('Please select a blog post', 'error'); return; }
     if (!datetimeVal) { showAlert('Please pick a date and time', 'error'); return; }
 
-    const platforms = Array.from(document.querySelectorAll('#cal-platform-checkboxes input[type=checkbox]:checked')).map(cb => cb.value);
+    const platforms = Array.from(document.querySelectorAll('#cal-platform-checkboxes .cal-plat-cb:checked')).map(cb => cb.value);
     if (platforms.length === 0) { showAlert('Please select at least one platform', 'error'); return; }
 
     const scheduledAt = new Date(datetimeVal).toISOString();
