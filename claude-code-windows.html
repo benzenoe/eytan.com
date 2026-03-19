@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install Claude Code on Windows — by Eytan Benzeno</title>
+  <meta name="description" content="A friendly, step-by-step guide to installing Claude Code on Windows Terminal. Made for Claudio by Eytan Benzeno." />
+  <link rel="icon" type="image/png" href="images/eb-logo1.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0b1220;
+      --bg2:      #111c2e;
+      --surface:  #172035;
+      --surface2: #1d2a42;
+      --border:   #253650;
+      --cyan:     #00b4d8;
+      --cyan2:    #48cae4;
+      --purple:   #7c3aed;
+      --purple2:  #a78bfa;
+      --green:    #10b981;
+      --gold:     #f59e0b;
+      --red:      #ef4444;
+      --text:     #e2eaf4;
+      --muted:    #6b8aaa;
+      --code-bg:  #080f1a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11,18,32,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 32px; }
+    .nav-logo span { font-weight: 700; font-size: 1rem; color: #fff; }
+    .nav-badge {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #fff; font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-right a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
+    .nav-right a:hover { color: var(--cyan); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 80px 24px 72px;
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,180,216,0.15) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 80% 110%, rgba(124,58,237,0.12) 0%, transparent 60%),
+                  var(--bg);
+    }
+    .hero-eytan {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px 6px 6px;
+      margin-bottom: 28px;
+      text-decoration: none;
+    }
+    .hero-eytan img { height: 28px; border-radius: 50%; }
+    .hero-eytan span { font-size: 0.82rem; color: var(--muted); }
+    .hero-eytan strong { color: #fff; font-weight: 600; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #fff 20%, var(--cyan) 60%, var(--purple2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 540px; margin: 0 auto 36px; }
+    .hero-pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 100px; padding: 6px 14px;
+      font-size: 0.82rem; color: var(--muted);
+    }
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .pill .dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .pill .dot.cyan  { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+    .pill .dot.gold  { background: var(--gold); }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+    /* ─── SECTION TITLES ─── */
+    .section-title {
+      font-size: 1.6rem; font-weight: 800; color: #fff;
+      margin-bottom: 8px; letter-spacing: -0.02em;
+    }
+    .section-sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 32px; }
+
+    /* ─── WHAT IS CLAUDE CODE ─── */
+    .what-is { padding: 64px 0 0; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 12px; margin-top: 28px; }
+    .feature-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+      transition: border-color .2s, transform .2s;
+      cursor: default;
+    }
+    .feature-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+    .feature-card .icon { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+    .feature-card h4 { font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .feature-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─── ARCHITECTURE DIAGRAM ─── */
+    .arch-section { padding: 64px 0; }
+    .arch-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .arch-diagram::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,180,216,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .arch-title { text-align: center; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 28px; }
+    .arch-layers { display: flex; flex-direction: column; gap: 0; }
+    .arch-layer {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: all .25s;
+      cursor: pointer;
+      position: relative;
+    }
+    .arch-layer:hover { border-color: var(--border); background: var(--surface2); }
+    .arch-layer.active { border-color: var(--cyan); background: rgba(0,180,216,0.06); }
+    .arch-layer-icon { font-size: 1.5rem; flex-shrink: 0; width: 44px; text-align: center; }
+    .arch-layer-content { flex: 1; }
+    .arch-layer-name { font-weight: 700; font-size: 0.95rem; color: #fff; }
+    .arch-layer-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+    .arch-layer-badge {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 4px; letter-spacing: 0.06em; flex-shrink: 0;
+    }
+    .badge-win { background: rgba(0,120,212,0.15); color: #60a5fa; border: 1px solid rgba(0,120,212,0.3); }
+    .badge-linux { background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.25); }
+    .badge-node { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+    .badge-claude { background: linear-gradient(135deg,rgba(0,180,216,0.15),rgba(124,58,237,0.15)); color: var(--cyan2); border: 1px solid rgba(0,180,216,0.3); }
+    .arch-arrow {
+      display: flex; justify-content: center; align-items: center;
+      height: 28px; color: var(--border); font-size: 1.1rem;
+      transition: color .3s;
+    }
+    .arch-arrow.lit { color: var(--cyan); }
+    .arch-tooltip {
+      margin-top: 16px; padding: 14px 18px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 8px; font-size: 0.85rem; color: #a0bcd4;
+      min-height: 52px; transition: opacity .2s;
+    }
+
+    /* ─── PROGRESS STEPS ─── */
+    .steps-section { padding: 12px 0 64px; }
+    .progress-track {
+      display: flex; align-items: center; gap: 4px;
+      margin-bottom: 40px; overflow-x: auto; padding-bottom: 4px;
+    }
+    .progress-track::-webkit-scrollbar { height: 3px; }
+    .progress-track::-webkit-scrollbar-track { background: var(--surface); }
+    .progress-track::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .pt-step {
+      display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+      cursor: pointer;
+    }
+    .pt-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700;
+      background: var(--surface); border: 2px solid var(--border);
+      color: var(--muted); transition: all .2s;
+    }
+    .pt-num.done { background: var(--green); border-color: var(--green); color: #fff; }
+    .pt-num.active { background: linear-gradient(135deg, var(--cyan), var(--purple)); border-color: transparent; color: #fff; box-shadow: 0 0 12px rgba(0,180,216,0.4); }
+    .pt-label { font-size: 0.72rem; color: var(--muted); white-space: nowrap; display: none; }
+    .pt-line { flex: 1; min-width: 16px; height: 2px; background: var(--border); border-radius: 1px; transition: background .3s; }
+    .pt-line.lit { background: var(--green); }
+
+    .step-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; margin-bottom: 16px;
+      position: relative; overflow: hidden;
+      transition: border-color .2s;
+    }
+    .step-card.active { border-color: var(--cyan); }
+    .step-card.done { border-color: rgba(16,185,129,0.4); }
+    .step-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .step-card.active::after { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+    .step-card.done::after { background: var(--green); }
+    .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .step-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(124,58,237,0.15));
+      border: 1px solid rgba(0,180,216,0.2);
+    }
+    .step-card.done .step-icon { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.3); }
+    .step-meta { flex: 1; }
+    .step-num-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; }
+    .step-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .step-done-badge {
+      display: none; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 100px; padding: 3px 10px; font-size: 0.72rem; font-weight: 700;
+      color: var(--green); text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .step-card.done .step-done-badge { display: block; }
+    .step-body { font-size: 0.92rem; color: #8eabc2; line-height: 1.7; }
+    .step-body p { margin-bottom: 12px; }
+    .step-body p:last-child { margin-bottom: 0; }
+    .step-body a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(0,180,216,0.3); }
+    .step-body a:hover { border-color: var(--cyan); }
+    .step-done-btn {
+      margin-top: 18px;
+      background: none; border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 18px;
+      color: var(--muted); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all .15s; display: flex; align-items: center; gap: 8px;
+    }
+    .step-done-btn:hover { border-color: var(--green); color: var(--green); background: rgba(16,185,129,0.05); }
+    .step-card.done .step-done-btn { border-color: var(--green); color: var(--green); background: rgba(16,185,129,0.08); }
+
+    /* ─── INFO BOXES ─── */
+    .info-box, .warn-box, .tip-box {
+      display: flex; gap: 10px; align-items: flex-start;
+      border-radius: 8px; padding: 13px 16px;
+      margin: 14px 0; font-size: 0.87rem; line-height: 1.55;
+    }
+    .info-box { background: rgba(0,180,216,0.07); border: 1px solid rgba(0,180,216,0.2); color: #8dc4d8; }
+    .warn-box { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); color: #c4ab72; }
+    .tip-box  { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); color: #72bfa8; }
+    .info-box em, .warn-box em, .tip-box em { flex-shrink: 0; font-style: normal; }
+
+    /* ─── CODE BLOCKS ─── */
+    .code-wrap { margin: 14px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .code-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 14px; background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .code-bar-label { font-size: 0.73rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .win-dot { color: #60a5fa; }
+    .ub-dot  { color: #fb923c; }
+    .copy-btn {
+      background: none; border: 1px solid var(--border); border-radius: 6px;
+      color: var(--muted); font-size: 0.73rem; padding: 3px 10px;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: all .15s;
+    }
+    .copy-btn:hover { background: var(--surface2); color: #fff; border-color: var(--cyan); }
+    .copy-btn.ok { color: var(--green); border-color: rgba(16,185,129,0.5); }
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--code-bg);
+      padding: 18px 20px; font-size: 0.87rem;
+      line-height: 1.75; overflow-x: auto; color: #c0d8ea;
+    }
+    .kw  { color: #60a5fa; }
+    .cmd { color: #22d3ee; }
+    .str { color: #34d399; }
+    .cmt { color: #3d5670; font-style: italic; }
+    .arg { color: #f59e0b; }
+    .op  { color: var(--purple2); }
+    code:not(pre code) {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.2);
+      border-radius: 4px; padding: 1px 6px; font-size: 0.84em; color: var(--cyan2);
+    }
+
+    /* ─── TERMINAL DEMO ─── */
+    .terminal-section { padding: 0 0 64px; }
+    .terminal-window {
+      background: #04090f; border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .terminal-bar {
+      background: #0d1825; padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .t-dots { display: flex; gap: 6px; }
+    .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .t-dot.r { background: #ff5f56; }
+    .t-dot.y { background: #ffbd2e; }
+    .t-dot.g { background: #27c93f; }
+    .t-title { font-size: 0.8rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    .t-badge { margin-left: auto; font-size: 0.68rem; font-weight: 700; background: rgba(251,146,60,0.15); color: #fb923c; border: 1px solid rgba(251,146,60,0.25); border-radius: 4px; padding: 2px 8px; text-transform: uppercase; letter-spacing: .06em; }
+    .terminal-body { padding: 20px 22px; min-height: 280px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7; }
+    .t-line { display: flex; gap: 8px; margin-bottom: 2px; }
+    .t-prompt { color: #34d399; flex-shrink: 0; }
+    .t-input  { color: #e2eaf4; }
+    .t-output { color: var(--muted); }
+    .t-claude { color: var(--cyan2); }
+    .t-cursor {
+      display: inline-block; width: 9px; height: 16px;
+      background: var(--cyan); animation: blink 1s steps(1) infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+    .t-line.hidden { display: none; }
+    .t-line.fade-in { animation: fadeIn .3s ease forwards; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+    .demo-controls { display: flex; gap: 8px; margin-top: 16px; }
+    .demo-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 16px;
+      color: var(--muted); font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: all .15s;
+    }
+    .demo-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+    .demo-btn.primary { background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #fff; border: none; }
+    .demo-btn.primary:hover { opacity: 0.9; }
+
+    /* ─── TROUBLE ─── */
+    .trouble-section { padding: 0 0 64px; }
+    .trouble-grid { display: flex; flex-direction: column; gap: 10px; }
+    .trouble-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .trouble-q {
+      display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+      cursor: pointer; transition: background .15s;
+    }
+    .trouble-q:hover { background: var(--surface2); }
+    .trouble-q .err { color: var(--red); font-size: 0.88rem; font-weight: 600; flex: 1; }
+    .trouble-q .chevron { color: var(--muted); font-size: 0.75rem; transition: transform .2s; }
+    .trouble-a {
+      display: none; padding: 0 20px 18px;
+      font-size: 0.87rem; color: #7aa0bc; line-height: 1.6; border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+    .trouble-item.open .trouble-a { display: block; }
+    .trouble-item.open .chevron { transform: rotate(180deg); }
+
+    /* ─── CHEATSHEET ─── */
+    .cheat-section { padding: 0 0 64px; }
+
+    /* ─── CTA / FOOTER ─── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0,180,216,0.08), rgba(124,58,237,0.06));
+      border: 1px solid rgba(0,180,216,0.15);
+      border-radius: 20px; padding: 48px 32px;
+      text-align: center; margin: 0 0 64px;
+    }
+    .cta-section h2 { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .cta-section p { color: var(--muted); margin-bottom: 28px; }
+    .cta-btn {
+      display: inline-block; background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #fff; text-decoration: none; border-radius: 10px;
+      padding: 13px 28px; font-weight: 700; font-size: 0.95rem;
+      transition: opacity .15s, transform .15s;
+    }
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    footer {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 40px 24px; text-align: center;
+    }
+    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+    .footer-brand img { height: 36px; }
+    .footer-brand span { font-size: 1.1rem; font-weight: 800; color: #fff; }
+    footer p { color: var(--muted); font-size: 0.83rem; margin-bottom: 16px; }
+    .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color .15s; }
+    .footer-links a:hover { color: var(--cyan); }
+
+    /* ─── DIVIDER ─── */
+    hr.divider { border: none; border-top: 1px solid var(--border); margin: 56px 0; }
+
+    @media(max-width:600px) {
+      .hero h1 { font-size: 2rem; }
+      pre { font-size: 0.78rem; }
+      .arch-layer-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://eytan.com" class="nav-logo">
+    <img src="images/eb-logo1.png" alt="Eytan Benzeno" />
+    <span>eytan.com</span>
+  </a>
+  <span class="nav-badge">Guide</span>
+  <div class="nav-right">
+    <a href="https://eytan.com/blog" target="_blank">Blog</a>
+    <a href="https://bogen.ai" target="_blank">Bogen.ai</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <a href="https://eytan.com" class="hero-eytan">
+    <img src="images/eb-logo1.png" alt="Eytan" />
+    <span>A guide by <strong>Eytan Benzeno</strong></span>
+  </a>
+  <h1>
+    Get <span class="grad">Claude Code</span><br>
+    Running on Windows
+  </h1>
+  <p class="hero-sub">
+    Hey Claudio 👋 — this is your personal step-by-step guide to installing Claude Code, Anthropic's AI coding assistant, right in your Windows Terminal.
+  </p>
+  <div class="hero-pills">
+    <div class="pill"><span class="dot green"></span> Free to install</div>
+    <div class="pill"><span class="dot cyan"></span> Windows 10 &amp; 11</div>
+    <div class="pill">⏱ ~15 min setup</div>
+    <div class="pill">🧠 No coding experience required</div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="container">
+
+  <!-- WHAT IS -->
+  <section class="what-is">
+    <div class="section-title">What is Claude Code?</div>
+    <p class="section-sub">Think of it as having a senior developer living inside your terminal — one who reads your actual files, writes real code, and explains anything in plain English. No copy-pasting. No tab-switching.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="icon">📂</span>
+        <h4>Reads your project</h4>
+        <p>It understands your files, not just what you paste into a chat box.</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">✍️</span>
+        <h4>Writes &amp; edits code</h4>
+        <p>Makes changes directly to your files — you just review and approve.</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">🐛</span>
+        <h4>Debugs errors</h4>
+        <p>Paste an error message and it finds and fixes the root cause.</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">💬</span>
+        <h4>Plain English</h4>
+        <p>Talk to it like a person. "Add a search bar to my homepage."</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">⚡</span>
+        <h4>Runs commands</h4>
+        <p>Can run shell commands, install packages, and test your code.</p>
+      </div>
+      <div class="feature-card">
+        <span class="icon">🔒</span>
+        <h4>Stays local</h4>
+        <p>Runs on your machine. Your code never leaves unless you tell it to.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ARCHITECTURE DIAGRAM -->
+  <section class="arch-section">
+    <div class="section-title">How it all fits together</div>
+    <p class="section-sub">On Windows, Claude Code runs inside a Linux environment (WSL2). Click each layer to understand what it does.</p>
+    <div class="arch-diagram">
+      <div class="arch-title">🪟 Your Windows Machine — Stack Overview</div>
+      <div class="arch-layers" id="archLayers">
+
+        <div class="arch-layer" data-tip="Windows is your host OS. It runs everything — including WSL2, which creates a full Linux environment inside Windows without any slowdown." onclick="selectLayer(this)">
+          <div class="arch-layer-icon">🪟</div>
+          <div class="arch-layer-content">
+            <div class="arch-layer-name">Windows 10 / 11</div>
+            <div class="arch-layer-desc">Your operating system — the foundation everything runs on.</div>
+          </div>
+          <span class="arch-layer-badge badge-win">Host OS</span>
+        </div>
+
+        <div class="arch-arrow" id="arrow1">↓</div>
+
+        <div class="arch-layer" data-tip="WSL2 (Windows Subsystem for Linux 2) is a real Linux kernel running inside Windows. It's fast, free, and lets you run Linux tools without dual-booting. This is where we install everything." onclick="selectLayer(this)">
+          <div class="arch-layer-icon">🐧</div>
+          <div class="arch-layer-content">
+            <div class="arch-layer-name">WSL2 + Ubuntu</div>
+            <div class="arch-layer-desc">A full Linux environment, living inside Windows. One command to install.</div>
+          </div>
+          <span class="arch-layer-badge badge-linux">Linux Layer</span>
+        </div>
+
+        <div class="arch-arrow" id="arrow2">↓</div>
+
+        <div class="arch-layer" data-tip="Node.js is a JavaScript runtime — the engine that Claude Code is built on. You need version 18 or higher. We'll install it with NVM, which makes managing Node versions painless." onclick="selectLayer(this)">
+          <div class="arch-layer-icon">⬡</div>
+          <div class="arch-layer-content">
+            <div class="arch-layer-name">Node.js (v18+)</div>
+            <div class="arch-layer-desc">The JavaScript runtime that powers Claude Code under the hood.</div>
+          </div>
+          <span class="arch-layer-badge badge-node">Runtime</span>
+        </div>
+
+        <div class="arch-arrow" id="arrow3">↓</div>
+
+        <div class="arch-layer active" data-tip="This is the goal — Claude Code by Anthropic. Once installed, you run 'claude' from any project folder and you have an AI pair programmer that knows your codebase." onclick="selectLayer(this)">
+          <div class="arch-layer-icon">🤖</div>
+          <div class="arch-layer-content">
+            <div class="arch-layer-name">Claude Code</div>
+            <div class="arch-layer-desc">Anthropic's AI coding assistant. Type <code>claude</code> to start.</div>
+          </div>
+          <span class="arch-layer-badge badge-claude">The Goal ✓</span>
+        </div>
+
+      </div>
+      <div class="arch-tooltip" id="archTooltip">
+        👆 Click any layer above to learn what it does and why it's needed.
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- STEPS -->
+  <section class="steps-section">
+    <div class="section-title">Installation — Step by Step</div>
+    <p class="section-sub">Follow these 7 steps in order. Check each one off as you go — the progress bar updates automatically.</p>
+
+    <!-- Progress tracker -->
+    <div class="progress-track" id="progressTrack">
+      <div class="pt-step" onclick="jumpStep(0)"><div class="pt-num active" id="pt0">1</div></div>
+      <div class="pt-line" id="ptl0"></div>
+      <div class="pt-step" onclick="jumpStep(1)"><div class="pt-num" id="pt1">2</div></div>
+      <div class="pt-line" id="ptl1"></div>
+      <div class="pt-step" onclick="jumpStep(2)"><div class="pt-num" id="pt2">3</div></div>
+      <div class="pt-line" id="ptl2"></div>
+      <div class="pt-step" onclick="jumpStep(3)"><div class="pt-num" id="pt3">4</div></div>
+      <div class="pt-line" id="ptl3"></div>
+      <div class="pt-step" onclick="jumpStep(4)"><div class="pt-num" id="pt4">5</div></div>
+      <div class="pt-line" id="ptl4"></div>
+      <div class="pt-step" onclick="jumpStep(5)"><div class="pt-num" id="pt5">6</div></div>
+      <div class="pt-line" id="ptl5"></div>
+      <div class="pt-step" onclick="jumpStep(6)"><div class="pt-num" id="pt6">7</div></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step-card active" id="step0">
+      <div class="step-header">
+        <div class="step-icon">🪟</div>
+        <div class="step-meta">
+          <div class="step-num-label">Step 1 of 7</div>
+          <div class="step-title">Install Windows Terminal</div>
+        </div>
+        <div class="step-done-badge">✓ Done</div>
+      </div>
+      <div class="step-body">
+        <p>Windows Terminal is the modern terminal app from Microsoft — way better than the old Command Prompt. On Windows 11 you probably already have it. If not, search <strong>"Windows Terminal"</strong> in the Microsoft Store and click Install.</p>
+        <div class="tip-box"><em>💡</em> <span>Already have it? Skip straight to Step 2. Open Windows Terminal and check — if you see a tab with PowerShell, you're good.</span></div>
+      </div>
+      <button class="step-done-btn" onclick="markDone(0)">✓ Done — next step</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card" id="step1">
+      <div class="step-header">
+        <div class="step-icon">🐧</div>
+        <div class="step-meta">
+          <div class="step-num-label">Step 2 of 7</div>
+          <div class="step-title">Enable WSL2 (Windows Subsystem for Linux)</div>
+        </div>
+        <div class="step-done-badge">✓ Done</div>
+      </div>
+      <div class="step-body">
+        <p>WSL2 gives you a full Linux environment inside Windows — no dual booting, no virtual machines. Open Windows Terminal <strong>as Administrator</strong> (right-click the taskbar icon → <em>Run as administrator</em>), then run:</p>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <span class="code-bar-label"><span class="win-dot">●</span> PowerShell — Run as Administrator</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre>wsl --install</pre>
+        </div>
+        <p>This installs WSL2 and Ubuntu automatically. <strong>Restart your computer when prompted.</strong></p>
+        <div class="warn-box"><em>⚠️</em> <span>The restart is required. After rebooting, Ubuntu will open and ask you to create a Linux username + password. Pick anything — it's just for your Linux environment.</span></div>
+      </div>
+      <button class="step-done-btn" onclick="markDone(1)">✓ Done — next step</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card" id="step2">
+      <div class="step-header">
+        <div class="step-icon">📂</div>
+        <div class="step-meta">
+          <div class="step-num-label">Step 3 of 7</div>
+          <div class="step-title">Open Ubuntu in Windows Terminal</div>
+        </div>
+        <div class="step-done-badge">✓ Done</div>
+      </div>
+      <div class="step-body">
+        <p>Open Windows Terminal and click the <strong>↓ arrow</strong> next to the + tab button. You should see <strong>Ubuntu</strong> in the dropdown — click it. You're now inside Linux!</p>
+        <p>All remaining commands go in this Ubuntu tab — not PowerShell.</p>
+        <div class="tip-box"><em>💡</em> <span>Want Ubuntu as your default tab? Settings → Startup → Default profile → Ubuntu. Saves a click every time.</span></div>
+      </div>
+      <button class="step-done-btn" onclick="markDone(2)">✓ Done — next step</button>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-card" id="step3">
+      <div class="step-header">
+        <div class="step-icon">⬡</div>
+        <div class="step-meta">
+          <div class="step-num-label">Step 4 of 7</div>
+          <div class="step-title">Install Node.js via NVM</div>
+        </div>
+        <div class="step-done-badge">✓ Done</div>
+      </div>
+      <div class="step-body">
+        <p>Claude Code needs Node.js v18+. The cleanest way to install it on Linux is with NVM (Node Version Manager). Run this in your Ubuntu tab:</p>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <span class="code-bar-label"><span class="ub-dot">●</span> Ubuntu Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><span class="cmt"># Install NVM</span>
+<span class="cmd">curl</span> <span class="arg">-o-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</pre>
+        </div>
+        <p><strong>Close the Ubuntu tab and open a new one</strong> (this loads NVM into your session). Then:</p>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <span class="code-bar-label"><span class="ub-dot">●</span> Ubuntu Terminal — new tab</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><span class="cmd">nvm</span> install <span class="arg">--lts</span>
+<span class="cmd">node</span> <span class="arg">--version</span>   <span class="cmt"># Should print v20.x.x or higher</span></pre>
+        </div>
+        <div class="tip-box"><em>💡</em> <span>If <code>nvm</code> says "command not found", run <code>source ~/.bashrc</code> and try again.</span></div>
+      </div>
+      <button class="step-done-btn" onclick="markDone(3)">✓ Done — next step</button>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-card" id="step4">
+      <div class="step-header">
+        <div class="step-icon">📦</div>
+        <div class="step-meta">
+          <div class="step-num-label">Step 5 of 7</div>
+          <div class="step-title">Install Claude Code</div>
+        </div>
+        <div class="step-done-badge">✓ Done</div>
+      </div>
+      <div class="step-body">
+        <p>One command — that's it:</p>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <span class="code-bar-label"><span class="ub-dot">●</span> Ubuntu Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><span class="cmd">npm</span> install <span class="arg">-g</span> @anthropic-ai/claude-code</pre>
+        </div>
+        <p>The <code>-g</code> flag installs it globally so you can run <code>claude</code> from any folder. Takes ~30 seconds. Confirm it worked:</p>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <span class="code-bar-label"><span class="ub-dot">●</span> Ubuntu Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><span class="cmd">claude</span> <span class="arg">--version</span>   <span class="cmt"># Should print 1.x.x</span></pre>
+        </div>
+      </div>
+      <button class="step-done-btn" onclick="markDone(4)">✓ Done — next step</button>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step-card" id="step5">
+      <div class="step-header">
+        <div class="step-icon">🔑</div>
+        <div class="step-meta">
+          <div class="step-num-label">Step 6 of 7</div>
+          <div class="step-title">Log In to Claude</div>
+        </div>
+        <div class="step-done-badge">✓ Done</div>
+      </div>
+      <div class="step-body">
+        <p>Launch Claude Code for the first time:</p>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <span class="code-bar-label"><span class="ub-dot">●</span> Ubuntu Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><span class="cmd">claude</span></pre>
+        </div>
+        <p>It'll open a browser window to authenticate. You have two options:</p>
+        <div class="info-box"><em>✅</em> <span><strong>Claude Pro/Max subscription</strong> (recommended if you already pay for claude.ai) — just log in with your account. No separate API key needed.</span></div>
+        <div class="info-box"><em>🔑</em> <span><strong>API key</strong> — get one at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>. Pay-as-you-go, very cheap for personal use (pennies per session).</span></div>
+        <p>Follow the prompts in the terminal and browser. Once done you'll land at the Claude Code prompt — a blinking cursor waiting for your first question.</p>
+      </div>
+      <button class="step-done-btn" onclick="markDone(5)">✓ Done — next step</button>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step-card" id="step6">
+      <div class="step-header">
+        <div class="step-icon">🚀</div>
+        <div class="step-meta">
+          <div class="step-num-label">Step 7 of 7</div>
+          <div class="step-title">Navigate to Your Project &amp; Start!</div>
+        </div>
+        <div class="step-done-badge">✓ Done</div>
+      </div>
+      <div class="step-body">
+        <p>Claude Code works best when you start it from your project folder. Your Windows files are accessible at <code>/mnt/c/</code> inside Ubuntu:</p>
+        <div class="code-wrap">
+          <div class="code-bar">
+            <span class="code-bar-label"><span class="ub-dot">●</span> Ubuntu Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><span class="cmt"># Go to your project (replace with your actual path)</span>
+<span class="cmd">cd</span> <span class="str">/mnt/c/Users/Claudio/Documents/my-project</span>
+
+<span class="cmt"># Launch Claude Code</span>
+<span class="cmd">claude</span></pre>
+        </div>
+        <p>Now just describe what you need in plain English:</p>
+        <div class="code-wrap">
+          <div class="code-bar"><span class="code-bar-label">💬 Things to say to Claude</span></div>
+          <pre><span class="str">"explain what this project does"</span>
+<span class="str">"fix the bug in app.js on line 42"</span>
+<span class="str">"add a function that sorts users alphabetically"</span>
+<span class="str">"what does this error mean?"</span>
+<span class="str">"create a README for this project"</span></pre>
+        </div>
+      </div>
+      <button class="step-done-btn" onclick="markDone(6)">🎉 All done!</button>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- TERMINAL DEMO -->
+  <section class="terminal-section">
+    <div class="section-title">See it in action</div>
+    <p class="section-sub">Here's what a real Claude Code session looks like. Hit Play to watch it unfold.</p>
+    <div class="terminal-window">
+      <div class="terminal-bar">
+        <div class="t-dots">
+          <div class="t-dot r"></div>
+          <div class="t-dot y"></div>
+          <div class="t-dot g"></div>
+        </div>
+        <span class="t-title">claudio@ubuntu: ~/my-project</span>
+        <span class="t-badge">Ubuntu (WSL2)</span>
+      </div>
+      <div class="terminal-body" id="termBody">
+        <div class="t-line"><span class="t-prompt">claudio@ubuntu:~$</span> <span class="t-input" id="tl0"></span><span class="t-cursor" id="cur0"></span></div>
+      </div>
+    </div>
+    <div class="demo-controls">
+      <button class="demo-btn primary" id="playBtn" onclick="startDemo()">▶ Play Demo</button>
+      <button class="demo-btn" onclick="resetDemo()">↺ Reset</button>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- TROUBLESHOOTING -->
+  <section class="trouble-section">
+    <div class="section-title">🔧 Something broke?</div>
+    <p class="section-sub">Click any error to see the fix.</p>
+    <div class="trouble-grid">
+      <div class="trouble-item" onclick="toggleTrouble(this)">
+        <div class="trouble-q">
+          <span class="err">❌ "wsl: command not found"</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="trouble-a">Make sure you're running PowerShell <strong>as Administrator</strong>. Right-click Windows Terminal in the taskbar → <em>Run as administrator</em>. Then try <code>wsl --install</code> again.</div>
+      </div>
+      <div class="trouble-item" onclick="toggleTrouble(this)">
+        <div class="trouble-q">
+          <span class="err">❌ "nvm: command not found" after installing NVM</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="trouble-a">Close the Ubuntu tab completely, open a new one, and try again. If it still fails, run <code>source ~/.bashrc</code> in the new tab, then retry <code>nvm install --lts</code>.</div>
+      </div>
+      <div class="trouble-item" onclick="toggleTrouble(this)">
+        <div class="trouble-q">
+          <span class="err">❌ "claude: command not found" after npm install</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="trouble-a">npm's global bin folder might not be in your PATH. Run: <code>export PATH="$(npm config get prefix)/bin:$PATH"</code> then add that same line to the end of your <code>~/.bashrc</code> file so it persists.</div>
+      </div>
+      <div class="trouble-item" onclick="toggleTrouble(this)">
+        <div class="trouble-q">
+          <span class="err">❌ Browser doesn't open for authentication</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="trouble-a">Copy the URL printed in the terminal and paste it manually into Chrome or Edge. Make sure you're already logged into <strong>claude.ai</strong> in that browser first.</div>
+      </div>
+      <div class="trouble-item" onclick="toggleTrouble(this)">
+        <div class="trouble-q">
+          <span class="err">❌ WSL won't start after rebooting</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="trouble-a">Open PowerShell as Administrator and run: <code>wsl --update</code> then <code>wsl --set-default-version 2</code>. Then try launching Ubuntu from Windows Terminal again.</div>
+      </div>
+      <div class="trouble-item" onclick="toggleTrouble(this)">
+        <div class="trouble-q">
+          <span class="err">❌ I can't find my Windows files inside Ubuntu</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="trouble-a">Your entire C: drive is mounted at <code>/mnt/c/</code> inside Ubuntu. So <code>C:\Users\Claudio\Documents</code> becomes <code>/mnt/c/Users/Claudio/Documents</code>. Use <code>cd /mnt/c/Users/Claudio</code> to get there.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CHEAT SHEET -->
+  <section class="cheat-section">
+    <div class="section-title">⚡ Quick Reference</div>
+    <p class="section-sub">Commands you'll use every day.</p>
+    <div class="code-wrap">
+      <div class="code-bar">
+        <span class="code-bar-label"><span class="ub-dot">●</span> Cheat sheet</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy all</button>
+      </div>
+      <pre><span class="cmt"># ── Start Claude Code ──────────────────────────────</span>
+<span class="cmd">claude</span>                          <span class="cmt"># Start session in current folder</span>
+<span class="cmd">claude</span> <span class="str">"your question here"</span>        <span class="cmt"># One-shot question, no session</span>
+<span class="cmd">claude</span> <span class="arg">--help</span>                   <span class="cmt"># See all options</span>
+
+<span class="cmt"># ── Navigate to your project ───────────────────────</span>
+<span class="cmd">cd</span> <span class="str">/mnt/c/Users/Claudio/Projects/my-app</span>
+<span class="cmd">claude</span>                          <span class="cmt"># Now it knows your whole project</span>
+
+<span class="cmt"># ── Useful keyboard shortcuts ──────────────────────</span>
+<span class="kw">Ctrl</span> + <span class="kw">C</span>                        <span class="cmt"># Exit Claude Code</span>
+<span class="kw">Ctrl</span> + <span class="kw">D</span>                        <span class="cmt"># End input (same as exit)</span>
+<span class="kw">↑ / ↓</span>                           <span class="cmt"># Browse command history</span>
+
+<span class="cmt"># ── Keep Claude Code up to date ────────────────────</span>
+<span class="cmd">npm</span> update <span class="arg">-g</span> @anthropic-ai/claude-code
+<span class="cmd">claude</span> <span class="arg">--version</span>               <span class="cmt"># Check current version</span></pre>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>You're all set, Claudio! 🎉</h2>
+    <p>Claude Code is ready. Open Ubuntu, navigate to any project, type <code>claude</code>, and start building. You've got a senior developer on call, 24/7.</p>
+    <a href="https://eytan.com/blog" class="cta-btn">Read more on eytan.com →</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img src="images/eb-logo1.png" alt="Eytan Benzeno" />
+    <span>eytan.com</span>
+  </div>
+  <p>Made with care for Claudio · by Eytan Benzeno<br>
+  Powered by <a href="https://bogen.ai" target="_blank" style="color:var(--cyan);text-decoration:none;">Bogen.ai</a> — AI Automation That Works While You Sleep</p>
+  <div class="footer-links">
+    <a href="https://eytan.com" target="_blank">eytan.com</a>
+    <a href="https://bogen.ai" target="_blank">bogen.ai</a>
+    <a href="https://claude.ai" target="_blank">Get Claude</a>
+    <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank">Official Docs</a>
+    <a href="https://github.com/benzenoe" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+/* ── ARCH DIAGRAM ── */
+const tooltips = {
+  0: '🪟 <strong>Windows</strong> is your host OS — everything runs on top of it. WSL2 is built into Windows 10/11, so no extra purchase needed.',
+  1: '🐧 <strong>WSL2</strong> (Windows Subsystem for Linux 2) is a real Linux kernel embedded in Windows. It\'s fast, free, and lets you run all Linux tools natively.',
+  2: '⬡ <strong>Node.js</strong> is the JavaScript runtime that Claude Code is built on. We use NVM to install it cleanly so you can manage versions easily.',
+  3: '🤖 <strong>Claude Code</strong> by Anthropic is the goal. Once running, type <code>claude</code> from any project folder to get an AI that reads your actual code.'
+};
+function selectLayer(el) {
+  document.querySelectorAll('.arch-layer').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+  const idx = [...el.parentNode.querySelectorAll('.arch-layer')].indexOf(el);
+  document.getElementById('archTooltip').innerHTML = tooltips[idx] || '';
+  // Light arrows up to this layer
+  ['arrow1','arrow2','arrow3'].forEach((id, i) => {
+    const a = document.getElementById(id);
+    a.classList.toggle('lit', i < idx);
+  });
+}
+
+/* ── STEP PROGRESS ── */
+let doneSteps = new Set();
+function markDone(idx) {
+  doneSteps.add(idx);
+  const card = document.getElementById('step' + idx);
+  card.classList.remove('active');
+  card.classList.add('done');
+  document.getElementById('pt' + idx).classList.remove('active');
+  document.getElementById('pt' + idx).classList.add('done');
+  document.getElementById('pt' + idx).textContent = '✓';
+  if (idx < 6) {
+    document.getElementById('ptl' + idx).classList.add('lit');
+    const next = document.getElementById('step' + (idx+1));
+    next.classList.add('active');
+    document.getElementById('pt' + (idx+1)).classList.add('active');
+    next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  const btn = card.querySelector('.step-done-btn');
+  if (idx === 6) { btn.textContent = '🎉 All done! Enjoy Claude Code!'; btn.disabled = true; }
+}
+function jumpStep(idx) {
+  document.getElementById('step' + idx).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── COPY BUTTONS ── */
+function copyCode(btn) {
+  const pre = btn.closest('.code-wrap').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1800);
+  });
+}
+
+/* ── TROUBLESHOOT ACCORDION ── */
+function toggleTrouble(el) { el.classList.toggle('open'); }
+
+/* ── TERMINAL DEMO ── */
+const demoScript = [
+  { type: 'cmd', prompt: 'claudio@ubuntu:~$', text: 'cd /mnt/c/Users/Claudio/Projects/my-app' },
+  { type: 'cmd', prompt: 'claudio@ubuntu:~/Projects/my-app$', text: 'claude' },
+  { type: 'out', text: '' },
+  { type: 'claude', text: '  ╔═══════════════════════════════╗' },
+  { type: 'claude', text: '  ║     Claude Code  v1.x.x       ║' },
+  { type: 'claude', text: '  ╚═══════════════════════════════╝' },
+  { type: 'out', text: '' },
+  { type: 'out', text: '  ✓ Loaded 24 files from your project' },
+  { type: 'out', text: '  ✓ Authenticated as Claudio' },
+  { type: 'out', text: '' },
+  { type: 'claude', text: '  What would you like to do?' },
+  { type: 'out', text: '' },
+  { type: 'cmd', prompt: 'You:', text: 'explain what this project does' },
+  { type: 'out', text: '' },
+  { type: 'claude', text: '  This is a Node.js web app with Express. It has:' },
+  { type: 'claude', text: '  • A REST API (routes/api.js) with 5 endpoints' },
+  { type: 'claude', text: '  • User authentication via JWT tokens' },
+  { type: 'claude', text: '  • A PostgreSQL database with 3 tables' },
+  { type: 'claude', text: '  • Frontend served from /public' },
+  { type: 'out', text: '' },
+  { type: 'claude', text: '  Want me to show you the main entry point?' },
+];
+
+let demoRunning = false;
+let demoTimeout;
+let lineIndex = 0;
+
+function startDemo() {
+  if (demoRunning) return;
+  demoRunning = true;
+  document.getElementById('playBtn').disabled = true;
+  document.getElementById('playBtn').textContent = '⏳ Playing...';
+  runLine();
+}
+
+function runLine() {
+  if (lineIndex >= demoScript.length) {
+    document.getElementById('playBtn').textContent = '✓ Complete';
+    return;
+  }
+  const item = demoScript[lineIndex++];
+  appendTermLine(item);
+  const delay = item.type === 'cmd' ? 600 : item.type === 'out' ? 150 : 220;
+  demoTimeout = setTimeout(runLine, delay);
+}
+
+function appendTermLine(item) {
+  const body = document.getElementById('termBody');
+  // Remove cursor from previous line
+  const cursors = body.querySelectorAll('.t-cursor');
+  cursors.forEach(c => c.remove());
+
+  const div = document.createElement('div');
+  div.className = 't-line fade-in';
+
+  if (item.type === 'cmd') {
+    div.innerHTML = `<span class="t-prompt">${item.prompt}</span> <span class="t-input">${item.text}</span>`;
+  } else if (item.type === 'out') {
+    div.innerHTML = `<span class="t-output">${item.text}</span>`;
+  } else if (item.type === 'claude') {
+    div.innerHTML = `<span class="t-claude">${item.text}</span>`;
+  }
+  body.appendChild(div);
+
+  // Add blinking cursor at end
+  const cursor = document.createElement('span');
+  cursor.className = 't-cursor';
+  div.appendChild(cursor);
+
+  body.scrollTop = body.scrollHeight;
+}
+
+function resetDemo() {
+  clearTimeout(demoTimeout);
+  demoRunning = false;
+  lineIndex = 0;
+  const body = document.getElementById('termBody');
+  body.innerHTML = `<div class="t-line"><span class="t-prompt">claudio@ubuntu:~$</span> <span class="t-input" id="tl0"></span><span class="t-cursor" id="cur0"></span></div>`;
+  const btn = document.getElementById('playBtn');
+  btn.disabled = false;
+  btn.textContent = '▶ Play Demo';
+}
+</script>
+
+</body>
+</html>
