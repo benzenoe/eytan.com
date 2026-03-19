@@ -1957,8 +1957,12 @@ function buildCalChipAvatar(platform, size = 16) {
         return `<i class="fab fa-whatsapp" style="color:#25D366;font-size:${iconSize}px;flex-shrink:0;"></i>`;
     if (platform === 'facebook-personal')
         return `<img src="${API_URL}/social/facebook/picture/benzeno" style="${s}" onerror="this.src='images/profile.jpg'" title="Facebook Personal">`;
-    if (platform === 'facebook' || platform === 'facebook:')
+    if (platform === 'facebook' || platform === 'facebook:') {
+        // Try to use the profile pic of the first known page (single-page setup)
+        const firstPic = Object.values(fbPagePictures)[0];
+        if (firstPic) return `<img src="${firstPic}" style="${s}" onerror="fbCalAvatarFallback(this,${size},'F')" title="Facebook Page">`;
         return `<i class="fab fa-facebook" style="color:#1877F2;font-size:${iconSize}px;flex-shrink:0;"></i>`;
+    }
     if (platform.startsWith('facebook:')) {
         const pageId = platform.split(':')[1];
         const picUrl = fbPagePictures[pageId] || `${API_URL}/social/facebook/picture/${pageId}`;
@@ -2056,13 +2060,15 @@ function renderCalendarCells(posts, year, month) {
 
         const dayPosts = byDay[dateKey] || [];
         dayPosts.slice(0, 4).forEach(p => {
-            const { label } = getPlatformLabel(p.platform);
+            const { label: platformLabel } = getPlatformLabel(p.platform);
             const avatar = buildCalChipAvatar(p.platform);
             const chip = document.createElement('div');
             chip.className = `cal-chip status-${p.status}`;
-            chip.title = `${p.title || p.post_id} — ${label} (${p.status})`;
+            const postTitle = p.title || p.post_id || '(untitled)';
+            chip.title = `${postTitle} → ${platformLabel} (${p.status})`;
             const time = new Date(p.scheduled_at || p.published_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-            chip.innerHTML = `${avatar}<span style="overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;">${label}</span><span style="flex-shrink:0;opacity:0.75;">${time}</span>`;
+            const postIcon = p.icon ? `${p.icon} ` : '';
+            chip.innerHTML = `${avatar}<span style="overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;">${postIcon}${postTitle}</span><span style="flex-shrink:0;opacity:0.7;margin-left:2px;">${time}</span>`;
             chip.onclick = (e) => { e.stopPropagation(); showPostChipDetail(p); };
             cell.appendChild(chip);
         });
@@ -2078,8 +2084,10 @@ function renderCalendarCells(posts, year, month) {
 }
 
 function showPostChipDetail(p) {
-    const { icon, color, label } = getPlatformLabel(p.platform);
+    const { label: platformLabel } = getPlatformLabel(p.platform);
     const time = new Date(p.scheduled_at || p.published_at).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    const postTitle = p.title || p.post_id || '(untitled)';
+    const postIcon = p.icon ? `${p.icon} ` : '';
     let actions = '';
     if (p.status === 'scheduled') {
         actions = `<button onclick="cancelFromCalendar(${p.id})" style="background:#dc3545;color:white;border:none;border-radius:4px;padding:4px 12px;font-size:0.82rem;cursor:pointer;margin-top:0.5rem;"><i class='fas fa-ban'></i> Cancel</button>`;
@@ -2088,7 +2096,15 @@ function showPostChipDetail(p) {
     } else if (p.platform_url) {
         actions = `<a href="${p.platform_url}" target="_blank" style="background:#28a745;color:white;border-radius:4px;padding:4px 12px;font-size:0.82rem;text-decoration:none;margin-top:0.5rem;display:inline-block;"><i class='fas fa-external-link-alt'></i> View Post</a>`;
     }
-    showAlert(`<span style="display:inline-flex;align-items:center;gap:6px;">${buildCalChipAvatar(p.platform, 20)}<strong>${label}</strong></span> — ${p.title || p.post_id}<br>${time} — <em>${p.status}</em>${actions ? '<br>' + actions : ''}`, 'info', 8000);
+    showAlert(
+        `<span style="display:inline-flex;align-items:center;gap:8px;margin-bottom:4px;">
+            ${buildCalChipAvatar(p.platform, 24)}
+            <span><strong style="font-size:0.95rem;">${postIcon}${postTitle}</strong></span>
+        </span><br>
+        <span style="color:#6c757d;font-size:0.82rem;">→ ${platformLabel} &nbsp;·&nbsp; ${time} &nbsp;·&nbsp; <em>${p.status}</em></span>
+        ${actions ? '<br>' + actions : ''}`,
+        'info', 8000
+    );
 }
 
 async function cancelFromCalendar(id) {
@@ -2240,7 +2256,7 @@ async function loadReminders() {
             return `<div class="reminder-item">
                 <div class="reminder-platform-icon">${buildCalChipAvatar(r.platform, 32)}</div>
                 <div class="reminder-content">
-                    <div class="reminder-title"><strong>${rLabel}</strong> — ${r.title || r.post_id} <span style="font-weight:400;color:#6c757d;font-size:0.8rem;">${time ? '— ' + time : ''}</span></div>
+                    <div class="reminder-title">${r.icon ? r.icon + ' ' : ''}<strong>${r.title || r.post_id}</strong> <span style="font-weight:400;color:#6c757d;font-size:0.8rem;">→ ${rLabel}${time ? ' · ' + time : ''}</span></div>
                     <div class="reminder-text">${content.substring(0, 200)}${content.length > 200 ? '…' : ''}</div>
                     <div class="reminder-actions">
                         ${shareBtn}
