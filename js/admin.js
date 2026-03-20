@@ -27,9 +27,6 @@ async function prefetchFacebookPageNames() {
 async function loadBlogData() {
     console.log('loadBlogData called');
     try {
-        // Prefetch Facebook page names so status icons show correct tooltips
-        await prefetchFacebookPageNames();
-
         console.log('Fetching from:', `${API_URL}/posts?status=all`);
         const response = await fetch(`${API_URL}/posts?status=all`, {
             method: 'GET',
@@ -2205,14 +2202,17 @@ function openCalModalForDate(date) {
 
 // ── Calendar Schedule Modal ──────────────────────────────────
 
-const FB_GROUPS = [
-    { name: 'My name is Eytan',                              url: 'https://www.facebook.com/groups/208780250279' },
-    { name: 'REIGNation',                                    url: 'https://www.facebook.com/groups/reignation' },
-    { name: 'ChatGPT and Real Estate Mastermind',            url: 'https://www.facebook.com/groups/6064131423672561' },
-    { name: 'New to Lisbon and the Surrounding Area',        url: 'https://www.facebook.com/groups/1884805645306198' },
-    { name: 'New to Surfside / Bal Harbour / Bay Harbor Islands', url: 'https://www.facebook.com/groups/871719803845126' },
-    { name: 'Benzeno Group',                                 url: 'https://www.facebook.com/groups/benzeno' },
-];
+// Facebook groups — loaded from API (replaces hardcoded array)
+let fbGroups = []; // { id, name, account_id (url), picture_url, is_active }
+
+async function loadFbGroups() {
+    try {
+        const res = await fetch(`${API_URL}/social/accounts?platform=facebook-group`, { credentials: 'include' });
+        if (!res.ok) return;
+        const data = await res.json();
+        fbGroups = (data.accounts || []).filter(a => a.is_active);
+    } catch (e) { /* silent */ }
+}
 
 // Builds the full platform checklist (same options as the inline social panel)
 function buildCalPlatformList() {
@@ -2256,12 +2256,16 @@ function buildCalPlatformList() {
     html += row('facebook-personal', `<i class="fab fa-facebook"  style="color:#1877F2;flex-shrink:0;"></i>`,                         'Facebook Personal', 'reminder', '#856404');
 
     html += sectionHdr('Facebook Groups (reminder)');
-    FB_GROUPS.forEach(g => {
-        const groupId = extractGroupId(g.url.replace('https://www.facebook.com/groups/', ''));
-        const imgHtml = groupId
-            ? `<img src="${API_URL}/social/facebook/cover/${groupId}" style="width:18px;height:18px;border-radius:3px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">`
+    if (fbGroups.length === 0) {
+        html += `<div style="color:#6c757d;font-size:0.85rem;padding:0.4rem;">No groups configured. Add them via the Accounts panel.</div>`;
+    }
+    fbGroups.forEach(g => {
+        const groupId = extractGroupId(g.account_id.replace('https://www.facebook.com/groups/', ''));
+        const picSrc = g.picture_url || (groupId ? `${API_URL}/social/facebook/cover/${groupId}` : '');
+        const imgHtml = picSrc
+            ? `<img src="${picSrc}" style="width:18px;height:18px;border-radius:3px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">`
             : `<i class="fab fa-facebook" style="color:#1877F2;flex-shrink:0;"></i>`;
-        html += row(`facebook-group:${g.url}`, imgHtml, g.name, 'reminder', '#856404');
+        html += row(`facebook-group:${g.account_id}`, imgHtml, g.name, 'reminder', '#856404');
     });
 
     return html;
@@ -2444,10 +2448,243 @@ async function markReminderDone(id) {
 // Initialize on page load
 // Since admin.js is loaded dynamically after authentication,
 // DOMContentLoaded may have already fired, so check document state
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { loadBlogData(); loadReminders(); });
-} else {
-    // DOM is already loaded, call immediately
+// ══════════════════════════════════════════════════════════════
+// ACCOUNTS PANEL
+// ══════════════════════════════════════════════════════════════
+
+const PLATFORM_CONFIGS = {
+    'facebook-page':  { label: 'Facebook Pages (auto-detected)', icon: 'fab fa-facebook', color: '#1877F2', manual: false },
+    'facebook-group': { label: 'Facebook Groups',                 icon: 'fab fa-facebook', color: '#1877F2', manual: true  },
+    'whatsapp':       { label: 'WhatsApp Contacts',               icon: 'fab fa-whatsapp', color: '#25D366', manual: true  },
+};
+
+function openAccountsPanel() {
+    document.getElementById('accounts-overlay').classList.add('open');
+    renderAccountsPanel();
+}
+function closeAccountsPanel() {
+    document.getElementById('accounts-overlay').classList.remove('open');
+}
+
+async function renderAccountsPanel() {
+    const body = document.getElementById('accounts-body');
+    body.innerHTML = '<div style="text-align:center;padding:2rem;color:#6c757d;"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+
+    // Fetch accounts from API + FB pages from Graph API
+    const [accountsRes, pagesData] = await Promise.allSettled([
+        fetch(`${API_URL}/social/accounts`, { credentials: 'include' }).then(r => r.json()),
+        fetch(`${API_URL}/social/facebook/pages`, { credentials: 'include' }).then(r => r.json())
+    ]);
+    const allAccounts = accountsRes.status === 'fulfilled' ? (accountsRes.value.accounts || []) : [];
+    const fbPages = pagesData.status === 'fulfilled' ? (pagesData.value.pages || []) : [];
+
+    // Connected platform status (read-only API creds)
+    const apiPlatforms = [
+        { key: 'facebook', icon: 'fab fa-facebook', color: '#1877F2', label: 'Facebook',  detail: fbPages.length ? fbPages.map(p=>p.name).join(', ') : 'No pages found' },
+        { key: 'instagram', icon: 'fab fa-instagram', color: '#E1306C', label: 'Instagram', detail: 'API token configured' },
+        { key: 'linkedin',  icon: 'fab fa-linkedin',  color: '#0A66C2', label: 'LinkedIn',  detail: 'API token configured' },
+        { key: 'twitter',   icon: 'fab fa-x-twitter', color: '#000',    label: 'X / Twitter', detail: 'API token configured' },
+        { key: 'whatsapp',  icon: 'fab fa-whatsapp',  color: '#25D366', label: 'WhatsApp', detail: 'Share link (no API)' },
+    ];
+
+    // Group manual accounts by platform
+    const grouped = {};
+    allAccounts.forEach(a => {
+        if (!grouped[a.platform]) grouped[a.platform] = [];
+        grouped[a.platform].push(a);
+    });
+
+    let html = '';
+
+    // ── Section 1: API Connections ──────────────────────────
+    html += `<div class="accounts-section">
+        <div class="accounts-section-title">API Connections</div>
+        <div class="platform-status-grid">
+        ${apiPlatforms.map(p => `
+            <div class="platform-status-card connected">
+                <i class="${p.icon}" style="color:${p.color};font-size:1.4rem;flex-shrink:0;"></i>
+                <div class="ps-info">
+                    <div class="ps-name">${p.label}</div>
+                    <div class="ps-status" style="color:#28a745;">${p.detail}</div>
+                </div>
+                <div class="ps-dot green"></div>
+            </div>`).join('')}
+        </div>
+        <div style="margin-top:0.75rem;font-size:0.78rem;color:#6c757d;"><i class="fas fa-info-circle"></i> API credentials are managed via environment variables on Railway. To add a new platform, contact your developer.</div>
+    </div>`;
+
+    // ── Section 2: Facebook Pages ─────────────────────────
+    html += `<div class="accounts-section">
+        <div class="accounts-section-title">Facebook Pages <span style="font-weight:400;">(auto-detected from your token)</span></div>
+        ${fbPages.length === 0
+            ? `<div style="color:#6c757d;font-size:0.85rem;">No Facebook pages found. Check your FACEBOOK_USER_TOKEN.</div>`
+            : fbPages.map(p => {
+                const pic = p.picture?.data?.url || fbPagePictures[p.id] || '';
+                return `<div class="account-row">
+                    ${pic ? `<img src="${pic}" class="account-avatar circle" alt="">` : `<i class="fab fa-facebook" style="color:#1877F2;font-size:1.5rem;"></i>`}
+                    <div class="account-info">
+                        <div class="account-name">${p.name}</div>
+                        <div class="account-id">ID: ${p.id} &nbsp;·&nbsp; ${p.category || 'Page'}</div>
+                    </div>
+                    <span style="background:#d4edda;color:#155724;font-size:0.72rem;padding:2px 8px;border-radius:10px;">auto-detected</span>
+                </div>`;
+            }).join('')}
+    </div>`;
+
+    // ── Section 3: Facebook Groups ────────────────────────
+    const groups = grouped['facebook-group'] || [];
+    html += `<div class="accounts-section">
+        <div class="accounts-section-title">Facebook Groups</div>
+        <div id="acc-groups-list">
+        ${groups.map(g => renderAccountRow(g)).join('')}
+        </div>
+        <button onclick="toggleAddForm('facebook-group')" style="margin-top:0.5rem;padding:0.4rem 0.9rem;background:#17a2b8;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;"><i class="fas fa-plus"></i> Add Group</button>
+        <div class="add-account-form" id="add-form-facebook-group">
+            <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;">Add Facebook Group</div>
+            <input type="url" id="new-fg-url" placeholder="https://www.facebook.com/groups/yourgroup" />
+            <input type="text" id="new-fg-name" placeholder="Group display name" />
+            <div class="form-row">
+                <button onclick="submitAddAccount('facebook-group')" style="flex:1;padding:0.45rem;background:#28a745;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;">Add</button>
+                <button onclick="toggleAddForm('facebook-group')" style="flex:1;padding:0.45rem;background:#6c757d;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;">Cancel</button>
+            </div>
+        </div>
+    </div>`;
+
+    // ── Section 4: WhatsApp Contacts ──────────────────────
+    const waAccounts = grouped['whatsapp'] || [];
+    html += `<div class="accounts-section">
+        <div class="accounts-section-title">WhatsApp Contacts / Broadcast</div>
+        <div id="acc-whatsapp-list">
+        ${waAccounts.length === 0
+            ? `<div class="account-row">
+                <i class="fab fa-whatsapp" style="color:#25D366;font-size:1.5rem;"></i>
+                <div class="account-info"><div class="account-name">Personal WhatsApp</div><div class="account-id">wa.me share link</div></div>
+                <span style="background:#fff3cd;color:#856404;font-size:0.72rem;padding:2px 8px;border-radius:10px;">built-in</span>
+               </div>`
+            : waAccounts.map(a => renderAccountRow(a)).join('')}
+        </div>
+        <button onclick="toggleAddForm('whatsapp')" style="margin-top:0.5rem;padding:0.4rem 0.9rem;background:#25D366;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;"><i class="fas fa-plus"></i> Add Contact / Group</button>
+        <div class="add-account-form" id="add-form-whatsapp">
+            <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;">Add WhatsApp Contact or Group</div>
+            <input type="text" id="new-wa-id" placeholder="Phone number: +1234567890 or group invite link" />
+            <input type="text" id="new-wa-name" placeholder="Contact / Group name" />
+            <div class="form-row">
+                <button onclick="submitAddAccount('whatsapp')" style="flex:1;padding:0.45rem;background:#28a745;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;">Add</button>
+                <button onclick="toggleAddForm('whatsapp')" style="flex:1;padding:0.45rem;background:#6c757d;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;">Cancel</button>
+            </div>
+        </div>
+    </div>`;
+
+    body.innerHTML = html;
+}
+
+function renderAccountRow(a) {
+    const platform = a.platform;
+    const groupId = platform === 'facebook-group' ? extractGroupId(a.account_id.replace('https://www.facebook.com/groups/','')) : null;
+    const picSrc = a.picture_url || (groupId ? `${API_URL}/social/facebook/cover/${groupId}` : '');
+    const activeStyle = a.is_active ? '' : ' inactive';
+    return `<div class="account-row${activeStyle}" id="acc-row-${a.id}">
+        ${picSrc
+            ? `<img src="${picSrc}" class="account-avatar" alt="" onerror="this.style.display='none'">`
+            : `<i class="fab fa-facebook" style="color:#1877F2;font-size:1.5rem;"></i>`}
+        <div class="account-info">
+            <div class="account-name" id="acc-name-${a.id}">${a.name}</div>
+            <div class="account-id" title="${a.account_id}">${a.account_id.replace('https://www.facebook.com/groups/','groups/')}</div>
+        </div>
+        <div class="account-actions">
+            <button class="acc-btn" onclick="editAccountName(${a.id})" style="background:#ffc107;color:#000;" title="Rename"><i class="fas fa-pen"></i></button>
+            <button class="acc-btn" onclick="toggleAccountActive(${a.id},${!a.is_active})" style="background:${a.is_active?'#6c757d':'#28a745'};color:white;" title="${a.is_active?'Disable':'Enable'}">
+                <i class="fas fa-${a.is_active?'eye-slash':'eye'}"></i>
+            </button>
+            <button class="acc-btn" onclick="deleteAccount(${a.id},'${a.name.replace(/'/g,"\\'")}')" style="background:#dc3545;color:white;" title="Delete"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>`;
+}
+
+function toggleAddForm(platform) {
+    const form = document.getElementById(`add-form-${platform}`);
+    form.classList.toggle('open');
+}
+
+async function submitAddAccount(platform) {
+    let account_id, name;
+    if (platform === 'facebook-group') {
+        account_id = document.getElementById('new-fg-url').value.trim();
+        name = document.getElementById('new-fg-name').value.trim();
+    } else if (platform === 'whatsapp') {
+        account_id = document.getElementById('new-wa-id').value.trim();
+        name = document.getElementById('new-wa-name').value.trim();
+    }
+    if (!account_id || !name) { showAlert('Both URL/ID and name are required', 'error'); return; }
+
+    try {
+        const res = await fetch(`${API_URL}/social/accounts`, {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ platform, account_id, name })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            showAlert(`✅ ${name} added!`, 'success');
+            await loadFbGroups(); // refresh group list used in schedule modal
+            renderAccountsPanel();
+        } else {
+            showAlert('Error: ' + data.error, 'error');
+        }
+    } catch (e) { showAlert('Request failed', 'error'); }
+}
+
+async function toggleAccountActive(id, newState) {
+    try {
+        const res = await fetch(`${API_URL}/social/accounts/${id}`, {
+            method: 'PUT', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ is_active: newState })
+        });
+        if (res.ok) {
+            await loadFbGroups();
+            renderAccountsPanel();
+        }
+    } catch (e) { showAlert('Request failed', 'error'); }
+}
+
+async function editAccountName(id) {
+    const current = document.getElementById(`acc-name-${id}`)?.textContent || '';
+    const newName = prompt('Rename account:', current);
+    if (!newName || newName === current) return;
+    try {
+        const res = await fetch(`${API_URL}/social/accounts/${id}`, {
+            method: 'PUT', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: newName })
+        });
+        if (res.ok) {
+            await loadFbGroups();
+            renderAccountsPanel();
+        }
+    } catch (e) { showAlert('Request failed', 'error'); }
+}
+
+async function deleteAccount(id, name) {
+    if (!confirm(`Remove "${name}" from your accounts?`)) return;
+    try {
+        const res = await fetch(`${API_URL}/social/accounts/${id}`, { method: 'DELETE', credentials: 'include' });
+        if (res.ok) {
+            showAlert(`Removed ${name}`, 'success');
+            await loadFbGroups();
+            renderAccountsPanel();
+        }
+    } catch (e) { showAlert('Request failed', 'error'); }
+}
+
+async function initAdmin() {
+    await Promise.all([loadFbGroups(), prefetchFacebookPageNames()]);
     loadBlogData();
     loadReminders();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAdmin);
+} else {
+    initAdmin();
 }
