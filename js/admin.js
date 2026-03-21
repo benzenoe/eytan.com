@@ -2385,7 +2385,7 @@ async function loadReminders() {
                 const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
                 shareBtn = `<button onclick="copyAndOpen('${encodeURIComponent(content)}','${fbUrl}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open FB</button>`;
             } else if (r.platform.startsWith('facebook-group:')) {
-                const groupUrl = r.platform.split(':')[1];
+                const groupUrl = r.platform.replace('facebook-group:', '');
                 shareBtn = `<button onclick="copyAndOpen('${encodeURIComponent(content)}','${groupUrl}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open Group</button>`;
             }
 
