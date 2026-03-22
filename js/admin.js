@@ -2478,13 +2478,30 @@ async function renderAccountsPanel() {
     const allAccounts = accountsRes.status === 'fulfilled' ? (accountsRes.value.accounts || []) : [];
     const fbPages = pagesData.status === 'fulfilled' ? (pagesData.value.pages || []) : [];
 
+    // Fetch real platform status from backend
+    let platformStatus = {};
+    try {
+        const statusRes = await fetch(`${API_URL}/social/platform-status`, { credentials: 'include' });
+        platformStatus = await statusRes.json();
+    } catch(e) { /* leave all false */ }
+
     // Connected platform status (read-only API creds)
     const apiPlatforms = [
-        { key: 'facebook', icon: 'fab fa-facebook', color: '#1877F2', label: 'Facebook',  detail: fbPages.length ? fbPages.map(p=>p.name).join(', ') : 'No pages found' },
-        { key: 'instagram', icon: 'fab fa-instagram', color: '#E1306C', label: 'Instagram', detail: 'API token configured' },
-        { key: 'linkedin',  icon: 'fab fa-linkedin',  color: '#0A66C2', label: 'LinkedIn',  detail: 'API token configured' },
-        { key: 'twitter',   icon: 'fab fa-x-twitter', color: '#000',    label: 'X / Twitter', detail: 'API token configured' },
-        { key: 'whatsapp',  icon: 'fab fa-whatsapp',  color: '#25D366', label: 'WhatsApp', detail: 'Share link (no API)' },
+        { key: 'facebook',  icon: 'fab fa-facebook',  color: '#1877F2', label: 'Facebook',
+          detail: fbPages.length ? fbPages.map(p=>p.name).join(', ') : 'No pages found',
+          connected: platformStatus.facebook },
+        { key: 'instagram', icon: 'fab fa-instagram', color: '#E1306C', label: 'Instagram',
+          detail: platformStatus.instagram ? 'API token configured' : 'Not configured',
+          connected: platformStatus.instagram },
+        { key: 'linkedin',  icon: 'fab fa-linkedin',  color: '#0A66C2', label: 'LinkedIn',
+          detail: platformStatus.linkedin ? 'API token configured' : 'Not configured',
+          connected: platformStatus.linkedin },
+        { key: 'twitter',   icon: 'fab fa-x-twitter', color: '#000',    label: 'X / Twitter',
+          detail: platformStatus.twitter ? 'API token configured' : 'Not configured (manual only)',
+          connected: platformStatus.twitter },
+        { key: 'whatsapp',  icon: 'fab fa-whatsapp',  color: '#25D366', label: 'WhatsApp',
+          detail: 'Share link (no API)',
+          connected: false },
     ];
 
     // Group manual accounts by platform
@@ -2501,13 +2518,13 @@ async function renderAccountsPanel() {
         <div class="accounts-section-title">API Connections</div>
         <div class="platform-status-grid">
         ${apiPlatforms.map(p => `
-            <div class="platform-status-card connected">
+            <div class="platform-status-card ${p.connected ? 'connected' : 'disconnected'}">
                 <i class="${p.icon}" style="color:${p.color};font-size:1.4rem;flex-shrink:0;"></i>
                 <div class="ps-info">
                     <div class="ps-name">${p.label}</div>
-                    <div class="ps-status" style="color:#28a745;">${p.detail}</div>
+                    <div class="ps-status" style="color:${p.connected ? '#28a745' : '#dc3545'};">${p.detail}</div>
                 </div>
-                <div class="ps-dot green"></div>
+                <div class="ps-dot ${p.connected ? 'green' : 'red'}"></div>
             </div>`).join('')}
         </div>
         <div style="margin-top:0.75rem;font-size:0.78rem;color:#6c757d;"><i class="fas fa-info-circle"></i> API credentials are managed via environment variables on Railway. To add a new platform, contact your developer.</div>
