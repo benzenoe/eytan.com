@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashth Europe — Retainer Proposal | Eytan.com</title>
+<style>
+  :root {
+    --navy:   #0d1620;
+    --navy2:  #1a2332;
+    --navy3:  #243044;
+    --blue:   #00a8e1;
+    --gold:   #ffd93d;
+    --green:  #00c48c;
+    --red:    #ff6b6b;
+    --white:  #f0f4f8;
+    --gray:   #8899aa;
+    --border: rgba(255,255,255,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(13,22,32,0.95); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 2rem; height:60px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
+  .nav-logo img { height:28px; }
+  .logo-pill {
+    background:linear-gradient(135deg,var(--blue),#5a2d82);
+    color:#fff; font-size:0.7rem; font-weight:700;
+    padding:0.2rem 0.6rem; border-radius:20px; letter-spacing:0.08em;
+  }
+  .nav-right { display:flex; align-items:center; gap:1rem; }
+  .nav-right span { color:var(--gray); font-size:0.8rem; }
+  .btn-book {
+    background:var(--blue); color:#fff; text-decoration:none;
+    padding:0.4rem 1rem; border-radius:8px; font-size:0.8rem; font-weight:600;
+    transition:opacity 0.2s;
+  }
+  .btn-book:hover { opacity:0.85; }
+
+  /* HERO */
+  .hero {
+    min-height:100vh;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,168,225,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(90,45,130,0.18) 0%, transparent 50%),
+                linear-gradient(180deg, #0d1620 0%, #1a2332 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:8rem 2rem 5rem; position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300a8e1' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity:0.5;
+  }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:rgba(0,168,225,0.1); border:1px solid rgba(0,168,225,0.3);
+    border-radius:20px; padding:0.4rem 1rem; font-size:0.78rem;
+    color:var(--blue); font-weight:600; letter-spacing:0.1em;
+    text-transform:uppercase; margin-bottom:1.5rem;
+  }
+  .dot { width:6px; height:6px; background:var(--blue); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:800; line-height:1.15; margin-bottom:1rem; }
+  .hero h1 span { color:var(--blue); }
+  .hero h1 em { font-style:normal; color:var(--gold); }
+  .hero-sub { font-size:1.1rem; color:var(--gray); max-width:620px; margin-bottom:2.5rem; line-height:1.7; }
+  .hero-stats {
+    display:flex; gap:2.5rem; flex-wrap:wrap; justify-content:center;
+    margin-bottom:2.5rem;
+  }
+  .hero-stat { text-align:center; }
+  .hero-stat .val { font-size:2rem; font-weight:800; color:var(--blue); display:block; }
+  .hero-stat .lbl { font-size:0.72rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.08em; }
+  .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+  .btn-primary {
+    background:linear-gradient(135deg,var(--blue),#0080b0);
+    color:#fff; text-decoration:none; padding:0.75rem 1.75rem;
+    border-radius:10px; font-weight:700; font-size:0.9rem;
+    transition:all 0.2s; display:inline-block;
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,168,225,0.4); }
+  .btn-outline {
+    background:transparent; color:var(--white);
+    border:1.5px solid rgba(255,255,255,0.25);
+    text-decoration:none; padding:0.75rem 1.75rem;
+    border-radius:10px; font-weight:600; font-size:0.9rem;
+    transition:all 0.2s; display:inline-block;
+  }
+  .btn-outline:hover { border-color:var(--blue); color:var(--blue); }
+
+  /* SECTIONS */
+  section { padding:5rem 2rem; max-width:1100px; margin:0 auto; }
+  .section-label {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    color:var(--blue); font-size:0.75rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.75rem;
+  }
+  .section-label::before { content:''; width:24px; height:2px; background:var(--blue); }
+  h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; margin-bottom:0.5rem; }
+  h2 span { color:var(--blue); }
+  .sub { color:var(--gray); font-size:1rem; margin-bottom:3rem; max-width:650px; }
+
+  /* CARDS */
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+  .card {
+    background:var(--navy2); border:1px solid var(--border);
+    border-radius:16px; padding:1.75rem;
+    transition:border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color:rgba(0,168,225,0.3); transform:translateY(-3px); }
+  .card-icon { font-size:1.75rem; margin-bottom:0.75rem; }
+  .card h3 { font-size:1rem; font-weight:700; margin-bottom:0.5rem; }
+  .card p { color:var(--gray); font-size:0.88rem; line-height:1.6; }
+  .card .tag {
+    display:inline-block; margin-top:0.75rem;
+    background:rgba(0,168,225,0.12); color:var(--blue);
+    font-size:0.72rem; font-weight:700; padding:0.2rem 0.6rem;
+    border-radius:20px; text-transform:uppercase; letter-spacing:0.06em;
+  }
+
+  /* PRICING TIERS */
+  .tiers { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+  .tier {
+    background:var(--navy2); border:1px solid var(--border);
+    border-radius:20px; padding:2rem; position:relative; overflow:hidden;
+  }
+  .tier.featured {
+    border-color:var(--blue);
+    background:linear-gradient(135deg,rgba(0,168,225,0.08),var(--navy2));
+  }
+  .tier-badge {
+    position:absolute; top:1rem; right:1rem;
+    background:var(--blue); color:#fff;
+    font-size:0.65rem; font-weight:800; padding:0.2rem 0.6rem;
+    border-radius:20px; text-transform:uppercase; letter-spacing:0.08em;
+  }
+  .tier-name { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray); margin-bottom:0.5rem; }
+  .tier-price { font-size:2.5rem; font-weight:900; color:var(--white); margin-bottom:0.25rem; }
+  .tier-price span { font-size:1rem; font-weight:500; color:var(--gray); }
+  .tier-desc { color:var(--gray); font-size:0.85rem; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+  .tier ul { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+  .tier li { font-size:0.85rem; color:var(--gray); display:flex; align-items:flex-start; gap:0.5rem; }
+  .tier li::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; margin-top:0.05em; }
+  .tier li.no::before { content:'✗'; color:var(--red); }
+  .tier li.no { color:rgba(136,153,170,0.5); }
+
+  /* TABLE */
+  .tbl-wrap { overflow-x:auto; margin-bottom:2rem; }
+  table { width:100%; border-collapse:collapse; }
+  thead th {
+    background:var(--navy3); color:var(--gray);
+    font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;
+    padding:0.8rem 1rem; text-align:left; border-bottom:1px solid var(--border);
+  }
+  tbody td { padding:0.9rem 1rem; font-size:0.88rem; border-bottom:1px solid var(--border); vertical-align:top; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr:hover td { background:rgba(255,255,255,0.02); }
+  .td-phase { font-weight:700; color:var(--white); white-space:nowrap; }
+  .td-period { color:var(--blue); white-space:nowrap; }
+  .td-amount { font-weight:800; color:var(--gold); white-space:nowrap; }
+  .td-trigger { color:var(--gray); }
+  .divider-row td {
+    background:rgba(0,168,225,0.06); color:var(--blue);
+    font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;
+    padding:0.5rem 1rem; border-top:1px solid rgba(0,168,225,0.2);
+  }
+
+  /* METRICS ROW */
+  .metrics { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:3rem; }
+  .metric {
+    flex:1; min-width:180px;
+    background:var(--navy2); border:1px solid var(--border);
+    border-radius:14px; padding:1.25rem 1.5rem;
+  }
+  .metric .val { font-size:1.8rem; font-weight:900; color:var(--blue); }
+  .metric .val.gold { color:var(--gold); }
+  .metric .val.green { color:var(--green); }
+  .metric .lbl { font-size:0.75rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.07em; margin-top:0.25rem; }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background:linear-gradient(135deg,rgba(0,168,225,0.08),rgba(0,168,225,0.04));
+    border:1px solid rgba(0,168,225,0.25); border-radius:16px;
+    padding:1.75rem 2rem; margin-bottom:2rem;
+  }
+  .highlight h3 { font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--blue); }
+  .highlight ul { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+  .highlight li { font-size:0.88rem; color:var(--gray); display:flex; align-items:flex-start; gap:0.6rem; }
+  .highlight li::before { content:'→'; color:var(--blue); font-weight:700; flex-shrink:0; }
+
+  .gold-box {
+    background:linear-gradient(135deg,rgba(255,217,61,0.08),rgba(255,217,61,0.03));
+    border:1px solid rgba(255,217,61,0.25); border-radius:16px;
+    padding:1.75rem 2rem; margin-bottom:2rem;
+  }
+  .gold-box h3 { font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--gold); }
+  .gold-box p, .gold-box li { font-size:0.88rem; color:var(--gray); }
+  .gold-box ul { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+  .gold-box li { display:flex; align-items:flex-start; gap:0.6rem; }
+  .gold-box li::before { content:'◆'; color:var(--gold); font-size:0.6rem; flex-shrink:0; margin-top:0.3em; }
+
+  /* TOTAL SUMMARY */
+  .summary-box {
+    background:var(--navy2); border:2px solid var(--blue);
+    border-radius:20px; padding:2.5rem;
+    display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;
+  }
+  .summary-line { border-bottom:1px solid var(--border); padding-bottom:1rem; margin-bottom:1rem; }
+  .summary-line:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+  .summary-line .name { color:var(--gray); font-size:0.85rem; }
+  .summary-line .amount { font-size:1.1rem; font-weight:800; color:var(--white); }
+  .summary-total {
+    grid-column:1/-1; background:rgba(0,168,225,0.08);
+    border:1px solid rgba(0,168,225,0.3); border-radius:12px;
+    padding:1.25rem 1.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .summary-total .name { font-size:1rem; font-weight:700; }
+  .summary-total .amount { font-size:2rem; font-weight:900; color:var(--blue); }
+  @media(max-width:600px) { .summary-box { grid-template-columns:1fr; } }
+
+  /* FOOTER */
+  footer {
+    background:var(--navy2); border-top:1px solid var(--border);
+    padding:3rem 2rem; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:1rem;
+  }
+  footer img { height:32px; }
+  footer p { color:var(--gray); font-size:0.85rem; }
+  footer a { color:var(--blue); text-decoration:none; }
+  .confidential-bar {
+    background:rgba(255,217,61,0.08); border-top:1px solid rgba(255,217,61,0.2);
+    padding:0.75rem; text-align:center;
+    font-size:0.72rem; color:rgba(255,217,61,0.7); letter-spacing:0.1em; text-transform:uppercase;
+  }
+
+  /* HR */
+  hr { border:none; border-top:1px solid var(--border); margin:3rem 0; }
+
+  @media(max-width:768px) {
+    nav { padding:0 1rem; }
+    section { padding:4rem 1.25rem; }
+    .hero { padding:6rem 1.25rem 4rem; }
+    .hero-stats { gap:1.5rem; }
+    .tiers { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://eytan.com">
+    <img src="../images/eb-logo2.png" alt="Eytan Benzeno">
+    <span style="color:var(--gray);font-size:0.75rem;">×</span>
+    <span class="logo-pill">ASHTH</span>
+  </a>
+  <div class="nav-right">
+    <span>Retainer Proposal · Confidential</span>
+    <a href="mailto:eytan@benzeno.com" class="btn-book">Book a Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><div class="dot"></div>Engagement Proposal — Prepared by Eytan.com</div>
+  <h1>Ashth Europe<br><span>Retainer</span> <em>Proposal</em></h1>
+  <p class="hero-sub">A milestone-based digital marketing retainer for Ashth's EU market launch — structured for transparency, aligned on performance, and priced for a first-year growth partnership.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="val">€7,500</span>
+      <span class="lbl">Monthly Base Retainer</span>
+    </div>
+    <div class="hero-stat">
+      <span class="val">10%</span>
+      <span class="lbl">Ad Spend Mgmt Fee</span>
+    </div>
+    <div class="hero-stat">
+      <span class="val">5</span>
+      <span class="lbl">Milestone Phases</span>
+    </div>
+    <div class="hero-stat">
+      <span class="val">12mo</span>
+      <span class="lbl">Engagement Term</span>
+    </div>
+  </div>
+  <div class="hero-ctas">
+    <a href="#scope" class="btn-primary">View Scope →</a>
+    <a href="#milestones" class="btn-outline">See Milestones</a>
+    <a href="#summary" class="btn-outline" style="border-color:var(--gold);color:var(--gold);">Total Investment</a>
+  </div>
+</div>
+
+<!-- SCOPE OF WORK -->
+<section id="scope">
+  <div class="section-label">Scope of Work</div>
+  <h2>What's <span>Included</span></h2>
+  <p class="sub">Full-spectrum EU digital marketing across 6 channels, delivered in phases aligned with your launch timeline.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🗺️</div>
+      <h3>EU Market Strategy</h3>
+      <p>Go-to-market playbooks for France, UK & Germany in Phase 1 — expanding to Italy, Spain & Eastern Europe by Q3. Competitive mapping, audience segmentation, and channel prioritisation.</p>
+      <span class="tag">Phase 0–1</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📣</div>
+      <h3>Paid Media Management</h3>
+      <p>Google (Shopping + Search), Meta (FB + IG), and TikTok Ads managed under client-owned ad accounts. Luxury jewellery audience targeting, A/B creative testing, and monthly budget optimisation.</p>
+      <span class="tag">Ongoing</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h3>Multilingual SEO</h3>
+      <p>Technical SEO, 8–10 blog posts/month starting in EN + FR, expanding to DE/ES/IT. Hreflang implementation on ashth.eu, link building in priority markets, and monthly ranking reports.</p>
+      <span class="tag">Ongoing</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h3>Social Media Management</h3>
+      <p>Content calendar, copy & scheduling for Instagram and TikTok (2 platforms). French and English captions, story sequences, reel hooks, and engagement management.</p>
+      <span class="tag">Ongoing</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌟</div>
+      <h3>Influencer Programme</h3>
+      <p>Sourcing, briefing, and managing micro (10K–100K) and nano (&lt;10K) influencers across France, UK, and Poland. Ambassador vetting, content approval workflow, and performance tracking.</p>
+      <span class="tag">Phase 2+</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Reporting & Strategy</h3>
+      <p>Monthly performance dashboard with CRM-attributed revenue, ROAS by channel, and SEO ranking movement. Quarterly strategy review with pivot recommendations and budget reallocation plan.</p>
+      <span class="tag">Monthly</span>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h3>What's Not Included (Pass-Through)</h3>
+    <ul>
+      <li>Ad spend (paid directly by Ashth to Google, Meta, TikTok)</li>
+      <li>Influencer talent fees (negotiated by Eytan.com, invoiced at cost)</li>
+      <li>Content production (photography, videography — quoted separately)</li>
+      <li>Translation tooling beyond 3 languages in Year 1</li>
+      <li>Luxembourg entity setup / legal / accounting fees</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRICING STRUCTURE -->
+<section id="pricing">
+  <div class="section-label">Pricing Structure</div>
+  <h2>How We <span>Charge</span></h2>
+  <p class="sub">A hybrid model: fixed retainer for predictability + a small percentage of ad spend that scales proportionally with your growth.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-name">Component 1</div>
+      <div class="tier-price">€8,000 <span>one-time</span></div>
+      <p class="tier-desc">Discovery & Strategy Fee — paid on signed agreement before work begins. Covers market research, competitor analysis, GTM plan, and onboarding.</p>
+      <ul>
+        <li>EU market sizing for 5 priority countries</li>
+        <li>Competitive audit (LGD + luxury jewellery)</li>
+        <li>Channel strategy & 12-month roadmap</li>
+        <li>Brand positioning for EU audiences</li>
+        <li>GDPR & VAT compliance checklist</li>
+        <li>ashth.eu / ashth.lu domain architecture plan</li>
+      </ul>
+    </div>
+    <div class="tier featured">
+      <div class="tier-badge">Core</div>
+      <div class="tier-name">Component 2</div>
+      <div class="tier-price">€7,500 <span>/month</span></div>
+      <p class="tier-desc">Monthly Retainer — billed on the 1st of each month following milestone delivery. Covers all execution, management, and reporting across active channels.</p>
+      <ul>
+        <li>Dedicated strategist + media buyer</li>
+        <li>Paid media management (3 platforms)</li>
+        <li>SEO (EN + FR → expanding to 5 langs)</li>
+        <li>Social media management (IG + TikTok)</li>
+        <li>Influencer programme (Phase 2 onward)</li>
+        <li>Monthly performance report + call</li>
+        <li>Quarterly strategy review</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <div class="tier-name">Component 3</div>
+      <div class="tier-price">10% <span>of ad spend</span></div>
+      <p class="tier-desc">Ad Spend Management Fee — charged monthly on total managed spend across Google, Meta, and TikTok. Minimum €500 · Maximum €3,000/month.</p>
+      <ul>
+        <li>Applies to client-owned accounts only</li>
+        <li>Invoiced monthly based on actual spend</li>
+        <li>Minimum floor: €500/month</li>
+        <li>Cap: €3,000/month regardless of spend</li>
+        <li>Example: €15K spend → €1,500 mgmt fee</li>
+        <li>Example: €35K spend → €3,000 (capped)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="gold-box">
+    <h3>◆ Performance Bonus (Optional Upside)</h3>
+    <p style="margin-bottom:0.75rem;">An optional performance layer can be added by mutual agreement at or after the Phase 2 review. Not required for engagement commencement.</p>
+    <ul>
+      <li>8% of CRM-attributed EU revenue above €30,000/month baseline</li>
+      <li>Attribution: position-based (U-shaped) — 40% first touch, 40% last touch, 20% middle</li>
+      <li>Reconciled quarterly via CRM (not platform-reported conversions)</li>
+      <li>Cap: €1,500/month maximum bonus payment</li>
+      <li>Requires minimum 3-month performance data before activation</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section id="milestones">
+  <div class="section-label">Payment Schedule</div>
+  <h2>Milestone <span>Payouts</span></h2>
+  <p class="sub">Payments tied to verified deliverables — not calendar months. You pay for results, not time. Each phase unlocks the next.</p>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="val">5</div>
+      <div class="lbl">Phases</div>
+    </div>
+    <div class="metric">
+      <div class="val gold">€8K</div>
+      <div class="lbl">Due on Signature</div>
+    </div>
+    <div class="metric">
+      <div class="val green">7 days</div>
+      <div class="lbl">Deemed Approval Window</div>
+    </div>
+    <div class="metric">
+      <div class="val">30 days</div>
+      <div class="lbl">Termination Notice</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Period</th>
+          <th>Payment</th>
+          <th>Milestone Trigger (what unlocks payment)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="divider-row"><td colspan="4">🚀 Pre-Engagement</td></tr>
+        <tr>
+          <td class="td-phase">Phase 0 — Discovery</td>
+          <td class="td-period">Month 0</td>
+          <td class="td-amount">€8,000</td>
+          <td class="td-trigger">Signed agreement + bank transfer received. Delivers market playbooks, GTM plan, and competitive audit within 3–4 weeks.</td>
+        </tr>
+        <tr class="divider-row"><td colspan="4">📐 Foundation (Months 1–3)</td></tr>
+        <tr>
+          <td class="td-phase">Phase 1 — Month 1</td>
+          <td class="td-period">Month 1</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Ad accounts linked, tracking pixels live, SEO baseline audit delivered, content calendar Month 2 approved.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 1 — Month 2</td>
+          <td class="td-period">Month 2</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">First paid campaigns live (Google + Meta FR/UK), first 4 SEO articles published, influencer shortlist submitted.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 1 — Month 3</td>
+          <td class="td-period">Month 3</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Foundation performance report delivered, Phase 2 strategy sign-off completed, TikTok Ads launched.</td>
+        </tr>
+        <tr class="divider-row"><td colspan="4">🌍 Launch (Months 4–6)</td></tr>
+        <tr>
+          <td class="td-phase">Phase 2 — Month 4</td>
+          <td class="td-period">Month 4</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Germany + Spain campaigns live, first influencer activations published, 8 SEO articles live on ashth.eu.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 2 — Month 5</td>
+          <td class="td-period">Month 5</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Poland/Allegro strategy launched, 5+ micro-influencer posts published, SEO ranking report showing movement.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 2 — Month 6</td>
+          <td class="td-period">Month 6</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Mid-year performance review delivered, Q3 budget reallocation plan approved, all 5 markets with active campaigns.</td>
+        </tr>
+        <tr class="divider-row"><td colspan="4">⚙️ Optimisation (Months 7–9)</td></tr>
+        <tr>
+          <td class="td-phase">Phase 3 — Month 7</td>
+          <td class="td-period">Month 7</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Performance pivots implemented based on Q2 data, Czech Republic expansion initiated, top influencers re-engaged.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 3 — Month 8</td>
+          <td class="td-period">Month 8</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Romania Facebook/eMAG campaign live, 20+ influencer posts accumulated, SEO traffic growth documented.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 3 — Month 9</td>
+          <td class="td-period">Month 9</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Q3 performance report with CRM attribution, performance bonus eligibility assessed, Year 2 scope discussion initiated.</td>
+        </tr>
+        <tr class="divider-row"><td colspan="4">📈 Scale (Months 10–12)</td></tr>
+        <tr>
+          <td class="td-phase">Phase 4 — Month 10</td>
+          <td class="td-period">Month 10</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Hungary expansion underway, ambassador programme formalised, Q4 (holiday season) campaign brief approved.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 4 — Month 11</td>
+          <td class="td-period">Month 11</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Holiday campaigns live across all markets, Black Friday + Christmas creative deployed, influencer unboxing programme active.</td>
+        </tr>
+        <tr>
+          <td class="td-phase">Phase 4 — Month 12</td>
+          <td class="td-period">Month 12</td>
+          <td class="td-amount">€7,500</td>
+          <td class="td-trigger">Full Year 1 attribution report, Year 2 strategy deck delivered, all logins/assets transferred, handoff call completed.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight">
+    <h3>Payment Terms & Protections</h3>
+    <ul>
+      <li>Invoices issued on the 1st of each month; due within 14 calendar days</li>
+      <li>Deemed approval: milestones are considered approved after 7 business days without written feedback</li>
+      <li>Late payment: 1.5% monthly interest on overdue balances after 30 days</li>
+      <li>Termination: 30 days written notice; work in progress billed pro-rata to termination date</li>
+      <li>IP transfer: all deliverables transfer to Ashth upon full payment of the relevant phase</li>
+      <li>Currency: all fees in EUR; FX conversions at invoice-date mid-market rate</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TOTAL SUMMARY -->
+<section id="summary">
+  <div class="section-label">Total Investment</div>
+  <h2>Year 1 <span>Summary</span></h2>
+  <p class="sub">Full 12-month base engagement — before performance bonus and before ad spend (pass-through).</p>
+
+  <div class="summary-box">
+    <div>
+      <div class="summary-line">
+        <div class="name">Phase 0 — Discovery & Strategy Fee</div>
+        <div class="amount">€8,000</div>
+      </div>
+      <div class="summary-line">
+        <div class="name">Monthly Retainer × 12 months</div>
+        <div class="amount">€90,000</div>
+      </div>
+      <div class="summary-line">
+        <div class="name">Ad Spend Mgmt Fee (est. €10K/mo spend)</div>
+        <div class="amount">~€12,000</div>
+      </div>
+    </div>
+    <div>
+      <div class="summary-line">
+        <div class="name">Performance Bonus (optional, capped)</div>
+        <div class="amount" style="color:var(--gray);">Variable</div>
+      </div>
+      <div class="summary-line">
+        <div class="name">Ad Spend (pass-through, not included)</div>
+        <div class="amount" style="color:var(--gray);">Client-direct</div>
+      </div>
+      <div class="summary-line">
+        <div class="name">Influencer Talent Fees (pass-through)</div>
+        <div class="amount" style="color:var(--gray);">At cost</div>
+      </div>
+    </div>
+    <div class="summary-total">
+      <div class="name">Total Year 1 Agency Engagement</div>
+      <div class="amount">~€110,000</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+    <div class="card" style="border-color:rgba(0,196,140,0.3);">
+      <div class="card-icon">✅</div>
+      <h3>Market Rate Context</h3>
+      <p>Industry benchmark for a 5-market, full-service EU engagement is <strong style="color:var(--white);">$15K–$22K/month</strong> retainer alone (Clutch, AMI 2025). This proposal is positioned at the <strong style="color:var(--green);">low end</strong> of the market — a first-year partnership rate reflecting the growth stage of the engagement.</p>
+    </div>
+    <div class="card" style="border-color:rgba(255,217,61,0.3);">
+      <div class="card-icon">📈</div>
+      <h3>Year 2 Rate Expectation</h3>
+      <p>A built-in <strong style="color:var(--white);">3–5% annual escalation</strong> is standard practice (industry-wide). Year 2 retainer would be proposed at <strong style="color:var(--gold);">€8,000–€9,000/month</strong> based on Year 1 performance, scope expansion, and market coverage increase.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section id="next-steps">
+  <div class="section-label">Next Steps</div>
+  <h2>How to <span>Get Started</span></h2>
+  <p class="sub">Three steps to kick off the engagement within 5 business days of agreement.</p>
+
+  <div class="cards" style="grid-template-columns:repeat(3,1fr);">
+    <div class="card" style="border-color:rgba(0,168,225,0.3);">
+      <div style="font-size:2rem;font-weight:900;color:var(--blue);margin-bottom:0.5rem;">01</div>
+      <h3>Review & Align</h3>
+      <p>Schedule a 45-minute call to walk through this proposal, answer questions, and align on any scope adjustments before signing.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,168,225,0.3);">
+      <div style="font-size:2rem;font-weight:900;color:var(--blue);margin-bottom:0.5rem;">02</div>
+      <h3>Sign SOW + Pay Discovery</h3>
+      <p>A formal Statement of Work is issued. On signature + receipt of the €8,000 discovery fee, the Phase 0 clock starts.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,168,225,0.3);">
+      <div style="font-size:2rem;font-weight:900;color:var(--blue);margin-bottom:0.5rem;">03</div>
+      <h3>Kick-Off Call</h3>
+      <p>2-hour onboarding session with the full team. Access shared to ad accounts, analytics, CMS, and brand assets. Work begins within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="../images/eb-logo2.png" alt="Eytan Benzeno">
+  <p>Prepared by <a href="https://eytan.com">Eytan Benzeno</a> · <a href="mailto:eytan@benzeno.com">eytan@benzeno.com</a></p>
+  <p style="font-size:0.78rem;">Proposal valid for 30 days from issue date · March 2026</p>
+</footer>
+<div class="confidential-bar">Confidential — Prepared exclusively for Ashth · Not for distribution</div>
+
+</body>
+</html>
