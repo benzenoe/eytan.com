@@ -251,6 +251,92 @@
     .hero-stats { gap:1.5rem; }
     .tiers { grid-template-columns:1fr; }
   }
+
+  /* CONFIGURATOR */
+  .config-layout {
+    display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem;
+  }
+  .config-panel {
+    background:var(--navy2); border:1px solid var(--border);
+    border-radius:20px; padding:1.5rem;
+  }
+  .config-panel-header {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:1.25rem; padding-bottom:1rem; border-bottom:1px solid var(--border);
+  }
+  .config-panel-title { font-size:1rem; font-weight:800; color:var(--white); }
+  .config-panel-note { font-size:0.72rem; color:var(--gray); }
+  .config-grid { display:flex; flex-direction:column; gap:0.6rem; }
+
+  .config-card {
+    display:flex; align-items:center; gap:0.75rem;
+    padding:0.75rem 1rem; border-radius:12px;
+    border:1.5px solid var(--border);
+    cursor:pointer; transition:all 0.18s; user-select:none;
+    background:var(--navy);
+  }
+  .config-card.locked {
+    border-color:rgba(0,168,225,0.35);
+    background:rgba(0,168,225,0.06);
+    cursor:default;
+  }
+  .config-card.addable:hover { border-color:rgba(255,217,61,0.4); background:rgba(255,217,61,0.04); }
+  .config-card.addable.active {
+    border-color:var(--blue); background:rgba(0,168,225,0.08);
+  }
+  .config-flag { font-size:1.4rem; flex-shrink:0; width:28px; text-align:center; }
+  .config-info { flex:1; min-width:0; }
+  .config-name { font-size:0.88rem; font-weight:700; color:var(--white); }
+  .config-sub { font-size:0.72rem; color:var(--gray); margin-top:0.1rem; }
+  .included-label { font-size:0.72rem; color:var(--blue); font-weight:700; margin-top:0.2rem; }
+  .addon-price { font-size:0.72rem; color:var(--gray); font-weight:600; margin-top:0.2rem; transition:color 0.18s; }
+  .config-card.active .addon-price { color:var(--blue); }
+  .config-check { font-size:0.9rem; color:var(--blue); font-weight:900; flex-shrink:0; }
+  .config-toggle {
+    width:26px; height:26px; border-radius:50%; flex-shrink:0;
+    border:2px solid var(--border); display:flex; align-items:center; justify-content:center;
+    font-size:1rem; font-weight:700; color:var(--gray); transition:all 0.18s;
+  }
+  .config-card:hover .config-toggle { border-color:var(--gold); color:var(--gold); }
+  .config-card.active .config-toggle {
+    background:var(--blue); border-color:var(--blue); color:#fff;
+    content:'✓';
+  }
+  .config-card.active .config-toggle::after { content:'✓'; }
+  .config-card.active .config-toggle { font-size:0; }
+  .config-card.active .config-toggle::after { font-size:0.8rem; }
+
+  /* LIVE QUOTE */
+  .live-quote {
+    position:sticky; bottom:1.5rem; z-index:50;
+    background:rgba(13,22,32,0.96); backdrop-filter:blur(16px);
+    border:1px solid rgba(0,168,225,0.3);
+    border-radius:16px; padding:1.25rem 1.75rem;
+    display:flex; align-items:center; gap:2rem;
+    box-shadow:0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,168,225,0.15);
+    margin-top:1rem;
+  }
+  .lq-left { flex:1; min-width:0; }
+  .lq-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray); margin-bottom:0.35rem; }
+  .lq-breakdown { display:flex; flex-direction:column; gap:0.15rem; max-height:90px; overflow-y:auto; }
+  .lq-item { font-size:0.78rem; color:var(--gray); }
+  .lq-item-price { font-size:0.78rem; color:var(--white); font-weight:600; }
+  .lq-center { text-align:center; flex-shrink:0; }
+  .lq-monthly { font-size:2rem; font-weight:900; color:var(--blue); transition:all 0.3s; }
+  .lq-right { text-align:right; flex-shrink:0; }
+  .lq-annual { font-size:1.2rem; font-weight:800; color:var(--white); margin-bottom:0.5rem; }
+  .lq-cta {
+    display:inline-block; background:var(--blue); color:#fff;
+    text-decoration:none; padding:0.5rem 1.25rem; border-radius:8px;
+    font-size:0.82rem; font-weight:700; transition:opacity 0.2s;
+  }
+  .lq-cta:hover { opacity:0.85; }
+
+  @media(max-width:900px) {
+    .config-layout { grid-template-columns:1fr; }
+    .live-quote { flex-direction:column; gap:1rem; text-align:center; }
+    .lq-right { text-align:center; }
+  }
 </style>
 </head>
 <body>
@@ -292,227 +378,240 @@
     </div>
   </div>
   <div class="hero-ctas">
-    <a href="#scope" class="btn-primary">View Scope →</a>
+    <a href="#configurator" class="btn-primary">Build Your Package →</a>
     <a href="#comparison" class="btn-outline">Market Comparison</a>
     <a href="#milestones" class="btn-outline">See Milestones</a>
     <a href="#summary" class="btn-outline" style="border-color:var(--gold);color:var(--gold);">Total Investment</a>
   </div>
 </div>
 
-<!-- SCOPE OF WORK -->
-<section id="scope">
-  <div class="section-label">Scope of Work</div>
-  <h2>Base Retainer — <span>What's Included</span></h2>
-  <p class="sub">The €3,000/month retainer covers PPC and SEO — the two highest-ROI channels for a new EU market entry. All other channels are available as priced add-ons below.</p>
+<!-- CONFIGURATOR -->
+<section id="configurator">
+  <div class="section-label">Build Your Package</div>
+  <h2>Configure Your <span>Proposal</span></h2>
+  <p class="sub">Base package includes 3 markets + PPC &amp; SEO at €3,000/month. Add markets and services — your price updates live.</p>
 
-  <div class="cards" style="margin-bottom:1rem;">
-    <div class="card" style="border-color:rgba(0,168,225,0.3);">
-      <div class="card-icon">🗺️</div>
-      <h3>EU Market Strategy</h3>
-      <p>Go-to-market playbooks for France, UK & Germany in Phase 1 — expanding to Italy, Spain & Eastern Europe by Q3. Competitive mapping, audience segmentation, and channel prioritisation.</p>
-      <span class="tag">Phase 0–1</span>
+  <div class="config-layout">
+
+    <!-- MARKETS PANEL -->
+    <div class="config-panel">
+      <div class="config-panel-header">
+        <div class="config-panel-title">Markets</div>
+        <div class="config-panel-note">🇫🇷 🇬🇧 🇩🇪 included in base</div>
+      </div>
+      <div class="config-grid">
+
+        <div class="config-card locked" data-type="market" data-key="fr" data-price="0">
+          <div class="config-flag">🇫🇷</div>
+          <div class="config-info">
+            <div class="config-name">France</div>
+            <div class="config-price included-label">Included</div>
+          </div>
+          <div class="config-check">✓</div>
+        </div>
+
+        <div class="config-card locked" data-type="market" data-key="uk" data-price="0">
+          <div class="config-flag">🇬🇧</div>
+          <div class="config-info">
+            <div class="config-name">United Kingdom</div>
+            <div class="config-price included-label">Included</div>
+          </div>
+          <div class="config-check">✓</div>
+        </div>
+
+        <div class="config-card locked" data-type="market" data-key="de" data-price="0">
+          <div class="config-flag">🇩🇪</div>
+          <div class="config-info">
+            <div class="config-name">Germany</div>
+            <div class="config-price included-label">Included</div>
+          </div>
+          <div class="config-check">✓</div>
+        </div>
+
+        <div class="config-card addable" data-type="market" data-key="es" data-price="500">
+          <div class="config-flag">🇪🇸</div>
+          <div class="config-info">
+            <div class="config-name">Spain</div>
+            <div class="config-price addon-price">+€500/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="market" data-key="it" data-price="500">
+          <div class="config-flag">🇮🇹</div>
+          <div class="config-info">
+            <div class="config-name">Italy</div>
+            <div class="config-price addon-price">+€500/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="market" data-key="pl" data-price="400">
+          <div class="config-flag">🇵🇱</div>
+          <div class="config-info">
+            <div class="config-name">Poland</div>
+            <div class="config-price addon-price">+€400/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="market" data-key="cz" data-price="400">
+          <div class="config-flag">🇨🇿</div>
+          <div class="config-info">
+            <div class="config-name">Czech Republic</div>
+            <div class="config-price addon-price">+€400/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="market" data-key="ro" data-price="350">
+          <div class="config-flag">🇷🇴</div>
+          <div class="config-info">
+            <div class="config-name">Romania</div>
+            <div class="config-price addon-price">+€350/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="market" data-key="hu" data-price="350">
+          <div class="config-flag">🇭🇺</div>
+          <div class="config-info">
+            <div class="config-name">Hungary</div>
+            <div class="config-price addon-price">+€350/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+      </div>
     </div>
-    <div class="card" style="border-color:rgba(0,168,225,0.3);">
-      <div class="card-icon">📣</div>
-      <h3>Paid Media Management</h3>
-      <p>Google (Shopping + Search), Meta (FB + IG), and TikTok Ads managed under client-owned ad accounts. Luxury jewellery audience targeting, A/B creative testing, and monthly budget optimisation.</p>
-      <span class="tag">Included</span>
+
+    <!-- SERVICES PANEL -->
+    <div class="config-panel">
+      <div class="config-panel-header">
+        <div class="config-panel-title">Services</div>
+        <div class="config-panel-note">PPC + SEO included in base</div>
+      </div>
+      <div class="config-grid">
+
+        <div class="config-card locked" data-type="service" data-key="ppc" data-price="0">
+          <div class="config-flag">📣</div>
+          <div class="config-info">
+            <div class="config-name">Paid Media (PPC)</div>
+            <div class="config-sub">Google · Meta · TikTok</div>
+            <div class="config-price included-label">Included</div>
+          </div>
+          <div class="config-check">✓</div>
+        </div>
+
+        <div class="config-card locked" data-type="service" data-key="seo" data-price="0">
+          <div class="config-flag">🔍</div>
+          <div class="config-info">
+            <div class="config-name">Multilingual SEO</div>
+            <div class="config-sub">Technical + content + links</div>
+            <div class="config-price included-label">Included</div>
+          </div>
+          <div class="config-check">✓</div>
+        </div>
+
+        <div class="config-card addable" data-type="service" data-key="social" data-price="800">
+          <div class="config-flag">📱</div>
+          <div class="config-info">
+            <div class="config-name">Social Media</div>
+            <div class="config-sub">Instagram + TikTok</div>
+            <div class="config-price addon-price">+€800/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="service" data-key="influencer" data-price="1200">
+          <div class="config-flag">🌟</div>
+          <div class="config-info">
+            <div class="config-name">Influencer Programme</div>
+            <div class="config-sub">Micro + nano · mgmt fee only</div>
+            <div class="config-price addon-price">+€1,200/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="service" data-key="amazon" data-price="1500">
+          <div class="config-flag">🛒</div>
+          <div class="config-info">
+            <div class="config-name">Amazon EU</div>
+            <div class="config-sub">.co.uk · .fr · .de · .es · .it · .pl</div>
+            <div class="config-price addon-price">+€1,500/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="service" data-key="allegro" data-price="800">
+          <div class="config-flag">🇵🇱</div>
+          <div class="config-info">
+            <div class="config-name">Allegro.pl</div>
+            <div class="config-sub">Poland #1 marketplace</div>
+            <div class="config-price addon-price">+€800/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="service" data-key="mallcz" data-price="800">
+          <div class="config-flag">🇨🇿</div>
+          <div class="config-info">
+            <div class="config-name">Mall.cz</div>
+            <div class="config-sub">Czech Republic marketplace</div>
+            <div class="config-price addon-price">+€800/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="service" data-key="emagro" data-price="800">
+          <div class="config-flag">🇷🇴</div>
+          <div class="config-info">
+            <div class="config-name">eMAG.ro</div>
+            <div class="config-sub">Romania dominant marketplace</div>
+            <div class="config-price addon-price">+€800/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+        <div class="config-card addable" data-type="service" data-key="emaghu" data-price="800">
+          <div class="config-flag">🇭🇺</div>
+          <div class="config-info">
+            <div class="config-name">eMAG.hu</div>
+            <div class="config-sub">Hungary marketplace</div>
+            <div class="config-price addon-price">+€800/mo</div>
+          </div>
+          <div class="config-toggle">+</div>
+        </div>
+
+      </div>
     </div>
-    <div class="card" style="border-color:rgba(0,168,225,0.3);">
-      <div class="card-icon">🔍</div>
-      <h3>Multilingual SEO</h3>
-      <p>Technical SEO, 8–10 blog posts/month starting in EN + FR, expanding to DE/ES/IT. Hreflang implementation on ashth.eu, link building in priority markets, and monthly ranking reports.</p>
-      <span class="tag">Included</span>
+
+  </div><!-- /config-layout -->
+
+  <!-- LIVE QUOTE -->
+  <div class="live-quote" id="liveQuote">
+    <div class="lq-left">
+      <div class="lq-label">Your Package</div>
+      <div class="lq-breakdown" id="lqBreakdown">
+        <span class="lq-item">Base (FR + UK + DE · PPC + SEO)</span>
+        <span class="lq-item-price">€3,000/mo</span>
+      </div>
     </div>
-    <div class="card" style="border-color:rgba(0,168,225,0.3);">
-      <div class="card-icon">📊</div>
-      <h3>Reporting & Strategy</h3>
-      <p>Monthly performance dashboard with CRM-attributed revenue, ROAS by channel, and SEO ranking movement. Quarterly strategy review with pivot recommendations and budget reallocation plan.</p>
-      <span class="tag">Included</span>
+    <div class="lq-center">
+      <div class="lq-label">Monthly Total</div>
+      <div class="lq-monthly" id="lqMonthly">€3,000</div>
+    </div>
+    <div class="lq-right">
+      <div class="lq-label">Year 1 Total <span style="font-size:0.7rem;color:var(--gray);">(incl. €5K signup)</span></div>
+      <div class="lq-annual" id="lqAnnual">€41,000</div>
+      <a href="mailto:eytan@benzeno.com?subject=ASHTH Retainer Proposal" class="lq-cta" id="lqCta">Book a Call →</a>
     </div>
   </div>
 
-  <div style="margin-bottom:0.75rem;"><span class="section-label">Add-On Modules</span></div>
-  <p style="font-size:0.88rem;color:var(--gray);margin-bottom:1.25rem;">Each add-on is billed separately and can be activated at any point during the engagement.</p>
-
-  <div class="cards">
-    <div class="card" style="border-color:rgba(255,217,61,0.25);">
-      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;">
-        <div class="card-icon" style="margin:0;">📱</div>
-        <span style="background:rgba(255,217,61,0.12);color:var(--gold);font-size:0.7rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;text-transform:uppercase;letter-spacing:0.06em;">Add-On</span>
-      </div>
-      <h3>Social Media Management</h3>
-      <p>Content calendar, copy & scheduling for Instagram and TikTok (2 platforms). French and English captions, story sequences, reel hooks, and engagement management.</p>
-      <div style="display:flex;gap:1.5rem;margin-top:1rem;">
-        <div>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">€800<span style="font-size:0.8rem;font-weight:500;color:var(--gray);">/mo</span></div>
-          <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;">2 platforms</div>
-        </div>
-      </div>
-    </div>
-    <div class="card" style="border-color:rgba(255,217,61,0.25);">
-      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;">
-        <div class="card-icon" style="margin:0;">🌟</div>
-        <span style="background:rgba(255,217,61,0.12);color:var(--gold);font-size:0.7rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;text-transform:uppercase;letter-spacing:0.06em;">Add-On</span>
-      </div>
-      <h3>Influencer Programme</h3>
-      <p>Sourcing, briefing, and managing micro (10K–100K) and nano (&lt;10K) influencers across France, UK, and Poland. Ambassador vetting, content approval workflow, and performance tracking.</p>
-      <div style="display:flex;gap:1.5rem;margin-top:1rem;">
-        <div>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">€1,200<span style="font-size:0.8rem;font-weight:500;color:var(--gray);">/mo</span></div>
-          <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;">Mgmt fee only</div>
-        </div>
-        <div style="border-left:1px solid var(--border);padding-left:1.5rem;">
-          <div style="font-size:0.82rem;color:var(--gray);">Talent fees billed at cost</div>
-        </div>
-      </div>
-    </div>
-    <div class="card" style="border-color:rgba(255,217,61,0.25);">
-      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;">
-        <div class="card-icon" style="margin:0;">🌍</div>
-        <span style="background:rgba(255,217,61,0.12);color:var(--gold);font-size:0.7rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;text-transform:uppercase;letter-spacing:0.06em;">Add-On</span>
-      </div>
-      <h3>Eastern European Marketplaces</h3>
-      <p>Listing management, localised copywriting, and paid placement on the dominant marketplaces in each Eastern European market — where Amazon has little to no presence.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.6rem;margin-top:0.75rem;margin-bottom:0.75rem;">
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇵🇱</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Allegro.pl</div><div style="font-size:0.7rem;color:var(--gray);">Poland · #1 marketplace</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇨🇿</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Mall.cz</div><div style="font-size:0.7rem;color:var(--gray);">Czech Republic · premium</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇷🇴</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">eMAG.ro</div><div style="font-size:0.7rem;color:var(--gray);">Romania · dominant</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇭🇺</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">eMAG.hu</div><div style="font-size:0.7rem;color:var(--gray);">Hungary · growing</div></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:1.5rem;margin-top:0.5rem;flex-wrap:wrap;">
-        <div>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">€1,000</div>
-          <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;">One-time setup / platform</div>
-        </div>
-        <div>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">€800<span style="font-size:0.8rem;font-weight:500;color:var(--gray);">/mo per platform</span></div>
-          <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;">Listings + SEO + ads</div>
-        </div>
-      </div>
-    </div>
-    <div class="card" style="border-color:rgba(255,217,61,0.25);">
-      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;">
-        <div class="card-icon" style="margin:0;">🛒</div>
-        <span style="background:rgba(255,217,61,0.12);color:var(--gold);font-size:0.7rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;text-transform:uppercase;letter-spacing:0.06em;">Add-On</span>
-      </div>
-      <h3>Amazon EU Management</h3>
-      <p>Brand Registry, A+ Content setup, multi-marketplace listing management, Amazon SEO, and Sponsored Products/Brands across 5 EU marketplaces.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.6rem;margin-top:0.75rem;margin-bottom:0.25rem;">
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇬🇧</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Amazon.co.uk</div><div style="font-size:0.7rem;color:var(--gray);">United Kingdom</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇫🇷</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Amazon.fr</div><div style="font-size:0.7rem;color:var(--gray);">France</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇩🇪</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Amazon.de</div><div style="font-size:0.7rem;color:var(--gray);">Germany</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇪🇸</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Amazon.es</div><div style="font-size:0.7rem;color:var(--gray);">Spain</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇮🇹</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Amazon.it</div><div style="font-size:0.7rem;color:var(--gray);">Italy</div></div>
-        </div>
-        <div style="background:var(--navy3);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.5rem;">
-          <span>🇵🇱</span><div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Amazon.pl</div><div style="font-size:0.7rem;color:var(--gray);">Poland</div></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;">
-        <div>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">€1,500</div>
-          <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;">One-time setup</div>
-        </div>
-        <div>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">€1,500<span style="font-size:0.8rem;font-weight:500;color:var(--gray);">/mo</span></div>
-          <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;">Monthly mgmt</div>
-        </div>
-        <div>
-          <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">10%</div>
-          <div style="font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;">of Amazon ad spend</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="highlight">
-    <h3>What's Not in the Base Retainer</h3>
-    <ul>
-      <li>Social Media Management — add-on at €800/month (IG + TikTok)</li>
-      <li>Influencer Programme — add-on at €1,200/month management fee + talent fees at cost</li>
-      <li>Amazon EU Management — add-on at €1,500 setup + €1,500/month + 10% of Amazon ad spend (amazon.co.uk · .fr · .de · .es · .it · .pl)</li>
-      <li>Eastern European Marketplaces — add-on at €1,000 setup + €800/month per platform (Allegro, Mall.cz, eMAG.ro, eMAG.hu)</li>
-      <li>Ad spend (paid directly by Ashth to Google, Meta, TikTok, Amazon)</li>
-      <li>Content production (photography, videography — quoted separately)</li>
-      <li>Translation tooling beyond 3 languages in Year 1</li>
-      <li>Luxembourg entity setup / legal / accounting fees</li>
-    </ul>
-  </div>
-</section>
-
-<!-- PRICING STRUCTURE -->
-<section id="pricing">
-  <div class="section-label">Pricing Structure</div>
-  <h2>How We <span>Charge</span></h2>
-  <p class="sub">A hybrid model: fixed retainer for predictability + a small percentage of ad spend that scales proportionally with your growth.</p>
-
-  <div class="tiers">
-    <div class="tier">
-      <div class="tier-name">Component 1</div>
-      <div class="tier-price">€5,000 <span>one-time</span></div>
-      <p class="tier-desc">Discovery & Strategy Fee — paid on signed agreement before work begins. Covers market research, competitor analysis, GTM plan, and onboarding.</p>
-      <ul>
-        <li>EU market sizing for 5 priority countries</li>
-        <li>Competitive audit (LGD + luxury jewellery)</li>
-        <li>Channel strategy & 12-month roadmap</li>
-        <li>Brand positioning for EU audiences</li>
-        <li>GDPR & VAT compliance checklist</li>
-        <li>ashth.eu / ashth.lu domain architecture plan</li>
-      </ul>
-    </div>
-    <div class="tier featured">
-      <div class="tier-badge">Core</div>
-      <div class="tier-name">Component 2</div>
-      <div class="tier-price">€3,000 <span>/month</span></div>
-      <p class="tier-desc">Monthly Retainer — billed on the 1st of each month following milestone delivery. Covers PPC and SEO execution, strategy, and reporting.</p>
-      <ul>
-        <li>Dedicated strategist + media buyer</li>
-        <li>Paid media management (Google + Meta + TikTok)</li>
-        <li>SEO (EN + FR → expanding to DE/ES/IT)</li>
-        <li>Technical SEO on ashth.eu + hreflang</li>
-        <li>Monthly performance report + call</li>
-        <li>Quarterly strategy review</li>
-        <li class="no">Social media management (add-on)</li>
-        <li class="no">Influencer programme (add-on)</li>
-        <li class="no">Amazon EU management (add-on)</li>
-      </ul>
-    </div>
-    <div class="tier">
-      <div class="tier-name">Component 3</div>
-      <div class="tier-price">10% <span>of ad spend</span></div>
-      <p class="tier-desc">Ad Spend Management Fee — charged monthly on total managed spend across Google, Meta, and TikTok. Minimum €500 · Maximum €3,000/month.</p>
-      <ul>
-        <li>Applies to client-owned accounts only</li>
-        <li>Invoiced monthly based on actual spend</li>
-        <li>Minimum floor: €500/month</li>
-        <li>Cap: €3,000/month regardless of spend</li>
-        <li>Example: €15K spend → €1,500 mgmt fee</li>
-        <li>Example: €35K spend → €3,000 (capped)</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="gold-box">
-    <h3>◆ Sales Milestone Bonuses</h3>
-    <p style="margin-bottom:1.25rem;">One-time bonuses triggered by cumulative EU sales milestones — paid within 14 days of the milestone being verified in the CRM. These are in addition to the monthly retainer and are not capped or recurring.</p>
+  <!-- SALES BONUSES -->
+  <div class="gold-box" style="margin-top:2rem;">
+    <h3>◆ Sales Milestone Bonuses — Fixed Regardless of Package</h3>
+    <p style="margin-bottom:1.25rem;">One-time bonuses triggered by cumulative EU sales milestones — on top of any monthly retainer configuration.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
       <div style="background:rgba(255,217,61,0.06);border:1px solid rgba(255,217,61,0.2);border-radius:12px;padding:1.25rem;text-align:center;">
         <div style="font-size:1.1rem;font-weight:800;color:var(--gold);margin-bottom:0.25rem;">€5,000</div>
@@ -540,7 +639,9 @@
       <li>Verified by mutual review of CRM export; payable within 14 days of confirmation</li>
     </ul>
   </div>
+
 </section>
+
 
 <!-- MARKET COMPARISON -->
 <section id="comparison">
@@ -998,5 +1099,83 @@
 </footer>
 <div class="confidential-bar">Confidential — Prepared exclusively for Ashth · Not for distribution</div>
 
+<script>
+  const BASE_MONTHLY = 3000;
+  const SIGNUP_FEE   = 5000;
+
+  const ITEMS = {
+    // markets
+    es:        { label:'Spain',            price:500  },
+    it:        { label:'Italy',            price:500  },
+    pl:        { label:'Poland',           price:400  },
+    cz:        { label:'Czech Republic',   price:400  },
+    ro:        { label:'Romania',          price:350  },
+    hu:        { label:'Hungary',          price:350  },
+    // services
+    social:    { label:'Social Media',     price:800  },
+    influencer:{ label:'Influencer Prog.', price:1200 },
+    amazon:    { label:'Amazon EU',        price:1500 },
+    allegro:   { label:'Allegro.pl',       price:800  },
+    mallcz:    { label:'Mall.cz',          price:800  },
+    emagro:    { label:'eMAG.ro',          price:800  },
+    emaghu:    { label:'eMAG.hu',          price:800  },
+  };
+
+  const selected = new Set();
+
+  function fmt(n) {
+    return '€' + n.toLocaleString('en-EU');
+  }
+
+  function updateQuote() {
+    let monthly = BASE_MONTHLY;
+    const lines = [
+      { label:'Base (FR + UK + DE · PPC + SEO)', price: BASE_MONTHLY }
+    ];
+
+    selected.forEach(key => {
+      const item = ITEMS[key];
+      monthly += item.price;
+      lines.push({ label: item.label, price: item.price });
+    });
+
+    const annual = monthly * 12 + SIGNUP_FEE;
+
+    // Update price displays
+    const monthlyEl = document.getElementById('lqMonthly');
+    monthlyEl.textContent = fmt(monthly) + '/mo';
+    monthlyEl.style.transform = 'scale(1.08)';
+    setTimeout(() => monthlyEl.style.transform = 'scale(1)', 180);
+
+    document.getElementById('lqAnnual').textContent = fmt(annual) + '/yr';
+
+    // Update breakdown
+    const breakdown = document.getElementById('lqBreakdown');
+    breakdown.innerHTML = lines.map(l =>
+      `<span class="lq-item">${l.label}<span class="lq-item-price" style="float:right;margin-left:1rem;">${fmt(l.price)}</span></span>`
+    ).join('');
+
+    // Update email subject
+    const sel = [...selected].map(k => ITEMS[k].label).join(', ') || 'none';
+    document.getElementById('lqCta').href =
+      `mailto:eytan@benzeno.com?subject=ASHTH Retainer – ${fmt(monthly)}/mo&body=Selected package: ${fmt(monthly)}/month (${fmt(annual)}/year incl. signup)%0AAdd-ons: ${sel}`;
+  }
+
+  document.querySelectorAll('.config-card.addable').forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.dataset.key;
+      if (selected.has(key)) {
+        selected.delete(key);
+        card.classList.remove('active');
+      } else {
+        selected.add(key);
+        card.classList.add('active');
+      }
+      updateQuote();
+    });
+  });
+
+  updateQuote();
+</script>
 </body>
 </html>
