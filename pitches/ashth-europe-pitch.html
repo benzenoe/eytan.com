@@ -58,12 +58,16 @@
   }
   .nav-drop-btn:hover { color:var(--white); background: var(--border); }
   .nav-drop-menu {
-    display:none; position:absolute; top:calc(100% + 8px); left:0;
+    display:none; position:absolute; top:100%; left:0;
+    padding-top:8px; min-width:170px; z-index:200;
+  }
+  .nav-drop-menu-inner {
     background: var(--navy2); border:1px solid var(--border);
-    border-radius:10px; padding:0.4rem; min-width:170px; z-index:200;
+    border-radius:10px; padding:0.4rem;
     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   }
-  .nav-dropdown:hover .nav-drop-menu { display:flex; flex-direction:column; }
+  .nav-dropdown:hover .nav-drop-menu { display:block; }
+  .nav-drop-menu-inner { display:flex; flex-direction:column; }
   .nav-drop-menu a {
     color: var(--gray); text-decoration:none; padding:0.4rem 0.75rem;
     border-radius:6px; font-size:0.82rem; transition: all 0.2s;
@@ -364,25 +368,31 @@
     <div class="nav-dropdown">
       <button class="nav-drop-btn">Markets ▾</button>
       <div class="nav-drop-menu">
-        <a href="#demographics">Demographics</a>
-        <a href="#eastern-europe">Eastern Europe</a>
-        <a href="#luxembourg">🇱🇺 Luxembourg HQ</a>
+        <div class="nav-drop-menu-inner">
+          <a href="#demographics">Demographics</a>
+          <a href="#eastern-europe">Eastern Europe</a>
+          <a href="#luxembourg">🇱🇺 Luxembourg HQ</a>
+        </div>
       </div>
     </div>
     <div class="nav-dropdown">
       <button class="nav-drop-btn">Strategy ▾</button>
       <div class="nav-drop-menu">
-        <a href="#strategy">Marketing Plan</a>
-        <a href="#seo">SEO</a>
-        <a href="#social">Social Media</a>
-        <a href="#influencers">Influencers</a>
+        <div class="nav-drop-menu-inner">
+          <a href="#strategy">Marketing Plan</a>
+          <a href="#seo">SEO</a>
+          <a href="#social">Social Media</a>
+          <a href="#influencers">Influencers</a>
+        </div>
       </div>
     </div>
     <div class="nav-dropdown">
       <button class="nav-drop-btn">Digital ▾</button>
       <div class="nav-drop-menu">
-        <a href="#website-audit">Site Audit</a>
-        <a href="#ecommerce">E-Commerce</a>
+        <div class="nav-drop-menu-inner">
+          <a href="#website-audit">Site Audit</a>
+          <a href="#ecommerce">E-Commerce</a>
+        </div>
       </div>
     </div>
     <a href="#budget">Budget</a>
