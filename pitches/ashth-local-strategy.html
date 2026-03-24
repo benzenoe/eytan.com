@@ -34,14 +34,10 @@
     padding:0 2rem; height:64px;
   }
   .nav-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
-  .nav-logo img { height:36px; width:36px; object-fit:contain; }
+  .nav-logo img.eytan-logo { height:36px; width:36px; object-fit:contain; }
+  .nav-logo img.ashth-logo { height:30px; width:auto; object-fit:contain; filter:brightness(1.1); }
   .logo-text { color:#667eea; font-weight:800; font-size:1rem; letter-spacing:0.03em; }
   .nav-x { color:var(--gray); font-size:1.1rem; }
-  .ashth-pill {
-    background:linear-gradient(135deg,var(--teal),#1a4447);
-    padding:0.3rem 0.85rem; border-radius:20px;
-    font-weight:700; font-size:0.9rem; letter-spacing:0.08em;
-  }
   .nav-links { display:flex; gap:0.25rem; align-items:center; }
   .nav-links a {
     color:var(--gray); text-decoration:none; padding:0.4rem 0.75rem;
@@ -340,10 +336,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="../images/eb-logo2.png" alt="Eytan.com">
+    <img src="../images/eb-logo2.png" alt="Eytan.com" class="eytan-logo">
     <span class="logo-text">eytan.com</span>
     <span class="nav-x">×</span>
-    <span class="ashth-pill">ASHTH</span>
+    <img src="ashth-logo.png" alt="Ashth" class="ashth-logo">
   </div>
   <div class="nav-links">
     <a href="#strategy">Strategy</a>

@@ -30,12 +30,8 @@
     padding:0 2rem; height:60px;
   }
   .nav-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
-  .nav-logo img { height:28px; }
-  .logo-pill {
-    background:linear-gradient(135deg,var(--blue),#5a2d82);
-    color:#fff; font-size:0.7rem; font-weight:700;
-    padding:0.2rem 0.6rem; border-radius:20px; letter-spacing:0.08em;
-  }
+  .nav-logo img.eytan-logo { height:28px; width:28px; object-fit:contain; }
+  .nav-logo img.ashth-logo { height:26px; width:auto; object-fit:contain; filter:brightness(1.1); }
   .nav-right { display:flex; align-items:center; gap:1rem; }
   .nav-right span { color:var(--gray); font-size:0.8rem; }
   .btn-book {
@@ -345,9 +341,9 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="https://eytan.com">
-    <img src="../images/eb-logo2.png" alt="Eytan Benzeno">
+    <img src="../images/eb-logo2.png" alt="Eytan Benzeno" class="eytan-logo">
     <span style="color:var(--gray);font-size:0.75rem;">×</span>
-    <span class="logo-pill">ASHTH</span>
+    <img src="ashth-logo.png" alt="Ashth" class="ashth-logo">
   </a>
   <div class="nav-right">
     <span>Partnership Proposal · Confidential</span>
