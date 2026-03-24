@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashth Europe — Local Market Entry Strategy | Eytan.com</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --teal:   #2B6166;
+    --teal2:  #4da8ad;
+    --navy:   #0d1620;
+    --navy2:  #1a2332;
+    --navy3:  #1a3e5c;
+    --blue:   #00a8e1;
+    --gold:   #ffd93d;
+    --green:  #6bcb77;
+    --red:    #ff6b6b;
+    --white:  #ffffff;
+    --gray:   #8899aa;
+    --card-bg: rgba(26,35,50,0.9);
+    --border: rgba(0,168,225,0.18);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; overflow-x:hidden; line-height:1.6; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(13,22,32,0.97); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 2rem; height:64px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
+  .nav-logo img { height:36px; width:36px; object-fit:contain; }
+  .logo-text { color:#667eea; font-weight:800; font-size:1rem; letter-spacing:0.03em; }
+  .nav-x { color:var(--gray); font-size:1.1rem; }
+  .ashth-pill {
+    background:linear-gradient(135deg,var(--teal),#1a4447);
+    padding:0.3rem 0.85rem; border-radius:20px;
+    font-weight:700; font-size:0.9rem; letter-spacing:0.08em;
+  }
+  .nav-links { display:flex; gap:0.25rem; align-items:center; }
+  .nav-links a {
+    color:var(--gray); text-decoration:none; padding:0.4rem 0.75rem;
+    border-radius:8px; font-size:0.8rem; font-weight:500; transition:all 0.2s; white-space:nowrap;
+  }
+  .nav-links a:hover { color:var(--white); background:var(--border); }
+  .nav-cta {
+    background:var(--teal); color:var(--white); border:none;
+    padding:0.5rem 1.2rem; border-radius:8px; font-weight:600;
+    cursor:pointer; font-size:0.85rem; transition:all 0.2s; text-decoration:none;
+  }
+  .nav-cta:hover { background:#1a4447; }
+
+  /* HERO */
+  .hero {
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 15% 50%, rgba(43,97,102,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 20%, rgba(0,168,225,0.12) 0%, transparent 50%),
+      linear-gradient(180deg, #0d1620 0%, #1a2332 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:8rem 2rem 5rem; position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232B6166' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:rgba(43,97,102,0.15); border:1px solid rgba(43,97,102,0.4);
+    border-radius:20px; padding:0.4rem 1rem; font-size:0.78rem;
+    color:var(--teal2); font-weight:600; letter-spacing:0.1em;
+    text-transform:uppercase; margin-bottom:1.5rem;
+  }
+  .dot { width:6px; height:6px; background:var(--teal2); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.3)} }
+  .hero-kicker {
+    font-size:0.88rem; color:var(--teal2); font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;
+  }
+  .hero h1 {
+    font-size:clamp(2.5rem,6vw,4.5rem); font-weight:800; line-height:1.1;
+    margin-bottom:1rem;
+    background:linear-gradient(135deg, var(--white) 0%, var(--teal2) 50%, var(--gold) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .hero-sub { font-size:1.15rem; color:var(--gray); max-width:680px; margin-bottom:2.5rem; line-height:1.7; }
+  .hero-sub strong { color:var(--teal2); font-weight:600; }
+  .hero-stats { display:flex; gap:3rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem; }
+  .stat { text-align:center; }
+  .stat-num { font-size:2.2rem; font-weight:800; color:var(--teal2); }
+  .stat-label { font-size:0.78rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.1em; margin-top:0.2rem; }
+  .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+  .btn-primary {
+    background:linear-gradient(135deg,var(--teal),#1a4447);
+    color:var(--white); border:none; padding:0.85rem 2rem;
+    border-radius:10px; font-weight:700; font-size:1rem;
+    cursor:pointer; transition:all 0.2s; text-decoration:none;
+    box-shadow:0 4px 20px rgba(43,97,102,0.4);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(43,97,102,0.5); }
+  .btn-outline {
+    background:transparent; color:var(--white);
+    border:1px solid rgba(255,255,255,0.2); padding:0.85rem 2rem;
+    border-radius:10px; font-weight:600; font-size:1rem;
+    cursor:pointer; transition:all 0.2s; text-decoration:none;
+  }
+  .btn-outline:hover { border-color:var(--teal2); color:var(--teal2); }
+  .btn-gold {
+    border-color:var(--gold); color:var(--gold);
+  }
+  .btn-gold:hover { border-color:var(--gold); background:rgba(255,217,61,0.08); }
+
+  /* SECTIONS */
+  section { padding:5rem 2rem; max-width:1200px; margin:0 auto; }
+  .section-label {
+    font-size:0.73rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.15em; color:var(--teal2); margin-bottom:0.75rem;
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  .section-label::before { content:''; width:20px; height:2px; background:var(--teal2); }
+  h2 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin-bottom:1rem; line-height:1.2; }
+  h2 span { color:var(--teal2); }
+  h2 em { font-style:normal; color:var(--gold); }
+  .section-desc { color:var(--gray); max-width:680px; line-height:1.75; margin-bottom:3rem; font-size:1rem; }
+  .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(43,97,102,0.3),transparent); margin:0 2rem; }
+
+  /* CARDS */
+  .cards { display:grid; gap:1.5rem; }
+  .cards-2 { grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); }
+  .cards-3 { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+  .cards-4 { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  .card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:16px; padding:1.75rem; transition:all 0.3s;
+  }
+  .card:hover { border-color:var(--teal); transform:translateY(-3px); box-shadow:0 8px 30px rgba(43,97,102,0.15); }
+  .card-icon { font-size:2rem; margin-bottom:1rem; }
+  .card h3 { font-size:1.05rem; font-weight:700; margin-bottom:0.5rem; }
+  .card p { color:var(--gray); font-size:0.9rem; line-height:1.65; }
+  .card-teal { border-color:rgba(43,97,102,0.4); background:rgba(43,97,102,0.07); }
+  .card-gold { border-color:rgba(255,217,61,0.3); background:rgba(255,217,61,0.04); }
+  .card-blue { border-color:rgba(0,168,225,0.3); background:rgba(0,168,225,0.05); }
+
+  /* TAG */
+  .tag {
+    display:inline-block; padding:0.22rem 0.65rem;
+    border-radius:20px; font-size:0.7rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem;
+  }
+  .tag-teal { background:rgba(43,97,102,0.2); color:var(--teal2); border:1px solid rgba(43,97,102,0.4); }
+  .tag-blue { background:rgba(0,168,225,0.12); color:var(--blue); border:1px solid rgba(0,168,225,0.3); }
+  .tag-gold { background:rgba(255,217,61,0.12); color:var(--gold); border:1px solid rgba(255,217,61,0.3); }
+  .tag-green { background:rgba(107,203,119,0.12); color:var(--green); border:1px solid rgba(107,203,119,0.3); }
+
+  /* METRICS */
+  .metric-row { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+  .metric {
+    flex:1; min-width:140px;
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:12px; padding:1.25rem; text-align:center;
+  }
+  .metric-val { font-size:1.8rem; font-weight:800; color:var(--teal2); }
+  .metric-val.gold { color:var(--gold); }
+  .metric-val.blue { color:var(--blue); }
+  .metric-lbl { font-size:0.72rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.25rem; }
+
+  /* HIGHLIGHT / INFO BOXES */
+  .highlight {
+    background:linear-gradient(135deg,rgba(43,97,102,0.1),rgba(43,97,102,0.04));
+    border:1px solid rgba(43,97,102,0.3); border-radius:14px;
+    padding:1.5rem 1.75rem; margin:1.5rem 0;
+  }
+  .highlight h4 { color:var(--teal2); font-size:0.9rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.6rem; }
+  .highlight p, .highlight li { color:var(--gray); font-size:0.9rem; line-height:1.7; }
+  .highlight ul { list-style:none; display:flex; flex-direction:column; gap:0.4rem; padding-left:0; }
+  .highlight li { display:flex; gap:0.6rem; align-items:flex-start; }
+  .highlight li::before { content:'→'; color:var(--teal2); font-weight:700; flex-shrink:0; }
+
+  .gold-box {
+    background:linear-gradient(135deg,rgba(255,217,61,0.07),rgba(255,217,61,0.02));
+    border:1px solid rgba(255,217,61,0.25); border-radius:14px;
+    padding:1.5rem 1.75rem; margin:1.5rem 0;
+  }
+  .gold-box h4 { color:var(--gold); font-size:0.9rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.6rem; }
+  .gold-box p, .gold-box li { color:var(--gray); font-size:0.9rem; line-height:1.7; }
+  .gold-box ul { list-style:none; display:flex; flex-direction:column; gap:0.4rem; }
+  .gold-box li { display:flex; gap:0.6rem; align-items:flex-start; }
+  .gold-box li::before { content:'◆'; color:var(--gold); font-size:0.6rem; flex-shrink:0; margin-top:0.35em; }
+
+  /* TWO-CHANNEL LAYOUT */
+  .two-channel {
+    display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:3rem;
+  }
+  .channel-card {
+    background:var(--card-bg); border-radius:20px; padding:2rem;
+    position:relative; overflow:hidden;
+  }
+  .channel-card.ch-events { border:2px solid var(--teal); }
+  .channel-card.ch-appts { border:2px solid var(--gold); }
+  .channel-badge {
+    display:inline-block; padding:0.3rem 0.85rem; border-radius:20px;
+    font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em;
+    margin-bottom:1.25rem;
+  }
+  .ch-events .channel-badge { background:var(--teal); color:#fff; }
+  .ch-appts .channel-badge { background:rgba(255,217,61,0.15); color:var(--gold); border:1px solid rgba(255,217,61,0.4); }
+  .channel-card h3 { font-size:1.3rem; font-weight:800; margin-bottom:0.75rem; }
+  .ch-events h3 { color:var(--teal2); }
+  .ch-appts h3 { color:var(--gold); }
+  .channel-card ul { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem; }
+  .channel-card li { font-size:0.88rem; color:var(--gray); display:flex; gap:0.6rem; align-items:flex-start; }
+  .ch-events li::before { content:'✦'; color:var(--teal2); font-size:0.7rem; flex-shrink:0; margin-top:0.2em; }
+  .ch-appts li::before { content:'◆'; color:var(--gold); font-size:0.6rem; flex-shrink:0; margin-top:0.3em; }
+
+  /* MAP / RADIUS VISUAL */
+  .radius-visual {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:20px; padding:2rem; text-align:center; margin-bottom:2rem;
+  }
+  .radius-rings {
+    position:relative; width:340px; height:340px;
+    margin:2rem auto;
+  }
+  .ring {
+    position:absolute; border-radius:50%; border:1px dashed;
+    top:50%; left:50%; transform:translate(-50%,-50%);
+  }
+  .ring-1 { width:80px; height:80px; border-color:rgba(43,97,102,0.8); background:rgba(43,97,102,0.15); }
+  .ring-2 { width:160px; height:160px; border-color:rgba(43,97,102,0.5); }
+  .ring-3 { width:250px; height:250px; border-color:rgba(0,168,225,0.3); }
+  .ring-4 { width:330px; height:330px; border-color:rgba(255,217,61,0.2); }
+  .center-dot {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:16px; height:16px; background:var(--teal2); border-radius:50%;
+    box-shadow:0 0 0 4px rgba(43,97,102,0.3);
+    z-index:5;
+  }
+  .city-pin {
+    position:absolute; transform:translate(-50%,-50%);
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+    z-index:4;
+  }
+  .city-dot { width:8px; height:8px; border-radius:50%; }
+  .city-name { font-size:0.62rem; font-weight:700; white-space:nowrap; }
+  .radius-legend { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
+  .legend-item { display:flex; align-items:center; gap:0.4rem; font-size:0.75rem; color:var(--gray); }
+  .legend-dot { width:10px; height:10px; border-radius:50%; }
+
+  /* TABLE */
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; }
+  th { background:rgba(43,97,102,0.12); padding:0.85rem 1rem; text-align:left; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal2); }
+  td { padding:0.85rem 1rem; border-bottom:1px solid var(--border); font-size:0.9rem; vertical-align:middle; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(43,97,102,0.04); }
+
+  /* TIMELINE */
+  .timeline { position:relative; padding-left:2.5rem; }
+  .timeline::before { content:''; position:absolute; left:0.6rem; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--teal),var(--navy3)); }
+  .timeline-item { position:relative; margin-bottom:2.25rem; }
+  .timeline-dot {
+    position:absolute; left:-1.9rem; top:0.2rem;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--teal); border:2px solid var(--navy);
+    box-shadow:0 0 0 3px rgba(43,97,102,0.25);
+  }
+  .timeline-phase { font-size:0.7rem; color:var(--teal2); font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.2rem; }
+  .timeline-item h4 { font-size:1rem; font-weight:700; margin-bottom:0.3rem; }
+  .timeline-item p { color:var(--gray); font-size:0.88rem; line-height:1.6; }
+
+  /* BUDGET BAR */
+  .budget-item { margin-bottom:1.1rem; }
+  .budget-header { display:flex; justify-content:space-between; margin-bottom:0.4rem; font-size:0.85rem; }
+  .budget-bar { height:10px; background:rgba(255,255,255,0.06); border-radius:5px; overflow:hidden; }
+  .budget-fill { height:100%; border-radius:5px; }
+  .fill-teal { background:linear-gradient(90deg,var(--teal),var(--teal2)); }
+  .fill-gold { background:linear-gradient(90deg,var(--gold),#ffe97a); }
+  .fill-blue { background:linear-gradient(90deg,var(--blue),#60d0ff); }
+  .fill-green { background:linear-gradient(90deg,var(--green),#a0f0a9); }
+
+  /* ROLES */
+  .role-split {
+    display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem;
+  }
+  .role-card {
+    border-radius:20px; padding:2rem;
+  }
+  .role-card.eytan { background:linear-gradient(135deg,rgba(0,168,225,0.08),rgba(0,168,225,0.03)); border:1px solid rgba(0,168,225,0.25); }
+  .role-card.kuntal { background:linear-gradient(135deg,rgba(43,97,102,0.1),rgba(43,97,102,0.04)); border:1px solid rgba(43,97,102,0.3); }
+  .role-name { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin-bottom:0.5rem; }
+  .eytan .role-name { color:var(--blue); }
+  .kuntal .role-name { color:var(--teal2); }
+  .role-title { font-size:1.3rem; font-weight:800; margin-bottom:1rem; }
+  .role-card ul { list-style:none; display:flex; flex-direction:column; gap:0.55rem; }
+  .role-card li { font-size:0.88rem; color:var(--gray); display:flex; gap:0.5rem; align-items:flex-start; }
+  .eytan li::before { content:'✓'; color:var(--blue); font-weight:700; flex-shrink:0; }
+  .kuntal li::before { content:'✓'; color:var(--teal2); font-weight:700; flex-shrink:0; }
+
+  /* CHART WRAP */
+  .chart-wrap { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:1.75rem; }
+  .chart-title { font-size:1rem; font-weight:700; margin-bottom:0.25rem; }
+  .chart-sub { font-size:0.8rem; color:var(--gray); margin-bottom:1.5rem; }
+
+  /* FOOTER */
+  footer {
+    background:var(--navy2); border-top:1px solid var(--border);
+    padding:3rem 2rem; text-align:center;
+  }
+  footer .footer-logo { font-size:1.4rem; font-weight:800; color:var(--teal2); margin-bottom:0.4rem; }
+  footer p { color:var(--gray); font-size:0.85rem; }
+  footer a { color:var(--teal2); text-decoration:none; }
+  .confidential {
+    background:rgba(255,217,61,0.06); border-top:1px solid rgba(255,217,61,0.15);
+    padding:0.65rem; text-align:center;
+    font-size:0.7rem; color:rgba(255,217,61,0.6); letter-spacing:0.12em; text-transform:uppercase;
+  }
+
+  /* FADE IN */
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s,transform 0.6s; }
+  .fade-in.visible { opacity:1; transform:none; }
+
+  /* RESPONSIVE */
+  @media(max-width:768px) {
+    nav { padding:0 1rem; }
+    .nav-links { display:none; }
+    section { padding:3.5rem 1.25rem; }
+    .two-channel { grid-template-columns:1fr; }
+    .role-split { grid-template-columns:1fr; }
+    .radius-rings { width:280px; height:280px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="../images/eb-logo2.png" alt="Eytan.com">
+    <span class="logo-text">eytan.com</span>
+    <span class="nav-x">×</span>
+    <span class="ashth-pill">ASHTH</span>
+  </div>
+  <div class="nav-links">
+    <a href="#strategy">Strategy</a>
+    <a href="#markets">Markets</a>
+    <a href="#digital">Digital</a>
+    <a href="#appointments">Appointments</a>
+    <a href="#budget">Budget</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <a href="mailto:eytan@benzeno.com" class="nav-cta">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><div class="dot"></div>ConsciousCarats Private Limited × Eytan.com — Confidential</div>
+  <div class="hero-kicker">✦ Phase 1 Market Entry ✦</div>
+  <h1>Ashth Europe<br>Local Strategy</h1>
+  <p class="hero-sub">
+    A relationship-first approach to the European luxury market.<br>
+    <strong>Luxembourg &amp; Paris.</strong> Private events. Personal appointments. Digital-powered introductions.<br>
+    <em style="color:var(--teal2); font-style:normal;">"Mine. Not Mined." — ready for Europe.</em>
+  </p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Primary Markets</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">300km</div>
+      <div class="stat-label">Addressable Radius</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">€0</div>
+      <div class="stat-label">Ad Spend Required to Start</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6mo</div>
+      <div class="stat-label">Phase 1 Timeline</div>
+    </div>
+  </div>
+  <div class="hero-ctas">
+    <a href="#strategy" class="btn-primary">View Strategy →</a>
+    <a href="#appointments" class="btn-outline">Appointment System</a>
+    <a href="ASHTH-Local-Strategy.pdf" target="_blank" class="btn-outline btn-gold">⬇ Download PDF</a>
+  </div>
+</div>
+
+<!-- STRATEGY OVERVIEW -->
+<section id="strategy" class="fade-in">
+  <div class="section-label">The Approach</div>
+  <h2>Two Channels. One <span>Coherent</span> Strategy.</h2>
+  <p class="section-desc">Before investing in large-scale digital campaigns, Ashth Europe establishes real market presence through two proven luxury sales channels — exclusive private events and concierge home appointments — powered by targeted digital marketing on LinkedIn and Facebook.</p>
+
+  <div class="two-channel">
+    <div class="channel-card ch-events">
+      <div class="channel-badge">Channel 1</div>
+      <h3>Private Showcase Events</h3>
+      <p style="color:var(--gray); font-size:0.9rem; line-height:1.65;">Curated cocktail evenings in Luxembourg and Paris. By invitation only. 20–30 guests from the professional and financial community. The Ashth Cut® as the centrepiece conversation.</p>
+      <ul>
+        <li>Intimate, exclusive format — luxury is experienced, not browsed</li>
+        <li>Pre-qualified guest list from professional networks</li>
+        <li>Direct sales at the event + appointment bookings for follow-up</li>
+        <li>Builds brand reputation in both cities simultaneously</li>
+        <li>Each event funds the next through direct sales</li>
+      </ul>
+    </div>
+    <div class="channel-card ch-appts">
+      <div class="channel-badge">Channel 2</div>
+      <h3>Concierge Appointments</h3>
+      <p style="color:var(--gray); font-size:0.9rem; line-height:1.65;">Clients browse the online catalogue, select pieces of interest, and book a private in-person appointment. Kuntal brings a curated selection directly to the client — at their home, office, or chosen venue.</p>
+      <ul>
+        <li>Website acts as a catalogue + appointment booking engine</li>
+        <li>Client qualifies themselves by selecting interest &amp; budget</li>
+        <li>Appointments within 300km radius of Luxembourg</li>
+        <li>Paris appointments scheduled on dedicated visit days</li>
+        <li>White-glove service as a brand differentiator</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>Why This Approach — Not Digital Advertising First</h4>
+    <p>Luxury jewelry at the €2,000–20,000 price point is not impulse-purchased through Instagram ads. It is bought through trust, personal experience, and touch. European luxury brands — from Cartier to Van Cleef — have always led with personal relationships before scaling to mass media. This strategy builds that trust base first. Digital marketing amplifies what already exists; it cannot create it from scratch.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- MARKETS -->
+<section id="markets" class="fade-in">
+  <div class="section-label">Geographic Coverage</div>
+  <h2>Luxembourg <span>&amp; Paris</span> — Two Anchors</h2>
+  <p class="section-desc">Two cities. Two distinct luxury audiences. Both within the operational reach of a single person based in Luxembourg.</p>
+
+  <div class="cards cards-2" style="margin-bottom:2.5rem;">
+    <div class="card card-teal">
+      <div class="tag tag-teal">Home Base</div>
+      <div class="card-icon">🇱🇺</div>
+      <h3>Luxembourg City</h3>
+      <p>Europe's wealthiest country per capita. Home to 140+ international banks, the European Investment Bank, and one of the continent's most concentrated financial communities. A city of 650,000 where the right 300 people represent extraordinary purchasing power. Luxembourg's reputation for discretion, quality, and international sophistication aligns perfectly with ConsciousCarats' positioning.</p>
+    </div>
+    <div class="card card-gold">
+      <div class="tag tag-gold">Expansion Market</div>
+      <div class="card-icon">🇫🇷</div>
+      <h3>Paris</h3>
+      <p>Europe's undisputed luxury capital. Home to 2.1 million high-net-worth individuals in Greater Paris. The city where luxury jewelry has cultural weight — Place Vendôme, the Marais, Saint-Germain. Paris also hosts the largest Indian diaspora in continental Europe, a natural first audience for ConsciousCarats. Accessible from Luxembourg in 2 hours by TGV — one dedicated Paris day per month is sufficient for Phase 1.</p>
+    </div>
+  </div>
+
+  <!-- Radius Visual -->
+  <div class="radius-visual fade-in">
+    <div class="chart-title">Addressable Territory — 300km from Luxembourg</div>
+    <div class="chart-sub">All cities within appointment and event reach</div>
+    <div class="radius-rings">
+      <!-- Rings -->
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring ring-4"></div>
+      <!-- Center -->
+      <div class="center-dot"></div>
+      <!-- Luxembourg label -->
+      <div class="city-pin" style="top:50%; left:50%; margin-top:18px;">
+        <span class="city-name" style="color:var(--teal2);">Luxembourg</span>
+      </div>
+      <!-- Cities -->
+      <div class="city-pin" style="top:38%; left:32%;">
+        <div class="city-dot" style="background:var(--gold);"></div>
+        <span class="city-name" style="color:var(--gold);">Paris</span>
+      </div>
+      <div class="city-pin" style="top:30%; left:53%;">
+        <div class="city-dot" style="background:var(--blue);"></div>
+        <span class="city-name" style="color:var(--blue);">Brussels</span>
+      </div>
+      <div class="city-pin" style="top:42%; left:72%;">
+        <div class="city-dot" style="background:var(--blue);"></div>
+        <span class="city-name" style="color:var(--blue);">Frankfurt</span>
+      </div>
+      <div class="city-pin" style="top:65%; left:64%;">
+        <div class="city-dot" style="background:var(--green);"></div>
+        <span class="city-name" style="color:var(--green);">Strasbourg</span>
+      </div>
+      <div class="city-pin" style="top:62%; left:36%;">
+        <div class="city-dot" style="background:var(--green);"></div>
+        <span class="city-name" style="color:var(--green);">Nancy</span>
+      </div>
+      <div class="city-pin" style="top:22%; left:42%;">
+        <div class="city-dot" style="background:var(--gray);"></div>
+        <span class="city-name" style="color:var(--gray);">Amsterdam</span>
+      </div>
+    </div>
+    <div class="radius-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(43,97,102,0.8);"></div>30–60 min</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--teal2);"></div>1–1.5 hrs</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue);"></div>2 hrs (event cities)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>Paris (TGV 2hrs)</div>
+    </div>
+  </div>
+
+  <div class="cards cards-3" style="margin-top:2rem;">
+    <div class="card">
+      <div class="card-icon">💼</div>
+      <h3>Luxembourg — Target Audience</h3>
+      <p>Private bankers, wealth managers, partners at law firms and audit firms, EU institution officials, hedge fund managers, senior executives at international corporates. The Indian expat professional community as a cultural bridge.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🗼</div>
+      <h3>Paris — Target Audience</h3>
+      <p>The Indian diaspora community (largest in continental Europe), fashion-forward professionals in the 8th and 16th arrondissements, luxury lifestyle buyers, jewellery-conscious couples planning engagements and milestones.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌍</div>
+      <h3>Regional Appointments</h3>
+      <p>Brussels, Frankfurt, Strasbourg, Nancy, Liège, and the surrounding Benelux-Germany-France tri-border region. Appointment-only, pre-qualified. Kuntal drives to the client — the service is part of the luxury.</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- DIGITAL MARKETING -->
+<section id="digital" class="fade-in">
+  <div class="section-label">Digital Marketing</div>
+  <h2>LinkedIn &amp; Facebook — <span>Precision</span> Targeting</h2>
+  <p class="section-desc">Two platforms. Two distinct roles. Together they cover the full spectrum from professional outreach to lifestyle discovery — driving both event attendance and appointment bookings.</p>
+
+  <div class="cards cards-2" style="margin-bottom:2.5rem;">
+    <div class="card card-blue">
+      <div class="tag tag-blue">Professional Network</div>
+      <div class="card-icon">💼</div>
+      <h3>LinkedIn — Event Invitations &amp; Brand Authority</h3>
+      <p style="margin-bottom:1rem;">LinkedIn reaches the professional class that represents Ashth's primary European buyer: finance, law, executive management. It is the only platform where you can target by job title, seniority, company size, and industry — all within a defined geography.</p>
+      <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem;">
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--blue);">→</span> Ashth Europe company page as the brand hub</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--blue);">→</span> LinkedIn Events for each cocktail showing</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--blue);">→</span> Sponsored content targeted by job title + location</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--blue);">→</span> "Book a Private Viewing" ads to appointment page</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--blue);">→</span> Weekly content: product stories, the Ashth Cut®, behind the scenes</li>
+      </ul>
+    </div>
+    <div class="card card-teal">
+      <div class="tag tag-teal">Lifestyle Discovery</div>
+      <div class="card-icon">📱</div>
+      <h3>Facebook &amp; Instagram — Audience Building &amp; Events</h3>
+      <p style="margin-bottom:1rem;">Facebook's targeting reaches the lifestyle buyer — someone who doesn't search for "lab-grown diamonds" but responds to beautiful jewelry when it appears in their feed. Combined with Instagram (same Meta platform), it builds visual brand awareness across both cities simultaneously.</p>
+      <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem;">
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--teal2);">→</span> Facebook Events for public-facing cocktail showings</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--teal2);">→</span> Boosted posts targeting by income bracket + luxury interests</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--teal2);">→</span> Instagram Reels: pieces in motion, the 97-facet cut up close</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--teal2);">→</span> Retargeting: website visitors shown appointment booking ads</li>
+        <li style="font-size:0.85rem; color:var(--gray); display:flex; gap:0.5rem;"><span style="color:var(--teal2);">→</span> Indian expat community groups in Luxembourg and Paris</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val blue">850M+</div><div class="metric-lbl">LinkedIn Professionals Worldwide</div></div>
+    <div class="metric"><div class="metric-val">255M</div><div class="metric-lbl">Meta Users in Europe</div></div>
+    <div class="metric"><div class="metric-val gold">€5–15</div><div class="metric-lbl">Cost Per Click, Luxury Luxembourg</div></div>
+    <div class="metric"><div class="metric-val" style="color:var(--teal2);">72%</div><div class="metric-lbl">HNW Buyers Research Online Before Purchase</div></div>
+  </div>
+
+  <div class="gold-box">
+    <h4>The Indian Expat Audience — Fastest Entry Point</h4>
+    <p>Luxembourg and Paris together host one of Europe's most significant Indian professional communities — EU institution employees, finance executives, technology leaders. This audience understands ConsciousCarats' cultural heritage, responds to the "Mine. Not Mined." philosophy instinctively, and represents the highest conversion probability of any European segment. They are reachable for free through community Facebook groups, LinkedIn connections, and WhatsApp networks. This is the starting audience for both cities.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- APPOINTMENT SYSTEM -->
+<section id="appointments" class="fade-in">
+  <div class="section-label">Appointment System</div>
+  <h2>The Website as a <span>Concierge</span> Platform</h2>
+  <p class="section-desc">The existing ashth.eu catalogue requires one addition: a "Book a Private Viewing" flow. Clients browse the collection, identify pieces of interest, and request a personal appointment. Kuntal brings the jewellery to them.</p>
+
+  <div class="cards cards-2" style="margin-bottom:2.5rem;">
+    <div class="card">
+      <div class="card-icon">🖥️</div>
+      <h3>Current Website Role</h3>
+      <p>The ashth.eu catalogue showcases the collection beautifully — product photography, collection descriptions, the Ashth Cut® story, pricing in euros. This stays exactly as-is. The only addition is a booking entry point on every product page and the homepage.</p>
+    </div>
+    <div class="card card-teal">
+      <div class="card-icon">📅</div>
+      <h3>New: "Book a Private Viewing"</h3>
+      <p>A single button — on every product page, on the homepage, in the navigation — opens a short qualifying form. The client tells us what they want to see and where they are. Kuntal reviews and confirms within 24 hours.</p>
+    </div>
+  </div>
+
+  <!-- Booking Flow -->
+  <div class="chart-wrap" style="margin-bottom:2rem;">
+    <div class="chart-title">The Appointment Journey</div>
+    <div class="chart-sub">From catalogue browse to confirmed private viewing</div>
+    <div style="display:flex; gap:0; align-items:stretch; margin-top:1.5rem; flex-wrap:wrap; gap:0.5rem;">
+      <div style="flex:1; min-width:130px; text-align:center; padding:1.25rem 0.75rem; background:rgba(43,97,102,0.08); border:1px solid rgba(43,97,102,0.25); border-radius:12px;">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🔍</div>
+        <div style="font-size:0.75rem; font-weight:700; color:var(--teal2); margin-bottom:0.35rem;">BROWSE</div>
+        <div style="font-size:0.78rem; color:var(--gray);">Client views collection on ashth.eu</div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--gray); font-size:1.2rem; padding:0 0.25rem;">→</div>
+      <div style="flex:1; min-width:130px; text-align:center; padding:1.25rem 0.75rem; background:rgba(43,97,102,0.08); border:1px solid rgba(43,97,102,0.25); border-radius:12px;">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">📋</div>
+        <div style="font-size:0.75rem; font-weight:700; color:var(--teal2); margin-bottom:0.35rem;">REQUEST</div>
+        <div style="font-size:0.78rem; color:var(--gray);">Fills short booking form — location, interest, budget range</div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--gray); font-size:1.2rem; padding:0 0.25rem;">→</div>
+      <div style="flex:1; min-width:130px; text-align:center; padding:1.25rem 0.75rem; background:rgba(43,97,102,0.08); border:1px solid rgba(43,97,102,0.25); border-radius:12px;">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">✅</div>
+        <div style="font-size:0.75rem; font-weight:700; color:var(--teal2); margin-bottom:0.35rem;">QUALIFY</div>
+        <div style="font-size:0.78rem; color:var(--gray);">Kuntal reviews within 24hrs and confirms</div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--gray); font-size:1.2rem; padding:0 0.25rem;">→</div>
+      <div style="flex:1; min-width:130px; text-align:center; padding:1.25rem 0.75rem; background:rgba(43,97,102,0.08); border:1px solid rgba(43,97,102,0.25); border-radius:12px;">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">💎</div>
+        <div style="font-size:0.75rem; font-weight:700; color:var(--teal2); margin-bottom:0.35rem;">VIEWING</div>
+        <div style="font-size:0.78rem; color:var(--gray);">Kuntal arrives with curated selection at client's location</div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--gray); font-size:1.2rem; padding:0 0.25rem;">→</div>
+      <div style="flex:1; min-width:130px; text-align:center; padding:1.25rem 0.75rem; background:rgba(255,217,61,0.08); border:1px solid rgba(255,217,61,0.25); border-radius:12px;">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🛍️</div>
+        <div style="font-size:0.75rem; font-weight:700; color:var(--gold); margin-bottom:0.35rem;">PURCHASE</div>
+        <div style="font-size:0.78rem; color:var(--gray);">Instant payment on-site or via link within 24hrs</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>What the Form Captures</h4>
+    <ul>
+      <li>Name and location (city + country)</li>
+      <li>Which collection or piece caught their attention</li>
+      <li>The occasion — engagement, gift, anniversary, personal purchase</li>
+      <li>Preferred budget range (€500–2K / €2K–5K / €5K–15K / €15K+)</li>
+      <li>Preferred date window and contact method (phone or WhatsApp)</li>
+    </ul>
+  </div>
+
+  <div class="cards cards-3">
+    <div class="card">
+      <div class="card-icon">🗺️</div>
+      <h3>Luxembourg Appointments</h3>
+      <p>Available any business day. Client's home, office, or a neutral venue of their choice. Within 90 minutes of Luxembourg City. Same-week availability for serious enquiries.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🗼</div>
+      <h3>Paris Appointments</h3>
+      <p>Dedicated Paris visit days — once or twice per month. Multiple appointments batched on the same day. Clients in Paris are contacted when a visit is scheduled and offered a confirmed slot.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>Client Qualification</h3>
+      <p>Not every enquiry becomes an appointment. The form's budget field and occasion context allow Kuntal to prioritise serious buyers. Lower-budget enquiries are directed to the online catalogue for self-service purchase.</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- BUDGET -->
+<section id="budget" class="fade-in">
+  <div class="section-label">Investment</div>
+  <h2>Phase 1 <span>Budget</span> Overview</h2>
+  <p class="section-desc">A lean, event-first budget designed to generate revenue before requiring significant ongoing spend. The first event's sales cover several months of operational cost.</p>
+
+  <div class="cards cards-2" style="margin-bottom:2rem;">
+    <div class="card card-teal">
+      <div class="card-icon">🎪</div>
+      <h3>Per Event (Luxembourg or Paris)</h3>
+      <p style="margin-bottom:1rem;">Estimated range per cocktail showcase event, covering all operational costs:</p>
+      <div class="budget-item">
+        <div class="budget-header"><span>Venue &amp; Catering</span><span style="color:var(--teal2);">€400–900</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-teal" style="width:70%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Jewellery Transport &amp; Insurance</span><span style="color:var(--teal2);">€150–400</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-teal" style="width:40%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Event Promotion (LinkedIn + Facebook)</span><span style="color:var(--teal2);">€100–250</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-teal" style="width:25%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Printed Materials (optional)</span><span style="color:var(--teal2);">€80–150</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-teal" style="width:15%"></div></div>
+      </div>
+      <div style="border-top:1px solid var(--border); margin-top:1rem; padding-top:1rem; display:flex; justify-content:space-between; font-weight:800;">
+        <span>Total per Event</span>
+        <span style="color:var(--teal2);">€730–1,700</span>
+      </div>
+    </div>
+
+    <div class="card card-gold">
+      <div class="card-icon">📅</div>
+      <h3>Monthly Ongoing (Digital + Appointments)</h3>
+      <p style="margin-bottom:1rem;">Monthly operational cost once the system is running:</p>
+      <div class="budget-item">
+        <div class="budget-header"><span>LinkedIn Ads</span><span style="color:var(--gold);">€200–400</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-gold" style="width:60%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Facebook / Meta Ads</span><span style="color:var(--gold);">€150–300</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-gold" style="width:45%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Booking System Tool</span><span style="color:var(--gold);">€15–50</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-gold" style="width:8%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Content Creation</span><span style="color:var(--gold);">€0–300</span></div>
+        <div class="budget-bar"><div class="budget-fill fill-gold" style="width:30%"></div></div>
+      </div>
+      <div style="border-top:1px solid var(--border); margin-top:1rem; padding-top:1rem; display:flex; justify-content:space-between; font-weight:800;">
+        <span>Monthly Total</span>
+        <span style="color:var(--gold);">€365–1,050</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Piece Sold to Cover 1 Event</div></div>
+    <div class="metric"><div class="metric-val gold">€2K–20K</div><div class="metric-lbl">Expected Revenue Per Event</div></div>
+    <div class="metric"><div class="metric-val" style="color:var(--teal2);">€3K</div><div class="metric-lbl">Est. 6-Month Total Budget</div></div>
+    <div class="metric"><div class="metric-val blue">Self-Funding</div><div class="metric-lbl">From Month 2 Onward</div></div>
+  </div>
+
+  <div class="highlight">
+    <h4>Revenue Context</h4>
+    <p>At a conservative 20% margin, a single sale of a €5,000 piece generates €1,000 net. One €15,000 piece sale covers 2–3 months of the entire marketing budget. The goal of Phase 1 is not to generate scale — it is to validate the European market, build the first client base, and create the proof of concept that justifies Phase 2 investment.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="fade-in">
+  <div class="section-label">Roadmap</div>
+  <h2>Phase 1 — <span>6 Month</span> Plan</h2>
+  <p class="section-desc">A deliberate, month-by-month build. Infrastructure first. Audience second. Events third. Appointments run in parallel from Month 2 onward.</p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem;">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--teal2);"></div>
+        <div class="timeline-phase">Month 1</div>
+        <h4>Foundation</h4>
+        <p>LinkedIn company page and Kuntal's profile live. Facebook Business page launched. "Book a Private Viewing" added to ashth.eu. First event venue confirmed for Month 2. Guest list building begins. Indian expat community outreach in Luxembourg.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--teal2);"></div>
+        <div class="timeline-phase">Month 2</div>
+        <h4>First Luxembourg Event</h4>
+        <p>First cocktail showcase in Luxembourg City. 20–30 invited guests from the professional and financial community. Direct sales target: 2–4 pieces. First appointment bookings from the website go live. LinkedIn and Facebook ads launched at modest budget.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--blue);"></div>
+        <div class="timeline-phase">Month 3</div>
+        <h4>Appointments + Optimization</h4>
+        <p>First private appointment week across Luxembourg region. Event follow-ups converted to appointments. Digital ad performance reviewed and optimized. Paris visit day scheduled. Second Luxembourg event guest list begins.</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--blue);"></div>
+        <div class="timeline-phase">Month 4</div>
+        <h4>Paris Launch</h4>
+        <p>First Paris event — Indian diaspora community and luxury lifestyle audience. 2–3 appointment days in Paris batched together. LinkedIn ads expanded to Paris job titles and locations. Facebook event boosted to Paris luxury interests audience.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--gold);"></div>
+        <div class="timeline-phase">Month 5</div>
+        <h4>Dual-City Rhythm</h4>
+        <p>One Luxembourg event + one Paris visit day per month becomes the standard cadence. Appointment pipeline running consistently from website. Client referral network beginning to generate organic introductions.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--gold);"></div>
+        <div class="timeline-phase">Month 6</div>
+        <h4>Phase 1 Review + Phase 2 Planning</h4>
+        <p>Sales data, client database, and digital performance reviewed. Assessment of whether Phase 2 — broader EU digital campaign — is warranted based on demonstrated demand. Decision on expanding inventory, adding markets, or deepening Luxembourg and Paris.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ROLES -->
+<section id="roles" class="fade-in">
+  <div class="section-label">Who Does What</div>
+  <h2>A Clear <span>Division</span> of Responsibility</h2>
+  <p class="section-desc">This strategy works because the roles are distinct. Marketing and business development are separated from client relationships and sales — each handled by the person best positioned to deliver it.</p>
+
+  <div class="role-split">
+    <div class="role-card eytan">
+      <div class="role-name">Eytan Benzeno · eytan.com</div>
+      <div class="role-title">Digital Marketing &amp; Business Development</div>
+      <ul>
+        <li>LinkedIn and Facebook strategy, content, and campaign management</li>
+        <li>LinkedIn company page setup and ongoing content calendar</li>
+        <li>Event promotion — digital invitations, boosted posts, ad targeting</li>
+        <li>"Book a Private Viewing" system setup and optimization</li>
+        <li>Audience building — professional networks in Luxembourg and Paris</li>
+        <li>Analytics and performance reporting</li>
+        <li>Introduction to Luxembourg business community where applicable</li>
+      </ul>
+    </div>
+    <div class="role-card kuntal">
+      <div class="role-name">Kuntal Shah · Ashth Europe</div>
+      <div class="role-title">Client Relationships &amp; Sales</div>
+      <ul>
+        <li>Event hosting — the face of Ashth in Europe</li>
+        <li>Appointment qualification and confirmation</li>
+        <li>Concierge viewings — Luxembourg region and Paris visit days</li>
+        <li>Product curation for each appointment based on client interest</li>
+        <li>Post-appointment follow-up and WhatsApp relationship management</li>
+        <li>Inventory coordination with Mumbai team</li>
+        <li>Client database and referral network management</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="gold-box">
+    <h4>The Next Step</h4>
+    <p>This document outlines the strategic framework. The immediate practical next steps are: setting up the digital infrastructure (LinkedIn page, Facebook page, booking system on ashth.eu), identifying and confirming the first Luxembourg event venue, and beginning the guest list outreach. All of this can be completed within two to three weeks. The first event can be live within 45 days.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="confidential">Confidential — Prepared by Eytan.com for ConsciousCarats Private Limited · ashth.eu</div>
+<footer>
+  <div class="footer-logo">eytan.com</div>
+  <p>Strategic Digital Marketing · Luxembourg &amp; Europe</p>
+  <p style="margin-top:0.75rem;"><a href="mailto:eytan@benzeno.com">eytan@benzeno.com</a> · <a href="https://eytan.com">eytan.com</a></p>
+</footer>
+
+<script>
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
