@@ -435,11 +435,139 @@
   [data-theme="light"] .role-name { color: var(--text3); }
   [data-theme="light"] .confidential { color: var(--text3); border-color: var(--card-border); }
   [data-theme="light"] footer { background: #2B6166; }
-  [data-theme="light"] .nav-logo img.ashth-logo { filter: var(--ashth-logo-filter); }
+  [data-theme="light"] .nav-logo img.ashth-logo { filter: none; }
   [data-theme="light"] .budget-bar { background: rgba(43,97,102,0.15); }
   [data-theme="light"] .stat-label { color: var(--text3); }
   [data-theme="light"] .radius-visual { background: var(--surface); border-color: var(--card-border); }
   [data-theme="light"] .ring { border-color: rgba(43,97,102,0.2); }
+
+
+  /* ── HERO LOGO ── */
+  .hero-ashth-logo {
+    height: 64px; width: auto; margin-bottom: 1.25rem;
+    filter: invert(1) brightness(1.1) drop-shadow(0 2px 16px rgba(200,240,240,0.3));
+    transition: filter 0.3s;
+  }
+  [data-theme="light"] .hero-ashth-logo {
+    filter: none;
+  }
+
+  /* ── HERO IMAGE STRIP ── */
+  .hero-img-strip {
+    display: flex; gap: 0.75rem; justify-content: center;
+    flex-wrap: wrap; margin: 1.75rem 0;
+  }
+  .jewelry-thumb {
+    position: relative; width: 96px; height: 96px;
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(43,97,102,0.45);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    transition: transform 0.25s, box-shadow 0.25s;
+    flex-shrink: 0;
+  }
+  .jewelry-thumb:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(43,97,102,0.4); }
+  .jewelry-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .jewelry-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    font-size: 0.6rem; font-weight: 700; text-align: center;
+    padding: 0.25rem; background: rgba(43,97,102,0.85); color: #fff;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  [data-theme="light"] .jewelry-thumb { border-color: rgba(43,97,102,0.3); }
+
+  /* ── COLLECTION GRID ── */
+  .collection-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .col-card {
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(43,97,102,0.25);
+    background: var(--navy2);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .col-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .col-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+  .col-name { font-size: 0.9rem; font-weight: 700; color: var(--teal2); padding: 0.6rem 0.75rem 0.1rem; }
+  .col-sub { font-size: 0.75rem; color: var(--gray); padding: 0 0.75rem 0.6rem; }
+  [data-theme="light"] .col-card { background: var(--surface); border-color: rgba(43,97,102,0.2); }
+  [data-theme="light"] .col-sub { color: var(--text3); }
+
+  /* ── PRODUCTS STRIP ── */
+  .products-strip {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.75rem;
+  }
+  .prod-card {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(0,168,225,0.15);
+    background: #fff; text-align: center;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .prod-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+  .prod-card img { width: 100%; height: 120px; object-fit: cover; display: block; }
+  .prod-label { font-size: 0.65rem; color: #555; padding: 0.4rem 0.5rem; line-height: 1.3; }
+  [data-theme="light"] .prod-card { border-color: rgba(43,97,102,0.2); }
+  [data-theme="light"] .prod-label { color: var(--text3); }
+
+  /* ── LIGHT MODE: DIAGRAMS ── */
+  /* Radius rings */
+  [data-theme="light"] .radius-visual { background: var(--surface); border-color: rgba(43,97,102,0.2); }
+  [data-theme="light"] .ring-1 { border-color: rgba(43,97,102,0.6); background: rgba(43,97,102,0.08); }
+  [data-theme="light"] .ring-2 { border-color: rgba(43,97,102,0.35); }
+  [data-theme="light"] .ring-3 { border-color: rgba(0,168,225,0.4); }
+  [data-theme="light"] .ring-4 { border-color: rgba(200,150,0,0.4); }
+  [data-theme="light"] .chart-wrap { background: var(--surface); border-color: rgba(43,97,102,0.2); }
+  [data-theme="light"] .chart-title { color: var(--text); }
+  [data-theme="light"] .chart-sub { color: var(--text3); }
+  [data-theme="light"] .city-name { text-shadow: none; }
+  [data-theme="light"] .legend-item { color: var(--text3); }
+
+  /* Budget bars */
+  [data-theme="light"] .budget-bar { background: rgba(43,97,102,0.1); }
+  [data-theme="light"] .budget-header span { color: var(--text2); }
+  [data-theme="light"] .budget-header span:last-child { color: var(--teal); }
+  [data-theme="light"] .card-gold .budget-header span:last-child { color: #9a7000; }
+
+  /* Timeline */
+  [data-theme="light"] .timeline::before { background: linear-gradient(180deg, var(--teal), #aaa); }
+  [data-theme="light"] .timeline-dot { border-color: var(--surface); }
+  [data-theme="light"] .timeline-phase { color: var(--teal); }
+  [data-theme="light"] .timeline-item h4 { color: var(--text); }
+
+  /* Booking flow steps */
+  [data-theme="light"] .flow-step-box { background: rgba(43,97,102,0.06); border-color: rgba(43,97,102,0.25); }
+
+  /* Role cards */
+  [data-theme="light"] .role-card.eytan { background: rgba(0,168,225,0.06); border-color: rgba(0,168,225,0.2); }
+  [data-theme="light"] .role-card.kuntal { background: rgba(255,217,61,0.06); border-color: rgba(255,217,61,0.25); }
+  [data-theme="light"] .role-name { color: var(--text3) !important; }
+  [data-theme="light"] .role-title { color: var(--text2); }
+  [data-theme="light"] .role-card ul li { color: var(--text3); }
+  [data-theme="light"] .role-card ul li::before { opacity: 0.7; }
+
+  /* Tags */
+  [data-theme="light"] .tag { border-color: rgba(43,97,102,0.3); }
+  [data-theme="light"] .tag-teal { background: rgba(43,97,102,0.1); color: var(--teal); }
+  [data-theme="light"] .tag-gold { background: rgba(200,150,0,0.1); color: #9a7000; }
+  [data-theme="light"] .tag-blue { background: rgba(0,168,225,0.1); color: #0088bb; }
+
+  /* Metric row */
+  [data-theme="light"] .metric-val { color: var(--teal); }
+  [data-theme="light"] .metric-val.gold { color: #9a7000; }
+  [data-theme="light"] .metric-val.blue { color: #0088bb; }
+
+  /* Nav border fix */
+  [data-theme="light"] nav { border-bottom-color: rgba(43,97,102,0.2); }
+
+  /* Section background stripes */
+  [data-theme="light"] section { background: transparent; }
+  [data-theme="light"] section:nth-child(even) { background: rgba(43,97,102,0.03); }
+
+  /* Footer */
+  [data-theme="light"] footer { background: #2B6166; color: #fff; }
+  [data-theme="light"] footer a { color: var(--teal2); }
+  [data-theme="light"] .confidential { color: var(--text3); border-color: rgba(43,97,102,0.2); }
 
 </style>
 </head>
@@ -463,11 +591,13 @@
     <a href="#budget">Budget</a>
     <a href="#roadmap">Roadmap</a>
   </div>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode" aria-label="Toggle theme"><span class="icon-dark">☀ Light</span><span class="icon-light">☾ Dark</span></button>
   <a href="mailto:eytan@benzeno.com" class="nav-cta">Book a Call</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
+  <img src="ashth-logo.png" alt="Ashth" class="hero-ashth-logo">
   <div class="hero-badge"><div class="dot"></div>ConsciousCarats Private Limited × Eytan.com — Confidential</div>
   <div class="hero-kicker">✦ Phase 1 Market Entry ✦</div>
   <h1>Ashth Europe<br>Local Strategy</h1>
@@ -476,6 +606,14 @@
     <strong>Luxembourg</strong> as home base. Private events. Personal appointments. Digital-powered introductions — with extended reach across the full regional driving radius.<br>
     <em style="color:var(--teal2); font-style:normal;">"Mine. Not Mined." — ready for Europe.</em>
   </p>
+  <!-- Product image strip -->
+  <div class="hero-img-strip">
+    <div class="jewelry-thumb"><img src="https://controller.ashth.com/public/storage/assets/uploads/sliders/collection/2024-09-09-18-19-5710000.jpg" alt="Rings" loading="lazy"><div class="jewelry-label">Rings</div></div>
+    <div class="jewelry-thumb"><img src="https://controller.ashth.com/public/storage/assets/uploads/sliders/collection/2024-09-09-18-20-099999.jpg" alt="Earrings" loading="lazy"><div class="jewelry-label">Earrings</div></div>
+    <div class="jewelry-thumb"><img src="https://controller.ashth.com/public/storage/assets/uploads/sliders/collection/2024-09-09-18-20-1910000.jpg" alt="Bangles" loading="lazy"><div class="jewelry-label">Bangles</div></div>
+    <div class="jewelry-thumb"><img src="https://controller.ashth.com/public/storage/assets/uploads/sliders/collection/2024-09-09-18-20-4110000.jpg" alt="Necklaces" loading="lazy"><div class="jewelry-label">Necklaces</div></div>
+    <div class="jewelry-thumb"><img src="https://controller.ashth.com/public/storage/assets/uploads/sliders/collection/2024-09-09-18-20-279999.jpg" alt="Pendants" loading="lazy"><div class="jewelry-label">Pendants</div></div>
+  </div>
   <div class="hero-stats">
     <div class="stat">
       <div class="stat-num">2</div>
@@ -552,6 +690,63 @@
 </section>
 <div class="divider"></div>
 
+<section id="collection" class="fade-in" style="padding-top:3rem; padding-bottom:3rem;">
+  <div class="section-label">The Collection</div>
+  <h2>Six Collections. <span>One Patented Cut.</span></h2>
+  <p class="section-desc">Every piece is built around the Ashth Cut® — a 97-facet patented octagon that reveals a hidden diamond within the diamond. Six distinct collections cover the full range of the European luxury buyer.</p>
+
+  <div class="collection-grid">
+    <div class="col-card">
+      <img src="https://controller.ashth.com/public/storage/assets/uploads/parameter/2025-10-15-19-06-4310000.jpg" alt="Ashth Aarambh" loading="lazy">
+      <div class="col-name">Aarambh</div>
+      <div class="col-sub">The Beginning</div>
+    </div>
+    <div class="col-card">
+      <img src="https://controller.ashth.com/public/storage/assets/uploads/parameter/2025-10-15-15-02-5810000.jpg" alt="Ashth Eclipse" loading="lazy">
+      <div class="col-name">Eclipse</div>
+      <div class="col-sub">Bold. Geometric.</div>
+    </div>
+    <div class="col-card">
+      <img src="https://controller.ashth.com/public/storage/assets/uploads/parameter/2025-10-15-15-02-3710000.jpg" alt="Ashth Bandhan" loading="lazy">
+      <div class="col-name">Bandhan</div>
+      <div class="col-sub">The Bond</div>
+    </div>
+    <div class="col-card">
+      <img src="https://controller.ashth.com/public/storage/assets/uploads/parameter/2025-10-15-15-02-289999.jpg" alt="Ashth Myra" loading="lazy">
+      <div class="col-name">Myra</div>
+      <div class="col-sub">Feminine Precision</div>
+    </div>
+    <div class="col-card">
+      <img src="https://controller.ashth.com/public/storage/assets/uploads/parameter/2025-10-15-15-02-1610000.jpg" alt="Ashth Maya" loading="lazy">
+      <div class="col-name">Maya</div>
+      <div class="col-sub">Illusion & Light</div>
+    </div>
+    <div class="col-card">
+      <img src="https://controller.ashth.com/public/storage/assets/uploads/parameter/2025-10-15-15-02-0110000.jpg" alt="Ashth Aadya" loading="lazy">
+      <div class="col-name">Aadya</div>
+      <div class="col-sub">The First</div>
+    </div>
+  </div>
+
+  <!-- Featured products strip -->
+  <h3 style="font-size:1.05rem; font-weight:700; margin:2.5rem 0 1.25rem; color:var(--white);">Selected Pieces — Available for European Viewing</h3>
+  <div class="products-strip">
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/RS20015-0250Y-1.jpg" alt="Ashth Ring" loading="lazy"><div class="prod-label">Solitaire Ring · Yellow Gold</div></div>
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/RS20014-0280W-1.jpg" alt="Ashth Ring" loading="lazy"><div class="prod-label">Solitaire Ring · White Gold</div></div>
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/EC12005-0800W-1.jpg" alt="Ashth Earrings" loading="lazy"><div class="prod-label">Drop Earrings · White Gold</div></div>
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/EC12003-1175W-1.jpg" alt="Ashth Earrings" loading="lazy"><div class="prod-label">Halo Earrings · White Gold</div></div>
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/NE41009-3300W-1.jpg" alt="Ashth Necklace" loading="lazy"><div class="prod-label">Statement Necklace · White Gold</div></div>
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/PN40001-0200W-1.jpg" alt="Ashth Pendant" loading="lazy"><div class="prod-label">Pendant · Yellow Gold</div></div>
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/BG31012-1000Y-1.jpg" alt="Ashth Bangle" loading="lazy"><div class="prod-label">Bangle · Yellow Gold</div></div>
+    <div class="prod-card"><img src="https://ashthmedia.s3.ap-south-1.amazonaws.com/images/NE41010-5465W-1.jpg" alt="Ashth Necklace" loading="lazy"><div class="prod-label">Collar Necklace · White Gold</div></div>
+  </div>
+
+  <div class="highlight" style="margin-top:2rem;">
+    <h4>75% Lifetime Buyback Guarantee</h4>
+    <p>Every Ashth piece carries a 75% lifetime buyback guarantee — an extraordinary differentiator in the European market, where no major lab-grown brand offers this. It transforms the purchase from expenditure to investment, and gives the European buyer a level of confidence they will not find elsewhere.</p>
+  </div>
+</section>
+<div class="divider"></div>
 <!-- MARKETS -->
 <section id="markets" class="fade-in">
   <div class="section-label">Geographic Coverage</div>

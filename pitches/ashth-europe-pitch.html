@@ -453,11 +453,20 @@
   [data-theme="light"] .role-name { color: var(--text3); }
   [data-theme="light"] .confidential { color: var(--text3); border-color: var(--card-border); }
   [data-theme="light"] footer { background: #2B6166; }
-  [data-theme="light"] .nav-logo img.ashth-logo { filter: var(--ashth-logo-filter); }
+  [data-theme="light"] .nav-logo img.ashth-logo { filter: none; }
   [data-theme="light"] .budget-bar { background: rgba(43,97,102,0.15); }
   [data-theme="light"] .stat-label { color: var(--text3); }
   [data-theme="light"] .radius-visual { background: var(--surface); border-color: var(--card-border); }
   [data-theme="light"] .ring { border-color: rgba(43,97,102,0.2); }
+
+
+  .hero-ashth-logo {
+    height: 60px; width: auto; margin-bottom: 1.25rem;
+    filter: invert(1) brightness(1.1) drop-shadow(0 2px 16px rgba(200,240,240,0.3));
+  }
+  [data-theme="light"] .hero-ashth-logo {
+    filter: none;
+  }
 
 </style>
 </head>
@@ -508,11 +517,13 @@
     <a href="#budget">Budget</a>
     <a href="#roadmap">Roadmap</a>
   </div>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode" aria-label="Toggle theme"><span class="icon-dark">☀ Light</span><span class="icon-light">☾ Dark</span></button>
   <button class="nav-cta" onclick="window.location='mailto:eytan@benzeno.com'">Book a Call</button>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
+  <img src="ashth-logo.png" alt="Ashth" class="hero-ashth-logo">
   <div class="hero-badge"><div class="dot"></div>ConsciousCarats Private Limited × Eytan.com — Confidential EU Strategy</div>
   <p style="font-size:0.95rem; color:var(--teal); font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:0.5rem;">✦ Aarambh — The Beginning ✦</p>
   <h1>Ashth Europe<br>Launch Strategy</h1>
