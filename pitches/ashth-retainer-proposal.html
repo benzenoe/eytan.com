@@ -362,6 +362,8 @@
     --bg:      #f0f4f7;
     --surface: #ffffff;
     --surface2: #e8f0f5;
+    --white:   #0d1620;
+    --gray:    #3a4e60;
     --text:    #0d1620;
     --text2:   #1e2e3e;
     --text3:   #3a4e60;
@@ -527,6 +529,18 @@
   [data-theme="light"] footer { background: #0d1620; }
   [data-theme="light"] footer a { color: var(--teal2); }
   [data-theme="light"] .confidential { color: var(--text3); border-color: var(--card-border); }
+
+
+  /* Elements on dark/teal backgrounds must keep white text in light mode */
+  [data-theme="light"] .btn-primary { color: #ffffff !important; }
+  [data-theme="light"] .btn-outline { color: var(--teal); border-color: var(--teal); }
+  [data-theme="light"] .nav-cta { color: #ffffff !important; }
+  [data-theme="light"] .ch-events .channel-badge { color: #ffffff !important; }
+  [data-theme="light"] .channel-badge { color: #ffffff !important; }
+  [data-theme="light"] .tag-teal { color: #1f5558; }
+  [data-theme="light"] th { color: #ffffff !important; }
+  [data-theme="light"] thead th { color: #ffffff !important; }
+  [data-theme="light"] .nav-cta:hover { background: #1a4447; }
 
 </style>
 </head>
