@@ -2500,8 +2500,8 @@ async function renderAccountsPanel() {
           detail: platformStatus.twitter ? 'API token configured' : 'Not configured (manual only)',
           connected: platformStatus.twitter },
         { key: 'whatsapp',  icon: 'fab fa-whatsapp',  color: '#25D366', label: 'WhatsApp',
-          detail: 'Share link (no API)',
-          connected: false },
+          detail: platformStatus.whatsapp ? 'Business API configured' : 'Share link (no API)',
+          connected: platformStatus.whatsapp },
     ];
 
     // Group manual accounts by platform
@@ -2567,28 +2567,52 @@ async function renderAccountsPanel() {
         </div>
     </div>`;
 
-    // ── Section 4: WhatsApp Contacts ──────────────────────
-    const waAccounts = grouped['whatsapp'] || [];
+    // ── Section 4: WhatsApp Subscribers ───────────────────
+    let waSubscribers = [];
+    try {
+        const waRes = await fetch(`${API_URL}/social/whatsapp/subscribers`, { credentials: 'include' });
+        const waData = await waRes.json();
+        waSubscribers = waData.subscribers || [];
+    } catch(e) {}
+
     html += `<div class="accounts-section">
-        <div class="accounts-section-title">WhatsApp Contacts / Broadcast</div>
+        <div class="accounts-section-title">WhatsApp Subscribers <span style="font-weight:400;font-size:0.8rem;">(API auto-publish)</span></div>
         <div id="acc-whatsapp-list">
-        ${waAccounts.length === 0
-            ? `<div class="account-row">
-                <i class="fab fa-whatsapp" style="color:#25D366;font-size:1.5rem;"></i>
-                <div class="account-info"><div class="account-name">Personal WhatsApp</div><div class="account-id">wa.me share link</div></div>
-                <span style="background:#fff3cd;color:#856404;font-size:0.72rem;padding:2px 8px;border-radius:10px;">built-in</span>
-               </div>`
-            : waAccounts.map(a => renderAccountRow(a)).join('')}
+        ${waSubscribers.length === 0
+            ? `<div style="color:#6c757d;font-size:0.85rem;padding:0.5rem 0;">No subscribers yet. Add contacts below or share the opt-in link.</div>`
+            : waSubscribers.map(s => `
+                <div class="account-row${s.is_active ? '' : ' inactive'}" id="wa-sub-${s.id}">
+                    <i class="fab fa-whatsapp" style="color:#25D366;font-size:1.5rem;flex-shrink:0;"></i>
+                    <div class="account-info">
+                        <div class="account-name">${s.name || s.phone}</div>
+                        <div class="account-id">${s.phone} · opted in ${new Date(s.opted_in_at).toLocaleDateString()}</div>
+                    </div>
+                    <div class="account-actions">
+                        <button class="acc-btn" onclick="toggleWaSubscriber(${s.id}, ${!s.is_active})"
+                            style="background:${s.is_active ? '#6c757d' : '#28a745'};color:white;"
+                            title="${s.is_active ? 'Disable' : 'Enable'}">
+                            <i class="fas fa-${s.is_active ? 'pause' : 'play'}"></i>
+                        </button>
+                        <button class="acc-btn" onclick="deleteWaSubscriber(${s.id}, '${(s.name||s.phone).replace(/'/g,"\\'")}')}"
+                            style="background:#dc3545;color:white;" title="Remove">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>`).join('')}
         </div>
-        <button onclick="toggleAddForm('whatsapp')" style="margin-top:0.5rem;padding:0.4rem 0.9rem;background:#25D366;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;"><i class="fas fa-plus"></i> Add Contact / Group</button>
+        <button onclick="toggleAddForm('whatsapp')" style="margin-top:0.5rem;padding:0.4rem 0.9rem;background:#25D366;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;"><i class="fas fa-plus"></i> Add Subscriber</button>
         <div class="add-account-form" id="add-form-whatsapp">
-            <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;">Add WhatsApp Contact or Group</div>
-            <input type="text" id="new-wa-id" placeholder="Phone number: +1234567890 or group invite link" />
-            <input type="text" id="new-wa-name" placeholder="Contact / Group name" />
+            <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;">Add WhatsApp Subscriber</div>
+            <input type="text" id="new-wa-phone" placeholder="Phone with country code: +17861234567" />
+            <input type="text" id="new-wa-name" placeholder="Name (optional)" />
             <div class="form-row">
-                <button onclick="submitAddAccount('whatsapp')" style="flex:1;padding:0.45rem;background:#28a745;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;">Add</button>
+                <button onclick="submitAddWaSubscriber()" style="flex:1;padding:0.45rem;background:#28a745;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;">Add</button>
                 <button onclick="toggleAddForm('whatsapp')" style="flex:1;padding:0.45rem;background:#6c757d;color:white;border:none;border-radius:4px;cursor:pointer;font-size:0.85rem;">Cancel</button>
             </div>
+        </div>
+        <div style="margin-top:0.75rem;font-size:0.78rem;color:#6c757d;">
+            <i class="fas fa-info-circle"></i> Subscribers receive new blog posts automatically via WhatsApp Business API.
+            Share opt-in link: <a href="https://eytan.com#whatsapp-subscribe" target="_blank" style="color:#25D366;">eytan.com#whatsapp-subscribe</a>
         </div>
     </div>`;
 
@@ -2692,6 +2716,44 @@ async function deleteAccount(id, name) {
             renderAccountsPanel();
         }
     } catch (e) { showAlert('Request failed', 'error'); }
+}
+
+// ── WhatsApp Subscriber Actions ───────────────────────────────────────────────
+
+async function submitAddWaSubscriber() {
+    const phone = document.getElementById('new-wa-phone')?.value?.trim();
+    const name  = document.getElementById('new-wa-name')?.value?.trim();
+    if (!phone) { showAlert('Phone number required', 'error'); return; }
+    try {
+        const res = await fetch(`${API_URL}/social/whatsapp/subscribers`, {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone, name })
+        });
+        const data = await res.json();
+        if (res.ok) { showAlert(`Added ${name || phone}`, 'success'); renderAccountsPanel(); }
+        else showAlert(data.error || 'Failed to add subscriber', 'error');
+    } catch(e) { showAlert('Request failed', 'error'); }
+}
+
+async function toggleWaSubscriber(id, newActive) {
+    try {
+        await fetch(`${API_URL}/social/whatsapp/subscribers/${id}`, {
+            method: 'PUT', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ is_active: newActive })
+        });
+        renderAccountsPanel();
+    } catch(e) { showAlert('Request failed', 'error'); }
+}
+
+async function deleteWaSubscriber(id, name) {
+    if (!confirm(`Remove "${name}" from WhatsApp subscribers?`)) return;
+    try {
+        await fetch(`${API_URL}/social/whatsapp/subscribers/${id}`, { method: 'DELETE', credentials: 'include' });
+        showAlert(`Removed ${name}`, 'success');
+        renderAccountsPanel();
+    } catch(e) { showAlert('Request failed', 'error'); }
 }
 
 async function initAdmin() {
