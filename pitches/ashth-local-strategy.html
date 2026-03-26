@@ -628,6 +628,7 @@
     <a href="#roadmap">Roadmap</a>
   </div>
   <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light / dark mode" aria-label="Toggle theme"><span class="icon-dark">☀ Light</span><span class="icon-light">☾ Dark</span></button>
+  <button onclick="openPdfModal()" class="nav-cta" style="background:#2B6166;border:none;cursor:pointer;">⬇ PDF</button>
   <a href="mailto:eytan@benzeno.com" class="nav-cta">Book a Call</a>
 </nav>
 
@@ -1547,6 +1548,23 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 <script>
 // Theme toggle
 (function(){
+  window.openPdfModal = function() {
+    const modal = document.getElementById('pdf-modal');
+    const iframe = document.getElementById('pdf-iframe');
+    if (!iframe.src || iframe.src === window.location.href) {
+      iframe.src = 'ASHTH-Local-Strategy.pdf';
+    }
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+  window.closePdfModal = function() {
+    document.getElementById('pdf-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') window.closePdfModal();
+  });
+
   const root = document.documentElement;
   const saved = localStorage.getItem('ashth-theme');
   if(saved) root.setAttribute('data-theme', saved);
@@ -1560,5 +1578,23 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 })();
 </script>
 
+<div id="pdf-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);flex-direction:column;align-items:center;justify-content:center;padding:1rem;" onclick="if(event.target===this)window.closePdfModal()">
+  <div style="background:#1a2332;border:1px solid rgba(255,255,255,0.1);border-radius:16px;width:100%;max-width:860px;height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);background:#0d1620;flex-shrink:0;">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span style="font-size:1.1rem;">📄</span>
+        <div>
+          <div style="font-weight:700;font-size:0.95rem;color:#f0f4f8;">ASHTH-Local-Strategy.pdf</div>
+          <div style="font-size:0.75rem;color:#8899aa;">Local Market Entry Strategy — Preview</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <a href="ASHTH-Local-Strategy.pdf" download style="display:inline-flex;align-items:center;gap:0.5rem;background:#2B6166;color:#fff;text-decoration:none;padding:0.5rem 1.1rem;border-radius:8px;font-weight:600;font-size:0.85rem;">⬇ Download</a>
+        <button onclick="window.closePdfModal()" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:#8899aa;cursor:pointer;width:36px;height:36px;border-radius:8px;font-size:1.1rem;display:flex;align-items:center;justify-content:center;">✕</button>
+      </div>
+    </div>
+    <iframe id="pdf-iframe" src="" style="flex:1;width:100%;border:none;background:#fff;" title="ASHTH Local Strategy Preview"></iframe>
+  </div>
+</div>
 </body>
 </html>
