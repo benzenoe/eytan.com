@@ -697,5 +697,24 @@ Sem pressão — apenas um lugar para crescer ao lado de outros comprometidos em
 
     <!-- Tidio Chatbot -->
     <script src="//code.tidio.co/mrlssbhzk3lc4tbjjinryaqueto6ezrr.js" async></script>
+    <script>
+    async function waOptIn() {
+        const phone = document.getElementById('wa-optin-phone').value.trim();
+        const msg = document.getElementById('wa-optin-msg');
+        if (!phone) { msg.style.color='#ffe'; msg.textContent='Please enter your phone number.'; return; }
+        try {
+            const res = await fetch('https://api.eytan.com/api/social/whatsapp/optin', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                document.getElementById('wa-optin-form').style.display = 'none';
+                msg.style.color = '#fff';
+                msg.textContent = data.message || "Subscribed! You'll receive new posts via WhatsApp.";
+            } else { msg.style.color='#ffe'; msg.textContent = data.error || 'Something went wrong.'; }
+        } catch(e) { msg.style.color='#ffe'; msg.textContent='Connection error. Please try again.'; }
+    }
+    </script>
 </body>
 </html>
