@@ -569,6 +569,12 @@ async function openSocialPublishModal(postId) {
                                     <span style="font-weight: 500; flex: 1;">WhatsApp</span>
                                     <span style="font-size: 0.85rem; color: #6c757d;">(AI caption + opens share)</span>
                                 </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.75rem; border: 2px solid #dee2e6; border-radius: 6px; transition: all 0.2s; background: white;" onmouseover="this.style.borderColor='#25D366'; this.style.background='#f0fff4'" onmouseout="this.style.borderColor='#dee2e6'; this.style.background='white'">
+                                    <input type="checkbox" class="platform-check" value="whatsapp-subscribers" style="width: 18px; height: 18px; cursor: pointer;">
+                                    <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.3rem;"></i>
+                                    <span style="font-weight: 500; flex: 1;">WhatsApp Subscribers <span style="font-weight:400;color:#6c757d;">(eytan.com)</span></span>
+                                    <span style="font-size: 0.85rem; color: #6c757d;">(API → all subscribers)</span>
+                                </label>
                             </div>
                         </div>
 
@@ -612,9 +618,6 @@ async function openSocialPublishModal(postId) {
                             </button>
                             <button onclick="publishToSocialInline()" id="publishSocialBtnInline" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                                 <i class="fas fa-share-alt"></i> Publish Now
-                            </button>
-                            <button onclick="sendToWhatsAppSubscribers()" id="waSubscriberBtn" style="padding: 0.75rem 1.5rem; background: #25D366; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='#1da851'" onmouseout="this.style.background='#25D366'" title="Send post to all WhatsApp subscribers via Business API">
-                                <i class="fab fa-whatsapp"></i> Send to WA Subscribers
                             </button>
                         </div>
                     </div>
@@ -682,7 +685,7 @@ async function previewSocialContent() {
 
         // Remove duplicates and filter out client-side-only platforms
         const uniquePlatforms = [...new Set(
-            selectedPlatforms.filter(p => p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' && !p.startsWith('facebook-group:'))
+            selectedPlatforms.filter(p => p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' && p !== 'whatsapp-subscribers' && !p.startsWith('facebook-group:'))
         )];
 
         console.log('Selected platforms:', selectedPlatforms);
@@ -966,6 +969,14 @@ async function publishToSocialInline() {
     if (!currentPublishingPostId) {
         showAlert('No post selected for publishing', 'error');
         return;
+    }
+
+    // Handle WhatsApp Subscribers — show edit modal before sending via API
+    if (selectedPlatforms.includes('whatsapp-subscribers')) {
+        await sendToWhatsAppSubscribers();
+        // If there are no other platforms to publish, stop here
+        const otherPlatforms = selectedPlatforms.filter(p => p !== 'whatsapp-subscribers');
+        if (otherPlatforms.length === 0) return;
     }
 
     // Handle Twitter/X — generate AI tweet, open X compose window pre-filled
