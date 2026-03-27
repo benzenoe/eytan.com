@@ -613,6 +613,9 @@ async function openSocialPublishModal(postId) {
                             <button onclick="publishToSocialInline()" id="publishSocialBtnInline" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                                 <i class="fas fa-share-alt"></i> Publish Now
                             </button>
+                            <button onclick="sendToWhatsAppSubscribers()" id="waSubscriberBtn" style="padding: 0.75rem 1.5rem; background: #25D366; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='#1da851'" onmouseout="this.style.background='#25D366'" title="Send post to all WhatsApp subscribers via Business API">
+                                <i class="fab fa-whatsapp"></i> Send to WA Subscribers
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -861,6 +864,36 @@ async function previewSocialContent() {
         // Re-enable button
         previewBtn.disabled = false;
         previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview Content';
+    }
+}
+
+// Send post to WhatsApp subscribers via Business API
+async function sendToWhatsAppSubscribers() {
+    if (!currentPublishingPostId) return;
+    const btn = document.getElementById('waSubscriberBtn');
+    const orig = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    try {
+        const res = await fetch(`${API_URL}/social/publish/${currentPublishingPostId}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ platforms: ['whatsapp'] })
+        });
+        const data = await res.json();
+        if (data.results && data.results[0]?.status === 'success') {
+            showAlert(`✅ ${data.results[0].message || 'Sent to WhatsApp subscribers'}`, 'success');
+        } else {
+            const err = data.results?.[0]?.error || data.error || 'Unknown error';
+            showAlert(`WhatsApp send failed: ${err}`, 'error');
+        }
+        await loadSocialHistoryPanel(currentPublishingPostId);
+    } catch (e) {
+        showAlert('WhatsApp send failed: ' + e.message, 'error');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
     }
 }
 
