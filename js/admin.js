@@ -884,7 +884,10 @@ async function sendToWhatsAppSubscribers() {
             body: JSON.stringify({ platforms: ['whatsapp'] })
         });
         const data = await res.json();
-        previewContent = data.previews?.whatsapp || data.previews?.['whatsapp'] || '';
+        const waPreview = Array.isArray(data.previews)
+            ? data.previews.find(p => p.platform === 'whatsapp')
+            : data.previews?.whatsapp;
+        previewContent = waPreview?.content || waPreview || '';
     } catch (e) {
         showAlert('Failed to generate preview: ' + e.message, 'error');
         btn.disabled = false;
