@@ -867,21 +867,76 @@ async function previewSocialContent() {
     }
 }
 
-// Send post to WhatsApp subscribers via Business API
+// Send post to WhatsApp subscribers via Business API — shows edit modal first
 async function sendToWhatsAppSubscribers() {
     if (!currentPublishingPostId) return;
     const btn = document.getElementById('waSubscriberBtn');
     const orig = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+    let previewContent = '';
     try {
-        const res = await fetch(`${API_URL}/social/publish/${currentPublishingPostId}`, {
+        const res = await fetch(`${API_URL}/social/preview/${currentPublishingPostId}`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ platforms: ['whatsapp'] })
         });
         const data = await res.json();
+        previewContent = data.previews?.whatsapp || data.previews?.['whatsapp'] || '';
+    } catch (e) {
+        showAlert('Failed to generate preview: ' + e.message, 'error');
+        btn.disabled = false;
+        btn.innerHTML = orig;
+        return;
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+    }
+
+    // Show edit modal
+    const existing = document.getElementById('wa-send-modal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'wa-send-modal';
+    modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
+    modal.innerHTML = `
+        <div style="background:white;border-radius:12px;padding:1.5rem;width:90%;max-width:520px;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                <h3 style="margin:0;color:#25D366;"><i class="fab fa-whatsapp"></i> Send to WhatsApp Subscribers</h3>
+                <button onclick="document.getElementById('wa-send-modal').remove();" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#6c757d;">✕</button>
+            </div>
+            <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.5rem;">Edit the message before sending to all active subscribers:</p>
+            <textarea id="wa-send-content" style="width:100%;height:160px;padding:0.75rem;border:2px solid #25D366;border-radius:8px;font-size:0.9rem;line-height:1.6;resize:vertical;box-sizing:border-box;">${previewContent}</textarea>
+            <div style="font-size:0.78rem;color:#6c757d;margin-top:0.3rem;text-align:right;"><span id="wa-char-count">${previewContent.length}</span> chars</div>
+            <div style="display:flex;gap:0.75rem;margin-top:1rem;justify-content:flex-end;">
+                <button onclick="document.getElementById('wa-send-modal').remove();" style="padding:0.6rem 1.2rem;background:#6c757d;color:white;border:none;border-radius:6px;cursor:pointer;">Cancel</button>
+                <button onclick="confirmSendToWhatsAppSubscribers()" style="padding:0.6rem 1.2rem;background:#25D366;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-whatsapp"></i> Send Now</button>
+            </div>
+        </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+    document.getElementById('wa-send-content').addEventListener('input', function() {
+        document.getElementById('wa-char-count').textContent = this.value.length;
+    });
+}
+
+async function confirmSendToWhatsAppSubscribers() {
+    const content = document.getElementById('wa-send-content')?.value?.trim();
+    if (!content) { showAlert('Message cannot be empty', 'error'); return; }
+    const sendBtn = document.querySelector('#wa-send-modal button[onclick="confirmSendToWhatsAppSubscribers()"]');
+    if (sendBtn) { sendBtn.disabled = true; sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...'; }
+    try {
+        const res = await fetch(`${API_URL}/social/publish/${currentPublishingPostId}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ platforms: ['whatsapp'], overrideContent: { whatsapp: content } })
+        });
+        const data = await res.json();
+        document.getElementById('wa-send-modal')?.remove();
         if (data.results && data.results[0]?.status === 'success') {
             showAlert(`✅ ${data.results[0].message || 'Sent to WhatsApp subscribers'}`, 'success');
         } else {
@@ -891,9 +946,7 @@ async function sendToWhatsAppSubscribers() {
         await loadSocialHistoryPanel(currentPublishingPostId);
     } catch (e) {
         showAlert('WhatsApp send failed: ' + e.message, 'error');
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = orig;
+        if (sendBtn) { sendBtn.disabled = false; sendBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Send Now'; }
     }
 }
 
