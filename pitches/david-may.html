@@ -7,19 +7,128 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
+        :root {
+            --bg: #ffffff;
+            --bg-card: #f7f9fb;
+            --bg-card-blue: #eef8fc;
+            --bg-dark: #1a3e5c;
+            --text: #333333;
+            --text-mid: #444444;
+            --text-muted: #555555;
+            --text-light: #777777;
+            --text-xlight: #999999;
+            --border: #e4e8ec;
+            --border-dash: #d0d8e0;
+            --accent: #00a8e1;
+            --accent-dark: #0090c4;
+            --navy: #1a3e5c;
+            --white: #ffffff;
+        }
+
+        body.dark {
+            --bg: #0d1b2a;
+            --bg-card: #162334;
+            --bg-card-blue: #0f2133;
+            --bg-dark: #091522;
+            --text: #dde6f0;
+            --text-mid: #c8d8e8;
+            --text-muted: #9ab0c4;
+            --text-light: #7a96ae;
+            --text-xlight: #5a7a94;
+            --border: #1e3549;
+            --border-dash: #1e3549;
+            --accent: #00a8e1;
+            --accent-dark: #0090c4;
+            --navy: #091522;
+            --white: #162334;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-            color: #333333;
-            background: #ffffff;
+            color: var(--text);
+            background: var(--bg);
             line-height: 1.7;
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Sticky Nav */
+        .proposal-nav {
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            background: var(--navy);
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .proposal-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            flex: 1;
+        }
+
+        .proposal-nav-links::-webkit-scrollbar { display: none; }
+
+        .proposal-nav-links a {
+            color: rgba(255,255,255,0.6);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 10px;
+            white-space: nowrap;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .proposal-nav-links a:hover {
+            color: #ffffff;
+            border-bottom-color: var(--accent);
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 16px;
+            background: rgba(255,255,255,0.15);
+            flex-shrink: 0;
+        }
+
+        .dark-mode-toggle {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
         }
 
         .header {
-            background: #1a3e5c;
+            background: var(--navy);
             padding: 40px 60px;
             display: flex;
             justify-content: space-between;
@@ -31,162 +140,162 @@
 
         .container { max-width: 740px; margin: 0 auto; padding: 60px 40px 80px; }
 
-        .title-block { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 3px solid #00a8e1; }
-        .title-block h1 { font-size: 28px; font-weight: 300; color: #1a3e5c; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-        .title-block .subtitle { font-size: 15px; color: #666666; font-weight: 400; }
-        .title-block .prepared-for { margin-top: 16px; font-size: 14px; color: #999999; letter-spacing: 0.04em; }
+        .title-block { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 3px solid var(--accent); }
+        .title-block h1 { font-size: 28px; font-weight: 300; color: var(--navy); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+        .title-block .subtitle { font-size: 15px; color: var(--text-light); font-weight: 400; }
+        .title-block .prepared-for { margin-top: 16px; font-size: 14px; color: var(--text-xlight); letter-spacing: 0.04em; }
 
-        .intro { font-size: 16px; color: #444444; margin-bottom: 48px; line-height: 1.8; }
+        .intro { font-size: 16px; color: var(--text-mid); margin-bottom: 48px; line-height: 1.8; }
         .intro p + p { margin-top: 14px; }
 
-        .section-header { font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
-        h2.section-title { font-size: 22px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px; }
+        .section-header { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+        h2.section-title { font-size: 22px; font-weight: 500; color: var(--navy); margin-bottom: 16px; }
 
         /* Market Opportunity */
-        .market-opportunity { margin-bottom: 52px; padding: 28px; background: #f7f9fb; border-radius: 6px; border-left: 4px solid #00a8e1; }
-        .market-opportunity h3 { font-size: 18px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px; }
+        .market-opportunity { margin-bottom: 52px; padding: 28px; background: var(--bg-card); border-radius: 6px; border-left: 4px solid var(--accent); }
+        .market-opportunity h3 { font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 16px; }
         .market-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-        .market-stat { background: #ffffff; border-radius: 6px; padding: 16px 20px; text-align: center; }
-        .market-stat .number { font-size: 22px; font-weight: 700; color: #00a8e1; display: block; margin-bottom: 4px; }
-        .market-stat .label { font-size: 12px; color: #666666; line-height: 1.4; }
-        .market-opportunity p { font-size: 15px; color: #555555; line-height: 1.7; margin-top: 12px; }
+        .market-stat { background: var(--white); border-radius: 6px; padding: 16px 20px; text-align: center; }
+        .market-stat .number { font-size: 22px; font-weight: 700; color: var(--accent); display: block; margin-bottom: 4px; }
+        .market-stat .label { font-size: 12px; color: var(--text-light); line-height: 1.4; }
+        .market-opportunity p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-top: 12px; }
 
         /* Before / After */
         .before-after { margin-bottom: 52px; }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 16px; border-radius: 6px; overflow: hidden; }
         .ba-col { padding: 24px; }
-        .ba-col.before { background: #f7f9fb; border-right: 2px solid #e4e8ec; }
-        .ba-col.after { background: #eef8fc; }
+        .ba-col.before { background: var(--bg-card); border-right: 2px solid var(--border); }
+        .ba-col.after { background: var(--bg-card-blue); }
         .ba-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
-        .ba-col.before h4 { color: #999999; }
-        .ba-col.after h4 { color: #00a8e1; }
+        .ba-col.before h4 { color: var(--text-xlight); }
+        .ba-col.after h4 { color: var(--accent); }
         .ba-col ul { list-style: none; padding: 0; }
         .ba-col ul li { padding: 5px 0 5px 16px; position: relative; font-size: 14px; line-height: 1.5; }
-        .ba-col.before ul li { color: #888888; }
-        .ba-col.after ul li { color: #444444; }
+        .ba-col.before ul li { color: var(--text-light); }
+        .ba-col.after ul li { color: var(--text-mid); }
         .ba-col ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; }
-        .ba-col.before ul li::before { background: #c0c8d0; }
-        .ba-col.after ul li::before { background: #00a8e1; }
-        .ba-summary { margin-top: 16px; padding: 16px 20px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.6; }
-        .ba-summary strong { color: #00a8e1; }
+        .ba-col.before ul li::before { background: var(--border); }
+        .ba-col.after ul li::before { background: var(--accent); }
+        .ba-summary { margin-top: 16px; padding: 16px 20px; background: var(--navy); border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.6; }
+        .ba-summary strong { color: var(--accent); }
 
         /* Landscape */
         .landscape { margin-bottom: 52px; }
-        .landscape .landscape-intro { font-size: 15px; color: #555555; line-height: 1.7; margin-bottom: 24px; }
+        .landscape .landscape-intro { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
         .competitor-grid { display: grid; gap: 16px; }
-        .competitor-card { background: #f7f9fb; border-radius: 6px; padding: 20px 24px; border-left: 4px solid #e4e8ec; }
-        .competitor-card.cvl { border-left-color: #00a8e1; background: #eef8fc; }
-        .competitor-name { font-size: 15px; font-weight: 600; color: #1a3e5c; margin-bottom: 4px; }
-        .competitor-type { font-size: 12px; color: #999999; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
+        .competitor-card { background: var(--bg-card); border-radius: 6px; padding: 20px 24px; border-left: 4px solid var(--border); }
+        .competitor-card.cvl { border-left-color: var(--accent); background: var(--bg-card-blue); }
+        .competitor-name { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+        .competitor-type { font-size: 12px; color: var(--text-xlight); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
         .competitor-stats { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; }
-        .stat { font-size: 13px; color: #666666; }
-        .stat strong { color: #1a3e5c; font-weight: 600; }
-        .competitor-note { font-size: 13px; color: #777777; line-height: 1.5; margin-top: 6px; }
-        .landscape-takeaway { margin-top: 24px; padding: 20px 24px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.7; }
-        .landscape-takeaway strong { color: #00a8e1; }
+        .stat { font-size: 13px; color: var(--text-light); }
+        .stat strong { color: var(--navy); font-weight: 600; }
+        .competitor-note { font-size: 13px; color: var(--text-light); line-height: 1.5; margin-top: 6px; }
+        .landscape-takeaway { margin-top: 24px; padding: 20px 24px; background: var(--navy); border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.7; }
+        .landscape-takeaway strong { color: var(--accent); }
 
         /* ROI */
         .roi-section { margin-bottom: 52px; }
-        .roi-box { background: #f7f9fb; border-radius: 6px; padding: 28px; margin-top: 16px; }
-        .roi-box h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 12px; }
-        .roi-box p { font-size: 15px; color: #555555; line-height: 1.7; margin-bottom: 10px; }
+        .roi-box { background: var(--bg-card); border-radius: 6px; padding: 28px; margin-top: 16px; }
+        .roi-box h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+        .roi-box p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
         .roi-box ul { list-style: none; padding: 0; margin-bottom: 16px; }
-        .roi-box ul li { padding: 5px 0 5px 20px; position: relative; font-size: 14px; color: #555555; }
-        .roi-box ul li::before { content: ''; position: absolute; left: 0; top: 13px; width: 7px; height: 7px; background: #00a8e1; border-radius: 50%; }
-        .roi-highlight { margin-top: 16px; padding: 16px 20px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.7; }
-        .roi-highlight strong { color: #00a8e1; }
+        .roi-box ul li { padding: 5px 0 5px 20px; position: relative; font-size: 14px; color: var(--text-muted); }
+        .roi-box ul li::before { content: ''; position: absolute; left: 0; top: 13px; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+        .roi-highlight { margin-top: 16px; padding: 16px 20px; background: var(--navy); border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.7; }
+        .roi-highlight strong { color: var(--accent); }
 
         /* Phases */
-        .phase { margin-bottom: 44px; padding-left: 20px; border-left: 4px solid #00a8e1; }
-        .phase-label { font-size: 11px; font-weight: 600; color: #00a8e1; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
-        .phase h2 { font-size: 20px; font-weight: 500; color: #1a3e5c; margin-bottom: 12px; }
-        .phase .why { font-size: 15px; color: #555555; margin-bottom: 16px; line-height: 1.7; }
+        .phase { margin-bottom: 44px; padding-left: 20px; border-left: 4px solid var(--accent); }
+        .phase-label { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+        .phase h2 { font-size: 20px; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+        .phase .why { font-size: 15px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.7; }
         .phase ul { list-style: none; padding: 0; }
-        .phase ul li { padding: 6px 0 6px 20px; position: relative; font-size: 15px; color: #444444; }
-        .phase ul li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 8px; background: #00a8e1; border-radius: 50%; }
+        .phase ul li { padding: 6px 0 6px 20px; position: relative; font-size: 15px; color: var(--text-mid); }
+        .phase ul li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
 
         /* Deliverables */
-        .deliverables { margin-top: 24px; margin-bottom: 16px; padding: 24px 28px; background: #eef8fc; border-radius: 6px; border: 1px solid #c8e6f0; }
-        .deliverables h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 6px; }
-        .deliverables .del-subtitle { font-size: 13px; color: #777777; margin-bottom: 16px; }
+        .deliverables { margin-top: 24px; margin-bottom: 16px; padding: 24px 28px; background: var(--bg-card-blue); border-radius: 6px; border: 1px solid var(--border); }
+        .deliverables h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+        .deliverables .del-subtitle { font-size: 13px; color: var(--text-light); margin-bottom: 16px; }
         .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-        .del-col h4 { font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+        .del-col h4 { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
         .del-col ul { list-style: none; padding: 0; }
-        .del-col ul li { padding: 4px 0 4px 16px; position: relative; font-size: 14px; color: #555555; line-height: 1.5; }
-        .del-col ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; background: #00a8e1; border-radius: 50%; }
-        .deliverables .del-result { font-size: 14px; color: #1a3e5c; font-weight: 500; margin-top: 8px; }
+        .del-col ul li { padding: 4px 0 4px 16px; position: relative; font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+        .del-col ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+        .deliverables .del-result { font-size: 14px; color: var(--navy); font-weight: 500; margin-top: 8px; }
 
         /* How it works */
-        .how-it-works { margin-top: 24px; margin-bottom: 24px; padding: 24px 28px; background: #f7f9fb; border-radius: 6px; border-left: 4px solid #00a8e1; }
-        .how-it-works h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 16px; }
+        .how-it-works { margin-top: 24px; margin-bottom: 24px; padding: 24px 28px; background: var(--bg-card); border-radius: 6px; border-left: 4px solid var(--accent); }
+        .how-it-works h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
         .how-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-        .how-step { text-align: center; padding: 16px 12px; background: #ffffff; border-radius: 6px; }
-        .how-step .step-num { font-size: 24px; font-weight: 700; color: #00a8e1; display: block; margin-bottom: 6px; }
-        .how-step .step-who { font-size: 11px; font-weight: 600; color: #999999; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
-        .how-step .step-desc { font-size: 13px; color: #555555; line-height: 1.4; }
+        .how-step { text-align: center; padding: 16px 12px; background: var(--white); border-radius: 6px; }
+        .how-step .step-num { font-size: 24px; font-weight: 700; color: var(--accent); display: block; margin-bottom: 6px; }
+        .how-step .step-who { font-size: 11px; font-weight: 600; color: var(--text-xlight); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+        .how-step .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
 
         /* Timeline */
         .timeline { margin-bottom: 52px; }
         .timeline-grid { display: grid; gap: 16px; margin-top: 16px; }
-        .timeline-block { background: #f7f9fb; border-radius: 6px; padding: 20px 24px; border-left: 4px solid #00a8e1; }
-        .timeline-block .period { font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+        .timeline-block { background: var(--bg-card); border-radius: 6px; padding: 20px 24px; border-left: 4px solid var(--accent); }
+        .timeline-block .period { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
         .timeline-block ul { list-style: none; padding: 0; }
-        .timeline-block ul li { padding: 3px 0 3px 16px; position: relative; font-size: 14px; color: #555555; }
-        .timeline-block ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; background: #00a8e1; border-radius: 50%; }
-        .timeline-outcome { margin-top: 16px; padding: 16px 20px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.6; }
-        .timeline-outcome strong { color: #00a8e1; }
+        .timeline-block ul li { padding: 3px 0 3px 16px; position: relative; font-size: 14px; color: var(--text-muted); }
+        .timeline-block ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+        .timeline-outcome { margin-top: 16px; padding: 16px 20px; background: var(--navy); border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.6; }
+        .timeline-outcome strong { color: var(--accent); }
 
         /* Future / Monetization */
-        .future { margin-bottom: 48px; padding: 24px 28px; background: #f7f9fb; border-radius: 6px; border: 1px dashed #d0d8e0; }
-        .future h3 { font-size: 16px; font-weight: 500; color: #1a3e5c; margin-bottom: 10px; }
-        .future p { font-size: 14px; color: #777777; line-height: 1.6; margin-bottom: 12px; }
+        .future { margin-bottom: 48px; padding: 24px 28px; background: var(--bg-card); border-radius: 6px; border: 1px dashed var(--border-dash); }
+        .future h3 { font-size: 16px; font-weight: 500; color: var(--navy); margin-bottom: 10px; }
+        .future p { font-size: 14px; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
         .future ul { list-style: none; padding: 0; }
-        .future ul li { padding: 4px 0 4px 18px; position: relative; font-size: 14px; color: #888888; }
-        .future ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; background: #c0c8d0; border-radius: 50%; }
+        .future ul li { padding: 4px 0 4px 18px; position: relative; font-size: 14px; color: var(--text-light); }
+        .future ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; background: var(--border); border-radius: 50%; }
 
         /* Why Us */
-        .why-us { margin-bottom: 32px; padding: 24px 28px; background: #f7f9fb; border-radius: 6px; border-left: 4px solid #1a3e5c; }
-        .why-us h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 12px; }
-        .why-us p { font-size: 15px; color: #444444; line-height: 1.7; margin-bottom: 10px; }
+        .why-us { margin-bottom: 32px; padding: 24px 28px; background: var(--bg-card); border-radius: 6px; border-left: 4px solid var(--navy); }
+        .why-us h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+        .why-us p { font-size: 15px; color: var(--text-mid); line-height: 1.7; margin-bottom: 10px; }
         .why-us p:last-child { margin-bottom: 0; }
 
         /* Pricing */
-        .pricing { background: #f7f9fb; border-radius: 6px; padding: 36px 32px; margin: 48px 0; }
-        .pricing h2 { font-size: 18px; font-weight: 500; color: #1a3e5c; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
-        .pricing-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #e4e8ec; }
+        .pricing { background: var(--bg-card); border-radius: 6px; padding: 36px 32px; margin: 48px 0; }
+        .pricing h2 { font-size: 18px; font-weight: 500; color: var(--navy); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+        .pricing-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--border); }
         .pricing-row:last-of-type { border-bottom: none; }
-        .pricing-label { font-size: 15px; color: #444444; flex: 1; }
-        .pricing-label .note { display: block; font-size: 13px; color: #888888; margin-top: 2px; }
-        .pricing-label .founding { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; color: #00a8e1; letter-spacing: 0.06em; text-transform: uppercase; }
-        .pricing-amount { font-size: 18px; font-weight: 600; color: #1a3e5c; text-align: right; white-space: nowrap; }
-        .pricing-amount .standard-rate { display: block; font-size: 13px; font-weight: 400; color: #aaaaaa; text-decoration: line-through; }
-        .pricing-note { font-size: 14px; color: #777777; margin-top: 20px; line-height: 1.6; }
-        .pricing-terms { margin-top: 16px; padding: 16px 20px; background: #ffffff; border-radius: 4px; border: 1px solid #e4e8ec; }
-        .pricing-terms p { font-size: 13px; color: #666666; line-height: 1.6; margin-bottom: 6px; }
+        .pricing-label { font-size: 15px; color: var(--text-mid); flex: 1; }
+        .pricing-label .note { display: block; font-size: 13px; color: var(--text-light); margin-top: 2px; }
+        .pricing-label .founding { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; }
+        .pricing-amount { font-size: 18px; font-weight: 600; color: var(--navy); text-align: right; white-space: nowrap; }
+        .pricing-amount .standard-rate { display: block; font-size: 13px; font-weight: 400; color: var(--text-xlight); text-decoration: line-through; }
+        .pricing-note { font-size: 14px; color: var(--text-light); margin-top: 20px; line-height: 1.6; }
+        .pricing-terms { margin-top: 16px; padding: 16px 20px; background: var(--white); border-radius: 4px; border: 1px solid var(--border); }
+        .pricing-terms p { font-size: 13px; color: var(--text-light); line-height: 1.6; margin-bottom: 6px; }
         .pricing-terms p:last-child { margin-bottom: 0; }
-        .market-context { margin-top: 24px; padding: 20px 24px; background: #eef8fc; border-radius: 6px; border-left: 4px solid #00a8e1; }
-        .market-context p { font-size: 14px; color: #555555; line-height: 1.6; }
-        .market-context strong { color: #1a3e5c; }
+        .market-context { margin-top: 24px; padding: 20px 24px; background: var(--bg-card-blue); border-radius: 6px; border-left: 4px solid var(--accent); }
+        .market-context p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+        .market-context strong { color: var(--navy); }
 
         /* Guarantee & Pilot */
         .guarantee { margin: 0 0 32px; padding: 24px 28px; background: #f0faf0; border-radius: 6px; border-left: 4px solid #4caf50; }
         .guarantee h3 { font-size: 16px; font-weight: 600; color: #2e7d32; margin-bottom: 10px; }
-        .guarantee p { font-size: 14px; color: #555555; line-height: 1.7; }
+        .guarantee p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
         .guarantee p + p { margin-top: 8px; }
-        .pilot { margin: 0 0 48px; padding: 24px 28px; background: #eef8fc; border-radius: 6px; border-left: 4px solid #00a8e1; }
-        .pilot h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 10px; }
-        .pilot p { font-size: 14px; color: #555555; line-height: 1.7; }
+        .pilot { margin: 0 0 48px; padding: 24px 28px; background: var(--bg-card-blue); border-radius: 6px; border-left: 4px solid var(--accent); }
+        .pilot h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+        .pilot p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
         .pilot p + p { margin-top: 8px; }
 
         /* CTA */
-        .cta { margin-top: 48px; padding-top: 32px; border-top: 1px solid #e4e8ec; }
-        .cta h2 { font-size: 18px; font-weight: 500; color: #1a3e5c; margin-bottom: 12px; }
-        .cta p { font-size: 15px; color: #444444; line-height: 1.8; }
+        .cta { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+        .cta h2 { font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+        .cta p { font-size: 15px; color: var(--text-mid); line-height: 1.8; }
         .cta p + p { margin-top: 14px; }
 
-        .footer { background: #1a3e5c; padding: 32px 60px; margin-top: 60px; text-align: center; }
+        .footer { background: var(--navy); padding: 32px 60px; margin-top: 60px; text-align: center; }
         .footer-text { color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 0.06em; }
-        .footer-text a { color: #00a8e1; text-decoration: none; }
+        .footer-text a { color: var(--accent); text-decoration: none; }
 
         /* PDF Modal */
         .pdf-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000; align-items: center; justify-content: center; flex-direction: column; }
@@ -234,6 +343,33 @@
             <div class="header-date">Proposal — March 2026</div>
         </div>
 
+        <nav class="proposal-nav">
+            <div class="proposal-nav-links">
+                <a href="#market">Market</a>
+                <div class="nav-divider"></div>
+                <a href="#shift">Before/After</a>
+                <div class="nav-divider"></div>
+                <a href="#landscape">Landscape</a>
+                <div class="nav-divider"></div>
+                <a href="#ai-moment">AI Moment</a>
+                <div class="nav-divider"></div>
+                <a href="#revenue">Revenue</a>
+                <div class="nav-divider"></div>
+                <a href="#phase1">Phase 1</a>
+                <div class="nav-divider"></div>
+                <a href="#phase2">Phase 2</a>
+                <div class="nav-divider"></div>
+                <a href="#timeline">90 Days</a>
+                <div class="nav-divider"></div>
+                <a href="#monetization">Monetization</a>
+                <div class="nav-divider"></div>
+                <a href="#investment">Investment</a>
+                <div class="nav-divider"></div>
+                <a href="#next-step">Next Step</a>
+            </div>
+            <button class="dark-mode-toggle" id="darkToggle">☽ Dark</button>
+        </nav>
+
         <div class="container">
             <div class="title-block">
                 <h1>Cloud Value Lab</h1>
@@ -247,6 +383,7 @@
             </div>
 
             <!-- Market Opportunity Stats -->
+            <div id="market"></div>
             <div class="market-opportunity">
                 <h3>The Market Right Now</h3>
                 <div class="market-stat-grid">
@@ -273,6 +410,7 @@
             </div>
 
             <!-- Before / After -->
+            <div id="shift"></div>
             <div class="before-after">
                 <div class="section-header">The Shift</div>
                 <h2 class="section-title">Your Week: Before and After</h2>
@@ -302,6 +440,7 @@
             </div>
 
             <!-- Competitive Landscape -->
+            <div id="landscape"></div>
             <div class="landscape">
                 <div class="section-header">Your Market</div>
                 <h2 class="section-title">Where Cloud Value Lab Stands</h2>
@@ -366,6 +505,7 @@
             </div>
 
             <!-- AI Moment -->
+            <div id="ai-moment"></div>
             <div style="padding: 28px 32px; background: #1a3e5c; border-radius: 6px; margin-bottom: 48px;">
                 <div style="font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px;">The AI Moment</div>
                 <p style="font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 12px;">There is a once-in-a-generation content gap opening right now. AI cost management went from <strong style="color: #00a8e1;">31% of organizations tracking it in 2024 → 98% in 2026</strong> — the fastest adoption curve in FinOps history. GPU clusters run idle 15–30% of the time. Token-level cost attribution, model routing economics, and AI ROI framing for executives are skills every senior practitioner needs — and almost no content covers them with real depth.</p>
@@ -373,6 +513,7 @@
             </div>
 
             <!-- ROI Section -->
+            <div id="revenue"></div>
             <div class="roi-section">
                 <div class="section-header">Revenue Potential</div>
                 <h2 class="section-title">What This Produces Financially</h2>
@@ -407,7 +548,7 @@
                 <h2 class="section-title">What We'll Build Together</h2>
             </div>
 
-            <div class="phase">
+            <div id="phase1" class="phase">
                 <div class="phase-label">Phase 1</div>
                 <h2>Foundation</h2>
                 <div style="font-size: 15px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px;">Platform & Positioning</div>
@@ -427,7 +568,7 @@
                 </div>
             </div>
 
-            <div class="phase">
+            <div id="phase2" class="phase">
                 <div class="phase-label">Phase 2</div>
                 <h2>Automation</h2>
                 <div style="font-size: 15px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px;">CMS, Content Engine & Distribution</div>
@@ -493,6 +634,7 @@
             </div>
 
             <!-- 90-Day Timeline -->
+            <div id="timeline"></div>
             <div class="section-header">Execution</div>
             <h2 class="section-title">First 90 Days</h2>
 
@@ -534,6 +676,7 @@
             </div>
 
             <!-- Monetization Roadmap -->
+            <div id="monetization"></div>
             <div class="future">
                 <h3>On the Horizon: Monetization Roadmap</h3>
                 <p>Once CVL has consistent content flow and a growing subscriber base, the revenue model builds naturally. B2B tech niche newsletters command $50–$150+ CPM — and the FinOps vendor landscape has 60+ active sponsors, flush with capital, who need practitioner mindshare. You build the audience, the economics follow. When you're ready, we'll build:</p>
@@ -556,6 +699,7 @@
             </div>
 
             <!-- Pricing -->
+            <div id="investment"></div>
             <div class="pricing">
                 <h2>Investment</h2>
                 <div class="pricing-row">
@@ -607,6 +751,7 @@
             </div>
 
             <!-- CTA -->
+            <div id="next-step"></div>
             <div class="cta">
                 <h2>Next Step</h2>
                 <p>Let's get on a call this week. We'll walk through this proposal together, answer any questions, and — if you're ready — pick a transcript for the pilot piece so you can see the output firsthand.</p>
@@ -643,6 +788,30 @@
     </div>
 
     <script>
+        // Dark mode
+        var toggle = document.getElementById('darkToggle');
+        var dark = localStorage.getItem('cvl-dark') === '1';
+        if (dark) { document.body.classList.add('dark'); toggle.textContent = '☀ Light'; }
+        toggle.addEventListener('click', function () {
+            dark = !dark;
+            document.body.classList.toggle('dark', dark);
+            toggle.textContent = dark ? '☀ Light' : '☽ Dark';
+            localStorage.setItem('cvl-dark', dark ? '1' : '0');
+        });
+
+        // Smooth scroll for nav anchors
+        document.querySelectorAll('.proposal-nav-links a').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                var id = this.getAttribute('href').slice(1);
+                var el = document.getElementById(id);
+                if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // PDF modal
         document.getElementById('downloadBtn').addEventListener('click', function () {
             document.getElementById('pdfModal').classList.add('active');
         });
