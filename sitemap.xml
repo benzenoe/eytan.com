@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <url>
+        <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <url>
+        <loc>https://eytan.com/blog/fr/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
+    <url>
+        <loc>https://eytan.com/blog/pt/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): test4 -->
     <url>
         <loc>https://eytan.com/blog/hey-siri.html</loc>
@@ -487,30 +511,6 @@
     <!-- Blog Post (PT): bitcoins-24hour-price-explosion -->
     <url>
         <loc>https://eytan.com/blog/pt/bitcoins-24hour-price-explosion.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
-    <url>
-        <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
-    <url>
-        <loc>https://eytan.com/blog/fr/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
-    <url>
-        <loc>https://eytan.com/blog/pt/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
