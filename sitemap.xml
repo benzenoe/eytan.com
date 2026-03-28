@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): bitcoins-24hour-price-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/bitcoins-24hour-price-explosion.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): bitcoins-24hour-price-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/fr/bitcoins-24hour-price-explosion.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): bitcoins-24hour-price-explosion -->
+    <url>
+        <loc>https://eytan.com/blog/pt/bitcoins-24hour-price-explosion.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
     <url>
         <loc>https://eytan.com/blog/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
@@ -487,30 +511,6 @@
     <!-- Blog Post (PT): hydrogen-energy-powering-a-global-green-revolution -->
     <url>
         <loc>https://eytan.com/blog/pt/hydrogen-energy-powering-a-global-green-revolution.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): bitcoins-24hour-price-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/bitcoins-24hour-price-explosion.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): bitcoins-24hour-price-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/fr/bitcoins-24hour-price-explosion.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): bitcoins-24hour-price-explosion -->
-    <url>
-        <loc>https://eytan.com/blog/pt/bitcoins-24hour-price-explosion.html</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
