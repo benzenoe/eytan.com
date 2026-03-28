@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
+    <url>
+        <loc>https://eytan.com/blog/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
+    <url>
+        <loc>https://eytan.com/blog/fr/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
+    <url>
+        <loc>https://eytan.com/blog/pt/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): ai-acceleration-power-race-2026 -->
     <url>
         <loc>https://eytan.com/blog/ai-acceleration-part-1-short-term-vision-2035.html</loc>
@@ -488,30 +512,6 @@
     <url>
         <loc>https://eytan.com/blog/pt/had-you-heard-of-notion-have-you-used-it.html</loc>
         <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
-    <url>
-        <loc>https://eytan.com/blog/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
-    <url>
-        <loc>https://eytan.com/blog/fr/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
-        <lastmod>2026-02-04</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
-    <url>
-        <loc>https://eytan.com/blog/pt/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
-        <lastmod>2026-02-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
