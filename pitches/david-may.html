@@ -7,11 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
@@ -29,544 +25,205 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        .header-brand {
-            color: #ffffff;
-            font-weight: 300;
-            font-size: 22px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        .header-brand strong {
-            font-weight: 600;
-        }
-
-        .header-date {
-            color: rgba(255,255,255,0.6);
-            font-size: 13px;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
-        .container {
-            max-width: 740px;
-            margin: 0 auto;
-            padding: 60px 40px 80px;
-        }
-
-        .title-block {
-            margin-bottom: 48px;
-            padding-bottom: 32px;
-            border-bottom: 3px solid #00a8e1;
-        }
-
-        .title-block h1 {
-            font-size: 28px;
-            font-weight: 300;
-            color: #1a3e5c;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .title-block .subtitle {
-            font-size: 15px;
-            color: #666666;
-            font-weight: 400;
-        }
-
-        .title-block .prepared-for {
-            margin-top: 16px;
-            font-size: 14px;
-            color: #999999;
-            letter-spacing: 0.04em;
-        }
-
-        .intro {
-            font-size: 16px;
-            color: #444444;
-            margin-bottom: 48px;
-            line-height: 1.8;
-        }
-
-        .intro p + p {
-            margin-top: 14px;
-        }
-
-        .section-header {
-            font-size: 12px;
-            font-weight: 600;
-            color: #00a8e1;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-
-        h2.section-title {
-            font-size: 22px;
-            font-weight: 500;
-            color: #1a3e5c;
-            margin-bottom: 16px;
-        }
-
-        .landscape {
-            margin-bottom: 52px;
-        }
-
-        .landscape .landscape-intro {
-            font-size: 15px;
-            color: #555555;
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .competitor-grid {
-            display: grid;
-            gap: 16px;
-        }
-
-        .competitor-card {
-            background: #f7f9fb;
-            border-radius: 6px;
-            padding: 20px 24px;
-            border-left: 4px solid #e4e8ec;
-        }
-
-        .competitor-card.cvl {
-            border-left-color: #00a8e1;
-            background: #eef8fc;
-        }
-
-        .competitor-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1a3e5c;
-            margin-bottom: 4px;
-        }
-
-        .competitor-type {
-            font-size: 12px;
-            color: #999999;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .competitor-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 10px;
-        }
-
-        .stat {
-            font-size: 13px;
-            color: #666666;
-        }
-
-        .stat strong {
-            color: #1a3e5c;
-            font-weight: 600;
-        }
-
-        .competitor-note {
-            font-size: 13px;
-            color: #777777;
-            line-height: 1.5;
-            margin-top: 6px;
-        }
-
-        .landscape-takeaway {
-            margin-top: 24px;
-            padding: 20px 24px;
-            background: #1a3e5c;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        .landscape-takeaway strong {
-            color: #00a8e1;
-        }
-
-        .phase {
-            margin-bottom: 44px;
-            padding-left: 20px;
-            border-left: 4px solid #00a8e1;
-        }
-
-        .phase-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #00a8e1;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .phase h2 {
-            font-size: 20px;
-            font-weight: 500;
-            color: #1a3e5c;
-            margin-bottom: 12px;
-        }
-
-        .phase .why {
-            font-size: 15px;
-            color: #555555;
-            margin-bottom: 16px;
-            line-height: 1.7;
-        }
-
-        .phase ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .phase ul li {
-            padding: 6px 0 6px 20px;
-            position: relative;
-            font-size: 15px;
-            color: #444444;
-        }
-
-        .phase ul li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 14px;
-            width: 8px;
-            height: 8px;
-            background: #00a8e1;
-            border-radius: 50%;
-        }
-
-        .future {
-            margin-bottom: 48px;
-            padding: 24px 28px;
-            background: #f7f9fb;
-            border-radius: 6px;
-            border: 1px dashed #d0d8e0;
-        }
-
-        .future h3 {
-            font-size: 16px;
-            font-weight: 500;
-            color: #1a3e5c;
-            margin-bottom: 10px;
-        }
-
-        .future p {
-            font-size: 14px;
-            color: #777777;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .future ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .future ul li {
-            padding: 4px 0 4px 18px;
-            position: relative;
-            font-size: 14px;
-            color: #888888;
-        }
-
-        .future ul li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 12px;
-            width: 6px;
-            height: 6px;
-            background: #c0c8d0;
-            border-radius: 50%;
-        }
-
-        .pricing {
-            background: #f7f9fb;
-            border-radius: 6px;
-            padding: 36px 32px;
-            margin: 48px 0;
-        }
-
-        .pricing h2 {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1a3e5c;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .pricing-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 16px 0;
-            border-bottom: 1px solid #e4e8ec;
-        }
-
-        .pricing-row:last-of-type {
-            border-bottom: none;
-        }
-
-        .pricing-label {
-            font-size: 15px;
-            color: #444444;
-            flex: 1;
-        }
-
-        .pricing-label .note {
-            display: block;
-            font-size: 13px;
-            color: #888888;
-            margin-top: 2px;
-        }
-
-        .pricing-amount {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1a3e5c;
-            text-align: right;
-            white-space: nowrap;
-        }
-
-        .pricing-note {
-            font-size: 14px;
-            color: #777777;
-            margin-top: 20px;
-            line-height: 1.6;
-        }
-
-        .market-context {
-            margin-top: 24px;
-            padding: 20px 24px;
-            background: #eef8fc;
-            border-radius: 6px;
-            border-left: 4px solid #00a8e1;
-        }
-
-        .market-context p {
-            font-size: 14px;
-            color: #555555;
-            line-height: 1.6;
-        }
-
-        .market-context strong {
-            color: #1a3e5c;
-        }
-
-        .cta {
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid #e4e8ec;
-        }
-
-        .cta h2 {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1a3e5c;
-            margin-bottom: 12px;
-        }
-
-        .cta p {
-            font-size: 15px;
-            color: #444444;
-            line-height: 1.8;
-        }
-
-        .cta p + p {
-            margin-top: 14px;
-        }
-
-        .footer {
-            background: #1a3e5c;
-            padding: 32px 60px;
-            margin-top: 60px;
-            text-align: center;
-        }
-
-        .footer-text {
-            color: rgba(255,255,255,0.5);
-            font-size: 12px;
-            letter-spacing: 0.06em;
-        }
-
-        .footer-text a {
-            color: #00a8e1;
-            text-decoration: none;
-        }
-
-
-        .pdf-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.75);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .pdf-modal-overlay.active {
-            display: flex;
-        }
-
-        .pdf-modal {
-            background: #1a3e5c;
-            border-radius: 8px;
-            width: 90vw;
-            max-width: 860px;
-            height: 88vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-        }
-
-        .pdf-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            flex-shrink: 0;
-        }
-
-        .pdf-modal-title {
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
-        .pdf-modal-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .pdf-modal-actions button {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 9px 22px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-close-modal {
-            background: rgba(255,255,255,0.1);
-            color: #ffffff;
-        }
-
-        .btn-close-modal:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .btn-confirm-download {
-            background: #00a8e1;
-            color: #ffffff;
-        }
-
-        .btn-confirm-download:hover {
-            background: #0090c4;
-        }
-
-        .pdf-modal-body {
-            flex: 1;
-            overflow: hidden;
-        }
-
-        .pdf-modal-body iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .pdf-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
-            letter-spacing: 0.06em;
-        }
-
-        .download-btn {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
-            background: #00a8e1;
-            color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0,168,225,0.35);
-            transition: background 0.2s, box-shadow 0.2s;
-            z-index: 1000;
-        }
-
-        .download-btn:hover {
-            background: #0090c4;
-            box-shadow: 0 6px 20px rgba(0,168,225,0.45);
-        }
+        .header-brand { color: #ffffff; font-weight: 300; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; }
+        .header-brand strong { font-weight: 600; }
+        .header-date { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+        .container { max-width: 740px; margin: 0 auto; padding: 60px 40px 80px; }
+
+        .title-block { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 3px solid #00a8e1; }
+        .title-block h1 { font-size: 28px; font-weight: 300; color: #1a3e5c; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+        .title-block .subtitle { font-size: 15px; color: #666666; font-weight: 400; }
+        .title-block .prepared-for { margin-top: 16px; font-size: 14px; color: #999999; letter-spacing: 0.04em; }
+
+        .intro { font-size: 16px; color: #444444; margin-bottom: 48px; line-height: 1.8; }
+        .intro p + p { margin-top: 14px; }
+
+        .section-header { font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+        h2.section-title { font-size: 22px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px; }
+
+        /* Market Opportunity */
+        .market-opportunity { margin-bottom: 52px; padding: 28px; background: #f7f9fb; border-radius: 6px; border-left: 4px solid #00a8e1; }
+        .market-opportunity h3 { font-size: 18px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px; }
+        .market-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .market-stat { background: #ffffff; border-radius: 6px; padding: 16px 20px; text-align: center; }
+        .market-stat .number { font-size: 22px; font-weight: 700; color: #00a8e1; display: block; margin-bottom: 4px; }
+        .market-stat .label { font-size: 12px; color: #666666; line-height: 1.4; }
+        .market-opportunity p { font-size: 15px; color: #555555; line-height: 1.7; margin-top: 12px; }
+
+        /* Before / After */
+        .before-after { margin-bottom: 52px; }
+        .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 16px; border-radius: 6px; overflow: hidden; }
+        .ba-col { padding: 24px; }
+        .ba-col.before { background: #f7f9fb; border-right: 2px solid #e4e8ec; }
+        .ba-col.after { background: #eef8fc; }
+        .ba-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+        .ba-col.before h4 { color: #999999; }
+        .ba-col.after h4 { color: #00a8e1; }
+        .ba-col ul { list-style: none; padding: 0; }
+        .ba-col ul li { padding: 5px 0 5px 16px; position: relative; font-size: 14px; line-height: 1.5; }
+        .ba-col.before ul li { color: #888888; }
+        .ba-col.after ul li { color: #444444; }
+        .ba-col ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; }
+        .ba-col.before ul li::before { background: #c0c8d0; }
+        .ba-col.after ul li::before { background: #00a8e1; }
+        .ba-summary { margin-top: 16px; padding: 16px 20px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.6; }
+        .ba-summary strong { color: #00a8e1; }
+
+        /* Landscape */
+        .landscape { margin-bottom: 52px; }
+        .landscape .landscape-intro { font-size: 15px; color: #555555; line-height: 1.7; margin-bottom: 24px; }
+        .competitor-grid { display: grid; gap: 16px; }
+        .competitor-card { background: #f7f9fb; border-radius: 6px; padding: 20px 24px; border-left: 4px solid #e4e8ec; }
+        .competitor-card.cvl { border-left-color: #00a8e1; background: #eef8fc; }
+        .competitor-name { font-size: 15px; font-weight: 600; color: #1a3e5c; margin-bottom: 4px; }
+        .competitor-type { font-size: 12px; color: #999999; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
+        .competitor-stats { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; }
+        .stat { font-size: 13px; color: #666666; }
+        .stat strong { color: #1a3e5c; font-weight: 600; }
+        .competitor-note { font-size: 13px; color: #777777; line-height: 1.5; margin-top: 6px; }
+        .landscape-takeaway { margin-top: 24px; padding: 20px 24px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.7; }
+        .landscape-takeaway strong { color: #00a8e1; }
+
+        /* ROI */
+        .roi-section { margin-bottom: 52px; }
+        .roi-box { background: #f7f9fb; border-radius: 6px; padding: 28px; margin-top: 16px; }
+        .roi-box h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 12px; }
+        .roi-box p { font-size: 15px; color: #555555; line-height: 1.7; margin-bottom: 10px; }
+        .roi-box ul { list-style: none; padding: 0; margin-bottom: 16px; }
+        .roi-box ul li { padding: 5px 0 5px 20px; position: relative; font-size: 14px; color: #555555; }
+        .roi-box ul li::before { content: ''; position: absolute; left: 0; top: 13px; width: 7px; height: 7px; background: #00a8e1; border-radius: 50%; }
+        .roi-highlight { margin-top: 16px; padding: 16px 20px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.7; }
+        .roi-highlight strong { color: #00a8e1; }
+
+        /* Phases */
+        .phase { margin-bottom: 44px; padding-left: 20px; border-left: 4px solid #00a8e1; }
+        .phase-label { font-size: 11px; font-weight: 600; color: #00a8e1; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+        .phase h2 { font-size: 20px; font-weight: 500; color: #1a3e5c; margin-bottom: 12px; }
+        .phase .why { font-size: 15px; color: #555555; margin-bottom: 16px; line-height: 1.7; }
+        .phase ul { list-style: none; padding: 0; }
+        .phase ul li { padding: 6px 0 6px 20px; position: relative; font-size: 15px; color: #444444; }
+        .phase ul li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 8px; background: #00a8e1; border-radius: 50%; }
+
+        /* Deliverables */
+        .deliverables { margin-top: 24px; margin-bottom: 16px; padding: 24px 28px; background: #eef8fc; border-radius: 6px; border: 1px solid #c8e6f0; }
+        .deliverables h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 6px; }
+        .deliverables .del-subtitle { font-size: 13px; color: #777777; margin-bottom: 16px; }
+        .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .del-col h4 { font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+        .del-col ul { list-style: none; padding: 0; }
+        .del-col ul li { padding: 4px 0 4px 16px; position: relative; font-size: 14px; color: #555555; line-height: 1.5; }
+        .del-col ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; background: #00a8e1; border-radius: 50%; }
+        .deliverables .del-result { font-size: 14px; color: #1a3e5c; font-weight: 500; margin-top: 8px; }
+
+        /* How it works */
+        .how-it-works { margin-top: 24px; margin-bottom: 24px; padding: 24px 28px; background: #f7f9fb; border-radius: 6px; border-left: 4px solid #00a8e1; }
+        .how-it-works h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 16px; }
+        .how-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .how-step { text-align: center; padding: 16px 12px; background: #ffffff; border-radius: 6px; }
+        .how-step .step-num { font-size: 24px; font-weight: 700; color: #00a8e1; display: block; margin-bottom: 6px; }
+        .how-step .step-who { font-size: 11px; font-weight: 600; color: #999999; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+        .how-step .step-desc { font-size: 13px; color: #555555; line-height: 1.4; }
+
+        /* Timeline */
+        .timeline { margin-bottom: 52px; }
+        .timeline-grid { display: grid; gap: 16px; margin-top: 16px; }
+        .timeline-block { background: #f7f9fb; border-radius: 6px; padding: 20px 24px; border-left: 4px solid #00a8e1; }
+        .timeline-block .period { font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+        .timeline-block ul { list-style: none; padding: 0; }
+        .timeline-block ul li { padding: 3px 0 3px 16px; position: relative; font-size: 14px; color: #555555; }
+        .timeline-block ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; background: #00a8e1; border-radius: 50%; }
+        .timeline-outcome { margin-top: 16px; padding: 16px 20px; background: #1a3e5c; border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.6; }
+        .timeline-outcome strong { color: #00a8e1; }
+
+        /* Future / Monetization */
+        .future { margin-bottom: 48px; padding: 24px 28px; background: #f7f9fb; border-radius: 6px; border: 1px dashed #d0d8e0; }
+        .future h3 { font-size: 16px; font-weight: 500; color: #1a3e5c; margin-bottom: 10px; }
+        .future p { font-size: 14px; color: #777777; line-height: 1.6; margin-bottom: 12px; }
+        .future ul { list-style: none; padding: 0; }
+        .future ul li { padding: 4px 0 4px 18px; position: relative; font-size: 14px; color: #888888; }
+        .future ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; background: #c0c8d0; border-radius: 50%; }
+
+        /* Why Us */
+        .why-us { margin-bottom: 32px; padding: 24px 28px; background: #f7f9fb; border-radius: 6px; border-left: 4px solid #1a3e5c; }
+        .why-us h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 12px; }
+        .why-us p { font-size: 15px; color: #444444; line-height: 1.7; margin-bottom: 10px; }
+        .why-us p:last-child { margin-bottom: 0; }
+
+        /* Pricing */
+        .pricing { background: #f7f9fb; border-radius: 6px; padding: 36px 32px; margin: 48px 0; }
+        .pricing h2 { font-size: 18px; font-weight: 500; color: #1a3e5c; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+        .pricing-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #e4e8ec; }
+        .pricing-row:last-of-type { border-bottom: none; }
+        .pricing-label { font-size: 15px; color: #444444; flex: 1; }
+        .pricing-label .note { display: block; font-size: 13px; color: #888888; margin-top: 2px; }
+        .pricing-label .founding { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; color: #00a8e1; letter-spacing: 0.06em; text-transform: uppercase; }
+        .pricing-amount { font-size: 18px; font-weight: 600; color: #1a3e5c; text-align: right; white-space: nowrap; }
+        .pricing-amount .standard-rate { display: block; font-size: 13px; font-weight: 400; color: #aaaaaa; text-decoration: line-through; }
+        .pricing-note { font-size: 14px; color: #777777; margin-top: 20px; line-height: 1.6; }
+        .pricing-terms { margin-top: 16px; padding: 16px 20px; background: #ffffff; border-radius: 4px; border: 1px solid #e4e8ec; }
+        .pricing-terms p { font-size: 13px; color: #666666; line-height: 1.6; margin-bottom: 6px; }
+        .pricing-terms p:last-child { margin-bottom: 0; }
+        .market-context { margin-top: 24px; padding: 20px 24px; background: #eef8fc; border-radius: 6px; border-left: 4px solid #00a8e1; }
+        .market-context p { font-size: 14px; color: #555555; line-height: 1.6; }
+        .market-context strong { color: #1a3e5c; }
+
+        /* Guarantee & Pilot */
+        .guarantee { margin: 0 0 32px; padding: 24px 28px; background: #f0faf0; border-radius: 6px; border-left: 4px solid #4caf50; }
+        .guarantee h3 { font-size: 16px; font-weight: 600; color: #2e7d32; margin-bottom: 10px; }
+        .guarantee p { font-size: 14px; color: #555555; line-height: 1.7; }
+        .guarantee p + p { margin-top: 8px; }
+        .pilot { margin: 0 0 48px; padding: 24px 28px; background: #eef8fc; border-radius: 6px; border-left: 4px solid #00a8e1; }
+        .pilot h3 { font-size: 16px; font-weight: 600; color: #1a3e5c; margin-bottom: 10px; }
+        .pilot p { font-size: 14px; color: #555555; line-height: 1.7; }
+        .pilot p + p { margin-top: 8px; }
+
+        /* CTA */
+        .cta { margin-top: 48px; padding-top: 32px; border-top: 1px solid #e4e8ec; }
+        .cta h2 { font-size: 18px; font-weight: 500; color: #1a3e5c; margin-bottom: 12px; }
+        .cta p { font-size: 15px; color: #444444; line-height: 1.8; }
+        .cta p + p { margin-top: 14px; }
+
+        .footer { background: #1a3e5c; padding: 32px 60px; margin-top: 60px; text-align: center; }
+        .footer-text { color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 0.06em; }
+        .footer-text a { color: #00a8e1; text-decoration: none; }
+
+        /* PDF Modal */
+        .pdf-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000; align-items: center; justify-content: center; flex-direction: column; }
+        .pdf-modal-overlay.active { display: flex; }
+        .pdf-modal { background: #1a3e5c; border-radius: 8px; width: 90vw; max-width: 860px; height: 88vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+        .pdf-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+        .pdf-modal-title { color: #ffffff; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+        .pdf-modal-actions { display: flex; gap: 12px; }
+        .pdf-modal-actions button { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 22px; border-radius: 4px; border: none; cursor: pointer; transition: background 0.2s; }
+        .btn-close-modal { background: rgba(255,255,255,0.1); color: #ffffff; }
+        .btn-close-modal:hover { background: rgba(255,255,255,0.2); }
+        .btn-confirm-download { background: #00a8e1; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 22px; border-radius: 4px; }
+        .btn-confirm-download:hover { background: #0090c4; }
+        .pdf-modal-body { flex: 1; overflow: hidden; }
+        .pdf-modal-body iframe { width: 100%; height: 100%; border: none; }
+
+        /* Download button */
+        .download-btn { position: fixed; bottom: 32px; right: 32px; background: #00a8e1; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,168,225,0.35); transition: background 0.2s, box-shadow 0.2s; z-index: 1000; }
+        .download-btn:hover { background: #0090c4; box-shadow: 0 6px 20px rgba(0,168,225,0.45); }
 
         @media print {
-            .download-btn { display: none; }
-            body {
-                font-size: 14px;
-            }
-            .header, .footer {
-                padding: 24px 40px;
-            }
-            .container {
-                padding: 40px 20px 40px;
-            }
-            .phase {
-                margin-bottom: 28px;
-            }
-            .pricing {
-                padding: 24px 20px;
-            }
+            .download-btn, .pdf-modal-overlay { display: none !important; }
+            body { font-size: 14px; }
+            .header, .footer { padding: 24px 40px; }
+            .container { padding: 40px 20px; }
+            .phase { margin-bottom: 28px; }
+            .pricing { padding: 24px 20px; }
         }
 
         @media (max-width: 600px) {
-            .header {
-                padding: 28px 24px;
-            }
-            .container {
-                padding: 40px 20px 60px;
-            }
-            .competitor-stats {
-                flex-direction: column;
-                gap: 6px;
-            }
-            .pricing-row {
-                flex-direction: column;
-                gap: 4px;
-            }
-            .pricing-amount {
-                text-align: left;
-            }
+            .header { padding: 28px 24px; }
+            .container { padding: 40px 20px 60px; }
+            .market-stat-grid, .ba-grid, .deliverables-grid, .how-steps { grid-template-columns: 1fr; }
+            .ba-col.before { border-right: none; border-bottom: 2px solid #e4e8ec; }
+            .competitor-stats { flex-direction: column; gap: 6px; }
+            .pricing-row { flex-direction: column; gap: 4px; }
+            .pricing-amount { text-align: left; }
         }
     </style>
 </head>
@@ -580,19 +237,75 @@
         <div class="container">
             <div class="title-block">
                 <h1>Cloud Value Lab</h1>
-                <div class="subtitle">A partnership to automate, professionalize, and grow your platform</div>
-                <div class="prepared-for">Prepared for David May — March 18, 2026</div>
+                <div class="subtitle">A partnership to automate, professionalize, and scale your platform</div>
+                <div class="prepared-for">Prepared for David May</div>
             </div>
 
             <div class="intro">
-                <p>David — great conversation on Tuesday with you and Eytan. Your vision for Cloud Value Lab is clear, the market opportunity is real, and your content is genuinely differentiated. The challenge is straightforward: you need the operation to run without you doing the manual work, especially once your new role starts next month.</p>
-                <p>Before putting this together, we did our homework on your space. What we found confirmed what you already know — but puts some numbers behind it. The short version: <strong>$44.5 billion in cloud waste is sitting on the table right now, the discipline tasked with stopping it has 35,000 professionals and is growing to 100,000 — and there is still no independent, vendor-neutral media platform that serves them.</strong> That is the opening Cloud Value Lab is built for.</p>
+                <p>David — great conversation recently with you and Eytan. Your vision for Cloud Value Lab is clear, the market opportunity is real, and your content is genuinely differentiated. The constraint is execution: building an operation that runs without requiring your direct involvement as your time becomes more constrained.</p>
+                <p>Before putting this together, we did our homework on your space. What we found confirmed what you already know — but puts some numbers behind it.</p>
             </div>
 
+            <!-- Market Opportunity Stats -->
+            <div class="market-opportunity">
+                <h3>The Market Right Now</h3>
+                <div class="market-stat-grid">
+                    <div class="market-stat">
+                        <span class="number">$44.5B</span>
+                        <span class="label">in annual cloud waste sitting on the table</span>
+                    </div>
+                    <div class="market-stat">
+                        <span class="number">$15B → $27B</span>
+                        <span class="label">FinOps market by 2030 (12.6% CAGR)</span>
+                    </div>
+                </div>
+                <div class="market-stat-grid">
+                    <div class="market-stat">
+                        <span class="number">35K → 100K</span>
+                        <span class="label">practitioner community within 3 years</span>
+                    </div>
+                    <div class="market-stat">
+                        <span class="number">31% → 98%</span>
+                        <span class="label">AI cost management adoption (2024–2026)</span>
+                    </div>
+                </div>
+                <p>This is a category in formation. The practitioners are multiplying, the budgets are growing, and AI is rewriting the playbook — but there is no independent, vendor-neutral media platform serving this audience at scale. That's the gap Cloud Value Lab was built to fill.</p>
+            </div>
+
+            <!-- Before / After -->
+            <div class="before-after">
+                <div class="section-header">The Shift</div>
+                <h2 class="section-title">Your Week: Before and After</h2>
+                <div class="ba-grid">
+                    <div class="ba-col before">
+                        <h4>Your week now</h4>
+                        <ul>
+                            <li>Record and schedule expert interviews</li>
+                            <li>Manually transcribe and edit into articles</li>
+                            <li>Write social posts for each platform</li>
+                            <li>Format and send the newsletter</li>
+                            <li>Clip video highlights by hand</li>
+                            <li>Track what's working, what's not</li>
+                            <li>Manage the website and archive</li>
+                        </ul>
+                    </div>
+                    <div class="ba-col after">
+                        <h4>Your week after Phase 2</h4>
+                        <ul>
+                            <li>Record expert interviews</li>
+                            <li>Review final drafts (15 min)</li>
+                            <li>Everything else is automated</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ba-summary"><strong>The result:</strong> You go from 15–20 hours per week of production work to under 2 hours. Your time shifts entirely to relationships, interviews, and strategic decisions — the things only you can do.</div>
+            </div>
+
+            <!-- Competitive Landscape -->
             <div class="landscape">
                 <div class="section-header">Your Market</div>
                 <h2 class="section-title">Where Cloud Value Lab Stands</h2>
-                <p class="landscape-intro">The FinOps market is growing from roughly $15 billion today to nearly $27 billion by 2030 — a 12.6% CAGR driven by exploding cloud adoption, AI infrastructure costs, and a discipline now present in 48 of the Fortune 50. The practitioner community stands at 35,000 professionals and is on track to hit 100,000 within three years. Despite all of that, the media landscape serving this audience is almost comically thin. Here's what we're seeing:</p>
+                <p class="landscape-intro">The FinOps media landscape has a handful of established players — but a clear window for the kind of independent, vendor-neutral, expert-level platform you're building. The practitioner community stands at 35,000 professionals, on track to hit 100,000 within three years. Despite all of that, the media landscape serving this audience is almost comically thin. Here's what we're seeing:</p>
 
                 <div class="competitor-grid">
                     <div class="competitor-card">
@@ -602,8 +315,7 @@
                             <div class="stat"><strong>95K</strong> community</div>
                             <div class="stat"><strong>25.8K</strong> LinkedIn</div>
                         </div>
-                        <div class="competitor-note">Certifications & events</div>
-                        <p style="font-size: 13px; color: #777777; line-height: 1.5; margin-top: 6px;">Institutional player — sets standards and runs conferences. Not a content competitor, but they define the ecosystem vocabulary. Their audience is your audience.</p>
+                        <div class="competitor-note">Certifications & events. Institutional player — sets standards and runs conferences. Not a content competitor today, but they define the ecosystem vocabulary and could move into media. Their audience is your audience. Speed matters.</div>
                     </div>
 
                     <div class="competitor-card">
@@ -613,8 +325,7 @@
                             <div class="stat"><strong>~6,500</strong> subscribers</div>
                             <div class="stat"><strong>12K</strong> LinkedIn</div>
                         </div>
-                        <div class="competitor-note">Vendor-sponsored</div>
-                        <p style="font-size: 13px; color: #777777; line-height: 1.5; margin-top: 6px;">Run by a Madrid-based marketing agency whose clients are FinOps vendors. Content is curated links, not original thought leadership. Revenue comes from sponsorships and vendor webinars. This is the model to beat — and your content already outclasses theirs. FinOps X 2025 had 60+ sponsors and 2,000+ attendees, confirming the sponsorship economy is real and growing.</p>
+                        <div class="competitor-note">Vendor-sponsored. Run by a Madrid-based marketing agency whose clients are FinOps vendors. Content is curated links, not original thought leadership. Revenue comes from sponsorships and vendor webinars. FinOps X 2025 had 60+ sponsors and 2,000+ attendees — confirming the sponsorship economy is real. This is the model to beat, and your content already outclasses theirs.</div>
                     </div>
 
                     <div class="competitor-card">
@@ -625,7 +336,16 @@
                             <div class="stat"><strong>30K+</strong> newsletter</div>
                             <div class="stat"><strong>669</strong> podcast episodes</div>
                         </div>
-                        <p style="font-size: 13px; color: #777777; line-height: 1.5; margin-top: 6px;">Massive following but AWS-only. Not multi-cloud FinOps, not a community. His company (Duckbill Group) raised $7.75M to pivot to software. He's moved away from content — leaving an even bigger opening for a multi-cloud, practitioner-first voice.</p>
+                        <div class="competitor-note">Massive following but AWS-only. Not multi-cloud FinOps, not a community. His company (Duckbill Group) raised $7.75M to pivot to software. He's moved away from content — leaving an even bigger opening for a multi-cloud, practitioner-first voice.</div>
+                    </div>
+
+                    <div class="competitor-card">
+                        <div class="competitor-name">Vendor Content Arms</div>
+                        <div class="competitor-type">Indirect Competitors</div>
+                        <div class="competitor-stats">
+                            <div class="stat">CloudZero, Vantage, Apptio</div>
+                        </div>
+                        <div class="competitor-note">Well-funded. Free content. FinOps tooling companies producing blogs, podcasts, and benchmarking reports as marketing. The tooling landscape has exploded from 5 tools to 115+, and consolidation is accelerating — Flexera alone acquired Spot, ProsperOps, and Chaos Genius in the past 14 months. Practitioners are increasingly skeptical of vendor-produced content. CVL's independence is the differentiator they can never match.</div>
                     </div>
 
                     <div class="competitor-card cvl">
@@ -636,21 +356,52 @@
                             <div class="stat"><strong>Organic</strong> growth</div>
                             <div class="stat"><strong>10%</strong> week-on-week</div>
                         </div>
-                        <p style="font-size: 13px; color: #777777; line-height: 1.5; margin-top: 6px;">Vendor-neutral. Expert-level interviews. Original content. The differentiators are real — but the infrastructure (site, social presence, content automation, SEO) isn't matching the quality of what you're producing.</p>
+                        <div class="competitor-note">Vendor-neutral. Expert-level interviews. Original content. The differentiators are real — but the infrastructure (site, social presence, content automation, SEO) isn't matching the quality of what you're producing.</div>
                     </div>
                 </div>
 
                 <div class="landscape-takeaway">
-                    <strong>The opportunity:</strong> The largest FinOps newsletter has only 6,500 subscribers in a discipline that touches 97 of the Fortune 100. The FinOps tooling landscape has exploded from 5 tools to 115+ — and practitioners are increasingly distrustful of vendor-produced content as consolidation accelerates (Flexera alone acquired Spot, ProsperOps, and Chaos Genius in the past 14 months). There is no Stratechery for FinOps. No independent, editorially-driven, vendor-neutral platform at the senior practitioner level. That is exactly the lane Cloud Value Lab can own — with the right infrastructure behind it.
+                    <strong>The window:</strong> The largest FinOps newsletter has only 6,500 subscribers in a discipline that touches 97 of the Fortune 100. There is no Stratechery for FinOps — no independent, editorially-driven, vendor-neutral platform at the senior practitioner level. There is a 12–18 month window to become the default independent voice in this space before better-funded players notice. At your current growth rate, you reach 5,000 subscribers in four months and overtake FinOps Weekly in six. The investment isn't in content — your content is already better. The investment is in velocity.
                 </div>
             </div>
 
-            <div style="margin-top: 48px; padding: 28px 32px; background: #1a3e5c; border-radius: 6px; margin-bottom: 48px;">
+            <!-- AI Moment -->
+            <div style="padding: 28px 32px; background: #1a3e5c; border-radius: 6px; margin-bottom: 48px;">
                 <div style="font-size: 12px; font-weight: 600; color: #00a8e1; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px;">The AI Moment</div>
                 <p style="font-size: 15px; color: #ffffff; line-height: 1.7; margin-bottom: 12px;">There is a once-in-a-generation content gap opening right now. AI cost management went from <strong style="color: #00a8e1;">31% of organizations tracking it in 2024 → 98% in 2026</strong> — the fastest adoption curve in FinOps history. GPU clusters run idle 15–30% of the time. Token-level cost attribution, model routing economics, and AI ROI framing for executives are skills every senior practitioner needs — and almost no content covers them with real depth.</p>
                 <p style="font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7;">The FinOps Foundation launched a dedicated "FinOps for AI" certification track. The tooling vendors are scrambling. But there is no independent editorial voice that practitioners trust to cut through the noise. <strong style="color: #ffffff;">Cloud Value Lab can own this conversation before anyone else does.</strong></p>
             </div>
 
+            <!-- ROI Section -->
+            <div class="roi-section">
+                <div class="section-header">Revenue Potential</div>
+                <h2 class="section-title">What This Produces Financially</h2>
+
+                <div class="roi-box">
+                    <h3>Newsletter Revenue (Base Layer)</h3>
+                    <p>At 5,000 subscribers with 2 sponsors per newsletter at $30–$75 CPM (standard for premium B2B tech verticals):</p>
+                    <ul>
+                        <li>~$300–$750 per send</li>
+                        <li>Weekly distribution → $1,200–$3,000 per month</li>
+                        <li>Annualized → $14,400–$36,000</li>
+                    </ul>
+                </div>
+
+                <div class="roi-box">
+                    <h3>Where the Real Revenue Lives</h3>
+                    <p>Newsletter sponsorship is the base layer — predictable, growing with subscriber count. But in comparable B2B media platforms, 70%+ of total revenue comes from the layers above it:</p>
+                    <ul>
+                        <li>Enterprise sponsorship packages → $15,000–$75,000 per year each</li>
+                        <li>Premium membership tier → gated deep-dive reports, benchmarking data, and peer roundtables</li>
+                        <li>Virtual summits and sponsored roundtables → $25,000–$200,000 per event</li>
+                        <li>FinOps job board — practitioners earn $100K–$160K+; specialized boards charge $500–$2,500 per posting</li>
+                        <li>Original research reports — State of FinOps-style benchmarking, co-sponsored at $10,000–$50,000 per report</li>
+                    </ul>
+                    <div class="roi-highlight"><strong>Conclusion:</strong> A properly executed platform reaches <strong>$100K–$300K+ annually</strong> before reaching true scale. Comparable B2B media communities — Exit Five, The Pragmatic Engineer — have built $1M–$3M+ ARR on these models with audiences your size or smaller. The investment to get there: $4,000 + $2,500/month.</div>
+                </div>
+            </div>
+
+            <!-- The Plan -->
             <div style="margin-top: 48px;">
                 <div class="section-header">The Plan</div>
                 <h2 class="section-title">What We'll Build Together</h2>
@@ -660,7 +411,7 @@
                 <div class="phase-label">Phase 1</div>
                 <h2>Foundation</h2>
                 <div style="font-size: 15px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px;">Platform & Positioning</div>
-                <p class="phase why">Before building anything new, we need to establish CVL as a standalone, professional platform — separate from your consulting site, with proper security, analytics, and SEO architecture. This is the baseline that earns trust from the senior practitioners you're targeting. Your content is already better than the competition. Your site needs to match.</p>
+                <p class="why">Before building anything new, we need to establish CVL as a standalone, professional platform — separate from your consulting site, with proper security, analytics, and SEO architecture. This is the baseline that earns trust from the senior practitioners you're targeting. Your content is already better than the competition. Your site needs to match.</p>
                 <ul>
                     <li>Competitive analysis and positioning strategy — where CVL fits in the FinOps landscape and how to differentiate</li>
                     <li>We will build a standalone CVL website — separate from your consulting site, purpose-built for content and community</li>
@@ -668,14 +419,20 @@
                     <li>Google Analytics with engagement tracking — know who's reading, what they care about, and where they drop off</li>
                     <li>Site-level SEO architecture — metadata, cross-linking, sitemap, structured data so search engines find you</li>
                     <li>Social media audit — current presence vs. competitors, platform gaps, and a roadmap to close the distance</li>
+                    <li>Content database and archive system — organized, searchable, tagged library of your existing expert interviews and articles</li>
                 </ul>
+
+                <div class="deliverables">
+                    <h3>Phase 1 Deliverable</h3>
+                    <p style="font-size: 15px; color: #555555; line-height: 1.7;">A live, SEO-optimized Cloud Value Lab platform with your existing content migrated, indexed, and searchable — ready for the content engine to run on top of.</p>
+                </div>
             </div>
 
             <div class="phase">
                 <div class="phase-label">Phase 2</div>
                 <h2>Automation</h2>
                 <div style="font-size: 15px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px;">CMS, Content Engine & Distribution</div>
-                <p class="phase why">The centerpiece of Phase 2 is a purpose-built CMS for Cloud Value Lab — your own platform to publish, manage, and organize all content without depending on third-party tools. Built on top of that is the automation layer that turns an interview transcript into a published, optimized article distributed across your channels, without you touching it. Your 4-5 hours a week go toward strategy and relationships, not production and admin.</p>
+                <p class="why">The centerpiece of Phase 2 is a purpose-built CMS for Cloud Value Lab — your own platform to publish, manage, and organize all content without depending on third-party tools. Built on top of that is the automation layer that turns an interview transcript into a published, optimized article distributed across your channels, with your 15-minute review before anything goes live.</p>
                 <ul>
                     <li><strong>Custom CMS</strong> — purpose-built content management system for CVL: publish articles, manage episodes, control layout, and own your data end-to-end</li>
                     <li><strong>Social media publishing engine</strong> — schedule and distribute content across LinkedIn, Facebook, Instagram, TikTok, WhatsApp, and any other platform of your choice</li>
@@ -687,8 +444,97 @@
                     <li>AI-powered administration — the operation runs with minimal hands-on time from you</li>
                     <li>Content archive system — organized, searchable, tagged library of your expert interviews and articles</li>
                 </ul>
+
+                <div class="how-it-works">
+                    <h3>How the Content Pipeline Works</h3>
+                    <div class="how-steps">
+                        <div class="how-step">
+                            <span class="step-num">1</span>
+                            <div class="step-who">You</div>
+                            <div class="step-desc">Record an expert interview or provide raw content input</div>
+                        </div>
+                        <div class="how-step">
+                            <span class="step-num">2</span>
+                            <div class="step-who">Bogen.ai</div>
+                            <div class="step-desc">AI pipeline produces article, social posts, video clips, and newsletter edition</div>
+                        </div>
+                        <div class="how-step">
+                            <span class="step-num">3</span>
+                            <div class="step-who">You</div>
+                            <div class="step-desc">15-minute review of final drafts. Approve, and everything publishes automatically</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deliverables">
+                    <h3>What Gets Produced Each Week</h3>
+                    <p class="del-subtitle">From a single interview or content input:</p>
+                    <div class="deliverables-grid">
+                        <div class="del-col">
+                            <h4>Content Output</h4>
+                            <ul>
+                                <li>1 fully edited, SEO-optimized long-form article</li>
+                                <li>3–5 short-form posts (LinkedIn, Facebook, Instagram, TikTok)</li>
+                                <li>1–2 video or audio clips (60–90 seconds)</li>
+                                <li>1 newsletter-ready formatted edition</li>
+                            </ul>
+                        </div>
+                        <div class="del-col">
+                            <h4>Operational Output</h4>
+                            <ul>
+                                <li>Automated distribution across all channels</li>
+                                <li>Weekly publishing cadence (1–2 pieces minimum)</li>
+                                <li>Monthly performance report</li>
+                                <li>Fully organized, searchable content archive</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="del-result">Result: Consistent, expert-reviewed output without manual production effort.</p>
+                </div>
             </div>
 
+            <!-- 90-Day Timeline -->
+            <div class="section-header">Execution</div>
+            <h2 class="section-title">First 90 Days</h2>
+
+            <div class="timeline">
+                <div class="timeline-grid">
+                    <div class="timeline-block">
+                        <div class="period">Weeks 1–2</div>
+                        <ul>
+                            <li>Platform build (site, analytics, SEO foundation)</li>
+                            <li>Positioning finalized</li>
+                            <li>Content structure and archive migration</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-block">
+                        <div class="period">Weeks 3–4</div>
+                        <ul>
+                            <li>CMS + automation layer deployed</li>
+                            <li>First content pipeline activated</li>
+                            <li>Initial distribution channels connected</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-block">
+                        <div class="period">Month 2</div>
+                        <ul>
+                            <li>Consistent weekly publishing cadence established</li>
+                            <li>Content repurposing fully automated</li>
+                            <li>Audience growth tracking live</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-block">
+                        <div class="period">Month 3</div>
+                        <ul>
+                            <li>Optimization phase (SEO + engagement improvements)</li>
+                            <li>Monetization readiness (sponsorship structure, media kit)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-outcome"><strong>Outcome by Day 90:</strong> A functioning, self-sustaining content and distribution engine — producing weekly without your hands on the keyboard.</div>
+            </div>
+
+            <!-- Monetization Roadmap -->
             <div class="future">
                 <h3>On the Horizon: Monetization Roadmap</h3>
                 <p>Once CVL has consistent content flow and a growing subscriber base, the revenue model builds naturally. B2B tech niche newsletters command $50–$150+ CPM — and the FinOps vendor landscape has 60+ active sponsors, flush with capital, who need practitioner mindshare. You build the audience, the economics follow. When you're ready, we'll build:</p>
@@ -700,36 +546,83 @@
                     <li>Original research reports — State of FinOps-style benchmarking, co-sponsored by vendors at $10K–$50K per report</li>
                     <li>Subscription management and billing infrastructure</li>
                 </ul>
-                <p style="margin-top: 12px; font-size: 14px; color: #777777; line-height: 1.6;">Comparable B2B media communities — Exit Five (B2B marketing), The Pragmatic Engineer (senior engineering) — have built $1M–$3M+ ARR on these models with audiences your size or smaller. We'll revisit scope and pricing together when CVL reaches that stage. No surprises.</p>
+                <p style="margin-top: 12px;">We'll revisit scope and pricing together when CVL reaches that stage. No surprises.</p>
             </div>
 
+            <!-- Why Bogen.ai -->
+            <div class="why-us">
+                <h3>Why Bogen.ai</h3>
+                <p>We build and operate this exact AI-driven content infrastructure internally — for our own publishing, our clients' platforms, and our weekly distribution systems. This is not theoretical. The system we're proposing for CVL is the same system we run every day.</p>
+                <p>Our current publishing operation produces weekly market intelligence packages, long-form articles, social content, and automated email distribution for multiple clients — all built on the same AI-first pipeline we'll deploy for Cloud Value Lab. We're not selling a concept. We're replicating a working system.</p>
+            </div>
+
+            <!-- Pricing -->
             <div class="pricing">
                 <h2>Investment</h2>
                 <div class="pricing-row">
-                    <div class="pricing-label">Phase 1 — Foundation<span class="note">One-time setup (website, SEO, analytics, competitive analysis, content database)</span></div>
-                    <div class="pricing-amount">$4,000</div>
+                    <div class="pricing-label">
+                        Phase 1 — Foundation
+                        <span class="note">Platform build, positioning, SEO, analytics, content migration, and infrastructure</span>
+                    </div>
+                    <div class="pricing-amount">
+                        <span class="standard-rate">$8,000</span>
+                        $4,000
+                        <span class="founding">Founding partner pricing</span>
+                    </div>
                 </div>
                 <div class="pricing-row">
-                    <div class="pricing-label">Phase 2 — Content Engine & Distribution<span class="note">Monthly retainer (content pipeline, social publishing, newsletter, SEO, AI admin)</span></div>
-                    <div class="pricing-amount">$1,000 /mo</div>
+                    <div class="pricing-label">
+                        Phase 2 — CMS, Content Engine & Distribution
+                        <span class="note">Automation, CMS, publishing pipeline, newsletter, SMS, CRM, SEO, video clips, and ongoing optimization</span>
+                        <span class="founding">Founding partner pricing — 6-month commitment</span>
+                    </div>
+                    <div class="pricing-amount">
+                        <span class="standard-rate">$5,000 /mo</span>
+                        $2,500 /mo
+                    </div>
                 </div>
-                <p class="pricing-note">If the scope evolves significantly, we revisit the numbers together. This is a partnership — we want it to work for both sides long-term.</p>
-                <p class="pricing-note">For context: comparable services from a mid-size digital agency typically run <strong>$15,000–$30,000</strong> for platform setup alone, with ongoing content and distribution retainers of <strong>$5,000–$15,000 per month</strong>. We're able to deliver at this price point because of our AI-first approach — the same automation we're building for you is how we operate.</p>
+
+                <div class="pricing-terms">
+                    <p><strong>Founding partner terms:</strong> This rate is locked for 12 months from the start of Phase 2. After 12 months, pricing reverts to standard rates unless renewed.</p>
+                    <p><strong>Commitment:</strong> Phase 2 requires a 6-month initial commitment. After the initial term, continuation is month-to-month.</p>
+                    <p>As scope expands into monetization systems, events, and advanced infrastructure, pricing will be revisited accordingly. This is a partnership — we want it to work for both sides long-term.</p>
+                </div>
+
+                <div class="market-context">
+                    <p>For context: comparable services from a mid-size digital agency typically run <strong>$15,000–$30,000</strong> for platform setup alone, with ongoing content and distribution retainers of <strong>$5,000–$15,000 per month</strong>. We're able to deliver at this price point because of our AI-first approach — the same automation we're building for you is how we operate.</p>
+                </div>
             </div>
 
+            <!-- Guarantee -->
+            <div class="guarantee">
+                <h3>Execution Guarantee</h3>
+                <p>If Phase 1 is not completed within 30 days, work continues at no additional cost until delivery is complete.</p>
+                <p>If at any point during the 6-month commitment the weekly output falls below the deliverables outlined above for two consecutive weeks, you may exit the agreement with no penalty.</p>
+            </div>
+
+            <!-- Pilot -->
+            <div class="pilot">
+                <h3>See It Before You Commit</h3>
+                <p>Before any money changes hands, we'll run your pipeline on a real piece of content. Send us one interview transcript, and we'll produce the full output: article, social posts, video clips, and newsletter edition. You'll see exactly what the system produces and how it handles FinOps-level content.</p>
+                <p>If the output meets your standard, we move forward. If not, we part ways with no cost and no hard feelings.</p>
+            </div>
+
+            <!-- CTA -->
             <div class="cta">
                 <h2>Next Step</h2>
-                <p>Let's connect this weekend to walk through this together and decide what makes sense for where Cloud Value Lab is right now. The window is open — the FinOps discipline is at an inflection point, AI costs have created urgency that wasn't there 18 months ago, the tooling landscape is consolidating, and practitioners are increasingly skeptical of vendor-produced content. FinOps Weekly is the only real content player in your space, and their model has clear weaknesses you can exploit. The sooner the infrastructure matches your content quality, the faster you own that lane — before someone else decides to.</p>
+                <p>Let's get on a call this week. We'll walk through this proposal together, answer any questions, and — if you're ready — pick a transcript for the pilot piece so you can see the output firsthand.</p>
+                <p>The FinOps category is forming in real time. The tooling landscape is consolidating, AI costs have created urgency that wasn't there 18 months ago, and practitioners are increasingly skeptical of vendor-produced content. The first credible, vendor-neutral platform at scale will capture disproportionate attention and sponsorship dollars — and right now, that lane is open. The infrastructure gap is the only thing between Cloud Value Lab and category ownership.</p>
+                <p>If aligned on the call, we begin Phase 1 immediately.</p>
                 <p>Looking forward to it, David.</p>
             </div>
 
             <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid #e4e8ec;">
-                <p style="font-size: 15px; color: #444444; line-height: 1.8; margin-bottom: 14px;"><strong>Edmund Bogen & Eytan Benzeno</strong><br>Bogen.ai</p>
+                <p style="font-size: 15px; color: #444444; line-height: 1.8;"><strong>Edmund Bogen & Eytan Benzeno</strong><br>Bogen.ai</p>
             </div>
         </div>
 
         <div class="footer">
-            <div class="footer-text">Bogen.ai  •  Boca Raton, FL  •  <a href="mailto:edmund@bogen.ai">edmund@bogen.ai</a></div>
+            <div class="footer-text">Bogen.ai &nbsp;•&nbsp; Boca Raton, FL &nbsp;•&nbsp; <a href="mailto:edmund@bogen.ai">edmund@bogen.ai</a></div>
         </div>
     </div>
 
@@ -754,11 +647,9 @@
         document.getElementById('downloadBtn').addEventListener('click', function () {
             document.getElementById('pdfModal').classList.add('active');
         });
-
         document.getElementById('closeModal').addEventListener('click', function () {
             document.getElementById('pdfModal').classList.remove('active');
         });
-
         document.getElementById('pdfModal').addEventListener('click', function (e) {
             if (e.target === this) this.classList.remove('active');
         });
