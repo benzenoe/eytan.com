@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/hey-siri.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/hey-siri.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): test4 -->
+    <url>
+        <loc>https://eytan.com/blog/pt/hey-siri.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): the-rise-of-the-ai-university-a-bold-vision-for-5k-learning -->
     <url>
         <loc>https://eytan.com/blog/the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html</loc>
@@ -487,30 +511,6 @@
     <!-- Blog Post (PT): mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends -->
     <url>
         <loc>https://eytan.com/blog/pt/mini-nuclear-reactors-deep-dive-into-key-players-tech-market-trends.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): test4 -->
-    <url>
-        <loc>https://eytan.com/blog/hey-siri.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): test4 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/hey-siri.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): test4 -->
-    <url>
-        <loc>https://eytan.com/blog/pt/hey-siri.html</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
