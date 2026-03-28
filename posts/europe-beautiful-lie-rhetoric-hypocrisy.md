@@ -1,0 +1,537 @@
+
+<p><strong>Spending more time in Europe lately has given me a front-row seat to something genuinely fascinating — and if you squint, occasionally hilarious.</strong></p>
+
+<hr/>
+
+<h2>A Continent Worth Admiring. And Questioning.</h2>
+
+<p>Let me start where I genuinely mean it: there is a lot to admire here.</p>
+
+<p>The history. The architecture. The food that makes you question every dietary decision you've ever made. The quality of daily life that much of the world would reasonably envy. And most importantly — the genuinely remarkable achievement of peaceful integration across nations that spent the better part of several centuries trying to erase each other from the map. That is not a small thing. That is, by any honest measure, one of the great political accomplishments of modern civilization.</p>
+
+<p>So what follows is not a dismissal. It's more of an invitation to sit with a few questions that seem worth asking — questions that tend to get a polite, pained smile at European dinner parties rather than an actual answer.</p>
+
+<p>Because alongside the remarkable achievement, there is a pattern that's hard to ignore once you start looking. A gap. A fairly significant one. Between the way Europe presents itself to the world — the moral standard-bearer, the champion of rules and institutions and values — and what seems to be actually happening when those values get tested by reality.</p>
+
+<p>It's a fascinating picture. Let's explore it.</p>
+
+<hr/>
+
+<h2>The Energy Story: How to Build a Crisis With Good Intentions</h2>
+
+<p>Start with energy, because the story here is almost too perfect.</p>
+
+<p>For years, Europe's political class championed one of the most ambitious climate agendas the world has seen. Carbon reduction targets. Renewable transition timelines. Phase-outs of fossil fuels. And most consequentially — the systematic shutdown of nuclear power plants. Germany led the charge, accelerating its nuclear phase-out after Fukushima and completing it in April 2023, closing its last three reactors on a wave of moral conviction and green sentiment.</p>
+
+<p>Nuclear, the reasoning went, was the old way. Dangerous. Unacceptable. The future was wind and solar.</p>
+
+<p>Here's what nuclear actually was: <strong>one-third of Europe's electricity supply in 1990.</strong> By the time Germany finished shutting everything down, that share had been reduced to approximately <strong>15 percent</strong> across the continent.</p>
+
+<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">Europe's Electricity Mix: Nuclear Decline vs Renewables Rise</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Share of electricity generation (%) — 1990 to 2025</p>
+  <div style="position:relative;height:320px;">
+    <canvas id="eb-chart-energy-mix"></canvas>
+  </div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Sources: European Commission, Vattenfall 2026</p>
+</div>
+
+<script>
+(function() {
+  if (typeof Chart === 'undefined') return;
+  var ctx = document.getElementById('eb-chart-energy-mix');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['1990','1995','2000','2005','2010','2015','2020','2025'],
+      datasets: [
+        {
+          label: 'Nuclear (%)',
+          data: [33, 32, 31, 29, 26, 20, 18, 15],
+          borderColor: '#f87171',
+          backgroundColor: 'rgba(248,113,113,0.1)',
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          pointRadius: 5,
+          pointBackgroundColor: '#f87171'
+        },
+        {
+          label: 'Renewables (Wind + Solar) (%)',
+          data: [2, 3, 4, 6, 10, 18, 32, 47],
+          borderColor: '#34d399',
+          backgroundColor: 'rgba(52,211,153,0.1)',
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          pointRadius: 5,
+          pointBackgroundColor: '#34d399'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#e5e7eb', font: { size: 13 } } },
+        tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db' }
+      },
+      scales: {
+        x: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: {
+          ticks: { color: '#9ca3af', callback: function(v){ return v + '%'; } },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          min: 0, max: 55
+        }
+      }
+    }
+  });
+})();
+</script>
+
+<p>In the year Germany went nuclear-free, a study found that electricity prices would have been <strong>23% lower</strong> had the 2010 nuclear fleet remained operational. A survey by Germany's own Chambers of Industry and Commerce found that <strong>37% of companies were considering reducing production or relocating entirely</strong> — rising to <strong>45% among energy-intensive firms.</strong> Since February 2024, <strong>101 industrial facilities</strong> across Europe have shut down, erasing <strong>75,000 jobs</strong> and <strong>25 million tonnes</strong> of chemical production capacity.</p>
+
+<p>Then, in early 2026, the Iran conflict closed the Strait of Hormuz. Europe's fuel supply took an immediate hit. European Commission President Ursula von der Leyen stood at a nuclear energy summit in Paris and called the whole phase-out what many had been saying for a decade: <strong>"a strategic mistake."</strong></p>
+
+<p>To her credit, that took courage to say. It is also worth a quiet moment of reflection that it took a war shutting down a critical global waterway to produce that admission.</p>
+
+<p>Europe has now absorbed <strong>three separate energy shocks in four years</strong>: the post-COVID supply disruption, the Russian gas crisis triggered by the Ukraine invasion, and now the Hormuz shutdown. Each time, the root vulnerability was identical — an energy policy built around optimistic assumptions that couldn't survive contact with geopolitical reality.</p>
+
+<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">Europe's Three Energy Shocks (2021–2026)</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">EU natural gas benchmark price (€/MWh) — showing three distinct crises</p>
+  <div style="position:relative;height:300px;">
+    <canvas id="eb-chart-energy-shocks"></canvas>
+  </div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Sources: European Commission, Fortune 2026</p>
+</div>
+
+<script>
+(function() {
+  if (typeof Chart === 'undefined') return;
+  var ctx = document.getElementById('eb-chart-energy-shocks');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan 21','Jul 21','Jan 22','Jul 22','Jan 23','Jul 23','Jan 24','Jul 24','Jan 25','Jul 25','Jan 26','Mar 26'],
+      datasets: [{
+        label: 'EU Gas Price (€/MWh)',
+        data: [18, 35, 80, 340, 85, 38, 30, 42, 35, 28, 55, 95],
+        borderColor: '#f59e0b',
+        backgroundColor: function(ctx) {
+          var gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 280);
+          gradient.addColorStop(0, 'rgba(245,158,11,0.4)');
+          gradient.addColorStop(1, 'rgba(245,158,11,0.02)');
+          return gradient;
+        },
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointRadius: 4,
+        pointBackgroundColor: '#f59e0b'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#e5e7eb', font: { size: 13 } } },
+        tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db',
+          callbacks: { label: function(ctx){ return '€' + ctx.raw + '/MWh'; } }
+        },
+        annotation: {}
+      },
+      scales: {
+        x: { ticks: { color: '#9ca3af', maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: {
+          ticks: { color: '#9ca3af', callback: function(v){ return '€' + v; } },
+          grid: { color: 'rgba(255,255,255,0.05)' }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+<p>The question worth sitting with: <strong>Is it possible to hold the highest moral ground on climate policy while simultaneously creating the energy fragility that forces reliance on the very fossil fuels and geopolitical dependencies you're trying to eliminate?</strong></p>
+
+<p>There might not be a clean answer. But it seems like a question worth asking openly.</p>
+
+<hr/>
+
+<h2>NATO: A Coalition of Thirty-Two Opinions</h2>
+
+<p>Now let's talk about the alliance that's supposed to keep all of this safe.</p>
+
+<p>NATO has 32 member states. They share a treaty, a logo, and, at various summits, a very expensive dinner. Beyond that, the coherence gets complicated quickly.</p>
+
+<p><strong>Turkey</strong> — a NATO member — purchased Russian S-400 air defense systems. This was considered sufficiently at odds with alliance membership that Turkey was removed from the F-35 program. It remains in NATO. It has used membership as leverage to delay the accession of new allies. It maintains functional relationships with Moscow when Ankara's interests require it. This is the alliance's second-largest military, incidentally.</p>
+
+<p><strong>Hungary</strong> — also a NATO member — has spent recent years blocking EU military aid packages for Ukraine, vetoing collective decisions, and collecting tens of billions in EU structural funds while doing so.</p>
+
+<p><strong>Germany</strong> spent the better part of two decades building its economy around cheap Russian gas — specifically Nord Stream — while sitting inside the alliance designed to contain Russia. The pipeline was presented as a purely commercial infrastructure project. The fact that it handed Putin direct leverage over Europe's largest economy was treated as a rude thing to point out.</p>
+
+<p><strong>France</strong> — whose President oscillates between threatening to send troops to Ukraine and privately reassuring Moscow it shouldn't feel "humiliated." The Kyiv Independent described Macron's approach as "spineless realpolitik" that poses active danger to Ukraine and its allies.</p>
+
+<p>For reference: in 2014, after Russia annexed Crimea, NATO members pledged to reach 2% of GDP on defense spending by 2024. In 2025, <strong>eleven years later</strong>, the alliance collectively crossed that threshold for the first time. Sixteen members landed between 2.0% and 2.1%.</p>
+
+<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">NATO Defense Spending 2025: Who's Serious?</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Defense expenditure as % of GDP — selected NATO members. Red line = 2% target.</p>
+  <div style="position:relative;height:360px;">
+    <canvas id="eb-chart-nato-spending"></canvas>
+  </div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: NATO Defence Expenditure Report 2025</p>
+</div>
+
+<script>
+(function() {
+  if (typeof Chart === 'undefined') return;
+  var ctx = document.getElementById('eb-chart-nato-spending');
+  if (!ctx) return;
+  var countries = ['Poland','Lithuania','Latvia','Estonia','USA','Greece','Finland','UK','Romania','Denmark','France','Germany','Norway','Italy','Spain','Belgium'];
+  var values =    [4.48,    4.00,      3.73,   3.38,    3.38, 3.08,   2.41,    2.33,'2.0',   2.0,    2.06,    2.12,    2.28,  1.49,  1.28,   1.3];
+  var numValues = [4.48, 4.00, 3.73, 3.38, 3.38, 3.08, 2.41, 2.33, 2.0, 2.0, 2.06, 2.12, 2.28, 1.49, 1.28, 1.3];
+  var colors = numValues.map(function(v) {
+    if (v >= 3.5) return '#34d399';
+    if (v >= 2.0) return '#a78bfa';
+    return '#f87171';
+  });
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: countries,
+      datasets: [{
+        label: '% of GDP',
+        data: numValues,
+        backgroundColor: colors,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1f2937',
+          titleColor: '#f9fafb',
+          bodyColor: '#d1d5db',
+          callbacks: { label: function(ctx){ return ctx.raw + '% of GDP'; } }
+        },
+        annotation: {
+          annotations: {
+            line1: {
+              type: 'line',
+              xMin: 2, xMax: 2,
+              borderColor: '#ef4444',
+              borderWidth: 2,
+              borderDash: [6, 3],
+              label: { content: '2% Target', enabled: true, color: '#ef4444', backgroundColor: 'transparent', font: { size: 11 } }
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#9ca3af', callback: function(v){ return v + '%'; } },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          min: 0, max: 5
+        },
+        y: { ticks: { color: '#e5e7eb', font: { size: 12 } }, grid: { color: 'rgba(255,255,255,0.03)' } }
+      }
+    }
+  });
+})();
+</script>
+
+<p>The alliance has now issued a new pledge: 3.5% of GDP by <strong>2035</strong>. Nine more years. There is presumably a summit scheduled to check in around 2031.</p>
+
+<p>Meanwhile, Russia in the first three months of 2024 produced what NATO's entire industrial base produced in a <strong>full year</strong> of ammunition. Europe produces propellants and explosives at roughly <strong>4,500–10,000 tonnes annually</strong> against estimated needs of <strong>20,000 tonnes</strong> — a shortfall of up to 14,000 tonnes per year.</p>
+
+<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">Ammunition Production: Russia vs NATO</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Estimated annual artillery shell production (millions of rounds), 2024</p>
+  <div style="position:relative;height:240px;">
+    <canvas id="eb-chart-ammo"></canvas>
+  </div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: Atlas Institute for International Affairs, 2025</p>
+</div>
+
+<script>
+(function() {
+  if (typeof Chart === 'undefined') return;
+  var ctx = document.getElementById('eb-chart-ammo');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Russia (2024)', 'NATO Combined (2024)', 'NATO Target (2026)'],
+      datasets: [{
+        label: 'Million rounds/year',
+        data: [3.0, 0.75, 1.5],
+        backgroundColor: ['#f87171','#a78bfa','#60a5fa'],
+        borderRadius: 8,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1f2937',
+          titleColor: '#f9fafb',
+          bodyColor: '#d1d5db',
+          callbacks: { label: function(ctx){ return ctx.raw + 'M rounds/year'; } }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#e5e7eb', font: { size: 13 } }, grid: { display: false } },
+        y: {
+          ticks: { color: '#9ca3af', callback: function(v){ return v + 'M'; } },
+          grid: { color: 'rgba(255,255,255,0.05)' }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+<p>The countries that seem to actually understand the situation are the ones closest to it. Poland is spending <strong>4.48% of GDP</strong> on defense. Lithuania <strong>4.00%.</strong> Latvia <strong>3.73%.</strong> Estonia <strong>3.38%.</strong> These are not wealthy countries making easy choices. They are making hard choices because they share a border — or a very short distance — with a government that has stated, in public, that it wants to roll back European security to its <strong>1997 configuration</strong> — before the Baltics were in NATO, before Poland was inside the alliance.</p>
+
+<p>Putin said this. Out loud. Repeatedly. It's written down.</p>
+
+<hr/>
+
+<h2>Ukraine Is at the Door. The Meeting Has Been Rescheduled.</h2>
+
+<p>Russia has been conducting a full-scale industrial war against Ukraine since 2022. The front lines are closer to Vienna than Vienna is to London. Russian missiles have struck within range of NATO borders. Russian intelligence operations — sabotage, arson, cyberattacks, election interference — have been documented across Germany, the UK, France, and the Baltic states with a <strong>four-fold increase in sabotage operations in 2024 alone.</strong></p>
+
+<p>Russian hybrid warfare has become, in the words of one defense analyst, "indistinguishable from politics." It has embedded itself so thoroughly into European information ecosystems, political movements, and election cycles that the attack and the political process are no longer clearly separable.</p>
+
+<p>The dominant response from Western Europe's largest economies has been, broadly: <em>we support Ukraine's right to exist, we condemn Russia's aggression, we will review our defense posture over the next several years, and we call for a negotiated solution.</em></p>
+
+<p>Which is a sophisticated position. It is also, functionally, a way of saying very little while appearing to say something important.</p>
+
+<p>NATO's Secretary-General stated in January 2026 that Europe cannot defend itself without U.S. military support and would need the equivalent of <strong>300,000 additional troops — roughly 50 new European brigades</strong> — just to replace what American forces currently provide. The 2026 U.S. National Defense Strategy has formalized that Europe is no longer the default priority theater for American conventional power. The Americans are not leaving NATO. They are simply no longer underwriting the gap between what Europe spends and what European defense actually requires.</p>
+
+<hr/>
+
+<h2>Iran, Hezbollah, and the War That Arrived Anyway</h2>
+
+<p>In February 2026, direct military conflict erupted between the United States, Israel, and Iran. The Strait of Hormuz closed. Europe's fuel markets responded within 72 hours. The Houthi forces that had spent 2024 and 2025 attacking commercial shipping in the Red Sea — funded, armed, and directed by Tehran — had already rerouted European supply chains and raised European import costs long before the first formal declaration of hostilities.</p>
+
+<p>Iran's network — Hezbollah in Lebanon, proxy militias across Iraq and Syria, Houthi forces in Yemen — constitutes what analysts describe as an "Axis of Resistance" that has been operationally active for years, systematically testing Western response thresholds across a region that sits directly on Europe's southern border.</p>
+
+<p>North Korea has been supplying Russia with ballistic missiles and artillery ammunition throughout the Ukraine conflict — extending Putin's capacity to sustain the war while European democracies debate whether sending ammunition crosses some diplomatic line. Kim Jong-un and Putin signed a formal strategic partnership explicitly framed in anti-Western terms.</p>
+
+<p>Xi Jinping's China ran persistent espionage campaigns across <strong>11 European countries</strong> in 2025, targeting healthcare, biotech, and defense manufacturing — systematically extracting intellectual property that European industry spent decades building. In January 2026, Xi declared "Taiwan Recovery Day" and framed reunification as "unstoppable." China's most recent military exercises around Taiwan — named "Justice Mission 2025" — were the largest-scale simulations of a Taiwan blockade ever conducted. A blockade of Taiwan would devastate European semiconductor supply chains almost immediately.</p>
+
+<p>The European response to most of this has been to call for dialogue and express deep concern. Which is better than nothing. Though not by as much as one might hope.</p>
+
+<hr/>
+
+<h2>The Israel Question and the Uncomfortable Ledger</h2>
+
+<p>There is one topic that comes up with striking frequency and intensity in European media and political conversation — and it seems worth examining through the same honest lens applied to everything else.</p>
+
+<p>Europe has been among the most vocal and sustained critics of Israel throughout the Gaza conflict. Parliamentary resolutions. State-level recognition of Palestinian statehood. A media drumbeat that often carries a noticeably different standard than coverage of other active conflicts.</p>
+
+<p>The numbers from the institutions Europe champions are worth looking at directly.</p>
+
+<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">UN General Assembly Resolutions: The Math Doesn't Lie</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Total resolutions adopted 2015–2025 — Israel vs all other countries combined</p>
+  <div style="position:relative;height:280px;">
+    <canvas id="eb-chart-un"></canvas>
+  </div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: UN Watch 2025 | In 2025 alone: 17 resolutions against Israel, 12 covering the entire rest of the world</p>
+</div>
+
+<script>
+(function() {
+  if (typeof Chart === 'undefined') return;
+  var ctx = document.getElementById('eb-chart-un');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Resolutions against Israel (2015–2025)', 'Resolutions against ALL other countries (2015–2025)'],
+      datasets: [{
+        label: 'UN General Assembly Resolutions',
+        data: [171, 71],
+        backgroundColor: ['#f87171','#60a5fa'],
+        borderRadius: 8,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1f2937',
+          titleColor: '#f9fafb',
+          bodyColor: '#d1d5db',
+          callbacks: { label: function(ctx){ return ctx.raw + ' resolutions'; } }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#e5e7eb', font: { size: 12 } }, grid: { display: false } },
+        y: {
+          ticks: { color: '#9ca3af' },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          min: 0, max: 200
+        }
+      }
+    }
+  });
+})();
+</script>
+
+<p>North Korea operates documented concentration camps. Xi Jinping's China has detained over a million Uyghurs in a system described by multiple Western governments as ethnic persecution on an industrial scale. Russia deliberately targeted Ukrainian hospitals, apartment buildings, and power infrastructure through an entire winter. Iran funds proxy warfare across four countries and executes political dissidents.</p>
+
+<p>The UN's singular legislative obsession, year after year, is the one democracy in the Middle East.</p>
+
+<p>The ICC issued arrest warrants for Israeli leaders in 2024. All 125 member states are legally obligated to enforce them. Multiple European states — including France — found applicable immunity clauses or political cover to decline. Hungary's Orbán hosted the affected individual for a three-day state visit in open defiance of the warrant. The court issued a press release. The world moved on.</p>
+
+<p>This is raised not to defend or attack any particular position on the conflict. It is raised because the disproportion in institutional attention is, at minimum, something worth examining honestly. Particularly from a continent whose post-war identity was built, in significant part, on the phrase "never again."</p>
+
+<hr/>
+
+<h2>The Loudest Critics, the Shortest Reach</h2>
+
+<p>One pattern that has become genuinely impossible to ignore spending more time here: European media coverage of the United States is extensive, detailed, frequently critical, and reliably present. American military actions. American political dysfunction. American foreign policy contradictions. All extensively documented and analyzed.</p>
+
+<p>Fair enough, in principle. Scrutiny of powerful actors is healthy. Press freedom is a value worth protecting.</p>
+
+<p>But there is a certain asymmetry worth sitting with.</p>
+
+<p>The United States spends approximately <strong>$900 billion annually on defense</strong> — roughly as much as the next ten countries combined. That budget is what has underwritten European security for eight decades. American soldiers stationed on European soil. American nuclear deterrence extending over a continent that dismantled its own. American intelligence infrastructure monitoring the threats that European agencies cannot fully track independently.</p>
+
+<p>A collection of nations that spent eleven years unable to collectively hit a <strong>2% of GDP defense target</strong> — while benefiting from the arrangement that target was meant to replace — occupies an interesting position from which to deliver sustained criticism of the country filling the gap. It would be a bit like having a very strong opinion about how your neighbor maintains their property while asking them to mow your lawn every week.</p>
+
+<hr/>
+
+<h2>Institutions Built to Reassure, Not Protect</h2>
+
+<p>Underlying all of this is a broader question about the architecture Europe has built and continues to invoke as the foundation of global order.</p>
+
+<p>The International Criminal Court issues warrants with no enforcement mechanism and watches member states decline to execute them when politically inconvenient. The UN Security Council is structurally paralyzed by the veto power of Russia and China — the two countries most actively challenging the order it was designed to protect. The EU's own Stability and Growth Pact has been violated repeatedly by its largest members, with fines never collected and warnings never enforced.</p>
+
+<p>The pattern is consistent: <strong>build the institution, skip the enforcement, paper over the gaps with diplomatic language, and hope the structure holds.</strong></p>
+
+<p>Sometimes it does. Sometimes reality arrives uninvited — through a gas cutoff, or a missile strike, or a closed shipping channel — and the gap between the institution and its actual protective capacity becomes visible to everyone at once.</p>
+
+<hr/>
+
+<h2>Shouldn't Europe Just Have Its Own Army?</h2>
+
+<p>Here is perhaps the simplest question buried underneath all of this — and one that almost never gets asked directly in serious European political conversation:</p>
+
+<p><strong>If Europe has a common currency, a common parliament, a common central bank, common trade policy, and common agricultural subsidies — why, in the name of all that is logical, does it not have a common army?</strong></p>
+
+<p>It is genuinely difficult to think of a more glaring structural omission. The argument for monetary union was always that economic integration required coordinated policy. The same logic applies — arguably more urgently — to defense. A currency union without a fiscal union is incomplete. A political union without a defense union is, frankly, negligent.</p>
+
+<p>Instead of a European Defense Force, what Europe has is NATO — a coalition of 32 different national interests, veto powers, and defense budgets that took eleven years to collectively hit a floor that everyone agreed was the minimum.</p>
+
+<p>The Draghi Report — commissioned by the European Commission itself — described EU bureaucracy as a <strong>"time robber"</strong> and a <strong>"cost driver"</strong> that obstructs investment, stifles innovation, and hampers growth. That report was received, discussed at several summits, and then filed somewhere.</p>
+
+<p>Because here's the thing. While the existential questions of European security go unanswered, European political energy is being directed elsewhere.</p>
+
+<p>France — Europe's second-largest economy, permanent member of the UN Security Council, the country that presents itself as the intellectual and cultural heart of Western civilization — is currently consumed by the following urgent priorities:</p>
+
+<p>The <strong>right to disconnect.</strong> A law enacted in 2017 that legally entitles employees to ignore work communications outside business hours. If you run a business, you have a genuine emergency at 9pm, and you need your team — you may be legally prohibited from contacting them. Not frowned upon. Not discouraged. <strong>Legally prohibited.</strong> The country that gave the world Descartes, Voltaire, and the Napoleonic Code apparently needed legislation to tell employers that evenings exist.</p>
+
+<p>The retirement age. France raised it from <strong>62 to 64</strong> in 2023 — a change so modest it is almost invisible on any actuarial table — and the response was months of national strikes, protests that brought major cities to a standstill, and a political crisis that nearly toppled the government. Sixty-four. In a continent facing the most serious security environment in eight decades.</p>
+
+<p>And the four-day work week — actively being piloted at French companies, celebrated in European media as a sign of civilizational progress. Working less, as a policy goal, while Russia produces <strong>four times NATO's annual ammunition output in a single quarter.</strong></p>
+
+<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">European Priorities: Where the Political Energy Goes</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Annual business compliance burden (hours/year per SME) vs defense spending (% GDP)</p>
+  <div style="position:relative;height:300px;">
+    <canvas id="eb-chart-priorities"></canvas>
+  </div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Sources: INESS Bureaucracy Index 2024, NATO 2025</p>
+</div>
+
+<script>
+(function() {
+  if (typeof Chart === 'undefined') return;
+  var ctx = document.getElementById('eb-chart-priorities');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Estonia','Poland','Germany','France','Italy','Slovakia'],
+      datasets: [
+        {
+          label: 'Defense Spending (% GDP)',
+          data: [3.38, 4.48, 2.12, 2.06, 1.49, 2.1],
+          backgroundColor: '#34d399',
+          borderRadius: 6,
+          yAxisID: 'y'
+        },
+        {
+          label: 'Annual Compliance Hours (hrs/SME)',
+          data: [190, 173, 215, 230, 280, 328],
+          backgroundColor: '#f87171',
+          borderRadius: 6,
+          yAxisID: 'y1'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#e5e7eb', font: { size: 12 } } },
+        tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db' }
+      },
+      scales: {
+        x: { ticks: { color: '#e5e7eb' }, grid: { display: false } },
+        y: {
+          type: 'linear', position: 'left',
+          ticks: { color: '#34d399', callback: function(v){ return v + '%'; } },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          title: { display: true, text: 'Defense % GDP', color: '#34d399' }
+        },
+        y1: {
+          type: 'linear', position: 'right',
+          ticks: { color: '#f87171', callback: function(v){ return v + 'h'; } },
+          grid: { display: false },
+          title: { display: true, text: 'Compliance Hours', color: '#f87171' }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+<p>The EU's own Draghi Report estimated that European companies already spend between <strong>173 and 328 hours annually</strong> just navigating bureaucratic compliance — before they produce a single unit of anything. Taxes, labor regulations, reporting requirements, permits, environmental compliance, digital compliance, financial compliance — layer upon layer of administrative architecture that makes starting and running a business in Europe a feat of institutional endurance rather than entrepreneurial energy.</p>
+
+<p><strong>This is a continent that added regulatory complexity while removing energy capacity, built institutional frameworks while hollowing out defense capability, and legislated work-life balance while the world outside kept working.</strong></p>
+
+<p>The same political culture that couldn't summon the will to maintain nuclear plants, hit defense targets, or build a common army has produced the regulatory environment, the labor laws, and the retirement debates that make European economies progressively less dynamic, less competitive, and less capable of funding the security infrastructure the continent actually needs.</p>
+
+<p>It all comes from the same place: <strong>a preference for comfort over consequence, and an institutional allergy to hard choices.</strong></p>
+
+<p>The good news — and there is good news — is that the countries getting it right prove it can be done differently. Poland is arming and growing. The Baltics are spending and reforming. The lesson from the eastern edge of the continent, the part that has actual skin in the game, is that clarity of threat produces clarity of action.</p>
+
+<p>The question is whether the western half of Europe waits for the threat to arrive at its own doorstep before finding that same clarity.</p>
+
+<p>Because the neighbors — Putin, Xi, Kim, Khamenei — are not on a four-day work week. They do not have a right to disconnect. And they are absolutely available after 9pm.</p>
+
+<p><strong>Wake up.</strong></p>
+
+<hr/>
+
+<p><em>Reach out at <strong>eytan@benzeno.com</strong> or join the conversation at <strong>REIGNation</strong>: <strong><a href="https://reignation.com" target="_blank">https://reignation.com</a></strong>.</em></p>
