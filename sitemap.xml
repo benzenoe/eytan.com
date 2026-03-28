@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): - -->
+    <url>
+        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): - -->
+    <url>
+        <loc>https://eytan.com/blog/fr/bitcoin-to-700k.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): - -->
+    <url>
+        <loc>https://eytan.com/blog/pt/bitcoin-to-700k.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): 88feb7a0a2e214e0 -->
     <url>
         <loc>https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html</loc>
@@ -487,30 +511,6 @@
     <!-- Blog Post (PT): welcome -->
     <url>
         <loc>https://eytan.com/blog/pt/welcome-to-my-blog.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): - -->
-    <url>
-        <loc>https://eytan.com/blog/bitcoin-to-700k.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): - -->
-    <url>
-        <loc>https://eytan.com/blog/fr/bitcoin-to-700k.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): - -->
-    <url>
-        <loc>https://eytan.com/blog/pt/bitcoin-to-700k.html</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
