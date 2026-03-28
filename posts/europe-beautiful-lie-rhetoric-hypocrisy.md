@@ -30,65 +30,16 @@
 <div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
   <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">Europe's Electricity Mix: Nuclear Decline vs Renewables Rise</h3>
   <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Share of electricity generation (%) — 1990 to 2025</p>
-  <div style="position:relative;height:320px;">
-    <canvas id="eb-chart-energy-mix"></canvas>
-  </div>
+  <div style="position:relative;height:320px;"><canvas id="eb-chart-energy-mix"></canvas></div>
   <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Sources: European Commission, Vattenfall 2026</p>
 </div>
 
-<script>
-(function() {
-  if (typeof Chart === 'undefined') return;
-  var ctx = document.getElementById('eb-chart-energy-mix');
-  if (!ctx) return;
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['1990','1995','2000','2005','2010','2015','2020','2025'],
-      datasets: [
-        {
-          label: 'Nuclear (%)',
-          data: [33, 32, 31, 29, 26, 20, 18, 15],
-          borderColor: '#f87171',
-          backgroundColor: 'rgba(248,113,113,0.1)',
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          pointRadius: 5,
-          pointBackgroundColor: '#f87171'
-        },
-        {
-          label: 'Renewables (Wind + Solar) (%)',
-          data: [2, 3, 4, 6, 10, 18, 32, 47],
-          borderColor: '#34d399',
-          backgroundColor: 'rgba(52,211,153,0.1)',
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          pointRadius: 5,
-          pointBackgroundColor: '#34d399'
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { labels: { color: '#e5e7eb', font: { size: 13 } } },
-        tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db' }
-      },
-      scales: {
-        x: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-        y: {
-          ticks: { color: '#9ca3af', callback: function(v){ return v + '%'; } },
-          grid: { color: 'rgba(255,255,255,0.05)' },
-          min: 0, max: 55
-        }
-      }
-    }
-  });
-})();
-</script>
+<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">Europe's Three Energy Shocks (2021–2026)</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">EU natural gas benchmark price (€/MWh) — three crises, one vulnerability</p>
+  <div style="position:relative;height:300px;"><canvas id="eb-chart-energy-shocks"></canvas></div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Sources: European Commission, Fortune 2026</p>
+</div>
 
 <p>In the year Germany went nuclear-free, a study found that electricity prices would have been <strong>23% lower</strong> had the 2010 nuclear fleet remained operational. A survey by Germany's own Chambers of Industry and Commerce found that <strong>37% of companies were considering reducing production or relocating entirely</strong> — rising to <strong>45% among energy-intensive firms.</strong> Since February 2024, <strong>101 industrial facilities</strong> across Europe have shut down, erasing <strong>75,000 jobs</strong> and <strong>25 million tonnes</strong> of chemical production capacity.</p>
 
@@ -97,63 +48,6 @@
 <p>To her credit, that took courage to say. It is also worth a quiet moment of reflection that it took a war shutting down a critical global waterway to produce that admission.</p>
 
 <p>Europe has now absorbed <strong>three separate energy shocks in four years</strong>: the post-COVID supply disruption, the Russian gas crisis triggered by the Ukraine invasion, and now the Hormuz shutdown. Each time, the root vulnerability was identical — an energy policy built around optimistic assumptions that couldn't survive contact with geopolitical reality.</p>
-
-<div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
-  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">Europe's Three Energy Shocks (2021–2026)</h3>
-  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">EU natural gas benchmark price (€/MWh) — showing three distinct crises</p>
-  <div style="position:relative;height:300px;">
-    <canvas id="eb-chart-energy-shocks"></canvas>
-  </div>
-  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Sources: European Commission, Fortune 2026</p>
-</div>
-
-<script>
-(function() {
-  if (typeof Chart === 'undefined') return;
-  var ctx = document.getElementById('eb-chart-energy-shocks');
-  if (!ctx) return;
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Jan 21','Jul 21','Jan 22','Jul 22','Jan 23','Jul 23','Jan 24','Jul 24','Jan 25','Jul 25','Jan 26','Mar 26'],
-      datasets: [{
-        label: 'EU Gas Price (€/MWh)',
-        data: [18, 35, 80, 340, 85, 38, 30, 42, 35, 28, 55, 95],
-        borderColor: '#f59e0b',
-        backgroundColor: function(ctx) {
-          var gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 280);
-          gradient.addColorStop(0, 'rgba(245,158,11,0.4)');
-          gradient.addColorStop(1, 'rgba(245,158,11,0.02)');
-          return gradient;
-        },
-        borderWidth: 3,
-        tension: 0.4,
-        fill: true,
-        pointRadius: 4,
-        pointBackgroundColor: '#f59e0b'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { labels: { color: '#e5e7eb', font: { size: 13 } } },
-        tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db',
-          callbacks: { label: function(ctx){ return '€' + ctx.raw + '/MWh'; } }
-        },
-        annotation: {}
-      },
-      scales: {
-        x: { ticks: { color: '#9ca3af', maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.05)' } },
-        y: {
-          ticks: { color: '#9ca3af', callback: function(v){ return '€' + v; } },
-          grid: { color: 'rgba(255,255,255,0.05)' }
-        }
-      }
-    }
-  });
-})();
-</script>
 
 <p>The question worth sitting with: <strong>Is it possible to hold the highest moral ground on climate policy while simultaneously creating the energy fragility that forces reliance on the very fossil fuels and geopolitical dependencies you're trying to eliminate?</strong></p>
 
@@ -179,129 +73,21 @@
 
 <div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
   <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">NATO Defense Spending 2025: Who's Serious?</h3>
-  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Defense expenditure as % of GDP — selected NATO members. Red line = 2% target.</p>
-  <div style="position:relative;height:360px;">
-    <canvas id="eb-chart-nato-spending"></canvas>
-  </div>
-  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: NATO Defence Expenditure Report 2025</p>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Defense expenditure as % of GDP — selected NATO members</p>
+  <div style="position:relative;height:380px;"><canvas id="eb-chart-nato-spending"></canvas></div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: NATO Defence Expenditure Report 2025 &nbsp;|&nbsp; 🟢 ≥3.5% &nbsp; 🟣 ≥2% &nbsp; 🔴 Below target</p>
 </div>
-
-<script>
-(function() {
-  if (typeof Chart === 'undefined') return;
-  var ctx = document.getElementById('eb-chart-nato-spending');
-  if (!ctx) return;
-  var countries = ['Poland','Lithuania','Latvia','Estonia','USA','Greece','Finland','UK','Romania','Denmark','France','Germany','Norway','Italy','Spain','Belgium'];
-  var values =    [4.48,    4.00,      3.73,   3.38,    3.38, 3.08,   2.41,    2.33,'2.0',   2.0,    2.06,    2.12,    2.28,  1.49,  1.28,   1.3];
-  var numValues = [4.48, 4.00, 3.73, 3.38, 3.38, 3.08, 2.41, 2.33, 2.0, 2.0, 2.06, 2.12, 2.28, 1.49, 1.28, 1.3];
-  var colors = numValues.map(function(v) {
-    if (v >= 3.5) return '#34d399';
-    if (v >= 2.0) return '#a78bfa';
-    return '#f87171';
-  });
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: countries,
-      datasets: [{
-        label: '% of GDP',
-        data: numValues,
-        backgroundColor: colors,
-        borderRadius: 6,
-        borderSkipped: false
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1f2937',
-          titleColor: '#f9fafb',
-          bodyColor: '#d1d5db',
-          callbacks: { label: function(ctx){ return ctx.raw + '% of GDP'; } }
-        },
-        annotation: {
-          annotations: {
-            line1: {
-              type: 'line',
-              xMin: 2, xMax: 2,
-              borderColor: '#ef4444',
-              borderWidth: 2,
-              borderDash: [6, 3],
-              label: { content: '2% Target', enabled: true, color: '#ef4444', backgroundColor: 'transparent', font: { size: 11 } }
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#9ca3af', callback: function(v){ return v + '%'; } },
-          grid: { color: 'rgba(255,255,255,0.05)' },
-          min: 0, max: 5
-        },
-        y: { ticks: { color: '#e5e7eb', font: { size: 12 } }, grid: { color: 'rgba(255,255,255,0.03)' } }
-      }
-    }
-  });
-})();
-</script>
-
-<p>The alliance has now issued a new pledge: 3.5% of GDP by <strong>2035</strong>. Nine more years. There is presumably a summit scheduled to check in around 2031.</p>
-
-<p>Meanwhile, Russia in the first three months of 2024 produced what NATO's entire industrial base produced in a <strong>full year</strong> of ammunition. Europe produces propellants and explosives at roughly <strong>4,500–10,000 tonnes annually</strong> against estimated needs of <strong>20,000 tonnes</strong> — a shortfall of up to 14,000 tonnes per year.</p>
 
 <div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
   <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">Ammunition Production: Russia vs NATO</h3>
   <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Estimated annual artillery shell production (millions of rounds), 2024</p>
-  <div style="position:relative;height:240px;">
-    <canvas id="eb-chart-ammo"></canvas>
-  </div>
+  <div style="position:relative;height:260px;"><canvas id="eb-chart-ammo"></canvas></div>
   <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: Atlas Institute for International Affairs, 2025</p>
 </div>
 
-<script>
-(function() {
-  if (typeof Chart === 'undefined') return;
-  var ctx = document.getElementById('eb-chart-ammo');
-  if (!ctx) return;
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Russia (2024)', 'NATO Combined (2024)', 'NATO Target (2026)'],
-      datasets: [{
-        label: 'Million rounds/year',
-        data: [3.0, 0.75, 1.5],
-        backgroundColor: ['#f87171','#a78bfa','#60a5fa'],
-        borderRadius: 8,
-        borderSkipped: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1f2937',
-          titleColor: '#f9fafb',
-          bodyColor: '#d1d5db',
-          callbacks: { label: function(ctx){ return ctx.raw + 'M rounds/year'; } }
-        }
-      },
-      scales: {
-        x: { ticks: { color: '#e5e7eb', font: { size: 13 } }, grid: { display: false } },
-        y: {
-          ticks: { color: '#9ca3af', callback: function(v){ return v + 'M'; } },
-          grid: { color: 'rgba(255,255,255,0.05)' }
-        }
-      }
-    }
-  });
-})();
-</script>
+<p>The alliance has now issued a new pledge: 3.5% of GDP by <strong>2035</strong>. Nine more years. There is presumably a summit scheduled to check in around 2031.</p>
+
+<p>Meanwhile, Russia in the first three months of 2024 produced what NATO's entire industrial base produced in a <strong>full year</strong> of ammunition. Europe produces propellants and explosives at roughly <strong>4,500–10,000 tonnes annually</strong> against estimated needs of <strong>20,000 tonnes</strong> — a shortfall of up to 14,000 tonnes per year.</p>
 
 <p>The countries that seem to actually understand the situation are the ones closest to it. Poland is spending <strong>4.48% of GDP</strong> on defense. Lithuania <strong>4.00%.</strong> Latvia <strong>3.73%.</strong> Estonia <strong>3.38%.</strong> These are not wealthy countries making easy choices. They are making hard choices because they share a border — or a very short distance — with a government that has stated, in public, that it wants to roll back European security to its <strong>1997 configuration</strong> — before the Baltics were in NATO, before Poland was inside the alliance.</p>
 
@@ -348,53 +134,9 @@
 <div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
   <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">UN General Assembly Resolutions: The Math Doesn't Lie</h3>
   <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Total resolutions adopted 2015–2025 — Israel vs all other countries combined</p>
-  <div style="position:relative;height:280px;">
-    <canvas id="eb-chart-un"></canvas>
-  </div>
-  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: UN Watch 2025 | In 2025 alone: 17 resolutions against Israel, 12 covering the entire rest of the world</p>
+  <div style="position:relative;height:280px;"><canvas id="eb-chart-un"></canvas></div>
+  <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Source: UN Watch 2025 &nbsp;|&nbsp; In 2025 alone: 17 resolutions against Israel, 12 covering the entire rest of the world</p>
 </div>
-
-<script>
-(function() {
-  if (typeof Chart === 'undefined') return;
-  var ctx = document.getElementById('eb-chart-un');
-  if (!ctx) return;
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Resolutions against Israel (2015–2025)', 'Resolutions against ALL other countries (2015–2025)'],
-      datasets: [{
-        label: 'UN General Assembly Resolutions',
-        data: [171, 71],
-        backgroundColor: ['#f87171','#60a5fa'],
-        borderRadius: 8,
-        borderSkipped: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1f2937',
-          titleColor: '#f9fafb',
-          bodyColor: '#d1d5db',
-          callbacks: { label: function(ctx){ return ctx.raw + ' resolutions'; } }
-        }
-      },
-      scales: {
-        x: { ticks: { color: '#e5e7eb', font: { size: 12 } }, grid: { display: false } },
-        y: {
-          ticks: { color: '#9ca3af' },
-          grid: { color: 'rgba(255,255,255,0.05)' },
-          min: 0, max: 200
-        }
-      }
-    }
-  });
-})();
-</script>
 
 <p>North Korea operates documented concentration camps. Xi Jinping's China has detained over a million Uyghurs in a system described by multiple Western governments as ethnic persecution on an industrial scale. Russia deliberately targeted Ukrainian hospitals, apartment buildings, and power infrastructure through an entire winter. Iran funds proxy warfare across four countries and executes political dissidents.</p>
 
@@ -455,66 +197,11 @@
 <p>And the four-day work week — actively being piloted at French companies, celebrated in European media as a sign of civilizational progress. Working less, as a policy goal, while Russia produces <strong>four times NATO's annual ammunition output in a single quarter.</strong></p>
 
 <div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
-  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">European Priorities: Where the Political Energy Goes</h3>
-  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Annual business compliance burden (hours/year per SME) vs defense spending (% GDP)</p>
-  <div style="position:relative;height:300px;">
-    <canvas id="eb-chart-priorities"></canvas>
-  </div>
+  <h3 style="color:#a78bfa;margin-bottom:4px;font-size:1.05em;text-transform:uppercase;letter-spacing:0.05em;">European Priorities: Defense Spending vs Bureaucracy Burden</h3>
+  <p style="color:#9ca3af;font-size:0.85em;margin-bottom:16px;">Annual compliance hours per SME vs defense spending (% GDP) by country</p>
+  <div style="position:relative;height:320px;"><canvas id="eb-chart-priorities"></canvas></div>
   <p style="color:#6b7280;font-size:0.75em;margin-top:12px;">Sources: INESS Bureaucracy Index 2024, NATO 2025</p>
 </div>
-
-<script>
-(function() {
-  if (typeof Chart === 'undefined') return;
-  var ctx = document.getElementById('eb-chart-priorities');
-  if (!ctx) return;
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Estonia','Poland','Germany','France','Italy','Slovakia'],
-      datasets: [
-        {
-          label: 'Defense Spending (% GDP)',
-          data: [3.38, 4.48, 2.12, 2.06, 1.49, 2.1],
-          backgroundColor: '#34d399',
-          borderRadius: 6,
-          yAxisID: 'y'
-        },
-        {
-          label: 'Annual Compliance Hours (hrs/SME)',
-          data: [190, 173, 215, 230, 280, 328],
-          backgroundColor: '#f87171',
-          borderRadius: 6,
-          yAxisID: 'y1'
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { labels: { color: '#e5e7eb', font: { size: 12 } } },
-        tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db' }
-      },
-      scales: {
-        x: { ticks: { color: '#e5e7eb' }, grid: { display: false } },
-        y: {
-          type: 'linear', position: 'left',
-          ticks: { color: '#34d399', callback: function(v){ return v + '%'; } },
-          grid: { color: 'rgba(255,255,255,0.05)' },
-          title: { display: true, text: 'Defense % GDP', color: '#34d399' }
-        },
-        y1: {
-          type: 'linear', position: 'right',
-          ticks: { color: '#f87171', callback: function(v){ return v + 'h'; } },
-          grid: { display: false },
-          title: { display: true, text: 'Compliance Hours', color: '#f87171' }
-        }
-      }
-    }
-  });
-})();
-</script>
 
 <p>The EU's own Draghi Report estimated that European companies already spend between <strong>173 and 328 hours annually</strong> just navigating bureaucratic compliance — before they produce a single unit of anything. Taxes, labor regulations, reporting requirements, permits, environmental compliance, digital compliance, financial compliance — layer upon layer of administrative architecture that makes starting and running a business in Europe a feat of institutional endurance rather than entrepreneurial energy.</p>
 
@@ -535,3 +222,199 @@
 <hr/>
 
 <p><em>Reach out at <strong>eytan@benzeno.com</strong> or join the conversation at <strong>REIGNation</strong>: <strong><a href="https://reignation.com" target="_blank">https://reignation.com</a></strong>.</em></p>
+
+<script>
+window.addEventListener('load', function() {
+  if (typeof Chart === 'undefined') return;
+
+  var chartDefaults = {
+    plugins: {
+      legend: { labels: { color: '#e5e7eb', font: { size: 13 } } },
+      tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db' }
+    },
+    scales: {
+      x: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+      y: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+    }
+  };
+
+  // Chart 1: Energy Mix
+  var c1 = document.getElementById('eb-chart-energy-mix');
+  if (c1) {
+    new Chart(c1, {
+      type: 'line',
+      data: {
+        labels: ['1990','1995','2000','2005','2010','2015','2020','2025'],
+        datasets: [
+          {
+            label: 'Nuclear (%)',
+            data: [33, 32, 31, 29, 26, 20, 18, 15],
+            borderColor: '#f87171', backgroundColor: 'rgba(248,113,113,0.15)',
+            borderWidth: 3, tension: 0.4, fill: true, pointRadius: 5, pointBackgroundColor: '#f87171'
+          },
+          {
+            label: 'Wind + Solar (%)',
+            data: [2, 3, 4, 6, 10, 18, 32, 47],
+            borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.15)',
+            borderWidth: 3, tension: 0.4, fill: true, pointRadius: 5, pointBackgroundColor: '#34d399'
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: chartDefaults.plugins,
+        scales: {
+          x: chartDefaults.scales.x,
+          y: { ticks: { color: '#9ca3af', callback: function(v){ return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' }, min: 0, max: 55 }
+        }
+      }
+    });
+  }
+
+  // Chart 2: Energy Shocks
+  var c2 = document.getElementById('eb-chart-energy-shocks');
+  if (c2) {
+    new Chart(c2, {
+      type: 'line',
+      data: {
+        labels: ['Jan 21','Jul 21','Jan 22','Jul 22','Jan 23','Jul 23','Jan 24','Jul 24','Jan 25','Jul 25','Jan 26','Mar 26'],
+        datasets: [{
+          label: 'EU Gas Price (€/MWh)',
+          data: [18, 35, 80, 340, 85, 38, 30, 42, 35, 28, 55, 95],
+          borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.15)',
+          borderWidth: 3, tension: 0.4, fill: true, pointRadius: 4, pointBackgroundColor: '#f59e0b'
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: '#e5e7eb', font: { size: 13 } } },
+          tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db',
+            callbacks: { label: function(ctx){ return '€' + ctx.raw + '/MWh'; } }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#9ca3af', maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { ticks: { color: '#9ca3af', callback: function(v){ return '€' + v; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+        }
+      }
+    });
+  }
+
+  // Chart 3: NATO Spending
+  var c3 = document.getElementById('eb-chart-nato-spending');
+  if (c3) {
+    var countries = ['Poland','Lithuania','Latvia','Estonia','Greece','USA','Finland','Norway','UK','Denmark','Germany','France','Romania','Belgium','Spain','Italy'];
+    var vals = [4.48, 4.00, 3.73, 3.38, 3.08, 3.38, 2.41, 2.28, 2.33, 2.0, 2.12, 2.06, 2.0, 1.3, 1.28, 1.49];
+    var colors = vals.map(function(v){ return v >= 3.5 ? '#34d399' : v >= 2.0 ? '#a78bfa' : '#f87171'; });
+    new Chart(c3, {
+      type: 'bar',
+      data: {
+        labels: countries,
+        datasets: [{ label: '% of GDP', data: vals, backgroundColor: colors, borderRadius: 6, borderSkipped: false }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db',
+            callbacks: { label: function(ctx){ return ctx.raw + '% of GDP'; } }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#9ca3af', callback: function(v){ return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' }, min: 0, max: 5 },
+          y: { ticks: { color: '#e5e7eb', font: { size: 12 } }, grid: { color: 'rgba(255,255,255,0.03)' } }
+        }
+      }
+    });
+  }
+
+  // Chart 4: Ammo
+  var c4 = document.getElementById('eb-chart-ammo');
+  if (c4) {
+    new Chart(c4, {
+      type: 'bar',
+      data: {
+        labels: ['Russia (2024)', 'NATO Combined (2024)', 'NATO Target (2026)'],
+        datasets: [{ label: 'Million rounds/year', data: [3.0, 0.75, 1.5],
+          backgroundColor: ['#f87171','#a78bfa','#60a5fa'], borderRadius: 8, borderSkipped: false }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db',
+            callbacks: { label: function(ctx){ return ctx.raw + 'M rounds/year'; } }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#e5e7eb', font: { size: 13 } }, grid: { display: false } },
+          y: { ticks: { color: '#9ca3af', callback: function(v){ return v + 'M'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+        }
+      }
+    });
+  }
+
+  // Chart 5: UN Resolutions
+  var c5 = document.getElementById('eb-chart-un');
+  if (c5) {
+    new Chart(c5, {
+      type: 'bar',
+      data: {
+        labels: ['Against Israel (2015–2025)', 'Against ALL other countries (2015–2025)'],
+        datasets: [{ label: 'UN Resolutions', data: [171, 71],
+          backgroundColor: ['#f87171','#60a5fa'], borderRadius: 8, borderSkipped: false }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db',
+            callbacks: { label: function(ctx){ return ctx.raw + ' resolutions'; } }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#e5e7eb', font: { size: 12 } }, grid: { display: false } },
+          y: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' }, min: 0, max: 200 }
+        }
+      }
+    });
+  }
+
+  // Chart 6: Priorities dual axis
+  var c6 = document.getElementById('eb-chart-priorities');
+  if (c6) {
+    new Chart(c6, {
+      type: 'bar',
+      data: {
+        labels: ['Estonia','Poland','Germany','France','Italy','Slovakia'],
+        datasets: [
+          { label: 'Defense Spending (% GDP)', data: [3.38, 4.48, 2.12, 2.06, 1.49, 2.1],
+            backgroundColor: '#34d399', borderRadius: 6, yAxisID: 'y' },
+          { label: 'Annual Compliance Hours', data: [190, 173, 215, 230, 280, 328],
+            backgroundColor: '#f87171', borderRadius: 6, yAxisID: 'y1' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#e5e7eb', font: { size: 12 } } },
+          tooltip: { backgroundColor: '#1f2937', titleColor: '#f9fafb', bodyColor: '#d1d5db' }
+        },
+        scales: {
+          x: { ticks: { color: '#e5e7eb' }, grid: { display: false } },
+          y: { type: 'linear', position: 'left',
+            ticks: { color: '#34d399', callback: function(v){ return v + '%'; } },
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            title: { display: true, text: 'Defense % GDP', color: '#34d399' }
+          },
+          y1: { type: 'linear', position: 'right',
+            ticks: { color: '#f87171', callback: function(v){ return v + 'h'; } },
+            grid: { display: false },
+            title: { display: true, text: 'Compliance Hrs', color: '#f87171' }
+          }
+        }
+      }
+    });
+  }
+});
+</script>
