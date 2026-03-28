@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "id": "europe-beautiful-lie-rhetoric-hypocrisy",
+      "title": "Europe's Beautiful Lie: Rhetoric, Hypocrisy, and a Continent That Can't Afford Its Own Convictions",
+      "date": "2026-03-28T00:00:00.000Z",
+      "author": "Eytan Benzeno",
+      "icon": "🌍",
+      "image": "/images/blog/europe-beautiful-lie-hero.png",
+      "excerpt": "Spending more time in Europe lately has given me a front-row seat to something genuinely fascinating. The speeches are extraordinary. The institutions are elaborate. The values are sincere. And the gap between all of that and what's actually happening on the ground is worth examining honestly."
+    },
+    {
       "id": "ai-acceleration-part-1-short-term-vision",
       "title": "AI Acceleration - Part 1: Short-Term Vision",
       "date": "2026-02-25T00:00:00.000Z",
