@@ -125,6 +125,9 @@ async function loadBlogPost() {
                     <button onclick="shareToX()" class="share-btn-icon x-btn" title="Share on X">
                         <span class="x-icon">𝕏</span>
                     </button>
+                    <button onclick="shareToWhatsApp()" class="share-btn-icon whatsapp-btn" title="Share on WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
                 </div>
             </div>
             ${postData.image ? `
@@ -162,6 +165,9 @@ async function loadBlogPost() {
                     </button>
                     <button onclick="shareToX()" class="share-btn-icon x-btn" title="Share on X">
                         <span class="x-icon">𝕏</span>
+                    </button>
+                    <button onclick="shareToWhatsApp()" class="share-btn-icon whatsapp-btn" title="Share on WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
                     </button>
                 </div>
             </div>
@@ -218,6 +224,12 @@ function shareToX() {
 
     const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(text)}`;
     window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToWhatsApp() {
+    const postId = window.location.pathname.split('/').pop().replace('.html', '');
+    const url = encodeURIComponent(`https://eytan.com/blog/${postId}.html?utm_source=whatsapp`);
+    window.open(`https://wa.me/?text=${url}`, '_blank');
 }
 
 // Initialize on page load
