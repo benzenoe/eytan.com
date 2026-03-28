@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/neuroplasticity.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/fr/neuroplasticity.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): neuroplasticity -->
+    <url>
+        <loc>https://eytan.com/blog/pt/neuroplasticity.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): intelligence-explosion -->
     <url>
         <loc>https://eytan.com/blog/intelligence-explosion.html</loc>
@@ -487,30 +511,6 @@
     <!-- Blog Post (PT): f9c286408f400b79 -->
     <url>
         <loc>https://eytan.com/blog/pt/understanding-buyer-broker-agreements-2024.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): neuroplasticity -->
-    <url>
-        <loc>https://eytan.com/blog/neuroplasticity.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): neuroplasticity -->
-    <url>
-        <loc>https://eytan.com/blog/fr/neuroplasticity.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): neuroplasticity -->
-    <url>
-        <loc>https://eytan.com/blog/pt/neuroplasticity.html</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
