@@ -29,7 +29,7 @@
     <meta property="og:image:width" content="1536">
     <meta property="og:image:height" content="1024">
     <meta property="og:site_name" content="Eytan.com">
-    <meta property="article:published_time" content="2026-02-01T23:00:00.000Z">
+    <meta property="article:published_time" content="2026-02-02T00:00:00.000Z">
     <meta property="article:author" content="https://eytan.com">
 
     <!-- Twitter -->
@@ -71,7 +71,7 @@
                 "url": "https://eytan.com/images/eb-logo1.png"
             }
         },
-        "datePublished": "2026-02-01T23:00:00.000Z",
+        "datePublished": "2026-02-02T00:00:00.000Z",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://eytan.com/blog/fr/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html"
@@ -135,7 +135,7 @@
             <div class="blog-post-content">
                 <h1><span class="post-icon">🏠</span> La grande réinitialisation du logement : ce que 2026 signifie pour les acheteurs, les vendeurs et les investisseurs</h1>
                 <div class="blog-post-meta">
-                    <i class="far fa-calendar"></i> <time datetime="2026-02-01T23:00:00.000Z">2 février 2026</time> •
+                    <i class="far fa-calendar"></i> <time datetime="2026-02-02T00:00:00.000Z">2 février 2026</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
                 </div>
 
@@ -373,7 +373,6 @@ Le réajustement est là. La seule question est ce que vous en ferez.
                     </div>
                 </div>
 
-                
                 <!-- WhatsApp Subscribe -->
                 <div id="whatsapp-subscribe" style="margin-top:2rem;padding:1.5rem 2rem;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:12px;color:white;text-align:center;">
                     <div style="font-size:1.8rem;margin-bottom:0.3rem;"><i class="fab fa-whatsapp"></i></div>
@@ -437,9 +436,24 @@ Le réajustement est là. La seule question est ce que vous en ferez.
                             </div>
                         </div>
                     </a>
+                    <a href="europe-beautiful-lie-rhetoric-hypocrisy.html" class="more-post-card">
+                        <div class="more-post-image">
+                            <img src="/images/blog/europe-beautiful-lie-hero.png" alt="Europe's Beautiful Lie: Rhetoric, Hypocrisy, and a Continent That Can't Afford Its Own Convictions">
+                        </div>
+                        <div class="more-post-info">
+                            <h4>Europe's Beautiful Lie: Rhetoric, Hypocrisy, and a Continent That Can't Afford Its Own Convictions</h4>
+                            <p class="more-post-excerpt">Spending more time in Europe lately has given me a front-row seat to something genuinely fascinating. The speeches are e...</p>
+                            <div class="more-post-tags">
+                            <span class="more-post-tag">Business</span><span class="more-post-tag">Personal Development</span>
+                           </div>
+                            <div class="more-post-date">
+                                <i class="far fa-calendar"></i> 28 mars 2026
+                            </div>
+                        </div>
+                    </a>
                     <a href="ai-acceleration-part-1-short-term-vision-2035.html" class="more-post-card">
                         <div class="more-post-image">
-                            <img src="https://www.eytan.com/images/blog/616e65ed-78b6-4b18-b230-ea9ee753e5aa.png" alt="Accélération de l'IA, Course à la Puissance et Risque de Choc Sociétal - Partie 1 : Vision à Court Terme">
+                            <img src="https://eytan.com/images/blog/616e65ed-78b6-4b18-b230-ea9ee753e5aa.png" alt="Accélération de l'IA, Course à la Puissance et Risque de Choc Sociétal - Partie 1 : Vision à Court Terme">
                         </div>
                         <div class="more-post-info">
                             <h4>Accélération de l'IA, Course à la Puissance et Risque de Choc Sociétal - Partie 1 : Vision à Court Terme</h4>
@@ -479,21 +493,6 @@ Le réajustement est là. La seule question est ce que vous en ferez.
                            </div>
                             <div class="more-post-date">
                                 <i class="far fa-calendar"></i> 29 décembre 2025
-                            </div>
-                        </div>
-                    </a>
-                    <a href="the-rise-of-the-ai-university-a-bold-vision-for-5k-learning.html" class="more-post-card">
-                        <div class="more-post-image">
-                            <img src="https://eytan.com/images/blog/1765856971107-chatgpt-image-dec-16-2025-11-49-07-am.png" alt="L'Essor de l'Université IA : Une Vision Audacieuse pour un Apprentissage à 5K$">
-                        </div>
-                        <div class="more-post-info">
-                            <h4>L'Essor de l'Université IA : Une Vision Audacieuse pour un Apprentissage à 5K$</h4>
-                            <p class="more-post-excerpt">Découvrez l'avenir de l'éducation avec l'apprentissage autonome piloté par l'IA. Obtenez une certification entièrement a...</p>
-                            <div class="more-post-tags">
-                            <span class="more-post-tag">Personal Development</span><span class="more-post-tag">AI</span><span class="more-post-tag">Business</span>
-                           </div>
-                            <div class="more-post-date">
-                                <i class="far fa-calendar"></i> 16 décembre 2025
                             </div>
                         </div>
                     </a>
@@ -768,15 +767,18 @@ Le réajustement est là. La seule question est ce que vous en ferez.
         if (!phone) { msg.style.color='#ffe'; msg.textContent='Please enter your phone number.'; return; }
         try {
             const res = await fetch('https://api.eytan.com/api/social/whatsapp/optin', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone })
             });
             const data = await res.json();
             if (res.ok) {
                 document.getElementById('wa-optin-form').style.display = 'none';
                 msg.style.color = '#fff';
-                msg.textContent = data.message || "Subscribed! You'll receive new posts via WhatsApp.";
-            } else { msg.style.color='#ffe'; msg.textContent = data.error || 'Something went wrong.'; }
+                msg.textContent = '✅ ' + (data.message || 'Subscribed! You\'ll receive new posts via WhatsApp.');
+            } else {
+                msg.style.color = '#ffe'; msg.textContent = data.error || 'Something went wrong. Try again.';
+            }
         } catch(e) { msg.style.color='#ffe'; msg.textContent='Connection error. Please try again.'; }
     }
     </script>
