@@ -404,6 +404,107 @@
         }
 
 
+        .pdf-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .pdf-modal-overlay.active {
+            display: flex;
+        }
+
+        .pdf-modal {
+            background: #1a3e5c;
+            border-radius: 8px;
+            width: 90vw;
+            max-width: 860px;
+            height: 88vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+        }
+
+        .pdf-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .pdf-modal-title {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .pdf-modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .pdf-modal-actions button {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 9px 22px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-close-modal {
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+        }
+
+        .btn-close-modal:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .btn-confirm-download {
+            background: #00a8e1;
+            color: #ffffff;
+        }
+
+        .btn-confirm-download:hover {
+            background: #0090c4;
+        }
+
+        .pdf-modal-body {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .pdf-modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .pdf-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            letter-spacing: 0.06em;
+        }
+
         .download-btn {
             position: fixed;
             bottom: 32px;
@@ -634,26 +735,72 @@
 
     <button class="download-btn" id="downloadBtn">⬇ Download PDF</button>
 
+    <div class="pdf-modal-overlay" id="pdfModal">
+        <div class="pdf-modal">
+            <div class="pdf-modal-header">
+                <div class="pdf-modal-title">CVL Proposal — Preview</div>
+                <div class="pdf-modal-actions">
+                    <button class="btn-close-modal" id="closeModal">Close</button>
+                    <button class="btn-confirm-download" id="confirmDownload">Download PDF</button>
+                </div>
+            </div>
+            <div class="pdf-modal-body" id="pdfModalBody">
+                <div class="pdf-loading" id="pdfLoading">Generating preview…</div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
+        var pdfBlob = null;
+
+        var opt = {
+            margin: 0,
+            filename: 'CVL-Proposal-Bogen.ai.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['avoid-all', 'css'] }
+        };
+
         document.getElementById('downloadBtn').addEventListener('click', function () {
             var btn = this;
             btn.textContent = 'Generating…';
             btn.disabled = true;
+            pdfBlob = null;
 
-            var opt = {
-                margin: 0,
-                filename: 'CVL-Proposal-Bogen.ai.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['avoid-all', 'css'] }
-            };
+            document.getElementById('pdfModal').classList.add('active');
+            document.getElementById('pdfLoading').style.display = 'flex';
+            document.getElementById('pdfModalBody').querySelector('iframe') && document.getElementById('pdfModalBody').querySelector('iframe').remove();
 
-            html2pdf().set(opt).from(document.getElementById('proposalContent')).save().then(function () {
+            html2pdf().set(opt).from(document.getElementById('proposalContent')).outputPdf('blob').then(function (blob) {
+                pdfBlob = blob;
+                var url = URL.createObjectURL(blob);
+                var iframe = document.createElement('iframe');
+                iframe.src = url;
+                document.getElementById('pdfLoading').style.display = 'none';
+                document.getElementById('pdfModalBody').appendChild(iframe);
                 btn.textContent = '⬇ Download PDF';
                 btn.disabled = false;
             });
+        });
+
+        document.getElementById('confirmDownload').addEventListener('click', function () {
+            if (!pdfBlob) return;
+            var url = URL.createObjectURL(pdfBlob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'CVL-Proposal-Bogen.ai.pdf';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('pdfModal').classList.remove('active');
+        });
+
+        document.getElementById('pdfModal').addEventListener('click', function (e) {
+            if (e.target === this) this.classList.remove('active');
         });
     </script>
 </body>
