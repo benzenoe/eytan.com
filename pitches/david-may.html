@@ -129,12 +129,13 @@
 
         .header {
             background: var(--navy);
-            padding: 40px 60px;
+            padding: 28px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .header-brand { color: #ffffff; font-weight: 300; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; }
+        .header-brand { display: flex; align-items: center; gap: 16px; color: #ffffff; font-weight: 300; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; }
+        .header-brand img { height: 52px; width: auto; opacity: 0.92; }
         .header-brand strong { font-weight: 600; }
         .header-date { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
 
@@ -339,7 +340,10 @@
 <body>
     <div id="proposalContent">
         <div class="header">
-            <div class="header-brand"><strong>Bogen</strong>.ai</div>
+            <div class="header-brand">
+                <img src="eb-logo.png" alt="Bogen.ai">
+                <span><strong>Bogen</strong>.ai</span>
+            </div>
             <div class="header-date">Proposal — March 2026</div>
         </div>
 
