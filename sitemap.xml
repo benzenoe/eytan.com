@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): had-you-heard-of-notion-have-you-used-it -->
+    <url>
+        <loc>https://eytan.com/blog/had-you-heard-of-notion-have-you-used-it.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): had-you-heard-of-notion-have-you-used-it -->
+    <url>
+        <loc>https://eytan.com/blog/fr/had-you-heard-of-notion-have-you-used-it.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): had-you-heard-of-notion-have-you-used-it -->
+    <url>
+        <loc>https://eytan.com/blog/pt/had-you-heard-of-notion-have-you-used-it.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): the-great-housing-reset-what-2026-means-for-buyers-sellers-investors -->
     <url>
         <loc>https://eytan.com/blog/the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html</loc>
@@ -487,30 +511,6 @@
     <!-- Blog Post (PT): the-future-of-work-is-here-dao-firms-and-the-automation-of-trust -->
     <url>
         <loc>https://eytan.com/blog/pt/the-future-of-work-is-here-dao-firms-and-the-automation-of-trust.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): had-you-heard-of-notion-have-you-used-it -->
-    <url>
-        <loc>https://eytan.com/blog/had-you-heard-of-notion-have-you-used-it.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): had-you-heard-of-notion-have-you-used-it -->
-    <url>
-        <loc>https://eytan.com/blog/fr/had-you-heard-of-notion-have-you-used-it.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): had-you-heard-of-notion-have-you-used-it -->
-    <url>
-        <loc>https://eytan.com/blog/pt/had-you-heard-of-notion-have-you-used-it.html</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
