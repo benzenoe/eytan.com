@@ -29,7 +29,7 @@
     <meta property="og:image:width" content="1280">
     <meta property="og:image:height" content="720">
     <meta property="og:site_name" content="Eytan.com">
-    <meta property="article:published_time" content="2025-10-28T23:00:00.000Z">
+    <meta property="article:published_time" content="2025-10-29T00:00:00.000Z">
     <meta property="article:author" content="https://eytan.com">
 
     <!-- Twitter -->
@@ -71,7 +71,7 @@
                 "url": "https://eytan.com/images/eb-logo1.png"
             }
         },
-        "datePublished": "2025-10-28T23:00:00.000Z",
+        "datePublished": "2025-10-29T00:00:00.000Z",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://eytan.com/blog/hey-siri.html"
@@ -135,7 +135,7 @@
             <div class="blog-post-content">
                 <h1><span class="post-icon">🤖</span> Hey Siri, What Happened? How Apple's Assistant Got Left Behind in the AI Revolution</h1>
                 <div class="blog-post-meta">
-                    <i class="far fa-calendar"></i> <time datetime="2025-10-28T23:00:00.000Z">October 29, 2025</time> •
+                    <i class="far fa-calendar"></i> <time datetime="2025-10-29T00:00:00.000Z">October 29, 2025</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
                 </div>
 
@@ -393,7 +393,6 @@ Perhaps the most surprising pillar – Apple acknowledged that Siri alone might 
                     </div>
                 </div>
 
-                
                 <!-- WhatsApp Subscribe -->
                 <div id="whatsapp-subscribe" style="margin-top:2rem;padding:1.5rem 2rem;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:12px;color:white;text-align:center;">
                     <div style="font-size:1.8rem;margin-bottom:0.3rem;"><i class="fab fa-whatsapp"></i></div>
@@ -429,7 +428,7 @@ Perhaps the most surprising pillar – Apple acknowledged that Siri alone might 
                         
                     <a href="ai-acceleration-part-1-short-term-vision-2035.html" class="more-post-card">
                         <div class="more-post-image">
-                            <img src="https://www.eytan.com/images/blog/616e65ed-78b6-4b18-b230-ea9ee753e5aa.png" alt="AI Acceleration, Power Race, and Societal Shock Risk - Part 1: Short-Term Vision">
+                            <img src="https://eytan.com/images/blog/616e65ed-78b6-4b18-b230-ea9ee753e5aa.png" alt="AI Acceleration, Power Race, and Societal Shock Risk - Part 1: Short-Term Vision">
                         </div>
                         <div class="more-post-info">
                             <h4>AI Acceleration, Power Race, and Societal Shock Risk - Part 1: Short-Term Vision</h4>
@@ -789,15 +788,18 @@ Discover the future of education with AI-driven, self-paced learning. Earn a ful
         if (!phone) { msg.style.color='#ffe'; msg.textContent='Please enter your phone number.'; return; }
         try {
             const res = await fetch('https://api.eytan.com/api/social/whatsapp/optin', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone })
             });
             const data = await res.json();
             if (res.ok) {
                 document.getElementById('wa-optin-form').style.display = 'none';
                 msg.style.color = '#fff';
-                msg.textContent = data.message || "Subscribed! You'll receive new posts via WhatsApp.";
-            } else { msg.style.color='#ffe'; msg.textContent = data.error || 'Something went wrong.'; }
+                msg.textContent = '✅ ' + (data.message || 'Subscribed! You\'ll receive new posts via WhatsApp.');
+            } else {
+                msg.style.color = '#ffe'; msg.textContent = data.error || 'Something went wrong. Try again.';
+            }
         } catch(e) { msg.style.color='#ffe'; msg.textContent='Connection error. Please try again.'; }
     }
     </script>
