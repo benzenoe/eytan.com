@@ -28,6 +28,14 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): europe-beautiful-lie-rhetoric-hypocrisy -->
+    <url>
+        <loc>https://eytan.com/blog/europe-beautiful-lie-rhetoric-hypocrisy.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): welcome -->
     <url>
         <loc>https://eytan.com/blog/welcome-to-my-blog.html</loc>
@@ -479,14 +487,6 @@
     <!-- Blog Post (PT): ai-acceleration-power-race-2026 -->
     <url>
         <loc>https://eytan.com/blog/pt/ai-acceleration-part-1-short-term-vision-2035.html</loc>
-        <lastmod>2026-03-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): europe-beautiful-lie-rhetoric-hypocrisy -->
-    <url>
-        <loc>https://eytan.com/blog/europe-beautiful-lie-rhetoric-hypocrisy.html</loc>
         <lastmod>2026-03-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
