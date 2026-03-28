@@ -29,7 +29,7 @@
     <meta property="og:image:width" content="1456">
     <meta property="og:image:height" content="816">
     <meta property="og:site_name" content="Eytan.com">
-    <meta property="article:published_time" content="2024-07-15T22:00:00.000Z">
+    <meta property="article:published_time" content="2024-07-16T00:00:00.000Z">
     <meta property="article:author" content="https://eytan.com">
 
     <!-- Twitter -->
@@ -71,7 +71,7 @@
                 "url": "https://eytan.com/images/eb-logo1.png"
             }
         },
-        "datePublished": "2024-07-15T22:00:00.000Z",
+        "datePublished": "2024-07-16T00:00:00.000Z",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://eytan.com/blog/pt/bitcoin-to-700k.html"
@@ -135,7 +135,7 @@
             <div class="blog-post-content">
                 <h1><span class="post-icon">💰</span> Bitcoin a $700K: O Caminho para um Marco Financeiro Sem Precedentes</h1>
                 <div class="blog-post-meta">
-                    <i class="far fa-calendar"></i> <time datetime="2024-07-15T22:00:00.000Z">16 de julho de 2024</time> •
+                    <i class="far fa-calendar"></i> <time datetime="2024-07-16T00:00:00.000Z">16 de julho de 2024</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
                 </div>
 
@@ -315,7 +315,6 @@ Para investidores e entusiastas, manter-se informado e engajado com esses desenv
                     </div>
                 </div>
 
-                
                 <!-- WhatsApp Subscribe -->
                 <div id="whatsapp-subscribe" style="margin-top:2rem;padding:1.5rem 2rem;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:12px;color:white;text-align:center;">
                     <div style="font-size:1.8rem;margin-bottom:0.3rem;"><i class="fab fa-whatsapp"></i></div>
@@ -411,7 +410,7 @@ Para investidores e entusiastas, manter-se informado e engajado com esses desenv
                     </a>
                     <a href="ai-acceleration-part-1-short-term-vision-2035.html" class="more-post-card">
                         <div class="more-post-image">
-                            <img src="https://www.eytan.com/images/blog/616e65ed-78b6-4b18-b230-ea9ee753e5aa.png" alt="Aceleração da IA, Corrida de Poder e Risco de Choque Societal - Parte 1: Visão de Curto Prazo">
+                            <img src="https://eytan.com/images/blog/616e65ed-78b6-4b18-b230-ea9ee753e5aa.png" alt="Aceleração da IA, Corrida de Poder e Risco de Choque Societal - Parte 1: Visão de Curto Prazo">
                         </div>
                         <div class="more-post-info">
                             <h4>Aceleração da IA, Corrida de Poder e Risco de Choque Societal - Parte 1: Visão de Curto Prazo</h4>
@@ -710,15 +709,18 @@ Para investidores e entusiastas, manter-se informado e engajado com esses desenv
         if (!phone) { msg.style.color='#ffe'; msg.textContent='Please enter your phone number.'; return; }
         try {
             const res = await fetch('https://api.eytan.com/api/social/whatsapp/optin', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone })
             });
             const data = await res.json();
             if (res.ok) {
                 document.getElementById('wa-optin-form').style.display = 'none';
                 msg.style.color = '#fff';
-                msg.textContent = data.message || "Subscribed! You'll receive new posts via WhatsApp.";
-            } else { msg.style.color='#ffe'; msg.textContent = data.error || 'Something went wrong.'; }
+                msg.textContent = '✅ ' + (data.message || 'Subscribed! You\'ll receive new posts via WhatsApp.');
+            } else {
+                msg.style.color = '#ffe'; msg.textContent = data.error || 'Something went wrong. Try again.';
+            }
         } catch(e) { msg.style.color='#ffe'; msg.textContent='Connection error. Please try again.'; }
     }
     </script>
