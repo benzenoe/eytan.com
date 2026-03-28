@@ -29,7 +29,7 @@
     <meta property="og:image:width" content="1280">
     <meta property="og:image:height" content="720">
     <meta property="og:site_name" content="Eytan.com">
-    <meta property="article:published_time" content="2025-02-17T23:00:00.000Z">
+    <meta property="article:published_time" content="2025-02-18T00:00:00.000Z">
     <meta property="article:author" content="https://eytan.com">
 
     <!-- Twitter -->
@@ -71,7 +71,7 @@
                 "url": "https://eytan.com/images/eb-logo1.png"
             }
         },
-        "datePublished": "2025-02-17T23:00:00.000Z",
+        "datePublished": "2025-02-18T00:00:00.000Z",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://eytan.com/blog/fr/mastering-your-sphere-of-influence-in-real-estate.html"
@@ -135,7 +135,7 @@
             <div class="blog-post-content">
                 <h1><span class="post-icon">🌍</span> Maîtriser votre sphère d'influence dans l'immobilier</h1>
                 <div class="blog-post-meta">
-                    <i class="far fa-calendar"></i> <time datetime="2025-02-17T23:00:00.000Z">18 février 2025</time> •
+                    <i class="far fa-calendar"></i> <time datetime="2025-02-18T00:00:00.000Z">18 février 2025</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
                 </div>
 
@@ -309,7 +309,6 @@ Pas de pression — juste un endroit pour grandir aux côtés d'autres personnes
                     </div>
                 </div>
 
-                
                 <!-- WhatsApp Subscribe -->
                 <div id="whatsapp-subscribe" style="margin-top:2rem;padding:1.5rem 2rem;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:12px;color:white;text-align:center;">
                     <div style="font-size:1.8rem;margin-bottom:0.3rem;"><i class="fab fa-whatsapp"></i></div>
@@ -373,6 +372,21 @@ Pas de pression — juste un endroit pour grandir aux côtés d'autres personnes
                             </div>
                         </div>
                     </a>
+                    <a href="europe-beautiful-lie-rhetoric-hypocrisy.html" class="more-post-card">
+                        <div class="more-post-image">
+                            <img src="/images/blog/europe-beautiful-lie-hero.png" alt="Europe's Beautiful Lie: Rhetoric, Hypocrisy, and a Continent That Can't Afford Its Own Convictions">
+                        </div>
+                        <div class="more-post-info">
+                            <h4>Europe's Beautiful Lie: Rhetoric, Hypocrisy, and a Continent That Can't Afford Its Own Convictions</h4>
+                            <p class="more-post-excerpt">Spending more time in Europe lately has given me a front-row seat to something genuinely fascinating. The speeches are e...</p>
+                            <div class="more-post-tags">
+                            <span class="more-post-tag">Business</span><span class="more-post-tag">Personal Development</span>
+                           </div>
+                            <div class="more-post-date">
+                                <i class="far fa-calendar"></i> 28 mars 2026
+                            </div>
+                        </div>
+                    </a>
                     <a href="the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html" class="more-post-card">
                         <div class="more-post-image">
                             <img src="https://eytan.com/images/blog/1738505000-great-housing-reset-aerial.png" alt="La grande réinitialisation du logement : ce que 2026 signifie pour les acheteurs, les vendeurs et les investisseurs">
@@ -415,21 +429,6 @@ Pas de pression — juste un endroit pour grandir aux côtés d'autres personnes
                            </div>
                             <div class="more-post-date">
                                 <i class="far fa-calendar"></i> 16 décembre 2025
-                            </div>
-                        </div>
-                    </a>
-                    <a href="neuroplasticity.html" class="more-post-card">
-                        <div class="more-post-image">
-                            <img src="https://eytan.com/images/blog/1765423275453-neuroplasticity-1b.png" alt="Neuroplasticité : Guide pour Reprogrammer Votre Cerveau vers le Succès">
-                        </div>
-                        <div class="more-post-info">
-                            <h4>Neuroplasticité : Guide pour Reprogrammer Votre Cerveau vers le Succès</h4>
-                            <p class="more-post-excerpt">La neuroplasticité est la capacité du cerveau à se réorganiser en formant de nouvelles connexions neuronales tout au lon...</p>
-                            <div class="more-post-tags">
-                            <span class="more-post-tag">Science</span><span class="more-post-tag">Personal Development</span>
-                           </div>
-                            <div class="more-post-date">
-                                <i class="far fa-calendar"></i> 25 avril 2025
                             </div>
                         </div>
                     </a>
@@ -704,15 +703,18 @@ Pas de pression — juste un endroit pour grandir aux côtés d'autres personnes
         if (!phone) { msg.style.color='#ffe'; msg.textContent='Please enter your phone number.'; return; }
         try {
             const res = await fetch('https://api.eytan.com/api/social/whatsapp/optin', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone })
             });
             const data = await res.json();
             if (res.ok) {
                 document.getElementById('wa-optin-form').style.display = 'none';
                 msg.style.color = '#fff';
-                msg.textContent = data.message || "Subscribed! You'll receive new posts via WhatsApp.";
-            } else { msg.style.color='#ffe'; msg.textContent = data.error || 'Something went wrong.'; }
+                msg.textContent = '✅ ' + (data.message || 'Subscribed! You\'ll receive new posts via WhatsApp.');
+            } else {
+                msg.style.color = '#ffe'; msg.textContent = data.error || 'Something went wrong. Try again.';
+            }
         } catch(e) { msg.style.color='#ffe'; msg.textContent='Connection error. Please try again.'; }
     }
     </script>
