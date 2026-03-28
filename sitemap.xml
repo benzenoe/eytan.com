@@ -28,6 +28,30 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Blog Post (EN): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (FR): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/fr/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Post (PT): f9c286408f400b79 -->
+    <url>
+        <loc>https://eytan.com/blog/pt/understanding-buyer-broker-agreements-2024.html</loc>
+        <lastmod>2026-03-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Blog Post (EN): the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade -->
     <url>
         <loc>https://eytan.com/blog/the-mind-blowing-evolution-of-technology-a-journey-through-the-last-decade.html</loc>
@@ -487,30 +511,6 @@
     <!-- Blog Post (PT): 88feb7a0a2e214e0 -->
     <url>
         <loc>https://eytan.com/blog/pt/low-cost-strategies-to-win-real-estate-listings.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (EN): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/understanding-buyer-broker-agreements-2024.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (FR): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/fr/understanding-buyer-broker-agreements-2024.html</loc>
-        <lastmod>2026-02-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Blog Post (PT): f9c286408f400b79 -->
-    <url>
-        <loc>https://eytan.com/blog/pt/understanding-buyer-broker-agreements-2024.html</loc>
         <lastmod>2026-02-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
