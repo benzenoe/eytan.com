@@ -29,7 +29,7 @@
     <meta property="og:image:width" content="1792">
     <meta property="og:image:height" content="1008">
     <meta property="og:site_name" content="Eytan.com">
-    <meta property="article:published_time" content="2024-07-16T22:00:00.000Z">
+    <meta property="article:published_time" content="2024-07-17T00:00:00.000Z">
     <meta property="article:author" content="https://eytan.com">
 
     <!-- Twitter -->
@@ -71,7 +71,7 @@
                 "url": "https://eytan.com/images/eb-logo1.png"
             }
         },
-        "datePublished": "2024-07-16T22:00:00.000Z",
+        "datePublished": "2024-07-17T00:00:00.000Z",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://eytan.com/blog/low-cost-strategies-to-win-real-estate-listings.html"
@@ -135,7 +135,7 @@
             <div class="blog-post-content">
                 <h1><span class="post-icon">🏆</span> Low-Cost Strategies to Win Real Estate Listings: Proven Tactics That Actually Work</h1>
                 <div class="blog-post-meta">
-                    <i class="far fa-calendar"></i> <time datetime="2024-07-16T22:00:00.000Z">July 17, 2024</time> •
+                    <i class="far fa-calendar"></i> <time datetime="2024-07-17T00:00:00.000Z">July 17, 2024</time> •
                     <i class="far fa-user"></i> Eytan Benzeno
                 </div>
 
@@ -558,7 +558,6 @@ Create a one-page marketing plan for each listing presentation showing:</p>
                     </div>
                 </div>
 
-                
                 <!-- WhatsApp Subscribe -->
                 <div id="whatsapp-subscribe" style="margin-top:2rem;padding:1.5rem 2rem;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:12px;color:white;text-align:center;">
                     <div style="font-size:1.8rem;margin-bottom:0.3rem;"><i class="fab fa-whatsapp"></i></div>
@@ -592,6 +591,21 @@ Create a one-page marketing plan for each listing presentation showing:</p>
                     </div>
                     <div class="more-posts-grid">
                         
+                    <a href="europe-beautiful-lie-rhetoric-hypocrisy.html" class="more-post-card">
+                        <div class="more-post-image">
+                            <img src="/images/blog/europe-beautiful-lie-hero.png" alt="Europe's Beautiful Lie: Rhetoric, Hypocrisy, and a Continent That Can't Afford Its Own Convictions">
+                        </div>
+                        <div class="more-post-info">
+                            <h4>Europe's Beautiful Lie: Rhetoric, Hypocrisy, and a Continent That Can't Afford Its Own Convictions</h4>
+                            <p class="more-post-excerpt">Spending more time in Europe lately has given me a front-row seat to something genuinely fascinating. The speeches are e...</p>
+                            <div class="more-post-tags">
+                            <span class="more-post-tag">Business</span><span class="more-post-tag">Personal Development</span>
+                           </div>
+                            <div class="more-post-date">
+                                <i class="far fa-calendar"></i> March 28, 2026
+                            </div>
+                        </div>
+                    </a>
                     <a href="the-great-housing-reset-what-2026-means-for-buyers-sellers-and-investors.html" class="more-post-card">
                         <div class="more-post-image">
                             <img src="https://eytan.com/images/blog/1738505000-great-housing-reset-aerial.png" alt="The Great Housing Reset: What 2026 Means for Buyers, Sellers, and Investors">
@@ -665,21 +679,6 @@ Discover the future of education with AI-driven, self-paced learning. Earn a ful
                            </div>
                             <div class="more-post-date">
                                 <i class="far fa-calendar"></i> February 18, 2025
-                            </div>
-                        </div>
-                    </a>
-                    <a href="understanding-buyer-broker-agreements-2024.html" class="more-post-card">
-                        <div class="more-post-image">
-                            <img src="https://eytan.com/images/blog/1765777393233-486371412-676400928236683-177352345992979064-n-1-.jpg" alt="Understanding Buyer-Broker Agreements: What Changed in 2024">
-                        </div>
-                        <div class="more-post-info">
-                            <h4>Understanding Buyer-Broker Agreements: What Changed in 2024</h4>
-                            <p class="more-post-excerpt">The real estate industry underwent a major transformation in 2024. Learn everything you need to know about the new buyer...</p>
-                            <div class="more-post-tags">
-                            <span class="more-post-tag">Real Estate</span><span class="more-post-tag">Business</span>
-                           </div>
-                            <div class="more-post-date">
-                                <i class="far fa-calendar"></i> October 30, 2024
                             </div>
                         </div>
                     </a>
@@ -954,15 +953,18 @@ Discover the future of education with AI-driven, self-paced learning. Earn a ful
         if (!phone) { msg.style.color='#ffe'; msg.textContent='Please enter your phone number.'; return; }
         try {
             const res = await fetch('https://api.eytan.com/api/social/whatsapp/optin', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone })
             });
             const data = await res.json();
             if (res.ok) {
                 document.getElementById('wa-optin-form').style.display = 'none';
                 msg.style.color = '#fff';
-                msg.textContent = data.message || "Subscribed! You'll receive new posts via WhatsApp.";
-            } else { msg.style.color='#ffe'; msg.textContent = data.error || 'Something went wrong.'; }
+                msg.textContent = '✅ ' + (data.message || 'Subscribed! You\'ll receive new posts via WhatsApp.');
+            } else {
+                msg.style.color = '#ffe'; msg.textContent = data.error || 'Something went wrong. Try again.';
+            }
         } catch(e) { msg.style.color='#ffe'; msg.textContent='Connection error. Please try again.'; }
     }
     </script>
