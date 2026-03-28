@@ -11,7 +11,6 @@
             --bg: #ffffff;
             --bg-card: #f7f9fb;
             --bg-card-blue: #eef8fc;
-            --bg-dark: #1a3e5c;
             --text: #333333;
             --text-mid: #444444;
             --text-muted: #555555;
@@ -20,27 +19,30 @@
             --border: #e4e8ec;
             --border-dash: #d0d8e0;
             --accent: #00a8e1;
-            --accent-dark: #0090c4;
             --navy: #1a3e5c;
+            --heading: #1a3e5c;
             --white: #ffffff;
+            --guarantee-bg: #f0faf0;
+            --guarantee-text: #2e7d32;
         }
 
         body.dark {
             --bg: #0d1b2a;
             --bg-card: #162334;
-            --bg-card-blue: #0f2133;
-            --bg-dark: #091522;
-            --text: #dde6f0;
-            --text-mid: #c8d8e8;
-            --text-muted: #9ab0c4;
-            --text-light: #7a96ae;
-            --text-xlight: #5a7a94;
-            --border: #1e3549;
-            --border-dash: #1e3549;
-            --accent: #00a8e1;
-            --accent-dark: #0090c4;
-            --navy: #091522;
+            --bg-card-blue: #112338;
+            --text: #dde8f5;
+            --text-mid: #c4d8ec;
+            --text-muted: #a8c2d8;
+            --text-light: #88a8c0;
+            --text-xlight: #6a90ac;
+            --border: #1e3850;
+            --border-dash: #1e3850;
+            --accent: #1fbde8;
+            --navy: #071318;
+            --heading: #c8e0f5;
             --white: #162334;
+            --guarantee-bg: #0d2414;
+            --guarantee-text: #6ecf7a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -142,7 +144,7 @@
         .container { max-width: 740px; margin: 0 auto; padding: 60px 40px 80px; }
 
         .title-block { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 3px solid var(--accent); }
-        .title-block h1 { font-size: 28px; font-weight: 300; color: var(--navy); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+        .title-block h1 { font-size: 28px; font-weight: 300; color: var(--heading); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
         .title-block .subtitle { font-size: 15px; color: var(--text-light); font-weight: 400; }
         .title-block .prepared-for { margin-top: 16px; font-size: 14px; color: var(--text-xlight); letter-spacing: 0.04em; }
 
@@ -150,11 +152,11 @@
         .intro p + p { margin-top: 14px; }
 
         .section-header { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
-        h2.section-title { font-size: 22px; font-weight: 500; color: var(--navy); margin-bottom: 16px; }
+        h2.section-title { font-size: 22px; font-weight: 500; color: var(--heading); margin-bottom: 16px; }
 
         /* Market Opportunity */
         .market-opportunity { margin-bottom: 52px; padding: 28px; background: var(--bg-card); border-radius: 6px; border-left: 4px solid var(--accent); }
-        .market-opportunity h3 { font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 16px; }
+        .market-opportunity h3 { font-size: 18px; font-weight: 500; color: var(--heading); margin-bottom: 16px; }
         .market-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .market-stat { background: var(--white); border-radius: 6px; padding: 16px 20px; text-align: center; }
         .market-stat .number { font-size: 22px; font-weight: 700; color: var(--accent); display: block; margin-bottom: 4px; }
@@ -186,11 +188,11 @@
         .competitor-grid { display: grid; gap: 16px; }
         .competitor-card { background: var(--bg-card); border-radius: 6px; padding: 20px 24px; border-left: 4px solid var(--border); }
         .competitor-card.cvl { border-left-color: var(--accent); background: var(--bg-card-blue); }
-        .competitor-name { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+        .competitor-name { font-size: 15px; font-weight: 600; color: var(--heading); margin-bottom: 4px; }
         .competitor-type { font-size: 12px; color: var(--text-xlight); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
         .competitor-stats { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; }
         .stat { font-size: 13px; color: var(--text-light); }
-        .stat strong { color: var(--navy); font-weight: 600; }
+        .stat strong { color: var(--heading); font-weight: 600; }
         .competitor-note { font-size: 13px; color: var(--text-light); line-height: 1.5; margin-top: 6px; }
         .landscape-takeaway { margin-top: 24px; padding: 20px 24px; background: var(--navy); border-radius: 6px; color: #ffffff; font-size: 15px; line-height: 1.7; }
         .landscape-takeaway strong { color: var(--accent); }
@@ -198,7 +200,7 @@
         /* ROI */
         .roi-section { margin-bottom: 52px; }
         .roi-box { background: var(--bg-card); border-radius: 6px; padding: 28px; margin-top: 16px; }
-        .roi-box h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+        .roi-box h3 { font-size: 16px; font-weight: 600; color: var(--heading); margin-bottom: 12px; }
         .roi-box p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 10px; }
         .roi-box ul { list-style: none; padding: 0; margin-bottom: 16px; }
         .roi-box ul li { padding: 5px 0 5px 20px; position: relative; font-size: 14px; color: var(--text-muted); }
@@ -209,7 +211,8 @@
         /* Phases */
         .phase { margin-bottom: 44px; padding-left: 20px; border-left: 4px solid var(--accent); }
         .phase-label { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
-        .phase h2 { font-size: 20px; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+        .phase-subtitle { color: var(--heading); }
+        .phase h2 { font-size: 20px; font-weight: 500; color: var(--heading); margin-bottom: 12px; }
         .phase .why { font-size: 15px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.7; }
         .phase ul { list-style: none; padding: 0; }
         .phase ul li { padding: 6px 0 6px 20px; position: relative; font-size: 15px; color: var(--text-mid); }
@@ -217,18 +220,18 @@
 
         /* Deliverables */
         .deliverables { margin-top: 24px; margin-bottom: 16px; padding: 24px 28px; background: var(--bg-card-blue); border-radius: 6px; border: 1px solid var(--border); }
-        .deliverables h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+        .deliverables h3 { font-size: 16px; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
         .deliverables .del-subtitle { font-size: 13px; color: var(--text-light); margin-bottom: 16px; }
         .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .del-col h4 { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
         .del-col ul { list-style: none; padding: 0; }
         .del-col ul li { padding: 4px 0 4px 16px; position: relative; font-size: 14px; color: var(--text-muted); line-height: 1.5; }
         .del-col ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
-        .deliverables .del-result { font-size: 14px; color: var(--navy); font-weight: 500; margin-top: 8px; }
+        .deliverables .del-result { font-size: 14px; color: var(--heading); font-weight: 500; margin-top: 8px; }
 
         /* How it works */
         .how-it-works { margin-top: 24px; margin-bottom: 24px; padding: 24px 28px; background: var(--bg-card); border-radius: 6px; border-left: 4px solid var(--accent); }
-        .how-it-works h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+        .how-it-works h3 { font-size: 16px; font-weight: 600; color: var(--heading); margin-bottom: 16px; }
         .how-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
         .how-step { text-align: center; padding: 16px 12px; background: var(--white); border-radius: 6px; }
         .how-step .step-num { font-size: 24px; font-weight: 700; color: var(--accent); display: block; margin-bottom: 6px; }
@@ -248,7 +251,7 @@
 
         /* Future / Monetization */
         .future { margin-bottom: 48px; padding: 24px 28px; background: var(--bg-card); border-radius: 6px; border: 1px dashed var(--border-dash); }
-        .future h3 { font-size: 16px; font-weight: 500; color: var(--navy); margin-bottom: 10px; }
+        .future h3 { font-size: 16px; font-weight: 500; color: var(--heading); margin-bottom: 10px; }
         .future p { font-size: 14px; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
         .future ul { list-style: none; padding: 0; }
         .future ul li { padding: 4px 0 4px 18px; position: relative; font-size: 14px; color: var(--text-light); }
@@ -256,19 +259,19 @@
 
         /* Why Us */
         .why-us { margin-bottom: 32px; padding: 24px 28px; background: var(--bg-card); border-radius: 6px; border-left: 4px solid var(--navy); }
-        .why-us h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+        .why-us h3 { font-size: 16px; font-weight: 600; color: var(--heading); margin-bottom: 12px; }
         .why-us p { font-size: 15px; color: var(--text-mid); line-height: 1.7; margin-bottom: 10px; }
         .why-us p:last-child { margin-bottom: 0; }
 
         /* Pricing */
         .pricing { background: var(--bg-card); border-radius: 6px; padding: 36px 32px; margin: 48px 0; }
-        .pricing h2 { font-size: 18px; font-weight: 500; color: var(--navy); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+        .pricing h2 { font-size: 18px; font-weight: 500; color: var(--heading); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
         .pricing-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--border); }
         .pricing-row:last-of-type { border-bottom: none; }
         .pricing-label { font-size: 15px; color: var(--text-mid); flex: 1; }
         .pricing-label .note { display: block; font-size: 13px; color: var(--text-light); margin-top: 2px; }
         .pricing-label .founding { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; }
-        .pricing-amount { font-size: 18px; font-weight: 600; color: var(--navy); text-align: right; white-space: nowrap; }
+        .pricing-amount { font-size: 18px; font-weight: 600; color: var(--heading); text-align: right; white-space: nowrap; }
         .pricing-amount .standard-rate { display: block; font-size: 13px; font-weight: 400; color: var(--text-xlight); text-decoration: line-through; }
         .pricing-note { font-size: 14px; color: var(--text-light); margin-top: 20px; line-height: 1.6; }
         .pricing-terms { margin-top: 16px; padding: 16px 20px; background: var(--white); border-radius: 4px; border: 1px solid var(--border); }
@@ -276,21 +279,21 @@
         .pricing-terms p:last-child { margin-bottom: 0; }
         .market-context { margin-top: 24px; padding: 20px 24px; background: var(--bg-card-blue); border-radius: 6px; border-left: 4px solid var(--accent); }
         .market-context p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
-        .market-context strong { color: var(--navy); }
+        .market-context strong { color: var(--heading); }
 
         /* Guarantee & Pilot */
-        .guarantee { margin: 0 0 32px; padding: 24px 28px; background: #f0faf0; border-radius: 6px; border-left: 4px solid #4caf50; }
-        .guarantee h3 { font-size: 16px; font-weight: 600; color: #2e7d32; margin-bottom: 10px; }
+        .guarantee { margin: 0 0 32px; padding: 24px 28px; background: var(--guarantee-bg); border-radius: 6px; border-left: 4px solid #4caf50; }
+        .guarantee h3 { font-size: 16px; font-weight: 600; color: var(--guarantee-text); margin-bottom: 10px; }
         .guarantee p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
         .guarantee p + p { margin-top: 8px; }
         .pilot { margin: 0 0 48px; padding: 24px 28px; background: var(--bg-card-blue); border-radius: 6px; border-left: 4px solid var(--accent); }
-        .pilot h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+        .pilot h3 { font-size: 16px; font-weight: 600; color: var(--heading); margin-bottom: 10px; }
         .pilot p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
         .pilot p + p { margin-top: 8px; }
 
         /* CTA */
         .cta { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
-        .cta h2 { font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+        .cta h2 { font-size: 18px; font-weight: 500; color: var(--heading); margin-bottom: 12px; }
         .cta p { font-size: 15px; color: var(--text-mid); line-height: 1.8; }
         .cta p + p { margin-top: 14px; }
 
@@ -555,7 +558,7 @@
             <div id="phase1" class="phase">
                 <div class="phase-label">Phase 1</div>
                 <h2>Foundation</h2>
-                <div style="font-size: 15px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px;">Platform & Positioning</div>
+                <div class="phase-subtitle" style="font-size: 15px; font-weight: 500; margin-bottom: 16px;">Platform & Positioning</div>
                 <p class="why">Before building anything new, we need to establish CVL as a standalone, professional platform — separate from your consulting site, with proper security, analytics, and SEO architecture. This is the baseline that earns trust from the senior practitioners you're targeting. Your content is already better than the competition. Your site needs to match.</p>
                 <ul>
                     <li>Competitive analysis and positioning strategy — where CVL fits in the FinOps landscape and how to differentiate</li>
@@ -575,7 +578,7 @@
             <div id="phase2" class="phase">
                 <div class="phase-label">Phase 2</div>
                 <h2>Automation</h2>
-                <div style="font-size: 15px; font-weight: 500; color: #1a3e5c; margin-bottom: 16px;">CMS, Content Engine & Distribution</div>
+                <div class="phase-subtitle" style="font-size: 15px; font-weight: 500; margin-bottom: 16px;">CMS, Content Engine & Distribution</div>
                 <p class="why">The centerpiece of Phase 2 is a purpose-built CMS for Cloud Value Lab — your own platform to publish, manage, and organize all content without depending on third-party tools. Built on top of that is the automation layer that turns an interview transcript into a published, optimized article distributed across your channels, with your 15-minute review before anything goes live.</p>
                 <ul>
                     <li><strong>Custom CMS</strong> — purpose-built content management system for CVL: publish articles, manage episodes, control layout, and own your data end-to-end</li>
