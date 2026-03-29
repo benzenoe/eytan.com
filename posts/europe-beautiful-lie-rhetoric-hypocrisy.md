@@ -253,7 +253,7 @@
 
 <p>Because the neighbors — Putin, Xi, Kim, Khamenei — are not on a four-day work week. They do not have a right to disconnect. And they are absolutely available after 9pm.</p>
 
-<p>And then there is Greenland. When questions arose about the island's strategic future, Denmark's response was to dispatch <strong>eleven soldiers</strong> to reinforce its presence there. Eleven. That is not a statement of intent. That is not a deterrent. That is a country accidentally revealing, to the entire world, exactly how much military credibility it has to bring to a geopolitical conversation. You do not send eleven soldiers to make a point. You send eleven soldiers when eleven soldiers is genuinely what you have.</p>
+<p>And then there is Greenland. When questions arose about the island's strategic future, France dispatched <strong>eleven soldiers</strong> to reinforce its presence there. The Netherlands went further — they sent one. His name is Willem. That is not a statement of intent. That is not a deterrent. That is two countries accidentally revealing, to the entire world, exactly how much military credibility they have to bring to a geopolitical conversation. You do not send eleven soldiers and one Willem to make a point. You send eleven soldiers and one Willem when that is genuinely what you are prepared to commit.</p>
 
 <p><strong>Wake up.</strong></p>
 
