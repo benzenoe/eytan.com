@@ -1,5 +1,5 @@
 
-<p><strong>Spending more time in Europe lately has given me a front-row seat to something genuinely fascinating — and if you squint, occasionally hilarious.</strong></p>
+<p><strong>Spending more time in Europe lately has given me a front-row seat to something genuinely fascinating.</strong></p>
 
 <hr/>
 
