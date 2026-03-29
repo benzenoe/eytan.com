@@ -69,6 +69,12 @@
 
 <p><strong>France</strong> — whose President oscillates between threatening to send troops to Ukraine and privately reassuring Moscow it shouldn't feel "humiliated." The Kyiv Independent described Macron's approach as "spineless realpolitik" that poses active danger to Ukraine and its allies.</p>
 
+<p>Consider the <em>Charles de Gaulle</em>. France's nuclear-powered aircraft carrier — the only one in the entire European Union. A genuinely impressive piece of military hardware and, symbolically, the crown jewel of French strategic ambition. It was recently deployed to the Persian Gulf. Not in response to a declaration of war. Not as part of a combat mission. As a projection of influence — a show of presence in a region where, let that sink in, a French military base in Iraq had just been attacked and a French soldier killed. The carrier sailed. No war was declared. No meaningful response followed. The flag was shown.</p>
+
+<p>Here is the detail that makes the whole picture complete: the <em>Charles de Gaulle</em> is operational for approximately <strong>one year out of every four</strong>. The rest of the time it is in maintenance. France — permanent member of the UN Security Council, nuclear power, self-styled guardian of Western civilization — has a carrier fleet that is, functionally, in dry dock seventy-five percent of the time. When your single capital ship is available roughly as often as the Olympics, deploying it to the Persian Gulf for a non-combat mission while your soldiers are being killed without consequence is not strength. It is the very definition of the gap between how Europe sees itself and what Europe actually has.</p>
+
+
+
 <p>For reference: in 2014, after Russia annexed Crimea, NATO members pledged to reach 2% of GDP on defense spending by 2024. In 2025, <strong>eleven years later</strong>, the alliance collectively crossed that threshold for the first time. Sixteen members landed between 2.0% and 2.1%.</p>
 
 <div style="background:#1a1a2e;border-radius:12px;padding:24px;margin:32px 0;">
