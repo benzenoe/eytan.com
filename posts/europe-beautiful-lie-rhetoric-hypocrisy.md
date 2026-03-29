@@ -257,6 +257,18 @@
 
 <hr/>
 
+
+<hr/>
+
+<p><em>As my best friend Claudio says:</em></p>
+
+<blockquote>
+<p>Hard times create strong men.<br/>
+Strong men create good times.<br/>
+Good times create weak men.<br/>
+And, weak men create hard times.</p>
+</blockquote>
+
 <p><em>Reach out at <strong>eytan@benzeno.com</strong> or join the conversation at <strong>REIGNation</strong>: <strong><a href="https://reignation.com" target="_blank">https://reignation.com</a></strong>.</em></p>
 
 <script>
