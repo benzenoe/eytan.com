@@ -1190,11 +1190,69 @@ async function publishToSocialInline() {
             loadSocialHistoryPanel(currentPublishingPostId);
 
         } else {
-            document.getElementById('socialResultsContentInline').innerHTML = `
-                <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
-                    <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> ${data.message || 'Publishing failed'}</p>
-                </div>
-            `;
+            // Show per-platform breakdown even when overall success = false
+            if (data.results && data.results.length > 0) {
+                let resultsHTML = `
+                    <div style="padding: 0.75rem 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.75rem;">
+                        <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> ${data.message || 'Publishing failed'}</p>
+                    </div>
+                `;
+                data.results.forEach(result => {
+                    if (result.status === 'success') {
+                        resultsHTML += `
+                            <div style="padding: 1rem; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                    <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
+                                    <span style="color: #155724;">- Published successfully!</span>
+                                </div>
+                                ${result.url ? `<a href="${result.url}" target="_blank" style="color: #0066cc; font-size: 0.9rem;">View post <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i></a>` : ''}
+                            </div>
+                        `;
+                    } else if (result.status === 'manual') {
+                        const contentId = 'manual-content-' + result.platform;
+                        resultsHTML += `
+                            <div style="padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                    <i class="fas fa-copy" style="color: #856404;"></i>
+                                    <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
+                                    <span style="color: #856404;">- Ready for manual posting</span>
+                                </div>
+                                <div style="background: white; padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; white-space: pre-wrap; border: 1px solid #dee2e6;">
+                                    <div id="${contentId}" style="color: #495057;">${result.content}</div>
+                                </div>
+                                <button onclick="copyToClipboard('${contentId}', '${result.platform}')"
+                                        style="background: #ffc107; color: #000; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 500;">
+                                    <i class="fas fa-copy"></i> Copy to Clipboard
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        resultsHTML += `
+                            <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <i class="fas fa-times-circle" style="color: #dc3545;"></i>
+                                    <strong>${result.platform.startsWith('facebook:') ? (fbPageNames[result.platform.split(':')[1]] || result.platform) : result.platform.charAt(0).toUpperCase() + result.platform.slice(1)}</strong>
+                                    <span style="color: #721c24;">- Failed</span>
+                                </div>
+                                <p style="margin: 0; color: #721c24; font-size: 0.9rem;">${result.error}</p>
+                            </div>
+                        `;
+                    }
+                });
+                document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
+                loadSocialStatus(currentPublishingPostId).then(statusHTML => {
+                    const statusDiv = document.getElementById(`social-status-${currentPublishingPostId}`);
+                    if (statusDiv) statusDiv.innerHTML = statusHTML;
+                });
+                loadSocialHistoryPanel(currentPublishingPostId);
+            } else {
+                document.getElementById('socialResultsContentInline').innerHTML = `
+                    <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px;">
+                        <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> ${data.message || 'Publishing failed'}</p>
+                    </div>
+                `;
+            }
             showAlert(data.message || 'Publishing failed', 'error');
         }
 
