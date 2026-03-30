@@ -2471,7 +2471,7 @@ async function loadReminders() {
         list.innerHTML = reminders.map(r => {
             const { icon: rIcon, color: rColor, label: rLabel } = getPlatformLabel(r.platform);
             const content = r.content || '(auto-generate content on publish)';
-            const postUrl = r.slug ? `https://eytan.com/posts/${r.slug}` : '';
+            const postUrl = r.slug ? `https://eytan.com/blog/${r.slug}.html` : '';
             const time = r.scheduled_at ? new Date(r.scheduled_at).toLocaleString('en-US', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '';
 
             let shareBtn = '';
