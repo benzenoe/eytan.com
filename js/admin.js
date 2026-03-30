@@ -2601,6 +2601,10 @@ async function markReminderDone(postId, encodedPlatform) {
             showAlert('✅ Marked as published!', 'success');
             await loadReminders();
             if (calendarOpen) await loadCalendar();
+            // Reload publishing history if this post's panel is currently open
+            if (currentPublishingPostId === postId) {
+                loadSocialHistoryPanel(postId).catch(() => {});
+            }
         } else {
             showAlert('Error: ' + data.error, 'error');
         }
