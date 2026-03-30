@@ -1,6 +1,6 @@
 # Eytan.com Blog System - Claude Memory Guide
 
-**Last Updated:** March 18, 2026 (Session 18 Complete)
+**Last Updated:** March 30, 2026 (Session 22 Complete)
 
 ---
 
@@ -1126,6 +1126,45 @@ Fixed multiple translation issues:
 
 ---
 
+### Session 22 (Mar 26-30, 2026)
+**Focus:** WhatsApp Business API — Full Setup & Integration
+
+**WhatsApp Number:**
+- **Number:** +1 786-727-7362 (T-Mobile real SIM)
+- **Phone Number ID:** `997749453428835`
+- **WhatsApp Account ID:** `1423261576263778`
+- **System User:** Eytan (ID: 61575487403686) — Full control on app + WhatsApp accounts
+- **App:** Eytan.com Blog Publisher (ID: 90201043915550)
+
+**Backend Changes:**
+- Added `whatsapp` to `validPlatforms` in `routes/social.js` (publish + preview endpoints — was rejecting it)
+- Added WhatsApp AI prompt to `transformContentForPlatform()` in `services/social-media.js`
+- Fixed double URL bug — `publishToWhatsApp()` no longer appends URL (AI prompt includes it)
+
+**Frontend Changes (`js/admin.js`):**
+- Added **"WhatsApp Subscribers (eytan.com)"** checkbox to platform list (value: `whatsapp-subscribers`)
+- Checking it + clicking Publish Now → shows edit modal pre-populated with AI-generated message
+- `sendToWhatsAppSubscribers()` — fetches preview, shows modal
+- `confirmSendToWhatsAppSubscribers()` — sends via API using `overrideContent`
+- `whatsapp-subscribers` excluded from API platforms filter (handled separately)
+
+**Railway Env Vars Updated:**
+- `WHATSAPP_PHONE_NUMBER_ID` = `997749453428835`
+- `WHATSAPP_ACCESS_TOKEN` = permanent System User token (never expires)
+
+**Platform Status (as of Session 22):**
+| Platform | Status |
+|---|---|
+| Facebook Pages | ✅ Full API |
+| Instagram | ✅ Full API |
+| LinkedIn | ✅ Full API |
+| WhatsApp Subscribers | ✅ Full API (Business API, edit modal before send) |
+| WhatsApp (manual) | ✅ Copy & open share link |
+| Twitter/X | ❌ Manual only ($100/mo API) |
+| Facebook Groups/Personal | ⚡ Semi-manual |
+
+---
+
 ## Current Status (Mar 2026)
 
 ### Blog Stats
@@ -1153,9 +1192,12 @@ Fixed multiple translation issues:
 - ✅ Interactive Chart.js visualizations (5 charts with toggles/sliders)
 - ✅ Research report system with citations
 - ✅ Notion MCP integration
+- ✅ WhatsApp Business API (subscriber notifications with edit modal)
 
 ### Pending
 - ⏳ Blog categorization UI (Session 9 plan exists)
+- ⏳ ASHTH Europe pitch PDF redesign (white professional layout)
+- ⏳ ASHTH VAT clause (pending: is Eytan VAT registered in Portugal?)
 
 ---
 
