@@ -1666,13 +1666,13 @@ async function deletePlatformPost(platformPostId, pageId, postId) {
         });
         const data = await res.json();
         if (data.success) {
-            showNotification('Deleted from Facebook', 'success');
+            showAlert('Deleted from Facebook', 'success');
             loadSocialHistoryPanel(postId);
         } else {
-            showNotification('Delete failed: ' + data.error, 'error');
+            showAlert('Delete failed: ' + data.error, 'error');
         }
     } catch (e) {
-        showNotification('Delete failed: ' + e.message, 'error');
+        showAlert('Delete failed: ' + e.message, 'error');
     }
 }
 
@@ -1688,7 +1688,7 @@ async function deleteSocialPostFromPanel(socialPostId, postId, dbOnly) {
         const res = await fetch(url, { method: 'DELETE', credentials: 'include' });
         const data = await res.json();
         if (data.success) {
-            showNotification(data.message, 'success');
+            showAlert(data.message, 'success');
             // Reload independently — don't let reload errors mask a successful delete
             loadSocialHistoryPanel(postId).catch(() => {});
             loadSocialStatus(postId).then(html => {
@@ -1696,10 +1696,10 @@ async function deleteSocialPostFromPanel(socialPostId, postId, dbOnly) {
                 if (cell) cell.innerHTML = html || '';
             }).catch(() => {});
         } else {
-            showNotification('Delete failed: ' + (data.message || data.error), 'error');
+            showAlert('Delete failed: ' + (data.message || data.error), 'error');
         }
     } catch (e) {
-        showNotification('Delete failed: ' + e.message, 'error');
+        showAlert('Delete failed: ' + e.message, 'error');
     }
 }
 
@@ -1723,12 +1723,12 @@ async function refreshFacebookCache() {
         });
         const data = await res.json();
         if (data.success) {
-            showNotification('Facebook cache refreshed — new shares will show the correct image', 'success');
+            showAlert('Facebook cache refreshed — new shares will show the correct image', 'success');
         } else {
-            showNotification('Refresh failed: ' + data.error, 'error');
+            showAlert('Refresh failed: ' + data.error, 'error');
         }
     } catch (e) {
-        showNotification('Refresh failed: ' + e.message, 'error');
+        showAlert('Refresh failed: ' + e.message, 'error');
     } finally {
         btn.disabled = false;
         btn.innerHTML = origText;
@@ -1828,7 +1828,7 @@ async function deleteSocialPost(socialPostId, postId) {
         });
         const data = await res.json();
         if (data.success) {
-            showNotification(data.message, 'success');
+            showAlert(data.message, 'success');
             // Reload social icons for this post
             const cell = document.getElementById(`social-status-${postId}`);
             if (cell) {
@@ -1836,10 +1836,10 @@ async function deleteSocialPost(socialPostId, postId) {
                 cell.innerHTML = html || '';
             }
         } else {
-            showNotification('Delete failed: ' + (data.message || data.error), 'error');
+            showAlert('Delete failed: ' + (data.message || data.error), 'error');
         }
     } catch (e) {
-        showNotification('Delete failed: ' + e.message, 'error');
+        showAlert('Delete failed: ' + e.message, 'error');
     }
 }
 
