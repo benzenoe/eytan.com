@@ -874,9 +874,8 @@ async function previewSocialContent() {
 async function sendToWhatsAppSubscribers() {
     if (!currentPublishingPostId) return;
     const btn = document.getElementById('waSubscriberBtn');
-    const orig = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+    const orig = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...'; }
 
     let previewContent = '';
     try {
@@ -893,12 +892,10 @@ async function sendToWhatsAppSubscribers() {
         previewContent = waPreview?.content || waPreview || '';
     } catch (e) {
         showAlert('Failed to generate preview: ' + e.message, 'error');
-        btn.disabled = false;
-        btn.innerHTML = orig;
+        if (btn) { btn.disabled = false; btn.innerHTML = orig; }
         return;
     } finally {
-        btn.disabled = false;
-        btn.innerHTML = orig;
+        if (btn) { btn.disabled = false; btn.innerHTML = orig; }
     }
 
     // Show edit modal
