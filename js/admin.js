@@ -2496,7 +2496,7 @@ async function loadReminders() {
                     <div class="reminder-text">${content.substring(0, 200)}${content.length > 200 ? '…' : ''}</div>
                     <div class="reminder-actions">
                         ${shareBtn}
-                        <button onclick="markReminderDone(${r.id})" class="btn" style="background:#28a745;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fas fa-check'></i> Mark Done</button>
+                        <button onclick="markReminderDone('${r.post_id}','${encodeURIComponent(r.platform)}')" class="btn" style="background:#28a745;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fas fa-check'></i> Mark Done</button>
                         <button onclick="cancelFromCalendar(${r.id})" class="btn" style="background:#dc3545;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fas fa-trash'></i> Delete</button>
                     </div>
                 </div>
@@ -2587,9 +2587,15 @@ function confirmCopyAndOpenGroup() {
     copyAndOpen(encodeURIComponent(content), groupUrl);
 }
 
-async function markReminderDone(id) {
+async function markReminderDone(postId, encodedPlatform) {
+    const platform = decodeURIComponent(encodedPlatform);
     try {
-        const res = await fetch(`${API_URL}/social/mark-reminder-done/${id}`, { method: 'POST', credentials: 'include' });
+        const res = await fetch(`${API_URL}/social/mark-reminder-done`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ post_id: postId, platform })
+        });
         const data = await res.json();
         if (res.ok) {
             showAlert('✅ Marked as published!', 'success');
