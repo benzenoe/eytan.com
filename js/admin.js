@@ -1092,7 +1092,8 @@ async function publishToSocialInline() {
 
     // Filter out all client-side-only platforms before sending to API
     const apiPlatforms = selectedPlatforms.filter(p =>
-        p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' && !p.startsWith('facebook-group:')
+        p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' &&
+        p !== 'whatsapp-subscribers' && !p.startsWith('facebook-group:')
     );
     if (apiPlatforms.length === 0) return;
 
@@ -1180,6 +1181,7 @@ async function publishToSocialInline() {
             });
 
             document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
+            document.getElementById('socialResultsInline').scrollIntoView({ behavior: 'smooth', block: 'start' });
             showAlert(data.message, 'success');
 
             // Reload social status icons and history panel immediately
@@ -1241,6 +1243,7 @@ async function publishToSocialInline() {
                     }
                 });
                 document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
+                document.getElementById('socialResultsInline').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 loadSocialStatus(currentPublishingPostId).then(statusHTML => {
                     const statusDiv = document.getElementById(`social-status-${currentPublishingPostId}`);
                     if (statusDiv) statusDiv.innerHTML = statusHTML;
