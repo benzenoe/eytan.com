@@ -993,6 +993,9 @@ async function publishToSocialInline() {
         return;
     }
 
+    // Track whether Twitter compose window was opened — confirmed by user after posting
+    let twitterPendingConfirm = false;
+
     // Handle WhatsApp Subscribers — show edit modal before sending via API
     if (selectedPlatforms.includes('whatsapp-subscribers')) {
         await sendToWhatsAppSubscribers();
@@ -1001,7 +1004,7 @@ async function publishToSocialInline() {
         if (otherPlatforms.length === 0) return;
     }
 
-    // Handle Twitter/X — generate AI tweet, open X compose window pre-filled
+    // Handle Twitter/X — open compose window pre-filled; user confirms after actually posting
     if (selectedPlatforms.includes('twitter')) {
         const post = blogPosts.find(p => p.id === currentPublishingPostId);
         if (post && post.slug) {
@@ -1016,31 +1019,13 @@ async function publishToSocialInline() {
                 const twPreview = previewData.previews && previewData.previews.find(p => p.platform === 'twitter');
 
                 if (twPreview && twPreview.content) {
-                    const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(twPreview.content)}`;
-                    window.open(tweetUrl, 'x-share', 'width=600,height=420,resizable=yes');
-                    // Show results section with a confirm button — do NOT log until user confirms
-                    document.getElementById('socialResultsInline').style.display = 'block';
-                    document.getElementById('socialResultsContentInline').innerHTML = `
-                        <div id="twitter-confirm-row" style="padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem;">
-                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                                <i class="fab fa-x-twitter" style="color: #000;"></i>
-                                <strong>X / Twitter</strong>
-                                <span style="color: #856404;">— Compose window opened. Did you post it?</span>
-                            </div>
-                            <button onclick="confirmTwitterPosted('${currentPublishingPostId}')"
-                                    style="background: #000; color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; cursor: pointer; font-weight: 600; margin-right: 0.5rem;">
-                                <i class="fab fa-x-twitter"></i> Yes, I Posted It
-                            </button>
-                            <button onclick="document.getElementById('twitter-confirm-row').remove();"
-                                    style="background: #6c757d; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
-                                Skip
-                            </button>
-                        </div>`;
-                    document.getElementById('socialResultsInline').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(twPreview.content)}`, 'x-share', 'width=600,height=420,resizable=yes');
+                    twitterPendingConfirm = true;
                 }
             } catch (e) {
                 const postUrl = `https://eytan.com/blog/${post.slug}.html`;
                 window.open(`https://x.com/intent/tweet?url=${encodeURIComponent(postUrl)}`, 'x-share', 'width=600,height=420,resizable=yes');
+                twitterPendingConfirm = true;
             }
         }
     }
@@ -1132,14 +1117,47 @@ async function publishToSocialInline() {
         p !== 'facebook-personal' && p !== 'twitter' && p !== 'whatsapp' &&
         p !== 'whatsapp-subscribers' && !p.startsWith('facebook-group:')
     );
-    if (apiPlatforms.length === 0) return;
+
+    // Helper: append Twitter "Did you post it?" confirm row to results section
+    const appendTwitterConfirm = () => {
+        document.getElementById('socialResultsInline').style.display = 'block';
+        const existing = document.getElementById('twitter-confirm-row');
+        if (existing) return; // already shown
+        const div = document.createElement('div');
+        div.id = 'twitter-confirm-row';
+        div.style.cssText = 'padding:1rem;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;margin-bottom:0.5rem;';
+        div.innerHTML = `
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                <i class="fab fa-x-twitter"></i>
+                <strong>X / Twitter</strong>
+                <span style="color:#856404;">— Compose window opened. Did you post it?</span>
+            </div>
+            <button onclick="confirmTwitterPosted('${currentPublishingPostId}')"
+                    style="background:#000;color:white;border:none;padding:0.5rem 1.2rem;border-radius:4px;cursor:pointer;font-weight:600;margin-right:0.5rem;">
+                <i class="fab fa-x-twitter"></i> Yes, I Posted It
+            </button>
+            <button onclick="document.getElementById('twitter-confirm-row').remove();"
+                    style="background:#6c757d;color:white;border:none;padding:0.5rem 1rem;border-radius:4px;cursor:pointer;">
+                Skip
+            </button>`;
+        document.getElementById('socialResultsContentInline').appendChild(div);
+    };
+
+    // If no API platforms but Twitter was opened, just show the confirm row
+    if (apiPlatforms.length === 0) {
+        if (twitterPendingConfirm) {
+            appendTwitterConfirm();
+            document.getElementById('socialResultsInline').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        return;
+    }
 
     // Disable publish button
     const publishBtn = document.getElementById('publishSocialBtnInline');
     publishBtn.disabled = true;
     publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
 
-    // Show results section
+    // Show results section with spinner
     document.getElementById('socialResultsInline').style.display = 'block';
     document.getElementById('socialResultsContentInline').innerHTML = '<p style="color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Publishing to ' + apiPlatforms.join(', ') + '...</p>';
 
@@ -1218,6 +1236,7 @@ async function publishToSocialInline() {
             });
 
             document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
+            if (twitterPendingConfirm) appendTwitterConfirm();
             document.getElementById('socialResultsInline').scrollIntoView({ behavior: 'smooth', block: 'start' });
             showAlert(data.message, 'success');
 
@@ -1280,6 +1299,7 @@ async function publishToSocialInline() {
                     }
                 });
                 document.getElementById('socialResultsContentInline').innerHTML = resultsHTML;
+                if (twitterPendingConfirm) appendTwitterConfirm();
                 document.getElementById('socialResultsInline').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 loadSocialStatus(currentPublishingPostId).then(statusHTML => {
                     const statusDiv = document.getElementById(`social-status-${currentPublishingPostId}`);
@@ -1292,6 +1312,7 @@ async function publishToSocialInline() {
                         <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> ${data.message || 'Publishing failed'}</p>
                     </div>
                 `;
+                if (twitterPendingConfirm) appendTwitterConfirm();
             }
             showAlert(data.message || 'Publishing failed', 'error');
         }
@@ -1307,6 +1328,7 @@ async function publishToSocialInline() {
                 <p style="margin: 0; color: #721c24;"><i class="fas fa-exclamation-triangle"></i> Error: ${error.message}</p>
             </div>
         `;
+        if (twitterPendingConfirm) appendTwitterConfirm();
         showAlert('Publishing error: ' + error.message, 'error');
 
         // Re-enable button
