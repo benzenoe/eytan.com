@@ -2486,7 +2486,7 @@ async function loadReminders() {
                 shareBtn = `<button onclick="copyAndOpen('${encodeURIComponent(content)}','${fbUrl}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open FB</button>`;
             } else if (r.platform.startsWith('facebook-group:')) {
                 const groupUrl = r.platform.replace('facebook-group:', '');
-                shareBtn = `<button onclick="generateAndCopyForGroup(${r.post_id},'${encodeURIComponent(groupUrl)}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open Group</button>`;
+                shareBtn = `<button onclick="generateAndCopyForGroup('${r.post_id}','${encodeURIComponent(groupUrl)}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open Group</button>`;
             }
 
             return `<div class="reminder-item">
