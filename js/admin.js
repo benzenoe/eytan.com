@@ -2486,7 +2486,7 @@ async function loadReminders() {
                 shareBtn = `<button onclick="copyAndOpen('${encodeURIComponent(content)}','${fbUrl}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open FB</button>`;
             } else if (r.platform.startsWith('facebook-group:')) {
                 const groupUrl = r.platform.replace('facebook-group:', '');
-                shareBtn = `<button onclick="copyAndOpen('${encodeURIComponent(content)}','${groupUrl}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open Group</button>`;
+                shareBtn = `<button onclick="generateAndCopyForGroup(${r.post_id},'${encodeURIComponent(groupUrl)}')" class="btn" style="background:#1877f2;color:white;font-size:0.78rem;padding:4px 10px;border-radius:4px;border:none;cursor:pointer;"><i class='fab fa-facebook'></i> Copy &amp; Open Group</button>`;
             }
 
             return `<div class="reminder-item">
@@ -2527,6 +2527,64 @@ function copyAndOpen(encodedContent, url) {
     document.body.removeChild(ta);
     window.open(url, '_blank');
     showAlert('✅ Content copied to clipboard — paste it in the popup!', 'success');
+}
+
+async function generateAndCopyForGroup(postId, encodedGroupUrl) {
+    const groupUrl = decodeURIComponent(encodedGroupUrl);
+    showAlert('⏳ Generating content...', 'info');
+
+    let generatedContent = '';
+    try {
+        const res = await fetch(`${API_URL}/social/preview/${postId}`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ platforms: ['facebook'] })
+        });
+        const data = await res.json();
+        const fbPreview = Array.isArray(data.previews)
+            ? data.previews.find(p => p.platform === 'facebook')
+            : data.previews?.facebook;
+        generatedContent = fbPreview?.content || fbPreview || '';
+    } catch (e) {
+        showAlert('Failed to generate content: ' + e.message, 'error');
+        return;
+    }
+
+    const existing = document.getElementById('fb-group-copy-modal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'fb-group-copy-modal';
+    modal.dataset.groupUrl = groupUrl;
+    modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;';
+    modal.innerHTML = `
+        <div style="background:white;border-radius:12px;padding:1.5rem;width:90%;max-width:520px;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                <h3 style="margin:0;color:#1877f2;"><i class="fab fa-facebook"></i> Post to Facebook Group</h3>
+                <button onclick="document.getElementById('fb-group-copy-modal').remove();" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#6c757d;">✕</button>
+            </div>
+            <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.5rem;">Edit the post, then click Copy &amp; Open — paste it into the group composer:</p>
+            <textarea id="fb-group-copy-content" style="width:100%;height:180px;padding:0.75rem;border:2px solid #1877f2;border-radius:8px;font-size:0.9rem;line-height:1.6;resize:vertical;box-sizing:border-box;">${generatedContent}</textarea>
+            <div style="font-size:0.78rem;color:#6c757d;margin-top:0.3rem;text-align:right;"><span id="fb-group-char-count">${generatedContent.length}</span> chars</div>
+            <div style="display:flex;gap:0.75rem;margin-top:1rem;justify-content:flex-end;">
+                <button onclick="document.getElementById('fb-group-copy-modal').remove();" style="padding:0.6rem 1.2rem;background:#6c757d;color:white;border:none;border-radius:6px;cursor:pointer;">Cancel</button>
+                <button onclick="confirmCopyAndOpenGroup()" style="padding:0.6rem 1.2rem;background:#1877f2;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;"><i class="fab fa-facebook"></i> Copy &amp; Open Group</button>
+            </div>
+        </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+    document.getElementById('fb-group-copy-content').addEventListener('input', function() {
+        document.getElementById('fb-group-char-count').textContent = this.value.length;
+    });
+}
+
+function confirmCopyAndOpenGroup() {
+    const modal = document.getElementById('fb-group-copy-modal');
+    const content = document.getElementById('fb-group-copy-content').value;
+    const groupUrl = modal.dataset.groupUrl;
+    document.getElementById('fb-group-copy-modal').remove();
+    copyAndOpen(encodeURIComponent(content), groupUrl);
 }
 
 async function markReminderDone(id) {
