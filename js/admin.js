@@ -2564,7 +2564,7 @@ async function generateAndCopyForGroup(postId, encodedGroupUrl) {
                 <h3 style="margin:0;color:#1877f2;"><i class="fab fa-facebook"></i> Post to Facebook Group</h3>
                 <button onclick="document.getElementById('fb-group-copy-modal').remove();" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#6c757d;">✕</button>
             </div>
-            <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.5rem;">Edit the post, then click Copy &amp; Open — paste it into the group composer:</p>
+            <p style="font-size:0.85rem;color:#6c757d;margin-bottom:0.5rem;">Edit the post, click <strong>Copy &amp; Open Group</strong>, then click <strong>"Write something…"</strong> in the group and press <strong>Cmd+V</strong> to paste:</p>
             <textarea id="fb-group-copy-content" style="width:100%;height:180px;padding:0.75rem;border:2px solid #1877f2;border-radius:8px;font-size:0.9rem;line-height:1.6;resize:vertical;box-sizing:border-box;">${generatedContent}</textarea>
             <div style="font-size:0.78rem;color:#6c757d;margin-top:0.3rem;text-align:right;"><span id="fb-group-char-count">${generatedContent.length}</span> chars</div>
             <div style="display:flex;gap:0.75rem;margin-top:1rem;justify-content:flex-end;">
