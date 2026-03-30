@@ -870,6 +870,31 @@ async function previewSocialContent() {
     }
 }
 
+async function confirmTwitterPosted(postId) {
+    const btn = document.querySelector('#twitter-confirm-row button');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; }
+    try {
+        await fetch(`${API_URL}/social/log-share`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ postId, platform: 'twitter', url: 'https://x.com/benzeno' })
+        });
+        document.getElementById('twitter-confirm-row').outerHTML = `
+            <div style="padding: 1rem; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                    <strong>X / Twitter</strong>
+                    <span style="color: #155724;">— Marked as posted!</span>
+                </div>
+            </div>`;
+        loadSocialHistoryPanel(postId);
+    } catch (e) {
+        showAlert('Failed to log Twitter post: ' + e.message, 'error');
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fab fa-x-twitter"></i> Yes, I Posted It'; }
+    }
+}
+
 // Send post to WhatsApp subscribers via Business API — shows edit modal first
 async function sendToWhatsAppSubscribers() {
     if (!currentPublishingPostId) return;
@@ -993,13 +1018,25 @@ async function publishToSocialInline() {
                 if (twPreview && twPreview.content) {
                     const tweetUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(twPreview.content)}`;
                     window.open(tweetUrl, 'x-share', 'width=600,height=420,resizable=yes');
-                    fetch(`${API_URL}/social/log-share`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        credentials: 'include',
-                        body: JSON.stringify({ postId: currentPublishingPostId, platform: 'twitter', url: 'https://x.com/benzeno' })
-                    }).then(() => loadSocialHistoryPanel(currentPublishingPostId));
-                    showAlert('✅ X compose window opened with your tweet!', 'success');
+                    // Show results section with a confirm button — do NOT log until user confirms
+                    document.getElementById('socialResultsInline').style.display = 'block';
+                    document.getElementById('socialResultsContentInline').innerHTML = `
+                        <div id="twitter-confirm-row" style="padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                <i class="fab fa-x-twitter" style="color: #000;"></i>
+                                <strong>X / Twitter</strong>
+                                <span style="color: #856404;">— Compose window opened. Did you post it?</span>
+                            </div>
+                            <button onclick="confirmTwitterPosted('${currentPublishingPostId}')"
+                                    style="background: #000; color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; cursor: pointer; font-weight: 600; margin-right: 0.5rem;">
+                                <i class="fab fa-x-twitter"></i> Yes, I Posted It
+                            </button>
+                            <button onclick="document.getElementById('twitter-confirm-row').remove();"
+                                    style="background: #6c757d; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                                Skip
+                            </button>
+                        </div>`;
+                    document.getElementById('socialResultsInline').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             } catch (e) {
                 const postUrl = `https://eytan.com/blog/${post.slug}.html`;
