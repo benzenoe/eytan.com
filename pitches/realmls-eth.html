@@ -441,17 +441,19 @@ footer a{color:var(--teal-text);text-decoration:none;}
 
 <style id="print-styles">
 @media print {
-  body > *:not(#print-root) { display: none !important; }
+  body * { visibility: hidden; }
+  #print-root, #print-root * { visibility: visible; }
   #print-root {
-    display: block !important;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: white;
-    padding: 2rem 2.5rem;
+    padding: 1.5rem 2rem;
     font-family: Arial, sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     color: #2C2C2C;
+    box-sizing: border-box;
   }
   #print-root .doc-h1 {
     font-size: 15px;
