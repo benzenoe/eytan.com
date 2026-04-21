@@ -441,19 +441,51 @@ footer a{color:var(--teal-text);text-decoration:none;}
 
 <style id="print-styles">
 @media print {
-  body * { visibility: hidden; }
-  #print-root, #print-root * { visibility: visible; }
+  @page {
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  body > *:not(#print-root) { display: none !important; }
   #print-root {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: block !important;
+    position: static;
     width: 100%;
     background: white;
-    padding: 1.5rem 2rem;
     font-family: Arial, sans-serif;
     font-size: 11px;
     color: #2C2C2C;
     box-sizing: border-box;
+    padding: 0;
+  }
+  #print-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 15mm;
+    border-bottom: 1.5px solid #1D9E75;
+    background: white;
+    font-size: 9px;
+    color: #666;
+    font-family: Arial, sans-serif;
+  }
+  #print-header .ph-logo { font-weight: 700; color: #1A3C5E; }
+  #print-header .ph-right { color: #888; font-style: italic; }
+  #print-footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15mm;
+    border-top: 1px solid #ccc;
+    background: white;
+    font-size: 8.5px;
+    color: #999;
+    font-family: Arial, sans-serif;
+  }
+  #print-content {
+    padding: 0 0 10mm 0;
   }
   #print-root .doc-h1 {
     font-size: 15px;
@@ -1405,14 +1437,25 @@ function switchTab(tab){
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDocModal();});
 function printDocument(){
   var content = document.getElementById('doc-content');
-  if(!content){ alert('Please open the document preview first.'); return; }
+  if(!content){ return; }
   var pr = document.getElementById('print-root');
   if(!pr){ pr = document.createElement('div'); pr.id = 'print-root'; document.body.appendChild(pr); }
-  pr.innerHTML = content.innerHTML;
+  pr.innerHTML =
+    '<div id="print-header">' +
+      '<span class="ph-logo">RealMLS.eth</span>' +
+      '<span>Meeting Notes &middot; April 7, 2026</span>' +
+      '<span class="ph-right">Confidential</span>' +
+    '</div>' +
+    '<div id="print-footer">' +
+      '<span>Eytan Benzeno &middot; eytan.com</span>' +
+      '<span>April 7, 2026</span>' +
+      '<span>Confidential &mdash; not a securities offering</span>' +
+    '</div>' +
+    '<div id="print-content">' + content.innerHTML + '</div>';
   setTimeout(function(){
     window.print();
     setTimeout(function(){ if(pr && pr.parentNode) pr.parentNode.removeChild(pr); }, 2000);
-  }, 100);
+  }, 150);
 }
 </script>
 </body>
