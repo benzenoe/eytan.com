@@ -1051,7 +1051,7 @@ document.querySelectorAll(
 
 <!-- DOCUMENT PREVIEW MODAL -->
 <div id="doc-modal" onclick="if(event.target===this)closeDocModal()" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1.5rem;">
-  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:780px;height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,.45);">
+  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:920px;height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,.45);">
 
     <!-- Header -->
     <div style="display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.6rem;border-bottom:1px solid var(--border);flex-shrink:0;gap:1rem;">
@@ -1068,12 +1068,12 @@ document.querySelectorAll(
     </div>
 
     <!-- Preview pane -->
-    <div id="pane-preview" style="flex:1;overflow-y:auto;overflow-x:hidden;position:relative;">
+    <div id="pane-preview" style="flex:1;overflow-y:auto;overflow-x:auto;position:relative;background:#e8e8e8;">
       <div id="doc-loading" style="display:flex;align-items:center;justify-content:center;height:100%;gap:.8rem;color:var(--text3);font-size:.85rem;font-family:'IBM Plex Sans',sans-serif;">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="animation:spin 1s linear infinite;"><circle cx="9" cy="9" r="7" stroke="var(--border2)" stroke-width="2"/><path d="M9 2a7 7 0 017 7" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/></svg>
         Rendering document…
       </div>
-      <div id="doc-content" style="display:none;padding:2.5rem 3rem;background:#fff;margin:.8rem;border-radius:8px;min-height:100%;"></div>
+      <div id="doc-content" style="display:none;padding:2rem 2.2rem;background:#fff;margin:.6rem;border-radius:8px;min-height:100%;max-width:100%;box-sizing:border-box;"></div>
     </div>
 
     <!-- TOC pane -->
@@ -1103,17 +1103,20 @@ document.querySelectorAll(
 
 <style>
 @keyframes spin{to{transform:rotate(360deg)}}
-#doc-content h1{font-size:1.4rem;font-weight:700;color:#1A3C5E;margin:1.8rem 0 .5rem;padding-bottom:.4rem;border-bottom:2px solid #1D9E75;}
-#doc-content h2{font-size:1.1rem;font-weight:700;color:#1A3C5E;margin:1.2rem 0 .4rem;}
-#doc-content p{font-size:.875rem;line-height:1.75;color:#2C2C2C;margin:.4rem 0;}
-#doc-content table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.8rem;}
-#doc-content td,#doc-content th{border:1px solid #CCCCCC;padding:.5rem .7rem;color:#2C2C2C;vertical-align:top;}
+#doc-content{font-family:Arial,sans-serif;}
+#doc-content h1{font-size:1.35rem;font-weight:700;color:#1A3C5E;margin:1.8rem 0 .5rem;padding-bottom:.4rem;border-bottom:2px solid #1D9E75;}
+#doc-content h2{font-size:1.05rem;font-weight:700;color:#1A3C5E;margin:1.2rem 0 .4rem;}
+#doc-content p{font-size:.85rem;line-height:1.75;color:#2C2C2C;margin:.35rem 0;}
+#doc-content table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.78rem;table-layout:fixed;word-break:break-word;}
+#doc-content td,#doc-content th{border:1px solid #CCCCCC;padding:.45rem .65rem;color:#2C2C2C;vertical-align:top;}
 #doc-content th{background:#1A3C5E;color:#fff;font-weight:600;}
 #doc-content tr:nth-child(even) td{background:#F4F6F8;}
 #doc-content ul,#doc-content ol{padding-left:1.4rem;margin:.4rem 0;}
-#doc-content li{font-size:.875rem;line-height:1.75;color:#2C2C2C;margin:.2rem 0;}
+#doc-content li{font-size:.85rem;line-height:1.75;color:#2C2C2C;margin:.2rem 0;}
 #doc-content strong{font-weight:600;}
 #doc-content em{font-style:italic;color:#555;}
+#doc-content img{max-width:100%;height:auto;display:block;margin:.8rem auto;border-radius:6px;}
+#doc-content figure{margin:.8rem 0;text-align:center;}
 </style>
 
 <script>
