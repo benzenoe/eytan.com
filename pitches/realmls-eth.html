@@ -1401,5 +1401,16 @@ function switchTab(tab){
   document.getElementById('tab-toc').style.color=isPreview?'var(--text2)':'#fff';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDocModal();});
+function printDocument(){
+  var content = document.getElementById('doc-content');
+  if(!content){ alert('Please open the document preview first.'); return; }
+  var pr = document.getElementById('print-root');
+  if(!pr){ pr = document.createElement('div'); pr.id = 'print-root'; document.body.appendChild(pr); }
+  pr.innerHTML = content.innerHTML;
+  setTimeout(function(){
+    window.print();
+    setTimeout(function(){ if(pr && pr.parentNode) pr.parentNode.removeChild(pr); }, 2000);
+  }, 100);
+}
 </script>
 </body>
