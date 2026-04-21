@@ -438,6 +438,58 @@ footer a{color:var(--teal-text);text-decoration:none;}
   .nav-links{display:none;}
 }
 </style>
+
+<style id="print-styles">
+@media print {
+  body > *:not(#print-root) { display: none !important; }
+  #print-root {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: white;
+    padding: 2rem 2.5rem;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #2C2C2C;
+  }
+  #print-root .doc-h1 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1A3C5E;
+    margin: 1.4rem 0 .4rem;
+    padding-bottom: .3rem;
+    border-bottom: 2px solid #1D9E75;
+    page-break-after: avoid;
+  }
+  #print-root table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: .6rem 0;
+    font-size: 10px;
+    page-break-inside: avoid;
+  }
+  #print-root th {
+    background: #1A3C5E !important;
+    color: white !important;
+    padding: .35rem .6rem;
+    text-align: left;
+    border: 1px solid #ccc;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  #print-root td {
+    border: 1px solid #ccc;
+    padding: .35rem .6rem;
+    vertical-align: top;
+  }
+  #print-root tr.alt td { background: #F4F6F8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #print-root p { font-size: 11px; line-height: 1.65; margin: .3rem 0; }
+  #print-root ul, #print-root ol { padding-left: 1.2rem; margin: .3rem 0; }
+  #print-root li { font-size: 11px; line-height: 1.65; }
+  #print-root img { max-width: 100%; height: auto; page-break-inside: avoid; }
+}
+</style>
 </head>
 <body>
 
@@ -1282,7 +1334,7 @@ document.querySelectorAll(
 
     <!-- Actions -->
     <div style="padding:1rem 1.4rem;border-top:1px solid var(--border);display:flex;gap:.7rem;flex-shrink:0;">
-      <button onclick="window.print()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:.5rem;background:none;border:1px solid var(--border2);border-radius:8px;padding:.7rem;cursor:pointer;color:var(--text2);font-family:'IBM Plex Sans',sans-serif;font-size:.8rem;font-weight:500;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal-text)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">
+      <button onclick="printDocument()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:.5rem;background:none;border:1px solid var(--border2);border-radius:8px;padding:.7rem;cursor:pointer;color:var(--text2);font-family:'IBM Plex Sans',sans-serif;font-size:.8rem;font-weight:500;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal-text)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 4.5V1.5h8v3M3 10.5H2a1 1 0 01-1-1v-4a1 1 0 011-1h10a1 1 0 011 1v4a1 1 0 01-1 1h-1M4 7.5h6M3 7.5v5h8v-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Print page
       </button>
