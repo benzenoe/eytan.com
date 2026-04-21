@@ -143,6 +143,17 @@
     }
     .nav-links a:hover { color: var(--gold); }
 
+    .nav-photos {
+      color: var(--gold) !important;
+      font-weight: 600 !important;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 4px;
+    }
+    .nav-photos:hover {
+      color: var(--gold-lt) !important;
+      border-bottom-color: var(--gold-lt);
+    }
+
     /* Hamburger */
     .nav-hamburger {
       display: none; flex-direction: column; gap: 5px; cursor: pointer;
@@ -176,6 +187,11 @@
       font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
       letter-spacing: 0.2em; text-transform: uppercase;
       border: 1px solid var(--gold); padding: 14px 36px; border-radius: 1px;
+    }
+
+    .mobile-menu .nav-photos {
+      color: var(--gold) !important;
+      font-weight: 500 !important;
     }
 
     .nav-cta {
@@ -821,7 +837,7 @@
       <a href="#overview">The Estate</a>
       <a href="#residences">The Lodge</a>
       <a href="#wildlife">Wildlife</a>
-      <a href="gallery.html">Photos</a>
+      <a href="gallery.html" class="nav-photos">Photos</a>
       <a href="#experience">Experiences</a>
       <a href="#investment">Investment</a>
       <a href="#contact" class="nav-cta">Private Enquiry</a>
@@ -836,7 +852,7 @@
     <a href="#overview" onclick="toggleMenu()">The Estate</a>
     <a href="#residences" onclick="toggleMenu()">The Lodge</a>
     <a href="#wildlife" onclick="toggleMenu()">Wildlife</a>
-    <a href="gallery.html">Photos</a>
+    <a href="gallery.html" class="nav-photos">Photos</a>
     <a href="#experience" onclick="toggleMenu()">Experiences</a>
     <a href="#investment" onclick="toggleMenu()">Investment</a>
     <a href="#contact" onclick="toggleMenu()">Private Enquiry</a>
