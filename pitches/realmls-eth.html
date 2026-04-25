@@ -672,14 +672,23 @@ footer a{color:var(--teal-text);text-decoration:none;}
   </div>
   <svg viewBox="0 0 1000 820" xmlns="http://www.w3.org/2000/svg" class="arch-svg" role="img" aria-label="RealMLS.eth five-layer architecture">
     <defs>
-      <marker id="arrow-solid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#8AACCC"/>
+      <!-- Solid flow arrows (capital / asset) -->
+      <marker id="arrow-solid" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+        <path d="M0,0 L12,6 L0,12 z" fill="#8AACCC"/>
       </marker>
-      <marker id="arrow-mandate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#C49A2A"/>
+      <marker id="arrow-solid-amber" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C49A2A"/>
       </marker>
-      <marker id="arrow-bidi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#3ECFA0"/>
+      <!-- Mandate / governance arrows (dashed) -->
+      <marker id="arrow-mandate" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+        <path d="M0,0 L12,6 L0,12 z" fill="#C49A2A"/>
+      </marker>
+      <marker id="arrow-gov" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+        <path d="M0,0 L12,6 L0,12 z" fill="#A99CFF"/>
+      </marker>
+      <!-- Yield / return (teal dashed) -->
+      <marker id="arrow-yield" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+        <path d="M0,0 L12,6 L0,12 z" fill="#3ECFA0"/>
       </marker>
       <linearGradient id="lane-l1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#5C7DA8" stop-opacity=".18"/><stop offset="1" stop-color="#5C7DA8" stop-opacity=".04"/></linearGradient>
       <linearGradient id="lane-l2" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#1D9E75" stop-opacity=".18"/><stop offset="1" stop-color="#1D9E75" stop-opacity=".04"/></linearGradient>
@@ -690,176 +699,205 @@ footer a{color:var(--teal-text);text-decoration:none;}
 
     <!-- Swim lanes -->
     <g class="lanes">
-      <rect x="0" y="20"  width="1000" height="140" fill="url(#lane-l1)" rx="8"/>
+      <rect x="0" y="15"  width="1000" height="145" fill="url(#lane-l1)" rx="8"/>
       <rect x="0" y="170" width="1000" height="140" fill="url(#lane-l2)" rx="8"/>
-      <rect x="0" y="320" width="1000" height="160" fill="url(#lane-l3)" rx="8"/>
-      <rect x="0" y="490" width="1000" height="140" fill="url(#lane-l4)" rx="8"/>
+      <rect x="0" y="320" width="1000" height="170" fill="url(#lane-l3)" rx="8"/>
+      <rect x="0" y="500" width="1000" height="130" fill="url(#lane-l4)" rx="8"/>
       <rect x="0" y="640" width="1000" height="140" fill="url(#lane-l5)" rx="8"/>
     </g>
 
     <!-- Layer labels (left edge stripes + text) -->
     <g class="lane-labels" font-family="'IBM Plex Mono', monospace" font-size="11" letter-spacing="1.5">
-      <g data-layer-label="L1"><rect x="0" y="20"  width="6" height="140" fill="#5C7DA8"/><text x="18" y="42" fill="#8AACCC">L1 · GOVERNANCE</text></g>
-      <g data-layer-label="L2"><rect x="0" y="170" width="6" height="140" fill="#1D9E75"/><text x="18" y="192" fill="#3ECFA0">L2 · CAPITAL</text></g>
-      <g data-layer-label="L3"><rect x="0" y="320" width="6" height="160" fill="#C49A2A"/><text x="18" y="342" fill="#E0B84A">L3 · OPERATIONS · RIT</text></g>
-      <g data-layer-label="L4"><rect x="0" y="490" width="6" height="140" fill="#2A7A6B"/><text x="18" y="512" fill="#3ECFA0">L4 · ASSETS</text></g>
-      <g data-layer-label="L5"><rect x="0" y="640" width="6" height="140" fill="#6B5CE7"/><text x="18" y="662" fill="#A99CFF">L5 · SERVICES</text></g>
+      <g data-layer-label="L1"><rect x="0" y="15"  width="6" height="145" fill="#5C7DA8"/><text x="18" y="36" fill="#8AACCC">L1 · GOVERNANCE</text></g>
+      <g data-layer-label="L2"><rect x="0" y="170" width="6" height="140" fill="#1D9E75"/><text x="18" y="191" fill="#3ECFA0">L2 · CAPITAL</text></g>
+      <g data-layer-label="L3"><rect x="0" y="320" width="6" height="170" fill="#C49A2A"/><text x="18" y="341" fill="#E0B84A">L3 · OPERATIONS · RIT</text></g>
+      <g data-layer-label="L4"><rect x="0" y="500" width="6" height="130" fill="#2A7A6B"/><text x="18" y="521" fill="#3ECFA0">L4 · ASSETS</text></g>
+      <g data-layer-label="L5"><rect x="0" y="640" width="6" height="140" fill="#6B5CE7"/><text x="18" y="661" fill="#A99CFF">L5 · SERVICES</text></g>
     </g>
 
-    <!-- Connectors (drawn before nodes so nodes overlay) -->
-    <g class="connectors" fill="none" stroke-width="1.6">
-      <!-- L1 → L2 capital flow -->
-      <path d="M 235,135 L 235,200" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <path d="M 700,135 L 580,200" stroke="#C49A2A" stroke-dasharray="5,4" marker-end="url(#arrow-mandate)"/>
-      <!-- L2 internal flow Capital entry → Ratio engine → Equity -->
-      <path d="M 305,255 L 425,255" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <path d="M 600,255 L 685,255" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <!-- L2 → L3 capital to BTC Treasury -->
-      <path d="M 235,290 L 235,365" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <!-- L2 Equity → L3 Mgmt co (DAO governance dashed bidi to mgmt co) -->
-      <path d="M 765,290 L 825,365" stroke="#3ECFA0" stroke-dasharray="5,4" marker-end="url(#arrow-bidi)" marker-start="url(#arrow-bidi)"/>
-      <!-- L3 internal: Treasury → Vault (collateral), Vault → Properties (capital out via mgmt co) -->
-      <path d="M 305,400 L 425,400" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <!-- L3 mgmt co ↔ vault (mandate) -->
-      <path d="M 745,400 L 600,400" stroke="#C49A2A" stroke-dasharray="5,4" marker-end="url(#arrow-mandate)" marker-start="url(#arrow-mandate)"/>
-      <!-- L3 → L4: Treasury → BTC Holdings (custody) -->
-      <path d="M 235,440 L 235,540" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <!-- L3 → L4: Vault → Properties (deploys borrowed stable to RE) -->
-      <path d="M 510,440 L 510,540" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <!-- L4 properties → L3 vault (yield) - dashed back up -->
-      <path d="M 560,540 L 560,440" stroke="#3ECFA0" stroke-dasharray="3,3" marker-end="url(#arrow-bidi)"/>
-      <!-- L4 → L5: Properties → TTF (tokenisation) -->
-      <path d="M 510,610 L 380,690" stroke="#8AACCC" marker-end="url(#arrow-solid)"/>
-      <!-- L5: Advisory ↔ L3 Mgmt co (mandate) -->
-      <path d="M 800,690 L 800,440" stroke="#C49A2A" stroke-dasharray="5,4" marker-end="url(#arrow-mandate)" marker-start="url(#arrow-mandate)"/>
+    <!-- ====== CONNECTORS (drawn before nodes so nodes overlay) ====== -->
+    <g class="connectors" fill="none" stroke-width="1.8">
+
+      <!-- L1 internal: Association → Investors and Association → DAO (dashed governance) -->
+      <path d="M 380,90 L 240,95" stroke="#A99CFF" stroke-dasharray="5,4" marker-end="url(#arrow-gov)"/>
+      <path d="M 620,90 L 675,95" stroke="#A99CFF" stroke-dasharray="5,4" marker-end="url(#arrow-gov)"/>
+
+      <!-- L1 → L2: capital flow (Investors → Capital entry, SOLID) -->
+      <path d="M 230,150 L 230,215" stroke="#3ECFA0" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+
+      <!-- L1 → L2: governance dashed (DAO → Ratio engine, DAO → Equity) -->
+      <path d="M 600,150 L 490,215" stroke="#A99CFF" stroke-dasharray="5,4" marker-end="url(#arrow-gov)"/>
+      <path d="M 720,150 L 740,215" stroke="#A99CFF" stroke-dasharray="5,4" marker-end="url(#arrow-gov)"/>
+
+      <!-- L2 internal: Capital entry → Ratio engine → Equity (SOLID) -->
+      <path d="M 320,247 L 400,247" stroke="#8AACCC" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+      <path d="M 580,247 L 660,247" stroke="#8AACCC" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+
+      <!-- L1 → L3 long-haul: DAO ↔ Mgmt co (BIDIRECTIONAL dashed governance, "DAO governance") -->
+      <path d="M 720,150 C 770,210 800,310 800,360" stroke="#A99CFF" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrow-gov)" marker-start="url(#arrow-gov)"/>
+
+      <!-- L2 → L3: Capital entry → BTC Treasury (SOLID) -->
+      <path d="M 200,280 L 170,355" stroke="#3ECFA0" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+
+      <!-- L3 internal: BTC Treasury → BTC/USD Vault (SOLID amber) -->
+      <path d="M 260,397 L 320,397" stroke="#C49A2A" stroke-width="2.2" marker-end="url(#arrow-solid-amber)"/>
+
+      <!-- L3 internal: BTC/USD Vault ↔ Mgmt co (BIDIRECTIONAL dashed amber, "mandate ↔ report") -->
+      <path d="M 530,400 L 660,400" stroke="#C49A2A" stroke-dasharray="5,4" marker-end="url(#arrow-mandate)" marker-start="url(#arrow-mandate)"/>
+
+      <!-- L3 → L4: BTC Treasury → BTC Holdings (SOLID amber, "custody") -->
+      <path d="M 170,440 L 180,535" stroke="#C49A2A" stroke-width="2.2" marker-end="url(#arrow-solid-amber)"/>
+
+      <!-- L3 → L4: BTC/USD Vault → Properties (DASHED amber, "2-5% APR — periodic deploy") -->
+      <path d="M 410,440 L 470,525" stroke="#C49A2A" stroke-dasharray="5,4" stroke-width="1.8" marker-end="url(#arrow-mandate)"/>
+
+      <!-- L4 → L3: Properties → BTC/USD Vault (DASHED teal "yield", parallel to above) -->
+      <path d="M 490,525 L 440,440" stroke="#3ECFA0" stroke-dasharray="5,4" stroke-width="1.8" marker-end="url(#arrow-yield)"/>
+
+      <!-- L4 internal: BTC Holdings → Properties (SOLID, horizontal) -->
+      <path d="M 280,570 L 340,570" stroke="#8AACCC" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+
+      <!-- L4 → L5: Properties → TTF (SOLID, "tokenises") -->
+      <path d="M 420,615 L 370,680" stroke="#8AACCC" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+
+      <!-- L3 ↔ L5: Mgmt co ↔ Advisory (BIDIRECTIONAL dashed amber "mandate ↔ report") -->
+      <path d="M 780,440 L 780,680" stroke="#C49A2A" stroke-dasharray="5,4" marker-end="url(#arrow-mandate)" marker-start="url(#arrow-mandate)"/>
     </g>
 
     <!-- Edge labels -->
-    <g class="edge-labels" font-family="'IBM Plex Mono', monospace" font-size="9.5" fill="#8AACCC" letter-spacing="0.5">
-      <text x="240" y="172" fill="#3ECFA0">capital in</text>
-      <text x="608" y="172" fill="#E0B84A">DAO mandate</text>
-      <text x="335" y="248">deploys</text>
-      <text x="615" y="248">issues</text>
-      <text x="240" y="332">to treasury</text>
-      <text x="335" y="392">posts collateral</text>
-      <text x="615" y="392" fill="#E0B84A">mandate ↔ report</text>
-      <text x="245" y="495">custody</text>
-      <text x="520" y="495">funds RE</text>
-      <text x="568" y="525" fill="#3ECFA0">yield</text>
-      <text x="395" y="660">tokenises</text>
-      <text x="810" y="565" fill="#E0B84A">mandate</text>
-      <text x="785" y="332" fill="#3ECFA0">DAO governance</text>
+    <g class="edge-labels" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#8AACCC" letter-spacing="0.4">
+      <text x="245" y="190" fill="#3ECFA0">capital in</text>
+      <text x="335" y="240">deploys</text>
+      <text x="595" y="240">issues</text>
+      <text x="195" y="335" fill="#3ECFA0">capital</text>
+      <text x="270" y="392" fill="#E0B84A">30% LTV</text>
+      <text x="540" y="392" fill="#E0B84A">mandate ↔ report</text>
+      <text x="195" y="495" fill="#E0B84A">custody</text>
+      <text x="380" y="495" fill="#E0B84A">2–5% APR</text>
+      <text x="500" y="495" fill="#3ECFA0">yield</text>
+      <text x="380" y="660">tokenises</text>
+      <text x="788" y="565" fill="#E0B84A">mandate ↔ report</text>
+      <!-- DAO governance pill label on the curve -->
+      <g transform="translate(800,330)">
+        <rect x="-58" y="-13" width="116" height="22" rx="11" fill="#1A2E42" stroke="#A99CFF" stroke-width="1"/>
+        <text x="0" y="3" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9.5" fill="#A99CFF" letter-spacing="0.3">DAO governance</text>
+      </g>
     </g>
 
     <!-- ====== NODES ====== -->
-    <!-- L1: Association (top), Investors (left), DAO Governance (right) -->
+    <!-- L1: Association (top wide), Investors (left), DAO Governance (right) -->
     <g class="node" data-layer="L1" data-id="association"
-       data-tip="The cultural and community shell. Investors join here. The Association is the voice — it represents members publicly, hosts events, manages community trust. It is not a legal owner of any asset.">
-      <rect x="350" y="40" width="300" height="60" rx="8" fill="#1A2E42" stroke="#5C7DA8" stroke-width="1.5"/>
-      <text x="500" y="68" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="18" font-weight="600" fill="#E8F0F8">RealMLS Association</text>
-      <text x="500" y="86" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9.5" fill="#8AACCC" letter-spacing="0.4">CAPITAL ATTRACTION · COMMUNITY · DEAL FLOW</text>
+       data-tip="The cultural and community shell. Capital attraction vehicle. Hosts the investor community and represents the institution publicly. The Association does not own any asset — it is the membership wrapper around the DAO.">
+      <rect x="290" y="35" width="420" height="55" rx="8" fill="#1A2E42" stroke="#5C7DA8" stroke-width="1.5"/>
+      <text x="500" y="60" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="18" font-weight="600" fill="#E8F0F8">RealMLS Association</text>
+      <text x="500" y="78" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9.5" fill="#8AACCC" letter-spacing="0.4">CAPITAL ATTRACTION · COMMUNITY · DEAL FLOW</text>
     </g>
 
     <g class="node" data-layer="L1" data-id="investors"
        data-tip="Family offices, BTC-native treasuries, qualified individuals. €50K minimum entry. Members get governance rights and proportional equity in the DAO.">
-      <rect x="135" y="75" width="200" height="60" rx="8" fill="#1A2E42" stroke="#5C7DA8" stroke-width="1.5"/>
-      <text x="235" y="103" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">Investors</text>
-      <text x="235" y="121" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#8AACCC">Family offices · BTC-native</text>
+      <rect x="140" y="95" width="200" height="55" rx="8" fill="#1A2E42" stroke="#5C7DA8" stroke-width="1.5"/>
+      <text x="240" y="120" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">Investors</text>
+      <text x="240" y="138" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#8AACCC">Family offices · BTC-native</text>
     </g>
 
     <g class="node" data-layer="L1" data-id="dao"
-       data-tip="On-chain governance. Every acquisition, treasury action, and major decision requires a 60% supermajority vote with a 7-day window. ENS: realmls.eth.">
-      <rect x="665" y="75" width="200" height="60" rx="8" fill="#1A2E42" stroke="#6B5CE7" stroke-width="1.5"/>
-      <text x="765" y="103" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">RealMLS.eth · DAO</text>
-      <text x="765" y="121" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#A99CFF">Supermajority on-chain</text>
+       data-tip="On-chain governance. Every acquisition, treasury action, and major decision requires a 60% supermajority vote with a 7-day window. ENS: realmls.eth. Mandates the Mgmt Co. Governs the Ratio engine and Equity issuance.">
+      <rect x="540" y="95" width="270" height="55" rx="8" fill="#1A2E42" stroke="#6B5CE7" stroke-width="1.5"/>
+      <text x="675" y="120" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">RealMLS.eth — DAO Governance</text>
+      <text x="675" y="138" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#A99CFF">On-chain · Supermajority decisions</text>
     </g>
 
     <!-- L2: Capital entry, Ratio engine, Equity -->
     <g class="node" data-layer="L2" data-id="capital-entry"
        data-tip="The point at which qualified investor capital enters the system. €50,000 minimum ticket. KYC/AML completed before commitment. Capital is held in a regulated EUR account before deployment.">
-      <rect x="135" y="225" width="170" height="60" rx="8" fill="#1A2E42" stroke="#1D9E75" stroke-width="1.5"/>
-      <text x="220" y="252" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Capital entry</text>
-      <text x="220" y="270" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#3ECFA0">€50K minimum</text>
+      <rect x="140" y="215" width="180" height="65" rx="8" fill="#1A2E42" stroke="#1D9E75" stroke-width="1.5"/>
+      <text x="230" y="244" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Capital entry</text>
+      <text x="230" y="262" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#3ECFA0">€50K minimum</text>
+      <text x="230" y="274" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">qualified investors</text>
     </g>
 
     <g class="node" data-layer="L2" data-id="ratio-engine"
        data-tip="Pro-rata equity allocation engine. Issues DAO equity tokens proportional to capital committed at entry. Open question: static (fixed at entry) vs. dynamic (oracle-fed BTC/USD ratio adjustment).">
-      <rect x="425" y="225" width="170" height="60" rx="8" fill="#1A2E42" stroke="#1D9E75" stroke-width="1.5"/>
-      <text x="510" y="252" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Ratio Engine</text>
-      <text x="510" y="270" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#3ECFA0">Pro-rata equity allocation</text>
+      <rect x="400" y="215" width="180" height="65" rx="8" fill="#1A2E42" stroke="#1D9E75" stroke-width="1.5"/>
+      <text x="490" y="244" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Ratio engine</text>
+      <text x="490" y="262" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#3ECFA0">Pro-rata equity allocation</text>
     </g>
 
     <g class="node" data-layer="L2" data-id="equity"
        data-tip="On-chain DAO equity tokens issued via Ethereum. Each token represents a proportional governance vote AND a pro-rata claim on the underlying NAV (BTC + Portugal RE).">
-      <rect x="685" y="225" width="170" height="60" rx="8" fill="#1A2E42" stroke="#6B5CE7" stroke-width="1.5"/>
-      <text x="770" y="252" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Equity (DAO shares)</text>
-      <text x="770" y="270" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#A99CFF">On-chain · Ethereum</text>
+      <rect x="660" y="215" width="180" height="65" rx="8" fill="#1A2E42" stroke="#6B5CE7" stroke-width="1.5"/>
+      <text x="750" y="244" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Equity</text>
+      <text x="750" y="262" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#A99CFF">On-chain DAO shares</text>
+      <text x="750" y="274" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">Ethereum</text>
     </g>
 
-    <!-- L3: BTC Treasury, BTC/USD Vault, Mgmt co -->
+    <!-- L3: BTC Treasury, BTC/USD Vault (rectangles), Mgmt co (ELLIPSE — external) -->
     <g class="node" data-layer="L3" data-id="treasury"
        data-tip="100M sat reserve target. Held in multisig custody from inception. Never on exchange. Never sold. Posts collateral to the Vault — does not move otherwise.">
-      <rect x="135" y="365" width="170" height="70" rx="8" fill="#1A2E42" stroke="#C49A2A" stroke-width="1.5"/>
-      <text x="220" y="395" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">BTC Treasury</text>
-      <text x="220" y="413" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#E0B84A">100M sat · multisig</text>
-      <text x="220" y="425" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">never on exchange</text>
+      <rect x="80" y="355" width="180" height="85" rx="8" fill="#1A2E42" stroke="#C49A2A" stroke-width="1.5"/>
+      <text x="170" y="383" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">BTC Treasury</text>
+      <text x="170" y="403" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#E0B84A">100M sat reserve</text>
+      <text x="170" y="425" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">never on exchange</text>
     </g>
 
     <g class="node" data-layer="L3" data-id="vault"
        data-tip="The alpha engine. BTC posted as collateral at 30% LTV (well below liquidation). Stablecoins drawn at 2–5% APR via Aave / Ledn / equivalent. Borrowed fiat funds Portugal RE acquisitions. BTC compounds untouched.">
-      <rect x="425" y="365" width="170" height="70" rx="8" fill="#1A2E42" stroke="#C49A2A" stroke-width="1.5"/>
-      <text x="510" y="392" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">BTC/USD Vault</text>
-      <text x="510" y="410" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#E0B84A">30% LTV · 2–5% APR</text>
-      <text x="510" y="423" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">borrows stablecoins</text>
+      <rect x="320" y="355" width="210" height="85" rx="8" fill="#1A2E42" stroke="#C49A2A" stroke-width="1.5"/>
+      <text x="425" y="383" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">BTC/USD Vault</text>
+      <text x="425" y="403" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#E0B84A">BTC-collateralised · 30% LTV</text>
+      <text x="425" y="425" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">borrow at 2–5% APR</text>
     </g>
 
-    <g class="node" data-layer="L3" data-id="mgmtco"
-       data-tip="Day-to-day operations under DAO mandate: NAV calculation, investor reporting, capital calls, coordination with the Advisory and TTF. MANDATED to a top-tier independent fund administrator. Reports to the DAO. Does not own anything.">
-      <rect x="745" y="365" width="170" height="70" rx="8" fill="#1A2E42" stroke="#C4441A" stroke-width="1.5"/>
-      <text x="830" y="395" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Mgmt Co</text>
-      <text x="830" y="413" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#FF8E66">Independent fund admin</text>
-      <text x="830" y="425" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">DAO-mandated</text>
+    <!-- Mgmt co: ELLIPSE (external service provider) -->
+    <g class="node external" data-layer="L3" data-id="mgmtco"
+       data-tip="Day-to-day operations under DAO mandate: NAV calculation, investor reporting, capital calls, coordination with the Advisory and TTF. EXTERNAL — mandated to a top-tier independent fund administrator. Reports to the DAO. Does not own anything.">
+      <ellipse cx="780" cy="400" rx="120" ry="40" fill="#1A2E42" stroke="#C4441A" stroke-width="1.6"/>
+      <text x="780" y="395" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">Mgmt co</text>
+      <text x="780" y="415" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#FF8E66">RIT operations &amp; reporting</text>
     </g>
 
     <!-- L4: BTC Holdings, Properties -->
     <g class="node" data-layer="L4" data-id="btc-holdings"
        data-tip="The actual BTC, held in multisig custody. Same coins that back the treasury. Visible on-chain. Never bridged, wrapped, or rehypothecated. The institution's hard-asset reserve.">
-      <rect x="135" y="540" width="200" height="70" rx="8" fill="#1A2E42" stroke="#C49A2A" stroke-width="1.5"/>
-      <text x="235" y="568" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">BTC Holdings</text>
-      <text x="235" y="586" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#E0B84A">Multisig custody</text>
-      <text x="235" y="599" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">on-chain auditable</text>
+      <rect x="80" y="535" width="200" height="70" rx="8" fill="#1A2E42" stroke="#C49A2A" stroke-width="1.5"/>
+      <text x="180" y="563" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">BTC Holdings</text>
+      <text x="180" y="582" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#E0B84A">Multisig custody</text>
+      <text x="180" y="595" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">on-chain auditable</text>
     </g>
 
     <g class="node" data-layer="L4" data-id="properties"
        data-tip="Portugal RE portfolio. Each acquisition held in a separate Portuguese LDA (SPV) for clean liability ringfencing. Income-generating: Lisbon, Porto, Algarve focus. Net rental yield converts to EURC and distributes quarterly.">
-      <rect x="410" y="540" width="200" height="70" rx="8" fill="#1A2E42" stroke="#2A7A6B" stroke-width="1.5"/>
-      <text x="510" y="568" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">Properties</text>
-      <text x="510" y="586" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#3ECFA0">Portugal RE · per-asset SPV</text>
-      <text x="510" y="599" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">income-generating</text>
+      <rect x="340" y="525" width="320" height="90" rx="8" fill="#1A2E42" stroke="#2A7A6B" stroke-width="1.5"/>
+      <text x="500" y="558" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="20" font-weight="600" fill="#E8F0F8">Properties</text>
+      <text x="500" y="580" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#3ECFA0">Portugal RE portfolio</text>
+      <text x="500" y="598" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#8AACCC">Income-generating assets</text>
     </g>
 
-    <!-- L5: TTF, Advisory -->
-    <g class="node" data-layer="L5" data-id="ttf"
-       data-tip="Token Transfer Facility. Wraps each property SPV on-chain and issues equity tokens to DAO members proportional to their stake. External, licensed, bound by mandate — does not own the underlying assets.">
-      <rect x="280" y="690" width="200" height="60" rx="8" fill="#1A2E42" stroke="#6B5CE7" stroke-width="1.5"/>
-      <text x="380" y="717" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">TTF</text>
-      <text x="380" y="735" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#A99CFF">Token Transfer Facility</text>
+    <!-- L5: TTF and Advisory — BOTH ELLIPSES (external service providers) -->
+    <g class="node external" data-layer="L5" data-id="ttf"
+       data-tip="Token Transfer Facility. Wraps each property SPV on-chain and issues equity tokens to DAO members proportional to their stake. EXTERNAL — licensed, bound by mandate, does not own the underlying assets.">
+      <ellipse cx="350" cy="720" rx="130" ry="40" fill="#1A2E42" stroke="#5C7DCC" stroke-width="1.6"/>
+      <text x="350" y="715" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">TTF</text>
+      <text x="350" y="735" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#8AACCC">Token Transfer Facility</text>
     </g>
 
-    <g class="node" data-layer="L5" data-id="advisory"
-       data-tip="Independent licensed Portuguese brokerage. Sole source of deal flow — sources, underwrites, and executes every acquisition on behalf of the DAO. Bound by mandate, not ownership. Earns 1% deal fee.">
-      <rect x="700" y="690" width="200" height="60" rx="8" fill="#1A2E42" stroke="#1D9E75" stroke-width="1.5"/>
-      <text x="800" y="717" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-weight="600" fill="#E8F0F8">Advisory</text>
-      <text x="800" y="735" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#3ECFA0">Independent brokerage</text>
+    <g class="node external" data-layer="L5" data-id="advisory"
+       data-tip="Independent licensed Portuguese brokerage. Sole source of deal flow — sources, underwrites, and executes every acquisition on behalf of the DAO. EXTERNAL — bound by mandate, not ownership. Earns 1% deal fee per acquisition.">
+      <ellipse cx="780" cy="720" rx="140" ry="40" fill="#1A2E42" stroke="#1D9E75" stroke-width="1.6"/>
+      <text x="780" y="713" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="16" font-weight="600" fill="#E8F0F8">Advisory</text>
+      <text x="780" y="731" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#3ECFA0">Independent · Licensed brokerage</text>
+      <text x="780" y="744" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#8AACCC">Portugal RE</text>
     </g>
   </svg>
 
   <div class="arch-tooltip" id="archTooltip" role="tooltip" aria-hidden="true"></div>
 
   <div class="arch-legend">
-    <span class="leg-item"><span class="leg-line solid"></span> Capital / asset flow</span>
-    <span class="leg-item"><span class="leg-line dashed"></span> Mandate · obligation</span>
-    <span class="leg-item"><span class="leg-line bidi"></span> Bidirectional · yield · governance</span>
+    <span class="leg-item"><span class="leg-line solid"></span> Direct capital / asset flow</span>
+    <span class="leg-item"><span class="leg-line dashed"></span> Obligation · service · periodic return</span>
+    <span class="leg-item"><span class="leg-line bidi"></span> Bidirectional · governance / mandate-report</span>
+    <span class="leg-item"><span class="leg-shape rect"></span> Internal entity</span>
+    <span class="leg-item"><span class="leg-shape oval"></span> External service provider</span>
     <span class="leg-item leg-hint">Hover any node for detail · click a layer to highlight</span>
   </div>
 </div>
@@ -1821,9 +1859,9 @@ function printDocument(){
 .arch-svg{ width:100%; height:auto; display:block; }
 .arch-svg .lanes rect{ transition:opacity .25s ease; }
 .arch-svg .node{ cursor:pointer; transition:transform .15s ease, filter .2s ease; transform-origin:center; transform-box:fill-box; }
-.arch-svg .node rect{ transition:stroke-width .15s ease, filter .2s ease, opacity .25s ease; }
+.arch-svg .node rect, .arch-svg .node ellipse{ transition:stroke-width .15s ease, filter .2s ease, opacity .25s ease; }
 .arch-svg .node text{ transition:opacity .25s ease; pointer-events:none; }
-.arch-svg .node:hover rect{ stroke-width:2.4; filter:drop-shadow(0 0 12px rgba(62,207,160,.35)); }
+.arch-svg .node:hover rect, .arch-svg .node:hover ellipse{ stroke-width:2.6; filter:drop-shadow(0 0 12px rgba(62,207,160,.35)); }
 .arch-svg .connectors path{ transition:opacity .25s ease, stroke-width .15s ease; }
 .arch-svg .edge-labels text{ transition:opacity .25s ease; pointer-events:none; }
 .arch-svg .lane-labels g{ cursor:pointer; transition:opacity .25s ease; }
@@ -1831,11 +1869,13 @@ function printDocument(){
 .arch-svg .lane-labels g:hover text{ fill:#E8F0F8; }
 
 /* dimmed state when a layer filter is active */
-.arch-svg.filtering .node:not(.match) rect{ opacity:.18; }
+.arch-svg.filtering .node:not(.match) rect,
+.arch-svg.filtering .node:not(.match) ellipse{ opacity:.18; }
 .arch-svg.filtering .node:not(.match) text{ opacity:.18; }
 .arch-svg.filtering .lanes rect:not(.match){ opacity:.4; }
 .arch-svg.filtering .connectors path{ opacity:.15; }
 .arch-svg.filtering .edge-labels text{ opacity:.15; }
+.arch-svg.filtering .edge-labels g{ opacity:.15; }
 
 /* tooltip */
 .arch-tooltip, .fw-tooltip{
@@ -1861,7 +1901,10 @@ function printDocument(){
 .leg-item{ display:flex; align-items:center; gap:.45rem; }
 .leg-line{ display:inline-block; width:24px; height:1.6px; background:#8AACCC; }
 .leg-line.dashed{ background:transparent; border-top:1.6px dashed #C49A2A; height:0; }
-.leg-line.bidi{ background:transparent; border-top:1.6px dashed #3ECFA0; height:0; }
+.leg-line.bidi{ background:transparent; border-top:1.6px dashed #A99CFF; height:0; }
+.leg-shape{ display:inline-block; width:18px; height:11px; vertical-align:middle; }
+.leg-shape.rect{ background:transparent; border:1px solid #8AACCC; border-radius:2px; }
+.leg-shape.oval{ background:transparent; border:1px solid #1D9E75; border-radius:50%; height:11px; width:18px; }
 .leg-hint{ margin-left:auto; color:var(--text3); font-style:italic; }
 
 /* mobile arch */
