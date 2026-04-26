@@ -2071,18 +2071,25 @@ function b64toArrayBuffer(b64){
   return buf;
 }
 
-function renderDoc_unused(){
+function renderDoc(){
   if(docRendered) return;
+  document.getElementById('doc-content').innerHTML = '<div style="padding:3rem;text-align:center;color:#888;font-family:Arial,sans-serif;font-size:.9rem;">Rendering document…</div>';
   var script=document.createElement('script');
   script.src='https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js';
   script.onload=function(){
     mammoth.convertToHtml({arrayBuffer:b64toArrayBuffer(DOCX_B64)})
       .then(function(result){
-        document.getElementById('doc-content').innerHTML=result.value;
-        document.getElementById('doc-loading').style.display='none';
-        document.getElementById('doc-content').style.display='block';
+        document.getElementById('doc-content').innerHTML=
+          '<div style="font-family:Arial,sans-serif;color:#2C2C2C;font-size:13px;line-height:1.65;" class="mammoth-rendered">' + result.value + '</div>';
         docRendered=true;
+      })
+      .catch(function(err){
+        document.getElementById('doc-content').innerHTML = '<div style="padding:2rem;color:#a33;font-family:Arial,sans-serif;">Could not render preview. Please use the Download button to view the document.</div>';
+        console.error('Mammoth render failed:', err);
       });
+  };
+  script.onerror=function(){
+    document.getElementById('doc-content').innerHTML = '<div style="padding:2rem;color:#a33;font-family:Arial,sans-serif;">Preview library failed to load. Please use the Download button to view the document.</div>';
   };
   document.head.appendChild(script);
 }
@@ -2090,6 +2097,7 @@ function renderDoc_unused(){
 function openDocModal(){
   var m=document.getElementById('doc-modal');
   m.style.display='flex';
+  renderDoc();
 }
 function closeDocModal(){document.getElementById('doc-modal').style.display='none';}
 function switchTab(tab){
@@ -2239,6 +2247,23 @@ function printDocument(){
 }
 
 /* shared tooltip already styled above */
+
+/* ─────── MAMMOTH-RENDERED PREVIEW STYLES ─────── */
+.mammoth-rendered h1{ font-size:1.15rem; font-weight:700; color:#1A3C5E; margin:1.4rem 0 .5rem; padding-bottom:.3rem; border-bottom:2px solid #1D9E75; }
+.mammoth-rendered h2{ font-size:1rem; font-weight:600; color:#1A3C5E; margin:1.1rem 0 .4rem; }
+.mammoth-rendered h3{ font-size:.95rem; font-weight:600; color:#1A3C5E; margin:.9rem 0 .3rem; }
+.mammoth-rendered p{ margin:.4rem 0; line-height:1.65; font-size:13px; }
+.mammoth-rendered strong{ color:#1A3C5E; }
+.mammoth-rendered em{ color:#555; font-style:italic; }
+.mammoth-rendered table{ width:100%; border-collapse:collapse; margin:.7rem 0 1rem; font-size:12px; }
+.mammoth-rendered th{ background:#1A3C5E; color:white; padding:.45rem .7rem; text-align:left; border:1px solid #ccc; font-weight:600; }
+.mammoth-rendered td{ padding:.45rem .7rem; border:1px solid #ccc; vertical-align:top; line-height:1.5; }
+.mammoth-rendered tr:nth-child(even) td{ background:#F4F6F8; }
+.mammoth-rendered ul, .mammoth-rendered ol{ margin:.4rem 0; padding-left:1.4rem; }
+.mammoth-rendered li{ margin:.2rem 0; line-height:1.6; }
+.mammoth-rendered img{ max-width:100%; height:auto; display:block; margin:1rem auto; }
+.mammoth-rendered hr{ border:none; border-top:1px solid #ddd; margin:1rem 0; }
+
 </style>
 
 <script>
