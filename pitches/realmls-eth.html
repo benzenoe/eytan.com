@@ -785,6 +785,12 @@ footer a{color:var(--teal-text);text-decoration:none;}
       <!-- L4 → L5: Properties → TTF (SOLID, "tokenises") -->
       <path d="M 420,615 L 370,680" stroke="#8AACCC" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
 
+      <!-- L5 → L4: TTF → Properties (DASHED teal "tokens", showing equity tokens returning to represent ownership) -->
+      <path d="M 380,680 L 430,615" stroke="#3ECFA0" stroke-dasharray="5,4" stroke-width="1.8" marker-end="url(#arrow-yield)"/>
+
+      <!-- L3 ↔ L4: Mgmt co ↔ Properties (BIDIRECTIONAL dashed amber "mandate ↔ report") -->
+      <path d="M 720,440 L 620,525" stroke="#C49A2A" stroke-dasharray="5,4" marker-end="url(#arrow-mandate)" marker-start="url(#arrow-mandate)"/>
+
       <!-- L3 ↔ L5: Mgmt co ↔ Advisory (BIDIRECTIONAL dashed amber "mandate ↔ report") -->
       <path d="M 780,440 L 780,680" stroke="#C49A2A" stroke-dasharray="5,4" marker-end="url(#arrow-mandate)" marker-start="url(#arrow-mandate)"/>
     </g>
@@ -800,7 +806,9 @@ footer a{color:var(--teal-text);text-decoration:none;}
       <text x="195" y="495" fill="#E0B84A">custody</text>
       <text x="380" y="495" fill="#E0B84A">2–5% APR</text>
       <text x="500" y="495" fill="#3ECFA0">yield</text>
-      <text x="380" y="660">tokenises</text>
+      <text x="350" y="655">tokenises</text>
+      <text x="430" y="668" fill="#3ECFA0">tokens</text>
+      <text x="640" y="495" fill="#E0B84A">mandate ↔ report</text>
       <text x="788" y="565" fill="#E0B84A">mandate ↔ report</text>
       <!-- DAO governance pill label on the curve -->
       <g transform="translate(800,330)">
