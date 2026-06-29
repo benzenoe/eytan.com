@@ -430,7 +430,7 @@
     return (name || '').split(/\s+/).slice(0, 2).map(function(w) { return w[0] ? w[0].toUpperCase() : ''; }).join('');
   }
 
-  function avatarUrl(name) {
+  function fallbackAvatar(name) {
     var encoded = encodeURIComponent((name || '?').trim());
     return 'https://ui-avatars.com/api/?name=' + encoded + '&size=68&background=0077b5&color=ffffff&bold=true&format=png';
   }
@@ -439,7 +439,10 @@
     var text = (rec.text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     var id = 'r' + Math.random().toString(36).slice(2);
     var long = text.length > 320;
-    var avatar = '<img src="' + avatarUrl(rec.name) + '" alt="' + (rec.name || '') + '" style="width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;">';
+    var photoSrc = rec.photo || fallbackAvatar(rec.name);
+    var avatar = '<img src="' + photoSrc + '" alt="' + (rec.name || '') + '" '
+      + 'onerror="this.src=\'' + fallbackAvatar(rec.name) + '\'" '
+      + 'style="width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;">';
     return '<div class="rec-card">' +
       '<div class="rec-stars">★★★★★</div>' +
       '<div class="rec-text' + (long ? ' clamped' : '') + '" id="' + id + '">' + text.replace(/\n/g, '<br>') + '</div>' +
