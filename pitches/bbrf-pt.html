@@ -735,6 +735,110 @@ footer p+p{margin-top:.4rem;}
 .plan-step p{font-size:.84rem;color:var(--text2);}
 .plan-owner{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text3);margin-top:.3rem;}
 
+/* ── PDF MODAL ── */
+#pdf-modal{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);
+  flex-direction:column;align-items:center;justify-content:center;padding:1rem;
+}
+.pdf-modal-box{
+  background:#0a1928;border:1px solid rgba(247,147,26,0.2);
+  border-radius:18px;width:100%;max-width:600px;
+  box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 60px rgba(247,147,26,0.05);
+  overflow:hidden;
+}
+.pdf-modal-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.4rem;border-bottom:1px solid rgba(255,255,255,0.07);
+  background:#060f1c;
+}
+.pdf-modal-head-left{display:flex;align-items:center;gap:.75rem;}
+.pdf-modal-head-icon{
+  width:38px;height:38px;background:rgba(247,147,26,.12);border:1px solid rgba(247,147,26,.25);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.pdf-modal-head-title{font-weight:700;font-size:.9rem;color:var(--text);}
+.pdf-modal-head-sub{font-size:.72rem;color:var(--text3);margin-top:.1rem;font-family:'Space Mono',monospace;}
+.pdf-modal-close{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  color:var(--text3);cursor:pointer;width:34px;height:34px;border-radius:8px;
+  font-size:1rem;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.pdf-modal-close:hover{color:var(--text);border-color:rgba(255,255,255,0.25);}
+.pdf-modal-body{padding:1.5rem 1.4rem;}
+/* Cover preview */
+.pdf-cover{
+  background:linear-gradient(135deg,rgba(247,147,26,0.07),rgba(0,180,255,0.04));
+  border:1px solid rgba(247,147,26,0.12);border-radius:12px;
+  padding:1.4rem;margin-bottom:1.4rem;
+  display:flex;align-items:center;gap:1.2rem;
+}
+.pdf-cover-thumb{
+  width:64px;height:88px;border-radius:6px;flex-shrink:0;
+  background:linear-gradient(160deg,var(--bg3),#0a1520);
+  border:1px solid rgba(247,147,26,0.2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;
+  font-family:'Space Grotesk',sans-serif;
+}
+.pdf-cover-thumb-logo{font-size:1.3rem;color:var(--btc);}
+.pdf-cover-thumb-text{font-size:.45rem;color:var(--text3);font-family:'Space Mono',monospace;letter-spacing:.05em;}
+.pdf-cover-meta h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:.2rem;color:var(--btc);}
+.pdf-cover-meta p{font-size:.8rem;color:var(--text2);margin-bottom:.5rem;}
+.pdf-cover-stats{display:flex;gap:1rem;flex-wrap:wrap;}
+.pdf-cover-stat{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text3);}
+.pdf-cover-stat strong{color:var(--text2);}
+/* Contents list */
+.pdf-contents{margin-bottom:1.4rem;}
+.pdf-contents-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;}
+.pdf-contents-grid{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;}
+.pdf-contents-item{font-size:.78rem;color:var(--text2);display:flex;align-items:flex-start;gap:.45rem;}
+.pdf-contents-item::before{content:'✓';color:var(--green);font-size:.7rem;flex-shrink:0;margin-top:.1rem;}
+/* Actions */
+.pdf-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+.pdf-print-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:.6rem;
+  background:var(--btc);color:#000;font-weight:800;font-size:.88rem;
+  padding:.8rem 1.4rem;border-radius:10px;border:none;cursor:pointer;
+  transition:all .2s;letter-spacing:.02em;
+}
+.pdf-print-btn:hover{background:#ffaa44;transform:translateY(-1px);box-shadow:0 8px 24px rgba(247,147,26,.3);}
+.pdf-cancel-btn{
+  padding:.8rem 1.4rem;border-radius:10px;border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);color:var(--text3);font-size:.88rem;
+  cursor:pointer;transition:all .2s;
+}
+.pdf-cancel-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.pdf-tip{
+  margin-top:1rem;font-size:.72rem;color:var(--text3);line-height:1.65;
+  padding:.7rem 1rem;background:rgba(255,255,255,0.02);border-radius:8px;
+  font-family:'Space Mono',monospace;
+}
+.pdf-tip strong{color:var(--text2);}
+
+/* ── PRINT CSS ── */
+@media print{
+  nav,
+  .ticker-bar,
+  .grid-bg,
+  #pdf-modal,
+  .engine-svg-box .stress-card,
+  .stress-card .btc-slider,
+  #pdf-modal,
+  .pilot-links .btn-ghost,
+  .cta-buttons,
+  .contacts{ display:none !important; }
+
+  body::before{ display:none; }
+  body{ background:#03080f; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .hero{ min-height:auto; padding:4rem 2rem 3rem; page-break-after:always; }
+  .stripe,.section{ page-break-inside:avoid; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+  .return-bar-fill{ transform:scaleX(1) !important; }
+  @page{ size:A4; margin:12mm 10mm; }
+  .chart-c,.chart-c.sm{ height:220px; }
+}
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .legs,.scenarios,.tiers,.roadmap,.struct-grid,.team-grid,.viz-duo{grid-template-columns:1fr;}
@@ -793,6 +897,7 @@ footer p+p{margin-top:.4rem;}
     <li><a href="#structure">Structure</a></li>
   </ul>
   <div class="nav-right">
+    <button onclick="openPdfModal()" style="background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.3);color:var(--btc);border-radius:6px;padding:.4rem 1rem;font-size:.75rem;font-weight:600;cursor:pointer;font-family:'Space Mono',monospace;transition:all .2s;" onmouseover="this.style.background='rgba(247,147,26,0.2)'" onmouseout="this.style.background='rgba(247,147,26,0.1)'">⬇ PDF</button>
     <a class="nav-cta" href="mailto:eytan@benzeno.com?subject=BBRF-PT%20%E2%80%94%20Investor%20Enquiry">Get In →</a>
   </div>
 </nav>
@@ -1500,6 +1605,7 @@ footer p+p{margin-top:.4rem;}
     <div class="cta-buttons">
       <a href="mailto:eytan@benzeno.com?subject=BBRF-PT%20%E2%80%94%20Investor%20Enquiry&body=I%20am%20writing%20to%20express%20interest%20in%20BBRF-PT%20and%20request%20the%20full%20investor%20memorandum." class="btn-fire">Request Full Memorandum →</a>
       <a href="mailto:eytan@benzeno.com?subject=BBRF-PT%20%E2%80%94%20Introductory%20Call" class="btn-ghost">Schedule a Call</a>
+      <button onclick="openPdfModal()" class="btn-ghost" style="border-color:rgba(247,147,26,0.3);color:var(--btc);">⬇ Download PDF</button>
     </div>
     <div class="contacts">
       <div class="contact-p">
@@ -1512,6 +1618,64 @@ footer p+p{margin-top:.4rem;}
         <p>On-chain Structuring · Bittrees</p>
         <p><a href="mailto:jhineline@bittrees.io">jhineline@bittrees.io</a></p>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- PDF PREVIEW MODAL -->
+<div id="pdf-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);flex-direction:column;align-items:center;justify-content:center;padding:1rem;">
+  <div class="pdf-modal-box">
+    <div class="pdf-modal-head">
+      <div class="pdf-modal-head-left">
+        <div class="pdf-modal-head-icon">₿</div>
+        <div>
+          <div class="pdf-modal-head-title">BBRF-PT — Investor Memorandum</div>
+          <div class="pdf-modal-head-sub">CONFIDENTIAL · June 2026 · A Bittrees venture</div>
+        </div>
+      </div>
+      <button class="pdf-modal-close" onclick="closePdfModal()">✕</button>
+    </div>
+    <div class="pdf-modal-body">
+      <!-- Cover preview -->
+      <div class="pdf-cover">
+        <div class="pdf-cover-thumb">
+          <div class="pdf-cover-thumb-logo">₿</div>
+          <div class="pdf-cover-thumb-text">BBRF-PT</div>
+          <div class="pdf-cover-thumb-text" style="color:rgba(247,147,26,0.3);">2026</div>
+        </div>
+        <div class="pdf-cover-meta">
+          <h3>Long Bitcoin. Long Portugal.</h3>
+          <p>Bitcoin-Backed Real-Estate Fund · Portugal<br>A Bittrees venture · bbrf-pt.eth</p>
+          <div class="pdf-cover-stats">
+            <div class="pdf-cover-stat">~<strong>15</strong> pages</div>
+            <div class="pdf-cover-stat"><strong>6</strong> charts</div>
+            <div class="pdf-cover-stat">Raise <strong>€25–100M</strong></div>
+            <div class="pdf-cover-stat">Base return <strong>~6×</strong></div>
+          </div>
+        </div>
+      </div>
+      <!-- Contents -->
+      <div class="pdf-contents">
+        <div class="pdf-contents-label">What's included</div>
+        <div class="pdf-contents-grid">
+          <div class="pdf-contents-item">Investment thesis (3 legs)</div>
+          <div class="pdf-contents-item">BTC spread + dollar decay charts</div>
+          <div class="pdf-contents-item">Leverage engine diagram</div>
+          <div class="pdf-contents-item">Pilot — Pebble Stone Farm</div>
+          <div class="pdf-contents-item">Return scenarios (3 cases)</div>
+          <div class="pdf-contents-item">BTC crash stress test</div>
+          <div class="pdf-contents-item">Luxembourg structure + terms</div>
+          <div class="pdf-contents-item">Portfolio scale chart</div>
+          <div class="pdf-contents-item">The 5 hard questions answered</div>
+          <div class="pdf-contents-item">90-day formation plan</div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="pdf-actions">
+        <button class="pdf-print-btn" onclick="window.print();closePdfModal();">🖨 Print / Save as PDF</button>
+        <button class="pdf-cancel-btn" onclick="closePdfModal()">Cancel</button>
+      </div>
+      <div class="pdf-tip"><strong>Tip:</strong> In the print dialog → select <strong>Save as PDF</strong> → enable <strong>"Background graphics"</strong> to preserve the dark theme and chart colours. A4 or Letter recommended.</div>
     </div>
   </div>
 </div>
@@ -1808,6 +1972,23 @@ if(typeof Chart !== 'undefined'){
   const donutWrap = btcEl.closest('.donut-ring');
   if(donutWrap) donutObs.observe(donutWrap);
 })();
+
+// ── PDF MODAL ──
+function openPdfModal(){
+  const m = document.getElementById('pdf-modal');
+  m.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closePdfModal(){
+  document.getElementById('pdf-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('pdf-modal').addEventListener('click', function(e){
+  if(e.target === this) closePdfModal();
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closePdfModal();
+});
 
 // ── STRESS TEST SLIDER ──
 (function(){
