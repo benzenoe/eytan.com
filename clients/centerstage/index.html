@@ -242,8 +242,8 @@
     <img src="eb-logo-white.png" alt="Eytan Benzeno" style="height:48px;width:auto;opacity:0.85;">
   </div>
   <p class="hero-eyebrow">Prepared for you by Eytan</p>
-  <h1>Guy, here are your<br><strong><span id="hero-count">your</span> LinkedIn recommendations</strong></h1>
-  <p class="hero-sub">Every review your clients left you — scraped directly from LinkedIn and kept up to date automatically every week.</p>
+  <h1>Guy, here are your<br><strong><span id="hero-count">48</span> LinkedIn recommendations</strong></h1>
+  <p class="hero-sub">Every review your clients left you on LinkedIn — all in one place, updated automatically every week so you never have to think about it.</p>
   <div class="hero-stats">
     <div class="hero-stat"><strong id="stat-count">—</strong><span>Reviews</span></div>
     <div class="hero-stat"><strong>★ 5.0</strong><span>Rating</span></div>
@@ -426,10 +426,6 @@
     btn.classList.add('active');
   }
 
-  function initials(name) {
-    return (name || '').split(/\s+/).slice(0, 2).map(function(w) { return w[0] ? w[0].toUpperCase() : ''; }).join('');
-  }
-
   function fallbackAvatar(name) {
     var encoded = encodeURIComponent((name || '?').trim());
     return 'https://ui-avatars.com/api/?name=' + encoded + '&size=68&background=0077b5&color=ffffff&bold=true&format=png';
@@ -506,7 +502,7 @@
 '    return `<div class="csc"><div class="css">★★★★★</div><div class="cst">${t.replace(/\\n/g,"<br>")}</div><hr class="csl"><div class="csp"><div class="csa">${av(r.name)}</div><div><div class="csn">${r.name||""}</div><div class="csr">${r.title||""}</div>${r.date_display?\'<div class="csd">\'+r.date_display+"</div>":""}</div></div></div>`;\n' +
 '  }).join("");\n' +
 '}).catch(()=>{document.getElementById("cs-grid").innerHTML="<p style=\'text-align:center;color:#94a3b8;padding:30px;font-family:Rubik,sans-serif\'>Could not load reviews.</p>";});\n' +
-'<\\/script>';
+'<' + '/script>';
   }
 
   function copyEl(elId, btn) {
@@ -530,7 +526,7 @@
       var recs = data.recommendations || [];
       document.getElementById('stat-count').textContent = recs.length;
       document.getElementById('hero-count').textContent = recs.length;
-      document.getElementById('stat-date').textContent = data.scraped_at ? data.scraped_at.slice(0,10) : '—';
+      document.getElementById('stat-date').textContent = data.last_updated || 'Jun 2026';
       document.getElementById('recs-subtitle').textContent = recs.length + ' verified reviews from LinkedIn';
       renderGrid(recs);
       document.getElementById('sq-code-text').textContent = buildSquarespaceCode(DATA_URL);
