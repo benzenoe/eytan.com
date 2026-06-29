@@ -242,7 +242,7 @@
     <img src="eb-logo-white.png" alt="Eytan Benzeno" style="height:48px;width:auto;opacity:0.85;">
   </div>
   <p class="hero-eyebrow">Prepared for you by Eytan</p>
-  <h1>Guy, here are your<br><strong>48 LinkedIn recommendations</strong></h1>
+  <h1>Guy, here are your<br><strong><span id="hero-count">your</span> LinkedIn recommendations</strong></h1>
   <p class="hero-sub">Every review your clients left you — scraped directly from LinkedIn and kept up to date automatically every week.</p>
   <div class="hero-stats">
     <div class="hero-stat"><strong id="stat-count">—</strong><span>Reviews</span></div>
@@ -529,6 +529,7 @@
     .then(function(data) {
       var recs = data.recommendations || [];
       document.getElementById('stat-count').textContent = recs.length;
+      document.getElementById('hero-count').textContent = recs.length;
       document.getElementById('stat-date').textContent = data.scraped_at ? data.scraped_at.slice(0,10) : '—';
       document.getElementById('recs-subtitle').textContent = recs.length + ' verified reviews from LinkedIn';
       renderGrid(recs);
