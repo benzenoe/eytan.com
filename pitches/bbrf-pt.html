@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBRF-PT — Bitcoin-Backed Real-Estate Fund, Portugal</title>
+<meta name="description" content="Confidential Investment Memorandum. Long Bitcoin. Euro-denominated hard assets. Portuguese real estate. A Bittrees venture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #1A3C5E;
+  --navy2:      #0F2540;
+  --teal:       #1D9E75;
+  --teal2:      #157558;
+  --teal-pale:  rgba(29,158,117,0.1);
+  --amber:      #C49A2A;
+  --amber-pale: rgba(196,154,42,0.1);
+  --purple:     #6B5CE7;
+  --coral:      #C4441A;
+  --bg:         #0A1520;
+  --bg2:        #0F1F30;
+  --bg3:        #152840;
+  --surface:    #1A2E42;
+  --surface2:   #1F3550;
+  --border:     rgba(255,255,255,0.07);
+  --border2:    rgba(255,255,255,0.12);
+  --text:       #E8F0F8;
+  --text2:      #8AACCC;
+  --text3:      #4E7090;
+  --teal-text:  #3ECFA0;
+  --amber-text: #E0B84A;
+}
+[data-theme="light"] {
+  --bg:       #F5F7FA;
+  --bg2:      #EBF0F6;
+  --bg3:      #DFE8F0;
+  --surface:  #FFFFFF;
+  --surface2: #F0F5FA;
+  --border:   rgba(0,0,0,0.07);
+  --border2:  rgba(0,0,0,0.12);
+  --text:     #0D1F2D;
+  --text2:    #3A5A70;
+  --text3:    #7090A8;
+  --teal-text: #127A55;
+  --amber-text: #8A6A10;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:16px; line-height:1.75;
+  transition: background .3s, color .3s;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 2.5rem; height:58px;
+  background:var(--bg); border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);
+}
+.nav-logo{
+  font-family:'IBM Plex Mono',monospace; font-size:.82rem;
+  color:var(--teal-text); text-decoration:none; letter-spacing:.08em;
+}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{
+  font-size:.75rem; font-weight:500; color:var(--text3);
+  text-decoration:none; letter-spacing:.06em; text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--teal-text);}
+.nav-right{display:flex;align-items:center;gap:.8rem;}
+.theme-btn{
+  background:none; border:1px solid var(--border2);
+  border-radius:20px; padding:.28rem .8rem;
+  font-size:.72rem; font-family:'IBM Plex Sans',sans-serif;
+  color:var(--text2); cursor:pointer; transition:all .2s;
+}
+.theme-btn:hover{border-color:var(--teal);color:var(--teal-text);}
+.cta-btn{
+  background:var(--teal); color:#fff; border:none; border-radius:6px;
+  padding:.45rem 1.1rem; font-size:.78rem; font-weight:600;
+  font-family:'IBM Plex Sans',sans-serif; cursor:pointer;
+  text-decoration:none; transition:background .2s;
+}
+.cta-btn:hover{background:var(--teal2);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh; display:flex; flex-direction:column;
+  justify-content:center; align-items:center; text-align:center;
+  padding:8rem 2rem 5rem; position:relative; overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 30%, rgba(29,158,117,.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(26,60,94,.15) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:.72rem;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--text3);
+  margin-bottom:1.6rem; display:flex; align-items:center; gap:.8rem;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:""; display:block; width:30px; height:1px; background:var(--border2);
+}
+.hero h1{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(3.2rem,8vw,6.5rem); font-weight:600;
+  line-height:1.08; letter-spacing:-.01em;
+  margin-bottom:1.2rem;
+}
+.hero h1 em{font-style:italic; color:var(--teal-text);}
+.hero-sub{
+  font-family:'IBM Plex Mono',monospace; font-size:.8rem;
+  color:var(--text3); letter-spacing:.12em; text-transform:uppercase;
+  margin-bottom:2rem;
+}
+.hero-desc{
+  font-size:1.05rem; color:var(--text2); max-width:560px;
+  font-weight:300; line-height:1.85; margin-bottom:2.8rem;
+}
+.hero-desc strong{color:var(--text); font-weight:500;}
+.blockquote-hero{
+  max-width:640px; margin:0 auto 3rem;
+  padding:1.6rem 2rem; border-left:2px solid var(--teal);
+  background:rgba(29,158,117,.05); border-radius:0 8px 8px 0;
+  text-align:left;
+}
+.blockquote-hero p{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:1.25rem; font-style:italic; color:var(--text2);
+  line-height:1.65; margin-bottom:.5rem;
+}
+.blockquote-hero cite{
+  font-size:.75rem; font-family:'IBM Plex Mono',monospace;
+  color:var(--text3); letter-spacing:.06em; text-transform:uppercase;
+}
+.notice-banner{
+  max-width:640px; margin:0 auto 2.5rem;
+  padding:1rem 1.5rem;
+  background:rgba(196,154,42,.06); border:1px solid rgba(196,154,42,.18);
+  border-radius:8px; text-align:left;
+}
+.notice-banner p{font-size:.76rem;color:var(--text2);line-height:1.65;}
+.notice-banner strong{color:var(--amber-text);}
+.hero-pills{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;}
+.hero-pill{
+  font-size:.75rem; font-weight:500; color:var(--text2);
+  border:1px solid var(--border2); border-radius:6px;
+  padding:.4rem .9rem; text-decoration:none; transition:all .2s;
+}
+.hero-pill:hover{border-color:var(--teal);color:var(--teal-text);}
+
+/* ── SECTION WRAPPERS ── */
+.section{padding:6rem 2rem; max-width:1080px; margin:0 auto;}
+.section-alt{background:var(--bg2); padding:6rem 0;}
+.section-alt .section-inner{max-width:1080px; margin:0 auto; padding:0 2rem;}
+.divider{width:100%;height:1px;background:var(--border);}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:.68rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--teal-text);
+  margin-bottom:.8rem; display:flex; align-items:center; gap:.6rem;
+}
+.eyebrow::before{content:"";display:block;width:20px;height:1px;background:var(--teal);}
+h2{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(2.2rem,4.5vw,3.4rem); font-weight:600;
+  line-height:1.12; letter-spacing:-.01em; margin-bottom:1rem;
+}
+h2 em{font-style:italic; color:var(--teal-text);}
+.lead{
+  font-size:1.05rem; color:var(--text2); max-width:640px;
+  font-weight:300; line-height:1.85; margin-bottom:3rem;
+}
+
+/* ── KPI STRIP ── */
+.kpi-strip{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px; background:var(--border); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; margin-bottom:3rem;
+}
+.kpi-item{
+  background:var(--surface); padding:1.3rem 1.5rem;
+}
+.kpi-label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.3rem;}
+.kpi-val{font-size:1.15rem;font-weight:600;color:var(--text);}
+.kpi-sub{font-size:.75rem;color:var(--text2);margin-top:.15rem;}
+
+/* ── THREE PILLARS ── */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.pillar{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:14px; padding:2rem; position:relative;
+  overflow:hidden; transition:border-color .2s, transform .2s;
+}
+.pillar:hover{transform:translateY(-3px);}
+.pillar::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+}
+.pillar.btc::before{background:var(--amber);}
+.pillar.usd::before{background:var(--coral);}
+.pillar.re::before{background:var(--teal);}
+.pillar:hover.btc{border-color:rgba(196,154,42,.35);}
+.pillar:hover.usd{border-color:rgba(196,68,26,.35);}
+.pillar:hover.re{border-color:rgba(29,158,117,.35);}
+.pillar-num{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:3.5rem; font-weight:600; line-height:1;
+  margin-bottom:1rem; opacity:.15;
+}
+.pillar.btc .pillar-num{color:var(--amber);}
+.pillar.usd .pillar-num{color:var(--coral);}
+.pillar.re .pillar-num{color:var(--teal);}
+.pillar-tag{
+  font-family:'IBM Plex Mono',monospace; font-size:.65rem;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:.2rem .55rem; border-radius:4px;
+  display:inline-block; margin-bottom:1rem;
+}
+.pillar.btc .pillar-tag{background:rgba(196,154,42,.12);color:var(--amber-text);}
+.pillar.usd .pillar-tag{background:rgba(196,68,26,.1);color:#E06040;}
+.pillar.re .pillar-tag{background:rgba(29,158,117,.12);color:var(--teal-text);}
+.pillar h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:600;margin-bottom:.6rem;}
+.pillar p{font-size:.85rem;color:var(--text2);line-height:1.75;}
+.pillar-note{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--text3);}
+.pillar-note strong{color:var(--text2);}
+
+/* ── TEAM ── */
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:2rem;}
+.team-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:1.8rem;border-left:3px solid;
+}
+.team-card.teal{border-left-color:var(--teal);}
+.team-card.purple{border-left-color:var(--purple);}
+.team-role{
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:.6rem;
+}
+.team-card.teal .team-role{color:var(--teal-text);}
+.team-card.purple .team-role{color:#A99CFF;}
+.team-card h3{font-size:1.3rem;margin-bottom:.4rem;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;}
+.team-card p{font-size:.85rem;color:var(--text2);line-height:1.7;}
+.team-card .brings{margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text3);}
+
+/* ── PORTUGAL ── */
+.portugal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.portugal-card{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:1.8rem; transition:border-color .2s;
+}
+.portugal-card:hover{border-color:rgba(29,158,117,.3);}
+.portugal-card h4{font-size:1rem;font-weight:600;margin-bottom:.6rem;}
+.portugal-card p{font-size:.85rem;color:var(--text2);line-height:1.75;}
+
+/* ── STRUCTURE LAYERS ── */
+.layer-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.layer{
+  padding:1.4rem; background:var(--surface);
+  border:1px solid var(--border); border-radius:10px; border-left:3px solid;
+  transition:border-color .2s, transform .2s;
+}
+.layer:hover{transform:translateY(-2px);}
+.layer.l1{border-left-color:var(--teal);}
+.layer.l2{border-left-color:var(--amber);}
+.layer.l3{border-left-color:var(--purple);}
+.layer.l4{border-left-color:var(--coral);}
+.layer-tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;}
+.layer h4{font-size:.92rem;font-weight:600;margin-bottom:.45rem;}
+.layer p{font-size:.8rem;color:var(--text2);line-height:1.65;}
+
+/* ── INSTRUMENT TABLE ── */
+.terms-table{
+  width:100%; border-collapse:collapse; margin-top:1.5rem; font-size:.88rem;
+}
+.terms-table th{
+  text-align:left; padding:.65rem 1rem;
+  background:var(--surface2); color:var(--text3);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.65rem; text-transform:uppercase; letter-spacing:.08em;
+}
+.terms-table td{
+  padding:.85rem 1rem; border-bottom:1px solid var(--border); vertical-align:top;
+}
+.terms-table tr:last-child td{border-bottom:none;}
+.terms-table tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+[data-theme="light"] .terms-table tr:nth-child(even) td{background:rgba(0,0,0,0.02);}
+.terms-table td:first-child{color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:.8rem;white-space:nowrap;}
+
+/* ── WORKFLOW ── */
+.workflow{
+  margin-top:2.2rem; padding:1.6rem 1.8rem;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; border-left:3px solid var(--teal);
+}
+.workflow h3{font-size:1rem;font-weight:600;margin-bottom:1rem;}
+.workflow ol{counter-reset:wf;list-style:none;padding:0;}
+.workflow ol li{
+  counter-increment:wf; position:relative;
+  padding:.55rem 0 .55rem 2.4rem;
+  font-size:.83rem; color:var(--text2); line-height:1.65;
+  border-bottom:1px dashed var(--border);
+}
+.workflow ol li:last-child{border-bottom:none;}
+.workflow ol li::before{
+  content:counter(wf); position:absolute; left:0; top:.55rem;
+  width:1.6rem; height:1.6rem; background:var(--teal); color:#fff;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem; font-weight:600;
+}
+.workflow ol li strong{color:var(--text);font-weight:600;}
+
+/* ── ENGINE CARDS ── */
+.engine-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.engine-card{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:1.8rem; position:relative; overflow:hidden;
+  transition:border-color .2s, transform .2s;
+}
+.engine-card:hover{transform:translateY(-2px);}
+.engine-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;}
+.engine-card.btc::before{background:var(--amber);}
+.engine-card.usd::before{background:var(--coral);}
+.engine-card.re::before{background:var(--teal);}
+.engine-card.btc:hover{border-color:rgba(196,154,42,.35);}
+.engine-card.usd:hover{border-color:rgba(196,68,26,.35);}
+.engine-card.re:hover{border-color:rgba(29,158,117,.35);}
+.engine-tag{
+  font-family:'IBM Plex Mono',monospace; font-size:.65rem;
+  letter-spacing:.1em; text-transform:uppercase;
+  padding:.2rem .55rem; border-radius:4px;
+  display:inline-block; margin-bottom:1rem;
+}
+.engine-card.btc .engine-tag{background:rgba(196,154,42,.12);color:var(--amber-text);}
+.engine-card.usd .engine-tag{background:rgba(196,68,26,.1);color:#E06040;}
+.engine-card.re .engine-tag{background:rgba(29,158,117,.12);color:var(--teal-text);}
+.engine-card h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.4rem;font-weight:600;margin-bottom:.7rem;}
+.engine-card p{font-size:.85rem;color:var(--text2);line-height:1.75;}
+.engine-note{
+  margin-top:3rem; padding:1.6rem 2rem;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; border-left:3px solid var(--amber);
+}
+.engine-note p{font-size:.88rem;color:var(--text2);line-height:1.8;}
+.engine-note strong{color:var(--text);}
+
+/* ── RETURNS ── */
+.returns-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.return-card{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:2rem; position:relative; overflow:hidden;
+  transition:transform .2s, border-color .2s;
+}
+.return-card:hover{transform:translateY(-3px);}
+.return-card.base{border-color:rgba(29,158,117,.3);}
+.return-tag{
+  font-family:'IBM Plex Mono',monospace; font-size:.65rem;
+  letter-spacing:.1em; text-transform:uppercase;
+  display:inline-block; margin-bottom:1rem;
+  padding:.2rem .55rem; border-radius:4px;
+}
+.conservative .return-tag{background:rgba(255,255,255,.06);color:var(--text3);}
+.base .return-tag{background:rgba(29,158,117,.12);color:var(--teal-text);}
+.upside .return-tag{background:rgba(196,154,42,.12);color:var(--amber-text);}
+.return-scenario{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:3rem; font-weight:600; line-height:1; margin-bottom:.4rem;
+}
+.conservative .return-scenario{color:var(--text2);}
+.base .return-scenario{color:var(--teal-text);}
+.upside .return-scenario{color:var(--amber-text);}
+.return-multiple{font-size:.9rem;color:var(--text3);margin-bottom:1.2rem;}
+.return-assumptions{font-size:.8rem;color:var(--text2);line-height:1.65;}
+.return-disclaimer{
+  margin-top:2.5rem; padding:1.2rem 1.6rem;
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:8px;
+}
+.return-disclaimer p{font-size:.78rem;color:var(--text3);line-height:1.65;}
+
+/* ── RAISE TIERS ── */
+.raise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.raise-tier{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:2rem; position:relative; overflow:hidden;
+  transition:border-color .2s, transform .2s;
+}
+.raise-tier:hover{transform:translateY(-2px);}
+.raise-tier.target{border-color:rgba(29,158,117,.3);background:rgba(29,158,117,.03);}
+.raise-tier::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--border);}
+.raise-tier.target::before{background:linear-gradient(90deg,var(--teal),var(--amber));}
+.raise-label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;}
+.raise-amount{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:3rem; font-weight:600; color:var(--teal-text);
+  line-height:1; margin-bottom:1.4rem;
+}
+.raise-line{
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:.45rem 0; border-bottom:1px dashed var(--border);
+  font-size:.83rem;
+}
+.raise-line:last-child{border-bottom:none;}
+.raise-line-key{color:var(--text3);}
+.raise-line-val{font-weight:600;color:var(--text);}
+.raise-line-sub{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--teal-text);}
+
+/* ── COMPETITIVE TABLE ── */
+.comp-table{
+  width:100%; border-collapse:collapse; font-size:.86rem; margin-top:1.5rem;
+}
+.comp-table thead tr{background:var(--surface2);}
+.comp-table th{
+  padding:.7rem 1rem; text-align:left; color:var(--text3);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.63rem; text-transform:uppercase; letter-spacing:.08em;
+}
+.comp-table td{padding:.85rem 1rem; border-bottom:1px solid var(--border); vertical-align:middle;}
+.comp-table tr:last-child td{border-bottom:none;}
+.comp-table tr.us td{background:rgba(29,158,117,.04);}
+.comp-table .comp-name{font-weight:600;}
+.comp-table .us .comp-name{color:var(--teal-text);}
+.chk{color:var(--teal-text);}
+.xmark{color:rgba(255,255,255,.2);}
+.comp-badge{
+  display:inline-block;font-size:.6rem;padding:.1rem .45rem;
+  border-radius:4px;background:rgba(29,158,117,.12);color:var(--teal-text);
+  font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;margin-left:.4rem;
+}
+
+/* ── FEES ── */
+.fees-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:1.5rem;}
+.fees-table th{
+  text-align:left;padding:.65rem 1rem;background:var(--surface2);
+  font-family:'IBM Plex Mono',monospace;color:var(--text3);
+  font-size:.63rem;text-transform:uppercase;letter-spacing:.08em;
+}
+.fees-table td{padding:.85rem 1rem;border-bottom:1px solid var(--border);}
+.fees-table tr:last-child td{border-bottom:none;}
+.fees-table td:first-child{color:var(--text2);}
+.fees-table td:last-child{font-weight:600;color:var(--text);}
+
+/* ── OPEN ITEMS ── */
+.q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.q-card{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; padding:1.3rem; transition:border-color .2s;
+}
+.q-card:hover{border-color:rgba(29,158,117,.25);}
+.q-num{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--teal-text);letter-spacing:.08em;margin-bottom:.4rem;}
+.q-card h4{font-size:.88rem;font-weight:600;margin-bottom:.35rem;}
+.q-card p{font-size:.78rem;color:var(--text2);line-height:1.6;}
+
+/* ── ROADMAP ── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;}
+.step{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:12px; padding:1.8rem; text-align:center;
+  transition:border-color .2s, transform .2s;
+}
+.step:hover{border-color:rgba(29,158,117,.3);transform:translateY(-2px);}
+.step-n{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:3rem; font-weight:600; color:rgba(29,158,117,.18);
+  line-height:1; margin-bottom:1rem;
+}
+.step h4{font-size:.95rem;font-weight:600;margin-bottom:.5rem;}
+.step p{font-size:.82rem;color:var(--text2);line-height:1.65;}
+
+/* ── COLLAB BANNER ── */
+.collab-banner{
+  margin-top:3rem; padding:2.5rem 2.8rem;
+  background:linear-gradient(135deg,rgba(29,158,117,.08),rgba(26,60,94,.2));
+  border:1px solid rgba(29,158,117,.2); border-radius:14px;
+  text-align:center;
+}
+.collab-banner h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;margin-bottom:.8rem;}
+.collab-banner p{font-size:.9rem;color:var(--text2);max-width:520px;margin:0 auto 1.5rem;}
+.collab-cta{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--teal);color:#fff;font-weight:600;font-size:.88rem;
+  padding:.7rem 1.8rem;border-radius:8px;text-decoration:none;
+  transition:background .2s;
+}
+.btn-primary:hover{background:var(--teal2);}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(29,158,117,.4);color:var(--teal-text);
+  font-weight:500;font-size:.88rem;padding:.7rem 1.8rem;
+  border-radius:8px;text-decoration:none;transition:all .2s;
+}
+.btn-outline:hover{background:rgba(29,158,117,.08);}
+
+/* ── HEARD / NOTES ── */
+.heard-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.heard-card{
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; padding:1.4rem; transition:border-color .2s;
+}
+.heard-clear{border-left:3px solid var(--teal);}
+.heard-open{border-left:3px solid var(--amber);}
+.heard-label{
+  font-family:'IBM Plex Mono',monospace; font-size:.65rem;
+  letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem;
+}
+.heard-clear .heard-label{color:var(--teal-text);}
+.heard-open .heard-label{color:var(--amber-text);}
+.heard-card h4{font-size:.9rem;font-weight:600;margin-bottom:.4rem;}
+.heard-card p{font-size:.82rem;color:var(--text2);line-height:1.65;}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center; padding:3rem 2rem;
+  border-top:1px solid var(--border);
+  color:var(--text3); font-size:.8rem;
+}
+footer strong{color:var(--text2);}
+footer a{color:var(--teal-text);text-decoration:none;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero>*{animation:fadeUp .65s ease both;}
+.hero>*:nth-child(1){animation-delay:.1s;}
+.hero>*:nth-child(2){animation-delay:.2s;}
+.hero>*:nth-child(3){animation-delay:.3s;}
+.hero>*:nth-child(4){animation-delay:.4s;}
+.hero>*:nth-child(5){animation-delay:.5s;}
+.hero>*:nth-child(6){animation-delay:.6s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .pillars,.engine-cards,.returns-grid,.raise-grid,
+  .q-grid,.steps,.portugal-grid,.heard-grid,
+  .layer-row,.team-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr;}
+  .kpi-strip{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">BBRF<span style="opacity:.4">-PT</span></a>
+  <ul class="nav-links">
+    <li><a href="#thesis">Thesis</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#pilot">Pilot</a></li>
+    <li><a href="#engine">Engine</a></li>
+    <li><a href="#returns">Returns</a></li>
+    <li><a href="#raise">Capital Raise</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()">☾ Dark</button>
+    <a class="cta-btn" href="mailto:eytan@benzeno.com?subject=BBRF-PT%20%E2%80%94%20Investor%20Enquiry">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">June 2026 · Lisbon · bbrf-pt.eth</div>
+  <div class="hero-sub">BBRF-PT · A Bittrees Venture · June 2026</div>
+  <h1>Long BTC.<br>Short USD.<br><em>Long Portugal.</em></h1>
+  <p class="hero-desc">
+    A ten-year macro trade structured as a <strong>Bitcoin-backed real estate fund</strong> — anchored in a Bitcoin reserve, deployed in Portugal, governed by a Luxembourg holding company and transparent on-chain.
+  </p>
+  <div class="blockquote-hero">
+    <p>"The dollar doesn't collapse — it dilutes. Bitcoin doesn't speculate — it monetises. Portugal doesn't peak — it compounds. Three legs. One decade. One institution."</p>
+    <cite>— BBRF-PT · Bitcoin-Backed Real-Estate Fund, Portugal · June 2026</cite>
+  </div>
+  <div class="notice-banner">
+    <p><strong>Confidential notice.</strong> For professional and well-informed investors only. Not a prospectus or securities offering. Return scenarios are illustrative, not forecasts. Capital is at risk, including total loss.</p>
+  </div>
+  <div class="hero-pills">
+    <a href="#thesis" class="hero-pill">The three-leg thesis</a>
+    <a href="#structure" class="hero-pill">Luxembourg structure</a>
+    <a href="#pilot" class="hero-pill">Pebble Stone Farm</a>
+    <a href="#returns" class="hero-pill">Return scenarios</a>
+    <a href="#questions" class="hero-pill">Open items</a>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- EXECUTIVE SUMMARY KPIs -->
+<section class="section" id="summary">
+  <div class="eyebrow">00 — At a Glance</div>
+  <h2>The fund in one page.</h2>
+  <div class="kpi-strip">
+    <div class="kpi-item">
+      <div class="kpi-label">Instrument</div>
+      <div class="kpi-val">Convertible Preferred</div>
+      <div class="kpi-sub">Luxembourg SOPARFI</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-label">Target Raise</div>
+      <div class="kpi-val">€25M → €100M</div>
+      <div class="kpi-sub">Floor · Hard cap</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-label">Min Ticket</div>
+      <div class="kpi-val">€50,000</div>
+      <div class="kpi-sub">Anchors: €1M–€5M</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-label">BTC Reserve</div>
+      <div class="kpi-val">~60% of capital</div>
+      <div class="kpi-sub">Never sold</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-label">RE Deployment</div>
+      <div class="kpi-val">~40% of capital</div>
+      <div class="kpi-sub">Borrowed against BTC</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-label">Base Return</div>
+      <div class="kpi-val">~6×</div>
+      <div class="kpi-sub">10-year illustrative</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-label">Pilot Asset</div>
+      <div class="kpi-val">Pebble Stone Farm</div>
+      <div class="kpi-sub">~€11M · 1,000 ha</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-label">On-chain Identity</div>
+      <div class="kpi-val">bbrf-pt.eth</div>
+      <div class="kpi-sub">Transparency layer</div>
+    </div>
+  </div>
+  <p class="lead">BBRF-PT raises institutional capital to build a long-horizon, euro-denominated Portuguese real estate portfolio — without liquidating a core Bitcoin reserve. Capital is raised as <strong>convertible preferred shares</strong> issued by a Luxembourg holding company. The mechanism: the holding company assembles a Bitcoin reserve in regulated institutional custody, borrows euros conservatively against that reserve, and deploys those euros to acquire income-producing Portuguese real estate. The Bitcoin is never sold.</p>
+</section>
+<div class="divider"></div>
+
+<!-- THREE PILLARS -->
+<div class="section-alt" id="thesis">
+  <div class="section-inner">
+    <div class="eyebrow">01 — The Investment Thesis</div>
+    <h2>One fund.<br><em>Three reinforcing legs.</em></h2>
+    <p class="lead">Each leg hedges and amplifies the others. The structural return is not selling the Bitcoin — it is the spread between Bitcoin's long-run appreciation and a low, regulated borrowing cost.</p>
+    <div class="pillars">
+      <div class="pillar btc">
+        <div class="pillar-num">01</div>
+        <div class="pillar-tag">Reserve Asset · Never Sold</div>
+        <h3>Long Bitcoin.</h3>
+        <p>Bitcoin is the hardest monetary asset ever created. Its continued monetisation — absorbing gold's market cap and gaining a foothold in sovereign reserves — is credible over a ten-year horizon. Across sustained four-year cycles Bitcoin has historically appreciated 40–60% per annum. The principal basis risk is regulatory, not structural.</p>
+        <div class="pillar-note">
+          <strong>In this structure:</strong> The holding company assembles a Bitcoin reserve in regulated institutional custody (Sygnum, Anchorage, or institutional Ledn class). Multisig from inception. Never on exchange. Collateral for conservative euro borrowing, not a position to be managed.
+        </div>
+      </div>
+      <div class="pillar usd">
+        <div class="pillar-num">02</div>
+        <div class="pillar-tag">Dollar Short · EUR Hedge</div>
+        <h3>Short the dollar.</h3>
+        <p>With ~$39 trillion of US federal debt and ~$1 trillion a quarter in interest, the long-run path of least resistance is currency debasement rather than collapse. Euro-denominated hard assets provide structural protection. Borrowing dollars at a low, regulated cost against a Bitcoin reserve converts that thesis into a financeable position.</p>
+        <div class="pillar-note">
+          <strong>In this structure:</strong> USD is borrowed at conservative LTV through regulated lending (~2–5% APR indicative), swapped to euros, and deployed to acquire Portuguese real estate. The borrowing cost is real and is included in all return illustrations.
+        </div>
+      </div>
+      <div class="pillar re">
+        <div class="pillar-num">03</div>
+        <div class="pillar-tag">Hard Asset · Yield Generating</div>
+        <h3>Long Portugal.</h3>
+        <p>Lisbon at €5–6K/m² remains well below Paris (€10–12K) and comparable to Barcelona, with mature tourism infrastructure, supply constrained by licensing, and durable inbound demand. Euro-denominated, income-producing, and a natural hedge against dollar debasement.</p>
+        <div class="pillar-note">
+          <strong>In this structure:</strong> Portuguese rental income services the borrowing cost; surplus flows to investors via the preferred dividend. Asset appreciation compounds alongside the Bitcoin reserve. Each acquisition closes into a dedicated Portuguese SPV (Lda.).
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem; padding:1.6rem 2rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; border-left:3px solid var(--teal);">
+      <p style="font-size:.88rem; color:var(--text2); line-height:1.85;">The structural alpha is in <em>not selling the Bitcoin.</em> The spread between Bitcoin's appreciation over a sustained cycle and a low, regulated borrowing cost is the trade. Portuguese rental income and asset appreciation pays the carry. The Luxembourg structure makes every step transparent and auditable enough for institutional investors to underwrite.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<section class="section" id="team">
+  <div class="eyebrow">01b — The Principals</div>
+  <h2>Two principals.<br><em>One assembled bench.</em></h2>
+  <p class="lead">BBRF-PT is a Bittrees venture, led by two principals with complementary networks — institutional real estate and on-chain structuring — backed by an independent professional bench that scales with the raise.</p>
+  <div class="team-grid">
+    <div class="team-card teal">
+      <div class="team-role">Real Estate · Multi-jurisdictional</div>
+      <h3>Eytan Benzeno</h3>
+      <p>Lisbon-based real estate principal. Florida broker licence. Operating across Portugal, Israel, Luxembourg, and the US. Multi-asset experience: residential, hospitality, distressed, agricultural. Co-founder of Bogen.ai (AI integration &amp; consulting). Multilingual: English, Portuguese, Hebrew, French.</p>
+      <div class="brings">Brings: deal sourcing, transaction execution, Portuguese market access, family-office relationships in LU/IL/PT/UAE.</div>
+    </div>
+    <div class="team-card purple">
+      <div class="team-role">On-Chain Structuring &amp; Operations · Bittrees</div>
+      <h3>Jonathan Hineline</h3>
+      <p>On-chain governance and operations architect. Designs the reserve-and-leverage mechanics, the tokenised share register, and the transparency layer. Deep network of smart-contract auditors and infrastructure engineers. Author of operational guidance for blockchain-native organisations (bittrees.eth.limo).</p>
+      <div class="brings">Brings: smart-contract design, reserve mechanics, blockchain engineering bench, crypto-native LP relationships.</div>
+    </div>
+  </div>
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.8rem;margin-top:1.8rem;border-left:3px solid var(--amber);">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-text);margin-bottom:.5rem;">Independent Bench · Assembled Around the Structure</div>
+    <p style="font-size:.85rem;color:var(--text2);line-height:1.75;">Around the principals: Portuguese real-estate operators (acquisitions, property and asset management), structuring and audit engineers, and the independent service providers set out in the Operational Stack — legal counsel, fund administration, regulated custody, smart-contract audit, and independent valuation. All external, bound by mandate, not ownership. The team scales with the raise.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- PORTUGAL -->
+<section class="section" id="portugal">
+  <div class="eyebrow">02 — Portugal</div>
+  <h2>Portugal isn't just<br><em>cheap real estate.</em></h2>
+  <p class="lead">The financial, cultural, regulatory, and network arguments for Portugal reinforce each other. Lisbon is not just undervalued — it is one of the most fertile grounds in Europe right now for a Bitcoin-native institution.</p>
+  <div class="portugal-grid">
+    <div class="portugal-card">
+      <h4>🏙️ The real estate case</h4>
+      <p>Lisbon at €5–6K/m² vs. Paris at €10–12K. Supply constrained by licensing bureaucracy. Tourism infrastructure mature and deepening. Rental yields of 3–5% net are structurally supported. The EUR hedge against USD debasement is real and persistent.</p>
+    </div>
+    <div class="portugal-card">
+      <h4>🔗 The blockchain-native case</h4>
+      <p>Portugal has become fertile ground for blockchain-native institutions. A growing community of on-chain operators, developers, and family offices is forming here. BBRF-PT grows from that same soil — anchored by the bbrf-pt.eth identity and Bittrees' existing presence.</p>
+    </div>
+    <div class="portugal-card">
+      <h4>⚖️ The regulatory case</h4>
+      <p>Portugal's CMVM is a navigable regulator. The Luxembourg–Portugal axis (SOPARFI holdco + Portuguese Lda. SPVs) offers EU Parent-Subsidiary Directive benefits, participation-exemption efficiency, and a clean private-placement pathway. No other structure combines this regulatory credibility as cleanly.</p>
+    </div>
+    <div class="portugal-card">
+      <h4>🎯 The institutional case</h4>
+      <p>The first acquisition is already identified — a 1,000-hectare Alentejo estate at ~€11M, off-market, institutional scale. Deal sourcing is live; execution is waiting on the structure being formed. Portugal rewards those who operate on the ground before the institutions arrive.</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- STRUCTURE -->
+<div class="section-alt" id="structure">
+  <div class="section-inner">
+    <div class="eyebrow">03 — The Structure</div>
+    <h2>A corporate structure.<br><em>Not a token scheme.</em></h2>
+    <p class="lead">Investors hold a senior, familiar security — convertible preferred shares of a Luxembourg holding company. The on-chain layer is a transparency and identity feature, not the legal interest. Capital and governance sit in the holding company; operations execute via the Portuguese subsidiaries.</p>
+
+    <div class="layer-row">
+      <div class="layer l1">
+        <div class="layer-tag">Issuer · Luxembourg</div>
+        <h4>SOPARFI Holding Company</h4>
+        <p>Issues the convertible preferred shares. Holds the capital raised. Holds the Bitcoin reserve. Owns the Portuguese operating company and per-asset SPVs. Benefits from Luxembourg's participation-exemption regime and EU directives.</p>
+      </div>
+      <div class="layer l2">
+        <div class="layer-tag">Reserve Asset</div>
+        <h4>Bitcoin Reserve</h4>
+        <p>Held in regulated institutional custody. Multisig from inception. Never on exchange. Collateral for conservative dollar and euro borrowing. The Bitcoin is never sold — it compounds untouched.</p>
+      </div>
+      <div class="layer l1">
+        <div class="layer-tag">Operations · Portugal</div>
+        <h4>Portuguese Operating Company</h4>
+        <p>Sources, executes, and manages acquisitions under mandate. Coordinates investor reporting, NAV inputs, and capital deployment. One Sociedade Unipessoal, Lda. per asset for clean liability ring-fencing.</p>
+      </div>
+      <div class="layer l4">
+        <div class="layer-tag">Per-Asset SPVs</div>
+        <h4>Property SPVs (Lda.)</h4>
+        <p>One Portuguese SPV per acquisition. Clean liability ring-fencing and disposal optionality. Each SPV receives borrowed euros to fund the acquisition; rental income flows up to the holdco.</p>
+      </div>
+      <div class="layer l3">
+        <div class="layer-tag">Transparency Layer</div>
+        <h4>bbrf-pt.eth · On-Chain</h4>
+        <p>Tokenised share register, published governance and acquisition records, and the bbrf-pt.eth identity on ENS. A transparency and reporting feature — it does not alter the legal rights of the convertible preferred shares.</p>
+      </div>
+      <div class="layer l3">
+        <div class="layer-tag">Independent Services</div>
+        <h4>Professional Bench</h4>
+        <p>Legal counsel, fund administration, regulated custody, smart-contract audit, and independent valuation — external and bound by mandate, not ownership. Five functions permanently independent of the operating company.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.6rem;font-weight:600;margin:3rem 0 1rem;">The instrument — convertible preferred shares</h3>
+    <table class="terms-table">
+      <thead><tr><th>Term</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Security</td><td>Convertible preferred shares of the Luxembourg holding company</td></tr>
+        <tr><td>Liquidation preference</td><td>1× non-participating, senior to common</td></tr>
+        <tr><td>Preferred dividend</td><td>~8% per annum, cumulative, accruing (PIK) until conversion or liquidity event</td></tr>
+        <tr><td>Valuation</td><td>Issued at a €100M pre-money valuation (indicative) — priced now, not via cap/discount</td></tr>
+        <tr><td>Conversion</td><td>1:1 into common shares at a qualified financing, sale, or listing; holder receives the greater of conversion value or liquidation preference</td></tr>
+        <tr><td>Investor rights</td><td>Pro-rata participation rights, information rights, and customary protective consents on major matters</td></tr>
+        <tr><td>Liquidity</td><td>12-month lock-up; quarterly redemption windows of up to ~10% of pool thereafter; secondary transfers of preferred permitted from Year 2; wind-down available from Year 8</td></tr>
+        <tr><td>Eligibility</td><td>Professional and well-informed investors only (Luxembourg private placement)</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.75rem;color:var(--text3);margin-top:.75rem;">Indicative headline terms only. Subject to definitive documentation.</p>
+  </div>
+</div>
+
+<!-- PILOT ASSET -->
+<div class="section-alt" id="pilot">
+  <div class="section-inner">
+    <div class="eyebrow">03b — The Pilot Acquisition</div>
+    <h2>Pebble Stone Farm.<br><em>1,000 hectares. €11M.</em></h2>
+    <p class="lead">The first acquisition is identified. Pebble Stone Farm — a ~€11M, 1,000-hectare hunting estate in Portugal's Alentejo — is the proof-of-concept asset: the full legal, custody, governance, and yield mechanics proven end-to-end before the institutional raise opens.</p>
+    <div class="layer-row" style="grid-template-columns:repeat(2,1fr);">
+      <div class="layer l1">
+        <div class="layer-tag">Location</div>
+        <h4>Alentejo, Portugal</h4>
+        <p>Portugal's most storied agricultural and hunting region. Single title, institutional scale, off-market access. A specialty asset class aligned to the long-horizon thesis.</p>
+      </div>
+      <div class="layer l2">
+        <div class="layer-tag">Price &amp; Scale</div>
+        <h4>~€11M · 1,000 hectares</h4>
+        <p>~$12M at current EUR/USD. One SPV (Sociedade Unipessoal, Lda.) through which the full legal, custody, governance, and yield mechanics are proven before the institutional raise opens.</p>
+      </div>
+      <div class="layer l3">
+        <div class="layer-tag">Income Streams</div>
+        <h4>Hunting · Agriculture · Hospitality</h4>
+        <p>Hunting-estate operations, agricultural revenue, and future hospitality optionality provide multiple yield streams. Each stream supports the preferred dividend and euro borrowing cost.</p>
+      </div>
+      <div class="layer l4">
+        <div class="layer-tag">Strategic Role</div>
+        <h4>Proof of Concept</h4>
+        <p>Institutional scale, off-market access, and a story that resonates with family-office capital. The pilot proves the full stack and opens the raise with a live track record — not a white paper.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ECONOMIC ENGINE -->
+<section class="section" id="engine">
+  <div class="eyebrow">04 — The Economic Engine</div>
+  <h2>Borrow against Bitcoin.<br><em>Buy Portuguese property.</em></h2>
+  <p class="lead">The Bitcoin reserve is not sold to buy property — it is posted as collateral through regulated channels to borrow euros, which acquire Portuguese real estate. The Bitcoin position compounds untouched.</p>
+  <div class="engine-cards">
+    <div class="engine-card btc">
+      <div class="engine-tag">BTC Reserve · Custody</div>
+      <h3>The hardest asset ever created.</h3>
+      <p>Bitcoin is custodied with a regulated institutional provider, multisig, never on exchange. Across sustained four-year cycles, Bitcoin has historically appreciated well in excess of the borrowing cost — the spread is the structural return.</p>
+    </div>
+    <div class="engine-card usd">
+      <div class="engine-tag">Conservative Borrowing · 2–5% APR</div>
+      <h3>The dollar dilutes. We borrow it cheaply.</h3>
+      <p>USD is borrowed at a conservative LTV through regulated lending at an indicative ~2–5% per annum. Conservative LTV is maintained at all times to preserve a buffer against drawdowns; collateral health is monitored continuously with defined de-risking actions.</p>
+    </div>
+    <div class="engine-card re">
+      <div class="engine-tag">Portuguese RE · Yield</div>
+      <h3>Undervalued. Supply-constrained. Ours.</h3>
+      <p>Borrowed euros acquire income-producing Portuguese real estate. Net rental income services the borrowing cost; surplus flows to investors. Asset appreciation compounds alongside the Bitcoin reserve. The two hard assets reinforce each other.</p>
+    </div>
+  </div>
+  <div class="engine-note">
+    <p>The borrowing cost is real and is included in all return illustrations. The claim is not "free leverage" — it is that <strong>the spread between Bitcoin's long-run appreciation and a low, regulated borrowing cost is structural and persistent across a cycle.</strong> Past performance is not indicative of future results.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- HOW A DEAL FLOWS -->
+<div class="section-alt">
+  <div class="section-inner">
+    <div class="eyebrow">04b — A Deal, End to End</div>
+    <h2>From capital in<br><em>to yield out.</em></h2>
+    <p class="lead">Every acquisition follows the same seven steps. Every step is documented. Every decision is published to investors and recorded via the bbrf-pt.eth identity.</p>
+    <div class="workflow">
+      <h3>How a deal flows through the structure</h3>
+      <ol>
+        <li><strong>Capital in.</strong> An eligible professional investor subscribes for convertible preferred shares. The share register (and its on-chain mirror via bbrf-pt.eth) records the holding.</li>
+        <li><strong>Reserve allocated.</strong> A defined portion of capital is allocated to the Bitcoin reserve, in regulated institutional custody. The Bitcoin is not sold.</li>
+        <li><strong>Conservative borrowing.</strong> Euros are borrowed against the reserve at a conservative LTV through regulated lending at ~2–5% APR.</li>
+        <li><strong>Advisory sources.</strong> A top-tier institutional real-estate advisor surfaces a deal and prepares a full underwriting dossier — location, net yield, financing terms, and exit scenarios.</li>
+        <li><strong>Investment Committee approves.</strong> The acquisition is approved by the Company's Investment Committee against defined criteria. An independent Portuguese valuation confirms pricing. The decision and its rationale are published to investors and recorded on-chain.</li>
+        <li><strong>Acquisition executes.</strong> The Portuguese operating company closes the asset into a dedicated SPV (Lda.).</li>
+        <li><strong>Yield flows.</strong> Net rental income is distributed periodically to investors, after the preferred dividend and costs, in EUR or EURC.</li>
+      </ol>
+    </div>
+    <div style="margin-top:2rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+      <div style="background:rgba(29,158,117,.07);border-bottom:1px solid var(--border);padding:1rem 1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-text);margin-bottom:.2rem;">Illustrative only · figures indicative</div>
+        <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.2rem;font-weight:600;">One Lisbon apartment — worked example</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+        <div style="padding:1.1rem 1.3rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem;">Asking price</div>
+          <div style="font-weight:600;font-size:.95rem;">€750,000</div>
+          <div style="font-size:.75rem;color:var(--text3);">~4.2% net yield</div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem;">Transaction costs</div>
+          <div style="font-weight:600;font-size:.95rem;">~€65,000</div>
+          <div style="font-size:.75rem;color:var(--text3);">IMT + closing</div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem;">BTC-collateral loan</div>
+          <div style="font-weight:600;font-size:.95rem;">~€400,000</div>
+          <div style="font-size:.75rem;color:var(--text3);">~3.5% APR indicative</div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem;">Deployable capital</div>
+          <div style="font-weight:600;font-size:.95rem;">~€415,000</div>
+          <div style="font-size:.75rem;color:var(--text3);">Covers price + costs</div>
+        </div>
+        <div style="padding:1.1rem 1.3rem;border-bottom:1px solid var(--border);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem;">Annual net rental income</div>
+          <div style="font-weight:600;font-size:.95rem;color:var(--teal-text);">~€31,500</div>
+          <div style="font-size:.75rem;color:var(--text3);">4.2% × €750,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RETURNS -->
+<section class="section" id="returns">
+  <div class="eyebrow">05 — Return Illustration</div>
+  <h2>Three compounding engines.<br><em>Ten years.</em></h2>
+  <p class="lead">Returns are driven by Bitcoin appreciation on the reserve, Portuguese real estate appreciation, and rental yield. The following scenarios illustrate a €1M commitment over 10 years.</p>
+  <div class="returns-grid">
+    <div class="return-card conservative">
+      <div class="return-tag">Conservative</div>
+      <div class="return-scenario">~€2.8M</div>
+      <div class="return-multiple">≈ 2.8× · on a €1M commitment</div>
+      <div class="return-assumptions">
+        BTC ×6 over 10 years<br>
+        Portuguese RE ×1.8<br>
+        Leverage available at modelled cost
+      </div>
+    </div>
+    <div class="return-card base">
+      <div class="return-tag">⭐ Base Case</div>
+      <div class="return-scenario">~€6.0M</div>
+      <div class="return-multiple">≈ 6× · on a €1M commitment</div>
+      <div class="return-assumptions">
+        BTC ×10 over 10 years<br>
+        Portuguese RE ×2.3<br>
+        Rental yield compounds throughout
+      </div>
+    </div>
+    <div class="return-card upside">
+      <div class="return-tag">Upside</div>
+      <div class="return-scenario">~€9.5M</div>
+      <div class="return-multiple">≈ 9.5× · on a €1M commitment</div>
+      <div class="return-assumptions">
+        BTC ×15 over 10 years<br>
+        Portuguese RE ×2.8<br>
+        Favourable EUR/USD + rates
+      </div>
+    </div>
+  </div>
+  <div class="return-disclaimer">
+    <p>Illustrative only — not a forecast, projection, or guarantee. These scenarios assume Bitcoin compounds, Portuguese real estate appreciates, leverage remains available at modelled cost, and the regulatory environment remains workable. Each of these can fail, independently or together. Borrowing cost (~2–5% p.a.) is netted against acquisition leverage. Past performance is not indicative of future results. Capital is at risk, including total loss.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- CAPITAL RAISE -->
+<div class="section-alt" id="raise">
+  <div class="section-inner">
+    <div class="eyebrow">06 — Capital Raise</div>
+    <h2>Three tiers.<br><em>One flywheel.</em></h2>
+    <p class="lead">The venture requires €25M minimum to justify the structure. Below €25M, fixed overhead exceeds the structural alpha. The structure compounds on itself — each acquisition deepens the portfolio, grows the Bitcoin reserve, and earns better deal access and financing terms.</p>
+    <div class="raise-grid">
+      <div class="raise-tier">
+        <div class="raise-label">Floor — Institutional Viability</div>
+        <div class="raise-amount">€25M</div>
+        <div class="raise-line"><span class="raise-line-key">BTC Reserve (~60%)</span><div><div class="raise-line-val">€15M</div><div class="raise-line-sub">~175 BTC</div></div></div>
+        <div class="raise-line"><span class="raise-line-key">RE Deployment (~40%)</span><div><div class="raise-line-val">€10M</div><div class="raise-line-sub">€20–30M leveraged</div></div></div>
+        <div class="raise-line"><span class="raise-line-key">10-year portfolio</span><div class="raise-line-val">€120–160M</div></div>
+      </div>
+      <div class="raise-tier target">
+        <div class="raise-label">⭐ Base Case Target</div>
+        <div class="raise-amount">€50M</div>
+        <div class="raise-line"><span class="raise-line-key">BTC Reserve (~60%)</span><div><div class="raise-line-val">€30M</div><div class="raise-line-sub">~350 BTC</div></div></div>
+        <div class="raise-line"><span class="raise-line-key">RE Deployment (~40%)</span><div><div class="raise-line-val">€20M</div><div class="raise-line-sub">€50–70M leveraged</div></div></div>
+        <div class="raise-line"><span class="raise-line-key">10-year portfolio</span><div class="raise-line-val">€280–380M</div></div>
+      </div>
+      <div class="raise-tier">
+        <div class="raise-label">Vision — Hard Cap</div>
+        <div class="raise-amount">€100M</div>
+        <div class="raise-line"><span class="raise-line-key">BTC Reserve (~60%)</span><div><div class="raise-line-val">€60M</div><div class="raise-line-sub">~700 BTC</div></div></div>
+        <div class="raise-line"><span class="raise-line-key">RE Deployment (~40%)</span><div><div class="raise-line-val">€40M</div><div class="raise-line-sub">€100–140M leveraged</div></div></div>
+        <div class="raise-line"><span class="raise-line-key">10-year portfolio</span><div class="raise-line-val">€600–850M</div></div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-text);margin-bottom:.4rem;">Bitcoin-Native Family Offices</div>
+        <div style="font-weight:600;font-size:.95rem;margin-bottom:.25rem;">€1M–€5M tickets</div>
+        <div style="font-size:.8rem;color:var(--text2);">LU, IL, PT, UAE — seeking hard-asset exposure without selling the stack.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-text);margin-bottom:.4rem;">Institutional &amp; Protocol Treasuries</div>
+        <div style="font-weight:600;font-size:.95rem;margin-bottom:.25rem;">€500K–€2M tickets</div>
+        <div style="font-size:.8rem;color:var(--text2);">Seeking real-world-asset exposure with transparent, on-chain reporting.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:.4rem;">Qualified Crypto-Native Individuals</div>
+        <div style="font-weight:600;font-size:.95rem;margin-bottom:.25rem;">€50K–€100K tickets</div>
+        <div style="font-size:.8rem;color:var(--text2);">Professional/well-informed only. Fractional Portuguese real estate with euro yield.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITIVE LANDSCAPE -->
+<section class="section" id="competitive">
+  <div class="eyebrow">07 — Competitive Landscape</div>
+  <h2>Tokenised real estate is real.<br><em>None combine all five.</em></h2>
+  <p class="lead">Existing operators tokenise. They do not anchor. BBRF-PT holds a Bitcoin reserve as the foundation, deploys euros against it to acquire Portuguese real estate, and makes every move auditable through the bbrf-pt.eth identity.</p>
+  <div style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Focus</th>
+          <th>BTC Reserve</th>
+          <th>Inst. Instrument</th>
+          <th>Portuguese RE</th>
+          <th>FO Tickets</th>
+          <th>On-chain</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="comp-name">RealT</span></td><td>Tokenised US single-family rentals</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="chk">✓</td></tr>
+        <tr><td><span class="comp-name">Lofty</span></td><td>Algorand fractional rentals</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="chk">✓</td></tr>
+        <tr><td><span class="comp-name">Roofstock onChain</span></td><td>NFT-backed US rentals</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="chk">✓</td></tr>
+        <tr><td><span class="comp-name">Centrifuge / Goldfinch</span></td><td>RWA debt pools</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="xmark">—</td><td class="chk">✓</td></tr>
+        <tr class="us"><td><span class="comp-name">BBRF-PT<span class="comp-badge">US</span></span></td><td>BTC reserve + Portuguese RE, inst. instrument</td><td class="chk">✓</td><td class="chk">✓</td><td class="chk">✓</td><td class="chk">✓</td><td class="chk">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:2rem;padding:1.6rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;border-left:3px solid var(--teal);">
+    <p style="font-size:.88rem;color:var(--text2);line-height:1.8;">The <em>reserve is the moat</em>; the instrument is the credibility; the Luxembourg–Portugal structure is the regulatory pathway. No existing operator combines a Bitcoin reserve, a credible institutional security, Portuguese specialty assets, and family-office ticket sizes in a single structure.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- FEES -->
+<div class="section-alt" id="fees">
+  <div class="section-inner">
+    <div class="eyebrow">08 — Fees</div>
+    <h2>Full-cost transparency.<br><em>All fees included in illustrations.</em></h2>
+    <table class="fees-table">
+      <thead><tr><th>Fee</th><th>Rate</th></tr></thead>
+      <tbody>
+        <tr><td>Management fee</td><td>1.5% of AUM annually</td></tr>
+        <tr><td>Advisory deal fee</td><td>1% per acquisition (charged to the SPV at close)</td></tr>
+        <tr><td>Carried interest</td><td>20% above an 8% annual hurdle</td></tr>
+        <tr><td>Bitcoin custody</td><td>~0.1% of BTC AUM annually</td></tr>
+        <tr><td>Legal / audit / infrastructure</td><td>~€150,000 per year</td></tr>
+        <tr><td>Independent valuation</td><td>~€3,000–5,000 per acquisition</td></tr>
+        <tr><td>Portuguese transaction costs</td><td>IMT 6–8% + closing 1–2% + notary — included in deal underwriting</td></tr>
+        <tr><td>Property management</td><td>~10% of gross rental yield per property</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- OPEN ITEMS -->
+<section class="section" id="questions">
+  <div class="eyebrow">09 — Open Items Before Formation</div>
+  <h2>What needs to be decided.<br><em>None is a blocker.</em></h2>
+  <p class="lead">Five structural decisions to confirm before formation. Each is resolved before first close — not before the conversation begins.</p>
+  <div class="q-grid">
+    <div class="q-card">
+      <div class="q-num">01</div>
+      <h4>Holdco share classes &amp; conversion mechanics</h4>
+      <p>Finalise preferred terms, valuation cap, and conversion triggers in the constitutional documents.</p>
+    </div>
+    <div class="q-card">
+      <div class="q-num">02</div>
+      <h4>Regulated custody &amp; lending counterparties</h4>
+      <p>Select 2–3 regulated providers (e.g. Sygnum, Anchorage, institutional Ledn class); document LTV policy and de-risking protocol.</p>
+    </div>
+    <div class="q-card">
+      <div class="q-num">03</div>
+      <h4>On-chain transparency layer scope</h4>
+      <p>Confirm what is mirrored on-chain and that it remains evidentiary, not constitutive of legal rights.</p>
+    </div>
+    <div class="q-card">
+      <div class="q-num">04</div>
+      <h4>Advisory selection</h4>
+      <p>Appoint the institutional real-estate advisor; agree mandate scope and conflicts policy in writing.</p>
+    </div>
+    <div class="q-card">
+      <div class="q-num">05</div>
+      <h4>BTC/RE ratio policy</h4>
+      <p>Fixed allocation at entry vs. a managed BTC/RE ratio — impact on fairness to later investors.</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<div class="section-alt" id="roadmap">
+  <div class="section-inner">
+    <div class="eyebrow">10 — Roadmap</div>
+    <h2>Four phases.<br><em>First close in 6–9 months.</em></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <h4>Legal &amp; Entity</h4>
+        <p>Engage LU + PT counsel. Form the SOPARFI holdco. Confirm the Portuguese OpCo and SPV template. Finalise convertible-preferred terms.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <h4>Custody &amp; Leverage</h4>
+        <p>Establish regulated multisig custody. Test the borrowing facility at small scale before committing the full reserve.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <h4>Pilot Acquisition</h4>
+        <p>Acquire Pebble Stone Farm into an SPV. Prove the full stack end-to-end. Issue first preferred shares to founding investors.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <h4>Distribution &amp; Raise</h4>
+        <p>Appoint licensed placement agent for LU, IL, UAE. Secure anchor commitments. Open the full institutional raise.</p>
+      </div>
+    </div>
+    <div class="collab-banner">
+      <h3>Ready to explore?</h3>
+      <p>We are speaking with a small number of potential anchor investors and formation partners. If the thesis resonates, the conversation starts here.</p>
+      <div class="collab-cta">
+        <a href="mailto:eytan@benzeno.com?subject=BBRF-PT%20%E2%80%94%20Investor%20Enquiry&body=I%20am%20writing%20to%20express%20interest%20in%20BBRF-PT%20and%20request%20the%20full%20investor%20memorandum." class="btn-primary">Request Full Memorandum →</a>
+        <a href="mailto:eytan@benzeno.com?subject=BBRF-PT%20%E2%80%94%20Introductory%20Call" class="btn-outline">Schedule a Call</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>BBRF-PT</strong> · Bitcoin-Backed Real-Estate Fund (Portugal) · A Bittrees venture · <a href="mailto:eytan@benzeno.com">eytan@benzeno.com</a> · <a href="mailto:jhineline@bittrees.io">jhineline@bittrees.io</a> · bbrf-pt.eth</p>
+  <p style="margin-top:.75rem;">Confidential. Provided in confidence to a named recipient. Not a securities offering, prospectus, or investment, legal, or tax advice. Any offering will be made only to eligible professional and well-informed investors pursuant to definitive documentation. Return scenarios are illustrative and are not forecasts; capital is at risk, including total loss.</p>
+</footer>
+
+<script>
+function toggleTheme(){
+  const t = document.documentElement.dataset.theme;
+  document.documentElement.dataset.theme = t==='dark' ? 'light' : 'dark';
+  document.querySelector('.theme-btn').textContent = t==='dark' ? '☀︎ Light' : '☾ Dark';
+}
+</script>
+</body>
+</html>
