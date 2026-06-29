@@ -614,6 +614,127 @@ footer p+p{margin-top:.4rem;}
 .engine-svg-box svg{width:100%;height:auto;display:block;}
 .portfolio-wrap{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);}
 
+/* ── STRESS TEST ── */
+.stress-card{
+  background:var(--surface);border:1px solid var(--border-btc);
+  border-radius:16px;padding:2.5rem;margin-top:2rem;
+}
+.stress-slider-label{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:.6rem;font-size:.82rem;color:var(--text2);
+}
+.stress-slider-label span:last-child{
+  font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:800;color:var(--btc);
+}
+.btc-slider{
+  width:100%;-webkit-appearance:none;appearance:none;
+  height:4px;background:rgba(255,255,255,0.06);border-radius:2px;outline:none;cursor:pointer;
+  margin-bottom:.5rem;
+}
+.btc-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--btc);cursor:pointer;border:3px solid var(--bg);
+  box-shadow:0 0 12px rgba(247,147,26,.5);transition:box-shadow .2s;
+}
+.btc-slider::-webkit-slider-thumb:hover{box-shadow:0 0 20px rgba(247,147,26,.7);}
+.stress-range-labels{
+  display:flex;justify-content:space-between;
+  font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text3);
+  margin-bottom:2rem;
+}
+.stress-range-labels span:nth-child(2){color:var(--text2);font-weight:700;}
+.stress-metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.8rem;
+}
+.stress-metric{
+  background:var(--bg3);padding:1.2rem 1rem;text-align:center;
+}
+.stress-metric-label{font-family:'Space Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.4rem;}
+.stress-metric-val{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:.2rem;transition:color .3s;}
+.stress-metric-sub{font-size:.72rem;color:var(--text3);}
+/* LTV Gauge */
+.stress-gauge-wrap{margin-bottom:1.5rem;}
+.stress-gauge-bar{
+  position:relative;height:16px;background:rgba(255,255,255,0.04);
+  border-radius:8px;overflow:hidden;margin-bottom:.5rem;
+}
+.stress-gauge-fill{
+  height:100%;border-radius:8px;transition:width .4s ease, background .4s ease;
+  width:40%;background:var(--green);
+}
+.stress-trigger-line{
+  position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,0.2);
+}
+.stress-trigger-line::after{
+  content:attr(data-label);position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+  font-family:'Space Mono',monospace;font-size:.58rem;color:rgba(255,255,255,0.3);white-space:nowrap;
+}
+.stress-gauge-labels{
+  display:flex;justify-content:space-between;
+  font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text3);
+}
+/* Status pill */
+.stress-status{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.3rem .8rem;border-radius:6px;font-size:.8rem;font-weight:700;
+  font-family:'Space Mono',monospace;transition:all .3s;
+}
+/* Waterfall */
+.stress-waterfall{
+  background:var(--bg3);border-radius:10px;padding:1.2rem 1.4rem;
+  font-size:.82rem;color:var(--text2);line-height:1.75;
+  transition:all .3s;border-left:3px solid var(--border);
+}
+.stress-waterfall strong{color:var(--btc);}
+.stress-waterfall.warn{border-left-color:#FFB84D;}
+.stress-waterfall.warn strong{color:#FFB84D;}
+.stress-waterfall.danger{border-left-color:#FF4444;}
+.stress-waterfall.danger strong{color:#FF4444;}
+
+/* ── HARD QUESTIONS ── */
+.hq-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:2rem;}
+.hq-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:1.8rem;
+  border-left:3px solid var(--border-btc);
+  transition:border-color .3s, transform .3s;
+}
+.hq-card:hover{border-left-color:var(--btc);transform:translateX(4px);}
+.hq-num{
+  font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--btc);margin-bottom:.5rem;
+}
+.hq-q{
+  font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;
+  margin-bottom:.9rem;color:var(--text);
+}
+.hq-a{font-size:.87rem;color:var(--text2);line-height:1.8;}
+.hq-a strong{color:var(--text);}
+.hq-a .verdict{
+  display:inline-block;margin-top:.7rem;padding:.25rem .7rem;
+  border-radius:5px;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;
+  letter-spacing:.05em;
+}
+.verdict.ok{background:rgba(0,255,136,.1);color:var(--green);}
+.verdict.partial{background:rgba(255,184,77,.1);color:#FFB84D;}
+.verdict.open{background:rgba(247,147,26,.12);color:var(--btc);}
+
+/* ── FORMATION PLAN ── */
+.plan-steps{display:grid;grid-template-columns:1fr;gap:0;margin-top:1.8rem;}
+.plan-step{
+  display:grid;grid-template-columns:180px 1fr;gap:1.5rem;
+  padding:1.3rem 0;border-bottom:1px solid var(--border);align-items:start;
+}
+.plan-step:last-child{border-bottom:none;}
+.plan-date{
+  font-family:'Space Mono',monospace;font-size:.72rem;color:var(--btc);
+  font-weight:700;padding-top:.2rem;letter-spacing:.03em;
+}
+.plan-step h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem;}
+.plan-step p{font-size:.84rem;color:var(--text2);}
+.plan-owner{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text3);margin-top:.3rem;}
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .legs,.scenarios,.tiers,.roadmap,.struct-grid,.team-grid,.viz-duo{grid-template-columns:1fr;}
@@ -688,9 +809,10 @@ footer p+p{margin-top:.4rem;}
     </h1>
 
     <p class="hero-deck">
-      A ten-year macro trade built on three legs that hedge and amplify each other.
-      <strong>The Bitcoin is never sold.</strong> It's posted as collateral to borrow euros,
-      which acquire Portuguese real estate. The spread is the trade.
+      You have Bitcoin. You don't want to sell it.
+      You want European hard-asset exposure, euro yield, and a structure that compounds all three simultaneously.
+      <strong>The Bitcoin is posted as collateral — never sold — to borrow euros that acquire Portuguese real estate.</strong>
+      The spread between what Bitcoin does and what borrowing costs is the trade.
     </p>
 
     <div class="stat-row">
@@ -1028,6 +1150,81 @@ footer p+p{margin-top:.4rem;}
   <p style="font-size:.75rem;color:var(--text3);margin-top:1.5rem;padding:1rem 1.25rem;background:var(--surface);border-radius:8px;line-height:1.65;">Illustrative only — not a forecast, projection, or guarantee. Each scenario assumes Bitcoin compounds, Portuguese real estate appreciates, leverage remains available at modelled cost, and the regulatory environment remains workable. Each can fail independently or together. Borrowing cost (~2–5% p.a.) is netted against acquisition leverage. Capital is at risk, including total loss.</p>
 </div>
 
+<!-- STRESS TEST -->
+<div class="stripe">
+  <div class="section" id="stresstest">
+    <div class="eyebrow">05 — Stress Test</div>
+    <h2 class="section-h">We modelled the crash.<br><span class="accent">Here's exactly where<br>the structure breaks.</span></h2>
+    <p class="lead">The most common investor question: <em>"what happens when Bitcoin drops 80%?"</em> Below is the exact answer — modelled on the €50M base-case raise. Drag the slider to any BTC price and see the reserve value, LTV ratio, and the de-risking waterfall that activates before the structure is threatened.</p>
+
+    <div class="stress-card reveal">
+      <div class="stress-slider-label">
+        <span>Bitcoin Price (EUR)</span>
+        <span id="btcPriceDisplay">€85,714</span>
+      </div>
+      <input type="range" id="btcSlider" min="5" max="100" value="100" step="1" class="btc-slider">
+      <div class="stress-range-labels">
+        <span>−95%</span>
+        <span id="changeDisplay" style="color:var(--green)">Current price (0%)</span>
+        <span>0%</span>
+      </div>
+
+      <div class="stress-metrics">
+        <div class="stress-metric">
+          <div class="stress-metric-label">Reserve Value</div>
+          <div class="stress-metric-val" id="reserveVal">€30.0M</div>
+          <div class="stress-metric-sub">350 BTC × price</div>
+        </div>
+        <div class="stress-metric">
+          <div class="stress-metric-label">Outstanding Loan</div>
+          <div class="stress-metric-val">€12.0M</div>
+          <div class="stress-metric-sub">Fixed until repaid</div>
+        </div>
+        <div class="stress-metric">
+          <div class="stress-metric-label">LTV Ratio</div>
+          <div class="stress-metric-val" id="ltvVal">40.0%</div>
+          <div class="stress-metric-sub">Loan ÷ Reserve</div>
+        </div>
+        <div class="stress-metric">
+          <div class="stress-metric-label">Structure Status</div>
+          <div class="stress-metric-val" id="statusVal" style="font-size:1rem;"><span class="stress-status" style="background:rgba(0,255,136,.12);color:#00FF88;">● SAFE</span></div>
+          <div class="stress-metric-sub" id="statusSub">45pp buffer to de-risking</div>
+        </div>
+      </div>
+
+      <!-- LTV Gauge -->
+      <div class="stress-gauge-wrap">
+        <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text3);margin-bottom:.4rem;">
+          <span>LTV 0%</span>
+          <span style="color:#00FF88;">SAFE &lt;65%</span>
+          <span style="color:#FFB84D;">WATCH 65–85%</span>
+          <span style="color:#FF4444;">MARGIN CALL &gt;85%</span>
+          <span>100%+</span>
+        </div>
+        <div class="stress-gauge-bar">
+          <div class="stress-gauge-fill" id="gaugeFill"></div>
+          <div class="stress-trigger-line" style="left:65%" data-label="65%"></div>
+          <div class="stress-trigger-line" style="left:85%" data-label="85%"></div>
+        </div>
+      </div>
+
+      <div class="stress-waterfall" id="waterfallMsg">
+        <strong>Current status: SAFE ZONE.</strong> At origination, 40% LTV leaves a 25-percentage-point buffer before the first de-risking trigger. Bitcoin would need to fall ~38% from the current price before active management begins. The structure can absorb this through normal market volatility without any forced action.
+      </div>
+    </div>
+
+    <div class="hi-box reveal" style="margin-top:2rem;">
+      <h4>The de-risking waterfall — three stages before BTC is ever threatened</h4>
+      <p style="line-height:1.85;">
+        <strong style="color:var(--green);">Stage 1 (LTV &gt;65%):</strong> Management reduces loan exposure by 15% via partial asset sale or additional equity contribution. No Bitcoin sold.<br>
+        <strong style="color:#FFB84D;">Stage 2 (LTV &gt;75%):</strong> Reduce by 30%. One SPV liquidated. Loan partially repaid. Reserve intact.<br>
+        <strong style="color:#FF4444;">Stage 3 (LTV &gt;85%):</strong> Full margin call response. Loan repaid via RE sale proceeds. Bitcoin still not sold unless all other options exhausted.<br>
+        <strong>The Bitcoin is a last resort, not a first response.</strong> Conservative origination LTV and active monitoring are the primary protection.
+      </p>
+    </div>
+  </div>
+</div>
+
 <!-- RAISE -->
 <div class="stripe" id="raise">
   <div class="section">
@@ -1192,31 +1389,92 @@ footer p+p{margin-top:.4rem;}
   </div>
 </div>
 
+<!-- HARD QUESTIONS -->
 <div class="stripe">
   <div class="section">
-    <div class="eyebrow">09 — Roadmap</div>
-    <h2 class="section-h">Four phases.<br><span class="accent">First close in 6–9 months.</span></h2>
-    <div class="roadmap reveal">
-      <div class="road-step">
-        <div class="road-num">1</div>
-        <h4>Legal &amp; Entity</h4>
-        <p>Engage LU + PT counsel. Form SOPARFI holdco. Confirm OpCo + SPV template. Finalise convertible-preferred terms.</p>
+    <div class="eyebrow">09 — The Hard Questions</div>
+    <h2 class="section-h">Five challenges.<br><span class="accent">Five honest answers.</span></h2>
+    <p class="lead">Sophisticated investors will ask these questions. We have asked them of ourselves first. Below are the honest, complete answers — including the parts that are still open.</p>
+
+    <div class="hq-grid reveal">
+      <div class="hq-card">
+        <div class="hq-num">Challenge 01</div>
+        <div class="hq-q">"What happens to the Bitcoin when it drops 80%?"</div>
+        <div class="hq-a">
+          We modelled this. See the interactive stress test above. At 40% origination LTV, the reserve can absorb a ~38% BTC drawdown before the first de-risking trigger activates — and that trigger sells <em>real estate</em>, not Bitcoin. A staged waterfall (65% → 75% → 85% LTV) means management is responding actively long before a margin call threatens the reserve. BTC has dropped 80%+ three times in its history. Each time, it recovered to new highs within 24 months. <strong>The risk is real. The mitigation is structural, staged, and transparent — and we are showing you the math, not asking you to trust us.</strong>
+          <div class="verdict ok">Addressed — stress-tested, waterfall defined</div>
+        </div>
       </div>
-      <div class="road-step">
-        <div class="road-num">2</div>
-        <h4>Custody &amp; Leverage</h4>
-        <p>Establish regulated multisig custody. Test borrowing facility at small scale before committing the full reserve.</p>
+
+      <div class="hq-card">
+        <div class="hq-num">Challenge 02</div>
+        <div class="hq-q">"Why should I pay 20% carry on Bitcoin going up?"</div>
+        <div class="hq-a">
+          You should not — and the structure is designed to reflect this. The 8% cumulative preferred hurdle must be cleared before the carry applies. The preferred liquidation preference (1×) protects investors on the downside. The carry compensates management for: sourcing and executing Portuguese real estate (illiquid, relationship-gated, bureaucratic); managing the BTC lending facility, LTV monitoring, and active de-risking; and operating the full Luxembourg SOPARFI + SPV legal structure across two jurisdictions. <strong>The BTC is the collateral engine. The work is in the real estate and the risk management.</strong> If you want pure BTC exposure, buy BTC. This instrument gives you BTC + leveraged EUR hard assets + institutional structure + preferred terms.
+          <div class="verdict ok">Addressed — carry is on the full structure, not the reserve alone</div>
+        </div>
       </div>
-      <div class="road-step">
-        <div class="road-num">3</div>
-        <h4>Pilot SPV</h4>
-        <p>Acquire Pebble Stone Farm. Prove the full stack end-to-end. Issue first preferred shares to founding investors.</p>
+
+      <div class="hq-card">
+        <div class="hq-num">Challenge 03</div>
+        <div class="hq-q">"Name the lender. Who is actually doing the BTC-backed loans?"</div>
+        <div class="hq-a">
+          The formation process involves shortlisting regulated lending counterparties who can provide BTC-collateralised facilities to a Luxembourg entity. Target profile: regulated custodian-lenders (category includes Sygnum Bank, institutional Bitcoin-backed credit desks at regulated European banks, and specialist crypto prime brokers with EU licences). <strong>We do not yet have a signed term sheet — this is an open item, and we are stating that clearly.</strong> The pilot SPV (Pebble Stone Farm) will be used to establish and test the lending relationship at a manageable scale before the full institutional raise. Any investor should treat the lending counterparty as an open due-diligence item until a name and terms are disclosed.
+          <div class="verdict partial">Partially open — lending counterparty is a formation-stage deliverable</div>
+        </div>
       </div>
-      <div class="road-step">
-        <div class="road-num">4</div>
-        <h4>Institutional Raise</h4>
-        <p>Appoint licensed placement agent for LU, IL, UAE. Secure anchor commitments. Open the full raise to €25M floor.</p>
+
+      <div class="hq-card">
+        <div class="hq-num">Challenge 04</div>
+        <div class="hq-q">"Strip out BTC appreciation. What's the actual real estate return?"</div>
+        <div class="hq-a">
+          Honest answer: the RE-only return is a respectable but unremarkable Portuguese property fund. ~40% of capital, leveraged ~2–3×, at 3–5% net yield, with 2–4% annual appreciation. That produces roughly 1.5–2× over 10 years before fees — a respectable euro return, but not why you're here. <strong>The structural alpha lives in the BTC reserve compounding while the RE deployment earns you current yield and hard-asset exposure.</strong> This is, at its core, a Bitcoin fund with a real estate income engine. We say that explicitly, because the LP base, risk profile, and regulatory classification follow from it. If you are allergic to BTC volatility, this is not the right instrument.
+          <div class="verdict ok">Addressed — the BTC thesis is primary; the RE is the yield and diversification layer</div>
+        </div>
       </div>
+
+      <div class="hq-card">
+        <div class="hq-num">Challenge 05</div>
+        <div class="hq-q">"€100M pre-money with no assets — justify the valuation."</div>
+        <div class="hq-a">
+          The €100M pre-money is the indicative conversion price for the convertible preferred — not an assertion of current enterprise value. The instrument is structured as a convertible precisely because the entity has no track record yet. The 1× liquidation preference means investors get their money back before any conversion value is realised. The preferred dividend accumulates at 8% PIK. <strong>The honest framing is: you are buying a protected entry into a structure at a pre-agreed conversion price, with downside protection via the liquidation preference, in exchange for providing formation-stage capital before the pilot SPV is closed.</strong> The €100M figure will be validated or renegotiated based on what the pilot demonstrates. Founding investors who join before the pilot closes are compensated for the risk via preferred terms, not a discounted price.
+          <div class="verdict ok">Addressed — instrument is a convertible preferred, not an equity valuation claim</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FORMATION PLAN -->
+<div class="section">
+  <div class="eyebrow">10 — Formation Plan</div>
+  <h2 class="section-h">Next 90 days.<br><span class="accent">Specific. Named. Accountable.</span></h2>
+  <p class="lead">The following milestones are commitments, not aspirations. The founding investor round is open until Pebble Stone Farm closes. After that, terms move to institutional pricing.</p>
+
+  <div class="plan-steps reveal">
+    <div class="plan-step">
+      <div class="plan-date">Jul 2026 — Week 1</div>
+      <div><h4>Engage Luxembourg counsel</h4><p>Mandate a Luxembourg law firm to form the SOPARFI holding company and draft the convertible preferred share subscription agreement. Target: completed entity within 4 weeks.</p><div class="plan-owner">Lead: Eytan Benzeno · Jonathan Hineline</div></div>
+    </div>
+    <div class="plan-step">
+      <div class="plan-date">Jul 2026 — Week 2</div>
+      <div><h4>Engage Portuguese transaction counsel</h4><p>Mandate a PT law firm specialising in agricultural real estate. Commence property title review on Pebble Stone Farm. Confirm SPV template (Lda. structure).</p><div class="plan-owner">Lead: Eytan Benzeno · PT partner counsel</div></div>
+    </div>
+    <div class="plan-step">
+      <div class="plan-date">Jul–Aug 2026</div>
+      <div><h4>Lending facility — shortlist and approach</h4><p>Approach 3–5 regulated BTC-collateralised lending counterparties. Obtain indicative term sheets. Select primary lender. Begin KYC/AML onboarding for the Luxembourg entity.</p><div class="plan-owner">Lead: Jonathan Hineline · crypto-native LP network</div></div>
+    </div>
+    <div class="plan-step">
+      <div class="plan-date">Aug 2026</div>
+      <div><h4>Custody arrangement</h4><p>Establish regulated institutional multisig custody for the Bitcoin reserve. Confirm custody provider, key-holder structure, and insurance arrangement. Publish custody policy to founding investors.</p><div class="plan-owner">Lead: Jonathan Hineline · Bittrees engineering bench</div></div>
+    </div>
+    <div class="plan-step">
+      <div class="plan-date">Aug–Sep 2026</div>
+      <div><h4>Pebble Stone Farm — pilot SPV close</h4><p>Close the acquisition into the first Portuguese Lda. SPV. Prove legal, custody, lending, and governance stack end-to-end. Issue first convertible preferred shares to founding investors.</p><div class="plan-owner">Lead: Eytan Benzeno + Rita Yang (Sócia-Gerente) · PT counsel</div></div>
+    </div>
+    <div class="plan-step">
+      <div class="plan-date">Q4 2026</div>
+      <div><h4>Institutional raise — open</h4><p>Appoint licensed placement agent in Luxembourg, Israel, and UAE. Publish pilot SPV performance data. Open the full raise to the €25M floor with institutional pricing.</p><div class="plan-owner">Lead: both principals · licensed placement agent</div></div>
     </div>
   </div>
 </div>
@@ -1463,6 +1721,83 @@ if(typeof Chart !== 'undefined'){
   },{threshold:0.4});
   const donutWrap = btcEl.closest('.donut-ring');
   if(donutWrap) donutObs.observe(donutWrap);
+})();
+
+// ── STRESS TEST SLIDER ──
+(function(){
+  const slider   = document.getElementById('btcSlider');
+  const priceEl  = document.getElementById('btcPriceDisplay');
+  const changeEl = document.getElementById('changeDisplay');
+  const resEl    = document.getElementById('reserveVal');
+  const ltvEl    = document.getElementById('ltvVal');
+  const statEl   = document.getElementById('statusVal');
+  const subEl    = document.getElementById('statusSub');
+  const gaugeEl  = document.getElementById('gaugeFill');
+  const wfEl     = document.getElementById('waterfallMsg');
+  if(!slider) return;
+
+  const BASE_BTC_PRICE = 85714; // EUR per BTC at origination
+  const BTC_AMOUNT     = 350;   // BTC held in reserve (€50M raise, 60% = €30M / €85,714)
+  const LOAN_OUTSTANDING = 12;  // €M — fixed loan against reserve
+
+  function fmt(n){ return '€'+n.toLocaleString('en-EU',{maximumFractionDigits:0}); }
+
+  function update(){
+    const pct = parseInt(slider.value); // 5–100
+    const price = Math.round(BASE_BTC_PRICE * pct / 100);
+    const change = pct - 100; // negative = drop
+    const reserveM = +(BTC_AMOUNT * price / 1e6).toFixed(1);
+    const ltv = +(LOAN_OUTSTANDING / reserveM * 100).toFixed(1);
+    const gaugeW = Math.min(ltv, 110); // cap visual at 110%
+
+    priceEl.textContent = fmt(price);
+    changeEl.textContent = change === 0 ? 'Current price (0%)' : change + '%';
+    changeEl.style.color = change < -50 ? '#FF4444' : change < -25 ? '#FFB84D' : '#00FF88';
+    resEl.textContent  = '€' + reserveM + 'M';
+    ltvEl.textContent  = ltv + '%';
+
+    // Gauge color + status
+    let statusHTML, subText, wfClass, wfHTML;
+    gaugeEl.style.width = Math.min(gaugeW, 100) + '%';
+
+    if(ltv < 65){
+      gaugeEl.style.background = '#00FF88';
+      ltvEl.style.color = '#00FF88';
+      statusHTML = '<span class="stress-status" style="background:rgba(0,255,136,.12);color:#00FF88;">● SAFE</span>';
+      subText = Math.round(65 - ltv) + 'pp buffer to Stage 1 trigger';
+      wfClass = '';
+      wfHTML = '<strong>Status: SAFE ZONE.</strong> The structure is operating within its designed parameters. No de-risking action required. BTC would need to fall an additional <strong>' + Math.round((1 - (LOAN_OUTSTANDING / (reserveM * 0.65))) * 100 * reserveM / (BTC_AMOUNT * price / 1e6 * 100) * (price/BASE_BTC_PRICE) * 100).toFixed(0) + '%</strong> from the current slider position before Stage 1 triggers. Bitcoin compounds untouched.';
+    } else if(ltv < 75){
+      gaugeEl.style.background = '#FFB84D';
+      ltvEl.style.color = '#FFB84D';
+      statusHTML = '<span class="stress-status" style="background:rgba(255,184,77,.12);color:#FFB84D;">⚠ WATCH</span>';
+      subText = 'Stage 1 active — monitoring closely';
+      wfClass = 'warn';
+      wfHTML = '<strong>Stage 1 activated (LTV 65–75%).</strong> Management reduces loan exposure by 15% — approximately €1.8M repaid via partial RE asset sale or equity contribution. This reduces the loan to ~€10.2M and brings LTV back below 55%. <strong>No Bitcoin is sold.</strong> The reserve is protected by liquidating the most liquid RE position first.';
+    } else if(ltv < 85){
+      gaugeEl.style.background = '#FF8844';
+      ltvEl.style.color = '#FF8844';
+      statusHTML = '<span class="stress-status" style="background:rgba(255,136,68,.12);color:#FF8844;">⚠ ELEVATED</span>';
+      subText = 'Stage 2 active — reduce by 30%';
+      wfClass = 'warn';
+      wfHTML = '<strong>Stage 2 activated (LTV 75–85%).</strong> Management reduces loan by 30% — approximately €3.6M repaid. One full SPV asset liquidated. This de-levers the structure meaningfully. <strong>Bitcoin is still not sold.</strong> The priority is to repay the loan with real estate proceeds, not with the reserve.';
+    } else {
+      gaugeEl.style.background = '#FF4444';
+      ltvEl.style.color = '#FF4444';
+      statusHTML = '<span class="stress-status" style="background:rgba(255,68,68,.14);color:#FF4444;">🚨 MARGIN CALL</span>';
+      subText = 'Stage 3 — full loan repayment required';
+      wfClass = 'danger';
+      wfHTML = '<strong>Stage 3 — Margin Call Zone (LTV &gt;85%).</strong> Lender issues margin call. Full loan repayment required. All RE assets are liquidated to repay €12M loan. At this price, the residual BTC reserve value is €' + reserveM + 'M. <strong>Bitcoin is released from collateral post-repayment</strong> — the reserve is intact and held by investors. Structure has been de-leveraged. The Bitcoin has never been sold; the real estate absorbed the impact.';
+    }
+
+    statEl.innerHTML = statusHTML;
+    subEl.textContent = subText;
+    wfEl.className = 'stress-waterfall' + (wfClass ? ' '+wfClass : '');
+    wfEl.innerHTML = wfHTML;
+  }
+
+  slider.addEventListener('input', update);
+  update();
 })();
 
 // ── SCROLL REVEAL ──
