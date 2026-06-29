@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Recommendations — Guy Benzeno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Rubik', -apple-system, sans-serif;
+    background: transparent;
+    color: #222;
+    padding: 32px 16px 40px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .header h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #0077b5;
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+  .header-sub svg { width: 14px; height: 14px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #e4e4e8;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover { box-shadow: 0 6px 18px rgba(0,0,0,.09); transform: translateY(-2px); }
+  .stars { color: #f4a724; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 10px; }
+  .text { font-size: 0.87rem; line-height: 1.68; color: #333; margin-bottom: 14px; }
+  .text.clamped { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+  .expand { background: none; border: none; color: #0077b5; font-size: 0.77rem; cursor: pointer; padding: 0 0 12px; font-family: inherit; }
+  .divider { border: none; border-top: 1px solid #eee; margin-bottom: 12px; }
+  .person { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .name { font-size: 0.86rem; font-weight: 600; color: #111; }
+  .role { font-size: 0.73rem; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px; }
+  .date { font-size: 0.68rem; color: #aaa; margin-top: 1px; }
+  .show-more {
+    display: none;
+    text-align: center;
+    margin-top: 24px;
+  }
+  .show-more button {
+    background: none;
+    border: 1px solid #0077b5;
+    color: #0077b5;
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 10px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .show-more button:hover { background: #0077b5; color: #fff; }
+  .loading { text-align: center; padding: 48px; color: #999; font-size: 0.88rem; }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>What clients say</h2>
+  <a class="header-sub" href="https://www.linkedin.com/in/guybenzeno/" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.37 4.25 5.44v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+    Verified LinkedIn recommendations
+  </a>
+</div>
+
+<div class="grid" id="grid"><div class="loading">Loading…</div></div>
+<div class="show-more" id="show-more"><button id="show-more-btn">Show all recommendations</button></div>
+
+<script>
+var DATA_URL = 'https://cdn.jsdelivr.net/gh/benzenoe/eytan.com@main/guy-recommendations.json';
+var INITIAL = 9;
+
+function fallback(name) {
+  return 'https://ui-avatars.com/api/?name=' + encodeURIComponent((name||'?').trim()) + '&size=68&background=0077b5&color=fff&bold=true&format=png';
+}
+
+function card(rec) {
+  var t = (rec.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  var id = 'c' + Math.random().toString(36).slice(2);
+  var long = t.length > 320;
+  var photo = rec.photo || fallback(rec.name);
+  return '<div class="card">'
+    + '<div class="stars">★★★★★</div>'
+    + '<div class="text' + (long?' clamped':'') + '" id="' + id + '">' + t.replace(/\n/g,'<br>') + '</div>'
+    + (long ? '<button class="expand" onclick="tog(this,\''+id+'\')">Read more ↓</button>' : '')
+    + '<hr class="divider">'
+    + '<div class="person">'
+    + '<img class="avatar" src="' + photo + '" onerror="this.src=\''+fallback(rec.name)+'\'" alt="' + (rec.name||'') + '">'
+    + '<div><div class="name">' + (rec.name||'') + '</div>'
+    + '<div class="role" title="'+(rec.title||'')+'">' + (rec.title||'') + '</div>'
+    + (rec.date_display ? '<div class="date">'+rec.date_display+'</div>' : '')
+    + '</div></div></div>';
+}
+
+function tog(btn, id) {
+  var el = document.getElementById(id);
+  var cl = el.classList.contains('clamped');
+  el.classList.toggle('clamped', !cl);
+  btn.textContent = cl ? 'Read less ↑' : 'Read more ↓';
+}
+
+fetch(DATA_URL)
+  .then(function(r){return r.json();})
+  .then(function(d){
+    var recs = d.recommendations || [];
+    var grid = document.getElementById('grid');
+    grid.innerHTML = recs.slice(0,INITIAL).map(card).join('');
+    var rest = recs.slice(INITIAL);
+    if (rest.length) {
+      var wrap = document.getElementById('show-more');
+      var btn = document.getElementById('show-more-btn');
+      wrap.style.display = 'block';
+      btn.textContent = 'Show all ' + recs.length + ' recommendations';
+      btn.onclick = function() { grid.innerHTML += rest.map(card).join(''); wrap.style.display = 'none'; };
+    }
+  })
+  .catch(function(){ document.getElementById('grid').innerHTML = '<div class="loading">Could not load reviews.</div>'; });
+</script>
+</body>
+</html>
