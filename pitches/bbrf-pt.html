@@ -877,10 +877,10 @@ footer p+p{margin-top:.4rem;}
       <div class="leg leg-usd reveal reveal-delay-2">
         <div class="leg-glow"></div>
         <div class="leg-num">02</div>
-        <div class="leg-tag">Dollar Short · EUR Hedge</div>
+        <div class="leg-tag">Dollar Short · EUR Arbitrage</div>
         <h3>Short the dollar.</h3>
-        <p>$39T federal debt. $1T/quarter in interest. The path of least resistance is debasement, not collapse. Euro-denominated hard assets provide structural protection. Borrowing dollars at regulated rates against a Bitcoin reserve converts that macro thesis into a financeable position.</p>
-        <div class="leg-stat">US debt <strong>$39T</strong> · Interest <strong>$1T/quarter</strong> · Structural debasement</div>
+        <p>We borrow in dollars. We own in euros. Every 10% dollar devaluation reduces our real borrowing cost by 10% in EUR terms. At ~7%/yr dollar debasement, the nominal 3.5% loan becomes a <strong style="color:var(--green)">negative real rate</strong>. The currency is paying us to borrow. $39T federal debt. $1T/quarter in interest. The path of least resistance is inflation — and inflation is on our side.</p>
+        <div class="leg-stat">Nominal cost <strong>3.5%</strong> — dollar debasement <strong>~7%/yr</strong> = real cost <strong style="color:var(--green)">−3.5%</strong></div>
       </div>
       <div class="leg leg-re reveal reveal-delay-3">
         <div class="leg-glow"></div>
@@ -889,6 +889,19 @@ footer p+p{margin-top:.4rem;}
         <h3>Long Portugal.</h3>
         <p>Lisbon at €5–6K/m² vs. Paris at €10–12K. Supply constrained by licensing. Tourism infrastructure mature. Rental yields of 3–5% net. Euro-denominated and income-producing — a natural hedge against the dollar debasement thesis. Undervalued and supply-constrained.</p>
         <div class="leg-stat">Lisbon <strong>€5–6K/m²</strong> vs Paris <strong>€10–12K</strong> · Net yield <strong>3–5%</strong></div>
+      </div>
+    </div>
+
+    <!-- DOLLAR DECAY DIVIDEND CHART -->
+    <div class="chart-wrap reveal" style="margin-top:2.5rem;">
+      <div class="chart-label">The Dollar Decay Dividend — €50M Base Case · €12M Loan</div>
+      <div class="chart-h">Borrow in a dying currency.<br><span style="color:var(--green)">Your loan shrinks in real terms every year.</span></div>
+      <div class="chart-note">Nominal loan outstanding (what you owe) vs real purchasing-power value of that loan (adjusted for −7%/yr dollar debasement) · Illustrative · Not a forecast</div>
+      <div class="chart-c" style="height:280px;">
+        <canvas id="dollarChart"></canvas>
+      </div>
+      <div class="chart-insight">
+        A €12M nominal dollar loan taken at origination is worth only <strong>€5.8M in real EUR terms by Year 10</strong> — at 7%/yr dollar debasement. The <strong style="color:var(--green)">green shaded area is €6.2M the currency gave you for free</strong>. That is more than half the original loan, and you never negotiated for it. It is structural, directional, and has been running for 20 years.
       </div>
     </div>
   </div>
@@ -1515,6 +1528,79 @@ if(typeof Chart !== 'undefined'){
   Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
   Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
 }
+
+// ── DOLLAR DECAY DIVIDEND CHART ──
+(function(){
+  const el = document.getElementById('dollarChart');
+  if(!el) return;
+  const labels = ['Y0','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10'];
+  // Nominal: flat at 12M
+  const nominal = [12,12,12,12,12,12,12,12,12,12,12];
+  // Real value: 12 × 0.93^n (dollar debasement at -7%/yr)
+  const real = labels.map((_,i)=>+(12*Math.pow(0.93,i)).toFixed(2));
+
+  new Chart(el,{
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        {
+          label:'Nominal loan (what you owe)',
+          data: nominal,
+          borderColor:'rgba(255,80,80,0.65)',
+          borderWidth:2, borderDash:[6,4],
+          fill:{target:1, above:'rgba(0,255,136,0.1)'},
+          tension:0, pointRadius:0, pointHoverRadius:4,
+          backgroundColor:'transparent',
+        },{
+          label:'Real value of loan (−7%/yr dollar debasement)',
+          data: real,
+          borderColor:'#00FF88',
+          borderWidth:2.5,
+          fill:true,
+          backgroundColor:(ctx)=>{
+            const g=ctx.chart.ctx.createLinearGradient(0,0,0,ctx.chart.height);
+            g.addColorStop(0,'rgba(0,255,136,0.12)');
+            g.addColorStop(1,'rgba(0,255,136,0.01)');
+            return g;
+          },
+          tension:0.4,
+          pointBackgroundColor:'#00FF88', pointRadius:3, pointHoverRadius:6,
+        }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{
+          position:'top', align:'start',
+          labels:{color:'#7BA8CC', font:{size:10}, usePointStyle:true, pointStyleWidth:18, padding:16}
+        },
+        tooltip:{
+          backgroundColor:'#061220', borderColor:'rgba(0,255,136,0.2)', borderWidth:1,
+          titleColor:'#00FF88', bodyColor:'#7BA8CC', padding:12,
+          callbacks:{
+            label:(c)=>{
+              const saving = (nominal[c.dataIndex]-real[c.dataIndex]).toFixed(2);
+              if(c.datasetIndex===1) return ` Real value: €${c.parsed.y}M  ·  Saved: €${saving}M`;
+              return ` Nominal: €${c.parsed.y}M`;
+            }
+          }
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#3D6080',font:{size:10}}},
+        y:{
+          grid:{color:'rgba(255,255,255,0.04)'},
+          min:4, max:13,
+          ticks:{color:'#3D6080', font:{size:10}, callback:(v)=>'€'+v+'M'}
+        }
+      },
+      animation:{duration:2000, easing:'easeInOutQuart'}
+    }
+  });
+})();
 
 // ── SPREAD CHART ──
 (function(){
