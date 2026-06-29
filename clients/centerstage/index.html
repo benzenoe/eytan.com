@@ -231,13 +231,16 @@
 <!-- LOGO BAR -->
 <div style="background:#fff;border-bottom:1px solid #e2e8f0;padding:12px 24px;display:flex;align-items:center;justify-content:center;">
   <a href="https://eytan.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;">
-    <img src="../ashth/eb-logo.png" alt="Eytan Benzeno" style="height:32px;width:auto;">
+    <img src="eb-logo-dark.png" alt="Eytan Benzeno" style="height:36px;width:auto;">
     <span style="font-family:'Rubik',sans-serif;font-size:0.78rem;color:#64748b;letter-spacing:0.04em;">eytan.com</span>
   </a>
 </div>
 
 <!-- HERO -->
 <div class="hero">
+  <div style="margin-bottom:20px;">
+    <img src="eb-logo-white.png" alt="Eytan Benzeno" style="height:48px;width:auto;opacity:0.85;">
+  </div>
   <p class="hero-eyebrow">Prepared for you by Eytan</p>
   <h1>Guy, here are your<br><strong>48 LinkedIn recommendations</strong></h1>
   <p class="hero-sub">Every review your clients left you — scraped directly from LinkedIn and kept up to date automatically every week.</p>
@@ -407,7 +410,7 @@
 
 <!-- FOOTER -->
 <div class="page-footer">
-  Built by <a href="https://eytan.com" target="_blank"><img src="../ashth/eb-logo.png" alt="Eytan" style="height:16px;vertical-align:middle;opacity:0.6;margin-right:4px;"></a><a href="https://eytan.com" target="_blank">eytan.com</a> &nbsp;·&nbsp;
+  Built by <a href="https://eytan.com" target="_blank"><img src="eb-logo-dark.png" alt="Eytan" style="height:16px;vertical-align:middle;opacity:0.5;margin-right:4px;"></a><a href="https://eytan.com" target="_blank">eytan.com</a> &nbsp;·&nbsp;
   Data from <a href="https://www.linkedin.com/in/guybenzeno/" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
   Updated automatically every Monday
 </div>
@@ -427,13 +430,16 @@
     return (name || '').split(/\s+/).slice(0, 2).map(function(w) { return w[0] ? w[0].toUpperCase() : ''; }).join('');
   }
 
+  function avatarUrl(name) {
+    var encoded = encodeURIComponent((name || '?').trim());
+    return 'https://ui-avatars.com/api/?name=' + encoded + '&size=68&background=0077b5&color=ffffff&bold=true&format=png';
+  }
+
   function renderCard(rec) {
     var text = (rec.text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     var id = 'r' + Math.random().toString(36).slice(2);
     var long = text.length > 320;
-    var avatar = rec.photo
-      ? '<img src="' + rec.photo + '" alt="' + (rec.name || '') + '" style="width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;">'
-      : '<div class="rec-avatar">' + initials(rec.name) + '</div>';
+    var avatar = '<img src="' + avatarUrl(rec.name) + '" alt="' + (rec.name || '') + '" style="width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;">';
     return '<div class="rec-card">' +
       '<div class="rec-stars">★★★★★</div>' +
       '<div class="rec-text' + (long ? ' clamped' : '') + '" id="' + id + '">' + text.replace(/\n/g, '<br>') + '</div>' +
