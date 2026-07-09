@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashth × Eytan Benzeno — Website Advisory Brief</title>
+<style>
+:root {
+  --teal: #2B6166;
+  --navy: #0d1620;
+  --navy2: #1a2332;
+  --navy3: #243044;
+  --blue: #00a8e1;
+  --gold: #ffd93d;
+  --green: #00c48c;
+  --red: #ff6b6b;
+  --white: #f0f4f8;
+  --gray: #8899aa;
+  --border: rgba(255,255,255,0.08);
+  --bg: var(--navy);
+  --surface: var(--navy2);
+  --text: var(--white);
+  --text2: #c0ccd8;
+  --text3: var(--gray);
+}
+
+[data-theme="light"] {
+  --white: #0d1620;
+  --gray: #3a4e60;
+  --bg: #f0f4f7;
+  --surface: #ffffff;
+  --text: #0d1620;
+  --text2: #1e2e3e;
+  --text3: #3a4e60;
+  --border: rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 60px;
+  background: rgba(13,22,32,0.97);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo img { height: 30px; }
+.nav-links { display: flex; align-items: center; gap: 1rem; }
+.nav-links a { color: var(--gray); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--blue); color: #fff !important;
+  padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+}
+.theme-toggle {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--gray); cursor: pointer; padding: 0.3rem 0.75rem;
+  border-radius: 6px; font-size: 0.8rem; transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--blue); color: var(--blue); }
+
+/* HERO */
+.hero {
+  min-height: 70vh;
+  background: linear-gradient(180deg, #0d1620 0%, #1a2332 100%) !important;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,168,225,0.1) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(43,97,102,0.15) 0%, transparent 60%);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 780px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 1px solid rgba(0,168,225,0.3); border-radius: 20px;
+  padding: 0.3rem 1rem; font-size: 0.78rem; color: var(--blue);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; color: #fff; }
+.hero h1 span { color: var(--blue); }
+.hero p { font-size: 1.1rem; color: #8899aa; max-width: 620px; margin: 0 auto 2.5rem; }
+.hero-logo { margin-bottom: 2rem; }
+.hero-logo img { height: 40px; filter: invert(1) brightness(1.2); }
+
+.hero-stats {
+  display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+  margin-top: 2rem; padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.stat-val { font-size: 1.8rem; font-weight: 800; color: var(--blue); display: block; }
+.stat-lbl { font-size: 0.78rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* SECTIONS */
+section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--blue); margin-bottom: 0.75rem;
+}
+.section-label::before { content: ''; display: block; width: 24px; height: 2px; background: var(--blue); }
+
+h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; color: var(--text); }
+h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+
+.lead { color: var(--text3); margin-bottom: 1.5rem; }
+
+/* PRIORITY BANNER */
+.priority-banner {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; padding: 0.25rem 0.8rem; border-radius: 20px; margin-bottom: 1rem;
+}
+.p-critical { background: rgba(255,107,107,0.12); color: var(--red); border: 1px solid rgba(255,107,107,0.3); }
+.p-high { background: rgba(255,217,61,0.1); color: var(--gold); border: 1px solid rgba(255,217,61,0.3); }
+.p-rec { background: rgba(0,196,140,0.1); color: var(--green); border: 1px solid rgba(0,196,140,0.3); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.75rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: rgba(0,168,225,0.3); transform: translateY(-3px); }
+.card-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+.card p { font-size: 0.9rem; color: var(--text3); margin-top: 0.4rem; }
+.tag {
+  display: inline-block; font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 0.2rem 0.6rem; border-radius: 20px;
+  background: rgba(0,168,225,0.12); color: var(--blue); margin-top: 0.75rem;
+}
+
+/* SPEC BLOCKS */
+.spec-block {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.75rem; margin-top: 1.5rem;
+}
+.spec-block h3 { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
+.spec-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(0,168,225,0.12); color: var(--blue); font-size: 0.9rem; font-weight: 800;
+}
+.spec-block p { font-size: 0.92rem; color: var(--text2); margin-bottom: 0.75rem; }
+.spec-block .why {
+  font-size: 0.85rem; color: var(--text3); border-left: 3px solid var(--teal);
+  padding: 0.4rem 0 0.4rem 1rem; margin: 1rem 0 0.25rem; font-style: italic;
+}
+
+/* TABLES */
+.spec-table {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden; margin-top: 1.25rem;
+}
+.spec-table table { width: 100%; border-collapse: collapse; }
+.spec-table th {
+  background: var(--navy3); padding: 0.75rem 1.1rem;
+  text-align: left; font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--gray);
+}
+.spec-table td {
+  padding: 0.8rem 1.1rem; border-top: 1px solid var(--border);
+  font-size: 0.9rem; color: var(--text2); vertical-align: top;
+}
+.spec-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+[data-theme="light"] .spec-table th { background: #e8edf2; color: #3a4e60; }
+
+/* CHECK LISTS */
+.deliverable-list { list-style: none; margin-top: 1rem; }
+.deliverable-list li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.95rem; color: var(--text2);
+}
+.deliverable-list li:last-child { border-bottom: none; }
+.deliverable-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+.dropped-list { list-style: none; margin-top: 1rem; }
+.dropped-list li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.92rem; color: var(--text3);
+}
+.dropped-list li:last-child { border-bottom: none; }
+.dropped-list li::before { content: '—'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+/* HIGHLIGHT BOXES */
+.highlight-blue {
+  background: rgba(0,168,225,0.07); border: 1px solid rgba(0,168,225,0.2);
+  border-radius: 14px; padding: 1.5rem 1.75rem; margin-top: 1.5rem;
+}
+.highlight-gold {
+  background: rgba(255,217,61,0.07); border: 1px solid rgba(255,217,61,0.2);
+  border-radius: 14px; padding: 1.5rem 1.75rem; margin-top: 1.5rem;
+}
+.highlight-blue p, .highlight-gold p { font-size: 0.92rem; color: var(--text2); margin-top: 0.4rem; }
+
+/* FLOW DIAGRAM */
+.flow {
+  display: flex; align-items: stretch; gap: 0.5rem; flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.flow-step {
+  flex: 1; min-width: 130px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem; text-align: center;
+}
+.flow-step .f-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+.flow-step .f-title { font-size: 0.8rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; }
+.flow-step .f-desc { font-size: 0.78rem; color: var(--text3); margin-top: 0.25rem; }
+.flow-arrow { display: flex; align-items: center; color: var(--gray); font-size: 1.1rem; }
+
+/* FOOTER */
+footer {
+  background: var(--navy); border-top: 1px solid var(--border);
+  padding: 3rem 2rem; text-align: center;
+}
+footer p { font-size: 0.85rem; color: var(--gray); }
+.confidential-bar {
+  margin-top: 1.5rem; padding: 0.6rem 1rem;
+  background: rgba(255,217,61,0.05); border: 1px solid rgba(255,217,61,0.15);
+  border-radius: 8px; display: inline-block;
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,217,61,0.5);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+@media (max-width: 768px) {
+  section { padding: 4rem 1.25rem; }
+  .hero { padding: 7rem 1.25rem 4rem; }
+  .hero-stats { gap: 1.5rem; }
+  .nav-links { gap: 0.5rem; }
+  .flow { flex-direction: column; }
+  .flow-arrow { justify-content: center; transform: rotate(90deg); }
+}
+
+/* LIGHT MODE OVERRIDES */
+[data-theme="light"] nav { background: rgba(13,22,32,0.98); }
+[data-theme="light"] .hero { background: linear-gradient(180deg,#0d1620 0%,#1a2332 100%) !important; }
+[data-theme="light"] footer { background: #0d1620; }
+[data-theme="light"] .card, [data-theme="light"] .spec-block { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+[data-theme="light"] .tag { background: rgba(43,97,102,0.1); color: var(--teal); }
+[data-theme="light"] .section-label { color: var(--teal); }
+[data-theme="light"] .section-label::before { background: var(--teal); }
+[data-theme="light"] .highlight-blue { background: rgba(43,97,102,0.06); border-color: rgba(43,97,102,0.2); }
+[data-theme="light"] .nav-cta { background: var(--teal) !important; }
+[data-theme="light"] .spec-num { background: rgba(43,97,102,0.1); color: var(--teal); }
+[data-theme="light"] .flow-step .f-title { color: var(--teal); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="ashth-logo.png" alt="Ashth" onerror="this.style.display='none'">
+  </div>
+  <div class="nav-links">
+    <a href="#context">Context</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#tier1">Tier 1</a>
+    <a href="#tier2">Tier 2</a>
+    <a href="#responsibilities">Responsibilities</a>
+    <a href="#checklist">Checklist</a>
+    <button class="theme-toggle" onclick="toggleTheme()">☀ Light / ☾ Dark</button>
+    <button onclick="openPdfModal()" class="nav-cta" style="background:#2B6166;border:none;cursor:pointer;">⬇ PDF</button>
+    <a href="mailto:eytan@benzeno.com" class="nav-cta">Questions</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <img src="ashth-logo.png" alt="Ashth">
+    </div>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Website Advisory Brief — Setup Phase Deliverable
+    </div>
+    <h1>ashth.com<br><span>European Market Readiness</span></h1>
+    <p>Technical specification for the Ashth development team — the website changes required to support the Luxembourg &amp; regional market launch. Prepared under §3.1.1 of the Digital Marketing Services Agreement.</p>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-val">10</span>
+        <span class="stat-lbl">Specified Changes</span>
+      </div>
+      <div>
+        <span class="stat-val">4</span>
+        <span class="stat-lbl">Launch-Blocking</span>
+      </div>
+      <div>
+        <span class="stat-val">3</span>
+        <span class="stat-lbl">Priority Tiers</span>
+      </div>
+      <div>
+        <span class="stat-val">€2K+</span>
+        <span class="stat-lbl">Monthly Ad Spend Protected</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<section id="context">
+  <div class="section-label">Purpose &amp; Context</div>
+  <h2>Why These Changes, Why Now</h2>
+  <p class="lead">The European launch model is <strong style="color:var(--text);">not mass e-commerce</strong>. The website's job in Europe is to act as a <strong style="color:var(--text);">catalogue and appointment engine</strong>: visitors browse the collection, qualify themselves, and book a private viewing. Paid campaigns on Meta, LinkedIn, and Google will drive Luxembourg, Paris, and Brussels traffic directly at this flow from Month&nbsp;1.</p>
+  <p class="lead">Every specification below exists to protect that investment: if the booking flow, tracking, or compliance layer is missing when campaigns go live, ad budget converts to wasted clicks.</p>
+
+  <div class="highlight-blue">
+    <h3>📄 Contractual Basis</h3>
+    <p>This brief is the "Website advisory" deliverable defined in <strong>§3.1.1</strong> of the Digital Marketing Services Agreement (executed 26 June 2026): a written brief to the Client's development team covering the changes required for the European market model, including <strong>booking mechanism specifications</strong>, <strong>European address formats</strong>, and <strong>tracking pixel implementation guidance</strong>.</p>
+    <p>Per <strong>§7</strong>, implementation is carried out by the Client's own development team. Per <strong>§3.2</strong>, website development is excluded from the Consultant's services.</p>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-label">Domain &amp; Site Architecture</div>
+  <h2>One Brand, Two Regional Experiences</h2>
+  <p class="lead">ashth.com remains the global and Indian home. The European market is served by a dedicated European section that the acquired domains point to.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🇮🇳</div>
+      <h3>ashth.com</h3>
+      <p>Existing site, unchanged for the home market. Global brand anchor.</p>
+      <span class="tag">Stays As-Is</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🇪🇺</div>
+      <h3>ashth.eu</h3>
+      <p>Points to the European section — the consumer-facing catalogue and booking experience, priced from the European price list.</p>
+      <span class="tag">Commerce</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🇱🇺</div>
+      <h3>ashth.lu</h3>
+      <p>Luxembourg presence — points to the same European section (or a corporate landing page at a later stage).</p>
+      <span class="tag">Local Trust</span>
+    </div>
+  </div>
+
+  <div class="highlight-gold">
+    <h3>🔧 Division of Work</h3>
+    <p><strong>Development team:</strong> creates the European section as a subdirectory (e.g. <code>ashth.com/eu/</code>) or subdomain (e.g. <code>eu.ashth.com</code>) and confirms the target for DNS.</p>
+    <p><strong>Eytan (Consultant):</strong> configures DNS and CNAME records for ashth.eu / ashth.lu once registrar access is provided (via Manoj, per the June 22 meeting).</p>
+  </div>
+</section>
+
+<!-- TIER 1 -->
+<section id="tier1">
+  <div class="section-label">Tier 1</div>
+  <span class="priority-banner p-critical">Launch-Blocking — Required Before Paid Campaigns Go Live</span>
+  <h2>Four Critical Changes</h2>
+
+  <!-- 1. BOOKING -->
+  <div class="spec-block">
+    <h3><span class="spec-num">1</span> "Book a Private Viewing" Booking Mechanism</h3>
+    <p>A booking entry point on <strong>every product page, the homepage, and the main navigation</strong> of the European section. Clicking it opens a short qualifying form. Submissions route to the Luxembourg representative (Kuntal), who confirms within 24 hours.</p>
+
+    <div class="flow">
+      <div class="flow-step"><div class="f-icon">🔍</div><div class="f-title">Browse</div><div class="f-desc">Client views collection</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="f-icon">📋</div><div class="f-title">Qualify</div><div class="f-desc">Short booking form</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="f-icon">✅</div><div class="f-title">Confirm</div><div class="f-desc">Kuntal responds in 24h</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="f-icon">💎</div><div class="f-title">Viewing</div><div class="f-desc">Private appointment</div></div>
+    </div>
+
+    <div class="spec-table">
+      <table>
+        <thead><tr><th>Form Field</th><th>Specification</th></tr></thead>
+        <tbody>
+          <tr><td>Name</td><td>Free text, required</td></tr>
+          <tr><td>Location</td><td>City + country, required (drives the distance-qualification rule)</td></tr>
+          <tr><td>Contact</td><td>Email required; phone/WhatsApp optional but encouraged</td></tr>
+          <tr><td>Piece of interest</td><td>Pre-filled from the product page the form was opened on</td></tr>
+          <tr><td>Budget range</td><td>Select: under €500 / €500–2,000 / €2,000–5,000 / €5,000–10,000 / €10,000+</td></tr>
+          <tr><td>Occasion</td><td>Select: engagement / wedding / anniversary / gift / personal / other</td></tr>
+          <tr><td>Consent</td><td>Unticked GDPR consent checkbox with link to privacy policy — required</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1rem;"><strong>Routing rule:</strong> budgets of €2,000+ become confirmed appointments; €500–2,000 enquiries are directed to the online shop for self-service purchase; under €500 receives the catalogue newsletter path.</p>
+    <p><strong>Fast option:</strong> a Calendly embed (≈€15/month) connected to Kuntal's calendar delivers this without custom development and can be live in one day. A custom form matching the site design is the preferred end-state; Calendly is an acceptable Phase&nbsp;1 implementation.</p>
+    <div class="why">Why it's first: 100% of the ad budget points at this flow. It is the single conversion event the entire local strategy is built around.</div>
+  </div>
+
+  <!-- 2. EUROPEAN SECTION -->
+  <div class="spec-block">
+    <h3><span class="spec-num">2</span> European Section with a Dedicated European Price List</h3>
+    <p>A dedicated European section (subdirectory or subdomain — dev team's choice) presenting the collection with:</p>
+    <ul class="deliverable-list">
+      <li><strong>European prices drawn from a separate pricing table</strong> — reflecting the landed Luxembourg cost of each piece (duties, shipping, VAT, and European margin) — <strong>not</strong> a currency conversion of the Indian price, which is how the site works today</li>
+      <li>European contact block: Luxembourg address, +352 phone, WhatsApp Business number</li>
+      <li>The "Book a Private Viewing" entry points (Spec 1) throughout</li>
+      <li>A legal/imprint page appropriate for EU consumer-facing commerce</li>
+    </ul>
+    <div class="highlight-gold" style="margin-top:1.25rem;">
+      <p><strong>⚠️ Key change from current behaviour:</strong> the site already auto-converts prices to EUR via geo-detection. Conversion is not the problem — the converted number is the <em>wrong price</em> for the European market. The product catalogue needs a second price field (or price table) per SKU for the European market, and the European section must read from it.</p>
+    </div>
+    <div class="why">Why: a currency-converted Indian price ignores landed cost and positions the pieces incorrectly for the European market — every ad click lands on a price the business cannot honour.</div>
+  </div>
+
+  <!-- 3. TRACKING -->
+  <div class="spec-block">
+    <h3><span class="spec-num">3</span> Tracking Pixel Implementation</h3>
+    <p>Install via <strong>Google Tag Manager</strong> (one container, all tags managed without further code changes):</p>
+    <div class="spec-table">
+      <table>
+        <thead><tr><th>Tag</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Meta Pixel + Conversions API</td><td>Facebook/Instagram campaign optimization and retargeting. CAPI server-side events recommended for iOS resilience.</td></tr>
+          <tr><td>LinkedIn Insight Tag</td><td>LinkedIn campaign tracking and HNW audience retargeting</td></tr>
+          <tr><td>GA4 + Google Ads tag</td><td>Analytics, Google PPC conversion tracking and Quality Score signals</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="spec-table">
+      <table>
+        <thead><tr><th>Conversion Event</th><th>Trigger</th></tr></thead>
+        <tbody>
+          <tr><td><code>booking_submitted</code></td><td>Primary conversion — booking form successfully submitted</td></tr>
+          <tr><td><code>booking_opened</code></td><td>Booking form/modal opened (micro-conversion for optimization)</td></tr>
+          <tr><td><code>product_view</code></td><td>Product detail page viewed (retargeting audiences)</td></tr>
+          <tr><td><code>purchase</code></td><td>Self-service purchase completed (€500–2K tier)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1rem;">Eytan will supply the pixel IDs and GTM container once the Luxembourg-entity ad accounts are established (Setup Phase, in progress). The dev team's task is inserting the GTM snippet on all European-section pages and firing the four events above.</p>
+    <div class="why">Why: without conversion events there is no retargeting, no lookalike audiences, and no campaign optimization — the platforms fly blind and CPC is wasted.</div>
+  </div>
+
+  <!-- 4. GDPR -->
+  <div class="spec-block">
+    <h3><span class="spec-num">4</span> GDPR Cookie Consent</h3>
+    <p>A compliant consent management platform (CMP) on all European-section pages. Requirements:</p>
+    <ul class="deliverable-list">
+      <li>Explicit <strong>opt-in before any tracking tag fires</strong> — Meta, LinkedIn, and GA4 tags must be blocked until consent is given</li>
+      <li><strong>Google Consent Mode v2</strong> integration (required for Google Ads measurement in the EU)</li>
+      <li>Reject option as prominent as Accept; preferences revisitable at any time</li>
+      <li>EU-facing privacy policy page covering data collected by the booking form and pixels</li>
+    </ul>
+    <p style="margin-top:0.75rem;"><strong>Suggested tools:</strong> Cookiebot, Usercentrics, or CookieYes — all integrate with GTM. Estimated effort: 2–3 days.</p>
+    <div class="why">Why: we are the ones installing trackers and running EU ads — operating them without consent exposes the company to GDPR fines of up to 4% of global annual revenue. This is inseparable from Spec 3.</div>
+  </div>
+</section>
+
+<!-- TIER 2 -->
+<section id="tier2">
+  <div class="section-label">Tier 2</div>
+  <span class="priority-banner p-high">High Priority — Within 30 Days of Launch</span>
+  <h2>First-Month Improvements</h2>
+
+  <div class="spec-block">
+    <h3><span class="spec-num">5</span> European Address &amp; Phone Formats</h3>
+    <p>All forms on the European section (booking, checkout, newsletter) must accept European conventions: postal-code-before-city address layouts, alphanumeric postcodes, and international phone formats (+352, +33, +32) with a country-code selector. Every data-capture point carries the GDPR consent checkbox from Spec 4.</p>
+    <div class="why">Why: named explicitly in the contract (§3.1.1) — and a checkout that rejects a Luxembourg postcode kills the €500–2K self-service tier.</div>
+  </div>
+
+  <div class="spec-block">
+    <h3><span class="spec-num">6</span> Extend Existing Geo-Detection to the Full European Experience</h3>
+    <p>The site already geo-detects visitors and switches currency automatically. Extend that same mechanism so European visitors receive the <strong>complete European experience</strong> — the European section, the European price table (Spec 2), and the European contact details — not merely a converted currency figure. Keep a manual region switcher as override.</p>
+    <div class="why">Why: the geo infrastructure exists; it currently switches the currency symbol but not the commercial experience behind it. Organic and referral traffic needs the same routing paid traffic gets.</div>
+  </div>
+
+  <div class="spec-block">
+    <h3><span class="spec-num">7</span> Mobile-Optimized Booking Flow</h3>
+    <p>Meta campaigns are predominantly mobile. The booking form must be a short, thumb-friendly, single-screen experience on mobile: large tap targets, native select controls, no horizontal scrolling, and a visible submit button without keyboard overlap.</p>
+    <div class="why">Why: scoped down from a full checkout overhaul — in the concierge model the booking form is the checkout.</div>
+  </div>
+</section>
+
+<!-- TIER 3 -->
+<section id="tier3">
+  <div class="section-label">Tier 3</div>
+  <span class="priority-banner p-rec">Recommended — Not Launch-Blocking</span>
+  <h2>Performance &amp; Depth</h2>
+
+  <div class="spec-block">
+    <h3><span class="spec-num">8</span> CDN for European Visitors</h3>
+    <p>The site is served from India; European load times of 2.5–4s hurt both Google Ads Quality Score (raising CPC) and bounce rates. A Cloudflare free-tier CDN in front of the European section is a low-effort, high-return fix. Target: LCP under 2.5s from Luxembourg/Paris.</p>
+  </div>
+
+  <div class="spec-block">
+    <h3><span class="spec-num">9</span> EU Payment Options for the Self-Service Tier</h3>
+    <p>For the €500–2,000 self-service segment: EUR card processing that reliably accepts European cards, plus PayPal and Apple Pay / Google Pay. BNPL options (Klarna, iDEAL, Bancontact) are deferred — high-ticket sales close in person, not at an online checkout.</p>
+  </div>
+
+  <div class="spec-block">
+    <h3><span class="spec-num">10</span> Language Selector — English, French &amp; German</h3>
+    <p>The European section requires all three regional languages — <strong>English, French, and German</strong> — with a <strong>user-facing language selector</strong> in the site header. Language must be the visitor's choice; geo-detection may set a sensible default, but never lock it.</p>
+    <ul class="deliverable-list">
+      <li>Visible EN / FR / DE switcher in the European section header, persisted across pages</li>
+      <li>Native-quality (not machine) translations for product pages, the booking flow, and legal pages</li>
+      <li>Rollout order: English at launch → French → German, as translations are validated</li>
+    </ul>
+    <div class="why">Why: Luxembourg operates in all three languages, Paris requires French, and the German-speaking regional radius (Trier, Saarbrücken, Frankfurt) requires German. A trilingual selector is a trust marker for a Luxembourg-based luxury brand.</div>
+  </div>
+
+  <h3 style="margin-top:3rem;">Descoped from the earlier Europe-wide audit</h3>
+  <p class="lead" style="margin-bottom:0;">The original 9-market e-commerce audit included items that no longer apply to the local launch model:</p>
+  <ul class="dropped-list">
+    <li>Multi-currency (EUR/GBP/PLN/CZK) — EUR only in this phase</li>
+    <li>hreflang for 5 languages and per-locale sitemaps — one market, not nine</li>
+    <li>Trustpilot review-volume push — trust is built in person and via LinkedIn in the concierge model</li>
+    <li>Lab-grown diamond education hub — an SEO play for mass e-commerce, not appointment generation</li>
+    <li>Full checkout overhaul — self-service is now the secondary path</li>
+  </ul>
+</section>
+
+<!-- RESPONSIBILITIES -->
+<section id="responsibilities">
+  <div class="section-label">Who Does What</div>
+  <h2>Responsibility Split</h2>
+  <p class="lead">Per §3.2 and §7 of the Services Agreement:</p>
+
+  <div class="spec-table">
+    <table>
+      <thead><tr><th>Party</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>Ashth Dev Team</td><td>Implement all website changes in this brief (§7) — European section, booking mechanism, GTM snippet + events, CMP, form formats, geo-detection, mobile flow</td></tr>
+        <tr><td>Ashth / Kuntal</td><td>Provide domain registrar access for ashth.eu / ashth.lu (via Manoj); designate the single point of contact for approvals; manage all appointment bookings and sales (§7)</td></tr>
+        <tr><td>Eytan</td><td>This brief and specifications; DNS/CNAME configuration once registrar access is provided; pixel IDs and GTM container from the Luxembourg-entity ad accounts; campaign build once Tier 1 is live (§3.1.1)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-gold">
+    <h3>⏱ Sequencing</h3>
+    <p>Paid campaigns cannot launch until <strong>all four Tier 1 items</strong> are live. Given the November event target and the 6–8 week invitation lead time, the recommended completion window for Tier 1 is <strong>within 3 weeks of this brief</strong>.</p>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="section-label">Acceptance</div>
+  <h2>Launch-Readiness Checklist</h2>
+  <p class="lead">Campaigns go live when every item below verifies:</p>
+  <ul class="deliverable-list">
+    <li>Booking form live on every European product page, homepage, and navigation</li>
+    <li>Form captures all seven specified fields and routes submissions to Kuntal</li>
+    <li>European section serves the dedicated European price list (not converted Indian prices) with Luxembourg contact details</li>
+    <li>GTM container installed; all four conversion events fire and verify in Meta Events Manager, LinkedIn Campaign Manager, and GA4 DebugView</li>
+    <li>CMP blocks all tags until consent; Google Consent Mode v2 active</li>
+    <li>EU privacy policy published and linked from the consent banner and booking form</li>
+    <li>Forms accept EU address and phone formats</li>
+    <li>EU visitors geo-route to the full European experience (extending the existing currency geo-detection)</li>
+    <li>Language selector (EN / FR / DE) live in the European section header</li>
+    <li>Booking flow completes in under 60 seconds on a mobile device</li>
+    <li>ashth.eu and ashth.lu resolve to the European section (DNS by Eytan, after registrar access)</li>
+  </ul>
+
+  <div class="highlight-blue">
+    <h3>📬 Next Step</h3>
+    <p>Questions on any specification: <a href="mailto:eytan@benzeno.com" style="color:var(--blue);">eytan@benzeno.com</a> · +351 93 999 5889. I'm available for a walkthrough call with the development team at any point.</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong style="color:var(--white);">Eytan Benzeno</strong> — Digital Marketing & Business Development</p>
+  <p style="margin-top:0.4rem;"><a href="https://eytan.com" style="color:var(--blue); text-decoration:none;">eytan.com</a></p>
+  <div class="confidential-bar">Confidential — Prepared exclusively for Ashth / ConsciousCarats Private Limited</div>
+</footer>
+
+<!-- PDF PREVIEW MODAL -->
+<div id="pdf-modal" style="
+  display:none; position:fixed; inset:0; z-index:1000;
+  background:rgba(0,0,0,0.85); backdrop-filter:blur(6px);
+  flex-direction:column; align-items:center; justify-content:center;
+  padding:1rem;
+">
+  <div style="
+    background:#1a2332; border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px; width:100%; max-width:860px;
+    height:90vh; display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 24px 80px rgba(0,0,0,0.6);
+  ">
+    <div style="
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.08);
+      background:#0d1620; flex-shrink:0;
+    ">
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span style="font-size:1.1rem;">📄</span>
+        <div>
+          <div style="font-weight:700;font-size:0.95rem;color:#f0f4f8;">ASHTH-Website-Brief.pdf</div>
+          <div style="font-size:0.75rem;color:#8899aa;">Website Advisory Brief — Preview</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <a href="ASHTH-Website-Brief.pdf" download style="
+          display:inline-flex;align-items:center;gap:0.5rem;
+          background:#2B6166;color:#fff;text-decoration:none;
+          padding:0.5rem 1.1rem;border-radius:8px;
+          font-weight:600;font-size:0.85rem;transition:opacity 0.2s;
+        " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          ⬇ Download
+        </a>
+        <button onclick="closePdfModal()" style="
+          background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+          color:#8899aa;cursor:pointer;width:36px;height:36px;border-radius:8px;
+          font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+          transition:all 0.2s;
+        " onmouseover="this.style.color='#f0f4f8';this.style.borderColor='rgba(255,255,255,0.3)'"
+           onmouseout="this.style.color='#8899aa';this.style.borderColor='rgba(255,255,255,0.12)'">✕</button>
+      </div>
+    </div>
+    <iframe
+      id="pdf-iframe"
+      src=""
+      style="flex:1;width:100%;border:none;background:#fff;"
+      title="ASHTH Website Advisory Brief Preview"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('ashth-theme', next);
+}
+(function() {
+  const saved = localStorage.getItem('ashth-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+function openPdfModal() {
+  const modal = document.getElementById('pdf-modal');
+  const iframe = document.getElementById('pdf-iframe');
+  if (!iframe.src || iframe.src === window.location.href) {
+    iframe.src = 'ASHTH-Website-Brief.pdf';
+  }
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closePdfModal() {
+  document.getElementById('pdf-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('pdf-modal').addEventListener('click', function(e) {
+  if (e.target === this) closePdfModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePdfModal();
+});
+</script>
+</body>
+</html>
