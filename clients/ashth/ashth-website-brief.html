@@ -341,7 +341,7 @@ footer p { font-size: 0.85rem; color: var(--gray); }
       <li><strong>Google Tag Manager already installed</strong> (container <code>GTM-N3DL74CL</code>) with GA4 and Microsoft Clarity active — no Meta Pixel or LinkedIn Insight Tag</li>
       <li><strong>No cookie consent banner</strong> — analytics tags fire without opt-in for EU visitors</li>
       <li>A floating <strong>"Schedule appointment" widget already exists site-wide</strong>, paired with a WhatsApp link to an Indian number</li>
-      <li>The European section does not exist yet — /eu, /europe, and /luxembourg return the 404 page; ashth.eu and ashth.lu do not resolve (DNS pending registrar access)</li>
+      <li>The European section does not exist yet — /eu, /europe, and /luxembourg return the 404 page; ashth.eu and ashth.lu are registered at EuroDNS and currently point to a parking page</li>
       <li>Contact &amp; signup forms: name / email / mobile only — no country-code selector on phone fields, no language switcher, no hreflang</li>
       <li>EU network performance is good (TTFB ≈ 0.5s from Portugal) — server speed is not a blocker</li>
     </ul>
@@ -378,7 +378,7 @@ footer p { font-size: 0.85rem; color: var(--gray); }
   <div class="highlight-gold">
     <h3>🔧 Division of Work</h3>
     <p><strong>Development team (Weingenious Technocrats):</strong> creates the European section as a subdirectory (e.g. <code>ashth.com/eu/</code>) or subdomain (e.g. <code>eu.ashth.com</code>) and confirms the target for DNS. As of this audit, /eu, /europe, and /luxembourg return the 404 page — the section does not exist yet.</p>
-    <p><strong>Eytan (Consultant):</strong> configures DNS and CNAME records for ashth.eu / ashth.lu once registrar access is provided (via Manoj, per the June 22 meeting). Neither domain currently resolves.</p>
+    <p><strong>Eytan (Consultant):</strong> repoints ashth.eu / ashth.lu from their current parking page to the European section — registrar access (EuroDNS) is already in hand, so DNS goes live as soon as the development team confirms the target.</p>
   </div>
 </section>
 
@@ -564,8 +564,8 @@ footer p { font-size: 0.85rem; color: var(--gray); }
       <thead><tr><th>Party</th><th>Responsibility</th></tr></thead>
       <tbody>
         <tr><td>Ashth Dev Team</td><td>Implement all website changes in this brief (§7) — European section, booking mechanism, GTM snippet + events, CMP, form formats, geo-detection, mobile flow</td></tr>
-        <tr><td>Ashth / Kuntal</td><td>Provide domain registrar access for ashth.eu / ashth.lu (via Manoj); designate the single point of contact for approvals; manage all appointment bookings and sales (§7)</td></tr>
-        <tr><td>Eytan</td><td>This brief and specifications; DNS/CNAME configuration once registrar access is provided; pixel IDs and GTM container from the Luxembourg-entity ad accounts; campaign build once Tier 1 is live (§3.1.1)</td></tr>
+        <tr><td>Ashth / Kuntal</td><td>Designate the single point of contact for approvals; manage all appointment bookings and sales (§7); provide GTM account access (container GTM-N3DL74CL)</td></tr>
+        <tr><td>Eytan</td><td>This brief and specifications; DNS/CNAME configuration via EuroDNS (registrar access in hand) once the dev team confirms the target; Meta &amp; LinkedIn pixel IDs from the Luxembourg-entity ad accounts; campaign build once Tier 1 is live (§3.1.1)</td></tr>
       </tbody>
     </table>
   </div>
@@ -592,7 +592,7 @@ footer p { font-size: 0.85rem; color: var(--gray); }
     <li>EU visitors geo-route to the full European experience (extending the existing currency geo-detection)</li>
     <li>Language selector (EN / FR / DE) live in the European section header</li>
     <li>Booking flow completes in under 60 seconds on a mobile device</li>
-    <li>ashth.eu and ashth.lu resolve to the European section (DNS by Eytan, after registrar access)</li>
+    <li>ashth.eu and ashth.lu repointed from the parking page to the European section (DNS by Eytan via EuroDNS, once the target is confirmed)</li>
   </ul>
 
   <div class="highlight-blue">
