@@ -332,6 +332,20 @@ footer p { font-size: 0.85rem; color: var(--gray); }
     <p>This brief is the "Website advisory" deliverable defined in <strong>§3.1.1</strong> of the Digital Marketing Services Agreement (executed 26 June 2026): a written brief to the Client's development team covering the changes required for the European market model, including <strong>booking mechanism specifications</strong>, <strong>European address formats</strong>, and <strong>tracking pixel implementation guidance</strong>.</p>
     <p>Per <strong>§7</strong>, implementation is carried out by the Client's own development team. Per <strong>§3.2</strong>, website development is excluded from the Consultant's services.</p>
   </div>
+
+  <div class="highlight-gold">
+    <h3>🔍 Live-Site Audit — 9 July 2026</h3>
+    <p>This brief is based on a technical review of ashth.com conducted from an EU (Portugal) connection. Verified findings referenced throughout:</p>
+    <ul class="deliverable-list">
+      <li>Platform: custom <strong>Next.js</strong> application (nginx; images served from S3 Mumbai); developed by Weingenious Technocrats</li>
+      <li><strong>Google Tag Manager already installed</strong> (container <code>GTM-N3DL74CL</code>) with GA4 and Microsoft Clarity active — no Meta Pixel or LinkedIn Insight Tag</li>
+      <li><strong>No cookie consent banner</strong> — analytics tags fire without opt-in for EU visitors</li>
+      <li>A floating <strong>"Schedule appointment" widget already exists site-wide</strong>, paired with a WhatsApp link to an Indian number</li>
+      <li>The European section does not exist yet — /eu, /europe, and /luxembourg return the 404 page; ashth.eu and ashth.lu do not resolve (DNS pending registrar access)</li>
+      <li>Contact &amp; signup forms: name / email / mobile only — no country-code selector on phone fields, no language switcher, no hreflang</li>
+      <li>EU network performance is good (TTFB ≈ 0.5s from Portugal) — server speed is not a blocker</li>
+    </ul>
+  </div>
 </section>
 
 <!-- ARCHITECTURE -->
@@ -363,8 +377,8 @@ footer p { font-size: 0.85rem; color: var(--gray); }
 
   <div class="highlight-gold">
     <h3>🔧 Division of Work</h3>
-    <p><strong>Development team:</strong> creates the European section as a subdirectory (e.g. <code>ashth.com/eu/</code>) or subdomain (e.g. <code>eu.ashth.com</code>) and confirms the target for DNS.</p>
-    <p><strong>Eytan (Consultant):</strong> configures DNS and CNAME records for ashth.eu / ashth.lu once registrar access is provided (via Manoj, per the June 22 meeting).</p>
+    <p><strong>Development team (Weingenious Technocrats):</strong> creates the European section as a subdirectory (e.g. <code>ashth.com/eu/</code>) or subdomain (e.g. <code>eu.ashth.com</code>) and confirms the target for DNS. As of this audit, /eu, /europe, and /luxembourg return the 404 page — the section does not exist yet.</p>
+    <p><strong>Eytan (Consultant):</strong> configures DNS and CNAME records for ashth.eu / ashth.lu once registrar access is provided (via Manoj, per the June 22 meeting). Neither domain currently resolves.</p>
   </div>
 </section>
 
@@ -377,7 +391,7 @@ footer p { font-size: 0.85rem; color: var(--gray); }
   <!-- 1. BOOKING -->
   <div class="spec-block">
     <h3><span class="spec-num">1</span> "Book a Private Viewing" Booking Mechanism</h3>
-    <p>A booking entry point on <strong>every product page, the homepage, and the main navigation</strong> of the European section. Clicking it opens a short qualifying form. Submissions route to the Luxembourg representative (Kuntal), who confirms within 24 hours.</p>
+    <p><strong>Good news: a floating "Schedule appointment" widget already exists site-wide.</strong> This spec is an adaptation, not a new build. For the European section the widget needs: (a) the qualifying form below instead of a bare calendar action, (b) submissions routed to the Luxembourg representative (Kuntal) — not the Indian team, (c) the accompanying WhatsApp button pointed at the European WhatsApp Business number instead of the current Indian number. Booking entry points should also appear on <strong>every product page, the homepage, and the main navigation</strong> of the European section. Kuntal confirms within 24 hours.</p>
 
     <div class="flow">
       <div class="flow-step"><div class="f-icon">🔍</div><div class="f-title">Browse</div><div class="f-desc">Client views collection</div></div>
@@ -428,7 +442,7 @@ footer p { font-size: 0.85rem; color: var(--gray); }
   <!-- 3. TRACKING -->
   <div class="spec-block">
     <h3><span class="spec-num">3</span> Tracking Pixel Implementation</h3>
-    <p>Install via <strong>Google Tag Manager</strong> (one container, all tags managed without further code changes):</p>
+    <p><strong>Google Tag Manager is already installed</strong> (container <code>GTM-N3DL74CL</code>, with GA4 and Microsoft Clarity active). The work is adding the missing advertising tags to the existing container and firing the conversion events below — no new code deployment needed beyond the event triggers:</p>
     <div class="spec-table">
       <table>
         <thead><tr><th>Tag</th><th>Purpose</th></tr></thead>
@@ -450,22 +464,22 @@ footer p { font-size: 0.85rem; color: var(--gray); }
         </tbody>
       </table>
     </div>
-    <p style="margin-top:1rem;">Eytan will supply the pixel IDs and GTM container once the Luxembourg-entity ad accounts are established (Setup Phase, in progress). The dev team's task is inserting the GTM snippet on all European-section pages and firing the four events above.</p>
+    <p style="margin-top:1rem;">Eytan will supply the Meta and LinkedIn pixel IDs once the Luxembourg-entity ad accounts are established (Setup Phase, in progress). The dev team's task is ensuring GTM loads on all European-section pages and implementing the four event triggers above.</p>
     <div class="why">Why: without conversion events there is no retargeting, no lookalike audiences, and no campaign optimization — the platforms fly blind and CPC is wasted.</div>
   </div>
 
   <!-- 4. GDPR -->
   <div class="spec-block">
     <h3><span class="spec-num">4</span> GDPR Cookie Consent</h3>
-    <p>A compliant consent management platform (CMP) on all European-section pages. Requirements:</p>
+    <p><strong>Audit finding: the site currently has no consent banner at all</strong>, while GA4 and Microsoft Clarity fire on every EU visit — this gap already exists today, before any new tags are added. A compliant consent management platform (CMP) is required on all European-section pages:</p>
     <ul class="deliverable-list">
-      <li>Explicit <strong>opt-in before any tracking tag fires</strong> — Meta, LinkedIn, and GA4 tags must be blocked until consent is given</li>
+      <li>Explicit <strong>opt-in before any tracking tag fires</strong> — the existing GA4 and Clarity tags, plus the new Meta and LinkedIn tags, must be blocked until consent is given</li>
       <li><strong>Google Consent Mode v2</strong> integration (required for Google Ads measurement in the EU)</li>
       <li>Reject option as prominent as Accept; preferences revisitable at any time</li>
-      <li>EU-facing privacy policy page covering data collected by the booking form and pixels</li>
+      <li>EU-facing privacy policy covering data collected by the booking form and pixels — the current policy's "International Users &amp; GDPR" section is a good start, but its data-contact placeholder is blank and must be filled with a monitored address</li>
     </ul>
-    <p style="margin-top:0.75rem;"><strong>Suggested tools:</strong> Cookiebot, Usercentrics, or CookieYes — all integrate with GTM. Estimated effort: 2–3 days.</p>
-    <div class="why">Why: we are the ones installing trackers and running EU ads — operating them without consent exposes the company to GDPR fines of up to 4% of global annual revenue. This is inseparable from Spec 3.</div>
+    <p style="margin-top:0.75rem;"><strong>Suggested tools:</strong> Cookiebot, Usercentrics, or CookieYes — all integrate with the existing GTM container. Estimated effort: 2–3 days.</p>
+    <div class="why">Why: analytics trackers already run on EU visitors without consent — the exposure exists now, and paid campaigns multiply the traffic. GDPR fines reach 4% of global annual revenue. This is inseparable from Spec 3.</div>
   </div>
 </section>
 
@@ -477,8 +491,8 @@ footer p { font-size: 0.85rem; color: var(--gray); }
 
   <div class="spec-block">
     <h3><span class="spec-num">5</span> European Address &amp; Phone Formats</h3>
-    <p>All forms on the European section (booking, checkout, newsletter) must accept European conventions: postal-code-before-city address layouts, alphanumeric postcodes, and international phone formats (+352, +33, +32) with a country-code selector. Every data-capture point carries the GDPR consent checkbox from Spec 4.</p>
-    <div class="why">Why: named explicitly in the contract (§3.1.1) — and a checkout that rejects a Luxembourg postcode kills the €500–2K self-service tier.</div>
+    <p><strong>Audit finding: the contact and signup forms capture a bare "mobile number" field with no country-code selector</strong> — built for Indian 10-digit numbers. All forms on the European section (booking, contact, signup, checkout, newsletter) must accept European conventions: a country-code selector (+352, +33, +32 and others), variable-length numbers, postal-code-before-city address layouts, and alphanumeric postcodes. Every data-capture point carries the GDPR consent checkbox from Spec 4.</p>
+    <div class="why">Why: named explicitly in the contract (§3.1.1) — a form that rejects a Luxembourg phone number or postcode loses the lead at the moment of highest intent.</div>
   </div>
 
   <div class="spec-block">
@@ -501,8 +515,8 @@ footer p { font-size: 0.85rem; color: var(--gray); }
   <h2>Performance &amp; Depth</h2>
 
   <div class="spec-block">
-    <h3><span class="spec-num">8</span> CDN for European Visitors</h3>
-    <p>The site is served from India; European load times of 2.5–4s hurt both Google Ads Quality Score (raising CPC) and bounce rates. A Cloudflare free-tier CDN in front of the European section is a low-effort, high-return fix. Target: LCP under 2.5s from Luxembourg/Paris.</p>
+    <h3><span class="spec-num">8</span> Image Delivery for European Visitors</h3>
+    <p><strong>Audit finding: server response from the EU is already good</strong> (TTFB ≈ 0.5s from Portugal) — the earlier assumption of a slow India-hosted origin does not hold. The remaining risk is <strong>product imagery served from S3 Mumbai</strong> (ap-south-1), which adds latency to the largest page elements. Recommended: CloudFront or Cloudflare in front of the S3 bucket. Measure real LCP from Luxembourg/Paris after the European section launches; target under 2.5s.</p>
   </div>
 
   <div class="spec-block">
@@ -529,6 +543,13 @@ footer p { font-size: 0.85rem; color: var(--gray); }
     <li>Trustpilot review-volume push — trust is built in person and via LinkedIn in the concierge model</li>
     <li>Lab-grown diamond education hub — an SEO play for mass e-commerce, not appointment generation</li>
     <li>Full checkout overhaul — self-service is now the secondary path</li>
+  </ul>
+
+  <h3 style="margin-top:3rem;">Housekeeping found during the audit</h3>
+  <p class="lead" style="margin-bottom:0;">Small defects worth fixing while in the code:</p>
+  <ul class="deliverable-list">
+    <li>The 404 page template contains placeholder data — phone "99999-99999" and "sales@gmail.com" — visible to any visitor who hits a dead link</li>
+    <li>The privacy policy's GDPR section has a blank data-contact placeholder ("Customers may contact ___") — must name a monitored address</li>
   </ul>
 </section>
 
