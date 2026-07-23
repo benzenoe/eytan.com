@@ -151,6 +151,7 @@
     color: var(--ink);
   }
   .stat-value.hot { color: var(--ironstone); }
+  .stat-sub { font-size: 10.5px; color: var(--ink-soft); margin-top: 2px; }
 
   /* ---- Finding banner ---- */
   .finding {
@@ -158,7 +159,7 @@
     border-left: 3px solid var(--ironstone);
     background: var(--paper-raised);
     padding: 16px 18px;
-    margin-bottom: 34px;
+    margin-bottom: 16px;
     font-size: 14px;
     color: var(--ink-soft);
   }
@@ -173,6 +174,8 @@
     display: block;
     margin-bottom: 6px;
   }
+  .finding.secondary { border-left-color: var(--billabong); margin-bottom: 34px; }
+  .finding.secondary .tag { color: var(--billabong); }
 
   /* ---- Legend ---- */
   .legend {
@@ -285,6 +288,8 @@
   .chip.urgent { background: var(--ironstone); color: var(--ironstone-ink); }
   .chip.hold { background: var(--clay-soft); color: var(--clay); border: 1px solid var(--line-strong); }
   .chip.poa { background: transparent; color: var(--ink-soft); border: 1px solid var(--line-strong); }
+  .chip.new { background: var(--eucalypt); color: var(--eucalypt-soft); }
+  .chip.value { background: var(--billabong); color: var(--billabong-soft); }
 
   .datagrid {
     display: grid;
@@ -394,6 +399,15 @@
   }
   table.ref-table td.num { font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; color: var(--ink); }
   table.ref-table tr:last-child td { border-bottom: none; }
+  table.ref-table td.deadline { color: var(--ironstone); font-weight: 600; font-family: ui-monospace, monospace; }
+
+  .ruled-out {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .ruled-out b { color: var(--ink); }
 
   /* ---- Cost strip / appendix ---- */
   .appendix {
@@ -441,6 +455,7 @@
     margin-top: 26px;
   }
   .council-appendix h3 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: 15px; margin: 0 0 4px; color: var(--ink-soft); }
+  .council-appendix p.sub { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 12px; max-width: 72ch; }
   .council-table-wrap { overflow-x: auto; border: 1px solid var(--line); }
   table.council {
     width: 100%;
@@ -465,6 +480,7 @@
   }
   table.council td.num { font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; color: var(--ink); }
   table.council tr.viable td { color: var(--eucalypt); font-weight: 600; }
+  table.council tr.mid td { color: var(--billabong); font-weight: 600; }
   table.council tr:last-child td { border-bottom: none; }
 
   footer.colophon {
@@ -491,39 +507,84 @@
 
   <div class="eyebrow">Queensland &middot; Rural Land Register</div>
   <h1>Candidates for subdivide-and-resell acquisition</h1>
-  <p class="dek">Live listings verified 22&ndash;23 Jul 2026, screened against the standing brief: <strong>AUD $2M&ndash;5M</strong>, majority-cleared land, real subdivision or resale upside, groundwater potential, and Starlink reception (confirmed statewide, no waitlist &mdash; no property below fails this test).</p>
+  <p class="dek">Live listings verified 22&ndash;23 Jul 2026, screened against the standing brief: <strong>AUD $1.43M&ndash;$8.58M</strong> (USD $1M&ndash;$6M at ~1.429), majority-cleared land, real subdivision or resale upside, groundwater potential, and Starlink reception (confirmed statewide, no waitlist &mdash; no property below fails this test).</p>
 
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Candidates surfaced</div>
-      <div class="stat-value">18</div>
+      <div class="stat-value">27</div>
     </div>
     <div class="stat">
-      <div class="stat-label">Cheapest confirmed</div>
+      <div class="stat-label">Cheapest available</div>
       <div class="stat-value">$2,056<span style="font-size:12px;font-weight:400;">/ha</span></div>
+      <div class="stat-sub">Pine Mountain hit $821/ha but is under offer</div>
     </div>
     <div class="stat">
       <div class="stat-label">Most urgent</div>
       <div class="stat-value hot">7 days</div>
+      <div class="stat-sub">Blair Athol auction, Jul 30</div>
     </div>
     <div class="stat">
       <div class="stat-label">Budget band</div>
-      <div class="stat-value">$2&ndash;5M</div>
+      <div class="stat-value">$1.43&ndash;8.58M</div>
+      <div class="stat-sub">= USD $1&ndash;6M</div>
     </div>
   </div>
 
   <div class="finding">
     <span class="tag">Planning reality check &mdash; read before falling in love with any listing</span>
     <b>No Queensland council in the 13 checked allows broad-acre 40&nbsp;ha rural subdivision.</b>
-    Minimums run from 100&nbsp;ha up to 5,000&nbsp;ha depending on council. Two routes actually work: <b>Route B</b> &mdash; buy land already split across many freehold titles and resell the titles individually, no development approval needed anywhere; or <b>Route A</b> &mdash; build genuinely new 60&nbsp;ha lots, which only Tablelands and Mareeba councils (Far North Queensland) currently permit as code-assessable development. Everything below is tagged by which route it fits &mdash; or flagged as a cheap benchmark that, under today&rsquo;s scheme, can&rsquo;t legally be split at all.
+    Minimums run from 100&nbsp;ha up to 5,000&nbsp;ha depending on council. Two routes actually work: <b>Route B</b> &mdash; buy land already split across many freehold titles and resell the titles individually, no development approval needed anywhere; or <b>Route A</b> &mdash; build genuinely new lots via a fresh Reconfiguring-a-Lot approval, which only pencils out where the council minimum is small enough to leave real per-lot margin.
+  </div>
+
+  <div class="finding secondary">
+    <span class="tag">New this round &mdash; the minimum isn't always 60 ha</span>
+    Tablelands and Mareeba remain the only councils that allow genuinely new <b>60&nbsp;ha</b> lots. But North Burnett, Bundaberg and Banana Shire allow new lots at <b>100&ndash;150&nbsp;ha</b> as-of-right on qualifying agricultural land &mdash; fewer, bigger, higher-value lots per parcel rather than a lifestyle-block volume play. Two of this round's finds (<b>Sparrows</b>, North Burnett, and <b>Kendah</b>, Banana Shire) are large enough to make that math work even without pre-existing titles.
   </div>
 
   <div class="legend">
     <span class="legend-item"><span class="swatch route-b"></span>Route B &mdash; multi-title, resell as-is</span>
-    <span class="legend-item"><span class="swatch route-a"></span>Route A &mdash; 60&nbsp;ha greenfield subdivision (FNQ only)</span>
+    <span class="legend-item"><span class="swatch route-a"></span>Route A &mdash; genuine new-lot subdivision</span>
     <span class="legend-item"><span class="swatch bench"></span>Benchmark &mdash; cheap, but not currently subdividable</span>
     <span class="legend-item"><span class="chip urgent" style="position:static;">urgent</span>hard deadline this week</span>
+    <span class="legend-item"><span class="chip new" style="position:static;">new</span>surfaced in the widened-budget round</span>
   </div>
+
+  <!-- ROUTE A -->
+  <section class="route" data-route="a">
+    <div class="route-head">
+      <h2>Route A &mdash; Greenfield subdivision</h2>
+      <span class="route-code">Scalable machine &middot; council minimum sets the lot size</span>
+    </div>
+    <p class="route-note">The gap from the first pass is closed: a genuinely large, in-budget, code-assessable-eligible parcel in Mareeba Shire. This is the first candidate that fits the repeatable "cut fresh lots and sell them" model rather than relying on pre-existing titles.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="card-title">Springmount, Mutchilba</p>
+            <p class="card-locality">Mareeba Shire Council &middot; 30 min to Mareeba</p>
+          </div>
+          <span class="chip new">new</span>
+        </div>
+        <div class="datagrid">
+          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$3.998M</div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">346 ha</div></div>
+          <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$11,555</div></div>
+        </div>
+        <div class="notes">
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">100 ML security via 2 on-farm dams + 75kW/10HP pumps; extra 10 ML allocation purchasable separately for $37,000</span></div>
+          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">~81 ha currently cultivated (limes, dragon fruit, hay); balance in mixed ag/grazing use &mdash; confirm it isn't majority remnant vegetation before counting the whole 346 ha</span></div>
+          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">6-bed/2-bath homestead, wood stove</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Confirmed Mareeba SC 60&nbsp;ha code-assessable path applies. At 346&nbsp;ha this could realistically yield 5+ lots after roads/setbacks &mdash; ask the agent whether it's already on multiple titles, which would help either way.</span></div>
+        </div>
+        <div class="card-foot">
+          <span class="contact">Sibi Girgenti Real Estate &middot; <b>Rino Gava</b> 0427 779 086</span>
+          <a class="source-link" href="https://farmbuy.com/1074-springmount-road-mutchilba-qld-4872-421770" target="_blank" rel="noopener">Listing &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ROUTE B -->
   <section class="route" data-route="b">
@@ -531,32 +592,32 @@
       <h2>Route B &mdash; Multi-title arbitrage</h2>
       <span class="route-code">Fastest path &middot; no council approval required</span>
     </div>
-    <p class="route-note">Buy a holding that is already split across several freehold titles, then sell the titles individually. No Reconfiguring-a-Lot application, no minimum-lot-size exposure &mdash; the subdivision is already done by the existing title register.</p>
+    <p class="route-note">Buy a holding already split across several freehold titles, then sell the titles individually. No Reconfiguring-a-Lot application, no minimum-lot-size exposure. The wider budget confirmed pricing on two properties that were previously stuck at POA, and surfaced two new large multi-title packages.</p>
 
     <div class="cards">
 
       <div class="card">
         <div class="card-head">
           <div>
-            <p class="card-title">Booth Rd package, Mirriwinni</p>
-            <p class="card-locality">Cairns Regional Council &middot; 50 min S of Cairns</p>
+            <p class="card-title">Homebush North, Mitchell</p>
+            <p class="card-locality">Maranoa Regional Council &middot; 8 km N of Mitchell</p>
           </div>
-          <span class="chip hold">10 titles</span>
+          <span class="chip value">best value</span>
         </div>
         <div class="datagrid">
-          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$4.5M<span style="font-size:10px;font-weight:400;">+ (8 of 10)</span></div></div>
-          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">247 ha</div></div>
-          <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$18,200</div></div>
+          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$2.38M</div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">760 ha</div></div>
+          <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$3,132</div></div>
         </div>
         <div class="notes">
-          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Not itemised in listing; sits in a 3,000mm+/yr rainfall belt</span></div>
-          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Mostly high and dry, currently cropped &mdash; listing itself pitches an "off-grid lifestyle compound" split</span></div>
-          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">Two houses already on site (4bd/2ba + 3bd/2ba) + 1,517m&sup2; shed</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Titles already carry a retail-level $/ha &mdash; you're paying for certainty, not margin. All 10 titles (308.6 ha) runs closer to $7M, over budget.</span></div>
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Solar bore + 2 dams</span></div>
+          <div class="note-row"><span class="note-label">Titles</span><span class="note-body">7 freehold titles &mdash; ~108 ha average per title</span></div>
+          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">None on title; bitumen road frontage</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Was under a backup-only offer last check &mdash; now showing "Available" again on the agent's live listings, suggesting that offer lapsed. Confirmed price, confirmed titles: the cleanest Route B match on the whole page.</span></div>
         </div>
         <div class="card-foot">
-          <span class="contact">CPO &middot; <b>Robyn Hawley-Whitton</b> 0488 071 007</span>
-          <a class="source-link" href="https://www.farmsale.com.au/listing/property-10-titles-booth-rd-via-goldsworthy-rd-mirriwinni-qld-4871/" target="_blank" rel="noopener">Listing &rarr;</a>
+          <span class="contact">TopX Roma &middot; <b>Carl Warren</b> 0428 222 341</span>
+          <a class="source-link" href="https://topx.com.au/buy-sell-property/homebush-north/" target="_blank" rel="noopener">Listing &rarr;</a>
         </div>
       </div>
 
@@ -577,7 +638,7 @@
           <div class="note-row"><span class="note-label">Water</span><span class="note-body">~9km creek frontage (Branch + Charley&rsquo;s Ck), near-permanent holes, 2 lagoons, 7 dams</span></div>
           <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">"Entire property cleared in the past"; veg overlay mostly white (Category X)</span></div>
           <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">1912 four-bedroom timber homestead; bitumen road frontage</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Best all-round match found &mdash; but the clock is real. Title search + veg report + a call to the agent this week if it's live.</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Still the best all-round match on land quality &mdash; but the clock is real. Title search + veg report + a call to the agent this week if still pursuing.</span></div>
         </div>
         <div class="card-foot">
           <span class="contact">Nutrien Harcourts &middot; <b>Warren Barker</b> 0429 893 099</span>
@@ -588,94 +649,78 @@
       <div class="card">
         <div class="card-head">
           <div>
-            <p class="card-title">Mon-Abri, Dingo</p>
-            <p class="card-locality">Central Highlands Regional Council &middot; on the Capricorn Hwy</p>
+            <p class="card-title">Sparrows, Mount Perry</p>
+            <p class="card-locality">North Burnett Regional Council &middot; 20 km SW of Mount Perry</p>
           </div>
-          <span class="chip poa">POA</span>
+          <span class="chip new">new</span>
         </div>
         <div class="datagrid">
-          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">POA</div></div>
-          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">4,012 ha</div></div>
-          <div class="dg-item"><div class="dg-label">Titles</div><div class="dg-value accent">5 + easement</div></div>
+          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">EOI</div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">1,723 ha</div></div>
+          <div class="dg-item"><div class="dg-label">Titles</div><div class="dg-value accent">7</div></div>
         </div>
         <div class="notes">
-          <div class="note-row"><span class="note-label">Water</span><span class="note-body">4 bores (main flows 1,500+ gal/hr, drinkable), permanent Dingo Creek waterholes, multiple dams</span></div>
-          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Mixed improved/native pasture with timbered pockets &mdash; cleared % unconfirmed</span></div>
-          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">4-bed homestead + pool + separate 3-bed quarters; 2km+ Capricorn Hwy frontage</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">If it lands at $5M that's ~$1,250/ha across 5 titles &mdash; call to price it is the next step.</span></div>
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Not detailed beyond general grazing suitability &mdash; no major frontage/bore flow cited, ask the agent directly</span></div>
+          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Open forest country, sown legumes (wynn cassia/siratro/stylo) plus native grasses &mdash; good clearing status</span></div>
+          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">Not specified in listing</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Agents explicitly market this "whole or split into individual portions" &mdash; the seller is already thinking Route B. North Burnett's 100&ndash;400&nbsp;ha minimum also gives a Route A backup even if a title split isn't ideal.</span></div>
         </div>
         <div class="card-foot">
-          <span class="contact">TopX &middot; <b>Gavin Tickle</b> 0488 580 730</span>
-          <a class="source-link" href="https://topx.com.au/buy-sell-property/mon-abri-dingo/" target="_blank" rel="noopener">Listing &rarr;</a>
+          <span class="contact">Aussie Land &amp; Livestock &middot; <b>James Bredhauer</b> 0427 549 373</span>
+          <a class="source-link" href="https://farmbuy.com/sparrows-monto-mount-perry-road-mount-perry-qld-4671-421886" target="_blank" rel="noopener">Listing &rarr;</a>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
           <div>
-            <p class="card-title">Tooee, Goondiwindi</p>
-            <p class="card-locality">Goondiwindi Regional Council &middot; 25 km W of town, Barwon Hwy</p>
+            <p class="card-title">Booth Rd package, Mirriwinni</p>
+            <p class="card-locality">Cairns Regional Council &middot; 50 min S of Cairns</p>
           </div>
-          <span class="chip poa">POA</span>
+          <span class="chip hold">10 titles</span>
         </div>
         <div class="datagrid">
-          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">POA<span style="font-size:9px;font-weight:400;"> may exceed $5M</span></div></div>
-          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">970.1 ha</div></div>
-          <div class="dg-item"><div class="dg-label">Titles</div><div class="dg-value accent">5</div></div>
+          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$7.0M<span style="font-size:10px;font-weight:400;"> all 10</span></div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">~320 ha</div></div>
+          <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$21,875</div></div>
         </div>
         <div class="notes">
-          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Callandoon bore scheme piped to tanks/troughs, plus dams and lagoons</span></div>
-          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">~620 ha already in forage cropping &mdash; majority developed, Coolibah floodplain to red/grey loam</span></div>
-          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">None on title &mdash; would need first build</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Floodplain position &mdash; check flood overlay before counting on it for homesites.</span></div>
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">4km+ Russell River frontage; sits in a 3,000mm+/yr rainfall belt</span></div>
+          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Sugar cane country, high and dry; 2 homes on site</span></div>
+          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">Two houses (4bd/2ba + 3bd/2ba) + 1,517m&sup2; shed</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Now confirmed via Colliers: $7M for all 10 titles, or an 8-title grouping from $4.5M+. Retail-level $/ha &mdash; you're buying certainty and speed, not margin.</span></div>
         </div>
         <div class="card-foot">
-          <span class="contact">farmsale.com.au listing</span>
-          <a class="source-link" href="https://www.farmsale.com.au/listing/property-tooee-barwon-highway-goondiwindi-qld-4390/" target="_blank" rel="noopener">Listing &rarr;</a>
+          <span class="contact">Colliers &middot; listing agent</span>
+          <a class="source-link" href="https://www.colliers.com.au/buy/qld/mirriwinni/20308887-booth-road-mirriwinni-qld-australia" target="_blank" rel="noopener">Listing &rarr;</a>
         </div>
       </div>
 
-    </div>
-
-    <div class="refs">
-      <h3>Price-point proof (already moved, for calibration)</h3>
-      <p class="sub">Not available &mdash; but these confirm the multi-title model is being executed by others right now, at prices in your band.</p>
-      <div class="ref-table-wrap">
-        <table class="ref-table">
-          <thead><tr><th>Property</th><th>Council</th><th>Titles</th><th>Area</th><th>Price</th><th>$/ha</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>Homebush North, Mitchell</td><td>Maranoa</td><td class="num">7</td><td class="num">760 ha</td><td class="num">$2.38M</td><td class="num">$3,132</td><td>Under offer &mdash; ask for similar stock</td></tr>
-            <tr><td>Kooringa Downs, Roma</td><td>Maranoa</td><td class="num">1</td><td class="num">2,805 ha</td><td class="num">undisclosed</td><td class="num">&mdash;</td><td>Under offer</td></tr>
-            <tr><td>Edenbelle, Goovigen</td><td>Banana</td><td class="num">6</td><td class="num">347.5 ha</td><td class="num">$2.0M</td><td class="num">$5,755</td><td>Sold &mdash; Ray White Biloela, Mark Simpson 0418 792 647</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROUTE A -->
-  <section class="route" data-route="a">
-    <div class="route-head">
-      <h2>Route A &mdash; Greenfield 60 ha subdivision</h2>
-      <span class="route-code">Scalable machine &middot; Tablelands &amp; Mareeba only</span>
-    </div>
-    <p class="route-note">The only two Queensland councils where a genuinely new rural lot can be created without impact assessment &mdash; and at 60&nbsp;ha rather than 40&nbsp;ha. This is the repeatable version of the strategy, but the sweep found no 200+&nbsp;ha holding inside budget in either LGA yet &mdash; this stock moves largely off-market.</p>
-
-    <div class="cards">
-      <div class="card" style="border-top-color:var(--clay);">
+      <div class="card">
         <div class="card-head">
           <div>
-            <p class="card-title">No in-budget listing surfaced</p>
-            <p class="card-locality">Tablelands &amp; Mareeba Shire, Far North Queensland</p>
+            <p class="card-title">Ashton Grove, Surat</p>
+            <p class="card-locality">Maranoa Regional Council &middot; 84 km SE of Roma</p>
           </div>
-          <span class="chip hold">gap</span>
+          <span class="chip urgent">Auction Aug 26</span>
+        </div>
+        <div class="datagrid">
+          <div class="dg-item"><div class="dg-label">Guide</div><div class="dg-value">POA</div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">1,561 ha</div></div>
+          <div class="dg-item"><div class="dg-label">Titles</div><div class="dg-value accent">7</div></div>
         </div>
         <div class="notes">
-          <div class="note-row"><span class="note-label">Found</span><span class="note-body">Only small blocks: Mutchilba 96.4&nbsp;ha at $600k (~$6.2k/ha); scattered 60&ndash;65&nbsp;ha lots asking $8&ndash;24k/ha retail</span></div>
-          <div class="note-row"><span class="note-label">Next</span><span class="note-body">Targeted call-around: Elders Atherton, Queensland Rural Atherton/Mareeba, Raine &amp; Horne Mareeba &mdash; large parcels here trade off-market</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">A dedicated FNQ sweep with direct agent outreach is the next step to close this gap.</span></div>
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Sub-artesian bore + reticulation, 3 surface dams</span></div>
+          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Open black soil downs, established Buffel/summer grass pasture &mdash; majority cleared</span></div>
+          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">4-bed self-contained dongas only, no permanent homestead</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">A nearby district benchmark (Burradoo, sold Jul&nbsp;22 at $5,946/ha) implies this could land $6.2M&ndash;$9.3M &mdash; may clear the top of budget. Worth tracking to auction regardless given the 7 titles.</span></div>
+        </div>
+        <div class="card-foot">
+          <span class="contact">JLL Agribusiness &middot; <b>David Summerville</b> 0488 504 260</span>
+          <a class="source-link" href="https://farmbuy.com/598-surat-development-road-surat-qld-4417-426082" target="_blank" rel="noopener">Listing &rarr;</a>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -683,11 +728,35 @@
   <section class="route" data-route="bench">
     <div class="route-head">
       <h2>Benchmark &mdash; cheapest land found</h2>
-      <span class="route-code">Not currently subdividable &mdash; hold or resell whole</span>
+      <span class="route-code">Not currently subdividable at scale &mdash; hold or resell whole</span>
     </div>
-    <p class="route-note">The lowest $/ha in the entire sweep. All three sit in Western Downs or Goondiwindi country, both of which set rural minimums at 400&ndash;1,000&nbsp;ha &mdash; these parcels are at or below that floor, so under today&rsquo;s scheme they can&rsquo;t legally be cut into lots. Useful as a price-floor reference, or as a whole-property hold/flip.</p>
+    <p class="route-note">Lowest $/ha in the sweep. Most sit below their council's own rural minimum, so under today's scheme they can't legally be cut into lots &mdash; useful as a price-floor reference, or as a whole-property hold/flip. Two new entries from the widened band.</p>
 
     <div class="cards">
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="card-title">Pine Mountain, Monto</p>
+            <p class="card-locality">North Burnett Regional Council</p>
+          </div>
+          <span class="chip hold">under offer</span>
+        </div>
+        <div class="datagrid">
+          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$1.2M</div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">1,461 ha</div></div>
+          <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$821</div></div>
+        </div>
+        <div class="notes">
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Bore, dams, seasonal creek flow</span></div>
+          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Well-grassed fertile flats rising to timbered country &mdash; partially cleared</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Cheapest $/ha found in either round &mdash; but currently Under Offer, may already be gone. North Burnett's 100&ndash;400&nbsp;ha minimum means this could theoretically yield 4&ndash;14 new lots if it ever recycles back onto the market. Worth asking the agent for similar off-market stock.</span></div>
+        </div>
+        <div class="card-foot">
+          <span class="contact">Kellco Rural Agencies &middot; <b>Louisa Bambling</b> 0409 205 883</span>
+          <a class="source-link" href="https://farmbuy.com/479-pine-mountain-creek-road-monto-qld-4630-402886" target="_blank" rel="noopener">Listing &rarr;</a>
+        </div>
+      </div>
 
       <div class="card">
         <div class="card-head">
@@ -702,14 +771,38 @@
           <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$2,056</div></div>
         </div>
         <div class="notes">
-          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Creek flats only &mdash; no bores or dams itemised, weakest water story on this page</span></div>
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">Creek flats only &mdash; no bores or dams itemised</span></div>
           <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Significant areas recently pulled and stick-raked, plus shaded grazing</span></div>
           <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">Homestead (3bd/1ba) + second cottage</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Cheapest confirmed $/ha in the sweep. Sits in Goondiwindi's Horticulture&nbsp;1 or Rural&nbsp;Res&nbsp;C2 precinct? &mdash; the only way 40&nbsp;ha splits become legal here. Worth a precinct-map check before writing this off.</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Cheapest confirmed-available $/ha in the sweep. Check whether it sits in Goondiwindi's Horticulture&nbsp;1 or Rural&nbsp;Res&nbsp;C2 precinct &mdash; the only way 40&nbsp;ha splits become legal here.</span></div>
         </div>
         <div class="card-foot">
           <span class="contact">Elders QLD Rural &middot; <b>Andrew Williams</b> 0429 004 299</span>
           <a class="source-link" href="https://ruralqld.eldersrealestate.com.au/rural/sale/3094-mosquito-creek-road-mosquito-creek-qld-4387-300P186506/" target="_blank" rel="noopener">Listing &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="card-title">Dalbeg, Ayr-Dalbeg Road</p>
+            <p class="card-locality">Burdekin Shire &middot; Burdekin River system</p>
+          </div>
+          <span class="chip new">new</span>
+        </div>
+        <div class="datagrid">
+          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$2.0M<span style="font-size:9px;font-weight:400;"> negotiable</span></div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">1,411 ha</div></div>
+          <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$1,417</div></div>
+        </div>
+        <div class="notes">
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">River frontage on the Burdekin system &mdash; described as "prime grazing land with river frontage"</span></div>
+          <div class="note-row"><span class="note-label">Titles</span><span class="note-body">Single title</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Burdekin Shire's rural subdivision minimum hasn't been verified in this sweep &mdash; treat as a cheap benchmark until that's confirmed, not yet a Route A/B claim.</span></div>
+        </div>
+        <div class="card-foot">
+          <span class="contact">Slaney &amp; Co, Charters Towers</span>
+          <a class="source-link" href="https://www.slaneyandco.com.au/property/7374-ayr-dalbeg-road-dalbeg/" target="_blank" rel="noopener">Listing &rarr;</a>
         </div>
       </div>
 
@@ -728,12 +821,35 @@
         <div class="notes">
           <div class="note-row"><span class="note-label">Water</span><span class="note-body">14 dams, house dam with windmill, 22,500 gal rainwater; no bore yet &mdash; GAB country, drilling upside</span></div>
           <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Fully cleared, sown to Queensland Blue, Buffel and Purple Pidgeon grass</span></div>
-          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">4-bed home + 2-bed cottage; bitumen frontage</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Tara is Queensland's proven off-grid-block resale micro-market &mdash; but at 1,002&nbsp;ha this property is barely above Western Downs' own 1,000&nbsp;ha minimum, so it's essentially one lot, not a subdivision.</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Tara is Queensland's proven off-grid-block resale micro-market &mdash; but at 1,002&nbsp;ha this sits barely above Western Downs' own 1,000&nbsp;ha minimum, so it's essentially one lot.</span></div>
         </div>
         <div class="card-foot">
           <span class="contact">farmsale.com.au listing</span>
           <a class="source-link" href="https://www.farmsale.com.au/listing/property-929-tara-kogan-road-tara-qld-4421/" target="_blank" rel="noopener">Listing &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="card-title">Kendah, Wowan</p>
+            <p class="card-locality">Banana Shire Council &middot; 9 km from Wowan</p>
+          </div>
+          <span class="chip new">new</span>
+        </div>
+        <div class="datagrid">
+          <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$7.0M</div></div>
+          <div class="dg-item"><div class="dg-label">Area</div><div class="dg-value">575 ha</div></div>
+          <div class="dg-item"><div class="dg-label">$/ha</div><div class="dg-value accent">$12,174</div></div>
+        </div>
+        <div class="notes">
+          <div class="note-row"><span class="note-label">Water</span><span class="note-body">3 bores, 3 wells, 2 dams &mdash; strong water infrastructure for the size</span></div>
+          <div class="note-row"><span class="note-label">Titles</span><span class="note-body">Single title, one family 65 years</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Sits above Banana Shire's own 150&nbsp;ha (agricultural land) minimum &mdash; if it qualifies as Class A/B ag land, this could support genuine Route A subdivision at ~150&nbsp;ha lot size, not just a resale-whole play. Pricier per hectare than the raw-land ideal, but worth a planning check before ruling out.</span></div>
+        </div>
+        <div class="card-foot">
+          <span class="contact">farmbuy.com listing</span>
+          <a class="source-link" href="https://farmbuy.com/kendah-795-romers-road-wowan-qld-4702-421572" target="_blank" rel="noopener">Listing &rarr;</a>
         </div>
       </div>
 
@@ -751,9 +867,7 @@
         </div>
         <div class="notes">
           <div class="note-row"><span class="note-label">Water</span><span class="note-body">Full Moonie River frontage, lagoons and dams throughout</span></div>
-          <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">"Level and clean" red/coolabah through belah-brigalow melon-hole country</span></div>
-          <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">3-bed weatherboard home</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Single title, remote from any sizeable town, and below Western Downs' rural minimum &mdash; whole-property hold only.</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Single title, remote from any sizeable town, below Western Downs' rural minimum &mdash; whole-property hold only.</span></div>
         </div>
         <div class="card-foot">
           <span class="contact">Elders QLD Rural &middot; <b>Jon Kingston</b></span>
@@ -761,6 +875,29 @@
         </div>
       </div>
 
+    </div>
+
+    <div class="refs">
+      <h3>Still pricing &mdash; watch these deadlines</h3>
+      <p class="sub">Genuinely relevant properties where the agent hasn't disclosed a number yet. Call before the date, not after.</p>
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <thead><tr><th>Property</th><th>Council</th><th>Titles</th><th>Area</th><th>Deadline</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Bellmary, Curra</td><td>Gympie</td><td class="num">4</td><td class="num">263 ha</td><td class="deadline">Aug 7 auction</td><td>Irrigated, water-heavy &mdash; likely paying for entitlements not needed</td></tr>
+            <tr><td>Carnemore, Capella</td><td>Central Highlands</td><td class="num">4</td><td class="num">5,564 ha</td><td class="deadline">Aug 13 auction</td><td>Est. $8.3&ndash;13.9M &mdash; probably over budget</td></tr>
+            <tr><td>Moonie Ponds, Thallon</td><td>Balonne</td><td class="num">&mdash;</td><td class="num">6,925 ha</td><td class="deadline">Aug 14 auction</td><td>Burradoo comp ($5,946/ha) implies well over budget &mdash; deprioritized</td></tr>
+            <tr><td>Eastlands, Duaringa</td><td>Central Highlands</td><td class="num">3</td><td class="num">4,492 ha</td><td class="deadline">TBC</td><td>No guide found; call agent</td></tr>
+            <tr><td>Mon-Abri, Dingo</td><td>Central Highlands</td><td class="num">5</td><td class="num">4,012 ha</td><td class="deadline">passed Jun 5</td><td>Re-listed "Private Sale" &mdash; auction outcome unconfirmed</td></tr>
+            <tr><td>Tooee, Goondiwindi</td><td>Goondiwindi</td><td class="num">5</td><td class="num">970 ha</td><td class="deadline">&mdash;</td><td>Still POA, still listed</td></tr>
+            <tr><td>Lancewood, Basalt</td><td>Charters Towers</td><td class="num">&mdash;</td><td class="num">1,545 ha</td><td class="deadline">EOI closed Jul 23</td><td>Result not yet published &mdash; recheck in a few days</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="ruled-out">
+      <b>Ruled out this round:</b> Ballangarry, Thallon (3,704 ha) &mdash; withdrawn from market. The Haven, Drillham (1,290 ha, $8.3M, 93% Cat&nbsp;X) &mdash; under offer. Delco, Duaringa (7,162 ha, $5.3M) &mdash; mostly leasehold to 2077, not freely resellable. Goondiwindi Grain Hub (~6,550 ha) and Wondalli Aggregation (3,853 ha, 3 titles) &mdash; institutional-scale developed cropping infrastructure, priced well above raw-land economics despite multi-title structure. Green Yards, Theodore (1,385 ha, 2 titles) &mdash; EOI closed Feb 2026, status unconfirmed. Crystal Hills, Duaringa ($3.2M/781 ha) &mdash; single title, well under Central Highlands' 2,000&nbsp;ha minimum. Blunder Park, Innot Hot Springs (7,513 ha, Tablelands RC) &mdash; oversized and 2.25 hrs from Cairns, weak resale-lot demand. FNQ horticulture blocks (avocado/mango, Walkamin/Arriga) &mdash; priced $30,000&ndash;115,000/ha, far too expensive per hectare for this model.
     </div>
   </section>
 
@@ -793,22 +930,24 @@
 
     <div class="council-appendix">
       <h3>Rural subdivision minimums by council (verified Jul 2026)</h3>
+      <p class="sub">Green rows: FNQ-only 60&nbsp;ha code-assessable path. Blue rows: 100&ndash;150&nbsp;ha as-of-right path on qualifying land &mdash; fewer/bigger lots, but no pre-existing titles required.</p>
       <div class="council-table-wrap">
         <table class="council">
           <thead><tr><th>Council</th><th>Min. new rural lot</th><th>Dwelling on lot?</th><th>Note</th></tr></thead>
           <tbody>
             <tr class="viable"><td>Tablelands RC</td><td class="num">60 ha</td><td>Yes</td><td>Code-assessable in Ag Land / General Rural precincts</td></tr>
-            <tr class="viable"><td>Mareeba SC</td><td class="num">60 ha</td><td>Yes</td><td>Code-assessable since Dec 2023 amendment</td></tr>
+            <tr class="viable"><td>Mareeba SC</td><td class="num">60 ha</td><td>Yes</td><td>Code-assessable since Dec 2023 amendment &mdash; Springmount candidate sits here</td></tr>
             <tr><td>Goondiwindi RC</td><td class="num">400&ndash;1,000 ha</td><td>Yes</td><td>40 ha only inside mapped Horticulture&nbsp;1 / Rural Res C2 precincts</td></tr>
-            <tr><td>South Burnett RC</td><td class="num">100 ha</td><td>Restricted</td><td>20 ha Winery precinct exists but dwelling right is stripped</td></tr>
-            <tr><td>Bundaberg RC</td><td class="num">100 ha</td><td>Yes</td><td>&mdash;</td></tr>
-            <tr><td>North Burnett RC</td><td class="num">100&ndash;400 ha</td><td>Yes</td><td>100 ha in Intensive Ag precinct</td></tr>
+            <tr class="mid"><td>South Burnett RC</td><td class="num">100 ha</td><td>Restricted</td><td>20 ha Winery precinct exists but dwelling right is stripped</td></tr>
+            <tr class="mid"><td>Bundaberg RC</td><td class="num">100 ha</td><td>Yes</td><td>&mdash;</td></tr>
+            <tr class="mid"><td>North Burnett RC</td><td class="num">100&ndash;400 ha</td><td>Yes</td><td>100 ha Intensive Ag precinct &mdash; Sparrows, Pine Mountain sit here</td></tr>
             <tr><td>Western Downs RC</td><td class="num">1,000 ha</td><td>Yes</td><td>Court-backed refusals of sub-minimum splits</td></tr>
             <tr><td>Maranoa RC</td><td class="num">300&ndash;600 ha</td><td>Yes</td><td>&mdash;</td></tr>
-            <tr><td>Banana Shire</td><td class="num">150&ndash;500 ha</td><td>Yes</td><td>&mdash;</td></tr>
+            <tr class="mid"><td>Banana Shire</td><td class="num">150&ndash;500 ha</td><td>Yes</td><td>150 ha on ALC Class A/B ag land &mdash; Kendah sits here</td></tr>
             <tr><td>Isaac RC</td><td class="num">500&ndash;5,000 ha</td><td>Yes</td><td>&mdash;</td></tr>
             <tr><td>Central Highlands RC</td><td class="num">2,000 ha</td><td>Yes</td><td>Most restrictive gazetted minimum on the list</td></tr>
             <tr><td>Charters Towers RC</td><td class="num">5,000 ha</td><td>Unverified</td><td>&mdash;</td></tr>
+            <tr><td>Burdekin Shire</td><td class="num">Unverified</td><td>Unverified</td><td>Dalbeg candidate sits here &mdash; not yet checked</td></tr>
           </tbody>
         </table>
       </div>
@@ -816,7 +955,7 @@
   </div>
 
   <footer class="colophon">
-    Field register compiled 22&ndash;23 Jul 2026 from live listing and council-scheme sources. Prices, auction dates and "under offer" statuses move fast in this market &mdash; confirm directly with the listed agent before acting. Not legal, planning or financial advice.
+    Field register compiled 22&ndash;23 Jul 2026 from live listing and council-scheme sources; re-priced 23 Jul 2026 against a widened AUD $1.43M&ndash;$8.58M budget (USD $1&ndash;6M equivalent). Prices, auction dates and "under offer" statuses move fast in this market &mdash; confirm directly with the listed agent before acting. Not legal, planning or financial advice.
   </footer>
 
 </div>
