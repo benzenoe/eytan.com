@@ -326,6 +326,8 @@
     color: var(--ink);
   }
   .dg-item .dg-value.accent { color: var(--route-color, var(--ironstone)); }
+  .dg-item .dg-value.warn { color: var(--ironstone); }
+  .dg-item .dg-value.good { color: var(--eucalypt); }
 
   .notes {
     display: flex;
@@ -700,15 +702,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$3.998M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">346 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$11,555</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$11,555</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">524 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value">~89 ha<span style="font-size:8.5px;font-weight:400;"> est.</span><span style="font-size:9px;font-weight:400;"> (~26%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="springmount-water" class="note-body">100 ML security via 2 on-farm dams + 75kW/10HP pumps; extra 10 ML allocation purchasable separately for $37,000</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="springmount-cleared" class="note-body">~81 ha currently cultivated (limes, dragon fruit, hay); balance in mixed ag/grazing use &mdash; confirm it isn't majority remnant vegetation before counting the whole 346 ha</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="springmount-dwelling" class="note-body">6-bed/2-bath homestead, wood stove</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="springmount-caveat" class="note-body">Confirmed Mareeba SC 60&nbsp;ha code-assessable path applies. At 346&nbsp;ha this could realistically yield 5+ lots after roads/setbacks &mdash; ask the agent whether it's already on multiple titles, which would help either way.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">524 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body">~89 ha rough estimate only (cultivated/hay area stated in listing) &mdash; NOT a confirmed Category X regulatory figure.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Partial/unconfirmed &mdash; a "Lot 5" reference exists on a possibly-related historical record that doesn't cleanly reconcile with the current listing; needs a title search.</span></div>
         </div>
         <div class="card-foot">
@@ -729,14 +729,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$3.5M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">647 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$5,410</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$5,410</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">300 m</div></div><div class="dg-item"><div class="dg-label">Unrestricted</div><div class="dg-value">~453 ha<span style="font-size:8.5px;font-weight:400;"> est.</span><span style="font-size:9px;font-weight:400;"> (70%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="fairview-cleared" class="note-body">70% arable/cleared &mdash; confirmed directly in the listing</span></div>
           <div class="note-row"><span data-i18n="lbl-zoning" class="note-label">Zoning</span><span data-i18n="fairview-zoning" class="note-body">Gwydir Shire RU1 Primary Production &mdash; confirmed 40&nbsp;ha minimum lot size, as-of-right</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="fairview-caveat" class="note-body">Best-verified 40&nbsp;ha subdivision fit found anywhere in the national search &mdash; could theoretically yield up to 16 lots. Titles, water and dwelling status still need direct confirmation from the agent.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">300 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">Unrestricted</span><span class="note-body">~453 ha estimate (70% arable per listing) &mdash; NSW has no single "Category X" system; no formal native-vegetation classification found for this title.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Unavailable &mdash; would need a NSW LRS/SIX Maps title search. Listing found: 823 Eulourie Road, Bingara NSW 2404, Elders Real Estate Tamworth.</span></div>
         </div>
         <div class="card-foot">
@@ -757,15 +755,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$4.2M+</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">686.7 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$6,116+</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$6,116+</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">360 m</div></div><div class="dg-item"><div class="dg-label">Unrestricted</div><div class="dg-value">&ge;210 ha<span style="font-size:8.5px;font-weight:400;"> est.</span><span style="font-size:9px;font-weight:400;"> (&ge;31%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="buckland-water" class="note-body">Tea Tree Rivulet + 564&nbsp;ML water licence; irrigation-dam potential</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="buckland-cleared" class="note-body">Majority cleared &mdash; gently undulating arable/semi-arable, 210+ ha of newly developed pasture</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="buckland-dwelling" class="note-body">Three dwellings: renovated 4-bed weatherboard, 1840s sandstone homestead (needs restoration), brick dwelling</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="buckland-caveat" class="note-body">Tasmania's Rural Zone carries a statewide 40&nbsp;ha minimum, but the ACTUAL zone on this title is unconfirmed &mdash; check LISTmap (thelist.tas.gov.au) before relying on it; could be mapped Agriculture Zone instead, which blocks this entirely.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">360 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">Unrestricted</span><span class="note-body">&ge;210 ha lower-bound estimate (recent pasture-development area stated in listing). No TASVEG/Nature Conservation Act classification found.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Unavailable on either listing page (verified via raw HTML). A conflicting "982 ha/6 titles" figure surfaced in one search summary but could not be substantiated &mdash; treat 686.73 ha as confirmed.</span></div>
         </div>
         <div class="card-foot">
@@ -798,15 +794,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$2.38M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">760 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$3,132</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$3,132</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">343 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value">n/a<span style="font-size:9px;font-weight:400;"> (&mdash;)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="homebush-water" class="note-body">Solar bore + 2 dams</span></div>
           <div class="note-row"><span data-i18n="lbl-titles-note" class="note-label">Titles</span><span data-i18n="homebush-titles" class="note-body">7 freehold titles &mdash; ~108 ha average per title</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="homebush-dwelling" class="note-body">None on title; bitumen road frontage</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="homebush-caveat" class="note-body">Was under a backup-only offer last check &mdash; now showing "Available" again on the agent's live listings, suggesting that offer lapsed. Confirmed price, confirmed titles: the cleanest Route B match on the whole page.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">343 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body">Unavailable &mdash; listing gives no cleared %/ha figure, only vegetation community names.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Unavailable &mdash; 7 titles confirmed but no individual lot/plan numbers published; the listing's "Download PDF" button is a lead-capture gate, not a real link.</span></div>
         </div>
         <div class="card-foot">
@@ -827,15 +821,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-guide" class="dg-label">Guide</div><div class="dg-value">~$3&ndash;4.5M<span style="font-size:9px;font-weight:400;"> est.</span></div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">729.2 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">3</div></div>
+          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">3</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">305 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value good">684.9 ha<span style="font-size:9px;font-weight:400;"> (93&ndash;95%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="blairathol-water" class="note-body">~9km creek frontage (Branch + Charley&rsquo;s Ck), near-permanent holes, 2 lagoons, 7 dams</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="blairathol-cleared" class="note-body">"Entire property cleared in the past"; veg overlay mostly white (Category X)</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="blairathol-dwelling" class="note-body">1912 four-bedroom timber homestead; bitumen road frontage</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="blairathol-caveat" class="note-body">Still the best all-round match on land quality &mdash; but the clock is real. Title search + veg report + a call to the agent this week if still pursuing.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">305 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">684.9 ha CONFIRMED via a certified, Current PMAV (93&ndash;95% of the property) &mdash; the strongest-verified vegetation result on this page.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 21 on LY1001 + Lot 1 on LY32 + Lot 2 on LY1006 (corrects a typo in the listing's own reference). Areas sum to 729.19 ha, matching the listing exactly.</span></div>
         </div>
         <div class="card-foot">
@@ -856,15 +848,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">EOI</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">1,723 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">7</div></div>
+          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">7</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">282 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value">n/a<span style="font-size:9px;font-weight:400;"> (&mdash;)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="sparrows-water" class="note-body">Not detailed beyond general grazing suitability &mdash; no major frontage/bore flow cited, ask the agent directly</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="sparrows-cleared" class="note-body">Open forest country, sown legumes (wynn cassia/siratro/stylo) plus native grasses &mdash; good clearing status</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="sparrows-dwelling" class="note-body">Not specified in listing</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="sparrows-caveat" class="note-body">Agents explicitly market this "whole or split into individual portions" &mdash; the seller is already thinking Route B. North Burnett's 100&ndash;400&nbsp;ha minimum also gives a Route A backup even if a title split isn't ideal.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">282 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body">Unavailable &mdash; listing states "majority Category X" with no hectare figure.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Unavailable/unconfirmed.</span></div>
         </div>
         <div class="card-foot">
@@ -885,15 +875,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div data-i18n="mirriwinni-price" class="dg-value">$7.0M<span style="font-size:10px;font-weight:400;"> all 10</span></div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">~320 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$21,875</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$21,875</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">120 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value">~291 ha<span style="font-size:8.5px;font-weight:400;"> est.</span><span style="font-size:9px;font-weight:400;"> (~91%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="mirriwinni-water" class="note-body">4km+ Russell River frontage; sits in a 3,000mm+/yr rainfall belt</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="mirriwinni-cleared" class="note-body">Sugar cane country, high and dry; 2 homes on site</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="mirriwinni-dwelling" class="note-body">Two houses (4bd/2ba + 3bd/2ba) + 1,517m&sup2; shed</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="mirriwinni-caveat" class="note-body">Now confirmed via Colliers: $7M for all 10 titles, or an 8-title grouping from $4.5M+. Retail-level $/ha &mdash; you're buying certainty and speed, not margin. <b>Status flag (23 Jul, confirmed twice):</b> the Colliers listing URL redirects to Colliers' generic homepage rather than a property page &mdash; independently confirmed both by automated fetch and by a direct browser visit, with no Wayback Machine snapshot ever recorded for this URL either. This strongly suggests the listing has sold or been withdrawn. Treat this candidate as unconfirmed until you reach the agent directly &mdash; do not rely on the $7M price above without a fresh quote.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">120 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body">~291 ha rough estimate only ("productive land" per a cached snippet) &mdash; not a confirmed regulatory figure, and moot pending the delisting flag above.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">10 lots identified via a likely-matching alternate listing: Lot 2 &amp; 1 on RP722628, Lot 69 on NR590, Lot 68/67/14/12/13/15/11 on RP845173, plus 2 road licences.</span></div>
         </div>
         <div class="card-foot">
@@ -914,15 +902,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-guide" class="dg-label">Guide</div><div class="dg-value">POA</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">1,561 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">7</div></div>
+          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">7</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">244 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value warn">1.9 ha<span style="font-size:9px;font-weight:400;"> (0.4%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="ashtongrove-water" class="note-body">Sub-artesian bore + reticulation, 3 surface dams</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="ashtongrove-cleared" class="note-body">Open black soil downs, established Buffel/summer grass pasture &mdash; majority cleared</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="ashtongrove-dwelling" class="note-body">4-bed self-contained dongas only, no permanent homestead</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="ashtongrove-caveat" class="note-body">A nearby district benchmark (Burradoo, sold Jul&nbsp;22 at $5,946/ha) implies this could land $6.2M&ndash;$9.3M &mdash; may clear the top of budget. Worth tracking to auction regardless given the 7 titles.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">244 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">RED FLAG &mdash; on the one title checked (Lot 2/RP72951, 439.6 ha), only 1.9 ha (0.4%) is Category X; 99.6% is restricted Category B. This directly contradicts the "open black soil downs" marketing. 6 of 7 titles unchecked.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 2 on RP72951 confirmed (locality is actually "Parknook," not "Surat"); the other 6 of 7 titles are unpublished &mdash; JLL gates the full title schedule behind an agent inquiry.</span></div>
         </div>
         <div class="card-foot">
@@ -943,14 +929,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$4.3M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">1,368 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">7</div></div>
+          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">7</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">314 m</div></div><div class="dg-item"><div class="dg-label">Unrestricted</div><div class="dg-value">1,160 ha<span style="font-size:8.5px;font-weight:400;"> est.</span><span style="font-size:9px;font-weight:400;"> (85%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="kumminin-water" class="note-body">Mains scheme water + 6 dams</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="kumminin-cleared" class="note-body">~1,160 ha (85%) arable/cleared</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="kumminin-caveat" class="note-body">The WA agent's own read: best overall fit in the state &mdash; already 7 separate freehold titles, so subdivision risk is essentially zero. Dwelling status unconfirmed. WA's rural zones have no reliable small statewide minimum, making pre-existing titles like this the practical path there.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">314 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">Unrestricted</span><span class="note-body">1,160 ha estimate (85% arable per listing). No WA native vegetation clearing classification found for this title.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Unavailable &mdash; 7 titles, none published. A same-road historical record (Lot 17196, DP P225582) exists but is marked off-market and can't be confirmed as part of this package.</span></div>
         </div>
         <div class="card-foot">
@@ -971,14 +955,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$4.5&ndash;4.86M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">1,968 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">6</div></div>
+          <div class="dg-item"><div data-i18n="lbl-titles-dg" class="dg-label">Titles</div><div class="dg-value accent">6</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">78 m</div></div><div class="dg-item"><div class="dg-label">Unrestricted</div><div class="dg-value">n/a<span style="font-size:9px;font-weight:400;"> (&mdash;)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="hunts-water" class="note-body">Privately owned established bore</span></div>
           <div class="note-row"><span data-i18n="lbl-perha-note" class="note-label">$/ha</span><span data-i18n="hunts-perha" class="note-body">~$2,286&ndash;2,439 &mdash; among the cheapest confirmed prices found nationwide</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="hunts-caveat" class="note-body">6 titles already in place; Victoria's Farming Zone 40&nbsp;ha default likely also applies here for a fresh subdivision on top, but Mildura's specific schedule couldn't be confirmed (portal blocked automated access) &mdash; verify via VicPlan before counting on it.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">78 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">Unrestricted</span><span class="note-body">Unavailable &mdash; no total cleared ha/% given; only an annual cropping figure (~121&ndash;162 ha/yr sown), which is not a valid proxy for total arable area.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body accent">Confirmed: Lot 21 (609.4 ha) + Lot 23 (323.5 ha) + Lot 27 (520.8 ha) + Lot 28 (310.5 ha) + Lot 29 (203.8 ha), Sunset Road, Tutye VIC 3512 &mdash; sums exactly to the 1,968 ha total.</span></div>
         </div>
         <div class="card-foot">
@@ -999,14 +981,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div data-i18n="peterborough-price" class="dg-value">$1.385M<span style="font-size:9px;font-weight:400;"> combined</span></div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">592 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$2,340</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$2,340</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">537 m</div></div><div class="dg-item"><div class="dg-label">Unrestricted</div><div class="dg-value">592 ha<span style="font-size:8.5px;font-weight:400;"> est.</span><span style="font-size:9px;font-weight:400;"> (~100%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="peterborough-water" class="note-body">Mains water + bores/troughs on 2 of 3 blocks</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="peterborough-cleared" class="note-body">Flat/arable across all three blocks</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="peterborough-caveat" class="note-body">Cheapest confirmed price found nationwide, and already sold as three individually-priced parcels ($260k/$465k/$660k) &mdash; effectively pre-split, though formal title structure isn't confirmed. Below this page's usual 200ha+ scale screen but included for the price point.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">537 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">Unrestricted</span><span class="note-body">~592 ha estimate &mdash; all three blocks described as flat/arable, so this uses the full stated area. No SA Native Vegetation Act classification found.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 91 "O'Toole's" (114 ha) + Lot 92 "O'Dea's" (197 ha) + Lots 567/69/70/71 "Spark's" (281 ha), Hundred of Yongala. Title Volume/Folio unavailable.</span></div>
         </div>
         <div class="card-foot">
@@ -1040,14 +1020,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$1.2M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">1,461 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$821</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$821</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">238 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value warn">99.7 ha<span style="font-size:9px;font-weight:400;"> (6.8%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="pinemountain-water" class="note-body">Bore, dams, seasonal creek flow</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="pinemountain-cleared" class="note-body">Well-grassed fertile flats rising to timbered country &mdash; partially cleared</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="pinemountain-caveat" class="note-body">Cheapest $/ha found in either round &mdash; but currently Under Offer, may already be gone. North Burnett's 100&ndash;400&nbsp;ha minimum means this could theoretically yield 4&ndash;14 new lots if it ever recycles back onto the market. Worth asking the agent for similar off-market stock.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">238 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">99.71 ha CONFIRMED (only 6.8% of 1,461 ha) &mdash; 74% of the property is heavily-restricted Category B, despite "well grassed fertile flats" marketing.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 3 on RW362 (Lands Lease tenure, consistent with the listing's "single GHPL title").</span></div>
         </div>
         <div class="card-foot">
@@ -1067,15 +1045,13 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$1.95M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">948.6 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$2,056</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$2,056</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">285 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value good">457.4 ha<span style="font-size:9px;font-weight:400;"> (48.4%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="ballancar-water" class="note-body">Creek flats only &mdash; no bores or dams itemised</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="ballancar-cleared" class="note-body">Significant areas recently pulled and stick-raked, plus shaded grazing</span></div>
           <div class="note-row"><span data-i18n="lbl-dwelling" class="note-label">Dwelling</span><span data-i18n="ballancar-dwelling" class="note-body">Homestead (3bd/1ba) + second cottage</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="ballancar-caveat" class="note-body">Cheapest confirmed-available $/ha in the sweep. Check whether it sits in Goondiwindi's Horticulture&nbsp;1 or Rural&nbsp;Res&nbsp;C2 precinct &mdash; the only way 40&nbsp;ha splits become legal here.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">285 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">457.37 ha CONFIRMED (48.4% of 948.58 ha) &mdash; roughly half the marketed "recently cleared" claim checks out against the government map.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 4 on BNT1113 (confirmed by exact area match). Caution: naive address-geocoding points to a superseded older lot (22 on BNT443) &mdash; Lot 4/BNT1113 is the correct current title.</span></div>
         </div>
         <div class="card-foot">
@@ -1096,14 +1072,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div data-i18n="dalbeg-price" class="dg-value">$2.0M<span style="font-size:9px;font-weight:400;"> negotiable</span></div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">1,411 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$1,417</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$1,417</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">67 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value warn">31.9 ha<span style="font-size:9px;font-weight:400;"> (2.6%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="dalbeg-water" class="note-body">River frontage on the Burdekin system &mdash; described as "prime grazing land with river frontage"</span></div>
           <div class="note-row"><span data-i18n="lbl-titles-note" class="note-label">Titles</span><span data-i18n="dalbeg-titles" class="note-body">Single title</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="dalbeg-caveat" class="note-body">Burdekin Shire's rural subdivision minimum hasn't been verified in this sweep &mdash; treat as a cheap benchmark until that's confirmed, not yet a Route A/B claim.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">67 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">RED FLAG &mdash; only ~31.92 ha CONFIRMED (2.6% of the surveyed area); the rest is heavily-restricted Category B/C despite "fertile river flats" marketing.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 58 on SP143789 (lease) + Lot 3 on D9153 (freehold shed block, confirmed by exact match). Survey area (~1,213&ndash;1,301 ha) runs 8&ndash;14% below the marketed 1,411 ha &mdash; verify against the lease file before any valuation.</span></div>
         </div>
         <div class="card-foot">
@@ -1123,14 +1097,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$4.0M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">1,002 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$3,992</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$3,992</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">315 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value good">999.2 ha<span style="font-size:9px;font-weight:400;"> (99.7%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="tarakogan-water" class="note-body">14 dams, house dam with windmill, 22,500 gal rainwater; no bore yet &mdash; GAB country, drilling upside</span></div>
           <div class="note-row"><span data-i18n="lbl-cleared" class="note-label">Cleared</span><span data-i18n="tarakogan-cleared" class="note-body">Fully cleared, sown to Queensland Blue, Buffel and Purple Pidgeon grass</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="tarakogan-caveat" class="note-body">Tara is Queensland's proven off-grid-block resale micro-market &mdash; but at 1,002&nbsp;ha this sits barely above Western Downs' own 1,000&nbsp;ha minimum, so it's essentially one lot.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">315 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">999.2 ha CONFIRMED (99.7% of 1,002.32 ha) &mdash; the cheapest confirmed $/m&sup2; of unrestricted land on the whole page.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 4 on DY135 (single title, exact area match).</span></div>
         </div>
         <div class="card-foot">
@@ -1151,14 +1123,12 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$7.0M</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">575 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$12,174</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$12,174</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">158 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value good">574.7 ha<span style="font-size:9px;font-weight:400;"> (100%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="kendah-water" class="note-body">3 bores, 3 wells, 2 dams &mdash; strong water infrastructure for the size</span></div>
           <div class="note-row"><span data-i18n="lbl-titles-note" class="note-label">Titles</span><span data-i18n="kendah-titles" class="note-body">Single title, one family 65 years</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="kendah-caveat" class="note-body">Sits above Banana Shire's own 150&nbsp;ha (agricultural land) minimum &mdash; if it qualifies as Class A/B ag land, this could support genuine Route A subdivision at ~150&nbsp;ha lot size, not just a resale-whole play. Pricier per hectare than the raw-land ideal, but worth a planning check before ruling out.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">158 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">574.7 ha CONFIRMED (100%!) &mdash; double-confirmed by both the state base map AND a registered, landholder-certified PMAV (nos. 2009/009902, 2009/001288).</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 1 (222.31 ha) &amp; Lot 2 (48.53 ha) on RP605503, Lot 234 (165.11 ha) &amp; Lot 235 (138.76 ha) on RN165 &mdash; sums to exactly 574.70 ha.</span></div>
         </div>
         <div class="card-foot">
@@ -1178,13 +1148,11 @@
         <div class="datagrid">
           <div class="dg-item"><div data-i18n="lbl-price" class="dg-label">Price</div><div class="dg-value">$3.0M+</div></div>
           <div class="dg-item"><div data-i18n="lbl-area" class="dg-label">Area</div><div class="dg-value">728.4 ha</div></div>
-          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$4,118+</div></div>
+          <div class="dg-item"><div data-i18n="lbl-perha" class="dg-label">$/ha</div><div class="dg-value accent">$4,118+</div></div><div class="dg-item"><div class="dg-label">Elevation</div><div class="dg-value">255 m</div></div><div class="dg-item"><div class="dg-label">White (Cat&nbsp;X)</div><div class="dg-value good">684.8 ha<span style="font-size:9px;font-weight:400;"> (~94%)</span></div></div>
         </div>
         <div class="notes">
           <div class="note-row"><span data-i18n="lbl-water" class="note-label">Water</span><span data-i18n="dornie-water" class="note-body">Full Moonie River frontage, lagoons and dams throughout</span></div>
           <div class="note-row caveat"><span data-i18n="lbl-caveat" class="note-label">Caveat</span><span data-i18n="dornie-caveat" class="note-body">Single title, remote from any sizeable town, below Western Downs' rural minimum &mdash; whole-property hold only.</span></div>
-          <div class="note-row"><span class="note-label">Elevation</span><span class="note-body">255 m (locality-level, SRTM 30m)</span></div>
-          <div class="note-row"><span class="note-label">White area</span><span class="note-body accent">~684.8 ha CONFIRMED estimate (~94% of 728.43 ha); ~44 ha (6%) is restricted Category B near the Moonie River frontage &mdash; check the flood overlay given the overlap.</span></div>
           <div class="note-row"><span class="note-label">Lot/Plan</span><span class="note-body">Lot 5 on CVN274 (single title, exact area match: 728.434 ha).</span></div>
         </div>
         <div class="card-foot">
@@ -1292,28 +1260,9 @@
   </div>
 
   <div class="appendix">
-    <h3>Ranked by price per m&sup2; of unrestricted land</h3>
-    <p class="sub">Raw $/ha hides how much of a property is actually usable &mdash; a "cheap" property that's mostly restricted vegetation can cost more per buildable square metre than an expensive one that's fully clear. Figures below use Queensland's Category&nbsp;X (confirmed via direct government GIS query where marked) for QLD properties, and each state's best-available cleared/arable estimate elsewhere. Properties without a usable-area estimate are listed separately below &mdash; not omitted, just not calculable yet.</p>
-    <div class="ref-table-wrap">
-      <table class="ref-table">
-        <thead><tr><th>Property</th><th>Price</th><th>Unrestricted area</th><th>$/m&sup2;</th><th>Confidence</th></tr></thead>
-        <tbody>
-          <tr><td><a href="#peterborough" class="source-link" style="border-bottom:1px solid currentColor;">Peterborough</a></td><td class="num">$1.385M</td><td class="num">592 ha</td><td class="num" style="color:var(--eucalypt);font-weight:700;">$0.234</td><td>Estimate (listing describes all 3 blocks arable)</td></tr>
-          <tr><td><a href="#kumminin" class="source-link" style="border-bottom:1px solid currentColor;">South Kumminin</a></td><td class="num">$4.3M</td><td class="num">1,160 ha</td><td class="num" style="color:var(--eucalypt);font-weight:700;">$0.371</td><td>Estimate (listing-stated 85% arable)</td></tr>
-          <tr><td><a href="#tarakogan" class="source-link" style="border-bottom:1px solid currentColor;">929 Tara-Kogan Rd</a></td><td class="num">$4.0M</td><td class="num">999.2 ha</td><td class="num" style="color:var(--eucalypt);font-weight:700;">$0.400</td><td><b>GIS-confirmed</b> (99.7% Cat X)</td></tr>
-          <tr><td><a href="#ballancar" class="source-link" style="border-bottom:1px solid currentColor;">Ballancar</a></td><td class="num">$1.95M</td><td class="num">457.4 ha</td><td class="num">$0.426</td><td><b>GIS-confirmed</b> (48.4% Cat X)</td></tr>
-          <tr><td><a href="#blairathol" class="source-link" style="border-bottom:1px solid currentColor;">Blair Athol</a></td><td class="num">~$3&ndash;4.5M</td><td class="num">684.9 ha</td><td class="num">$0.44&ndash;0.66</td><td><b>GIS-confirmed PMAV</b> (93&ndash;95% Cat X); price is auction estimate</td></tr>
-          <tr><td><a href="#dornie" class="source-link" style="border-bottom:1px solid currentColor;">Dornie</a></td><td class="num">$3.0M+</td><td class="num">684.8 ha</td><td class="num">$0.438+</td><td><b>GIS-confirmed est.</b> (~94% Cat X); price is a floor</td></tr>
-          <tr><td><a href="#fairview" class="source-link" style="border-bottom:1px solid currentColor;">Fairview</a></td><td class="num">$3.5M</td><td class="num">452.8 ha</td><td class="num">$0.773</td><td>Estimate (listing-stated 70% arable)</td></tr>
-          <tr><td><a href="#pinemountain" class="source-link" style="border-bottom:1px solid currentColor;">Pine Mountain</a></td><td class="num">$1.2M</td><td class="num">99.7 ha</td><td class="num" style="color:var(--ironstone);font-weight:700;">$1.203</td><td><b>GIS-confirmed</b> &mdash; only 6.8% Cat X despite "cheapest $/ha" headline</td></tr>
-          <tr><td><a href="#kendah" class="source-link" style="border-bottom:1px solid currentColor;">Kendah</a></td><td class="num">$7.0M</td><td class="num">574.7 ha</td><td class="num">$1.218</td><td><b>GIS-confirmed PMAV</b> (100% Cat X, double-confirmed)</td></tr>
-          <tr><td><a href="#buckland" class="source-link" style="border-bottom:1px solid currentColor;">Buckland</a></td><td class="num">$4.2M+</td><td class="num">&ge;210 ha</td><td class="num">&le;$2.00</td><td>Estimate, lower bound only &mdash; true figure likely higher</td></tr>
-          <tr><td><a href="#springmount" class="source-link" style="border-bottom:1px solid currentColor;">Springmount</a></td><td class="num">$3.998M</td><td class="num">~89 ha</td><td class="num">~$4.49</td><td>Rough estimate only, not regulatory</td></tr>
-          <tr style="opacity:0.85;"><td><a href="#dalbeg" class="source-link" style="border-bottom:1px solid currentColor;">Dalbeg</a></td><td class="num">$2.0M</td><td class="num">31.9 ha</td><td class="num" style="color:var(--ironstone);font-weight:700;">$6.266</td><td><b>GIS-confirmed</b> &mdash; worst value on the page; only 2.6% Cat X, also has an unresolved area discrepancy</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="sub" style="margin-top:12px;">Not yet calculable: <b>Homebush North</b> and <b>Hunts</b> (no cleared-area figure anywhere in either listing), <b>Sparrows</b> (no figure, and the property's own size is now in question &mdash; see its card), <b>Ashton Grove</b> (the only title checked is 99.6% restricted &mdash; a red flag serious enough that a full 7-title report should come before any number is trusted), <b>Mirriwinni</b> (moot given the likely-delisted status).</p>
+    <h3>What "White (Cat&nbsp;X)" means, and where it does &mdash; and doesn't &mdash; apply</h3>
+    <p class="sub"><b>Category X ("white area") is a Queensland-specific term</b> from the state's Regulated Vegetation Management map: land classified white/Cat&nbsp;X has essentially no clearing restriction, versus Category B (remnant vegetation, heavily restricted) or C (high-value regrowth, restricted). It only exists as a formal legal classification in Queensland &mdash; it does not apply in NSW, Victoria, Tasmania, South Australia or Western Australia, each of which has its own separate (and differently-named) native-vegetation framework.</p>
+    <p class="sub" style="margin-top:-6px;">Practical effect on this page: the <b>12 Queensland properties</b> below show a real "White (Cat&nbsp;X)" figure &mdash; government GIS-confirmed for 9 of them via direct query of Queensland's spatial data services, the same data that powers Queensland Globe. The <b>5 non-Queensland properties</b> (Fairview NSW, Buckland TAS, South Kumminin WA, Hunts VIC, Peterborough SA) instead show "Unrestricted" &mdash; each state's best available cleared/arable <i>estimate</i> from listing text, since no formal classification was found for those specific titles. Treat the two labels as different confidence tiers, not the same thing with different names.</p>
   </div>
 
   <div class="appendix">
@@ -1430,32 +1379,33 @@
   </div>
 
   <div class="appendix">
-    <h3 data-i18n="alltab-h3">All 17 candidates</h3>
-    <p data-i18n="alltab-sub" class="sub">Every qualified property on this page in one list &mdash; price, location, size, and a link to the listing where one exists.</p>
+    <h3>All 17 candidates, ranked by $/m&sup2; of unrestricted land</h3>
+    <p class="sub">The single reference table for every property on this page &mdash; location, price, size, elevation, unrestricted/white land, and the resulting $/m&sup2;. Sorted best value first; properties with no usable-area estimate are grouped at the bottom, not omitted. <b>"White (Cat&nbsp;X)" is a Queensland-specific vegetation-mapping term</b> and only applies to the 12 QLD rows below (bold $/m&sup2; = confirmed via direct government GIS query, not an estimate); the 5 non-QLD properties show each state's best-available cleared/arable estimate instead under "Unrestricted" &mdash; see the explainer above the map for detail on this distinction.</p>
     <div class="ref-table-wrap">
       <table class="ref-table">
-        <thead data-i18n="alltab-thead"><tr><th>Property</th><th>Location</th><th>Route</th><th>Price</th><th>Size</th><th>Link</th></tr></thead>
+        <thead><tr><th>Property</th><th>Location</th><th>Route</th><th>Price</th><th>Size</th><th>Elev.</th><th>White/Unrestricted</th><th>$/m&sup2;</th><th>Link</th></tr></thead>
         <tbody>
-            <tr id="row-springmount" data-route="a"><td>Springmount, Mutchilba</td><td>Mareeba Shire, QLD</td><td class="route-tag">A</td><td class="num">$3.998M</td><td class="num">346 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/1074-springmount-road-mutchilba-qld-4872-421770" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-fairview" data-route="a"><td>Fairview, Horton Valley</td><td>Gwydir Shire, NSW</td><td class="route-tag">A</td><td class="num">$3.5M</td><td class="num">647 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#fairview"><span data-i18n="lbl-seecard-link">See card &uarr;</span></a></td></tr>
-            <tr id="row-buckland" data-route="a"><td>Buckland, Court Farm Rd</td><td>Glamorgan-Spring Bay, TAS</td><td class="route-tag">A</td><td class="num">$4.2M+</td><td class="num">686.7 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/196-court-farm-road-buckland-tas-7190-379654" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-homebush" data-route="b"><td>Homebush North, Mitchell</td><td>Maranoa RC, QLD</td><td class="route-tag">B</td><td class="num">$2.38M</td><td class="num">760 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://topx.com.au/buy-sell-property/homebush-north/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-blairathol" data-route="b"><td>Blair Athol, Chinchilla</td><td>Western Downs RC, QLD</td><td class="route-tag">B</td><td class="num">~$3–4.5M</td><td class="num">729.2 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/285-burncluith-road-chinchilla-qld-4413-423459" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-sparrows" data-route="b"><td>Sparrows, Mount Perry</td><td>North Burnett RC, QLD</td><td class="route-tag">B</td><td class="num">EOI</td><td class="num">1,723 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/sparrows-monto-mount-perry-road-mount-perry-qld-4671-421886" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-mirriwinni" data-route="b" style="opacity:0.7;"><td>Booth Rd package, Mirriwinni <span data-i18n="mirriwinni-tbl-flag" style="color:var(--ironstone);font-weight:600;">(likely delisted)</span></td><td>Cairns RC, QLD</td><td class="route-tag">B</td><td class="num">$7.0M</td><td class="num">~320 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.colliers.com.au/buy/qld/mirriwinni/20308887-booth-road-mirriwinni-qld-australia" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-ashtongrove" data-route="b"><td>Ashton Grove, Surat</td><td>Maranoa RC, QLD</td><td class="route-tag">B</td><td class="num">POA</td><td class="num">1,561 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/598-surat-development-road-surat-qld-4417-426082" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-kumminin" data-route="b"><td>South Kumminin</td><td>Shire of Narembeen, WA</td><td class="route-tag">B</td><td class="num">$4.3M</td><td class="num">1,368 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/2342-emu-hill-road-east-south-kumminin-wa-6368-412978" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-hunts" data-route="b"><td>&quot;Hunts&quot;, Tutye</td><td>Mildura Rural City, VIC</td><td class="route-tag">B</td><td class="num">$4.5–4.86M</td><td class="num">1,968 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#hunts"><span data-i18n="lbl-seecard-link">See card &uarr;</span></a></td></tr>
-            <tr id="row-peterborough" data-route="b"><td>Peterborough blocks</td><td>Peterborough DC, SA</td><td class="route-tag">B</td><td class="num">$1.385M</td><td class="num">592 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#peterborough"><span data-i18n="lbl-seecard-link">See card &uarr;</span></a></td></tr>
-            <tr id="row-pinemountain" data-route="bench"><td>Pine Mountain, Monto</td><td>North Burnett RC, QLD</td><td class="route-tag">—</td><td class="num">$1.2M</td><td class="num">1,461 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/479-pine-mountain-creek-road-monto-qld-4630-402886" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-ballancar" data-route="bench"><td>Ballancar, Mosquito Creek</td><td>Goondiwindi RC, QLD</td><td class="route-tag">—</td><td class="num">$1.95M</td><td class="num">948.6 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://ruralqld.eldersrealestate.com.au/rural/sale/3094-mosquito-creek-road-mosquito-creek-qld-4387-300P186506/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-dalbeg" data-route="bench"><td>Dalbeg, Ayr-Dalbeg Road</td><td>Burdekin Shire, QLD</td><td class="route-tag">—</td><td class="num">$2.0M</td><td class="num">1,411 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.slaneyandco.com.au/property/7374-ayr-dalbeg-road-dalbeg/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-tarakogan" data-route="bench"><td>929 Tara-Kogan Road, Tara</td><td>Western Downs RC, QLD</td><td class="route-tag">—</td><td class="num">$4.0M</td><td class="num">1,002 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.farmsale.com.au/listing/property-929-tara-kogan-road-tara-qld-4421/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-kendah" data-route="bench"><td>Kendah, Wowan</td><td>Banana Shire, QLD</td><td class="route-tag">—</td><td class="num">$7.0M</td><td class="num">575 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/kendah-795-romers-road-wowan-qld-4702-421572" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
-            <tr id="row-dornie" data-route="bench"><td>Dornie, Flinton</td><td>Western Downs / Balonne, QLD</td><td class="route-tag">—</td><td class="num">$3.0M+</td><td class="num">728.4 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://ruralqld.eldersrealestate.com.au/rural/sale/5790-flinton-road-flinton-qld-4422-300P152228/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-peterborough" data-route="b"><td>Peterborough blocks</td><td>Peterborough DC, SA</td><td class="route-tag">B</td><td class="num">$1.385M</td><td class="num">592 ha</td><td class="num">537 m</td><td class="num">592 ha (~100%) <i>est.</i></td><td class="num" style="color:var(--eucalypt);font-weight:700;">$0.234</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#peterborough"><span data-i18n="lbl-seecard-link">See card &uarr;</span></a></td></tr>
+            <tr id="row-kumminin" data-route="b"><td>South Kumminin</td><td>Shire of Narembeen, WA</td><td class="route-tag">B</td><td class="num">$4.3M</td><td class="num">1,368 ha</td><td class="num">314 m</td><td class="num">1,160 ha (85%) <i>est.</i></td><td class="num" style="color:var(--eucalypt);font-weight:700;">$0.371</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/2342-emu-hill-road-east-south-kumminin-wa-6368-412978" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-tarakogan" data-route="bench"><td>929 Tara-Kogan Road, Tara</td><td>Western Downs RC, QLD</td><td class="route-tag">&mdash;</td><td class="num">$4.0M</td><td class="num">1,002 ha</td><td class="num">315 m</td><td class="num" style="font-weight:700;">999.2 ha (99.7%)</td><td class="num" style="color:var(--eucalypt);font-weight:700;">$0.400</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.farmsale.com.au/listing/property-929-tara-kogan-road-tara-qld-4421/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-ballancar" data-route="bench"><td>Ballancar, Mosquito Creek</td><td>Goondiwindi RC, QLD</td><td class="route-tag">&mdash;</td><td class="num">$1.95M</td><td class="num">948.6 ha</td><td class="num">285 m</td><td class="num" style="font-weight:700;">457.4 ha (48.4%)</td><td class="num">$0.426</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://ruralqld.eldersrealestate.com.au/rural/sale/3094-mosquito-creek-road-mosquito-creek-qld-4387-300P186506/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-dornie" data-route="bench"><td>Dornie, Flinton</td><td>Western Downs / Balonne, QLD</td><td class="route-tag">&mdash;</td><td class="num">$3.0M+</td><td class="num">728.4 ha</td><td class="num">255 m</td><td class="num" style="font-weight:700;">684.8 ha (~94%)</td><td class="num">$0.438+</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://ruralqld.eldersrealestate.com.au/rural/sale/5790-flinton-road-flinton-qld-4422-300P152228/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-blairathol" data-route="b"><td>Blair Athol, Chinchilla</td><td>Western Downs RC, QLD</td><td class="route-tag">B</td><td class="num">~$3&ndash;4.5M</td><td class="num">729.2 ha</td><td class="num">305 m</td><td class="num" style="font-weight:700;">684.9 ha (93&ndash;95%)</td><td class="num">$0.44&ndash;0.66</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/285-burncluith-road-chinchilla-qld-4413-423459" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-fairview" data-route="a"><td>Fairview, Horton Valley</td><td>Gwydir Shire, NSW</td><td class="route-tag">A</td><td class="num">$3.5M</td><td class="num">647 ha</td><td class="num">300 m</td><td class="num">452.8 ha (70%) <i>est.</i></td><td class="num">$0.773</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#fairview"><span data-i18n="lbl-seecard-link">See card &uarr;</span></a></td></tr>
+            <tr id="row-pinemountain" data-route="bench"><td>Pine Mountain, Monto</td><td>North Burnett RC, QLD</td><td class="route-tag">&mdash;</td><td class="num">$1.2M</td><td class="num">1,461 ha</td><td class="num">238 m</td><td class="num" style="color:var(--ironstone);font-weight:700;">99.7 ha (6.8%) &#9888;</td><td class="num" style="color:var(--ironstone);font-weight:700;">$1.203</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/479-pine-mountain-creek-road-monto-qld-4630-402886" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-kendah" data-route="bench"><td>Kendah, Wowan</td><td>Banana Shire, QLD</td><td class="route-tag">&mdash;</td><td class="num">$7.0M</td><td class="num">575 ha</td><td class="num">158 m</td><td class="num" style="color:var(--eucalypt);font-weight:700;">574.7 ha (100%)</td><td class="num">$1.218</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/kendah-795-romers-road-wowan-qld-4702-421572" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-buckland" data-route="a"><td>Buckland, Court Farm Rd</td><td>Glamorgan-Spring Bay, TAS</td><td class="route-tag">A</td><td class="num">$4.2M+</td><td class="num">686.7 ha</td><td class="num">360 m</td><td class="num">&ge;210 ha (&ge;31%) <i>est.</i></td><td class="num">&le;$2.00</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/196-court-farm-road-buckland-tas-7190-379654" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-springmount" data-route="a"><td>Springmount, Mutchilba</td><td>Mareeba Shire, QLD</td><td class="route-tag">A</td><td class="num">$3.998M</td><td class="num">346 ha</td><td class="num">524 m</td><td class="num">~89 ha (~26%) <i>rough est.</i></td><td class="num">~$4.49</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/1074-springmount-road-mutchilba-qld-4872-421770" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-dalbeg" data-route="bench" style="opacity:0.85;"><td>Dalbeg, Ayr-Dalbeg Road</td><td>Burdekin Shire, QLD</td><td class="route-tag">&mdash;</td><td class="num">$2.0M</td><td class="num">1,411 ha</td><td class="num">67 m</td><td class="num" style="color:var(--ironstone);font-weight:700;">31.9 ha (2.6%) &#9888;</td><td class="num" style="color:var(--ironstone);font-weight:700;">$6.266</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.slaneyandco.com.au/property/7374-ayr-dalbeg-road-dalbeg/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-homebush" data-route="b" style="opacity:0.7;"><td>Homebush North, Mitchell</td><td>Maranoa RC, QLD</td><td class="route-tag">B</td><td class="num">$2.38M</td><td class="num">760 ha</td><td class="num">343 m</td><td class="num">n/a</td><td class="num">&mdash;</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://topx.com.au/buy-sell-property/homebush-north/" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-sparrows" data-route="b" style="opacity:0.7;"><td>Sparrows, Mount Perry <span style="color:var(--ironstone);font-weight:600;">(size in question)</span></td><td>North Burnett RC, QLD</td><td class="route-tag">B</td><td class="num">EOI</td><td class="num">1,052&ndash;1,723 ha</td><td class="num">282 m</td><td class="num">n/a</td><td class="num">&mdash;</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/sparrows-monto-mount-perry-road-mount-perry-qld-4671-421886" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-hunts" data-route="b" style="opacity:0.7;"><td>&quot;Hunts&quot;, Tutye</td><td>Mildura Rural City, VIC</td><td class="route-tag">B</td><td class="num">$4.5&ndash;4.86M</td><td class="num">1,968 ha</td><td class="num">78 m</td><td class="num">n/a</td><td class="num">&mdash;</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#hunts"><span data-i18n="lbl-seecard-link">See card &uarr;</span></a></td></tr>
+            <tr id="row-ashtongrove" data-route="b" style="opacity:0.6;"><td>Ashton Grove, Surat <span style="color:var(--ironstone);font-weight:600;">&#9888; red flag</span></td><td>Maranoa RC, QLD</td><td class="route-tag">B</td><td class="num">POA</td><td class="num">1,561 ha</td><td class="num">244 m</td><td class="num" style="color:var(--ironstone);font-weight:700;">1.9 ha (0.4%)*</td><td class="num">&mdash;</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/598-surat-development-road-surat-qld-4417-426082" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
+            <tr id="row-mirriwinni" data-route="b" style="opacity:0.55;"><td>Booth Rd package, Mirriwinni <span data-i18n="mirriwinni-tbl-flag" style="color:var(--ironstone);font-weight:600;">(likely delisted)</span></td><td>Cairns RC, QLD</td><td class="route-tag">B</td><td class="num">$7.0M</td><td class="num">~320 ha</td><td class="num">120 m</td><td class="num">~291 ha <i>rough est.</i></td><td class="num">&mdash;</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.colliers.com.au/buy/qld/mirriwinni/20308887-booth-road-mirriwinni-qld-australia" target="_blank" rel="noopener"><span data-i18n="lbl-listing-link">Listing &rarr;</span></a></td></tr>
         </tbody>
       </table>
     </div>
+    <p class="sub" style="margin-top:12px;">&#9888; = red flag, worth extra scrutiny before proceeding. * Ashton Grove's 0.4% is from only 1 of 7 titles &mdash; not used for $/m&sup2; since 6 titles are unverified. Elevation is locality-level (SRTM 30m), not parcel-exact. "Rough est." = not a formal classification of any kind, weakest confidence tier.</p>
   </div>
 
   <div class="appendix">
@@ -1721,9 +1671,6 @@
   "map-legend-b": "<span class=\"swatch route-b\"></span>路径B",
   "map-legend-a": "<span class=\"swatch route-a\"></span>路径A",
   "map-legend-bench": "<span class=\"swatch bench\"></span>基准",
-  "alltab-h3": "全部17个候选地块",
-  "alltab-sub": "<p class=\"sub\">本页所有合格房产一览表&mdash;&mdash;价格、地点、面积，以及房源链接（如有）。</p>",
-  "alltab-thead": "<thead><tr><th>房产</th><th>地点</th><th>路径</th><th>价格</th><th>面积</th><th>链接</th></tr></thead>",
   "lbl-seecard-link": "查看卡片 &uarr;",
   "footer": "本名录基于2026年7月22&ndash;23日的实时房源与规划方案资料整理；已于2026年7月23日按扩大后的预算（澳元$143万&ndash;$858万，约合美元$100万&ndash;$600万）重新核价；并于2026年7月23日扩展至全国范围，涵盖全部6个州及北领地。本市场中的价格、拍卖日期及&ldquo;已被要约&rdquo;状态变化迅速&mdash;&mdash;采取行动前请直接向挂牌中介核实。本内容不构成法律、规划或财务建议。"
 };
