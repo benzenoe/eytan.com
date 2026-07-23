@@ -16,9 +16,9 @@
     --line-strong: #a49c86;
     --ironstone: #a8481f;
     --ironstone-ink: #ffffff;
-    --eucalypt: #4c6b40;
+    --eucalypt: #2e7d4f;
     --eucalypt-soft: #e4e9dc;
-    --billabong: #35548c;
+    --billabong: #2a5fa8;
     --billabong-soft: #dde4f0;
     --clay: #857a68;
     --clay-soft: #eae5d8;
@@ -34,9 +34,9 @@
       --line-strong: #555644;
       --ironstone: #de8656;
       --ironstone-ink: #1a1c15;
-      --eucalypt: #93b57e;
+      --eucalypt: #4fa06b;
       --eucalypt-soft: #2a331f;
-      --billabong: #8ba3d6;
+      --billabong: #5486d1;
       --billabong-soft: #1f2a3f;
       --clay: #b3a98f;
       --clay-soft: #2c2a1f;
@@ -52,9 +52,9 @@
     --line-strong: #555644;
     --ironstone: #de8656;
     --ironstone-ink: #1a1c15;
-    --eucalypt: #93b57e;
+    --eucalypt: #4fa06b;
     --eucalypt-soft: #2a331f;
-    --billabong: #8ba3d6;
+    --billabong: #5486d1;
     --billabong-soft: #1f2a3f;
     --clay: #b3a98f;
     --clay-soft: #2c2a1f;
@@ -69,9 +69,9 @@
     --line-strong: #a49c86;
     --ironstone: #a8481f;
     --ironstone-ink: #ffffff;
-    --eucalypt: #4c6b40;
+    --eucalypt: #2e7d4f;
     --eucalypt-soft: #e4e9dc;
-    --billabong: #35548c;
+    --billabong: #2a5fa8;
     --billabong-soft: #dde4f0;
     --clay: #857a68;
     --clay-soft: #eae5d8;
@@ -483,6 +483,43 @@
   table.council tr.mid td { color: var(--billabong); font-weight: 600; }
   table.council tr:last-child td { border-bottom: none; }
 
+  /* ---- Map ---- */
+  .card, tr[id] { scroll-margin-top: 20px; }
+  .map-wrap {
+    border: 1px solid var(--line);
+    background: var(--paper-raised);
+    padding: 8px;
+  }
+  .map-svg { width: 100%; height: auto; display: block; }
+  .map-land { fill: var(--paper); stroke: var(--line-strong); stroke-width: 1; }
+  .map-state-label {
+    font-family: ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    fill: var(--ink-soft);
+    opacity: 0.55;
+    text-anchor: middle;
+    pointer-events: none;
+  }
+  .map-pin { cursor: pointer; }
+  .map-pin .hit { fill: transparent; }
+  .map-pin .dot { stroke: var(--paper-raised); stroke-width: 2; transition: r 0.15s ease; }
+  .map-pin.route-a .dot { fill: var(--eucalypt); }
+  .map-pin.route-b .dot { fill: var(--billabong); }
+  .map-pin.bench .dot { fill: var(--clay); }
+  .map-pin:hover .dot, .map-pin:focus-visible .dot { r: 8; }
+  .map-pin:focus-visible .dot { outline: 2px solid var(--ironstone); outline-offset: 1px; }
+  .map-pin-label {
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    fill: var(--ink-soft);
+    pointer-events: none;
+  }
+  table.ref-table td.route-tag { font-family: ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; }
+  table.ref-table tr[data-route="a"] td.route-tag { color: var(--eucalypt); }
+  table.ref-table tr[data-route="b"] td.route-tag { color: var(--billabong); }
+  table.ref-table tr[data-route="bench"] td.route-tag { color: var(--clay); }
+
   footer.colophon {
     margin-top: 40px;
     padding-top: 16px;
@@ -570,7 +607,7 @@
     <p class="route-note">The gap from the first pass is closed: a genuinely large, in-budget, code-assessable-eligible parcel in Mareeba Shire. This is the first candidate that fits the repeatable "cut fresh lots and sell them" model rather than relying on pre-existing titles.</p>
 
     <div class="cards">
-      <div class="card">
+      <div class="card" id="springmount">
         <div class="card-head">
           <div>
             <p class="card-title">Springmount, Mutchilba</p>
@@ -595,7 +632,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="fairview">
         <div class="card-head">
           <div>
             <p class="card-title">Fairview, Horton Valley</p>
@@ -619,7 +656,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="buckland">
         <div class="card-head">
           <div>
             <p class="card-title">Buckland, Court Farm Rd</p>
@@ -656,7 +693,7 @@
 
     <div class="cards">
 
-      <div class="card">
+      <div class="card" id="homebush">
         <div class="card-head">
           <div>
             <p class="card-title">Homebush North, Mitchell</p>
@@ -681,7 +718,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="blairathol">
         <div class="card-head">
           <div>
             <p class="card-title">Blair Athol, Chinchilla</p>
@@ -706,7 +743,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="sparrows">
         <div class="card-head">
           <div>
             <p class="card-title">Sparrows, Mount Perry</p>
@@ -731,7 +768,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="mirriwinni">
         <div class="card-head">
           <div>
             <p class="card-title">Booth Rd package, Mirriwinni</p>
@@ -756,7 +793,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="ashtongrove">
         <div class="card-head">
           <div>
             <p class="card-title">Ashton Grove, Surat</p>
@@ -781,7 +818,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="kumminin">
         <div class="card-head">
           <div>
             <p class="card-title">South Kumminin, Emu Hill Rd East</p>
@@ -805,7 +842,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="hunts">
         <div class="card-head">
           <div>
             <p class="card-title">"Hunts", Tutye</p>
@@ -829,7 +866,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="peterborough">
         <div class="card-head">
           <div>
             <p class="card-title">Peterborough blocks</p>
@@ -866,7 +903,7 @@
 
     <div class="cards">
 
-      <div class="card">
+      <div class="card" id="pinemountain">
         <div class="card-head">
           <div>
             <p class="card-title">Pine Mountain, Monto</p>
@@ -890,7 +927,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="ballancar">
         <div class="card-head">
           <div>
             <p class="card-title">Ballancar, Mosquito Creek</p>
@@ -914,7 +951,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="dalbeg">
         <div class="card-head">
           <div>
             <p class="card-title">Dalbeg, Ayr-Dalbeg Road</p>
@@ -938,7 +975,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="tarakogan">
         <div class="card-head">
           <div>
             <p class="card-title">929 Tara-Kogan Road, Tara</p>
@@ -961,7 +998,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="kendah">
         <div class="card-head">
           <div>
             <p class="card-title">Kendah, Wowan</p>
@@ -985,7 +1022,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="dornie">
         <div class="card-head">
           <div>
             <p class="card-title">Dornie, Flinton</p>
@@ -1102,6 +1139,148 @@
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <div class="appendix">
+    <h3>Where they are</h3>
+    <p class="sub">All 17 candidates, plotted by locality. This is a schematic locator map (approximate town-level positions, not surveyed parcel boundaries) &mdash; click a pin to open its listing, or jump to its card if no listing link exists yet.</p>
+    <div class="map-wrap">
+      <svg class="map-svg" viewBox="0 0 640 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Australia showing the 17 candidate properties">
+        <path class="map-land" d="M 450.6,30.6 L 466.1,50.4 L 440.7,58.0 L 408.2,134.0 L 371.5,115.8 L 365.9,53.5 L 309.4,39.8 L 285.4,56.5 L 230.4,85.4 L 164.0,141.6 L 72.2,182.7 L 41.2,202.5 L 39.8,261.8 L 62.4,305.8 L 72.2,354.5 L 63.8,384.9 L 111.8,383.4 L 192.2,362.1 L 260.0,346.9 L 302.4,353.0 L 344.7,369.7 L 356.0,395.6 L 384.2,362.1 L 380.0,398.6 L 412.5,445.7 L 437.9,451.8 L 464.7,456.4 L 480.2,447.3 L 505.6,457.9 L 528.2,438.1 L 556.5,419.9 L 573.4,383.4 L 600.2,328.7 L 605.9,296.7 L 601.6,286.1 L 594.6,252.6 L 563.5,210.1 L 545.2,188.8 L 511.3,161.4 L 497.2,124.9 L 490.1,94.5 L 450.6,30.6 Z" />
+        <path class="map-land" d="M 481.6,488.3 L 504.2,491.3 L 521.2,492.9 L 532.5,506.5 L 526.8,521.8 L 511.3,530.9 L 488.7,506.5 L 481.6,488.3 Z" />
+        <text class="map-state-label" x="118.8" y="263.3">WA</text>
+        <text class="map-state-label" x="316.5" y="156.8">NT</text>
+        <text class="map-state-label" x="358.8" y="316.5">SA</text>
+        <text class="map-state-label" x="450.6" y="240.5">QLD</text>
+        <text class="map-state-label" x="507.1" y="362.1">NSW</text>
+        <text class="map-state-label" x="468.9" y="433.6">VIC</text>
+        <text class="map-state-label" x="474.6" y="503.5">TAS</text>
+        <a class="map-pin route-a" href="https://farmbuy.com/1074-springmount-road-mutchilba-qld-4872-421770" target="_blank" rel="noopener">
+          <circle class="hit" cx="485.5" cy="131.8" r="12" />
+          <circle class="dot" cx="485.5" cy="131.8" r="5.5" />
+          <title>Springmount, Mutchilba — $3.998M — 346 ha</title>
+        </a>
+        <a class="map-pin route-a" href="#fairview">
+          <circle class="hit" cx="564.5" cy="322.1" r="12" />
+          <circle class="dot" cx="564.5" cy="322.1" r="5.5" />
+          <text class="map-pin-label" x="572.5" y="326.1">Fairview</text>
+          <title>Fairview, Horton Valley — $3.5M — 647 ha</title>
+        </a>
+        <a class="map-pin route-a" href="https://farmbuy.com/196-court-farm-road-buckland-tas-7190-379654" target="_blank" rel="noopener">
+          <circle class="hit" cx="524.3" cy="510.8" r="12" />
+          <circle class="dot" cx="524.3" cy="510.8" r="5.5" />
+          <text class="map-pin-label" x="532.3" y="514.8">Buckland</text>
+          <title>Buckland, Court Farm Rd — $4.2M+ — 686.7 ha</title>
+        </a>
+        <a class="map-pin route-b" href="https://topx.com.au/buy-sell-property/homebush-north/" target="_blank" rel="noopener">
+          <circle class="hit" cx="527.8" cy="270.6" r="12" />
+          <circle class="dot" cx="527.8" cy="270.6" r="5.5" />
+          <title>Homebush North, Mitchell — $2.38M — 760 ha</title>
+        </a>
+        <a class="map-pin route-b" href="https://farmbuy.com/285-burncluith-road-chinchilla-qld-4413-423459" target="_blank" rel="noopener">
+          <circle class="hit" cx="565.4" cy="274.5" r="12" />
+          <circle class="dot" cx="565.4" cy="274.5" r="5.5" />
+          <title>Blair Athol, Chinchilla — ~$3–4.5M — 729.2 ha</title>
+        </a>
+        <a class="map-pin route-b" href="https://farmbuy.com/sparrows-monto-mount-perry-road-mount-perry-qld-4671-421886" target="_blank" rel="noopener">
+          <circle class="hit" cx="579.5" cy="251.1" r="12" />
+          <circle class="dot" cx="579.5" cy="251.1" r="5.5" />
+          <title>Sparrows, Mount Perry — EOI — 1,723 ha</title>
+        </a>
+        <a class="map-pin route-b" href="https://www.colliers.com.au/buy/qld/mirriwinni/20308887-booth-road-mirriwinni-qld-australia" target="_blank" rel="noopener">
+          <circle class="hit" cx="498.0" cy="134.0" r="12" />
+          <circle class="dot" cx="498.0" cy="134.0" r="5.5" />
+          <title>Booth Rd package, Mirriwinni — $7.0M — ~320 ha</title>
+        </a>
+        <a class="map-pin route-b" href="https://farmbuy.com/598-surat-development-road-surat-qld-4417-426082" target="_blank" rel="noopener">
+          <circle class="hit" cx="543.3" cy="280.8" r="12" />
+          <circle class="dot" cx="543.3" cy="280.8" r="5.5" />
+          <title>Ashton Grove, Surat — POA — 1,561 ha</title>
+        </a>
+        <a class="map-pin route-b" href="https://farmbuy.com/2342-emu-hill-road-east-south-kumminin-wa-6368-412978" target="_blank" rel="noopener">
+          <circle class="hit" cx="110.4" cy="358.0" r="12" />
+          <circle class="dot" cx="110.4" cy="358.0" r="5.5" />
+          <text class="map-pin-label" x="118.4" y="362.0">South Kumminin</text>
+          <title>South Kumminin — $4.3M — 1,368 ha</title>
+        </a>
+        <a class="map-pin route-b" href="#hunts">
+          <circle class="hit" cx="432.2" cy="405.4" r="12" />
+          <circle class="dot" cx="432.2" cy="405.4" r="5.5" />
+          <text class="map-pin-label" x="440.2" y="409.4">Hunts</text>
+          <title>&quot;Hunts&quot;, Tutye — $4.5–4.86M — 1,968 ha</title>
+        </a>
+        <a class="map-pin route-b" href="#peterborough">
+          <circle class="hit" cx="398.9" cy="369.3" r="12" />
+          <circle class="dot" cx="398.9" cy="369.3" r="5.5" />
+          <text class="map-pin-label" x="406.9" y="373.3">Peterborough</text>
+          <title>Peterborough blocks — $1.385M — 592 ha</title>
+        </a>
+        <a class="map-pin bench" href="https://farmbuy.com/479-pine-mountain-creek-road-monto-qld-4630-402886" target="_blank" rel="noopener">
+          <circle class="hit" cx="572.3" cy="246.1" r="12" />
+          <circle class="dot" cx="572.3" cy="246.1" r="5.5" />
+          <title>Pine Mountain, Monto — $1.2M — 1,461 ha</title>
+        </a>
+        <a class="map-pin bench" href="https://ruralqld.eldersrealestate.com.au/rural/sale/3094-mosquito-creek-road-mosquito-creek-qld-4387-300P186506/" target="_blank" rel="noopener">
+          <circle class="hit" cx="572.0" cy="300.1" r="12" />
+          <circle class="dot" cx="572.0" cy="300.1" r="5.5" />
+          <title>Ballancar, Mosquito Creek — $1.95M — 948.6 ha</title>
+        </a>
+        <a class="map-pin bench" href="https://www.slaneyandco.com.au/property/7374-ayr-dalbeg-road-dalbeg/" target="_blank" rel="noopener">
+          <circle class="hit" cx="518.1" cy="176.5" r="12" />
+          <circle class="dot" cx="518.1" cy="176.5" r="5.5" />
+          <title>Dalbeg, Ayr-Dalbeg Road — $2.0M — 1,411 ha</title>
+        </a>
+        <a class="map-pin bench" href="https://www.farmsale.com.au/listing/property-929-tara-kogan-road-tara-qld-4421/" target="_blank" rel="noopener">
+          <circle class="hit" cx="563.0" cy="282.7" r="12" />
+          <circle class="dot" cx="563.0" cy="282.7" r="5.5" />
+          <title>929 Tara-Kogan Road, Tara — $4.0M — 1,002 ha</title>
+        </a>
+        <a class="map-pin bench" href="https://farmbuy.com/kendah-795-romers-road-wowan-qld-4702-421572" target="_blank" rel="noopener">
+          <circle class="hit" cx="558.6" cy="228.0" r="12" />
+          <circle class="dot" cx="558.6" cy="228.0" r="5.5" />
+          <title>Kendah, Wowan — $7.0M — 575 ha</title>
+        </a>
+        <a class="map-pin bench" href="https://ruralqld.eldersrealestate.com.au/rural/sale/5790-flinton-road-flinton-qld-4422-300P152228/" target="_blank" rel="noopener">
+          <circle class="hit" cx="551.1" cy="289.1" r="12" />
+          <circle class="dot" cx="551.1" cy="289.1" r="5.5" />
+          <title>Dornie, Flinton — $3.0M+ — 728.4 ha</title>
+        </a>
+      </svg>
+    </div>
+    <div class="legend" style="margin-top:14px;margin-bottom:0;padding-bottom:0;border-bottom:none;">
+      <span class="legend-item"><span class="swatch route-b"></span>Route B</span>
+      <span class="legend-item"><span class="swatch route-a"></span>Route A</span>
+      <span class="legend-item"><span class="swatch bench"></span>Benchmark</span>
+    </div>
+  </div>
+
+  <div class="appendix">
+    <h3>All 17 candidates</h3>
+    <p class="sub">Every qualified property on this page in one list &mdash; price, location, size, and a link to the listing where one exists.</p>
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead><tr><th>Property</th><th>Location</th><th>Route</th><th>Price</th><th>Size</th><th>Link</th></tr></thead>
+        <tbody>
+            <tr id="row-springmount" data-route="a"><td>Springmount, Mutchilba</td><td>Mareeba Shire, QLD</td><td class="route-tag">A</td><td class="num">$3.998M</td><td class="num">346 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/1074-springmount-road-mutchilba-qld-4872-421770" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-fairview" data-route="a"><td>Fairview, Horton Valley</td><td>Gwydir Shire, NSW</td><td class="route-tag">A</td><td class="num">$3.5M</td><td class="num">647 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#fairview">See card &uarr;</a></td></tr>
+            <tr id="row-buckland" data-route="a"><td>Buckland, Court Farm Rd</td><td>Glamorgan-Spring Bay, TAS</td><td class="route-tag">A</td><td class="num">$4.2M+</td><td class="num">686.7 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/196-court-farm-road-buckland-tas-7190-379654" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-homebush" data-route="b"><td>Homebush North, Mitchell</td><td>Maranoa RC, QLD</td><td class="route-tag">B</td><td class="num">$2.38M</td><td class="num">760 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://topx.com.au/buy-sell-property/homebush-north/" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-blairathol" data-route="b"><td>Blair Athol, Chinchilla</td><td>Western Downs RC, QLD</td><td class="route-tag">B</td><td class="num">~$3–4.5M</td><td class="num">729.2 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/285-burncluith-road-chinchilla-qld-4413-423459" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-sparrows" data-route="b"><td>Sparrows, Mount Perry</td><td>North Burnett RC, QLD</td><td class="route-tag">B</td><td class="num">EOI</td><td class="num">1,723 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/sparrows-monto-mount-perry-road-mount-perry-qld-4671-421886" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-mirriwinni" data-route="b"><td>Booth Rd package, Mirriwinni</td><td>Cairns RC, QLD</td><td class="route-tag">B</td><td class="num">$7.0M</td><td class="num">~320 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.colliers.com.au/buy/qld/mirriwinni/20308887-booth-road-mirriwinni-qld-australia" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-ashtongrove" data-route="b"><td>Ashton Grove, Surat</td><td>Maranoa RC, QLD</td><td class="route-tag">B</td><td class="num">POA</td><td class="num">1,561 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/598-surat-development-road-surat-qld-4417-426082" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-kumminin" data-route="b"><td>South Kumminin</td><td>Shire of Narembeen, WA</td><td class="route-tag">B</td><td class="num">$4.3M</td><td class="num">1,368 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/2342-emu-hill-road-east-south-kumminin-wa-6368-412978" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-hunts" data-route="b"><td>&quot;Hunts&quot;, Tutye</td><td>Mildura Rural City, VIC</td><td class="route-tag">B</td><td class="num">$4.5–4.86M</td><td class="num">1,968 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#hunts">See card &uarr;</a></td></tr>
+            <tr id="row-peterborough" data-route="b"><td>Peterborough blocks</td><td>Peterborough DC, SA</td><td class="route-tag">B</td><td class="num">$1.385M</td><td class="num">592 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="#peterborough">See card &uarr;</a></td></tr>
+            <tr id="row-pinemountain" data-route="bench"><td>Pine Mountain, Monto</td><td>North Burnett RC, QLD</td><td class="route-tag">—</td><td class="num">$1.2M</td><td class="num">1,461 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/479-pine-mountain-creek-road-monto-qld-4630-402886" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-ballancar" data-route="bench"><td>Ballancar, Mosquito Creek</td><td>Goondiwindi RC, QLD</td><td class="route-tag">—</td><td class="num">$1.95M</td><td class="num">948.6 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://ruralqld.eldersrealestate.com.au/rural/sale/3094-mosquito-creek-road-mosquito-creek-qld-4387-300P186506/" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-dalbeg" data-route="bench"><td>Dalbeg, Ayr-Dalbeg Road</td><td>Burdekin Shire, QLD</td><td class="route-tag">—</td><td class="num">$2.0M</td><td class="num">1,411 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.slaneyandco.com.au/property/7374-ayr-dalbeg-road-dalbeg/" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-tarakogan" data-route="bench"><td>929 Tara-Kogan Road, Tara</td><td>Western Downs RC, QLD</td><td class="route-tag">—</td><td class="num">$4.0M</td><td class="num">1,002 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://www.farmsale.com.au/listing/property-929-tara-kogan-road-tara-qld-4421/" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-kendah" data-route="bench"><td>Kendah, Wowan</td><td>Banana Shire, QLD</td><td class="route-tag">—</td><td class="num">$7.0M</td><td class="num">575 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://farmbuy.com/kendah-795-romers-road-wowan-qld-4702-421572" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+            <tr id="row-dornie" data-route="bench"><td>Dornie, Flinton</td><td>Western Downs / Balonne, QLD</td><td class="route-tag">—</td><td class="num">$3.0M+</td><td class="num">728.4 ha</td><td><a class="source-link" style="border-bottom:1px solid currentColor;" href="https://ruralqld.eldersrealestate.com.au/rural/sale/5790-flinton-road-flinton-qld-4422-300P152228/" target="_blank" rel="noopener">Listing &rarr;</a></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
