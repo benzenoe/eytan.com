@@ -258,6 +258,17 @@
     flex-direction: column;
     gap: 10px;
   }
+  .card-img-wrap {
+    margin: -16px -18px 4px;
+    overflow: hidden;
+    background: var(--line);
+  }
+  .card-img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+  }
   .card-head {
     display: flex;
     justify-content: space-between;
@@ -608,6 +619,7 @@
 
     <div class="cards">
       <div class="card" id="springmount">
+        <div class="card-img-wrap"><img class="card-img" src="images/springmount.jpg" alt="Springmount, Mutchilba — aerial/property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Springmount, Mutchilba</p>
@@ -633,6 +645,7 @@
       </div>
 
       <div class="card" id="fairview">
+        <div class="card-img-wrap"><img class="card-img" src="images/fairview.jpg" alt="Fairview, Horton Valley — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Fairview, Horton Valley</p>
@@ -657,6 +670,7 @@
       </div>
 
       <div class="card" id="buckland">
+        <div class="card-img-wrap"><img class="card-img" src="images/buckland.jpg" alt="Buckland, Court Farm Rd — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Buckland, Court Farm Rd</p>
@@ -694,6 +708,7 @@
     <div class="cards">
 
       <div class="card" id="homebush">
+        <div class="card-img-wrap"><img class="card-img" src="images/homebush.jpg" alt="Homebush North, Mitchell — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Homebush North, Mitchell</p>
@@ -719,6 +734,7 @@
       </div>
 
       <div class="card" id="blairathol">
+        <div class="card-img-wrap"><img class="card-img" src="images/blairathol.jpg" alt="Blair Athol, Chinchilla — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Blair Athol, Chinchilla</p>
@@ -744,6 +760,7 @@
       </div>
 
       <div class="card" id="sparrows">
+        <div class="card-img-wrap"><img class="card-img" src="images/sparrows.jpg" alt="Sparrows, Mount Perry — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Sparrows, Mount Perry</p>
@@ -775,6 +792,7 @@
             <p class="card-locality">Cairns Regional Council &middot; 50 min S of Cairns</p>
           </div>
           <span class="chip hold">10 titles</span>
+          <span class="chip urgent" style="margin-left:4px;">verify live</span>
         </div>
         <div class="datagrid">
           <div class="dg-item"><div class="dg-label">Price</div><div class="dg-value">$7.0M<span style="font-size:10px;font-weight:400;"> all 10</span></div></div>
@@ -785,7 +803,7 @@
           <div class="note-row"><span class="note-label">Water</span><span class="note-body">4km+ Russell River frontage; sits in a 3,000mm+/yr rainfall belt</span></div>
           <div class="note-row"><span class="note-label">Cleared</span><span class="note-body">Sugar cane country, high and dry; 2 homes on site</span></div>
           <div class="note-row"><span class="note-label">Dwelling</span><span class="note-body">Two houses (4bd/2ba + 3bd/2ba) + 1,517m&sup2; shed</span></div>
-          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Now confirmed via Colliers: $7M for all 10 titles, or an 8-title grouping from $4.5M+. Retail-level $/ha &mdash; you're buying certainty and speed, not margin.</span></div>
+          <div class="note-row caveat"><span class="note-label">Caveat</span><span class="note-body">Now confirmed via Colliers: $7M for all 10 titles, or an 8-title grouping from $4.5M+. Retail-level $/ha &mdash; you're buying certainty and speed, not margin. <b>Status flag (23 Jul):</b> the Colliers listing URL now redirects to a generic buy page with no cached snapshot available &mdash; this may indicate the listing has sold or been withdrawn. Confirm directly before treating this as live.</span></div>
         </div>
         <div class="card-foot">
           <span class="contact">Colliers &middot; listing agent</span>
@@ -794,6 +812,7 @@
       </div>
 
       <div class="card" id="ashtongrove">
+        <div class="card-img-wrap"><img class="card-img" src="images/ashtongrove.jpg" alt="Ashton Grove, Surat — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Ashton Grove, Surat</p>
@@ -819,6 +838,7 @@
       </div>
 
       <div class="card" id="kumminin">
+        <div class="card-img-wrap"><img class="card-img" src="images/kumminin.jpg" alt="South Kumminin — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">South Kumminin, Emu Hill Rd East</p>
@@ -843,6 +863,7 @@
       </div>
 
       <div class="card" id="hunts">
+        <div class="card-img-wrap"><img class="card-img" src="images/hunts.jpg" alt=""Hunts", Tutye — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">"Hunts", Tutye</p>
@@ -867,6 +888,7 @@
       </div>
 
       <div class="card" id="peterborough">
+        <div class="card-img-wrap"><img class="card-img" src="images/peterborough.jpg" alt="Peterborough blocks — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Peterborough blocks</p>
@@ -904,6 +926,7 @@
     <div class="cards">
 
       <div class="card" id="pinemountain">
+        <div class="card-img-wrap"><img class="card-img" src="images/pinemountain.jpg" alt="Pine Mountain, Monto — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Pine Mountain, Monto</p>
@@ -928,6 +951,7 @@
       </div>
 
       <div class="card" id="ballancar">
+        <div class="card-img-wrap"><img class="card-img" src="images/ballancar.jpg" alt="Ballancar, Mosquito Creek — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Ballancar, Mosquito Creek</p>
@@ -952,6 +976,7 @@
       </div>
 
       <div class="card" id="dalbeg">
+        <div class="card-img-wrap"><img class="card-img" src="images/dalbeg.jpg" alt="Dalbeg, Ayr-Dalbeg Road — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Dalbeg, Ayr-Dalbeg Road</p>
@@ -976,6 +1001,7 @@
       </div>
 
       <div class="card" id="tarakogan">
+        <div class="card-img-wrap"><img class="card-img" src="images/tarakogan.jpg" alt="929 Tara-Kogan Road, Tara — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">929 Tara-Kogan Road, Tara</p>
@@ -999,6 +1025,7 @@
       </div>
 
       <div class="card" id="kendah">
+        <div class="card-img-wrap"><img class="card-img" src="images/kendah.jpg" alt="Kendah, Wowan — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Kendah, Wowan</p>
@@ -1023,6 +1050,7 @@
       </div>
 
       <div class="card" id="dornie">
+        <div class="card-img-wrap"><img class="card-img" src="images/dornie.jpg" alt="Dornie, Flinton — property photo" loading="lazy"></div>
         <div class="card-head">
           <div>
             <p class="card-title">Dornie, Flinton</p>
