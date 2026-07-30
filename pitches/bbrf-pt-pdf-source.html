@@ -44,35 +44,35 @@ h1.sec .dim{color:var(--text3);}
 .small-note{font-size:6.4pt;color:var(--text3);line-height:1.55;}
 
 /* ── Cover ── */
-.cover{background:var(--navy);}
+.cover{background:#fff;}
 .cover::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 90% 55% at 50% 18%, rgba(247,147,26,.13) 0%, transparent 65%),
-             radial-gradient(ellipse 50% 35% at 85% 80%, rgba(0,255,136,.05) 0%, transparent 60%);}
+  background:radial-gradient(ellipse 90% 55% at 50% 18%, rgba(232,130,14,.06) 0%, transparent 65%),
+             radial-gradient(ellipse 50% 35% at 85% 80%, rgba(0,135,90,.04) 0%, transparent 60%);}
 .cover-body{position:absolute;inset:0;padding:20mm 18mm;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;}
 .stamp{display:inline-flex;align-items:center;gap:2mm;font-family:'Space Mono',monospace;font-size:6.4pt;
-  letter-spacing:0.14em;text-transform:uppercase;color:#F7931A;border:0.7pt solid rgba(247,147,26,0.4);
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--btc);border:0.7pt solid var(--border-btc);
   border-radius:2pt;padding:1.8mm 4mm;margin-bottom:12mm;}
-.stamp-dot{width:2mm;height:2mm;border-radius:50%;background:#F7931A;}
+.stamp-dot{width:2mm;height:2mm;border-radius:50%;background:var(--btc2);}
 .cover h1{font-family:'Space Grotesk',sans-serif;font-size:37pt;font-weight:700;line-height:1.02;
   letter-spacing:-0.03em;margin-bottom:8mm;}
-.cover h1 .l1{color:#F0F6FF;display:block;}
-.cover h1 .l2{color:#7BA8CC;display:block;}
-.cover h1 .l3{color:#F7931A;display:block;}
-.cover .deck{font-size:9.5pt;color:#b9c9d9;line-height:1.75;max-width:130mm;margin-bottom:12mm;font-weight:300;}
-.cover .deck strong{color:#F0F6FF;font-weight:600;}
-.cover-stats{display:flex;width:100%;max-width:165mm;background:rgba(255,255,255,0.03);
-  border:0.7pt solid rgba(247,147,26,0.3);border-radius:3mm;overflow:hidden;margin-bottom:10mm;}
-.cs{flex:1;padding:5mm 2mm;text-align:center;border-right:0.5pt solid rgba(255,255,255,0.07);}
+.cover h1 .l1{color:var(--text);display:block;}
+.cover h1 .l2{color:#8a97a3;display:block;}
+.cover h1 .l3{color:var(--btc2);display:block;}
+.cover .deck{font-size:9.5pt;color:var(--text2);line-height:1.75;max-width:130mm;margin-bottom:12mm;font-weight:300;}
+.cover .deck strong{color:var(--text);font-weight:600;}
+.cover-stats{display:flex;width:100%;max-width:165mm;background:var(--card2);
+  border:0.7pt solid var(--border-btc);border-radius:3mm;overflow:hidden;margin-bottom:10mm;}
+.cs{flex:1;padding:5mm 2mm;text-align:center;border-right:0.5pt solid var(--border);}
 .cs:last-child{border-right:none;}
-.cs .v{font-family:'Space Grotesk',sans-serif;font-size:14.5pt;font-weight:700;color:#F7931A;display:block;margin-bottom:1mm;}
-.cs .l{font-family:'Space Mono',monospace;font-size:5.4pt;color:#5d7a94;text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.8mm;}
-.cs .s{font-size:6.2pt;color:#8fa8bf;}
-.cover-disc{font-size:6.4pt;color:#5d7a94;max-width:135mm;line-height:1.6;
-  border-top:0.5pt solid rgba(255,255,255,0.1);padding-top:5mm;}
+.cs .v{font-family:'Space Grotesk',sans-serif;font-size:14.5pt;font-weight:700;color:var(--btc);display:block;margin-bottom:1mm;}
+.cs .l{font-family:'Space Mono',monospace;font-size:5.4pt;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.8mm;}
+.cs .s{font-size:6.2pt;color:var(--text3);}
+.cover-disc{font-size:6.4pt;color:var(--text3);max-width:135mm;line-height:1.6;
+  border-top:0.5pt solid var(--border);padding-top:5mm;}
 .cover-disc strong{color:#F7931A;}
 .cover-ftr{position:absolute;bottom:12mm;left:18mm;right:18mm;display:flex;justify-content:space-between;
-  font-family:'Space Mono',monospace;font-size:6pt;color:#5d7a94;letter-spacing:0.08em;}
+  font-family:'Space Mono',monospace;font-size:6pt;color:var(--text3);letter-spacing:0.08em;}
 
 /* ── Cards / components ── */
 .card{background:var(--card);border:0.6pt solid var(--border);border-radius:2.5mm;padding:5mm;}
@@ -264,17 +264,17 @@ table.t td:first-child{font-family:'Space Mono',monospace;font-size:6.6pt;color:
 .powner{font-family:'Space Mono',monospace;font-size:5.8pt;color:var(--text3);margin-top:1mm;}
 
 /* ── Close page ── */
-.close-page{background:var(--navy);}
+.close-page{background:#fff;}
 .close-body{position:absolute;inset:0;padding:20mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-.close-body h1{font-family:'Space Grotesk',sans-serif;font-size:30pt;font-weight:800;line-height:1.1;color:#F0F6FF;margin-bottom:6mm;}
-.close-body h1 span{color:#F7931A;}
-.close-body .p{font-size:9pt;color:#b9c9d9;max-width:110mm;line-height:1.7;margin-bottom:12mm;}
+.close-body h1{font-family:'Space Grotesk',sans-serif;font-size:30pt;font-weight:800;line-height:1.1;color:var(--text);margin-bottom:6mm;}
+.close-body h1 span{color:var(--btc2);}
+.close-body .p{font-size:9pt;color:var(--text2);max-width:110mm;line-height:1.7;margin-bottom:12mm;}
 .contacts{display:flex;gap:18mm;justify-content:center;margin-bottom:14mm;}
 .cp{text-align:center;}
-.cp h4{font-size:9.5pt;font-weight:700;color:#F0F6FF;margin-bottom:1mm;}
-.cp p{font-size:7pt;color:#8fa8bf;line-height:1.6;}
-.cp .em{color:#F7931A;font-family:'Space Mono',monospace;font-size:7pt;}
-.close-legal{font-size:6pt;color:#5d7a94;max-width:150mm;line-height:1.65;border-top:0.5pt solid rgba(255,255,255,0.1);padding-top:5mm;}
+.cp h4{font-size:9.5pt;font-weight:700;color:var(--text);margin-bottom:1mm;}
+.cp p{font-size:7pt;color:var(--text3);line-height:1.6;}
+.cp .em{color:var(--btc);font-family:'Space Mono',monospace;font-size:7pt;}
+.close-legal{font-size:6pt;color:var(--text3);max-width:150mm;line-height:1.65;border-top:0.5pt solid var(--border);padding-top:5mm;}
 
 .canvasbox{width:100%;position:relative;}
 .spacer{flex:1;}
@@ -806,7 +806,7 @@ h2.sub{font-family:'Space Grotesk',sans-serif;font-size:11pt;font-weight:700;mar
       <div class="cp"><h4>Eytan Benzeno</h4><p>Real Estate Principal · Lisbon</p><p class="em">eytan@benzeno.com</p></div>
       <div class="cp"><h4>Jonathan Hineline</h4><p>On-chain Structuring · Bittrees</p><p class="em">jhineline@bittrees.io</p></div>
     </div>
-    <p class="close-legal"><b style="color:#8fa8bf;">BBRF-PT</b> · Bitcoin-Backed Real-Estate Fund (Portugal) · A Bittrees venture · bbrf-pt.eth · June 2026<br><br>
+    <p class="close-legal"><b style="color:var(--text2);">BBRF-PT</b> · Bitcoin-Backed Real-Estate Fund (Portugal) · A Bittrees venture · bbrf-pt.eth · June 2026<br><br>
     Confidential. Not a securities offering, prospectus, or investment, legal, or tax advice. Any offering will be made only to eligible professional and well-informed investors pursuant to definitive documentation. Return scenarios are illustrative and are not forecasts; capital is at risk, including total loss.</p>
   </div>
 </div>
