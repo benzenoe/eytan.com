@@ -2161,8 +2161,9 @@ const _pdfIframe = document.getElementById('pdf-iframe');
 
 function openPdfModal(){
   // Load iframe lazily
-  if(!_pdfIframe.src || _pdfIframe.src === window.location.href){
+  if(!_pdfIframe.dataset.loaded){
     _pdfIframe.src = 'BBRF-PT-Memorandum-Investisseur.pdf';
+    _pdfIframe.dataset.loaded = '1';
   }
   _pdfModal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
