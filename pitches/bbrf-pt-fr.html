@@ -1175,6 +1175,17 @@ footer p+p{margin-top:.4rem;}
       </div>
     </div>
 
+
+    <!-- DOLLAR DECAY DIVIDEND CHART -->
+    <div class="chart-wrap reveal" style="margin-top:2.5rem;">
+      <div class="chart-label">Le Dividende de la Décote du Dollar — Cas de base €50M · Prêt €12M · Illustratif</div>
+      <div class="chart-h">Empruntez dans une monnaie qui se déprécie.<br><span style="color:var(--green)">Votre prêt rétrécit en termes réels chaque année.</span></div>
+      <div class="chart-note">Encours nominal du prêt (ce que vous devez) vs valeur réelle en pouvoir d'achat de ce prêt (ajustée d'une dévaluation du dollar de −7%/an) · Illustratif · Pas une prévision</div>
+      <div class="chart-c" style="height:280px;">
+        <canvas id="dollarChart"></canvas>
+      </div>
+      <div class="chart-insight">Un prêt dollar nominal de €12M contracté à l'origine ne vaut plus que <strong>€5,8M en termes réels EUR à l'année 10</strong> — à 7%/an de dévaluation du dollar. La <strong style="color:var(--green)">zone verte représente €6,2M d'érosion en termes réels côté passif</strong>. Si la thèse de dévaluation se réalise, c'est structurel et directionnel.</div>
+    </div>
   </div>
 </div>
 
@@ -1446,9 +1457,62 @@ footer p+p{margin-top:.4rem;}
       <div class="struct-card c2"><div class="struct-tag">Réglementaire</div><h4>Les règles peuvent changer</h4><p>Évolutions des règles luxembourgeoises ou portugaises, requalification en titres, dé-risquage bancaire des rails euro. Mitigations : structuration prudente, dispositifs de repli et une liquidation ordonnée permettant aux investisseurs de sortir proprement.</p></div>
       <div class="struct-card c3"><div class="struct-tag">Liquidité &amp; Contrepartie</div><h4>Concentration maîtrisée</h4><p>Concentration des prêteurs diversifiée entre contreparties régulées ; pression de rachat gérée par le lock-up et des fenêtres de rachat plafonnées ; liquidité au niveau des actifs gérée par SPV.</p></div>
     </div>
+    <div class="stress-card reveal" style="margin-top:2.5rem;">
+      <div class="chart-label" style="margin-bottom:1.2rem;">Interactif — Modèle LTV · Cas de base €50M · Paramètres indicatifs</div>
+      <div class="stress-slider-label">
+        <span>Prix du Bitcoin (EUR)</span>
+        <span id="btcPriceDisplay">€85 714</span>
+      </div>
+      <input type="range" id="btcSlider" min="5" max="100" value="100" step="1" class="btc-slider">
+      <div class="stress-range-labels">
+        <span>−95%</span>
+        <span id="changeDisplay" style="color:var(--green)">Prix actuel (0%)</span>
+        <span>0%</span>
+      </div>
+      <div class="stress-metrics">
+        <div class="stress-metric">
+          <div class="stress-metric-label">Valeur de la réserve</div>
+          <div class="stress-metric-val" id="reserveVal">€30.0M</div>
+          <div class="stress-metric-sub">350 BTC × prix</div>
+        </div>
+        <div class="stress-metric">
+          <div class="stress-metric-label">Encours du prêt</div>
+          <div class="stress-metric-val">€12.0M</div>
+          <div class="stress-metric-sub">Fixe jusqu'au remboursement</div>
+        </div>
+        <div class="stress-metric">
+          <div class="stress-metric-label">Ratio LTV</div>
+          <div class="stress-metric-val" id="ltvVal">40.0%</div>
+          <div class="stress-metric-sub">Prêt ÷ Réserve</div>
+        </div>
+        <div class="stress-metric">
+          <div class="stress-metric-label">État de la structure</div>
+          <div class="stress-metric-val" id="statusVal" style="font-size:1rem;"><span class="stress-status" style="background:rgba(0,255,136,.12);color:#00FF88;">● SÛR</span></div>
+          <div class="stress-metric-sub" id="statusSub">Marge avant dé-risquage</div>
+        </div>
+      </div>
+      <div class="stress-gauge-wrap">
+        <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text3);margin-bottom:.4rem;">
+          <span>LTV 0%</span>
+          <span style="color:#00FF88;">SÛR &lt;65%</span>
+          <span style="color:#FFB84D;">VIGILANCE 65–85%</span>
+          <span style="color:#FF4444;">APPEL DE MARGE &gt;85%</span>
+          <span>100%+</span>
+        </div>
+        <div class="stress-gauge-bar">
+          <div class="stress-gauge-fill" id="gaugeFill"></div>
+          <div class="stress-trigger-line" style="left:65%" data-label="65%"></div>
+          <div class="stress-trigger-line" style="left:85%" data-label="85%"></div>
+        </div>
+      </div>
+      <div class="stress-waterfall" id="waterfallMsg">
+        <strong>Statut : ZONE SÛRE.</strong> La structure opère dans ses paramètres de conception. Aucune action de dé-risquage requise.
+      </div>
+      <p class="small-note" style="font-size:.7rem;color:var(--text3);margin-top:1rem;">Modèle illustratif. Les seuils et réponses sont indicatifs ; la politique de LTV définitive et le protocole de dé-risquage sont documentés avec les contreparties prêteuses avant tout appel de capital.</p>
+    </div>
     <div class="hi-box reveal" style="margin-top:2rem;">
       <h4>LTV prudent, surveillé en continu.</h4>
-      <p>Un LTV prudent est maintenu en permanence pour préserver une marge contre les drawdowns ; la santé du collatéral est surveillée en continu, avec des actions de dé-risquage définies. Le cadre complet est communiqué avant tout appel de capital.</p>
+      <p>Un LTV prudent est maintenu en permanence pour préserver une marge contre les drawdowns ; la santé du collatéral est surveillée en continu, avec des actions de dé-risquage définies — l'immobilier est désendetté d'abord ; la réserve est un dernier recours. Le cadre complet est communiqué avant tout appel de capital.</p>
     </div>
   </div>
 </div>
@@ -1527,6 +1591,63 @@ footer p+p{margin-top:.4rem;}
   <div class="eyebrow">08 — La Structure</div>
   <h2 class="section-h">Une structure sociétaire.<br><span class="dim">Pas un montage à tokens.</span></h2>
   <p class="lead">Les investisseurs détiennent des actions préférentielles convertibles d'une holding luxembourgeoise. La couche on-chain est un dispositif de transparence et d'identité — pas le titre juridique. Le Bitcoin n'est jamais détenu sur un exchange.</p>
+  <div class="engine-svg-box reveal" style="margin:2rem 0 2.5rem;">
+    <svg viewBox="0 0 1100 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="sg-o" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <path id="stp1" d="M 190 130 L 295 130"/>
+        <path id="stp2" d="M 575 105 C 640 75 670 68 730 68"/>
+        <path id="stp3" d="M 575 155 C 640 190 670 198 730 198"/>
+        <path id="stp4" d="M 915 198 L 955 198"/>
+      </defs>
+      <!-- connectors -->
+      <line x1="190" y1="130" x2="295" y2="130" stroke="rgba(247,147,26,0.2)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <path d="M 575 105 C 640 75 670 68 730 68" fill="none" stroke="rgba(247,147,26,0.2)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <path d="M 575 155 C 640 190 670 198 730 198" fill="none" stroke="rgba(0,180,255,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="915" y1="198" x2="955" y2="198" stroke="rgba(0,255,136,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="435" y1="185" x2="435" y2="240" stroke="rgba(170,136,255,0.3)" stroke-width="1.2" stroke-dasharray="3 4"/>
+      <!-- investors -->
+      <rect x="25" y="90" width="165" height="80" rx="12" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <text x="107" y="122" text-anchor="middle" fill="#7BA8CC" font-family="Space Grotesk,sans-serif" font-size="20" font-weight="700">€</text>
+      <text x="107" y="140" text-anchor="middle" fill="#7BA8CC" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">INVESTISSEURS</text>
+      <text x="107" y="156" text-anchor="middle" fill="#3D6080" font-family="Space Mono,monospace" font-size="6.6">PRÉFÉRENTIELLES CONVERTIBLES</text>
+      <!-- holdco -->
+      <rect x="295" y="75" width="280" height="110" rx="12" fill="rgba(247,147,26,0.07)" stroke="rgba(247,147,26,0.45)" stroke-width="1.5"/>
+      <text x="435" y="115" text-anchor="middle" fill="#F7931A" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="700">BBRF-PT HOLDING S.A.</text>
+      <text x="435" y="136" text-anchor="middle" fill="rgba(247,147,26,0.75)" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">SOPARFI · LUXEMBOURG</text>
+      <text x="435" y="155" text-anchor="middle" fill="#3D6080" font-family="Space Mono,monospace" font-size="7">ÉMETTEUR · DÉTIENT LA RÉSERVE</text>
+      <!-- btc reserve -->
+      <rect x="730" y="28" width="185" height="80" rx="12" fill="rgba(247,147,26,0.05)" stroke="rgba(247,147,26,0.35)" stroke-width="1.5"/>
+      <text x="822" y="60" text-anchor="middle" fill="#F7931A" font-family="Space Grotesk,sans-serif" font-size="18" font-weight="700">₿</text>
+      <text x="822" y="78" text-anchor="middle" fill="#F7931A" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">RÉSERVE BTC</text>
+      <text x="822" y="94" text-anchor="middle" fill="rgba(247,147,26,0.5)" font-family="Space Mono,monospace" font-size="6.6">JAMAIS VENDUE · MULTISIG</text>
+      <!-- opco -->
+      <rect x="730" y="158" width="185" height="80" rx="12" fill="rgba(0,180,255,0.04)" stroke="rgba(0,180,255,0.3)" stroke-width="1.5"/>
+      <text x="822" y="190" text-anchor="middle" fill="#00B4FF" font-family="Space Grotesk,sans-serif" font-size="14" font-weight="700">🏠</text>
+      <text x="822" y="208" text-anchor="middle" fill="#00B4FF" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">OPCO PORTUGAISE</text>
+      <text x="822" y="224" text-anchor="middle" fill="#3D6080" font-family="Space Mono,monospace" font-size="6.6">SOURCE · EXÉCUTE · GÈRE</text>
+      <!-- SPVs -->
+      <rect x="955" y="130" width="120" height="38" rx="8" fill="rgba(0,255,136,0.04)" stroke="rgba(0,255,136,0.25)" stroke-width="1"/>
+      <text x="1015" y="153" text-anchor="middle" fill="#00FF88" font-family="Space Mono,monospace" font-size="8">SPV Lda. 01</text>
+      <rect x="955" y="179" width="120" height="38" rx="8" fill="rgba(0,255,136,0.04)" stroke="rgba(0,255,136,0.25)" stroke-width="1"/>
+      <text x="1015" y="202" text-anchor="middle" fill="#00FF88" font-family="Space Mono,monospace" font-size="8">SPV Lda. 02</text>
+      <rect x="955" y="228" width="120" height="38" rx="8" fill="rgba(0,255,136,0.04)" stroke="rgba(0,255,136,0.25)" stroke-width="1"/>
+      <text x="1015" y="251" text-anchor="middle" fill="rgba(0,255,136,0.55)" font-family="Space Mono,monospace" font-size="8">SPV Lda. 0n</text>
+      <!-- on-chain mirror -->
+      <rect x="255" y="240" width="360" height="40" rx="8" fill="rgba(170,136,255,0.04)" stroke="rgba(170,136,255,0.35)" stroke-width="1.2" stroke-dasharray="5 4"/>
+      <text x="435" y="264" text-anchor="middle" fill="#AA88FF" font-family="Space Mono,monospace" font-size="7.5" letter-spacing="0.8">bbrf-pt.eth · MIROIR ON-CHAIN — PROBANT, NON CONSTITUTIF</text>
+      <!-- particles -->
+      <circle r="4.5" fill="#7BA8CC" filter="url(#sg-o)"><animateMotion dur="1.4s" repeatCount="indefinite" begin="0s"><mpath href="#stp1"/></animateMotion></circle>
+      <circle r="3" fill="#7BA8CC" filter="url(#sg-o)" opacity="0.5"><animateMotion dur="1.4s" repeatCount="indefinite" begin="0.7s"><mpath href="#stp1"/></animateMotion></circle>
+      <circle r="4.5" fill="#F7931A" filter="url(#sg-o)"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0.2s"><mpath href="#stp2"/></animateMotion></circle>
+      <circle r="4.5" fill="#00B4FF" filter="url(#sg-o)"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0.5s"><mpath href="#stp3"/></animateMotion></circle>
+      <circle r="3.5" fill="#00FF88" filter="url(#sg-o)"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0.3s"><mpath href="#stp4"/></animateMotion></circle>
+    </svg>
+  </div>
+
 
   <div class="struct-grid reveal">
     <div class="struct-card c1">
@@ -1817,6 +1938,37 @@ if(typeof Chart !== 'undefined'){
 }
 
 
+// ── DOLLAR DECAY DIVIDEND CHART ──
+function buildDollarChart(){
+  const el = document.getElementById('dollarChart');
+  if(!el) return;
+  if(_charts.dollar) _charts.dollar.destroy();
+  const T = chartTheme();
+  const labels = ['Y0','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10'];
+  const nominal = [12,12,12,12,12,12,12,12,12,12,12];
+  const real = labels.map((_,i)=>+(12*Math.pow(0.93,i)).toFixed(2));
+  _charts.dollar = new Chart(el,{
+    type:'line',
+    data:{labels,datasets:[
+      {label:'Prêt nominal (ce que vous devez)',data:nominal,borderColor:'rgba(255,80,80,0.65)',borderWidth:2,borderDash:[6,4],
+       fill:{target:1, above:'rgba(0,255,136,0.1)'},tension:0,pointRadius:0,pointHoverRadius:4,backgroundColor:'transparent'},
+      {label:'Valeur réelle du prêt (dévaluation du dollar −7%/an)',data:real,borderColor:T.green,borderWidth:2.5,fill:true,
+       backgroundColor:(ctx)=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,ctx.chart.height);g.addColorStop(0,'rgba(0,255,136,0.12)');g.addColorStop(1,'rgba(0,255,136,0.01)');return g;},
+       tension:0.4,pointBackgroundColor:T.green,pointRadius:3,pointHoverRadius:6}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'top',align:'start',labels:{color:T.legend,font:{size:10},usePointStyle:true,pointStyleWidth:18,padding:16}},
+        tooltip:{backgroundColor:T.ttBg,borderColor:'rgba(0,255,136,0.2)',borderWidth:1,titleColor:T.green,bodyColor:T.ttBody,padding:12,
+          callbacks:{label:(c)=>{const saving=(nominal[c.dataIndex]-real[c.dataIndex]).toFixed(2);
+            if(c.datasetIndex===1) return ` Valeur réelle : €${c.parsed.y}M  ·  Érosion : €${saving}M`;
+            return ` Nominal : €${c.parsed.y}M`;}}}},
+      scales:{x:{grid:{color:T.grid},ticks:{color:T.tick,font:{size:10}}},
+              y:{grid:{color:T.grid},min:4,max:13,ticks:{color:T.tick,font:{size:10},callback:(v)=>'€'+v+'M'}}},
+      animation:{duration:2000,easing:'easeInOutQuart'}}
+  });
+}
+buildDollarChart();
+
 // ── SPREAD CHART ──
 function buildSpreadChart(){
   const el = document.getElementById('spreadChart');
@@ -2000,7 +2152,7 @@ function buildPortfolioChart(){
   });
 }
 buildPortfolioChart();
-window._rebuildCharts = function(){buildSpreadChart();buildReturnsChart();buildPortfolioChart();};
+window._rebuildCharts = function(){buildDollarChart();buildSpreadChart();buildReturnsChart();buildPortfolioChart();};
 
 // ── DONUT ANIMATION (SVG stroke-dasharray) ──
 (function(){
@@ -2071,6 +2223,83 @@ if(_pdfBtn){
   });
 }
 
+
+// ── STRESS TEST SLIDER ──
+(function(){
+  const slider   = document.getElementById('btcSlider');
+  const priceEl  = document.getElementById('btcPriceDisplay');
+  const changeEl = document.getElementById('changeDisplay');
+  const resEl    = document.getElementById('reserveVal');
+  const ltvEl    = document.getElementById('ltvVal');
+  const statEl   = document.getElementById('statusVal');
+  const subEl    = document.getElementById('statusSub');
+  const gaugeEl  = document.getElementById('gaugeFill');
+  const wfEl     = document.getElementById('waterfallMsg');
+  if(!slider) return;
+
+  const BASE_BTC_PRICE = 85714;
+  const BTC_AMOUNT     = 350;
+  const LOAN_OUTSTANDING = 12;
+
+  function fmt(n){ return '€'+n.toLocaleString('fr-FR',{maximumFractionDigits:0}); }
+
+  function update(){
+    const T = chartTheme();
+    const pct = parseInt(slider.value);
+    const price = Math.round(BASE_BTC_PRICE * pct / 100);
+    const change = pct - 100;
+    const reserveM = +(BTC_AMOUNT * price / 1e6).toFixed(1);
+    const ltv = +(LOAN_OUTSTANDING / reserveM * 100).toFixed(1);
+
+    priceEl.textContent = fmt(price);
+    changeEl.textContent = change === 0 ? 'Prix actuel (0%)' : change + '%';
+    changeEl.style.color = change < -50 ? T.red : change < -25 ? T.warn : T.green;
+    resEl.textContent  = '€' + reserveM + 'M';
+    ltvEl.textContent  = ltv + '%';
+
+    let statusHTML, subText, wfClass, wfHTML;
+    gaugeEl.style.width = Math.min(ltv, 100) + '%';
+
+    if(ltv < 65){
+      gaugeEl.style.background = T.green;
+      ltvEl.style.color = T.green;
+      statusHTML = '<span class="stress-status" style="background:rgba(0,255,136,.12);color:'+T.green+';">● SÛR</span>';
+      subText = Math.round(65 - ltv) + ' pp de marge avant le premier seuil';
+      wfClass = '';
+      wfHTML = "<strong>Statut : ZONE SÛRE.</strong> La structure opère dans ses paramètres de conception. Aucune action de dé-risquage requise. Le Bitcoin compose intact.";
+    } else if(ltv < 75){
+      gaugeEl.style.background = T.warn;
+      ltvEl.style.color = T.warn;
+      statusHTML = '<span class="stress-status" style="background:rgba(255,184,77,.12);color:'+T.warn+';">⚠ VIGILANCE</span>';
+      subText = 'Premier palier de dé-risquage — surveillance rapprochée';
+      wfClass = 'warn';
+      wfHTML = "<strong>Dé-risquage actif (LTV 65–75%).</strong> L'exposition au prêt est réduite via une vente partielle d'immobilier ou un apport de fonds propres. <strong>Aucun Bitcoin n'est vendu.</strong> La réserve est protégée en désendettant d'abord la position immobilière la plus liquide.";
+    } else if(ltv < 85){
+      gaugeEl.style.background = T.orange2;
+      ltvEl.style.color = T.orange2;
+      statusHTML = '<span class="stress-status" style="background:rgba(255,136,68,.12);color:'+T.orange2+';">⚠ ÉLEVÉ</span>';
+      subText = 'Second palier — réduction plus profonde';
+      wfClass = 'warn';
+      wfHTML = "<strong>Dé-risquage renforcé (LTV 75–85%).</strong> Le prêt est réduit davantage ; un actif SPV peut être liquidé pour désendetter significativement la structure. <strong>Le Bitcoin n'est toujours pas vendu.</strong> La priorité est de rembourser le prêt avec le produit immobilier, pas avec la réserve.";
+    } else {
+      gaugeEl.style.background = T.red;
+      ltvEl.style.color = T.red;
+      statusHTML = '<span class="stress-status" style="background:rgba(255,68,68,.14);color:'+T.red+';">🚨 APPEL DE MARGE</span>';
+      subText = 'Remboursement intégral du prêt requis';
+      wfClass = 'danger';
+      wfHTML = "<strong>Zone d'appel de marge (LTV &gt;85%).</strong> Les actifs immobiliers sont liquidés pour rembourser le prêt. À ce prix, la valeur résiduelle de la réserve est de €" + reserveM + "M. <strong>Le Bitcoin est libéré du collatéral après remboursement</strong> — vendu seulement si toutes les autres options sont épuisées. L'immobilier absorbe le choc d'abord.";
+    }
+
+    statEl.innerHTML = statusHTML;
+    subEl.textContent = subText;
+    wfEl.className = 'stress-waterfall' + (wfClass ? ' '+wfClass : '');
+    wfEl.innerHTML = wfHTML;
+  }
+
+  slider.addEventListener('input', update);
+  update();
+  window._stressUpdate = update;
+})();
 
 // ── SCROLL REVEAL ──
 const io = new IntersectionObserver((entries)=>{

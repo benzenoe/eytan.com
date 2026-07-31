@@ -105,7 +105,16 @@ table.tbl{width:100%;border-collapse:collapse;background:var(--surface);border:1
 
 footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:var(--ink3);line-height:1.7;text-align:center;}
 
-@media(max-width:900px){
+.chartcard{background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:1.8rem;margin-top:2.4rem;}
+.chartcard .cl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;}
+.chartcard h3{font-family:'Source Serif 4',Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;}
+.chartcard .cn{font-size:.72rem;color:var(--ink3);margin-bottom:1.2rem;}
+.chartbox{position:relative;height:320px;}
+.chartbox.sm{height:250px;}
+.diagram{background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:1.4rem;margin:2.2rem 0;}
+.diagram svg{width:100%;height:auto;display:block;}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2.4rem;}
+@media(max-width:900px){.duo{grid-template-columns:1fr;}
   .facts{grid-template-columns:repeat(2,1fr);}
   .fact{border-bottom:1px solid var(--border);}
   .cols3,.cols2,.scen,.team{grid-template-columns:1fr;}
@@ -116,6 +125,7 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
   body{background:#fff;}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -181,6 +191,12 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
     <h4>The structural alpha is in not selling the Bitcoin.</h4>
     <p>The reserve is posted as collateral through regulated channels to borrow conservatively at an indicative ~2–5% per annum; the borrowed euros acquire income-producing Portuguese real estate; rental income services the borrowing and funds distributions. The claim is not "free leverage" — the borrowing cost is real and included in every illustration. Conservative loan-to-value is maintained at all times, with collateral health monitored continuously and defined de-risking actions.</p>
   </div>
+  <div class="chartcard">
+    <div class="cl">The Currency Hedge, Quantified — Illustrative</div>
+    <h3>A €12M loan in a depreciating currency.</h3>
+    <div class="cn">Nominal loan outstanding vs its real purchasing-power value at −7%/yr dollar debasement · Illustrative · Not a forecast</div>
+    <div class="chartbox sm"><canvas id="dollarChart"></canvas></div>
+  </div>
 </div>
 
 <hr class="rule">
@@ -190,6 +206,48 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
   <div class="kicker">Structure &amp; Instrument</div>
   <h2 class="head">A corporate structure, not a token scheme.</h2>
   <p class="lead">Investors hold a senior, familiar security issued by BBRF-PT Holding S.A., a Luxembourg SOPARFI. The on-chain transparency layer (tokenised share register, published governance records, bbrf-pt.eth) is a reporting feature — it does not alter the legal rights of the shares. The Bitcoin reserve is held in regulated institutional custody, multisig from inception, never on exchange.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 1100 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="pp1" d="M 190 130 L 295 130"/>
+        <path id="pp2" d="M 575 105 C 640 75 670 68 730 68"/>
+        <path id="pp3" d="M 575 155 C 640 190 670 198 730 198"/>
+        <path id="pp4" d="M 915 198 L 955 198"/>
+      </defs>
+      <line x1="190" y1="130" x2="295" y2="130" stroke="rgba(184,95,0,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <path d="M 575 105 C 640 75 670 68 730 68" fill="none" stroke="rgba(184,95,0,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <path d="M 575 155 C 640 190 670 198 730 198" fill="none" stroke="rgba(22,40,60,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="915" y1="198" x2="955" y2="198" stroke="rgba(0,112,79,0.35)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="435" y1="185" x2="435" y2="240" stroke="rgba(124,92,214,0.4)" stroke-width="1.2" stroke-dasharray="3 4"/>
+      <rect x="25" y="90" width="165" height="80" rx="10" fill="#fff" stroke="#d9d2c4" stroke-width="1.2"/>
+      <text x="107" y="122" text-anchor="middle" fill="#16283c" font-family="Source Serif 4,Georgia,serif" font-size="20" font-weight="700">€</text>
+      <text x="107" y="140" text-anchor="middle" fill="#46586a" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">INVESTORS</text>
+      <text x="107" y="156" text-anchor="middle" fill="#7d8a97" font-family="Space Mono,monospace" font-size="6.6">CONVERTIBLE PREFERRED</text>
+      <rect x="295" y="75" width="280" height="110" rx="10" fill="rgba(184,95,0,0.05)" stroke="#B85F00" stroke-width="1.5"/>
+      <text x="435" y="115" text-anchor="middle" fill="#16283c" font-family="Source Serif 4,Georgia,serif" font-size="15" font-weight="700">BBRF-PT HOLDING S.A.</text>
+      <text x="435" y="136" text-anchor="middle" fill="#B85F00" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">SOPARFI · LUXEMBOURG</text>
+      <text x="435" y="155" text-anchor="middle" fill="#7d8a97" font-family="Space Mono,monospace" font-size="7">ISSUER · HOLDS THE RESERVE</text>
+      <rect x="730" y="28" width="185" height="80" rx="10" fill="rgba(184,95,0,0.04)" stroke="rgba(184,95,0,0.5)" stroke-width="1.3"/>
+      <text x="822" y="60" text-anchor="middle" fill="#B85F00" font-family="Source Serif 4,Georgia,serif" font-size="18" font-weight="700">₿</text>
+      <text x="822" y="78" text-anchor="middle" fill="#B85F00" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">BTC RESERVE</text>
+      <text x="822" y="94" text-anchor="middle" fill="#7d8a97" font-family="Space Mono,monospace" font-size="6.6">NEVER SOLD · MULTISIG</text>
+      <rect x="730" y="158" width="185" height="80" rx="10" fill="rgba(22,40,60,0.03)" stroke="rgba(22,40,60,0.35)" stroke-width="1.3"/>
+      <text x="822" y="192" text-anchor="middle" fill="#16283c" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="1.2">PT OPERATING CO</text>
+      <text x="822" y="210" text-anchor="middle" fill="#7d8a97" font-family="Space Mono,monospace" font-size="6.6">SOURCES · EXECUTES · MANAGES</text>
+      <rect x="955" y="130" width="120" height="38" rx="6" fill="rgba(0,112,79,0.04)" stroke="rgba(0,112,79,0.4)" stroke-width="1"/>
+      <text x="1015" y="153" text-anchor="middle" fill="#00704F" font-family="Space Mono,monospace" font-size="8">SPV Lda. 01</text>
+      <rect x="955" y="179" width="120" height="38" rx="6" fill="rgba(0,112,79,0.04)" stroke="rgba(0,112,79,0.4)" stroke-width="1"/>
+      <text x="1015" y="202" text-anchor="middle" fill="#00704F" font-family="Space Mono,monospace" font-size="8">SPV Lda. 02</text>
+      <rect x="955" y="228" width="120" height="38" rx="6" fill="rgba(0,112,79,0.03)" stroke="rgba(0,112,79,0.25)" stroke-width="1"/>
+      <text x="1015" y="251" text-anchor="middle" fill="rgba(0,112,79,0.6)" font-family="Space Mono,monospace" font-size="8">SPV Lda. 0n</text>
+      <rect x="255" y="240" width="360" height="40" rx="6" fill="rgba(124,92,214,0.03)" stroke="rgba(124,92,214,0.45)" stroke-width="1.2" stroke-dasharray="5 4"/>
+      <text x="435" y="264" text-anchor="middle" fill="#7C5CD6" font-family="Space Mono,monospace" font-size="7.5" letter-spacing="0.8">bbrf-pt.eth · ON-CHAIN MIRROR — EVIDENTIARY, NOT CONSTITUTIVE</text>
+      <circle r="4" fill="#B85F00"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0s"><mpath href="#pp1"/></animateMotion></circle>
+      <circle r="4" fill="#B85F00" opacity="0.8"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.3s"><mpath href="#pp2"/></animateMotion></circle>
+      <circle r="4" fill="#16283c" opacity="0.7"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.6s"><mpath href="#pp3"/></animateMotion></circle>
+      <circle r="3.5" fill="#00704F" opacity="0.8"><animateMotion dur="1.3s" repeatCount="indefinite" begin="0.4s"><mpath href="#pp4"/></animateMotion></circle>
+    </svg>
+  </div>
   <div class="tblwrap">
     <table>
       <thead><tr><th>Term</th><th>Detail</th></tr></thead>
@@ -237,6 +295,12 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
     <div class="card"><div class="tag">Conservative</div><div class="big">~€2.8M</div><div class="drv">BTC ×6 · RE ×1.8 · 10 years</div></div>
     <div class="card base"><div class="tag">Base</div><div class="big">~€6.0M</div><div class="drv">BTC ×10 · RE ×2.3 · 10 years</div></div>
     <div class="card"><div class="tag">Upside</div><div class="big">~€9.5M</div><div class="drv">BTC ×15 · RE ×2.8 · 10 years</div></div>
+  </div>
+  <div class="chartcard">
+    <div class="cl">The Spread, Visualised — Illustrative</div>
+    <h3>Historical appreciation vs the cost of capital.</h3>
+    <div class="cn">Indexed to 1× at Year 0 · Conservative 30% CAGR shown against a ~3.5% APR borrowing cost · Illustrative · Not a forecast</div>
+    <div class="chartbox"><canvas id="spreadChart"></canvas></div>
   </div>
 </div>
 
@@ -306,6 +370,31 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
     <div class="card"><div class="tag">€50M — Base</div><p>€30M reserve (~350 BTC) · €20M deployed (€50–70M leveraged) · illustrative 10-yr portfolio €280–380M.</p></div>
     <div class="card"><div class="tag">€100M — Cap</div><p>€60M reserve (~700 BTC) · €40M deployed (€100–140M leveraged) · illustrative 10-yr portfolio €600–850M.</p></div>
   </div>
+  <div class="duo">
+    <div class="chartcard" style="margin-top:0;">
+      <div class="cl">Capital Allocation — Indicative</div>
+      <h3>~60 / 40.</h3>
+      <div class="cn">Reserve vs deployment per €1M committed · Ratio policy finalised at formation</div>
+      <div style="display:flex;justify-content:center;padding:.6rem 0;">
+        <svg width="210" height="210" viewBox="0 0 240 240">
+          <circle cx="120" cy="120" r="96" fill="none" stroke="#eee8dc" stroke-width="26"/>
+          <circle cx="120" cy="120" r="96" fill="none" stroke="#B85F00" stroke-width="26" stroke-dasharray="361.9 241.3" transform="rotate(-90 120 120)"/>
+          <circle cx="120" cy="120" r="96" fill="none" stroke="#00704F" stroke-width="26" stroke-dasharray="241.3 361.9" stroke-dashoffset="-361.9" transform="rotate(-90 120 120)"/>
+          <text x="120" y="108" text-anchor="middle" fill="#B85F00" font-family="Source Serif 4,Georgia,serif" font-size="30" font-weight="700">60%</text>
+          <text x="120" y="124" text-anchor="middle" fill="#7d8a97" font-family="Space Mono,monospace" font-size="8">BTC RESERVE</text>
+          <text x="120" y="147" text-anchor="middle" fill="#00704F" font-family="Source Serif 4,Georgia,serif" font-size="23" font-weight="700">40%</text>
+          <text x="120" y="162" text-anchor="middle" fill="#7d8a97" font-family="Space Mono,monospace" font-size="8">RE DEPLOYMENT</text>
+        </svg>
+      </div>
+      <p style="font-size:.8rem;color:var(--ink2);"><span style="color:#B85F00;font-weight:700;">■</span> Bitcoin reserve — never sold, regulated custody &nbsp; <span style="color:#00704F;font-weight:700;">■</span> Real estate — leveraged ~2–3× via the reserve</p>
+    </div>
+    <div class="chartcard" style="margin-top:0;">
+      <div class="cl">Portfolio Value at Scale — Illustrative</div>
+      <h3>Ten-year trajectory by raise tier.</h3>
+      <div class="cn">Reserve compounding + leveraged appreciation + yield reinvestment · Not a forecast</div>
+      <div class="chartbox sm"><canvas id="portfolioChart"></canvas></div>
+    </div>
+  </div>
   <div class="callout">
     <h4>Open items before formation — disclosed, none blocking.</h4>
     <p>Share classes and conversion mechanics; custody and lending counterparties; on-chain layer scope; advisory selection; BTC/RE ratio policy. Roadmap: legal &amp; entity → custody &amp; leverage → pilot → distribution.</p>
@@ -351,5 +440,67 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
   <p>Confidential. Not a securities offering, prospectus, or investment, legal, or tax advice. Any offering will be made only to eligible professional and well-informed investors pursuant to definitive documentation. Return scenarios are illustrative and are not forecasts; capital is at risk, including total loss. Prospective investors should obtain independent legal, tax, and financial advice.</p>
 </footer>
 
+<script>
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = '#7d8a97';
+const GRID = 'rgba(22,40,60,0.07)';
+const TICK = {color:'#7d8a97', font:{size:10}};
+const LGD = {color:'#46586a', font:{size:10}, usePointStyle:true, pointStyleWidth:16, padding:12};
+
+(function(){
+  const labels = ['Y0','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10'];
+  const nominal = [12,12,12,12,12,12,12,12,12,12,12];
+  const real = labels.map((_,i)=>+(12*Math.pow(0.93,i)).toFixed(2));
+  new Chart(document.getElementById('dollarChart'),{
+    type:'line',
+    data:{labels,datasets:[
+      {label:'Nominal loan (what you owe)',data:nominal,borderColor:'rgba(160,60,50,0.75)',borderWidth:1.6,borderDash:[6,4],
+       fill:{target:1, above:'rgba(0,112,79,0.10)'},tension:0,pointRadius:0,backgroundColor:'transparent'},
+      {label:'Real value at −7%/yr debasement',data:real,borderColor:'#00704F',borderWidth:2.2,fill:false,tension:0.4,
+       pointBackgroundColor:'#00704F',pointRadius:2.5}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'top',align:'start',labels:LGD}},
+      scales:{x:{grid:{color:GRID},ticks:TICK},y:{grid:{color:GRID},min:4,max:13,ticks:{...TICK,callback:v=>'€'+v+'M'}}},
+      animation:{duration:1600,easing:'easeInOutQuart'}}
+  });
+})();
+
+(function(){
+  const labels = ['Y0','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10'];
+  new Chart(document.getElementById('spreadChart'),{
+    type:'line',
+    data:{labels,datasets:[
+      {label:'BTC — conservative 30% CAGR',data:[1,1.30,1.69,2.20,2.86,3.71,4.83,6.27,8.16,10.60,13.79],
+       borderColor:'#B85F00',backgroundColor:'rgba(184,95,0,0.07)',fill:true,tension:0.4,borderWidth:2.2,pointBackgroundColor:'#B85F00',pointRadius:2.5},
+      {label:'Borrowing cost (~3.5% APR)',data:[1,1.035,1.071,1.109,1.148,1.188,1.229,1.272,1.317,1.363,1.411],
+       borderColor:'rgba(160,60,50,0.75)',fill:false,tension:0,borderWidth:1.6,borderDash:[5,5],pointRadius:0}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'top',align:'start',labels:LGD}},
+      scales:{x:{grid:{color:GRID},ticks:TICK},y:{grid:{color:GRID},ticks:{...TICK,callback:v=>v+'×'}}},
+      animation:{duration:1800,easing:'easeInOutQuart'}}
+  });
+})();
+
+(function(){
+  const labels = ['Y0','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y9','Y10'];
+  new Chart(document.getElementById('portfolioChart'),{
+    type:'line',
+    data:{labels,datasets:[
+      {label:'€100M raise',data:[100,122,155,200,262,336,415,492,560,632,715],
+       borderColor:'#B85F00',backgroundColor:'rgba(184,95,0,0.06)',fill:true,tension:0.4,borderWidth:2,pointBackgroundColor:'#B85F00',pointRadius:2},
+      {label:'€50M raise',data:[50,60,77,100,132,170,208,246,280,316,356],
+       borderColor:'#16283c',backgroundColor:'rgba(22,40,60,0.05)',fill:true,tension:0.4,borderWidth:1.7,pointBackgroundColor:'#16283c',pointRadius:2},
+      {label:'€25M raise',data:[25,29,37,48,62,78,95,110,124,138,153],
+       borderColor:'#7d8a97',backgroundColor:'rgba(125,138,151,0.06)',fill:true,tension:0.4,borderWidth:1.4,pointBackgroundColor:'#7d8a97',pointRadius:2}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'top',align:'end',labels:LGD}},
+      scales:{x:{grid:{color:GRID},ticks:TICK},y:{grid:{color:GRID},ticks:{...TICK,callback:v=>'€'+v+'M'}}},
+      animation:{duration:1800,easing:'easeInOutQuart'}}
+  });
+})();
+</script>
 </body>
 </html>
