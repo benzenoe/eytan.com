@@ -12,6 +12,7 @@ catch { puppeteer = require(path.join(require('os').homedir(), 'bogen-ai/node_mo
 const JOBS = [
   { src: 'bbrf-pt-pdf-source.html',    out: 'BBRF-PT-Investor-Memorandum.pdf' },
   { src: 'bbrf-pt-fr-pdf-source.html', out: 'BBRF-PT-Memorandum-Investisseur.pdf' },
+  { src: 'bbrf-pt-pt-pdf-source.html', out: 'BBRF-PT-Memorando-Investidor.pdf' },
 ];
 
 (async () => {
