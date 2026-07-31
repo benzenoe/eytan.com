@@ -105,6 +105,17 @@ table.tbl{width:100%;border-collapse:collapse;background:var(--surface);border:1
 
 footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:var(--ink3);line-height:1.7;text-align:center;}
 
+.photos{display:grid;grid-template-columns:1.8fr 1fr;grid-template-rows:1fr 1fr;gap:1rem;margin:0 0 2.2rem;height:420px;}
+.photos img{width:100%;height:100%;object-fit:cover;border-radius:6px;display:block;border:1px solid var(--border2);}
+.photos img:first-child{grid-row:1 / span 2;}
+.photos figcaption{display:none;}
+.linkrow{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2.2rem;}
+.linkbtn{display:inline-block;border:1px solid var(--border2);background:var(--surface);color:var(--navy);
+  font-weight:600;font-size:.85rem;padding:.7rem 1.6rem;border-radius:4px;text-decoration:none;transition:all .2s;}
+.linkbtn:hover{border-color:var(--accent);color:var(--accent);}
+.linkbtn.solid{background:var(--navy);border-color:var(--navy);color:#fff;}
+.linkbtn.solid:hover{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+@media(max-width:860px){.photos{grid-template-columns:1fr;grid-template-rows:none;height:auto;}.photos img{height:220px;}.photos img:first-child{grid-row:auto;}}
 .chartcard{background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:1.8rem;margin-top:2.4rem;}
 .chartcard .cl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;}
 .chartcard h3{font-family:'Source Serif 4',Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;}
@@ -277,10 +288,20 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
   <div class="kicker">Pilot Acquisition</div>
   <h2 class="head">Pebble Stone Farm — the proof of concept.</h2>
   <p class="lead">The first acquisition is identified, not hypothetical: a ~€11M, 1,000-hectare hunting estate in Portugal's Alentejo. One SPV through which the full legal, custody, governance, and yield mechanics are proven end-to-end before the institutional raise opens.</p>
+  <div class="photos">
+    <img src="/properties/pebble-stone/images/aerial-14.jpg" alt="Pebble Stone Farm — aerial view of the 1,000-hectare Alentejo estate" loading="lazy">
+    <img src="/properties/pebble-stone/images/farmhouse.jpg" alt="Pebble Stone Farm — the farmhouse" loading="lazy">
+    <img src="/properties/pebble-stone/images/deer-herd.jpg" alt="Pebble Stone Farm — deer herd on the hunting estate" loading="lazy">
+  </div>
   <div class="cols3">
     <div class="card"><div class="tag">Asset</div><h3>1,000 hectares</h3><p>Institutional scale, off-market access, single-title simplicity, in Portugal's premier hunting and agricultural region.</p></div>
     <div class="card"><div class="tag">Income</div><h3>Multiple streams</h3><p>Hunting-estate operations, agricultural revenue, and future hospitality optionality — a specialty asset class aligned to the long-horizon thesis.</p></div>
     <div class="card"><div class="tag">Role</div><h3>Full-stack proof</h3><p>Legal, custody, lending, governance, and yield mechanics proven end-to-end at a manageable scale before institutional capital is accepted.</p></div>
+  </div>
+  <div class="linkrow">
+    <a class="linkbtn solid" href="/properties/pebble-stone/brochure.html" target="_blank">View the Estate Brochure</a>
+    <a class="linkbtn" href="/properties/pebble-stone/gallery.html" target="_blank">Aerial Gallery</a>
+    <a class="linkbtn" href="/properties/pebble-stone/Pebble-Stone-Estate-EN.pdf" target="_blank">Estate PDF</a>
   </div>
 </div>
 
