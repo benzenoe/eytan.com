@@ -1868,7 +1868,7 @@ footer p+p{margin-top:.4rem;}
         BBRF-PT — Mémorandum Investisseur
       </div>
       <div style="display:flex;align-items:center;gap:.75rem;">
-        <a id="pdf-download-link" href="BBRF-PT-Memorandum-Investisseur.pdf?v=aligned1" download
+        <a id="pdf-download-link" href="BBRF-PT-Memorandum-Investisseur.pdf?v=aligned2" download
           style="display:inline-flex;align-items:center;gap:.5rem;background:#B85F00;color:#fff;
           text-decoration:none;padding:.55rem 1.1rem;border-radius:8px;
           font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.83rem;
@@ -2188,7 +2188,7 @@ const _pdfIframe = document.getElementById('pdf-iframe');
 function openPdfModal(){
   // Load iframe lazily
   if(!_pdfIframe.dataset.loaded){
-    _pdfIframe.src = 'BBRF-PT-Memorandum-Investisseur.pdf?v=aligned1';
+    _pdfIframe.src = 'BBRF-PT-Memorandum-Investisseur.pdf?v=aligned2';
     _pdfIframe.dataset.loaded = '1';
   }
   _pdfModal.style.display = 'flex';
