@@ -118,7 +118,7 @@ With the first baby boomers turning 80 in 2026, demand for senior housing is app
 
 ### 3. International Diversification
 
-This is something I practice personally. Operating in both the U.S. (Miami) and Portugal through [SoldHere.pt](https://soldhere.pt), I've seen how international diversification provides both currency hedging and access to different market cycles.
+This is something I practice personally. Operating in both the U.S. (Miami) and Portugal, I've seen how international diversification provides both currency hedging and access to different market cycles.
 
 Portugal, in particular, continues to attract American and European investors seeking lifestyle, tax advantages, and relative value.
 
