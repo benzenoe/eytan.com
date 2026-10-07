@@ -66,7 +66,7 @@ a{color:var(--forest-2)}
 :focus-visible{outline:2px solid var(--champagne);outline-offset:3px}
 .wrap{max-width:var(--content);margin-inline:auto;padding-inline:var(--gutter)}
 .section{padding-block:var(--section);scroll-margin-top:110px}
-#appointment,#cut,#team,#story,#facets{scroll-margin-top:110px}
+#appointment,#cut,#team,#story,#facets,#film{scroll-margin-top:110px}
 .eyebrow{font-size:var(--fs-eyebrow);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#7A603F}
 .on-dark .eyebrow{color:var(--champagne)}
 .lede{font-family:var(--serif);font-size:var(--fs-lede);line-height:1.55;color:var(--forest-2)}
@@ -156,6 +156,20 @@ a{color:var(--forest-2)}
 .story figure{margin:var(--s3) 0 0;max-width:520px}
 .story figure img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;object-position:center 45%}
 .story figcaption{margin-top:10px;font-size:var(--fs-small);color:#7D8A7A}
+
+/* ── Film ──────────────────────────────────────────────────────────────── */
+.film{background:var(--white)}
+.film .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s3) var(--s6);margin-bottom:clamp(32px,4vw,56px)}
+.film .head > p{flex:1 1 360px;min-width:0;max-width:34em}
+.player{position:relative;max-width:980px;margin-inline:auto;padding:0 18px 18px 0}
+.player::after{content:"";position:absolute;inset:18px 0 0 18px;border:1px solid var(--champagne);pointer-events:none}
+.player video{position:relative;z-index:1;display:block;width:100%;height:auto;aspect-ratio:848/480;background:var(--forest);object-fit:cover}
+.player .play{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-60%);width:clamp(72px,8vw,96px);height:clamp(72px,8vw,96px);border-radius:50%;border:1px solid var(--champagne);background:rgba(27,36,25,.55);color:var(--champagne);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);transition:background .25s,transform .25s}
+.player .play:hover{background:rgba(27,36,25,.8);transform:translate(-50%,-60%) scale(1.04)}
+.player .play svg{width:34%;height:34%;margin-left:6%}
+.player.playing .play{display:none}
+.film .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;max-width:980px;margin:14px auto 0;font-size:var(--fs-small);color:#7D8A7A}
+.film .meta b{font-family:var(--serif);font-weight:400;font-style:italic;color:var(--forest-2);font-size:var(--fs-body)}
 
 /* ── Three words ───────────────────────────────────────────────────────── */
 .promise .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s3) var(--s6);margin-bottom:clamp(32px,4vw,56px)}
@@ -402,6 +416,32 @@ a{color:var(--forest-2)}
           <img src="img/story.jpg" alt="Hand wearing an ASHTH pear-cut laboratory-grown diamond ring" width="1000" height="800" loading="lazy">
           <figcaption>Pear-cut solitaire, laboratory-grown, set in white gold.</figcaption>
         </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILM -->
+  <section class="film section" id="film" aria-labelledby="film-title">
+    <div class="wrap">
+      <div class="head">
+        <div class="head-l">
+          <p class="eyebrow">A First Look</p>
+          <h2 id="film-title">Preview our ad.</h2>
+        </div>
+        <p>Our thirty-second film for the European launch. The same diamond, with a different origin, worn where it belongs: in the middle of an ordinary, beautiful day.</p>
+      </div>
+      <div class="player" id="player">
+        <video id="adVideo" controls playsinline preload="metadata" poster="video/ashth-ad-poster.jpg" width="848" height="480">
+          <source src="video/ashth-ad.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="video/ashth-ad.mp4">Download the film</a> instead.
+        </video>
+        <button class="play" type="button" id="playBtn" aria-label="Play the ASHTH film">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>
+        </button>
+      </div>
+      <div class="meta">
+        <b>Same diamond. Different origin.</b>
+        <span>00:30 · ASHTH Europe · ashth.eu</span>
       </div>
     </div>
   </section>
@@ -690,6 +730,8 @@ a{color:var(--forest-2)}
 (function(){
   var h=document.getElementById('header'),t=document.getElementById('menuToggle');
   if(t){t.addEventListener('click',function(){var open=h.classList.toggle('open');t.setAttribute('aria-expanded',open?'true':'false');t.setAttribute('aria-label',open?'Close menu':'Open menu');});}
+  var v=document.getElementById('adVideo'),pb=document.getElementById('playBtn'),pl=document.getElementById('player');
+  if(v&&pb&&pl){pb.addEventListener('click',function(){v.play();});v.addEventListener('play',function(){pl.classList.add('playing');});v.addEventListener('pause',function(){if(v.currentTime<v.duration){pl.classList.add('playing');}});v.addEventListener('ended',function(){pl.classList.remove('playing');});}
   var f=document.getElementById('newsletter');
   if(f){f.addEventListener('submit',function(e){e.preventDefault();var i=document.getElementById('newsletter-email');if(i&&i.value){i.value='';i.placeholder='Thank you. You are on the list.';}});}
 })();
