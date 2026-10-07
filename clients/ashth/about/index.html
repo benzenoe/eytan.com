@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Us | ASHTH Europe – Laboratory-Grown Diamond Jewellery, Luxembourg</title>
+<meta name="description" content="ASHTH Europe: an international house of fine jewellery set with laboratory-grown diamonds, offered direct from our factory. Now opening in Luxembourg. A Sustainable, Sensible, Conscientious Choice.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="About ASHTH Europe">
+<meta property="og:description" content="A Sustainable, Sensible, Conscientious Choice. Laboratory-grown diamond jewellery, direct from our factory, now in Luxembourg.">
+<meta property="og:image" content="img/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Tenor+Sans&display=swap">
+<style>
+/* ASHTH website system — Zapf Humanist headings, Jost body, teal #2B6166, white ground.
+   All sizes are set against the 1920px Figma frame and scale down with the viewport. */
+@font-face{
+  font-family:"ZapfHumnst BT";
+  src:local("Zapf Humanist 601 BT"),local("ZapfHumnst BT"),local("ZapfHumanist601BT-Roman"),
+      url("fonts/ZapfHumanist601BT-Roman.otf") format("opentype"); /* drop ashth.com's font file here; until then Tenor Sans is used */
+  font-weight:400 500;font-style:normal;font-display:swap;
+}
+:root{
+  --teal:#2B6166;
+  --teal-deep:#234F53;
+  --ink:#000000;
+  --body:#4C4C4C;
+  --muted:#777777;
+  --line:#E6E6E6;
+  --panel:#F3F7F8;
+  --white:#FFFFFF;
+  --serif:"ZapfHumnst BT","Tenor Sans","Optima","Gill Sans","Helvetica Neue",sans-serif;
+  --sans:"Jost","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(16px,3.125vw,60px);     /* 60px @1920 */
+  --h2:clamp(24px,1.875vw,36px);         /* 36px @1920 */
+  --h3:clamp(17px,1.04vw,20px);          /* 20px @1920 */
+  --body-size:clamp(14px,.9375vw,18px);  /* 18px @1920 */
+  --small:clamp(13px,.833vw,16px);       /* 16px @1920 */
+  --nav:clamp(13px,.9375vw,18px);
+  --section:clamp(36px,3.75vw,72px);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--body);font-family:var(--sans);font-weight:400;font-size:var(--body-size);line-height:1.55}
+img{max-width:100%;display:block}
+a{color:var(--teal)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:.5px;color:var(--ink);margin:0;text-wrap:balance}
+h2{font-size:var(--h2);line-height:1.25}
+h3{font-size:var(--h3);line-height:1.3}
+p{margin:0}
+.wrap{padding-inline:var(--gutter)}
+.section{padding-block:var(--section)}
+.section-head{display:flex;flex-direction:column;gap:6px;margin-bottom:clamp(20px,1.6vw,32px)}
+.section-head p{color:var(--body);font-size:var(--body-size)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:clamp(40px,2.4vw,46px);padding:0 clamp(16px,1.25vw,24px);border:1px solid currentColor;font-family:var(--sans);font-weight:500;font-size:var(--nav);letter-spacing:.05em;text-decoration:none;color:var(--ink);background:transparent;transition:background .2s,color .2s}
+.btn:hover{background:var(--ink);color:var(--white)}
+.btn-white{color:var(--white)}
+.btn-white:hover{background:var(--white);color:var(--teal)}
+.btn-fill{background:var(--white);color:var(--teal);border-color:var(--white)}
+.btn-fill:hover{background:transparent;color:var(--white)}
+.btn-teal{background:var(--teal);color:var(--white);border-color:var(--teal)}
+.btn-teal:hover{background:var(--teal-deep);border-color:var(--teal-deep);color:var(--white)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+
+/* Top bar */
+.topbar{background:var(--teal);color:var(--white);text-align:center;font-size:var(--small);line-height:1.4;padding:10px var(--gutter)}
+
+/* Header */
+.header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px 32px;min-height:clamp(64px,4.5vw,86px);padding-inline:var(--gutter)}
+.brand{display:flex;align-items:center;gap:clamp(10px,1vw,18px);text-decoration:none}
+.brand img{height:clamp(34px,2.5vw,48px);width:auto}
+.brand .divider{width:1px;height:clamp(22px,1.6vw,30px);background:var(--line)}
+.brand .region{font-size:clamp(10px,.68vw,13px);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--teal)}
+.menu{display:flex;align-items:center;gap:clamp(14px,1.6vw,30px);font-size:var(--nav);font-weight:500}
+.menu a{color:var(--ink);text-decoration:none;padding-block:8px;border-bottom:1px solid transparent}
+.menu a:hover,.menu a[aria-current]{color:var(--teal);border-bottom-color:var(--teal)}
+.menu .btn{padding-block:0}
+.menu .btn:hover{border-bottom-color:var(--ink)}
+.tools{display:flex;align-items:center;gap:clamp(10px,1.1vw,20px);font-size:clamp(12px,.73vw,14px);color:var(--ink)}
+.tools a{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;min-height:40px}
+.tools svg{width:18px;height:18px}
+.tools .search{border-bottom:1px solid var(--ink);line-height:1.2;min-height:0;padding-bottom:2px}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer}
+@media (max-width:1100px){
+  .menu{display:none}
+  .menu-toggle{display:inline-flex}
+  .header.open .menu{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px var(--gutter) 20px;border-top:1px solid var(--line)}
+  .tools .label{display:none}
+}
+
+/* Hero */
+.hero{position:relative;width:100%;aspect-ratio:1920/800;min-height:340px;max-height:860px;background:#3b2c22;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 100%)}
+.hero .caption{position:absolute;left:var(--gutter);right:var(--gutter);bottom:clamp(24px,3vw,56px);color:var(--white);display:flex;flex-direction:column;gap:10px}
+.hero h1{color:var(--white);font-weight:400;font-size:clamp(26px,2.6vw,50px);line-height:1.15;max-width:18em}
+.hero p{color:var(--white);font-size:var(--body-size);max-width:36em}
+
+/* Two-column text + image */
+.split{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(24px,3vw,60px)}
+.split .text{flex:1.2 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.split .text p{max-width:42em}
+.split .media{flex:1 1 340px;min-width:0;max-width:480px}
+.split .media img{width:100%;height:auto;max-height:clamp(360px,34vw,600px);object-fit:cover;object-position:center 40%}
+.lede{font-size:clamp(16px,1.04vw,20px);color:var(--ink);line-height:1.5}
+.figures{display:flex;flex-wrap:wrap;gap:20px 40px;padding-top:18px;margin-top:6px;border-top:1px solid var(--line)}
+.figures div{display:flex;flex-direction:column;gap:2px;min-width:120px}
+.figures b{font-family:var(--serif);font-weight:400;font-size:clamp(22px,1.6vw,30px);color:var(--ink);font-variant-numeric:tabular-nums}
+.figures span{font-size:var(--small);color:var(--body)}
+
+/* Teal band — "Jewelry You Can Live In" pattern */
+.band{background:var(--teal);color:var(--white)}
+.band .inner{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px clamp(40px,5vw,96px);padding-block:clamp(40px,3.2vw,60px)}
+.band h2{color:var(--white);flex:1 1 320px;min-width:0;font-weight:400}
+.band .copy{flex:1.5 1 460px;min-width:0;display:flex;flex-direction:column;gap:14px;font-size:var(--small);line-height:1.6}
+.band .copy p{max-width:56em}
+.band .copy b{font-family:var(--serif);font-weight:400;font-size:var(--body-size);color:var(--white);letter-spacing:.3px}
+.band .copy .btn{align-self:flex-start;margin-top:6px}
+
+/* Image grid — two large photo tiles with captions */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:2px}
+.tile{position:relative;display:block;width:100%;aspect-ratio:960/684;min-height:260px;overflow:hidden;color:var(--white);text-decoration:none;background:#2a2a2a}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.tile:hover img{transform:scale(1.03)}
+.tile .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.42))}
+.tile .cap{position:absolute;left:clamp(16px,2vw,40px);right:clamp(16px,2vw,40px);bottom:clamp(16px,2vw,40px);font-family:var(--serif);font-size:clamp(20px,1.66vw,32px);letter-spacing:.5px;color:var(--white);display:flex;flex-direction:column;gap:6px}
+.tile .cap small{font-family:var(--sans);font-size:var(--small);letter-spacing:.02em;font-weight:400;max-width:34em}
+.tile.top .cap{top:clamp(16px,2vw,40px);bottom:auto;align-items:flex-end;text-align:right}
+
+/* Trust band — four icons */
+.trust{background:var(--teal);color:var(--white)}
+.trust .inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:28px 24px;padding-block:clamp(32px,2.6vw,50px);text-align:center}
+.trust .item{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.trust svg{width:clamp(32px,2.1vw,40px);height:clamp(32px,2.1vw,40px)}
+.trust h3{color:var(--white);font-weight:400}
+.trust p{font-size:clamp(13px,.78vw,15px);line-height:1.5;max-width:26em}
+
+/* Cards row — "Most Loved" pattern */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:clamp(12px,1vw,20px)}
+.card{border:1px solid var(--line);padding:clamp(18px,1.4vw,26px) clamp(16px,1.2vw,22px);display:flex;flex-direction:column;gap:8px;min-width:0;background:var(--white)}
+.card .k{font-size:clamp(11px,.68vw,13px);letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:500}
+.card h3{font-weight:400}
+.card p{font-size:clamp(13px,.78vw,15px);line-height:1.55}
+.cards.eight{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+
+/* Split block — photo + teal (Get In Touch pattern) */
+.feature{display:flex;flex-wrap:wrap;background:var(--teal);color:var(--white)}
+.feature .photo{flex:0 1 clamp(300px,36vw,560px);min-width:0;position:relative;aspect-ratio:4/5;min-height:300px}
+.feature .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.feature .content{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:clamp(36px,4vw,80px) clamp(20px,4vw,80px)}
+.feature .eyebrow{font-size:clamp(11px,.68vw,13px);letter-spacing:.3em;text-transform:uppercase;font-weight:500}
+.feature h2{color:var(--white);font-weight:400}
+.feature p{font-size:var(--small);line-height:1.6;max-width:40em}
+.feature .note{font-style:italic;opacity:.75}
+.feature .actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;padding-top:6px}
+.feature .email{user-select:all;font-size:var(--body-size)}
+
+/* Photo band — video band pattern */
+.photoband{position:relative;min-height:clamp(320px,26vw,500px);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);background:#4f5a47;overflow:hidden}
+.photoband img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photoband .scrim{position:absolute;inset:0;background:rgba(20,30,28,.55)}
+.photoband .inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(48px,5vw,96px) var(--gutter)}
+.photoband h2{color:var(--white);font-weight:400;font-size:clamp(26px,2.3vw,44px)}
+.photoband p{max-width:40em;font-size:var(--body-size)}
+.photoband .btn{margin-top:8px}
+
+/* Footer */
+.footer{background:var(--teal);color:var(--white)}
+.footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px clamp(24px,3vw,64px);padding-block:clamp(40px,3.2vw,60px) clamp(28px,2.4vw,44px)}
+.footer h3{color:var(--white);font-weight:400;margin-bottom:14px}
+.footer a{color:var(--white);text-decoration:none;font-size:clamp(13px,.78vw,15px)}
+.footer a:hover{text-decoration:underline}
+.footer .links{display:flex;flex-direction:column;gap:10px}
+.footer .about img{height:clamp(44px,3vw,56px);width:auto;margin-bottom:14px}
+.footer .about p{font-size:clamp(13px,.78vw,15px);line-height:1.6;max-width:24em}
+.newsletter{display:flex;align-items:center;background:var(--white);max-width:360px}
+.newsletter input{flex:1 1 auto;min-width:0;border:0;background:transparent;font:inherit;font-size:clamp(13px,.78vw,15px);padding:12px 14px;color:var(--ink)}
+.newsletter button{flex:0 0 auto;width:44px;height:44px;border:0;background:transparent;color:var(--teal);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.social{display:flex;gap:14px;margin-top:18px}
+.social a{display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.4)}
+.social svg{width:18px;height:18px}
+.footer .legal{border-top:1px solid rgba(255,255,255,.3)}
+.footer .legal .inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 32px;padding-block:14px;font-size:clamp(12px,.68vw,13px);line-height:1.6}
+
+/* Floating actions (as on ashth.com) */
+.floating{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:12px;z-index:60}
+.floating a{width:48px;height:48px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--white);box-shadow:0 6px 18px rgba(0,0,0,.18);text-decoration:none}
+.floating .cal{background:var(--teal)}
+.floating .wa{background:#25D366}
+.floating svg{width:22px;height:22px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tile img{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">ASHTH Europe is now opening in Luxembourg · Private appointments available by invitation</div>
+
+<header class="header" id="header">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="https://ashth.com" aria-label="ASHTH home">
+      <img src="img/ashth-logo-horizontal-green.png" alt="ASHTH. Mine. Not Mined.">
+      <span class="divider" aria-hidden="true"></span>
+      <span class="region">Europe</span>
+    </a>
+    <div class="menu" id="menu">
+      <a href="https://ashth.com/lab-grown-diamond-rings">Rings</a>
+      <a href="https://ashth.com/lab-grown-diamond-earrings">Earrings</a>
+      <a href="https://ashth.com/lab-grown-diamond-bracelets">Bangles/Bracelets</a>
+      <a href="https://ashth.com/lab-grown-diamond-necklace">Necklaces</a>
+      <a href="https://ashth.com/lab-grown-diamond-pendant">Pendants</a>
+      <a href="#top" aria-current="page">About Us</a>
+      <a class="btn" href="#appointment">Book An Appointment</a>
+    </div>
+    <div class="tools">
+      <a class="search" href="#" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="label">Search</span></a>
+      <a href="#" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></a>
+      <a href="#" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.3C1.2 8.4 3.4 5 7 5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.6 0 5.8 3.4 4.5 6.7C19.5 16.4 12 21 12 21z"/></svg><span class="label">(0)</span></a>
+      <a href="#" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.5L21.5 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span class="label">(0)</span></a>
+      <button class="menu-toggle" type="button" aria-controls="menu" aria-expanded="false" aria-label="Open menu" id="menuToggle"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero" aria-label="About ASHTH Europe">
+    <img src="img/hero.jpg" alt="ASHTH ring in yellow gold set with a laboratory-grown diamond, resting on terracotta stone" fetchpriority="high">
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="caption">
+      <h1>A Sustainable, Sensible, Conscientious Choice.</h1>
+      <p>An international house of fine jewellery set with laboratory-grown diamonds, offered direct from our factory. Our European chapter opens in Luxembourg.</p>
+    </div>
+  </section>
+
+  <!-- About / Story -->
+  <section class="wrap section" id="story">
+    <div class="section-head">
+      <h2>About ASHTH</h2>
+      <p>Born of the diamond trade. Made for the century ahead.</p>
+    </div>
+    <div class="split">
+      <div class="text">
+        <p class="lede">ASHTH was founded by diamond-industry veteran Mukesh Shah and co-founder Kaivan Shah, who bring decades of experience in diamond manufacturing and the international jewellery trade.</p>
+        <p>They saw a new generation asking more of the world’s most meaningful stone: the same fire and brilliance, with nothing taken from the earth to make it. Their answer was a house where science, craftsmanship and conscience meet.</p>
+        <p>Every ASHTH diamond is laboratory-grown, above ground and under controlled conditions. It shares the physical, chemical and optical properties of a mined diamond, and every one is certified.</p>
+        <p>Today our designs span engagement rings and solitaires, eternity bands, tennis bracelets, statement necklaces and pieces made for every day. Each is made to be worn for a lifetime and passed on.</p>
+        <div class="figures" aria-label="ASHTH in figures">
+          <div><b>97</b><span>Facets in the ASHTH Cut</span></div>
+          <div><b>2,000+</b><span>Original designs</span></div>
+          <div><b>20+</b><span>Jewellery categories</span></div>
+          <div><b>9K–18K</b><span>Gold, plus platinum</span></div>
+        </div>
+      </div>
+      <figure class="media" style="margin:0">
+        <img src="img/story.jpg" alt="Hand wearing an ASHTH pear-cut laboratory-grown diamond ring" width="1000" height="1217" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- Teal band: the tagline, word by word -->
+  <section class="band" aria-labelledby="promise">
+    <div class="wrap inner">
+      <h2 id="promise">Our Promise In Three Words</h2>
+      <div class="copy">
+        <p><b>Sustainable.</b> Every ASHTH diamond is grown above ground. There is no mine behind it, no excavated landscape and no disturbed earth. What remains is the diamond itself, as brilliant as any ever unearthed.</p>
+        <p><b>Sensible.</b> Our jewellery travels direct from our factory to you. With no wholesalers, brokers or layers of retail mark-up in between, the value stays in the stone, the setting and the craftsmanship.</p>
+        <p><b>Conscientious.</b> A laboratory-grown diamond has a known origin and no link to conflict. Each ASHTH diamond is certified and each piece is hallmarked, so you know exactly what you are wearing.</p>
+        <a class="btn btn-white" href="#appointment">Book An Appointment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image grid -->
+  <section class="grid2" aria-label="The ASHTH Cut and Mine. Not Mined.">
+    <a class="tile" href="#cut">
+      <img src="img/cut.jpg" alt="ASHTH yellow gold ring with laboratory-grown diamonds on a sage green background" loading="lazy">
+      <div class="scrim" aria-hidden="true"></div>
+      <div class="cap">The ASHTH Cut<small>An octagon of 97 facets, cut exclusively for ASHTH.</small></div>
+    </a>
+    <a class="tile top" href="#story">
+      <img src="img/diamonds.jpg" alt="Pairs of laboratory-grown diamonds in oval, heart, marquise and emerald cuts on a green velvet tray" loading="lazy">
+      <div class="scrim" aria-hidden="true"></div>
+      <div class="cap">Mine. Not Mined.<small>A diamond that is wholly yours to keep, and was never taken from the earth.</small></div>
+    </a>
+  </section>
+
+  <!-- Trust band -->
+  <section class="trust" aria-label="The ASHTH promise">
+    <div class="wrap inner">
+      <div class="item">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M11 6h18l8 10-17 19L3 16l8-10z"/><path d="M3 16h34M11 6l9 10 9-10M20 16v19"/></svg>
+        <h3>Certified Diamonds</h3>
+        <p>Verified for authenticity, quality and brilliance.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M20 4l4.2 3 5.2-.6 1.6 5 4.6 2.5-1.6 5 1.6 5-4.6 2.5-1.6 5-5.2-.6-4.2 3-4.2-3-5.2.6-1.6-5L4.4 23.9l1.6-5-1.6-5L9 11.4l1.6-5 5.2.6L20 4z"/><path d="M14 19.5l4 4 8-8"/></svg>
+        <h3>Hallmarked</h3>
+        <p>Assurance of purity, authenticity and trusted quality.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M20 4l13 5v9c0 8-5.5 14.5-13 18C12.5 32.5 7 26 7 18V9l13-5z"/><path d="M13 20l5 5 9-10"/></svg>
+        <h3>Secured &amp; Insured Shipping</h3>
+        <p>Safe, reliable and fully insured delivery across Europe.</p>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M6 8h28v18H16l-7 6v-6H6V8z"/><path d="M12 15h16M12 20h10"/></svg>
+        <h3>Free Diamond Consultation</h3>
+        <p>Expert guidance to help you choose the perfect diamond.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The ASHTH Cut -->
+  <section class="wrap section" id="cut">
+    <div class="section-head">
+      <h2>The ASHTH Cut</h2>
+      <p>Our signature diamond: an octagon of 97 facets, cut exclusively for ASHTH. Seen from above, a pattern of arrows. Seen from below, a ring of hearts.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="k">Shape</span><h3>Octagon</h3><p>Eight sides, echoing the eight facets in our name.</p></div>
+      <div class="card"><span class="k">Facets</span><h3>97</h3><p>Each placed to draw out the greatest brilliance and fire.</p></div>
+      <div class="card"><span class="k">Optical Pattern</span><h3>Arrows &amp; Hearts</h3><p>Arrows from the crown, hearts from the pavilion.</p></div>
+      <div class="card"><span class="k">Origin</span><h3>Laboratory-Grown</h3><p>Grown above ground under controlled conditions, then certified.</p></div>
+      <div class="card"><span class="k">Availability</span><h3>Exclusive To ASHTH</h3><p>Available only in ASHTH jewellery, by appointment in Luxembourg.</p></div>
+    </div>
+  </section>
+
+  <!-- Eight facets -->
+  <section class="wrap section" id="values" style="padding-top:0">
+    <div class="section-head">
+      <h2>Eight Facets. Eight Values.</h2>
+      <p>ASHTH takes its name from an ancient word for the eight facets of a diamond. Each facet stands for a value we hold ourselves to, in every stone and every setting.</p>
+    </div>
+    <div class="cards eight">
+      <div class="card"><h3>Innovation</h3><p>Laboratory-grown diamonds, created through advanced science and precise technology.</p></div>
+      <div class="card"><h3>Sustainability</h3><p>No mine and no excavation. The earth beneath an ASHTH diamond is left undisturbed.</p></div>
+      <div class="card"><h3>Customisation</h3><p>Pieces tailored to your hand, your story and your occasion.</p></div>
+      <div class="card"><h3>Uniqueness</h3><p>Designs that stand apart, made for individual style.</p></div>
+      <div class="card"><h3>Symbolism</h3><p>Jewellery that carries love, commitment and the moments worth keeping.</p></div>
+      <div class="card"><h3>Purity</h3><p>Controlled growth for exceptional clarity, and purity of intention in all we deliver.</p></div>
+      <div class="card"><h3>Affordability</h3><p>Exceptional diamonds at a considered price, with no compromise on quality or ethics.</p></div>
+      <div class="card"><h3>Artistry</h3><p>Every piece shaped by designers who treat jewellery as an art form.</p></div>
+    </div>
+  </section>
+
+  <!-- Direct from our factory -->
+  <section class="wrap section" id="factory" style="padding-top:0">
+    <div class="section-head">
+      <h2>From Our Factory To Your Hand</h2>
+      <p>No wholesalers. No brokers. No showroom mark-ups. Every ASHTH piece follows one short, accountable path to you.</p>
+    </div>
+    <ol class="cards" style="list-style:none;margin:0;padding:0">
+      <li class="card"><span class="k">01</span><h3>Grown</h3><p>Each diamond begins as a seed crystal and grows, layer by layer, under carefully controlled conditions.</p></li>
+      <li class="card"><span class="k">02</span><h3>Cut &amp; Polished</h3><p>Master cutters bring out each stone’s fire, including our 97-facet ASHTH Cut.</p></li>
+      <li class="card"><span class="k">03</span><h3>Designed &amp; Set</h3><p>Our designers and goldsmiths set every stone in 18K, 14K or 9K gold, or in platinum.</p></li>
+      <li class="card"><span class="k">04</span><h3>Certified &amp; Hallmarked</h3><p>Every diamond is certified and every piece hallmarked before it leaves the factory.</p></li>
+      <li class="card"><span class="k">05</span><h3>Delivered</h3><p>Shipped direct and fully insured to Luxembourg and across Europe.</p></li>
+    </ol>
+  </section>
+
+  <!-- Kuntal Shah -->
+  <section class="feature" id="team" aria-labelledby="kuntal">
+    <div class="photo">
+      <img src="img/kuntal-shah.jpg" alt="Kuntal Shah, Head of European Operations at ASHTH" loading="lazy">
+    </div>
+    <div class="content">
+      <span class="eyebrow">Head Of European Operations</span>
+      <h2 id="kuntal">Meet Kuntal Shah</h2>
+      <p>Kuntal Shah leads ASHTH in Europe from Luxembourg, as Managing Partner of Kaleidoscopic Splendor S.à r.l., the company behind ASHTH Europe.</p>
+      <p>She is the person our clients meet. Every private consultation, bespoke commission and appointment in Luxembourg is handled by her personally, from the first conversation to the moment a piece is placed in your hand.</p>
+      <p>Her brief is to bring ASHTH to Europe with the same care the house is known for: Luxembourg first, then Paris and Brussels.</p>
+      <p class="note">[Two or three lines on Kuntal’s background and what drew her to ASHTH, to be confirmed with her.]</p>
+      <div class="actions">
+        <a class="btn btn-fill" href="#appointment">Request A Consultation With Kuntal</a>
+        <span class="email">kuntal@ashth.lu</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxembourg -->
+  <section class="photoband" id="appointment" aria-labelledby="europe">
+    <img src="img/luxembourg-band.jpg" alt="" loading="lazy">
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="inner">
+      <h2 id="europe">Europe Begins In Luxembourg</h2>
+      <p>A capital at the heart of the continent, with a long tradition of discernment and a taste for things made well. From here, ASHTH Europe serves clients across Europe with our collections, private consultations and bespoke commissions, priced in euros and delivered direct from our factory.</p>
+      <a class="btn btn-white" href="https://ashth.com/contact-us">Book An Appointment</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap cols">
+    <div class="about">
+      <img src="img/ashth-logo-horizontal-white.png" alt="ASHTH. Mine. Not Mined.">
+      <p>Laboratory-grown diamond jewellery, certified and hallmarked, direct from our factory to Europe.</p>
+    </div>
+    <nav class="links" aria-label="Customer care">
+      <h3>Customer Care</h3>
+      <a href="https://ashth.com/privacy-policy">Privacy Policy</a>
+      <a href="https://ashth.com/terms-conditions">Terms &amp; Conditions</a>
+      <a href="https://ashth.com/return-policy">Return Policy</a>
+      <a href="https://ashth.com/shipping-policy">Shipping Policy</a>
+    </nav>
+    <nav class="links" aria-label="Our company">
+      <h3>Our Company</h3>
+      <a href="#top">About Us</a>
+      <a href="https://ashth.com/contact-us">Contact Us</a>
+      <a href="https://ashth.com/faqs-lab-grown-diamond-jewellery">FAQs</a>
+      <a href="https://ashth.com/blogs">Blogs</a>
+    </nav>
+    <div>
+      <h3>Get Exclusive Offers And News</h3>
+      <form class="newsletter" id="newsletter" novalidate>
+        <label class="sr" for="newsletter-email">Your email address</label>
+        <input id="newsletter-email" type="email" placeholder="Your Email Address" autocomplete="email">
+        <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h16M13 6l6 6-6 6"/></svg></button>
+      </form>
+      <h3 style="margin-top:22px">Follow Us</h3>
+      <div class="social">
+        <a href="https://www.instagram.com/ashth.luxembourg/" aria-label="ASHTH Europe on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.linkedin.com/company/ashth-europe" aria-label="ASHTH Europe on LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18"/><path d="M7.5 10v7M7.5 7.2v.1M11 17v-4.2c0-1.6 1-2.8 2.6-2.8s2.4 1.1 2.4 2.8V17M11 10v7"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61555633616342" aria-label="ASHTH on Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M13.5 21v-7h2.3l.4-2.7h-2.7V9.6c0-.8.3-1.3 1.4-1.3h1.4V5.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5v2H8.6V14h2.3v7"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="legal">
+    <div class="wrap inner">
+      <span>©2026 Ashth. All Rights Reserved | Managed &amp; Developed by Weingenious Technocrats.</span>
+      <span>ASHTH Europe is operated by Kaleidoscopic Splendor S.à r.l., Luxembourg.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="floating" aria-label="Quick actions">
+  <a class="cal" href="#appointment" aria-label="Book an appointment"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></a>
+  <a class="wa" href="#appointment" aria-label="WhatsApp (number to be added)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3 4.4c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4l-.5-.3-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4 0-.5.3-1l.4-.6c.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4H9z"/></svg></a>
+</div>
+
+<script>
+(function(){
+  var h=document.getElementById('header'),t=document.getElementById('menuToggle');
+  if(t){t.addEventListener('click',function(){var open=h.classList.toggle('open');t.setAttribute('aria-expanded',open?'true':'false');t.setAttribute('aria-label',open?'Close menu':'Open menu');});}
+  var f=document.getElementById('newsletter');
+  if(f){f.addEventListener('submit',function(e){e.preventDefault();var i=document.getElementById('newsletter-email');if(i&&i.value){i.value='';i.placeholder='Thank you. You are on the list.';}});}
+})();
+</script>
+</body>
+</html>
