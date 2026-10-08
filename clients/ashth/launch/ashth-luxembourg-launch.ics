@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ASHTH Europe//Luxembourg Launch//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:ashth-luxembourg-launch-20261203@ashth.eu
+DTSTAMP:20261008T000000Z
+DTSTART:20261203T160000Z
+DTEND:20261203T210000Z
+SUMMARY:ASHTH Luxembourg Launch — A Private Jewellery Evening
+LOCATION:MOB-ART studio\, 19a Avenue de la Porte-Neuve\, L-2227 Luxembourg
+DESCRIPTION:Join us for an intimate evening of contemporary design\, exceptional craftsmanship and conscious luxury. Champagne · Wine · Canapés · Live Music. By invitation only · RSVP requested. ashth.eu
+URL:https://eytan.com/clients/ashth/launch/
+GEO:49.6135454;6.1276758
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:ASHTH Luxembourg Launch tomorrow at 5:00 PM
+END:VALARM
+END:VEVENT
+END:VCALENDAR
