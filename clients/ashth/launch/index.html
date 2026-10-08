@@ -2,23 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Luxembourg Launch | ASHTH – A Private Jewellery Evening, 3 December 2026</title>
-<meta name="description" content="ASHTH Luxembourg Launch: a private jewellery evening of contemporary design, exceptional craftsmanship and conscious luxury. Thursday 3 December 2026, 5–10 PM, MOB-ART studio, Luxembourg. By invitation only.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You Are Invited | ASHTH Luxembourg Launch · 3 December 2026</title>
+<meta name="description" content="You are cordially invited to the ASHTH Luxembourg Launch: a private jewellery evening of contemporary design, exceptional craftsmanship and conscious luxury. Thursday 3 December 2026, 5–10 PM, MOB-ART studio, Luxembourg.">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="ASHTH Luxembourg Launch · 3 December 2026">
+<meta name="theme-color" content="#2D3B2A">
+<meta property="og:title" content="You are invited · ASHTH Luxembourg Launch · 3 December 2026">
 <meta property="og:description" content="A private jewellery evening at MOB-ART studio, Luxembourg. Champagne · Wine · Canapés · Live Music. By invitation only.">
-<meta property="og:image" content="../about/img/cut.jpg">
+<meta property="og:image" content="img/ring-green.jpg">
+<link rel="icon" href="img/ashth-mark-forest.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500&family=Lora:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@400;500&family=Lora:ital,wght@0,400;1,400&display=swap">
 <style>
 /* ─────────────────────────────────────────────────────────────────────────
-   ASHTH Luxembourg Launch — the printed invitation, as a page.
-   Cover: forest green with ivory type and a faceted wireframe.
-   Interior: a photo panel and a pale-sage panel with the details.
-   Type: Cormorant Garamond caps for display (the card's serif), Jost for
-   spaced small-caps labels, Lora for running text.
+   ASHTH Luxembourg Launch — the printed invitation, continued on screen.
+   The QR code on the card lands here, so the page opens exactly where the
+   card leaves off: forest green, ivory type, the emerald-cut wireframe,
+   then the inside spread, the venue, the RSVP — and from there, the house.
+   Type: Cormorant Garamond (the card's serif), Jost for spaced labels,
+   Lora for running text.
    ───────────────────────────────────────────────────────────────────────── */
 :root{
   --forest:#2D3B2A;
@@ -30,6 +33,7 @@
   --ivory:#F2EBDD;
   --champagne:#DFCCB6;
   --champagne-2:#EADFCF;
+  --gold-ink:#7A603F;
   --teal:#2B6166;
   --ink:#2D3B2A;
   --body:#4A5747;
@@ -51,17 +55,21 @@ a{color:var(--forest)}
 :focus-visible{outline:2px solid var(--champagne);outline-offset:3px}
 .wrap{max-width:var(--content);margin-inline:auto;padding-inline:var(--gutter)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
 
-/* Invitation type system */
+/* Invitation type system — as set on the card */
 .caps{font-family:var(--sans);font-weight:400;letter-spacing:.32em;text-transform:uppercase;font-size:clamp(11px,.8vw,14px);line-height:1.8}
-.caps-serif{font-family:var(--display);font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-size:clamp(14px,1.1vw,19px);line-height:1.6}
-.title{font-family:var(--display);font-weight:600;letter-spacing:.06em;text-transform:uppercase;line-height:1.02;margin:0}
+.caps-serif{font-family:var(--display);font-weight:500;letter-spacing:.26em;text-transform:uppercase;font-size:clamp(15px,1.15vw,20px);line-height:1.6}
+.title{font-family:var(--display);font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1;margin:0}
 .rule{display:flex;align-items:center;justify-content:center;gap:14px;color:currentColor}
-.rule::before,.rule::after{content:"";flex:0 1 72px;height:1px;background:currentColor;opacity:.55}
-.rule svg{width:12px;height:12px;flex:0 0 auto}
-.rule.left{justify-content:flex-start}
-.rule.left::before{display:none}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 30px;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border:1px solid transparent;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.rule::before,.rule::after{content:"";flex:0 1 80px;height:1px;background:currentColor;opacity:.6}
+.rule svg{width:11px;height:11px;flex:0 0 auto}
+.lockup{display:flex;flex-direction:column;align-items:center;gap:0}
+.lockup img{width:clamp(74px,8vw,108px);height:auto}
+.lockup .word{font-family:var(--display);font-weight:500;letter-spacing:.34em;text-transform:uppercase;font-size:clamp(32px,3.6vw,50px);line-height:1;margin:14px 0 0 .34em}
+.lockup .tag{font-family:var(--sans);font-weight:400;font-size:clamp(10px,.72vw,12px);letter-spacing:.38em;text-transform:uppercase;margin:6px 0 0 .38em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 32px;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border:1px solid transparent;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.btn svg{width:16px;height:16px;flex:0 0 auto}
 .btn:hover{transform:translateY(-1px)}
 .btn-champagne{background:var(--champagne);color:var(--forest);border-color:var(--champagne)}
 .btn-champagne:hover{background:var(--champagne-2);border-color:var(--champagne-2)}
@@ -69,10 +77,14 @@ a{color:var(--forest)}
 .btn-outline-light:hover{background:var(--champagne);color:var(--forest)}
 .btn-outline-dark{border-color:var(--forest);color:var(--forest)}
 .btn-outline-dark:hover{background:var(--forest);color:var(--ivory)}
+.textlink{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:12px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--champagne);border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .25s}
+.textlink:hover{border-bottom-color:var(--champagne)}
+.textlink svg{width:14px;height:14px}
 
 /* ── Shared ashth.com header ───────────────────────────────────────────── */
 .topbar{background:var(--teal);color:var(--white);text-align:center;font-family:var(--sans);font-size:14px;line-height:1.4;padding:10px var(--gutter)}
 .topbar a{color:var(--white);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:560px){.topbar .long{display:none}}
 .header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid #E6E6E6;font-family:var(--sans)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px 32px;min-height:84px;padding-inline:var(--gutter)}
 .brand{display:flex;align-items:center;gap:16px;text-decoration:none;flex:0 0 auto}
@@ -98,66 +110,72 @@ a{color:var(--forest)}
 @media (max-width:560px){.brand .divider,.brand .region{display:none}.brand img{height:38px}.tools{gap:12px}}
 
 /* ── Cover ─────────────────────────────────────────────────────────────── */
-.cover{position:relative;overflow:hidden;background:var(--forest);color:var(--ivory);min-height:min(92vh,980px);display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(64px,8vw,120px) var(--gutter)}
-.cover .facets{position:absolute;right:-6%;bottom:-8%;width:min(64vw,760px);height:auto;opacity:.55;pointer-events:none}
-.cover .facets-2{position:absolute;left:-10%;top:-6%;width:min(34vw,420px);height:auto;opacity:.22;pointer-events:none;transform:rotate(180deg)}
-.cover .inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(18px,2.2vw,28px);max-width:860px}
-.cover .mark{width:clamp(72px,8vw,104px);height:auto}
-.cover .word{font-family:var(--display);font-weight:600;letter-spacing:.42em;text-transform:uppercase;font-size:clamp(30px,3.4vw,44px);line-height:1;margin-left:.42em}
-.cover .tag{font-family:var(--sans);font-size:clamp(10px,.72vw,12px);letter-spacing:.36em;text-transform:uppercase;margin-top:4px;margin-left:.36em;color:var(--champagne)}
-.cover .title{font-size:clamp(44px,7.2vw,112px);color:var(--ivory)}
+.cover{position:relative;overflow:hidden;background:var(--forest);color:var(--ivory);min-height:min(100svh,1000px);display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(56px,7vw,104px) var(--gutter) clamp(72px,8vw,120px)}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 42%,rgba(255,255,255,.05),transparent 70%);pointer-events:none}
+.facet{position:absolute;pointer-events:none;color:var(--champagne)}
+.facet-main{--s:clamp(820px,110vw,1500px);width:var(--s);height:var(--s);right:calc(15% - var(--s)/2);bottom:calc(30% - var(--s)/2);opacity:.9}
+.facet-small{--s:clamp(520px,60vw,820px);width:var(--s);height:var(--s);left:calc(4% - var(--s)/2);top:calc(8% - var(--s)/2);opacity:.2;transform:rotate(150deg)}
+.cover .inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(16px,2vw,26px);max-width:880px}
+.cover .rule{color:var(--champagne)}
+.cover .invite{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,34px);letter-spacing:.04em;color:var(--champagne);line-height:1.2}
+.cover .title{font-size:clamp(46px,7.4vw,116px);color:var(--ivory);text-shadow:0 2px 24px rgba(36,48,31,.5)}
 .cover .caps-serif{color:var(--ivory)}
-.cover .evening{color:var(--champagne)}
-.cover .date{font-family:var(--display);font-weight:500;font-size:clamp(22px,2.2vw,32px);letter-spacing:.04em;color:var(--ivory)}
-.cover .date small{display:block;font-family:var(--sans);font-size:clamp(11px,.8vw,14px);letter-spacing:.28em;text-transform:uppercase;color:var(--champagne);margin-top:6px}
-.cover .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:10px}
-.rise{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
-.d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}
-@keyframes rise{to{opacity:1;transform:none}}
+.cover .evening{color:var(--champagne);letter-spacing:.3em}
+.cover .date{font-family:var(--display);font-weight:600;font-size:clamp(24px,2.4vw,34px);letter-spacing:.03em;color:var(--ivory)}
+.cover .date small{display:block;font-family:var(--sans);font-weight:400;font-size:clamp(11px,.8vw,14px);letter-spacing:.26em;text-transform:uppercase;color:var(--champagne);margin-top:8px}
+.cover .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:8px}
+.cover .enter{margin-top:clamp(10px,1.6vw,22px)}
+@media (prefers-reduced-motion:no-preference){
+  .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}.d6{animation-delay:.66s}
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (max-width:560px){.cover .actions .btn{flex:1 1 100%}.cover .evening{font-size:13px;letter-spacing:.26em}}
 
 /* ── Interior spread ───────────────────────────────────────────────────── */
 .spread{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
-.panel-photo{position:relative;min-height:min(72vh,760px);background:var(--forest);color:var(--ivory);display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;padding:clamp(40px,5vw,72px) var(--gutter);overflow:hidden}
-.panel-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%}
-.panel-photo .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,48,31,.78) 0%,rgba(36,48,31,.15) 32%,rgba(36,48,31,.1) 68%,rgba(36,48,31,.78) 100%)}
-.panel-photo .top,.panel-photo .bottom{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}
-.panel-photo .caps{color:var(--ivory);letter-spacing:.36em}
+.panel-photo{position:relative;min-height:min(78vh,820px);background:var(--forest);color:var(--ivory);display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;padding:clamp(40px,5vw,72px) var(--gutter);overflow:hidden}
+.panel-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 46%}
+.panel-photo .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,48,31,.72) 0%,rgba(36,48,31,.12) 30%,rgba(36,48,31,.08) 66%,rgba(36,48,31,.74) 100%)}
+.panel-photo .top,.panel-photo .bottom{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px}
+.panel-photo .caps-serif{color:var(--ivory);letter-spacing:.3em;font-size:clamp(14px,1.05vw,18px);text-shadow:0 1px 12px rgba(0,0,0,.35)}
 .panel-photo .rule{color:var(--ivory)}
-.panel-details{background:var(--sage-2);color:var(--forest);display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(14px,1.6vw,22px);padding:clamp(48px,6vw,88px) var(--gutter)}
-.panel-details .mark{width:clamp(64px,6vw,84px)}
-.panel-details .word{font-family:var(--display);font-weight:600;letter-spacing:.42em;text-transform:uppercase;font-size:clamp(28px,2.6vw,38px);line-height:1;margin-left:.42em}
-.panel-details .tag{font-family:var(--sans);font-size:clamp(10px,.7vw,12px);letter-spacing:.36em;text-transform:uppercase;margin-top:4px;margin-left:.36em}
-.panel-details .title{font-size:clamp(34px,3.6vw,54px)}
+.panel-details{position:relative;overflow:hidden;background:var(--sage-2);color:var(--forest);display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(12px,1.4vw,20px);padding:clamp(48px,6vw,88px) var(--gutter)}
+.panel-details .facet{--s:clamp(700px,70vw,1000px);width:var(--s);height:var(--s);right:calc(-2% - var(--s)/2);top:calc(42% - var(--s)/2);color:var(--forest);opacity:.22}
+.panel-details > :not(.facet){position:relative}
+.panel-details .lockup img{width:clamp(64px,6.4vw,88px)}
+.panel-details .lockup .word{font-size:clamp(28px,2.8vw,40px)}
+.panel-details .title{font-size:clamp(36px,3.8vw,58px)}
 .panel-details .body{max-width:30em;font-family:var(--display);font-weight:500;font-size:clamp(18px,1.3vw,22px);line-height:1.5}
-.panel-details .when{font-family:var(--display);font-weight:600;font-size:clamp(24px,2vw,32px);line-height:1.2}
-.panel-details .time{font-family:var(--sans);letter-spacing:.2em;font-size:clamp(12px,.9vw,15px)}
-.panel-details .place{font-family:var(--display);font-weight:600;font-size:clamp(18px,1.3vw,22px)}
-.panel-details .addr{font-family:var(--display);font-weight:500;font-size:clamp(16px,1.1vw,19px);line-height:1.4}
+.panel-details .when{font-family:var(--display);font-weight:700;font-size:clamp(24px,2.1vw,34px);line-height:1.2;letter-spacing:.01em}
+.panel-details .time{font-family:var(--display);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:clamp(14px,1vw,17px)}
+.panel-details .place{font-family:var(--display);font-weight:700;font-size:clamp(19px,1.35vw,23px);letter-spacing:.01em}
+.panel-details .addr{font-family:var(--display);font-weight:500;font-size:clamp(16px,1.1vw,19px);line-height:1.4;margin-top:-8px}
 .panel-details .menu-line{font-family:var(--sans);letter-spacing:.26em;text-transform:uppercase;font-size:clamp(11px,.8vw,13px)}
-.panel-details .rsvp-line{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(16px,1.15vw,20px)}
-.panel-details .site{font-family:var(--display);font-weight:600;font-size:clamp(20px,1.5vw,26px);letter-spacing:.04em;text-decoration:none;color:var(--forest)}
+.panel-details .rsvp-line{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(17px,1.2vw,21px)}
+.panel-details .site{font-family:var(--display);font-weight:700;font-size:clamp(20px,1.5vw,26px);letter-spacing:.04em;text-decoration:none;color:var(--forest)}
 
 /* ── Sections ──────────────────────────────────────────────────────────── */
 .section{padding-block:var(--section);scroll-margin-top:110px}
 .head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;margin-bottom:clamp(32px,4vw,56px)}
-.head .caps{color:#7A603F}
-.head h2{font-family:var(--display);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(28px,3vw,44px);line-height:1.1;color:var(--forest);margin:0}
+.head .caps{color:var(--gold-ink)}
+.head h2{font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:clamp(30px,3.2vw,48px);line-height:1.05;color:var(--forest);margin:0}
 .head .rule{color:var(--forest)}
 .head p{max-width:40em;color:var(--body)}
 
 /* Evening */
-.evening-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px}
-.evening-list .item{background:var(--white);border:1px solid var(--line);padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.evening-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:20px}
+.evening-list .item{background:var(--white);border:1px solid var(--line);padding:36px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
 .evening-list svg{width:36px;height:36px;color:var(--forest)}
-.evening-list b{font-family:var(--display);font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:15px;color:var(--forest)}
+.evening-list b{font-family:var(--display);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:16px;color:var(--forest)}
 .evening-list span{font-size:15px;line-height:1.6}
 
 /* Venue */
 .venue{background:var(--white)}
 .venue .inner{display:flex;flex-wrap:wrap;gap:var(--section) clamp(40px,5vw,96px);align-items:stretch}
 .venue .info{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:22px}
-.venue .info h3{font-family:var(--display);font-weight:600;font-size:clamp(28px,2.6vw,40px);letter-spacing:.02em;line-height:1.1;color:var(--forest);margin:0}
-.venue .info .sub{font-family:var(--sans);letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:#7A603F}
+.venue .info h3{font-family:var(--display);font-weight:600;font-size:clamp(30px,2.8vw,42px);letter-spacing:.01em;line-height:1.1;color:var(--forest);margin:0}
+.venue .info .sub{font-family:var(--sans);letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--gold-ink)}
 .venue .info p{max-width:36em}
 .venue address{font-style:normal;font-family:var(--display);font-weight:500;font-size:clamp(18px,1.3vw,22px);line-height:1.45;color:var(--forest)}
 .links{display:flex;flex-wrap:wrap;gap:10px 14px}
@@ -173,22 +191,41 @@ a{color:var(--forest)}
 .maplinks a:hover{border-bottom-color:var(--forest)}
 .practical{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px 40px;margin-top:var(--section);padding-top:var(--section);border-top:1px solid var(--line)}
 .practical .item{display:flex;flex-direction:column;gap:8px}
-.practical b{font-family:var(--sans);font-weight:500;letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:#7A603F}
+.practical b{font-family:var(--sans);font-weight:500;letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--gold-ink)}
 .practical p{font-size:15px;line-height:1.65}
 
 /* Host + RSVP */
-.host{background:var(--forest);color:var(--ivory)}
-.host .inner{display:flex;flex-wrap:wrap;align-items:center;gap:var(--section) clamp(40px,5vw,96px)}
+.host{position:relative;overflow:hidden;background:var(--forest);color:var(--ivory)}
+.host .facet{--s:clamp(700px,70vw,1100px);width:var(--s);height:var(--s);right:calc(-6% - var(--s)/2);bottom:calc(-10% - var(--s)/2);opacity:.3}
+.host .inner{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:var(--section) clamp(40px,5vw,96px)}
 .host .portrait{flex:0 1 320px;min-width:0;max-width:320px;margin:0;position:relative;padding:0 16px 16px 0}
 .host .portrait::after{content:"";position:absolute;inset:16px 0 0 16px;border:1px solid var(--champagne);pointer-events:none}
 .host .portrait img{position:relative;z-index:1;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center top}
 .host .text{flex:1.3 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .host .caps{color:var(--champagne)}
-.host h2{font-family:var(--display);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(28px,3vw,44px);line-height:1.1;color:var(--ivory);margin:0}
+.host h2{font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:clamp(30px,3.2vw,48px);line-height:1.05;color:var(--ivory);margin:0}
 .host p{color:var(--sage-2);max-width:38em}
+.host .bio{font-family:var(--display);font-size:clamp(18px,1.3vw,22px);line-height:1.5;color:var(--ivory)}
 .host .rsvp{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;padding-top:6px}
 .host .contact{font-family:var(--display);font-size:clamp(18px,1.3vw,22px);letter-spacing:.04em;color:var(--ivory);user-select:all}
 .host .fine{font-family:var(--sans);font-size:13px;letter-spacing:.06em;color:var(--sage)}
+
+/* Step inside — the door into the site */
+.discover{background:var(--sage-3)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px}
+.tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:var(--forest);color:var(--ivory);text-decoration:none}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.tile:hover img{transform:scale(1.05)}
+.tile .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,48,31,0) 40%,rgba(36,48,31,.82) 100%)}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 22px 24px;display:flex;flex-direction:column;gap:6px}
+.tile .cap small{font-family:var(--sans);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--champagne)}
+.tile .cap b{font-family:var(--display);font-weight:600;font-size:clamp(24px,1.8vw,30px);line-height:1.1;letter-spacing:.02em}
+.tile .cap span{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);margin-top:6px}
+.tile .cap span svg{width:14px;height:14px;transition:transform .3s}
+.tile:hover .cap span svg{transform:translateX(4px)}
+.collections{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;margin-top:clamp(28px,3vw,40px);font-family:var(--sans);font-size:13px;letter-spacing:.22em;text-transform:uppercase}
+.collections a{color:var(--forest);text-decoration:none;border-bottom:1px solid var(--champagne);padding-bottom:3px}
+.collections a:hover{border-bottom-color:var(--forest)}
 
 /* ── Shared ashth.com footer ───────────────────────────────────────────── */
 .footer{background:var(--teal);color:var(--white);font-family:var(--sans)}
@@ -202,16 +239,26 @@ a{color:var(--forest)}
 .footer .legal{border-top:1px solid rgba(255,255,255,.3)}
 .footer .legal .inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 32px;padding-block:14px;font-size:13px;line-height:1.6}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rise{opacity:1;transform:none;animation:none}.btn:hover{transform:none}}
+/* ── Phone action bar (guests arrive from the QR code on a phone) ──────── */
+.actionbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;grid-template-columns:1.3fr 1fr 1fr;gap:8px;background:rgba(45,59,42,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(223,204,182,.35);padding:10px 12px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.actionbar a{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--champagne);color:var(--ivory)}
+.actionbar a svg{width:15px;height:15px}
+.actionbar a.primary{background:var(--champagne);color:var(--forest)}
+.actionbar.show{transform:none}
+@media (max-width:760px){.actionbar{display:grid}body.has-bar{padding-bottom:72px}}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover,.tile:hover img{transform:none}.actionbar{transition:none}}
 </style>
 </head>
 <body>
 
-<div class="topbar">ASHTH Luxembourg Launch · Thursday 3 December 2026 · <a href="#rsvp">RSVP</a> · <a href="../about/">About ASHTH Europe</a></div>
+<svg class="defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><symbol id="emerald" viewBox="-1000 -1000 2000 2000" overflow="visible"><g transform="rotate(-24)"><polygon points="-112.0,-280.0 112.0,-280.0 106.6,-250.0 -106.6,-250.0" fill="currentColor" fill-opacity="0.060" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="112.0,-280.0 200.0,-192.0 170.0,-186.6 106.6,-250.0" fill="currentColor" fill-opacity="0.140" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="200.0,-192.0 200.0,192.0 170.0,186.6 170.0,-186.6" fill="currentColor" fill-opacity="0.080" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="200.0,192.0 112.0,280.0 106.6,250.0 170.0,186.6" fill="currentColor" fill-opacity="0.180" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="112.0,280.0 -112.0,280.0 -106.6,250.0 106.6,250.0" fill="currentColor" fill-opacity="0.060" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-112.0,280.0 -200.0,192.0 -170.0,186.6 -106.6,250.0" fill="currentColor" fill-opacity="0.120" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-200.0,192.0 -200.0,-192.0 -170.0,-186.6 -170.0,186.6" fill="currentColor" fill-opacity="0.090" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-200.0,-192.0 -112.0,-280.0 -106.6,-250.0 -170.0,-186.6" fill="currentColor" fill-opacity="0.160" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-106.6,-250.0 106.6,-250.0 101.6,-222.0 -101.6,-222.0" fill="currentColor" fill-opacity="0.049" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="106.6,-250.0 170.0,-186.6 142.0,-181.6 101.6,-222.0" fill="currentColor" fill-opacity="0.115" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="170.0,-186.6 170.0,186.6 142.0,181.6 142.0,-181.6" fill="currentColor" fill-opacity="0.066" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="170.0,186.6 106.6,250.0 101.6,222.0 142.0,181.6" fill="currentColor" fill-opacity="0.148" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="106.6,250.0 -106.6,250.0 -101.6,222.0 101.6,222.0" fill="currentColor" fill-opacity="0.049" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-106.6,250.0 -170.0,186.6 -142.0,181.6 -101.6,222.0" fill="currentColor" fill-opacity="0.098" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-170.0,186.6 -170.0,-186.6 -142.0,-181.6 -142.0,181.6" fill="currentColor" fill-opacity="0.074" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-170.0,-186.6 -106.6,-250.0 -101.6,-222.0 -142.0,-181.6" fill="currentColor" fill-opacity="0.131" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-101.6,-222.0 101.6,-222.0 96.9,-196.0 -96.9,-196.0" fill="currentColor" fill-opacity="0.038" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="101.6,-222.0 142.0,-181.6 116.0,-176.9 96.9,-196.0" fill="currentColor" fill-opacity="0.090" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="142.0,-181.6 142.0,181.6 116.0,176.9 116.0,-176.9" fill="currentColor" fill-opacity="0.051" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="142.0,181.6 101.6,222.0 96.9,196.0 116.0,176.9" fill="currentColor" fill-opacity="0.115" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="101.6,222.0 -101.6,222.0 -96.9,196.0 96.9,196.0" fill="currentColor" fill-opacity="0.038" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-101.6,222.0 -142.0,181.6 -116.0,176.9 -96.9,196.0" fill="currentColor" fill-opacity="0.077" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-142.0,181.6 -142.0,-181.6 -116.0,-176.9 -116.0,176.9" fill="currentColor" fill-opacity="0.058" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-142.0,-181.6 -101.6,-222.0 -96.9,-196.0 -116.0,-176.9" fill="currentColor" fill-opacity="0.102" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-96.9,-196.0 96.9,-196.0 64.0,-160.0 -64.0,-160.0" fill="currentColor" fill-opacity="0.028" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="96.9,-196.0 116.0,-176.9 80.0,-144.0 64.0,-160.0" fill="currentColor" fill-opacity="0.064" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="116.0,-176.9 116.0,176.9 80.0,144.0 80.0,-144.0" fill="currentColor" fill-opacity="0.037" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="116.0,176.9 96.9,196.0 64.0,160.0 80.0,144.0" fill="currentColor" fill-opacity="0.083" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="96.9,196.0 -96.9,196.0 -64.0,160.0 64.0,160.0" fill="currentColor" fill-opacity="0.028" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-96.9,196.0 -116.0,176.9 -80.0,144.0 -64.0,160.0" fill="currentColor" fill-opacity="0.055" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-116.0,176.9 -116.0,-176.9 -80.0,-144.0 -80.0,144.0" fill="currentColor" fill-opacity="0.041" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-116.0,-176.9 -96.9,-196.0 -64.0,-160.0 -80.0,-144.0" fill="currentColor" fill-opacity="0.074" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><polygon points="-64.0,-160.0 64.0,-160.0 80.0,-144.0 80.0,144.0 64.0,160.0 -64.0,160.0 -80.0,144.0 -80.0,-144.0" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-opacity=".9" stroke-width="1.1" stroke-linejoin="round"/><line x1="-112.0" y1="-280.0" x2="-594.8" y2="-1487.0" stroke="currentColor" stroke-opacity="0.55" stroke-width=".9"/><line x1="112.0" y1="-280.0" x2="446.3" y2="-1115.6" stroke="currentColor" stroke-opacity="0.35" stroke-width=".9"/><line x1="200.0" y1="-192.0" x2="1137.8" y2="-1092.3" stroke="currentColor" stroke-opacity="0.55" stroke-width=".9"/><line x1="200.0" y1="192.0" x2="849.2" y2="815.3" stroke="currentColor" stroke-opacity="0.35" stroke-width=".9"/><line x1="112.0" y1="280.0" x2="594.8" y2="1487.0" stroke="currentColor" stroke-opacity="0.55" stroke-width=".9"/><line x1="-112.0" y1="280.0" x2="-446.3" y2="1115.6" stroke="currentColor" stroke-opacity="0.35" stroke-width=".9"/><line x1="-200.0" y1="192.0" x2="-1137.8" y2="1092.3" stroke="currentColor" stroke-opacity="0.55" stroke-width=".9"/><line x1="-200.0" y1="-192.0" x2="-849.2" y2="-815.3" stroke="currentColor" stroke-opacity="0.35" stroke-width=".9"/><line x1="112.0" y1="-280.0" x2="1012.0" y2="-280.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="-112.0" y1="-280.0" x2="-1012.0" y2="-280.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="200.0" y1="192.0" x2="200.0" y2="1092.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="200.0" y1="-192.0" x2="200.0" y2="-1092.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="-112.0" y1="280.0" x2="-1012.0" y2="280.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="112.0" y1="280.0" x2="1012.0" y2="280.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="-200.0" y1="-192.0" x2="-200.0" y2="-1092.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="-200.0" y1="192.0" x2="-200.0" y2="1092.0" stroke="currentColor" stroke-opacity="0.3" stroke-width=".9"/><line x1="-377.5" y1="-943.9" x2="229.0" y2="-572.5" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="346.0" y1="-864.9" x2="622.0" y2="-597.1" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="668.9" y1="-642.1" x2="589.5" y2="566.0" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="459.7" y1="441.3" x2="256.8" y2="642.1" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="411.3" y1="1028.3" x2="-279.1" y2="697.8" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="-229.0" y1="572.5" x2="-622.0" y2="597.1" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="-743.9" y1="714.2" x2="-459.7" y2="-441.3" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="-492.1" y1="-472.5" x2="-256.8" y2="-642.1" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="-256.8" y1="-642.1" x2="434.4" y2="-417.1" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/><line x1="281.0" y1="702.5" x2="-481.3" y2="462.1" stroke="currentColor" stroke-opacity=".28" stroke-width=".8"/></g></symbol></svg>
+
+<div class="topbar"><span class="long">You are invited · ASHTH Luxembourg Launch · </span>Thursday 3 December 2026 · <a href="#rsvp">RSVP</a><span class="long"> · <a href="../about/">About ASHTH Europe</a></span></div>
 
 <header class="header" id="header">
   <nav class="nav" aria-label="Main">
-    <a class="brand" href="https://ashth.com" aria-label="ASHTH home">
+    <a class="brand" href="./" aria-label="ASHTH Europe home">
       <img src="../about/img/ashth-logo-horizontal-green.png" alt="ASHTH. Mine. Not Mined.">
       <span class="divider" aria-hidden="true"></span>
       <span class="region">Europe</span>
@@ -238,60 +285,52 @@ a{color:var(--forest)}
 
 <main id="top">
 
-  <!-- COVER -->
-  <section class="cover" aria-labelledby="cover-title">
-    <svg class="facets" viewBox="0 0 760 640" fill="none" stroke="#DFCCB6" stroke-width="1" aria-hidden="true">
-      <path d="M120 640L300 420L430 520L380 640M300 420L480 300L600 380L430 520M480 300L620 160L760 240L600 380M600 380L760 420L700 560L430 520M430 520L560 640M700 560L760 640M380 640L430 520M300 420L200 320L480 300M200 320L330 180L620 160M330 180L420 60L620 160M620 160L760 60M0 640L120 640M200 320L80 400L120 640M80 400L0 480M330 180L240 100L420 60M240 100L130 160L200 320M130 160L0 220L80 400"/>
-    </svg>
-    <svg class="facets-2" viewBox="0 0 760 640" fill="none" stroke="#DFCCB6" stroke-width="1" aria-hidden="true">
-      <path d="M120 640L300 420L430 520L380 640M300 420L480 300L600 380L430 520M480 300L620 160L760 240L600 380M600 380L760 420L700 560L430 520M430 520L560 640M700 560L760 640M300 420L200 320L480 300M200 320L330 180L620 160M330 180L420 60L620 160"/>
-    </svg>
+  <!-- COVER — the front of the card -->
+  <section class="cover" id="cover" aria-labelledby="cover-title">
+    <svg class="facet facet-main" aria-hidden="true"><use href="#emerald"/></svg>
+    <svg class="facet facet-small" aria-hidden="true"><use href="#emerald"/></svg>
     <div class="inner">
-      <svg class="mark rise" viewBox="0 0 100 100" fill="none" stroke="#F2EBDD" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true">
-        <polygon points="29,4 71,4 96,29 96,71 71,96 29,96 4,71 4,29"/>
-        <polygon points="50,14 57,36 79,29 64,50 79,71 57,64 50,86 43,64 21,71 36,50 21,29 43,36"/>
-        <path d="M50 14L29 4M50 14L71 4M57 36L96 29M79 29L96 29M64 50L96 50M79 71L96 71M57 64L96 71M50 86L71 96M50 86L29 96M43 64L4 71M21 71L4 71M36 50L4 50M21 29L4 29M43 36L4 29" stroke-width="1.1" opacity=".8"/>
-      </svg>
-      <div class="rise d1" style="display:flex;flex-direction:column;align-items:center">
-        <span class="word">ASHTH</span>
-        <span class="tag">Mine. Not Mined.</span>
+      <div class="lockup rise">
+        <img src="img/ashth-mark-ivory.png" alt="" width="534" height="534" fetchpriority="high">
+        <span class="word" aria-hidden="true">ASHTH</span>
+        <span class="tag" aria-hidden="true">Mine. Not Mined.</span>
+        <span class="sr">ASHTH. Mine. Not Mined.</span>
       </div>
-      <div class="rule rise d1" aria-hidden="true" style="color:var(--champagne)"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+      <div class="rule rise d1" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+      <p class="invite rise d1">You are cordially invited to the</p>
       <h1 id="cover-title" class="title rise d2">Luxembourg<br>Launch</h1>
       <p class="caps-serif rise d2">Luxury Designer<br>Lab Diamond Jewellery</p>
-      <div class="rule rise d3" aria-hidden="true" style="color:var(--champagne)"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-      <p class="caps evening rise d3">A Private Jewellery Evening</p>
+      <div class="rule rise d3" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+      <p class="caps-serif evening rise d3">A Private Jewellery Evening</p>
       <p class="date rise d4">Thursday, 3 December 2026<small>5:00 PM – 10:00 PM · MOB-ART studio, Luxembourg</small></p>
       <div class="actions rise d5">
         <a class="btn btn-champagne" href="#rsvp">RSVP</a>
         <a class="btn btn-outline-light" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
       </div>
+      <a class="textlink enter rise d6" href="#discover">Enter ASHTH Europe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
     </div>
   </section>
 
-  <!-- INTERIOR SPREAD -->
+  <!-- INSIDE SPREAD — the open card -->
   <section class="spread" aria-label="The invitation">
     <div class="panel-photo">
-      <img src="../about/img/cut.jpg" alt="ASHTH yellow gold ring with laboratory-grown diamonds on a sage green background">
+      <img src="img/ring-green.jpg" alt="ASHTH yellow gold ring set with laboratory-grown diamonds, on green silk" width="820" height="960" loading="lazy">
       <div class="scrim" aria-hidden="true"></div>
       <div class="top">
-        <p class="caps">Modern Luxury<br>A Brighter Tomorrow</p>
+        <p class="caps-serif">Modern Luxury<br>A Brighter Tomorrow</p>
         <div class="rule" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
       </div>
       <div class="bottom">
         <div class="rule" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-        <p class="caps">Exceptional Design<br>Conscious Choice</p>
+        <p class="caps-serif">Exceptional Design<br>Conscious Choice</p>
       </div>
     </div>
     <div class="panel-details">
-      <svg class="mark" viewBox="0 0 100 100" fill="none" stroke="#2D3B2A" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true">
-        <polygon points="29,4 71,4 96,29 96,71 71,96 29,96 4,71 4,29"/>
-        <polygon points="50,14 57,36 79,29 64,50 79,71 57,64 50,86 43,64 21,71 36,50 21,29 43,36"/>
-        <path d="M50 14L29 4M50 14L71 4M57 36L96 29M79 29L96 29M64 50L96 50M79 71L96 71M57 64L96 71M50 86L71 96M50 86L29 96M43 64L4 71M21 71L4 71M36 50L4 50M21 29L4 29M43 36L4 29" stroke-width="1.1" opacity=".8"/>
-      </svg>
-      <div style="display:flex;flex-direction:column;align-items:center">
-        <span class="word">ASHTH</span>
-        <span class="tag">Mine. Not Mined.</span>
+      <svg class="facet" aria-hidden="true"><use href="#emerald"/></svg>
+      <div class="lockup">
+        <img src="img/ashth-mark-forest.png" alt="" width="534" height="534" loading="lazy">
+        <span class="word" aria-hidden="true">ASHTH</span>
+        <span class="tag" aria-hidden="true">Mine. Not Mined.</span>
       </div>
       <div class="rule" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
       <h2 class="title">Luxembourg<br>Launch</h2>
@@ -305,7 +344,7 @@ a{color:var(--forest)}
       <p class="place">MOB-ART studio</p>
       <p class="addr">19a Avenue de la Porte-Neuve<br>L-2227 Luxembourg</p>
       <div class="rule" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-      <p class="menu-line">Champagne &nbsp;·&nbsp; Wine &nbsp;·&nbsp; Canapés &nbsp;·&nbsp; Live Music</p>
+      <p class="menu-line"><span>Champagne</span> &nbsp;·&nbsp; <span>Wine</span> &nbsp;·&nbsp; <span>Canapés</span> &nbsp;·&nbsp; <span>Live&nbsp;Music</span></p>
       <div class="rule" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
       <p class="rsvp-line">By invitation only &nbsp;·&nbsp; RSVP requested</p>
       <a class="site" href="https://ashth.eu">ashth.eu</a>
@@ -363,7 +402,7 @@ a{color:var(--forest)}
             <a href="https://www.facebook.com/mobartstudio/" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M13.5 21v-7h2.3l.4-2.7h-2.7V9.6c0-.8.3-1.3 1.4-1.3h1.4V5.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5v2H8.6V14h2.3v7"/></svg>Facebook</a>
           </div>
         </div>
-        <div class="map">
+        <div class="map" id="directions">
           <div class="mapframe">
             <iframe title="Map: MOB-ART studio, 19a Avenue de la Porte-Neuve, Luxembourg" src="https://www.google.com/maps?q=MOB-ART+studio,+19a+Avenue+de+la+Porte-Neuve,+L-2227+Luxembourg&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
           </div>
@@ -385,13 +424,15 @@ a{color:var(--forest)}
 
   <!-- HOST + RSVP -->
   <section class="host section" id="rsvp" aria-labelledby="rsvp-title">
+    <svg class="facet" aria-hidden="true"><use href="#emerald"/></svg>
     <div class="wrap inner">
       <figure class="portrait">
         <img src="../about/img/kuntal-shah.jpg" alt="Kuntal Shah, Head of European Operations at ASHTH" width="320" height="400" loading="lazy">
       </figure>
       <div class="text">
         <p class="caps">Your Host · Head Of European Operations</p>
-        <h2 id="rsvp-title">RSVP To Kuntal Shah</h2>
+        <h2 id="rsvp-title">RSVP To <span style="white-space:nowrap">Kuntal Shah</span></h2>
+        <p class="bio">A fourth-generation jeweller from a prominent diamond family and an international intellectual-property lawyer, Kuntal leads ASHTH in Europe from Luxembourg. She will be your host for the evening.</p>
         <p>This is a private evening, and places are limited to the guests on our list. Please reply at your earliest convenience with your name and the number of guests, and let us know of any dietary requirements.</p>
         <div class="rsvp">
           <a class="btn btn-champagne" href="mailto:kuntal@ashth.lu?subject=RSVP%20%E2%80%93%20ASHTH%20Luxembourg%20Launch%2C%203%20December&body=Dear%20Kuntal%2C%0A%0AI%20would%20be%20delighted%20to%20attend%20the%20ASHTH%20Luxembourg%20Launch%20on%20Thursday%203%20December.%0A%0AName%3A%20%0ANumber%20of%20guests%3A%20%0ADietary%20requirements%3A%20%0A%0AKind%20regards%2C">RSVP By Email</a>
@@ -400,6 +441,47 @@ a{color:var(--forest)}
         </div>
         <p class="fine">By invitation only · RSVP requested</p>
       </div>
+    </div>
+  </section>
+
+  <!-- STEP INSIDE — from the invitation into the house -->
+  <section class="discover section" id="discover" aria-labelledby="discover-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="caps">Step Inside</p>
+        <h2 id="discover-title">Discover ASHTH Europe</h2>
+        <div class="rule" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+        <p>Before the evening, or after it: the story of the house, the cut it patented, the collections, and thirty seconds of film.</p>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="../about/">
+          <img src="../about/img/story.jpg" alt="" width="1000" height="1217" loading="lazy">
+          <div class="veil" aria-hidden="true"></div>
+          <div class="cap"><small>About Us</small><b>Our Story</b><span>Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></span></div>
+        </a>
+        <a class="tile" href="../about/#cut">
+          <img src="../about/img/diamonds.jpg" alt="" width="1440" height="1000" loading="lazy">
+          <div class="veil" aria-hidden="true"></div>
+          <div class="cap"><small>97 Facets</small><b>The ASHTH Cut</b><span>Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></span></div>
+        </a>
+        <a class="tile" href="https://ashth.com/lab-grown-diamond-rings">
+          <img src="img/collections.jpg" alt="" width="1217" height="1400" loading="lazy">
+          <div class="veil" aria-hidden="true"></div>
+          <div class="cap"><small>Five Collections</small><b>The Collections</b><span>Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></span></div>
+        </a>
+        <a class="tile" href="../about/#film">
+          <img src="../about/video/ashth-ad-poster.jpg" alt="" width="848" height="480" loading="lazy">
+          <div class="veil" aria-hidden="true"></div>
+          <div class="cap"><small>30 Seconds</small><b>Preview Our Ad</b><span>Watch <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></span></div>
+        </a>
+      </div>
+      <nav class="collections" aria-label="Collections">
+        <a href="https://ashth.com/lab-grown-diamond-rings">Rings</a>
+        <a href="https://ashth.com/lab-grown-diamond-earrings">Earrings</a>
+        <a href="https://ashth.com/lab-grown-diamond-bracelets">Bangles &amp; Bracelets</a>
+        <a href="https://ashth.com/lab-grown-diamond-necklace">Necklaces</a>
+        <a href="https://ashth.com/lab-grown-diamond-pendant">Pendants</a>
+      </nav>
     </div>
   </section>
 
@@ -440,10 +522,22 @@ a{color:var(--forest)}
   </div>
 </footer>
 
+<nav class="actionbar" id="actionbar" aria-label="Quick actions">
+  <a class="primary" href="#rsvp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>RSVP</a>
+  <a href="#directions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>Map</a>
+  <a href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="16"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</a>
+</nav>
+
 <script>
 (function(){
   var h=document.getElementById('header'),t=document.getElementById('menuToggle');
   if(t){t.addEventListener('click',function(){var open=h.classList.toggle('open');t.setAttribute('aria-expanded',open?'true':'false');t.setAttribute('aria-label',open?'Close menu':'Open menu');});}
+  /* Phone action bar: appears once the cover (with its own buttons) has scrolled away. */
+  var bar=document.getElementById('actionbar'),cover=document.getElementById('cover');
+  if(bar&&cover&&'IntersectionObserver' in window){
+    document.body.classList.add('has-bar');
+    new IntersectionObserver(function(es){es.forEach(function(e){bar.classList.toggle('show',!e.isIntersecting);});},{threshold:0.15}).observe(cover);
+  }
 })();
 </script>
 </body>
