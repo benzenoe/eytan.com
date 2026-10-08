@@ -6,7 +6,7 @@
 <title>You Are Invited | ASHTH Luxembourg Launch · 3 December 2026</title>
 <meta name="description" content="You are cordially invited to the ASHTH Luxembourg Launch: a private viewing of contemporary design, exceptional craftsmanship and conscious luxury. Thursday 3 December 2026, 5–10 PM, MOB-ART studio, Luxembourg.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#7DA98E">
+<meta name="theme-color" content="#475C4C">
 <meta property="og:title" content="You are invited · ASHTH Luxembourg Launch · 3 December 2026">
 <meta property="og:description" content="A private viewing at MOB-ART studio, Luxembourg. Champagne · Wine · Canapés · Live Music. By invitation only.">
 <meta property="og:image" content="img/ring-green.jpg">
@@ -23,17 +23,18 @@
    the venue, the RSVP — and from there, the house.
    ───────────────────────────────────────────────────────────────────────── */
 :root{
-  --sage:#7DA98E;          /* ground behind the wash */
-  --sage-deep:#5F8A72;
-  --ivory:#F3EEE2;
-  --cream:#F1ECE0;         /* inside of the gatefold */
-  --cream-2:#F7F4EC;
-  --forest:#2F4A3C;        /* ink on cream */
-  --forest-deep:#24392E;
+  --ground:#475C4C;        /* the card's forest green, behind the wash */
+  --sage:#9DB5A3;          /* accent lines on light grounds */
+  --sage-deep:#5F7A66;
+  --ivory:#EDE6D3;         /* the card's cream type */
+  --cream:#E4EAE0;         /* inside of the card: pale sage */
+  --cream-2:#EEF2EB;
+  --forest:#2D3B2A;        /* ink on the pale sage (Brand Book green) */
+  --forest-deep:#1F2A1E;
   --teal:#2B6166;          /* shared ashth.com header/footer */
   --body:#4A5A50;
   --line:#D9D3C4;
-  --line-sage:rgba(243,238,226,.78);
+  --line-sage:rgba(237,230,211,.75);
   --white:#FFFFFF;
   --display:"Bodoni Moda","Cormorant Garamond",Georgia,serif;
   --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
@@ -85,7 +86,7 @@ a{color:var(--forest)}
 .textlink svg{width:14px;height:14px}
 
 /* The sage watercolour ground, the ivory frame and the card's corner art */
-.ground{position:relative;overflow:hidden;background:var(--sage) url(img/wash.jpg) center/cover no-repeat;color:var(--ivory)}
+.ground{position:relative;overflow:hidden;background:var(--ground) url(img/wash.jpg) center/cover no-repeat;color:var(--ivory)}
 .ground .frame{position:absolute;inset:calc(22px*var(--cs)) calc(26px*var(--cs)) calc(24px*var(--cs)) calc(24px*var(--cs));border:2px solid var(--line-sage);pointer-events:none}
 .corner{position:absolute;pointer-events:none;background-repeat:no-repeat;background-size:100% 100%}
 .corner.tl{left:0;top:0;width:calc(340px*var(--cs));height:calc(360px*var(--cs));background-image:url(img/corner-tl.png)}
@@ -129,7 +130,7 @@ a{color:var(--forest)}
 .cover{display:flex;justify-content:center;text-align:center;padding:clamp(64px,7vw,110px) var(--gutter) clamp(72px,8vw,120px)}
 .cover .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(12px,1.4vw,20px);width:100%;max-width:780px}
 .cover .invite{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(22px,2.3vw,32px);letter-spacing:.03em;line-height:1.2;margin-top:4px}
-.cover .title{font-size:clamp(44px,7.2vw,104px);text-shadow:0 2px 18px rgba(47,74,60,.22)}
+.cover .title{font-size:clamp(44px,7.2vw,104px);text-shadow:0 2px 18px rgba(0,0,0,.22)}
 .cover .caps-serif{font-size:clamp(14px,1.35vw,21px)}
 .cover .sub{letter-spacing:.3em}
 .cover .viewing{font-family:var(--serif);font-weight:600;letter-spacing:.34em;text-transform:uppercase;font-size:clamp(20px,2vw,30px);line-height:1.2}
@@ -163,7 +164,7 @@ a{color:var(--forest)}
 .leaf.side.left .drop{left:calc(60px*var(--cs))}.leaf.side.right .drop{right:calc(60px*var(--cs))}
 .leaf.centre{background:var(--cream);color:var(--forest);padding:clamp(48px,5vw,80px) clamp(24px,4vw,64px)}
 .leaf.centre .card{position:relative;max-width:720px;margin:0 auto;padding:clamp(36px,4vw,56px) clamp(20px,3vw,44px);border:1px solid var(--forest);display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(12px,1.4vw,18px)}
-.leaf.centre .card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(47,74,60,.25);pointer-events:none}
+.leaf.centre .card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(45,59,42,.25);pointer-events:none}
 .leaf.centre .lockup .mark{width:clamp(64px,6.4vw,84px)}
 .leaf.centre .lockup .word{width:clamp(150px,16vw,200px);margin-top:10px}
 .leaf.centre .eyebrow{font-family:var(--serif);font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:clamp(12px,1vw,15px);color:var(--sage-deep)}
@@ -225,7 +226,7 @@ a{color:var(--forest)}
 .host .portrait img{position:relative;z-index:1;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center top}
 .host .text{flex:1.3 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .host .caps{color:var(--ivory);opacity:.9}
-.host h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(30px,3.2vw,48px);line-height:1.02;color:var(--ivory);margin:0;text-shadow:0 2px 14px rgba(47,74,60,.2)}
+.host h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(30px,3.2vw,48px);line-height:1.02;color:var(--ivory);margin:0;text-shadow:0 2px 14px rgba(0,0,0,.2)}
 .host p{color:var(--ivory);max-width:38em}
 .host .bio{font-size:clamp(19px,1.4vw,23px);line-height:1.45}
 .host .rsvp{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;padding-top:6px}
@@ -240,7 +241,7 @@ a{color:var(--forest)}
 .tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:var(--forest);color:var(--ivory);text-decoration:none}
 .tile img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);will-change:transform}
 .tile:hover img{transform:scale(1.05)}
-.tile .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,57,46,0) 40%,rgba(36,57,46,.82) 100%)}
+.tile .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,42,30,0) 40%,rgba(31,42,30,.84) 100%)}
 .tile .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 22px 24px;display:flex;flex-direction:column;gap:6px}
 .tile .cap small{font-family:var(--sans);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ivory);opacity:.85}
 .tile .cap b{font-family:var(--serif);font-weight:600;font-size:clamp(26px,2vw,32px);line-height:1.1;letter-spacing:.01em}
@@ -264,7 +265,7 @@ a{color:var(--forest)}
 .footer .legal .inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 32px;padding-block:14px;font-size:13px;line-height:1.6}
 
 /* ── Phone action bar (guests arrive from the QR code on a phone) ──────── */
-.actionbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;grid-template-columns:1.3fr 1fr 1fr;gap:8px;background:rgba(47,74,60,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(243,238,226,.35);padding:10px 12px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.actionbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;grid-template-columns:1.3fr 1fr 1fr;gap:8px;background:rgba(31,42,30,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(237,230,211,.35);padding:10px 12px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
 .actionbar a{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ivory);color:var(--ivory)}
 .actionbar a svg{width:15px;height:15px}
 .actionbar a.primary{background:var(--ivory);color:var(--forest)}
