@@ -216,12 +216,14 @@ a{color:var(--forest-2)}
 /* ── Facets grid ───────────────────────────────────────────────────────── */
 .facets .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s3) var(--s6);margin-bottom:clamp(32px,4vw,56px)}
 .facets .head > p{flex:1 1 360px;min-width:0;max-width:34em}
-.grid8{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.grid8 .cell{display:flex;flex-direction:column;gap:12px;padding:var(--s4) 28px var(--s5);border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0;background:var(--white);transition:background .3s}
-.grid8 .cell:hover{background:var(--mist)}
-.grid8 .num{font-family:var(--serif);font-size:14px;letter-spacing:.12em;color:#7A603F}
-.grid8 h3{font-weight:500;font-size:22px}
-.grid8 p{font-size:var(--fs-small);line-height:1.7}
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(28px,4vw,72px);align-items:center}
+.plate{margin:0;max-width:640px;width:100%;justify-self:center}
+.plate svg{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:22px 32px;counter-reset:v}
+.vlist li{display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid var(--line);min-width:0}
+.vlist li::before{content:counter(v,upper-roman);counter-increment:v;font-family:var(--serif);font-size:13px;letter-spacing:.12em;color:#7A603F}
+.vlist b{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.2;color:var(--ink)}
+.vlist span{font-size:var(--fs-small);line-height:1.65}
 
 /* ── Journey ───────────────────────────────────────────────────────────── */
 .journey .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s3) var(--s6);margin-bottom:clamp(32px,4vw,56px)}
@@ -583,25 +585,28 @@ a{color:var(--forest-2)}
     </div>
   </section>
 
-  <!-- EIGHT FACETS -->
+  <!-- EIGHT CORE VALUES -->
   <section class="facets section" id="facets" aria-labelledby="facets-title">
     <div class="wrap">
       <div class="head">
         <div class="head-l">
-          <p class="eyebrow">Our Name</p>
+          <p class="eyebrow">Our 8 Core Values</p>
           <h2 id="facets-title">Eight facets. Eight values.</h2>
         </div>
-        <p>ASHTH takes its name from an ancient word for the eight facets of a diamond. To us, each facet stands for a value we hold ourselves to, in every stone and every setting.</p>
+        <p>ASHTH takes its name from an ancient word for the eight facets of a diamond. Each facet of our mark carries one of the eight values we hold ourselves to, in every stone and every setting.</p>
       </div>
-      <div class="grid8">
-        <div class="cell"><span class="num">I</span><h3>Innovation</h3><p>Laboratory-grown diamonds, created through advanced science and precise technology.</p></div>
-        <div class="cell"><span class="num">II</span><h3>Sustainability</h3><p>No mine and no excavation. The earth beneath an ASHTH diamond is left undisturbed.</p></div>
-        <div class="cell"><span class="num">III</span><h3>Customisation</h3><p>Pieces tailored to your hand, your story and your occasion.</p></div>
-        <div class="cell"><span class="num">IV</span><h3>Uniqueness</h3><p>Designs that stand apart, made for individual style.</p></div>
-        <div class="cell"><span class="num">V</span><h3>Symbolism</h3><p>Jewellery that carries love, commitment and the moments worth keeping.</p></div>
-        <div class="cell"><span class="num">VI</span><h3>Purity</h3><p>Controlled growth for exceptional clarity, and purity of intention in all we deliver.</p></div>
-        <div class="cell"><span class="num">VII</span><h3>Affordability</h3><p>Exceptional diamonds at a considered price, with no compromise on quality or ethics.</p></div>
-        <div class="cell"><span class="num">VIII</span><h3>Artistry</h3><p>Every piece shaped by designers who treat jewellery as an art form.</p></div>
+      <div class="values">
+        <figure class="plate"><svg viewBox="0 0 1000 1000" role="img" aria-labelledby="values-plate-title"><title id="values-plate-title">The ASHTH mark with its eight facets labelled: Creativity, Craftsmanship, Conscious, Contemporary, Character, Cost-Effective, Curation, Customization</title><rect width="1000" height="1000" fill="#C0D0BC"/><polygon points="720.0,408.9 1551.5,64.5 1551.5,935.5 720.0,591.1" fill="#FFFFFF" fill-opacity="0.04"/><polygon points="720.0,591.1 1551.5,935.5 935.5,1551.5 591.1,720.0" fill="#FFFFFF" fill-opacity="0.16"/><polygon points="591.1,720.0 935.5,1551.5 64.5,1551.5 408.9,720.0" fill="#FFFFFF" fill-opacity="0.04"/><polygon points="408.9,720.0 64.5,1551.5 -551.5,935.5 280.0,591.1" fill="#FFFFFF" fill-opacity="0.16"/><polygon points="280.0,591.1 -551.5,935.5 -551.5,64.5 280.0,408.9" fill="#FFFFFF" fill-opacity="0.04"/><polygon points="280.0,408.9 -551.5,64.5 64.5,-551.5 408.9,280.0" fill="#FFFFFF" fill-opacity="0.16"/><polygon points="408.9,280.0 64.5,-551.5 935.5,-551.5 591.1,280.0" fill="#FFFFFF" fill-opacity="0.04"/><polygon points="591.1,280.0 935.5,-551.5 1551.5,64.5 720.0,408.9" fill="#FFFFFF" fill-opacity="0.16"/><line x1="720.0" y1="408.9" x2="1551.5" y2="64.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><line x1="720.0" y1="591.1" x2="1551.5" y2="935.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><line x1="591.1" y1="720.0" x2="935.5" y2="1551.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><line x1="408.9" y1="720.0" x2="64.5" y2="1551.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><line x1="280.0" y1="591.1" x2="-551.5" y2="935.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><line x1="280.0" y1="408.9" x2="-551.5" y2="64.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><line x1="408.9" y1="280.0" x2="64.5" y2="-551.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><line x1="591.1" y1="280.0" x2="935.5" y2="-551.5" stroke="#F2EBDD" stroke-width="1.6" stroke-opacity=".95"/><image href="img/ashth-mark-ivory.png" x="280" y="280" width="440" height="440"/><text x="500.0" y="210.0" transform="rotate(0 500.0 210.0)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">CREATIVITY</text><text x="705.1" y="294.9" transform="rotate(45 705.1 294.9)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">CRAFTSMANSHIP</text><text x="790.0" y="500.0" transform="rotate(90 790.0 500.0)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">CONSCIOUS</text><text x="705.1" y="705.1" transform="rotate(-45 705.1 705.1)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">CONTEMPORARY</text><text x="500.0" y="790.0" transform="rotate(0 500.0 790.0)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">CHARACTER</text><text x="294.9" y="705.1" transform="rotate(45 294.9 705.1)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">COST-EFFECTIVE</text><text x="210.0" y="500.0" transform="rotate(-90 210.0 500.0)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">CURATION</text><text x="294.9" y="294.9" transform="rotate(-45 294.9 294.9)" text-anchor="middle" dominant-baseline="central" font-family="Jost,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="23" letter-spacing="2" fill="#F2EBDD" style="text-transform:uppercase">CUSTOMIZATION</text></svg></figure>
+        <ol class="vlist">
+          <li><b>Creativity</b><span>Original design, from a studio with more than 2,000 pieces of its own.</span></li>
+          <li><b>Craftsmanship</b><span>Set and finished by hand in our own factory, by people who have done it for generations.</span></li>
+          <li><b>Conscious</b><span>Laboratory-grown, certified and traceable. Mine. Not mined.</span></li>
+          <li><b>Contemporary</b><span>Designed for the way jewellery is worn now: every day, and on your own terms.</span></li>
+          <li><b>Character</b><span>Pieces with a point of view, made to be recognised across a room.</span></li>
+          <li><b>Cost-Effective</b><span>Direct from our factory to you, so the price reflects the piece and not the chain of hands between.</span></li>
+          <li><b>Curation</b><span>Collections edited with intent, so every piece earns its place.</span></li>
+          <li><b>Customization</b><span>Made to your hand, your story and your occasion.</span></li>
+        </ol>
       </div>
     </div>
   </section>
