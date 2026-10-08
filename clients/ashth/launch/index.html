@@ -169,7 +169,10 @@ a{color:var(--forest)}
 .leaf.centre .eyebrow{font-family:var(--serif);font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:clamp(12px,1vw,15px);color:var(--sage-deep)}
 .leaf.centre h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(28px,3vw,44px);line-height:1.02;margin:0}
 .leaf.centre .intro{max-width:32em;font-size:clamp(17px,1.25vw,20px);line-height:1.5;color:var(--forest)}
-.evening-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,108px),1fr));gap:18px 10px;width:100%;margin-top:8px}
+.evening-list{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 10px;width:100%;margin-top:8px}
+@media (max-width:1240px){.evening-list{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1000px){.evening-list{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:600px){.evening-list{grid-template-columns:repeat(2,1fr)}}
 .evening-list .item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:8px 4px}
 .evening-list svg{width:34px;height:34px;color:var(--forest)}
 .evening-list b{font-family:var(--serif);font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:14px;color:var(--forest)}
@@ -215,7 +218,8 @@ a{color:var(--forest)}
 .practical p{font-size:17px;line-height:1.55}
 
 /* Host + RSVP */
-.host .inner{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:var(--section) clamp(40px,5vw,96px)}
+.host .inner{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:var(--section) clamp(40px,5vw,96px);padding-left:calc(var(--gutter) + 190px*var(--cs))}
+@media (max-width:760px){.host .inner{padding-left:var(--gutter)}}
 .host .portrait{flex:0 1 320px;min-width:0;max-width:320px;margin:0;position:relative;padding:0 16px 16px 0}
 .host .portrait::after{content:"";position:absolute;inset:16px 0 0 16px;border:1px solid var(--ivory);pointer-events:none}
 .host .portrait img{position:relative;z-index:1;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center top}
