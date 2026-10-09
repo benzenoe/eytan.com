@@ -1011,6 +1011,19 @@ footer p+p{margin-top:.4rem;}
   .chart-c{height:220px;}
   .chart-c.sm{height:200px;}
 }
+
+/* Summary repeats the terms table; update both together when terms change. */
+.investment-summary{margin:2rem 0;padding:1.25rem;border:1px solid var(--border, currentColor);border-radius:10px;text-align:left;color:var(--text,var(--ink));}
+.investment-summary h2{font-size:1.25rem;line-height:1.4;margin:0 0 1rem;}
+.investment-summary dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;}
+.investment-summary dt{font-size:.8rem;font-weight:700;margin-bottom:.35rem;}
+.investment-summary dd{font-size:.9rem;line-height:1.6;margin:0;overflow-wrap:anywhere;}
+.investment-summary .summary-liquidity{grid-column:1/-1;}
+.investment-summary p{font-size:.8rem;line-height:1.6;margin:1rem 0 0;max-width:none;}
+.investment-summary a{display:inline-flex;align-items:center;min-height:44px;margin-top:.5rem;color:inherit;text-decoration:underline;}
+.investment-summary a:focus-visible{outline:3px solid currentColor;outline-offset:4px;}
+#investment-summary,#structure{scroll-margin-top:120px;}
+@media(max-width:600px){.investment-summary dl{grid-template-columns:1fr;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('bbrf-theme')||'dark');}catch(e){}</script>
@@ -1098,6 +1111,19 @@ footer p+p{margin-top:.4rem;}
       <strong>Le Bitcoin est déposé en garantie — jamais vendu — pour emprunter des euros qui financent l'acquisition d'immobilier portugais.</strong>
       Le spread entre la performance du Bitcoin et le coût de l'emprunt : c'est ça, le trade.
     </p>
+
+<!-- INVESTMENT SUMMARY: keep aligned with this page's terms table. -->
+  <section class="investment-summary" id="investment-summary" aria-labelledby="investment-summary-title">
+    <h2 id="investment-summary-title">L’investissement en bref</h2>
+    <dl>
+      <div><dt>Ce que vous détenez</dt><dd>Actions préférentielles convertibles · société holding luxembourgeoise (SOPARFI)</dd></div>
+      <div><dt>À qui s’adresse l’investissement</dt><dd>Investisseurs professionnels et avertis uniquement · placement privé luxembourgeois</dd></div>
+      <div><dt>Investissement minimum</dt><dd>€50,000</dd></div>
+      <div class="summary-liquidity"><dt>Liquidité et sortie</dt><dd>Lock-up de 12 mois → rachats trimestriels jusqu'à ~10% du pool → cessions secondaires dès l'année 2 → liquidation possible dès l'année 8</dd></div>
+    </dl>
+    <p>Conditions indicatives — sous réserve de la documentation définitive. Le capital est à risque, y compris en perte totale.</p>
+    <a href="#structure">Lire les conditions complètes →</a>
+  </section>
 
     <div class="stat-row">
       <div class="stat-cell">
