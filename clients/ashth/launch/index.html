@@ -6,10 +6,15 @@
 <title>You Are Invited | ASHTH Luxembourg Launch · 3 December 2026</title>
 <meta name="description" content="You are cordially invited to the ASHTH Luxembourg Launch: a private viewing of contemporary design, exceptional craftsmanship and conscious luxury. Thursday 3 December 2026, 5–10 PM, MOB-ART studio, Luxembourg.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#C0D0BC">
+<meta name="theme-color" content="#CDE6CD">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eytan.com/clients/ashth/launch/">
 <meta property="og:title" content="You are invited · ASHTH Luxembourg Launch · 3 December 2026">
-<meta property="og:description" content="A private viewing at MOB-ART studio, Luxembourg. Champagne · Wine · Canapés · Live Music. By invitation only.">
-<meta property="og:image" content="img/ring-green.jpg">
+<meta property="og:description" content="A private jewellery evening at MOB-ART studio, Luxembourg. Champagne · Wine · Canapés · Live Music. By invitation only.">
+<meta property="og:image" content="https://eytan.com/clients/ashth/launch/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/ashth-mark-forest.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +22,14 @@
 <style>
 /* ─────────────────────────────────────────────────────────────────────────
    ASHTH Luxembourg Launch — the printed invitation, continued on screen.
-   The QR code on the card lands here, so the page opens as the card does:
-   the pale pista watercolour ground of the final "Ashth colour" print
-   (29 Oct 2026) and the About page, forest ink, gold caps, the gold-lattice
-   diamond corners. Then the inside of the gatefold, the venue, the RSVP.
+   The page follows the final "Ashth colour" print run (29 Oct 2026) panel
+   by panel, with its own assets cut from the print PDFs: the light pista
+   ground and gold-lattice diamond corners from the envelope, the rings
+   page of the card as shot, then the details page, the venue, the RSVP.
    ───────────────────────────────────────────────────────────────────────── */
 :root{
-  --ground:#C0D0BC;        /* the card's pista sage ("Ashth colour", as printed) */
+  --ground:#CDE6CD;        /* the printed card's light pista, sampled from the envelope */
+  --paper:#F6F1E5;         /* the card's cream details page */
   --sage:#9DB5A3;          /* accent lines on light grounds */
   --sage-deep:#5F7A66;
   --ivory:#EDE6D3;         /* the card's cream type */
@@ -87,7 +93,7 @@ a{color:var(--forest)}
 .textlink svg{width:14px;height:14px}
 
 /* The sage watercolour ground, the ivory frame and the card's corner art */
-.ground{position:relative;overflow:hidden;background:var(--ground) url(img/wash-sage.jpg) center/cover no-repeat;color:var(--forest)}
+.ground{position:relative;overflow:hidden;background:var(--ground) url(img/wash-print.jpg) center/cover no-repeat;color:var(--forest)}
 .ground .frame{position:absolute;inset:calc(22px*var(--cs)) calc(26px*var(--cs)) calc(24px*var(--cs)) calc(24px*var(--cs));border:2px solid var(--line-gold);pointer-events:none}
 .corner{position:absolute;pointer-events:none;background-repeat:no-repeat;background-size:100% 100%}
 .corner.tl{left:0;top:0;width:calc(340px*var(--cs));height:calc(360px*var(--cs));background-image:url(img/corner-tl-forest.png)}
@@ -127,26 +133,41 @@ a{color:var(--forest)}
 }
 @media (max-width:560px){.brand .divider,.brand .region{display:none}.brand img{height:38px}.tools{gap:12px}}
 
-/* ── Cover: the invitation ─────────────────────────────────────────────── */
-.cover{display:flex;justify-content:center;text-align:center;padding:clamp(64px,7vw,110px) var(--gutter) clamp(72px,8vw,120px)}
-.cover .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(12px,1.4vw,20px);width:100%;max-width:780px}
-.cover .invite{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(22px,2.3vw,32px);letter-spacing:.03em;line-height:1.2;margin-top:4px}
-.cover .title{font-size:clamp(44px,7.2vw,104px)}
-.cover .caps-serif{font-size:clamp(14px,1.35vw,21px)}
-.cover .sub{letter-spacing:.3em;color:var(--bronze)}
-.cover .viewing{font-family:var(--serif);font-weight:600;letter-spacing:.34em;text-transform:uppercase;font-size:clamp(20px,2vw,30px);line-height:1.2}
-.cover .body{max-width:34em;font-family:var(--serif);font-weight:500;font-size:clamp(18px,1.5vw,24px);line-height:1.45}
-.cover .menu-line{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 18px;font-family:var(--serif);font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-size:clamp(13px,1.2vw,18px);color:var(--bronze)}
-.cover .menu-line svg{width:10px;height:10px;margin:0 2px}
-.cover .when{font-family:var(--serif);font-weight:700;font-size:clamp(28px,3vw,46px);line-height:1.15;letter-spacing:.01em}
-.cover .time{font-family:var(--serif);font-weight:500;letter-spacing:.26em;text-transform:uppercase;font-size:clamp(14px,1.3vw,20px);margin-top:-6px}
-.cover .place{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2vw,30px);line-height:1.2;margin-top:6px}
-.cover .addr{font-family:var(--serif);font-weight:500;font-size:clamp(17px,1.4vw,21px);line-height:1.4;margin-top:-6px}
-.cover .rsvp-line{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(18px,1.5vw,23px);display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.cover .rsvp-line svg{width:10px;height:10px}
-.cover .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:10px}
-.cover .enter{margin-top:clamp(8px,1.4vw,18px)}
-@media (max-width:760px){.cover{padding-bottom:calc(560px*var(--cs))}.cover .actions{width:100%}.cover .actions .btn{flex:1 1 100%}.cover .rule::before,.cover .rule::after{flex-basis:60px}}
+/* ── Cover: the front of the printed card ──────────────────────────────── */
+.cover{display:flex;justify-content:center;align-items:center;text-align:center;min-height:min(86vh,940px);padding:clamp(72px,9vw,140px) var(--gutter) clamp(110px,12vw,180px)}
+.cover .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,1.6vw,22px);width:100%;max-width:780px}
+.invite-type .title{font-size:clamp(40px,6.6vw,96px)}
+.invite-type .caps-serif{font-size:clamp(14px,1.35vw,21px)}
+.invite-type .sub{letter-spacing:.3em}
+.invite-type .request{max-width:30em;font-family:var(--serif);font-weight:500;font-size:clamp(18px,1.5vw,24px);line-height:1.5}
+.invite-type .request b{font-weight:700;letter-spacing:.02em}
+.invite-type .menu-line{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 18px;font-family:var(--serif);font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-size:clamp(13px,1.2vw,18px);color:var(--bronze)}
+.invite-type .menu-line svg{width:10px;height:10px;margin:0 2px}
+.invite-type .when{font-family:var(--serif);font-weight:700;font-size:clamp(28px,3vw,46px);line-height:1.15;letter-spacing:.01em}
+.invite-type .time{font-family:var(--serif);font-weight:500;letter-spacing:.26em;text-transform:uppercase;font-size:clamp(14px,1.3vw,20px);margin-top:-6px}
+.invite-type .place{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2vw,30px);line-height:1.2;margin-top:6px}
+.invite-type .addr{font-family:var(--serif);font-weight:500;font-size:clamp(17px,1.4vw,21px);line-height:1.4;margin-top:-6px}
+.invite-type .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:10px}
+.cover .enter{margin-top:clamp(10px,1.8vw,22px)}
+.rule .cluster{width:48px;height:12px}
+
+/* The card's corner art, cut from the envelope of the final print run */
+.corner-photo{position:absolute;pointer-events:none;background-repeat:no-repeat;background-size:100% 100%;z-index:1}
+.corner-photo.br{right:0;bottom:0;width:calc(440px*var(--cs));height:calc(748px*var(--cs));background-image:url(img/corner-print-br.webp)}
+
+/* The second page of the card, as printed */
+.page2{background:var(--cream-2);padding:var(--section) var(--gutter)}
+.page2 .leafimg{margin:0 auto;max-width:620px;box-shadow:0 26px 70px rgba(31,42,30,.22)}
+.page2 img{width:100%;height:auto}
+
+/* The details page of the card */
+.details{background:var(--paper);display:flex;justify-content:center;text-align:center;padding:var(--section) var(--gutter)}
+.details .inner{display:flex;flex-direction:column;align-items:center;gap:clamp(12px,1.4vw,18px);width:100%;max-width:780px;color:var(--forest)}
+.details .lockup .mark{width:clamp(60px,6vw,82px)}
+.details .lockup .word{width:clamp(146px,15vw,196px);margin-top:10px}
+.details .goldline{color:var(--bronze);font-weight:600}
+.details .rule{color:var(--forest)}
+@media (max-width:760px){.cover{min-height:0;padding-bottom:calc(748px*var(--cs)*.78)}.invite-type .actions{width:100%}.invite-type .actions .btn{flex:1 1 100%}.rule::before,.rule::after{flex-basis:60px}}
 @media (prefers-reduced-motion:no-preference){
   .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
   .d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}.d6{animation-delay:.64s}.d7{animation-delay:.76s}
@@ -231,7 +252,7 @@ a{color:var(--forest)}
 .host p{color:var(--body);max-width:38em}
 .host .bio{font-size:clamp(19px,1.4vw,23px);line-height:1.45}
 .host .rsvp{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;padding-top:6px}
-.host .contact{font-family:var(--serif);font-weight:600;font-size:clamp(19px,1.4vw,23px);letter-spacing:.03em;color:var(--forest);user-select:all}
+.host .contact{font-family:var(--serif);font-weight:600;font-size:clamp(19px,1.4vw,23px);letter-spacing:.03em;color:var(--forest);user-select:all;text-decoration:none}
 .host .fine{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.2vw,19px);color:#5E6D59}
 .host{padding-bottom:calc(var(--section) + 120px*var(--cs))}
 @media (max-width:760px){.host{padding-bottom:calc(var(--section) + 420px*var(--cs))}}
@@ -309,56 +330,56 @@ a{color:var(--forest)}
 
 <main id="top">
 
-  <!-- COVER — the invitation, as printed -->
-  <section class="cover ground" id="cover" aria-labelledby="cover-title">
-    <div class="corner tl" aria-hidden="true"></div>
-    <div class="corner tr" aria-hidden="true"></div>
-    <div class="corner bl" aria-hidden="true"></div>
-    <div class="corner br" aria-hidden="true"></div>
-    <div class="frame" aria-hidden="true"></div>
+  <!-- COVER — the front of the printed card -->
+  <section class="cover ground invite-type" id="cover" aria-labelledby="cover-title">
+    <div class="corner-photo br" aria-hidden="true"></div>
     <div class="inner">
       <div class="lockup rise">
         <img class="mark" src="img/ashth-mark-forest.png" alt="" width="534" height="534" fetchpriority="high">
         <img class="word" src="img/ashth-wordmark-forest.png" alt="ASHTH. Mine. Not Mined." width="570" height="226" fetchpriority="high">
       </div>
-      <div class="rule rise d1" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-      <p class="invite rise d1">You are cordially invited</p>
-      <h1 id="cover-title" class="title rise d2">Luxembourg<br>Launch</h1>
-      <p class="caps-serif sub rise d2">Luxury Designer Lab Diamond Jewellery</p>
-      <div class="rule short rise d3" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-      <p class="viewing rise d3">Private Viewing</p>
-      <p class="body rise d3">Join us for an intimate evening of contemporary design, exceptional craftsmanship and conscious luxury.</p>
-      <p class="menu-line rise d4"><span>Champagne</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Wine</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Canapés</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Live Music</span></p>
-      <div class="rule rise d4" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-      <p class="when rise d5">Thursday, 3 December 2026</p>
-      <p class="time rise d5">5:00 PM – 10:00 PM</p>
-      <p class="place rise d5">MOB-ART studio</p>
-      <p class="addr rise d5">19a Avenue de la Porte-Neuve<br>L-2227 Luxembourg</p>
-      <div class="rule short rise d6" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-      <p class="rsvp-line rise d6"><span>By invitation only</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>RSVP requested</span></p>
-      <div class="actions rise d7">
-        <a class="btn btn-forest" href="#rsvp">RSVP</a>
-        <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
-      </div>
-      <a class="textlink enter rise d7" href="#discover">Enter ASHTH Europe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
+      <div class="rule rise d1" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
+      <p class="caps-serif sub rise d2">You Are Invited To</p>
+      <h1 id="cover-title" class="title rise d3">A Private<br>Jewellery Evening</h1>
+      <a class="textlink enter rise d4" href="#invitation">Open The Invitation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
     </div>
   </section>
 
-  <!-- INSIDE THE GATEFOLD — the evening -->
-  <section class="gate" id="evening" aria-labelledby="evening-title">
-    <aside class="leaf side left ground" aria-label="Contemporary design, exceptional craftsmanship, conscious luxury">
-      <svg class="drop" viewBox="0 0 60 130" fill="none" stroke="#44593F" stroke-width="1.2" aria-hidden="true"><path d="M30 0v40M30 76v54"/><path d="M30 44l8 14-8 14-8-14z"/><path d="M30 100l3 5-3 5-3-5z" fill="#44593F"/><path d="M48 20l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#44593F" stroke="none"/></svg>
-      <div class="words">
-        <span>Contemporary<br>Design</span>
-        <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg>
-        <span>Exceptional<br>Craftsmanship</span>
-        <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg>
-        <span>Conscious<br>Luxury</span>
+  <!-- THE SECOND PAGE OF THE CARD — as printed -->
+  <section class="page2" aria-label="Modern luxury, a brighter tomorrow">
+    <figure class="leafimg">
+      <img src="img/invite-rings.jpg" alt="The second page of the printed invitation: two ASHTH octagonal laboratory-grown diamond rings in golden light. Modern luxury, a brighter tomorrow — exceptional design, conscious choice." width="875" height="1240" loading="lazy">
+    </figure>
+  </section>
+
+  <!-- THE DETAILS PAGE OF THE CARD -->
+  <section class="details invite-type" id="invitation" aria-labelledby="invite-title">
+    <div class="inner">
+      <div class="lockup">
+        <img class="mark" src="img/ashth-mark-forest.png" alt="" width="534" height="534" loading="lazy">
+        <img class="word" src="img/ashth-wordmark-forest.png" alt="ASHTH. Mine. Not Mined." width="570" height="226" loading="lazy">
       </div>
-      <div class="corner bl" aria-hidden="true"></div>
-      <div class="frame" aria-hidden="true"></div>
-    </aside>
-    <div class="leaf centre">
+      <p class="caps-serif goldline">Luxury Designer Lab Diamond Jewellery</p>
+      <div class="rule" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
+      <h2 id="invite-title" class="title">Luxembourg<br>Launch</h2>
+      <div class="rule short" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
+      <p class="request"><b>Kuntal Shah-Narain</b> requests your company for an intimate evening of contemporary design, exceptional craftsmanship and conscious luxury.</p>
+      <div class="rule short" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
+      <p class="when">Thursday, 3 December 2026</p>
+      <p class="time">5:00 PM – 10:00 PM</p>
+      <p class="place">MOB-ART studio</p>
+      <p class="addr">19a Avenue de la Porte-Neuve<br>L-2227 Luxembourg</p>
+      <div class="rule short" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
+      <p class="menu-line"><span>Champagne</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Wine</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Canapés</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Live Music</span></p>
+      <div class="actions">
+        <a class="btn btn-forest" href="#rsvp">RSVP</a>
+        <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE EVENING -->
+  <section class="leaf centre" id="evening" aria-labelledby="evening-title">
       <div class="card">
         <div class="lockup">
           <img class="mark" src="img/ashth-mark-forest.png" alt="" width="534" height="534" loading="lazy">
@@ -366,7 +387,7 @@ a{color:var(--forest)}
         </div>
         <p class="eyebrow">The Evening</p>
         <h2 id="evening-title">What Awaits You</h2>
-        <div class="rule short" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+        <div class="rule short" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
         <p class="intro">An open door from five o’clock, with the collections laid out to be tried on, and Kuntal Shah and the ASHTH team on hand to talk you through each piece, the patented ASHTH Cut and the story behind the house.</p>
         <div class="evening-list">
           <div class="item">
@@ -386,23 +407,10 @@ a{color:var(--forest)}
             <b>Live Music</b><span>A live set to carry the room.</span>
           </div>
         </div>
-        <div class="rule short" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-        <p class="host-line">Your host for the evening is Kuntal Shah, Head of European Operations.</p>
+        <div class="rule short" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
+        <p class="host-line">Your host for the evening is Kuntal Shah-Narain, Head of European Operations.</p>
         <a class="btn btn-forest" href="#rsvp">RSVP</a>
       </div>
-    </div>
-    <aside class="leaf side right ground" aria-label="A brighter tomorrow, beauty with purpose, mine not mined">
-      <svg class="drop" viewBox="0 0 60 130" fill="none" stroke="#44593F" stroke-width="1.2" aria-hidden="true"><path d="M30 0v40M30 76v54"/><path d="M30 44l8 14-8 14-8-14z"/><path d="M30 100l3 5-3 5-3-5z" fill="#44593F"/><path d="M12 20l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#44593F" stroke="none"/></svg>
-      <div class="words">
-        <span>A Brighter<br>Tomorrow</span>
-        <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg>
-        <span>Beauty<br>With Purpose</span>
-        <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg>
-        <span>Mine.<br>Not Mined.</span>
-      </div>
-      <div class="corner br" aria-hidden="true"></div>
-      <div class="frame" aria-hidden="true"></div>
-    </aside>
   </section>
 
   <!-- VENUE + MAP -->
@@ -411,7 +419,7 @@ a{color:var(--forest)}
       <div class="head">
         <p class="caps">The Venue</p>
         <h2 id="venue-title">MOB-ART studio</h2>
-        <div class="rule short" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+        <div class="rule short" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
       </div>
       <div class="inner">
         <div class="info">
@@ -441,28 +449,28 @@ a{color:var(--forest)}
         <div class="item"><b>By car</b><p>The Théâtre, Knuedler and Royal-Hamilius car parks are all within a few minutes’ walk and open around the clock.</p></div>
         <div class="item"><b>By tram or bus</b><p>Public transport in Luxembourg is free. The Hamilius tram stop on Boulevard Royal is a short walk from the gallery.</p></div>
         <div class="item"><b>Access</b><p>The gallery has a step-free entrance and is at street level on Avenue de la Porte-Neuve.</p></div>
-        <div class="item"><b>Questions</b><p>Write to Kuntal Shah at kuntal@ashth.lu, or call the gallery on +352 691 109 645.</p></div>
+        <div class="item"><b>Questions</b><p>Write to Kuntal Shah-Narain at kuntal@ashth.lu, or call her on +352 621 197 974.</p></div>
       </div>
     </div>
   </section>
 
   <!-- HOST + RSVP -->
   <section class="host ground section" id="rsvp" aria-labelledby="rsvp-title">
-    <div class="corner tr" aria-hidden="true"></div>
-    <div class="corner bl" aria-hidden="true"></div>
+    <div class="corner-photo br" aria-hidden="true"></div>
     <div class="wrap inner">
       <figure class="portrait">
         <img src="../about/img/kuntal-shah.jpg" alt="Kuntal Shah, Head of European Operations at ASHTH" width="320" height="400" loading="lazy">
       </figure>
       <div class="text">
         <p class="caps">Your Host · Head Of European Operations</p>
-        <h2 id="rsvp-title">RSVP To <span style="white-space:nowrap">Kuntal Shah</span></h2>
+        <h2 id="rsvp-title">RSVP To <span style="white-space:nowrap">Kuntal Shah-Narain</span></h2>
         <p class="bio">A fourth-generation jeweller from a prominent diamond family and an international intellectual-property lawyer, Kuntal leads ASHTH in Europe from Luxembourg. She will be your host for the evening.</p>
         <p>This is a private evening, and places are limited to the guests on our list. Please reply at your earliest convenience with your name and the number of guests, and let us know of any dietary requirements.</p>
         <div class="rsvp">
           <a class="btn btn-forest" href="mailto:kuntal@ashth.lu?subject=RSVP%20%E2%80%93%20ASHTH%20Luxembourg%20Launch%2C%203%20December&body=Dear%20Kuntal%2C%0A%0AI%20would%20be%20delighted%20to%20attend%20the%20ASHTH%20Luxembourg%20Launch%20on%20Thursday%203%20December.%0A%0AName%3A%20%0ANumber%20of%20guests%3A%20%0ADietary%20requirements%3A%20%0A%0AKind%20regards%2C">RSVP By Email</a>
           <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
           <span class="contact">kuntal@ashth.lu</span>
+          <a class="contact" href="tel:+352621197974">+352 621 197 974</a>
         </div>
         <p class="fine">By invitation only · RSVP requested</p>
       </div>
@@ -475,7 +483,7 @@ a{color:var(--forest)}
       <div class="head">
         <p class="caps">Step Inside</p>
         <h2 id="discover-title">Discover ASHTH Europe</h2>
-        <div class="rule short" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+        <div class="rule short" aria-hidden="true"><svg class="cluster" viewBox="0 0 48 12" fill="currentColor"><g transform="translate(0 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(8 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(18 0)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(32.4 2.2) scale(.63)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g><g transform="translate(43 3.5) scale(.42)"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></g></svg></div>
         <p>Before the evening, or after it: the story of the house, the cut it patented, the collections, and thirty seconds of film.</p>
       </div>
       <div class="tiles">
