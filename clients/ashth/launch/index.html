@@ -6,7 +6,7 @@
 <title>You Are Invited | ASHTH Luxembourg Launch · 3 December 2026</title>
 <meta name="description" content="You are cordially invited to the ASHTH Luxembourg Launch: a private viewing of contemporary design, exceptional craftsmanship and conscious luxury. Thursday 3 December 2026, 5–10 PM, MOB-ART studio, Luxembourg.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#475C4C">
+<meta name="theme-color" content="#C0D0BC">
 <meta property="og:title" content="You are invited · ASHTH Luxembourg Launch · 3 December 2026">
 <meta property="og:description" content="A private viewing at MOB-ART studio, Luxembourg. Champagne · Wine · Canapés · Live Music. By invitation only.">
 <meta property="og:image" content="img/ring-green.jpg">
@@ -18,12 +18,12 @@
 /* ─────────────────────────────────────────────────────────────────────────
    ASHTH Luxembourg Launch — the printed invitation, continued on screen.
    The QR code on the card lands here, so the page opens as the card does:
-   the sage watercolour ground, the thin ivory frame, the diamond corners,
-   the mark and wordmark, the Bodoni title. Then the inside of the gatefold,
-   the venue, the RSVP — and from there, the house.
+   the pale pista watercolour ground of the final "Ashth colour" print
+   (29 Oct 2026) and the About page, forest ink, gold caps, the gold-lattice
+   diamond corners. Then the inside of the gatefold, the venue, the RSVP.
    ───────────────────────────────────────────────────────────────────────── */
 :root{
-  --ground:#475C4C;        /* the card's forest green, behind the wash */
+  --ground:#C0D0BC;        /* the card's pista sage ("Ashth colour", as printed) */
   --sage:#9DB5A3;          /* accent lines on light grounds */
   --sage-deep:#5F7A66;
   --ivory:#EDE6D3;         /* the card's cream type */
@@ -33,8 +33,9 @@
   --forest-deep:#1F2A1E;
   --teal:#2B6166;          /* shared ashth.com header/footer */
   --body:#4A5A50;
+  --bronze:#7A603F;        /* the card's gold caps, deepened for small type */
   --line:#D9D3C4;
-  --line-sage:rgba(237,230,211,.75);
+  --line-gold:rgba(148,120,66,.5);
   --white:#FFFFFF;
   --display:"Bodoni Moda","Cormorant Garamond",Georgia,serif;
   --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
@@ -56,7 +57,7 @@ body{margin:0;background:var(--cream-2);color:var(--body);font-family:var(--seri
 img{max-width:100%;display:block}
 p{margin:0}
 a{color:var(--forest)}
-:focus-visible{outline:2px solid var(--ivory);outline-offset:3px}
+:focus-visible{outline:2px solid var(--forest);outline-offset:3px}
 .wrap{max-width:var(--content);margin-inline:auto;padding-inline:var(--gutter)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
@@ -81,13 +82,13 @@ a{color:var(--forest)}
 .btn-forest:hover{background:var(--forest-deep);border-color:var(--forest-deep)}
 .btn-outline-dark{border-color:var(--forest);color:var(--forest)}
 .btn-outline-dark:hover{background:var(--forest);color:var(--ivory)}
-.textlink{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:12px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--ivory);border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .25s}
-.textlink:hover{border-bottom-color:var(--ivory)}
+.textlink{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:12px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:var(--forest);border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .25s}
+.textlink:hover{border-bottom-color:var(--forest)}
 .textlink svg{width:14px;height:14px}
 
 /* The sage watercolour ground, the ivory frame and the card's corner art */
-.ground{position:relative;overflow:hidden;background:var(--ground) url(img/wash-forest.jpg) center/cover no-repeat;color:var(--ivory)}
-.ground .frame{position:absolute;inset:calc(22px*var(--cs)) calc(26px*var(--cs)) calc(24px*var(--cs)) calc(24px*var(--cs));border:2px solid var(--line-sage);pointer-events:none}
+.ground{position:relative;overflow:hidden;background:var(--ground) url(img/wash-sage.jpg) center/cover no-repeat;color:var(--forest)}
+.ground .frame{position:absolute;inset:calc(22px*var(--cs)) calc(26px*var(--cs)) calc(24px*var(--cs)) calc(24px*var(--cs));border:2px solid var(--line-gold);pointer-events:none}
 .corner{position:absolute;pointer-events:none;background-repeat:no-repeat;background-size:100% 100%}
 .corner.tl{left:0;top:0;width:calc(340px*var(--cs));height:calc(360px*var(--cs));background-image:url(img/corner-tl-forest.png)}
 .corner.tr{right:0;top:0;width:calc(342px*var(--cs));height:calc(360px*var(--cs));background-image:url(img/corner-tr-forest.png)}
@@ -130,12 +131,12 @@ a{color:var(--forest)}
 .cover{display:flex;justify-content:center;text-align:center;padding:clamp(64px,7vw,110px) var(--gutter) clamp(72px,8vw,120px)}
 .cover .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(12px,1.4vw,20px);width:100%;max-width:780px}
 .cover .invite{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(22px,2.3vw,32px);letter-spacing:.03em;line-height:1.2;margin-top:4px}
-.cover .title{font-size:clamp(44px,7.2vw,104px);text-shadow:0 2px 18px rgba(0,0,0,.22)}
+.cover .title{font-size:clamp(44px,7.2vw,104px)}
 .cover .caps-serif{font-size:clamp(14px,1.35vw,21px)}
-.cover .sub{letter-spacing:.3em}
+.cover .sub{letter-spacing:.3em;color:var(--bronze)}
 .cover .viewing{font-family:var(--serif);font-weight:600;letter-spacing:.34em;text-transform:uppercase;font-size:clamp(20px,2vw,30px);line-height:1.2}
 .cover .body{max-width:34em;font-family:var(--serif);font-weight:500;font-size:clamp(18px,1.5vw,24px);line-height:1.45}
-.cover .menu-line{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 18px;font-family:var(--serif);font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-size:clamp(13px,1.2vw,18px)}
+.cover .menu-line{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 18px;font-family:var(--serif);font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-size:clamp(13px,1.2vw,18px);color:var(--bronze)}
 .cover .menu-line svg{width:10px;height:10px;margin:0 2px}
 .cover .when{font-family:var(--serif);font-weight:700;font-size:clamp(28px,3vw,46px);line-height:1.15;letter-spacing:.01em}
 .cover .time{font-family:var(--serif);font-weight:500;letter-spacing:.26em;text-transform:uppercase;font-size:clamp(14px,1.3vw,20px);margin-top:-6px}
@@ -167,7 +168,7 @@ a{color:var(--forest)}
 .leaf.centre .card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(45,59,42,.25);pointer-events:none}
 .leaf.centre .lockup .mark{width:clamp(64px,6.4vw,84px)}
 .leaf.centre .lockup .word{width:clamp(150px,16vw,200px);margin-top:10px}
-.leaf.centre .eyebrow{font-family:var(--serif);font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:clamp(12px,1vw,15px);color:var(--sage-deep)}
+.leaf.centre .eyebrow{font-family:var(--serif);font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:clamp(12px,1vw,15px);color:var(--bronze)}
 .leaf.centre h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(28px,3vw,44px);line-height:1.02;margin:0}
 .leaf.centre .intro{max-width:32em;font-size:clamp(17px,1.25vw,20px);line-height:1.5;color:var(--forest)}
 .evening-list{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 10px;width:100%;margin-top:8px}
@@ -189,7 +190,7 @@ a{color:var(--forest)}
 /* ── Sections ──────────────────────────────────────────────────────────── */
 .section{padding-block:var(--section);scroll-margin-top:110px}
 .head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;margin-bottom:clamp(32px,4vw,56px)}
-.head .caps{color:var(--sage-deep)}
+.head .caps{color:var(--bronze)}
 .head h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(30px,3.2vw,48px);line-height:1.02;color:var(--forest);margin:0}
 .head .rule{color:var(--forest)}
 .head p{max-width:40em;color:var(--body)}
@@ -199,7 +200,7 @@ a{color:var(--forest)}
 .venue .inner{display:flex;flex-wrap:wrap;gap:var(--section) clamp(40px,5vw,96px);align-items:stretch}
 .venue .info{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:22px}
 .venue .info h3{font-family:var(--serif);font-weight:600;font-size:clamp(30px,2.8vw,42px);letter-spacing:.01em;line-height:1.1;color:var(--forest);margin:0}
-.venue .info .sub{font-family:var(--sans);letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--sage-deep)}
+.venue .info .sub{font-family:var(--sans);letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--bronze)}
 .venue .info p{max-width:36em}
 .venue address{font-style:normal;font-family:var(--serif);font-weight:600;font-size:clamp(19px,1.4vw,23px);line-height:1.45;color:var(--forest)}
 .links{display:flex;flex-wrap:wrap;gap:10px 14px}
@@ -215,23 +216,23 @@ a{color:var(--forest)}
 .maplinks a:hover{border-bottom-color:var(--forest)}
 .practical{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px 40px;margin-top:var(--section);padding-top:var(--section);border-top:1px solid var(--line)}
 .practical .item{display:flex;flex-direction:column;gap:8px}
-.practical b{font-family:var(--sans);font-weight:500;letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--sage-deep)}
+.practical b{font-family:var(--sans);font-weight:500;letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--bronze)}
 .practical p{font-size:17px;line-height:1.55}
 
 /* Host + RSVP */
 .host .inner{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:var(--section) clamp(40px,5vw,96px);padding-left:calc(var(--gutter) + 190px*var(--cs))}
 @media (max-width:760px){.host .inner{padding-left:var(--gutter)}}
 .host .portrait{flex:0 1 320px;min-width:0;max-width:320px;margin:0;position:relative;padding:0 16px 16px 0}
-.host .portrait::after{content:"";position:absolute;inset:16px 0 0 16px;border:1px solid var(--ivory);pointer-events:none}
+.host .portrait::after{content:"";position:absolute;inset:16px 0 0 16px;border:1px solid var(--line-gold);pointer-events:none}
 .host .portrait img{position:relative;z-index:1;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center top}
 .host .text{flex:1.3 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px}
-.host .caps{color:var(--ivory);opacity:.9}
-.host h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(30px,3.2vw,48px);line-height:1.02;color:var(--ivory);margin:0;text-shadow:0 2px 14px rgba(0,0,0,.2)}
-.host p{color:var(--ivory);max-width:38em}
+.host .caps{color:var(--bronze)}
+.host h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(30px,3.2vw,48px);line-height:1.02;color:var(--forest);margin:0}
+.host p{color:var(--body);max-width:38em}
 .host .bio{font-size:clamp(19px,1.4vw,23px);line-height:1.45}
 .host .rsvp{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;padding-top:6px}
-.host .contact{font-family:var(--serif);font-weight:600;font-size:clamp(19px,1.4vw,23px);letter-spacing:.03em;color:var(--ivory);user-select:all}
-.host .fine{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.2vw,19px);color:var(--ivory);opacity:.9}
+.host .contact{font-family:var(--serif);font-weight:600;font-size:clamp(19px,1.4vw,23px);letter-spacing:.03em;color:var(--forest);user-select:all}
+.host .fine{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.2vw,19px);color:#5E6D59}
 .host{padding-bottom:calc(var(--section) + 120px*var(--cs))}
 @media (max-width:760px){.host{padding-bottom:calc(var(--section) + 420px*var(--cs))}}
 
@@ -317,8 +318,8 @@ a{color:var(--forest)}
     <div class="frame" aria-hidden="true"></div>
     <div class="inner">
       <div class="lockup rise">
-        <img class="mark" src="img/ashth-mark-ivory.png" alt="" width="534" height="534" fetchpriority="high">
-        <img class="word" src="img/ashth-wordmark-ivory.png" alt="ASHTH. Mine. Not Mined." width="570" height="226" fetchpriority="high">
+        <img class="mark" src="img/ashth-mark-forest.png" alt="" width="534" height="534" fetchpriority="high">
+        <img class="word" src="img/ashth-wordmark-forest.png" alt="ASHTH. Mine. Not Mined." width="570" height="226" fetchpriority="high">
       </div>
       <div class="rule rise d1" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
       <p class="invite rise d1">You are cordially invited</p>
@@ -336,8 +337,8 @@ a{color:var(--forest)}
       <div class="rule short rise d6" aria-hidden="true"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
       <p class="rsvp-line rise d6"><span>By invitation only</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>RSVP requested</span></p>
       <div class="actions rise d7">
-        <a class="btn btn-ivory" href="#rsvp">RSVP</a>
-        <a class="btn btn-outline-light" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
+        <a class="btn btn-forest" href="#rsvp">RSVP</a>
+        <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
       </div>
       <a class="textlink enter rise d7" href="#discover">Enter ASHTH Europe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7"/></svg></a>
     </div>
@@ -346,7 +347,7 @@ a{color:var(--forest)}
   <!-- INSIDE THE GATEFOLD — the evening -->
   <section class="gate" id="evening" aria-labelledby="evening-title">
     <aside class="leaf side left ground" aria-label="Contemporary design, exceptional craftsmanship, conscious luxury">
-      <svg class="drop" viewBox="0 0 60 130" fill="none" stroke="#F3EEE2" stroke-width="1.2" aria-hidden="true"><path d="M30 0v40M30 76v54"/><path d="M30 44l8 14-8 14-8-14z"/><path d="M30 100l3 5-3 5-3-5z" fill="#F3EEE2"/><path d="M48 20l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#F3EEE2" stroke="none"/></svg>
+      <svg class="drop" viewBox="0 0 60 130" fill="none" stroke="#44593F" stroke-width="1.2" aria-hidden="true"><path d="M30 0v40M30 76v54"/><path d="M30 44l8 14-8 14-8-14z"/><path d="M30 100l3 5-3 5-3-5z" fill="#44593F"/><path d="M48 20l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#44593F" stroke="none"/></svg>
       <div class="words">
         <span>Contemporary<br>Design</span>
         <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg>
@@ -391,7 +392,7 @@ a{color:var(--forest)}
       </div>
     </div>
     <aside class="leaf side right ground" aria-label="A brighter tomorrow, beauty with purpose, mine not mined">
-      <svg class="drop" viewBox="0 0 60 130" fill="none" stroke="#F3EEE2" stroke-width="1.2" aria-hidden="true"><path d="M30 0v40M30 76v54"/><path d="M30 44l8 14-8 14-8-14z"/><path d="M30 100l3 5-3 5-3-5z" fill="#F3EEE2"/><path d="M12 20l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#F3EEE2" stroke="none"/></svg>
+      <svg class="drop" viewBox="0 0 60 130" fill="none" stroke="#44593F" stroke-width="1.2" aria-hidden="true"><path d="M30 0v40M30 76v54"/><path d="M30 44l8 14-8 14-8-14z"/><path d="M30 100l3 5-3 5-3-5z" fill="#44593F"/><path d="M12 20l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#44593F" stroke="none"/></svg>
       <div class="words">
         <span>A Brighter<br>Tomorrow</span>
         <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg>
@@ -459,8 +460,8 @@ a{color:var(--forest)}
         <p class="bio">A fourth-generation jeweller from a prominent diamond family and an international intellectual-property lawyer, Kuntal leads ASHTH in Europe from Luxembourg. She will be your host for the evening.</p>
         <p>This is a private evening, and places are limited to the guests on our list. Please reply at your earliest convenience with your name and the number of guests, and let us know of any dietary requirements.</p>
         <div class="rsvp">
-          <a class="btn btn-ivory" href="mailto:kuntal@ashth.lu?subject=RSVP%20%E2%80%93%20ASHTH%20Luxembourg%20Launch%2C%203%20December&body=Dear%20Kuntal%2C%0A%0AI%20would%20be%20delighted%20to%20attend%20the%20ASHTH%20Luxembourg%20Launch%20on%20Thursday%203%20December.%0A%0AName%3A%20%0ANumber%20of%20guests%3A%20%0ADietary%20requirements%3A%20%0A%0AKind%20regards%2C">RSVP By Email</a>
-          <a class="btn btn-outline-light" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
+          <a class="btn btn-forest" href="mailto:kuntal@ashth.lu?subject=RSVP%20%E2%80%93%20ASHTH%20Luxembourg%20Launch%2C%203%20December&body=Dear%20Kuntal%2C%0A%0AI%20would%20be%20delighted%20to%20attend%20the%20ASHTH%20Luxembourg%20Launch%20on%20Thursday%203%20December.%0A%0AName%3A%20%0ANumber%20of%20guests%3A%20%0ADietary%20requirements%3A%20%0A%0AKind%20regards%2C">RSVP By Email</a>
+          <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
           <span class="contact">kuntal@ashth.lu</span>
         </div>
         <p class="fine">By invitation only · RSVP requested</p>
@@ -494,7 +495,7 @@ a{color:var(--forest)}
           <div class="cap"><small>Five Collections</small><b>The Collections</b><span>Shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></span></div>
         </a>
         <a class="tile" href="../about/#film">
-          <img src="../about/video/ashth-ad-poster.jpg" alt="" width="848" height="480" loading="lazy">
+          <img src="../about/video/ashth-ad-poster-cafe.jpg" alt="" width="848" height="480" loading="lazy">
           <div class="veil" aria-hidden="true"></div>
           <div class="cap"><small>30 Seconds</small><b>Preview Our Ad</b><span>Watch <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></span></div>
         </a>
