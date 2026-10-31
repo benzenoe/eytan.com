@@ -15,8 +15,9 @@
 <style>
 /* ─────────────────────────────────────────────────────────────────────────
    ASHTH Europe — About Us
-   Palette from the ASHTH Brand Book (forest green, pastel grey-green,
-   sand/champagne) with ashth.com's teal for the shared header & footer.
+   Palette from the ASHTH Brand Book, sage/pista-led per Kuntal's 10–17 Oct
+   notes (sage grounds, forest ink, bronze/champagne accents) with
+   ashth.com's teal for the shared header & footer.
    Type: Lora (brand serif) for display, Jost (ashth.com) for everything else.
    Rhythm: 8px base, section padding on a 1.5 modular scale.
    ───────────────────────────────────────────────────────────────────────── */
@@ -30,6 +31,7 @@
   --champagne:#DFCCB6;     /* brand accent (sand) */
   --champagne-2:#EADFCF;
   --teal:#2B6166;          /* ashth.com header/footer */
+  --bronze:#7A603F;        /* accents on sage grounds */
   --ink:#2D3B2A;
   --body:#4A5747;
   --on-dark:#C9D3C5;
@@ -68,7 +70,7 @@ a{color:var(--forest-2)}
 .section{padding-block:var(--section);scroll-margin-top:110px}
 #appointment,#cut,#team,#story,#facets,#film{scroll-margin-top:110px}
 .eyebrow{font-size:var(--fs-eyebrow);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#7A603F}
-.on-dark .eyebrow{color:var(--champagne)}
+.on-sage .eyebrow{color:var(--bronze)}
 .lede{font-family:var(--serif);font-size:var(--fs-lede);line-height:1.55;color:var(--forest-2)}
 .measure{max-width:38em}
 .head-l{display:flex;flex-direction:column;gap:16px;flex:1 1 380px;min-width:0}
@@ -80,11 +82,13 @@ a{color:var(--forest-2)}
 .btn-outline-light:hover{background:var(--champagne);color:var(--forest)}
 .btn-outline-dark{border-color:var(--forest-2);color:var(--forest-2)}
 .btn-outline-dark:hover{background:var(--forest-2);color:var(--white)}
-.on-dark{background:var(--forest);color:var(--on-dark)}
-.on-dark h2,.on-dark h3{color:var(--mist)}
-.on-dark p{color:var(--on-dark)}
+.on-sage{background:var(--sage);color:var(--body)}
+.on-sage h2,.on-sage h3{color:var(--ink)}
+.on-sage p{color:var(--body)}
+.on-sage .btn-champagne{background:var(--forest-2);border-color:var(--forest-2);color:var(--mist)}
+.on-sage .btn-champagne:hover{background:#1F2A1D;border-color:#1F2A1D}
 .hairline{border-top:1px solid var(--line)}
-.on-dark .hairline{border-top-color:var(--moss)}
+.on-sage .hairline{border-top-color:#8EAA87}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ── Shared ashth.com header ───────────────────────────────────────────── */
@@ -116,13 +120,13 @@ a{color:var(--forest-2)}
 .hero{padding-block:clamp(72px,9vw,128px) clamp(80px,10vw,144px);position:relative;overflow:hidden}
 .hero .inner{display:flex;flex-wrap:wrap;align-items:center;gap:56px 72px}
 .hero .text{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:var(--s4)}
-.hero h1{font-size:var(--fs-h1);line-height:1.02;letter-spacing:-.015em;color:var(--mist)}
-.hero h1 em{font-style:italic;color:var(--champagne)}
+.hero h1{font-size:var(--fs-h1);line-height:1.02;letter-spacing:-.015em;color:var(--forest)}
+.hero h1 em{font-style:italic;color:var(--bronze)}
 .hero .sub{font-size:var(--fs-lede);font-family:var(--sans);line-height:1.6;max-width:34em}
 .hero .actions{display:flex;flex-wrap:wrap;gap:16px;padding-top:4px}
 .hero figure{flex:1 1 360px;min-width:0;max-width:500px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px}
 .hero figure svg{width:100%;height:auto;display:block}
-.hero figcaption{font-size:var(--fs-eyebrow);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--on-dark-muted);text-align:center}
+.hero figcaption{font-size:var(--fs-eyebrow);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#5E6D59;text-align:center}
 .rise{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
 .rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.18s}.rise.d3{animation-delay:.28s}.rise.d4{animation-delay:.4s}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -175,19 +179,19 @@ a{color:var(--forest-2)}
 .promise .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s3) var(--s6);margin-bottom:clamp(32px,4vw,56px)}
 .promise .head > p{flex:1 1 360px;min-width:0;max-width:34em}
 .words{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 clamp(32px,4vw,64px)}
-.word{display:flex;flex-direction:column;gap:var(--s3);padding:var(--s4) 0 var(--s5);border-top:1px solid var(--moss);min-width:0}
-.word .num{font-family:var(--serif);font-size:14px;letter-spacing:.12em;color:var(--champagne)}
-.word h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(36px,3.4vw,52px);line-height:1.1;color:var(--champagne)}
-.word .def{font-family:var(--serif);font-style:italic;color:var(--on-dark-muted);font-size:var(--fs-small);letter-spacing:.01em}
-.word .def b{font-style:normal;font-weight:500;color:var(--on-dark)}
+.word{display:flex;flex-direction:column;gap:var(--s3);padding:var(--s4) 0 var(--s5);border-top:1px solid #8EAA87;min-width:0}
+.word .num{font-family:var(--serif);font-size:14px;letter-spacing:.12em;color:var(--bronze)}
+.word h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(36px,3.4vw,52px);line-height:1.1;color:var(--forest-2)}
+.word .def{font-family:var(--serif);font-style:italic;color:#5E6D59;font-size:var(--fs-small);letter-spacing:.01em}
+.word .def b{font-style:normal;font-weight:500;color:var(--ink)}
 .word p.text{font-size:var(--fs-body);line-height:1.75}
-.proof{margin:var(--s1) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--moss);padding-top:var(--s3)}
-.proof li{display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-small);line-height:1.55;color:var(--on-dark)}
-.proof li::before{content:"";flex:0 0 auto;width:6px;height:6px;margin-top:9px;background:var(--champagne);transform:rotate(45deg)}
-.proof-label{font-size:var(--fs-eyebrow);font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--champagne)}
-.promise .close{margin-top:clamp(40px,5vw,72px);padding-top:var(--s5);border-top:1px solid var(--moss);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3) var(--s6)}
-.promise .close p{font-family:var(--serif);font-size:clamp(22px,2vw,30px);line-height:1.35;color:var(--mist);max-width:24em}
-.promise .close p em{color:var(--champagne)}
+.proof{margin:var(--s1) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;border-top:1px solid #8EAA87;padding-top:var(--s3)}
+.proof li{display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-small);line-height:1.55;color:var(--body)}
+.proof li::before{content:"";flex:0 0 auto;width:6px;height:6px;margin-top:9px;background:var(--bronze);transform:rotate(45deg)}
+.proof-label{font-size:var(--fs-eyebrow);font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze)}
+.promise .close{margin-top:clamp(40px,5vw,72px);padding-top:var(--s5);border-top:1px solid #8EAA87;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3) var(--s6)}
+.promise .close p{font-family:var(--serif);font-size:clamp(22px,2vw,30px);line-height:1.35;color:var(--forest-2);max-width:24em}
+.promise .close p em{color:var(--bronze)}
 
 /* ── The Cut ───────────────────────────────────────────────────────────── */
 .cut .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s3) var(--s6);margin-bottom:clamp(32px,4vw,56px)}
@@ -227,11 +231,11 @@ a{color:var(--forest-2)}
 
 /* ── Journey ───────────────────────────────────────────────────────────── */
 .journey .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s3) var(--s6);margin-bottom:clamp(32px,4vw,56px)}
-.journey .head > p{flex:1 1 340px;min-width:0;max-width:30em;color:var(--on-dark-muted)}
+.journey .head > p{flex:1 1 340px;min-width:0;max-width:30em;color:var(--body)}
 .steps{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:0 var(--s4)}
-.steps li{display:flex;flex-direction:column;gap:14px;padding:28px 0 32px;border-top:1px solid var(--moss);min-width:0}
-.steps li:first-child{border-top-color:var(--champagne)}
-.steps .n{font-size:12px;font-weight:500;letter-spacing:.24em;color:var(--champagne);font-variant-numeric:tabular-nums}
+.steps li{display:flex;flex-direction:column;gap:14px;padding:28px 0 32px;border-top:1px solid #8EAA87;min-width:0}
+.steps li:first-child{border-top-color:var(--bronze)}
+.steps .n{font-size:12px;font-weight:500;letter-spacing:.24em;color:var(--bronze);font-variant-numeric:tabular-nums}
 .steps h3{font-size:24px}
 .steps p{font-size:var(--fs-small);line-height:1.7}
 
@@ -239,9 +243,9 @@ a{color:var(--forest-2)}
 .europe .inner{display:flex;flex-wrap:wrap;align-items:stretch;gap:var(--s5) clamp(48px,6vw,112px)}
 .europe .text{flex:1.2 1 440px;min-width:0;display:flex;flex-direction:column;gap:var(--s3)}
 .europe .text p{max-width:36em}
-.europe aside{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:var(--s5);background:var(--forest-2);color:var(--on-dark);padding:clamp(32px,4vw,48px)}
-.europe aside .coords{font-family:var(--serif);font-size:clamp(30px,3vw,40px);line-height:1.15;color:var(--mist);font-variant-numeric:tabular-nums}
-.europe aside .quote{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.55;color:var(--sage-2)}
+.europe aside{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:var(--s5);background:var(--sage);color:var(--body);padding:clamp(32px,4vw,48px)}
+.europe aside .coords{font-family:var(--serif);font-size:clamp(30px,3vw,40px);line-height:1.15;color:var(--forest);font-variant-numeric:tabular-nums}
+.europe aside .quote{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.55;color:var(--forest-2)}
 
 /* ── Promise list ──────────────────────────────────────────────────────── */
 .assure{background:var(--sage-2)}
@@ -256,10 +260,10 @@ a{color:var(--forest-2)}
 .closing{padding-block:clamp(80px,10vw,152px)}
 .closing .inner{display:flex;flex-direction:column;gap:var(--s4)}
 .closing h2{font-size:clamp(40px,5.4vw,76px);line-height:1.06;max-width:16em}
-.closing h2 em{color:var(--champagne)}
+.closing h2 em{color:var(--bronze)}
 .closing .sub{font-size:var(--fs-lede);font-family:var(--sans);max-width:34em}
 .closing .actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
-.closing .domain{font-family:var(--serif);font-size:18px;letter-spacing:.06em;color:var(--mist);user-select:all}
+.closing .domain{font-family:var(--serif);font-size:18px;letter-spacing:.06em;color:var(--forest-2);user-select:all}
 
 /* ── Shared ashth.com footer ───────────────────────────────────────────── */
 .footer{background:var(--teal);color:var(--white)}
@@ -336,7 +340,7 @@ a{color:var(--forest-2)}
 <main id="top">
 
   <!-- HERO -->
-  <section class="hero on-dark" aria-labelledby="hero-title">
+  <section class="hero on-sage" aria-labelledby="hero-title">
     <div class="wrap inner">
       <div class="text">
         <p class="eyebrow rise">About ASHTH · Launching in Luxembourg on 3 December 2026</p>
@@ -344,27 +348,27 @@ a{color:var(--forest-2)}
         <p class="sub rise d2">ASHTH is an international house of fine jewellery set with laboratory-grown diamonds, cut to our own patented standard and offered direct from our factory. Our European chapter opens in Luxembourg.</p>
         <div class="actions rise d3">
           <a class="btn btn-champagne" href="../launch/">Join The Luxembourg Launch</a>
-          <a class="btn btn-outline-light" href="#cut">Discover The ASHTH Cut</a>
+          <a class="btn btn-outline-dark" href="#cut">Discover The ASHTH Cut</a>
         </div>
       </div>
       <figure class="rise d4">
         <svg viewBox="0 0 400 400" role="img" aria-label="Top view of the octagonal 97-facet ASHTH Cut: an eight-pointed star of facets inside an octagon">
           <defs>
             <radialGradient id="glow" cx="50%" cy="45%" r="60%">
-              <stop offset="0%" stop-color="#DFCCB6" stop-opacity=".30"/>
-              <stop offset="70%" stop-color="#DFCCB6" stop-opacity=".05"/>
-              <stop offset="100%" stop-color="#DFCCB6" stop-opacity="0"/>
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".50"/>
+              <stop offset="70%" stop-color="#FFFFFF" stop-opacity=".12"/>
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
             </radialGradient>
           </defs>
           <g class="spin-slow">
-            <polygon points="366.3,268.9 268.9,366.3 131.1,366.3 33.7,268.9 33.7,131.1 131.1,33.7 268.9,33.7 366.3,131.1" fill="url(#glow)" stroke="#DFCCB6" stroke-width="1.4" stroke-linejoin="round"/>
-            <polygon points="287.8,236.4 299,299 236.4,287.8 200,340 163.6,287.8 101,299 112.2,236.4 60,200 112.2,163.6 101,101 163.6,112.2 200,60 236.4,112.2 299,101 287.8,163.6 340,200" fill="none" stroke="#DFCCB6" stroke-width=".9" stroke-linejoin="round" opacity=".85"/>
-            <path d="M287.8 236.4L366.3 268.9M236.4 287.8L268.9 366.3M163.6 287.8L131.1 366.3M112.2 236.4L33.7 268.9M112.2 163.6L33.7 131.1M163.6 112.2L131.1 33.7M236.4 112.2L268.9 33.7M287.8 163.6L366.3 131.1M366.3 131.1L340 200L366.3 268.9M340 200L366.3 200M366.3 268.9L299 299L268.9 366.3M299 299L317.6 317.6M268.9 366.3L200 340L131.1 366.3M200 340L200 366.3M131.1 366.3L101 299L33.7 268.9M101 299L82.4 317.6M33.7 268.9L60 200L33.7 131.1M60 200L33.7 200M33.7 131.1L101 101L131.1 33.7M101 101L82.4 82.4M131.1 33.7L200 60L268.9 33.7M200 60L200 33.7M268.9 33.7L299 101L366.3 131.1M299 101L317.6 82.4" fill="none" stroke="#DFCCB6" stroke-width=".7" opacity=".7"/>
-            <polygon points="287.8,236.4 236.4,287.8 163.6,287.8 112.2,236.4 112.2,163.6 163.6,112.2 236.4,112.2 287.8,163.6" fill="none" stroke="#F4F6F1" stroke-width="1.1" stroke-linejoin="round"/>
-            <path d="M200 200L287.8 236.4M200 200L236.4 287.8M200 200L163.6 287.8M200 200L112.2 236.4M200 200L112.2 163.6M200 200L163.6 112.2M200 200L236.4 112.2M200 200L287.8 163.6" fill="none" stroke="#DFCCB6" stroke-width=".5" opacity=".35"/>
+            <polygon points="366.3,268.9 268.9,366.3 131.1,366.3 33.7,268.9 33.7,131.1 131.1,33.7 268.9,33.7 366.3,131.1" fill="url(#glow)" stroke="#44593F" stroke-width="1.4" stroke-linejoin="round"/>
+            <polygon points="287.8,236.4 299,299 236.4,287.8 200,340 163.6,287.8 101,299 112.2,236.4 60,200 112.2,163.6 101,101 163.6,112.2 200,60 236.4,112.2 299,101 287.8,163.6 340,200" fill="none" stroke="#44593F" stroke-width=".9" stroke-linejoin="round" opacity=".85"/>
+            <path d="M287.8 236.4L366.3 268.9M236.4 287.8L268.9 366.3M163.6 287.8L131.1 366.3M112.2 236.4L33.7 268.9M112.2 163.6L33.7 131.1M163.6 112.2L131.1 33.7M236.4 112.2L268.9 33.7M287.8 163.6L366.3 131.1M366.3 131.1L340 200L366.3 268.9M340 200L366.3 200M366.3 268.9L299 299L268.9 366.3M299 299L317.6 317.6M268.9 366.3L200 340L131.1 366.3M200 340L200 366.3M131.1 366.3L101 299L33.7 268.9M101 299L82.4 317.6M33.7 268.9L60 200L33.7 131.1M60 200L33.7 200M33.7 131.1L101 101L131.1 33.7M101 101L82.4 82.4M131.1 33.7L200 60L268.9 33.7M200 60L200 33.7M268.9 33.7L299 101L366.3 131.1M299 101L317.6 82.4" fill="none" stroke="#44593F" stroke-width=".7" opacity=".7"/>
+            <polygon points="287.8,236.4 236.4,287.8 163.6,287.8 112.2,236.4 112.2,163.6 163.6,112.2 236.4,112.2 287.8,163.6" fill="none" stroke="#2D3B2A" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M200 200L287.8 236.4M200 200L236.4 287.8M200 200L163.6 287.8M200 200L112.2 236.4M200 200L112.2 163.6M200 200L163.6 112.2M200 200L236.4 112.2M200 200L287.8 163.6" fill="none" stroke="#44593F" stroke-width=".5" opacity=".35"/>
           </g>
-          <path d="M318 54l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#F4F6F1" opacity=".9"/>
-          <path d="M70 318l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#DFCCB6" opacity=".8"/>
+          <path d="M318 54l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#FFFFFF" opacity=".95"/>
+          <path d="M70 318l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#7A603F" opacity=".7"/>
         </svg>
         <figcaption>The ASHTH Cut · Octagon · 97 Facets · Patented</figcaption>
       </figure>
@@ -393,7 +397,7 @@ a{color:var(--forest-2)}
         <h2 id="kuntal">Meet Kuntal Shah</h2>
         <p class="lede">Kuntal Shah leads ASHTH in Europe from Luxembourg, as Managing Partner of Kaleidoscopic Splendor S.à r.l., the company behind ASHTH Europe.</p>
         <p class="measure">She is the person our clients meet. Every private consultation, bespoke commission and appointment in Luxembourg is handled by her personally, from the first conversation to the moment a piece is placed in your hand.</p>
-        <p class="measure">A fourth-generation jeweller from a prominent diamond family, Kuntal grew up in the trade before training as a lawyer. She holds an LL.M. from American University and an LL.B. from the University of Wales, and built an international career in intellectual property and business law at firms including Jones Day and Crawford Bayley &amp; Co., handling patent litigation, trademark registration and cross-border legal work in the United States, the United Kingdom and Asia.</p>
+        <p class="measure">A fourth-generation jeweller from a prominent diamond family, Kuntal grew up in the trade before training as a lawyer, practising intellectual property and business law internationally across the United States, the United Kingdom and Asia.</p>
         <p class="measure">ASHTH brings those two halves of her life together: the heritage of a diamond family, and a lawyer’s insistence on certification, provenance and doing things properly. Her brief is to bring ASHTH to Europe with the same care the house is known for: Luxembourg first, then Paris and Brussels.</p>
         <div class="actions">
           <a class="btn btn-outline-dark" href="#appointment">Request A Consultation With Kuntal</a>
@@ -413,11 +417,11 @@ a{color:var(--forest-2)}
       <div class="body">
         <p class="lede">ASHTH was founded by diamond-industry veteran Mukesh Shah and co-founder Kaivan Shah, who bring decades of experience in diamond manufacturing and the international jewellery trade.</p>
         <p>They saw a new generation asking more of the world’s most meaningful stone: the same fire and brilliance, with nothing taken from the earth to make it. Their answer was a house where science, craftsmanship and conscience meet.</p>
-        <p>Every ASHTH diamond is laboratory-grown, above ground and under controlled conditions. It shares the physical, chemical and optical properties of a mined diamond, and every one is certified.</p>
+        <p>Every ASHTH diamond is laboratory-grown, above ground and under controlled conditions. It shares the physical, chemical and optical properties of a mined diamond, and every piece of ASHTH jewellery is IGI-certified.</p>
         <p>Today our designs span engagement rings and solitaires, eternity bands, tennis bracelets, statement necklaces and pieces made for every day. Each is made to be worn for a lifetime and passed on.</p>
         <figure>
-          <img src="img/story.jpg" alt="Hand wearing an ASHTH pear-cut laboratory-grown diamond ring" width="1000" height="800" loading="lazy">
-          <figcaption>Pear-cut solitaire, laboratory-grown, set in white gold.</figcaption>
+          <img src="img/story.jpg" alt="Hand wearing an ASHTH cushion-cut laboratory-grown diamond ring" width="1000" height="800" loading="lazy">
+          <figcaption>Cushion-cut solitaire, laboratory-grown, set in white gold.</figcaption>
         </figure>
       </div>
     </div>
@@ -434,7 +438,7 @@ a{color:var(--forest-2)}
         <p>Our thirty-second film for the European launch. The same diamond, with a different origin, worn where it belongs: in the middle of an ordinary, beautiful day.</p>
       </div>
       <div class="player" id="player">
-        <video id="adVideo" controls playsinline preload="metadata" poster="video/ashth-ad-poster.jpg" width="848" height="480">
+        <video id="adVideo" controls playsinline preload="metadata" poster="video/ashth-ad-poster-cafe.jpg" width="848" height="480">
           <source src="video/ashth-ad.mp4" type="video/mp4">
           Your browser does not support embedded video. <a href="video/ashth-ad.mp4">Download the film</a> instead.
         </video>
@@ -450,7 +454,7 @@ a{color:var(--forest-2)}
   </section>
 
   <!-- THREE WORDS -->
-  <section class="promise on-dark section" aria-labelledby="threewords">
+  <section class="promise on-sage section" aria-labelledby="threewords">
     <div class="wrap">
       <div class="head">
         <div class="head-l">
@@ -470,7 +474,7 @@ a{color:var(--forest-2)}
             <li><span class="proof-label">The proof</span></li>
             <li>Grown above ground in a controlled environment, not extracted from a mine.</li>
             <li>No open-pit excavation and no disturbed land behind any ASHTH stone.</li>
-            <li>Known origin on every diamond, documented in its certificate.</li>
+            <li>Known origin, documented in the certificate that accompanies every piece.</li>
           </ul>
         </article>
         <article class="word">
@@ -489,10 +493,10 @@ a{color:var(--forest-2)}
           <span class="num">III</span>
           <h3>Conscientious</h3>
           <p class="def"><b>con·sci·en·tious</b> · adj. · Careful to do what is right, in every detail.</p>
-          <p class="text">A laboratory-grown diamond has a known origin and no link to conflict. Each ASHTH diamond is certified and each piece is hallmarked, so you know exactly what you are wearing, where it came from and what it is made of.</p>
+          <p class="text">A laboratory-grown diamond has a known origin and no link to conflict. Each piece of ASHTH jewellery is IGI-certified and hallmarked, so you know exactly what you are wearing, where it came from and what it is made of.</p>
           <ul class="proof" aria-label="The proof">
             <li><span class="proof-label">The proof</span></li>
-            <li>Every diamond independently certified; every piece hallmarked.</li>
+            <li>Every piece of jewellery independently IGI-certified and hallmarked.</li>
             <li>No association with conflict sourcing at any point in the chain.</li>
             <li>Full transparency on metal purity and carat weight, in writing.</li>
           </ul>
@@ -612,7 +616,7 @@ a{color:var(--forest-2)}
   </section>
 
   <!-- JOURNEY -->
-  <section class="journey on-dark section" aria-labelledby="journey-title">
+  <section class="journey on-sage section" aria-labelledby="journey-title">
     <div class="wrap">
       <div class="head">
         <div class="head-l">
@@ -625,7 +629,7 @@ a{color:var(--forest-2)}
         <li><span class="n">01</span><h3>Grown</h3><p>Each diamond begins as a seed crystal and grows, layer by layer, under carefully controlled conditions.</p></li>
         <li><span class="n">02</span><h3>Cut &amp; polished</h3><p>Master cutters bring out each stone’s fire, including our patented 97-facet ASHTH Cut.</p></li>
         <li><span class="n">03</span><h3>Designed &amp; set</h3><p>Our designers and goldsmiths set every stone in 18K, 14K or 9K gold, or in platinum.</p></li>
-        <li><span class="n">04</span><h3>Certified &amp; hallmarked</h3><p>Every diamond is certified and every piece hallmarked before it leaves the factory.</p></li>
+        <li><span class="n">04</span><h3>Certified &amp; hallmarked</h3><p>Every piece of jewellery is IGI-certified and hallmarked before it leaves the factory.</p></li>
         <li><span class="n">05</span><h3>Delivered</h3><p>Shipped direct and fully insured to Luxembourg and across Europe.</p></li>
       </ol>
     </div>
@@ -642,11 +646,11 @@ a{color:var(--forest-2)}
       </div>
       <aside>
         <div style="display:flex;flex-direction:column;gap:10px">
-          <span class="eyebrow" style="color:var(--champagne)">Luxembourg</span>
+          <span class="eyebrow">Luxembourg</span>
           <span class="coords">49.61° N<br>6.13° E</span>
         </div>
         <p class="quote">Our launch evening: Thursday 3 December 2026, 5–10 PM, at MOB-ART studio. By invitation only.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-champagne" href="../launch/">See The Invitation</a><a class="btn btn-outline-light" href="https://ashth.com/contact-us">Arrange A Viewing</a></div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-champagne" style="background:var(--forest-2);border-color:var(--forest-2);color:var(--mist)" href="../launch/">See The Invitation</a><a class="btn btn-outline-dark" href="https://ashth.com/contact-us">Arrange A Viewing</a></div>
       </aside>
     </div>
   </section>
@@ -659,7 +663,7 @@ a{color:var(--forest-2)}
         <h2 id="assure-title">The ASHTH Promise</h2>
       </div>
       <div class="list">
-        <div class="item"><h3>Certified &amp; hallmarked</h3><p>Every diamond certified, every piece hallmarked.</p></div>
+        <div class="item"><h3>Certified &amp; hallmarked</h3><p>Every piece of jewellery IGI-certified and hallmarked.</p></div>
         <div class="item"><h3>Lifetime buy-back*</h3><p>We stand behind the value of every piece we make.</p></div>
         <div class="item"><h3>Bespoke &amp; personalised</h3><p>From a personal engraving to a piece designed around your story.</p></div>
         <div class="item"><h3>Diamond consultation</h3><p>Complimentary expert guidance on stone, shape and setting.</p></div>
@@ -670,7 +674,7 @@ a{color:var(--forest-2)}
   </section>
 
   <!-- CLOSING -->
-  <section class="closing on-dark" aria-labelledby="closing-title">
+  <section class="closing on-sage" aria-labelledby="closing-title">
     <div class="wrap inner">
       <p class="eyebrow">ASHTH Europe · Luxembourg</p>
       <h2 id="closing-title">A Sustainable, Sensible, <em>Conscientious</em> Choice.</h2>
