@@ -187,8 +187,9 @@ a{color:var(--forest)}
 .details .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(8px,1.2vw,14px)}
 @media (max-width:880px){.gatefold{grid-template-columns:1fr}.gatefold .leafimg{min-height:0}.gatefold .leafimg img{position:static;height:auto}}
 
-/* Venue — on the card's suede, compact */
-.venue{border-top:1px solid rgba(148,120,66,.45);padding:var(--section) var(--gutter);text-align:center}
+/* Venue — its own quiet page of the card: cool mist between the cream
+   details leaf and the pista RSVP page */
+.venue{background:#EDF1EA;border-top:1px solid rgba(148,120,66,.45);padding:var(--section) var(--gutter);text-align:center}
 .venue .inner{position:relative;z-index:2;max-width:680px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;gap:16px}
 .venue .caps{color:var(--bronze)}
 .venue h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(26px,3vw,40px);line-height:1.05;color:var(--forest);margin:0}
@@ -373,7 +374,7 @@ a{color:var(--forest)}
   </section>
 
   <!-- VENUE -->
-  <section class="venue ground" id="venue" aria-labelledby="venue-title">
+  <section class="venue" id="venue" aria-labelledby="venue-title">
     <div class="inner reveal">
       <p class="caps">The Venue</p>
       <h2 id="venue-title">MOB-ART studio</h2>
