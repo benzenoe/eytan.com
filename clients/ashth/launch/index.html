@@ -230,6 +230,7 @@ a{color:var(--forest)}
 .field input:focus,.field select:focus{outline:none;border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}
 .field input::placeholder{color:#9AA496;font-style:italic}
 .ferr{font-family:var(--sans);font-size:13px;color:#8A3B2E;margin:0}
+.field input.bad,.field select.bad{border-color:#8A3B2E;box-shadow:0 0 0 1px #8A3B2E}
 .rsvpdone{display:flex;flex-direction:column;gap:10px;border:1px solid rgba(148,120,66,.5);padding:clamp(20px,2.4vw,30px);background:#FFFDF6}
 .rsvpdone[hidden]{display:none}
 .rsvpdone .done-head{font-family:var(--serif);font-weight:700;font-size:clamp(19px,1.6vw,24px);color:var(--forest)}
@@ -611,8 +612,12 @@ a{color:var(--forest)}
       ev.preventDefault();
       var err=document.getElementById('rsvpErr'),btn=document.getElementById('rsvpSubmit');
       var get=function(n){return (rf.elements[n].value||'').trim();};
+      var bads=rf.querySelectorAll('.bad');for(var i=0;i<bads.length;i++){bads[i].classList.remove('bad');}
+      var fail=function(n,msg){var el=rf.elements[n];el.classList.add('bad');err.textContent=msg;err.hidden=false;el.focus();};
       var email=get('email');
-      if(!get('name')||!get('guests')||!email||email.indexOf('@')<1||email.indexOf('.',email.indexOf('@'))<0){err.hidden=false;return;}
+      if(!get('name')){fail('name','Please tell us your name.');return;}
+      if(!email||email.indexOf('@')<1||email.indexOf('.',email.indexOf('@'))<0){fail('email','Please enter a valid email address — e.g. name@example.com.');return;}
+      if(!get('guests')){fail('guests','Please select the number of guests.');return;}
       err.hidden=true;btn.disabled=true;btn.textContent='Sending…';
       var p=new URLSearchParams();
       for(var k in MAP){p.append(MAP[k],get(k));}
