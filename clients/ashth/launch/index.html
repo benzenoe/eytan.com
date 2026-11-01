@@ -231,6 +231,17 @@ a{color:var(--forest)}
 .field input::placeholder{color:#9AA496;font-style:italic}
 .ferr{font-family:var(--sans);font-size:13px;color:#8A3B2E;margin:0}
 .field input.bad,.field select.bad{border-color:#8A3B2E;box-shadow:0 0 0 1px #8A3B2E}
+/* Add-to-calendar chooser: Apple/Outlook (.ics) or Google */
+details.cal{position:relative;display:inline-block}
+details.cal>summary{list-style:none;cursor:pointer;user-select:none}
+details.cal>summary::-webkit-details-marker{display:none}
+.calpop{position:absolute;left:0;bottom:calc(100% + 8px);min-width:236px;background:#FFFDF6;border:1px solid rgba(45,59,42,.35);box-shadow:0 14px 40px rgba(31,42,30,.2);z-index:8;display:flex;flex-direction:column;text-align:left}
+.calpop a{display:block;padding:13px 16px;text-decoration:none;color:var(--forest);font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.calpop a:hover{background:var(--paper)}
+.calpop a+a{border-top:1px solid rgba(45,59,42,.15)}
+.actionbar details.cal{display:block}
+.actionbar details.cal>summary{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:46px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--ivory);color:var(--ivory)}
+.actionbar .calpop{left:auto;right:0;bottom:calc(100% + 10px)}
 .rsvpdone{display:flex;flex-direction:column;gap:10px;border:1px solid rgba(148,120,66,.5);padding:clamp(20px,2.4vw,30px);background:#FFFDF6}
 .rsvpdone[hidden]{display:none}
 .rsvpdone .done-head{font-family:var(--serif);font-weight:700;font-size:clamp(19px,1.6vw,24px);color:var(--forest)}
@@ -384,7 +395,7 @@ a{color:var(--forest)}
         <p class="menu-line"><span>Champagne</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Wine</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Canapés</span><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg><span>Live Music</span></p>
         <div class="actions">
           <a class="btn btn-forest" href="#rsvp">RSVP</a>
-          <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
+          <details class="cal"><summary class="btn btn-outline-dark">Add To Calendar</summary><div class="calpop"><a href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Apple / Outlook (.ics)</a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=ASHTH%20Luxembourg%20Launch%20%E2%80%94%20A%20Private%20Jewellery%20Evening&amp;dates=20261203T160000Z%2F20261203T210000Z&amp;location=MOB-ART%20studio%2C%2019a%20Avenue%20de%20la%20Porte-Neuve%2C%20L-2227%20Luxembourg&amp;details=A%20private%20jewellery%20evening%20of%20contemporary%20design%2C%20exceptional%20craftsmanship%20and%20conscious%20luxury.%20By%20invitation%20only.%0A%0Ahttps%3A%2F%2Feytan.com%2Fclients%2Fashth%2Flaunch%2F" rel="noopener" target="_blank">Google Calendar</a></div></details>
         </div>
       </div>
     </div>
@@ -442,13 +453,13 @@ a{color:var(--forest)}
           <p class="ferr" id="rsvpErr" hidden>Please give us your name, email and the number of guests.</p>
           <div class="rsvp">
             <button class="btn btn-gold" type="submit" id="rsvpSubmit">Confirm Attendance</button>
-            <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
+            <details class="cal"><summary class="btn btn-outline-dark">Add To Calendar</summary><div class="calpop"><a href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Apple / Outlook (.ics)</a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=ASHTH%20Luxembourg%20Launch%20%E2%80%94%20A%20Private%20Jewellery%20Evening&amp;dates=20261203T160000Z%2F20261203T210000Z&amp;location=MOB-ART%20studio%2C%2019a%20Avenue%20de%20la%20Porte-Neuve%2C%20L-2227%20Luxembourg&amp;details=A%20private%20jewellery%20evening%20of%20contemporary%20design%2C%20exceptional%20craftsmanship%20and%20conscious%20luxury.%20By%20invitation%20only.%0A%0Ahttps%3A%2F%2Feytan.com%2Fclients%2Fashth%2Flaunch%2F" rel="noopener" target="_blank">Google Calendar</a></div></details>
           </div>
         </form>
         <div class="rsvpdone" id="rsvpDone" hidden>
           <p class="done-head">Thank you — your reply has been received.</p>
           <p>We look forward to welcoming you on Thursday, 3 December.</p>
-          <div class="rsvp"><a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a></div>
+          <div class="rsvp"><details class="cal"><summary class="btn btn-outline-dark">Add To Calendar</summary><div class="calpop"><a href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Apple / Outlook (.ics)</a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=ASHTH%20Luxembourg%20Launch%20%E2%80%94%20A%20Private%20Jewellery%20Evening&amp;dates=20261203T160000Z%2F20261203T210000Z&amp;location=MOB-ART%20studio%2C%2019a%20Avenue%20de%20la%20Porte-Neuve%2C%20L-2227%20Luxembourg&amp;details=A%20private%20jewellery%20evening%20of%20contemporary%20design%2C%20exceptional%20craftsmanship%20and%20conscious%20luxury.%20By%20invitation%20only.%0A%0Ahttps%3A%2F%2Feytan.com%2Fclients%2Fashth%2Flaunch%2F" rel="noopener" target="_blank">Google Calendar</a></div></details></div>
         </div>
         <div class="rsvp">
           <span class="contact">kuntal@ashth.lu</span>
@@ -557,7 +568,7 @@ a{color:var(--forest)}
 <nav class="actionbar" id="actionbar" aria-label="Quick actions">
   <a class="primary" href="#rsvp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>RSVP</a>
   <a href="https://www.google.com/maps/search/?api=1&query=49.6135454%2C6.1276758&query_place_id=ChIJE4XHZytPlUcRLokHHsebqN4" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>Map</a>
-  <a href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="16"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</a>
+  <details class="cal"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="16"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</summary><div class="calpop"><a href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Apple / Outlook (.ics)</a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=ASHTH%20Luxembourg%20Launch%20%E2%80%94%20A%20Private%20Jewellery%20Evening&amp;dates=20261203T160000Z%2F20261203T210000Z&amp;location=MOB-ART%20studio%2C%2019a%20Avenue%20de%20la%20Porte-Neuve%2C%20L-2227%20Luxembourg&amp;details=A%20private%20jewellery%20evening%20of%20contemporary%20design%2C%20exceptional%20craftsmanship%20and%20conscious%20luxury.%20By%20invitation%20only.%0A%0Ahttps%3A%2F%2Feytan.com%2Fclients%2Fashth%2Flaunch%2F" rel="noopener" target="_blank">Google Calendar</a></div></details>
 </nav>
 
 <script>
@@ -603,6 +614,13 @@ a{color:var(--forest)}
       cov.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
     },{passive:true});
   }
+  /* Calendar choosers close when you pick an option or click elsewhere. */
+  document.addEventListener('click',function(e){
+    var open=document.querySelectorAll('details.cal[open]');
+    for(var i=0;i<open.length;i++){
+      if(!open[i].contains(e.target)||e.target.closest('.calpop a')){open[i].removeAttribute('open');}
+    }
+  });
   /* RSVP form: posts into the guest list (Google Form backend -> Sheet). */
   var rf=document.getElementById('rsvpForm');
   if(rf){
