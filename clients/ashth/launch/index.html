@@ -220,6 +220,7 @@ a{color:var(--forest)}
 .host .fine{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.15vw,18px);color:#5E6D59}
 /* RSVP form — writes to the guest list */
 .rsvpform{display:flex;flex-direction:column;gap:14px;margin-top:4px}
+.rsvpform[hidden]{display:none}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media (max-width:620px){.frow{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
@@ -616,7 +617,7 @@ a{color:var(--forest)}
       var p=new URLSearchParams();
       for(var k in MAP){p.append(MAP[k],get(k));}
       fetch(FR,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
-        .then(function(){rf.hidden=true;document.getElementById('rsvpDone').hidden=false;})
+        .then(function(){rf.hidden=true;var d=document.getElementById('rsvpDone');d.hidden=false;d.scrollIntoView({behavior:'smooth',block:'center'});})
         .catch(function(){btn.disabled=false;btn.textContent='Confirm Attendance';err.textContent='Something went wrong — please try again, or write to kuntal@ashth.lu.';err.hidden=false;});
     });
   }
