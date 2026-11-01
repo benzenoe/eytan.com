@@ -218,6 +218,21 @@ a{color:var(--forest)}
 .host .rsvp{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;padding-top:4px}
 .host .contact{font-family:var(--serif);font-weight:600;font-size:clamp(18px,1.35vw,21px);letter-spacing:.03em;color:var(--forest);user-select:all;text-decoration:none}
 .host .fine{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.15vw,18px);color:#5E6D59}
+/* RSVP form — writes to the guest list */
+.rsvpform{display:flex;flex-direction:column;gap:14px;margin-top:4px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:620px){.frow{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field label{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze)}
+.field input,.field select{font-family:var(--serif);font-size:17px;color:var(--forest);background:#FFFDF6;border:1px solid rgba(45,59,42,.35);border-radius:0;padding:11px 12px;width:100%;-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%232D3B2A'/></svg>");background-repeat:no-repeat;background-position:right 12px center}
+.field input:focus,.field select:focus{outline:none;border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}
+.field input::placeholder{color:#9AA496;font-style:italic}
+.ferr{font-family:var(--sans);font-size:13px;color:#8A3B2E;margin:0}
+.rsvpdone{display:flex;flex-direction:column;gap:10px;border:1px solid rgba(148,120,66,.5);padding:clamp(20px,2.4vw,30px);background:#FFFDF6}
+.rsvpdone[hidden]{display:none}
+.rsvpdone .done-head{font-family:var(--serif);font-weight:700;font-size:clamp(19px,1.6vw,24px);color:var(--forest)}
+.btn[disabled]{opacity:.6;pointer-events:none}
 @media (max-width:760px){.host{padding-bottom:calc(var(--section) + 340px*var(--cs))}}
 
 /* Step inside — on the table, below the card */
@@ -407,16 +422,37 @@ a{color:var(--forest)}
         <p class="caps">Your Host · Head Of European Operations</p>
         <h2 id="rsvp-title">RSVP To Kuntal <span style="white-space:nowrap">Shah-Narain</span></h2>
         <p class="bio">A fourth-generation jeweller from a prominent diamond family and an international intellectual-property lawyer, Kuntal leads ASHTH in Europe from Luxembourg. She will be your host for the evening.</p>
-        <p>This is a private evening, and places are limited to the guests on our list. Please reply with your name and the number of guests, and let us know of any dietary requirements.</p>
-        <div class="rsvp">
-          <a class="btn btn-gold" href="mailto:kuntal@ashth.lu?subject=RSVP%20%E2%80%93%20ASHTH%20Luxembourg%20Launch%2C%203%20December&body=Dear%20Kuntal%2C%0A%0AI%20would%20be%20delighted%20to%20attend%20the%20ASHTH%20Luxembourg%20Launch%20on%20Thursday%203%20December.%0A%0AName%3A%20%0ANumber%20of%20guests%3A%20%0ADietary%20requirements%3A%20%0A%0AKind%20regards%2C">RSVP By Email</a>
-          <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
+        <p>This is a private evening, and places are limited to the guests on our list. Kindly confirm your attendance below.</p>
+        <form class="rsvpform" id="rsvpForm" novalidate>
+          <div class="frow">
+            <div class="field"><label for="f-name">Full name *</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="f-email">Email *</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="f-guests">Number of guests *</label><select id="f-guests" name="guests" required><option value="" selected disabled>Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+          </div>
+          <div class="field"><label for="f-address">Postal address</label><input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="Street, number · Postcode · City"></div>
+          <div class="frow">
+            <div class="field"><label for="f-dietary">Dietary requirements</label><input id="f-dietary" name="dietary" type="text"></div>
+            <div class="field"><label for="f-message">Message (optional)</label><input id="f-message" name="message" type="text"></div>
+          </div>
+          <p class="ferr" id="rsvpErr" hidden>Please give us your name, email and the number of guests.</p>
+          <div class="rsvp">
+            <button class="btn btn-gold" type="submit" id="rsvpSubmit">Confirm Attendance</button>
+            <a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a>
+          </div>
+        </form>
+        <div class="rsvpdone" id="rsvpDone" hidden>
+          <p class="done-head">Thank you — your reply has been received.</p>
+          <p>We look forward to welcoming you on Thursday, 3 December.</p>
+          <div class="rsvp"><a class="btn btn-outline-dark" href="ashth-luxembourg-launch.ics" download="ASHTH-Luxembourg-Launch.ics">Add To Calendar</a></div>
         </div>
         <div class="rsvp">
           <span class="contact">kuntal@ashth.lu</span>
           <a class="contact" href="tel:+352621197974">+352 621 197 974</a>
         </div>
-        <p class="fine">By invitation only · RSVP requested</p>
+        <p class="fine">By invitation only · Your details are used solely for this evening</p>
       </div>
     </div>
   </section>
@@ -564,6 +600,25 @@ a{color:var(--forest)}
       cov.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
       cov.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
     },{passive:true});
+  }
+  /* RSVP form: posts into the guest list (Google Form backend -> Sheet). */
+  var rf=document.getElementById('rsvpForm');
+  if(rf){
+    var FR='https://docs.google.com/forms/d/e/1FAIpQLSdZXSjjWaHFVzyuZKDRFU8nIdAMtQJSQZZdwFMtIRsWRZ3vFA/formResponse';
+    var MAP={name:'entry.712986850',email:'entry.240435978',phone:'entry.2059053622',guests:'entry.682211906',address:'entry.1890434778',dietary:'entry.1199824087',message:'entry.903531916'};
+    rf.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var err=document.getElementById('rsvpErr'),btn=document.getElementById('rsvpSubmit');
+      var get=function(n){return (rf.elements[n].value||'').trim();};
+      var email=get('email');
+      if(!get('name')||!get('guests')||!email||email.indexOf('@')<1||email.indexOf('.',email.indexOf('@'))<0){err.hidden=false;return;}
+      err.hidden=true;btn.disabled=true;btn.textContent='Sending…';
+      var p=new URLSearchParams();
+      for(var k in MAP){p.append(MAP[k],get(k));}
+      fetch(FR,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
+        .then(function(){rf.hidden=true;document.getElementById('rsvpDone').hidden=false;})
+        .catch(function(){btn.disabled=false;btn.textContent='Confirm Attendance';err.textContent='Something went wrong — please try again, or write to kuntal@ashth.lu.';err.hidden=false;});
+    });
   }
   /* The printed corners drift gently for depth as you scroll. */
   if(matchMedia('(hover:hover) and (prefers-reduced-motion: no-preference)').matches){
