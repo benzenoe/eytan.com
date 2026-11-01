@@ -187,9 +187,8 @@ a{color:var(--forest)}
 .details .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:clamp(8px,1.2vw,14px)}
 @media (max-width:880px){.gatefold{grid-template-columns:1fr}.gatefold .leafimg{min-height:0}.gatefold .leafimg img{position:static;height:auto}}
 
-/* Venue — its own quiet page of the card: cool mist between the cream
-   details leaf and the pista RSVP page */
-.venue{background:#EDF1EA;border-top:1px solid rgba(148,120,66,.45);padding:var(--section) var(--gutter);text-align:center}
+/* Venue — on the card's pista suede */
+.venue{border-top:1px solid rgba(148,120,66,.45);padding:var(--section) var(--gutter);text-align:center}
 .venue .inner{position:relative;z-index:2;max-width:680px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;gap:16px}
 .venue .caps{color:var(--bronze)}
 .venue h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(26px,3vw,40px);line-height:1.05;color:var(--forest);margin:0}
@@ -204,8 +203,9 @@ a{color:var(--forest)}
 .practical b{display:block;font-family:var(--sans);font-weight:500;letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:var(--bronze);margin-bottom:6px}
 .practical p{font-size:15px;line-height:1.5}
 
-/* Host + RSVP — the back of the card */
-.host{border-top:1px solid rgba(148,120,66,.45);padding:var(--section) var(--gutter) calc(var(--section) + 150px*var(--cs))}
+/* Host + RSVP — the inside of the printed invite: ivory with green writing */
+.host{position:relative;overflow:hidden;background:var(--paper);border-top:1px solid rgba(148,120,66,.45);padding:var(--section) var(--gutter) calc(var(--section) + 150px*var(--cs))}
+.corner-photo.cream{background-image:url(img/corner-print-cream.webp)}
 .host .inner{position:relative;z-index:2;max-width:860px;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;gap:40px clamp(36px,4.5vw,64px)}
 .host .portrait{flex:0 1 260px;min-width:0;max-width:260px;margin:0;position:relative;padding:0 14px 14px 0}
 .host .portrait::after{content:"";position:absolute;inset:14px 0 0 14px;border:1px solid var(--gold);pointer-events:none}
@@ -374,7 +374,7 @@ a{color:var(--forest)}
   </section>
 
   <!-- VENUE -->
-  <section class="venue" id="venue" aria-labelledby="venue-title">
+  <section class="venue ground" id="venue" aria-labelledby="venue-title">
     <div class="inner reveal">
       <p class="caps">The Venue</p>
       <h2 id="venue-title">MOB-ART studio</h2>
@@ -397,8 +397,8 @@ a{color:var(--forest)}
   </section>
 
   <!-- HOST + RSVP — the back of the card -->
-  <section class="host ground" id="rsvp" aria-labelledby="rsvp-title">
-    <div class="corner-photo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <section class="host" id="rsvp" aria-labelledby="rsvp-title">
+    <div class="corner-photo cream" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="inner reveal">
       <figure class="portrait">
         <img src="../about/img/kuntal-shah.jpg" alt="Kuntal Shah-Narain, Head of European Operations at ASHTH" width="320" height="400" loading="lazy">
