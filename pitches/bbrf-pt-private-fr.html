@@ -103,6 +103,14 @@ table.tbl{width:100%;border-collapse:collapse;background:var(--surface);border:1
 .cta .contacts b{display:block;color:#fff;font-size:.92rem;}
 .cta .contacts a{color:#e9a25c;text-decoration:none;font-family:'Space Mono',monospace;font-size:.78rem;}
 
+/* Plain-language help beside the instrument terms. */
+.bbrf-glossary{margin:1.25rem 0;padding:0 1rem;border:1px solid var(--border);border-radius:8px;color:var(--navy);}
+.bbrf-glossary summary{min-height:44px;padding:.75rem 0;cursor:pointer;font-weight:600;}
+.bbrf-glossary summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;}
+.bbrf-glossary dl{margin:0 0 1rem;line-height:1.65;}
+.bbrf-glossary dt{font-weight:700;margin-top:.75rem;}
+.bbrf-glossary dd{margin:0;}
+
 footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:var(--ink3);line-height:1.7;text-align:center;}
 
 .photos{display:grid;grid-template-columns:1.8fr 1fr;grid-template-rows:1fr 1fr;gap:1rem;margin:0 0 2.2rem;height:420px;}
@@ -264,6 +272,15 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
       <circle r="3.5" fill="#00704F" opacity="0.8"><animateMotion dur="1.3s" repeatCount="indefinite" begin="0.4s"><mpath href="#pp4"/></animateMotion></circle>
     </svg>
   </div>
+  <details class="bbrf-glossary">
+    <summary>Les termes expliqués</summary>
+    <dl>
+      <dt>SOPARFI</dt><dd>la société holding luxembourgeoise de la structure proposée.</dd>
+      <dt>SPV (véhicule ad hoc)</dt><dd>une société distincte pour chaque bien immobilier.</dd>
+      <dt>PIK (paiement en nature)</dt><dd>le dividende préférentiel s’accumule au lieu d’être immédiatement versé en espèces ; voir les conditions indicatives ci-dessous.</dd>
+      <dt>LTV (ratio prêt/valeur)</dt><dd>le montant du prêt restant dû divisé par la valeur de sa garantie.</dd>
+    </dl>
+  </details>
   <div class="tblwrap">
     <table>
       <thead><tr><th>Terme</th><th>Détail</th></tr></thead>

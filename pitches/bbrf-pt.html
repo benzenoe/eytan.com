@@ -589,6 +589,14 @@ nav{
 .contact-p a:hover{text-decoration:underline;}
 
 /* ── FOOTER ── */
+/* Plain-language help beside the instrument terms. */
+.bbrf-glossary{margin:1.25rem 0;padding:0 1rem;border:1px solid var(--border);border-radius:8px;color:var(--text);}
+.bbrf-glossary summary{min-height:44px;padding:.75rem 0;cursor:pointer;font-weight:600;}
+.bbrf-glossary summary:focus-visible{outline:3px solid var(--btc);outline-offset:3px;}
+.bbrf-glossary dl{margin:0 0 1rem;line-height:1.65;}
+.bbrf-glossary dt{font-weight:700;margin-top:.75rem;}
+.bbrf-glossary dd{margin:0;}
+
 footer{
   border-top:1px solid var(--border);padding:2.5rem 2rem;
   text-align:center;color:var(--text3);font-size:.75rem;position:relative;z-index:1;
@@ -1684,6 +1692,15 @@ footer p+p{margin-top:.4rem;}
   </div>
 
   <h3 style="font-size:1.2rem;font-weight:700;margin:3rem 0 .5rem;">Indicative instrument terms.</h3>
+  <details class="bbrf-glossary">
+    <summary>Terms explained</summary>
+    <dl>
+      <dt>SOPARFI</dt><dd>the Luxembourg holding company in the proposed structure.</dd>
+      <dt>SPV (special-purpose vehicle)</dt><dd>a separate company for an individual property.</dd>
+      <dt>PIK (payment in kind)</dt><dd>the preferred dividend accrues rather than being paid immediately in cash; see the indicative terms below.</dd>
+      <dt>LTV (loan-to-value)</dt><dd>the outstanding loan divided by the value of its collateral.</dd>
+    </dl>
+  </details>
   <div class="terms-wrap reveal">
     <table class="terms-table">
       <thead><tr><th>Term</th><th>Detail</th></tr></thead>

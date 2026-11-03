@@ -589,6 +589,14 @@ nav{
 .contact-p a:hover{text-decoration:underline;}
 
 /* ── FOOTER ── */
+/* Plain-language help beside the instrument terms. */
+.bbrf-glossary{margin:1.25rem 0;padding:0 1rem;border:1px solid var(--border);border-radius:8px;color:var(--text);}
+.bbrf-glossary summary{min-height:44px;padding:.75rem 0;cursor:pointer;font-weight:600;}
+.bbrf-glossary summary:focus-visible{outline:3px solid var(--btc);outline-offset:3px;}
+.bbrf-glossary dl{margin:0 0 1rem;line-height:1.65;}
+.bbrf-glossary dt{font-weight:700;margin-top:.75rem;}
+.bbrf-glossary dd{margin:0;}
+
 footer{
   border-top:1px solid var(--border);padding:2.5rem 2rem;
   text-align:center;color:var(--text3);font-size:.75rem;position:relative;z-index:1;
@@ -1684,6 +1692,15 @@ footer p+p{margin-top:.4rem;}
   </div>
 
   <h3 style="font-size:1.2rem;font-weight:700;margin:3rem 0 .5rem;">Termos indicativos do instrumento.</h3>
+  <details class="bbrf-glossary">
+    <summary>Termos explicados</summary>
+    <dl>
+      <dt>SOPARFI</dt><dd>a sociedade holding luxemburguesa da estrutura proposta.</dd>
+      <dt>SPV (sociedade de propósito específico)</dt><dd>uma sociedade separada para cada imóvel.</dd>
+      <dt>PIK (pagamento em espécie)</dt><dd>o dividendo preferencial acumula-se em vez de ser pago imediatamente em dinheiro; consulte as condições indicativas abaixo.</dd>
+      <dt>LTV (rácio empréstimo/valor)</dt><dd>o montante do empréstimo em dívida dividido pelo valor da garantia.</dd>
+    </dl>
+  </details>
   <div class="terms-wrap reveal">
     <table class="terms-table">
       <thead><tr><th>Termo</th><th>Detalhe</th></tr></thead>
