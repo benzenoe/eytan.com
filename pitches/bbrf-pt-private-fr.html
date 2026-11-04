@@ -135,6 +135,19 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
   nav{display:none;}
   body{background:#fff;}
 }
+
+/* Summary repeats the terms table; update both together when terms change. */
+.investment-summary{margin:2rem 0;padding:1.25rem;border:1px solid var(--border, currentColor);border-radius:10px;text-align:left;color:var(--text,var(--ink));}
+.investment-summary h2{font-size:1.25rem;line-height:1.4;margin:0 0 1rem;}
+.investment-summary dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;}
+.investment-summary dt{font-size:.8rem;font-weight:700;margin-bottom:.35rem;}
+.investment-summary dd{font-size:.9rem;line-height:1.6;margin:0;overflow-wrap:anywhere;}
+.investment-summary .summary-liquidity{grid-column:1/-1;}
+.investment-summary p{font-size:.8rem;line-height:1.6;margin:1rem 0 0;max-width:none;}
+.investment-summary a{display:inline-flex;align-items:center;min-height:44px;margin-top:.5rem;color:inherit;text-decoration:underline;}
+.investment-summary a:focus-visible{outline:3px solid currentColor;outline-offset:4px;}
+#investment-summary,#structure{scroll-margin-top:120px;}
+@media(max-width:600px){.investment-summary dl{grid-template-columns:1fr;}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="alternate" hreflang="en" href="https://eytan.com/pitches/bbrf-pt-private.html">
@@ -166,6 +179,19 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
   <div class="hero-rule">Confidentiel · Investisseurs professionnels et avertis uniquement · Une initiative Bittrees · Juin 2026</div>
   <h1>Un portefeuille immobilier portugais,<br>ancré par une réserve <em>jamais vendue.</em></h1>
   <p>BBRF-PT lève du capital institutionnel pour construire un portefeuille immobilier portugais de long terme, libellé en euros, sans liquider une réserve Bitcoin cœur. Les investisseurs détiennent un instrument senior et familier — des actions préférentielles convertibles d'une holding luxembourgeoise — avec préférence de liquidation et dividende préférentiel.</p>
+<!-- INVESTMENT SUMMARY: keep aligned with this page's terms table. -->
+  <section class="investment-summary" id="investment-summary" aria-labelledby="investment-summary-title">
+    <h2 id="investment-summary-title">L’investissement en bref</h2>
+    <dl>
+      <div><dt>Ce que vous détenez</dt><dd>Actions préférentielles convertibles · société holding luxembourgeoise (SOPARFI), BBRF-PT Holding S.A.</dd></div>
+      <div><dt>À qui s’adresse l’investissement</dt><dd>Investisseurs professionnels et avertis uniquement · placement privé luxembourgeois</dd></div>
+      <div><dt>Investissement minimum</dt><dd>€50,000</dd></div>
+      <div class="summary-liquidity"><dt>Liquidité et sortie</dt><dd>Lock-up de 12 mois → rachats trimestriels jusqu'à ~10% du pool → cessions secondaires dès l'année 2 → liquidation possible dès l'année 8</dd></div>
+    </dl>
+    <p>Conditions indicatives — sous réserve de la documentation définitive. Le capital est à risque, y compris en perte totale.</p>
+    <a href="#structure">Lire les conditions complètes →</a>
+  </section>
+
   <div class="facts">
     <div class="fact"><span class="v">€25–100M</span><span class="l">Levée cible</span></div>
     <div class="fact"><span class="v">€50,000</span><span class="l">Ticket minimum</span></div>
