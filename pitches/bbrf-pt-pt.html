@@ -1014,6 +1014,21 @@ footer p+p{margin-top:.4rem;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('bbrf-theme')||'dark');}catch(e){}</script>
+<style>
+/* Shared document access, independent of audience-specific pitch content. */
+.document-jump{margin:1rem 0;font-size:.95rem;}
+.document-jump a,.document-resources a{color:inherit;text-decoration:underline;text-underline-offset:.2em;display:inline-flex;align-items:center;min-height:44px;}
+.document-jump a:focus-visible,.document-resources a:focus-visible{outline:3px solid currentColor;outline-offset:4px;}
+.document-resources{max-width:1100px;margin:2rem auto;padding:1.5rem;color:var(--text,var(--ink));scroll-margin-top:120px;}
+.document-resources h2{font-size:1.5rem;line-height:1.4;margin:0 0 1rem;}
+.document-resources-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;}
+.document-resources-group{border:1px solid var(--border,currentColor);border-radius:8px;padding:1.25rem;}
+.document-resources h3{font-size:1rem;margin:0 0 .5rem;}
+.document-resources p{font-size:.9rem;margin:0 0 .5rem;}
+.document-resources ul{list-style:none;padding:0;margin:0;}
+.document-resources li{margin:.25rem 0;overflow-wrap:anywhere;}
+@media(max-width:600px){.document-resources-grid{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
 
@@ -1131,6 +1146,7 @@ footer p+p{margin-top:.4rem;}
       <strong>Importante:</strong> Apenas para investidores profissionais e bem informados. Não é um prospeto nem uma oferta de valores mobiliários.
       Os cenários de retorno são ilustrativos — não são previsões. O capital está em risco, incluindo perda total.
     </p>
+    <p class="document-jump"><a href="#documents">Consultar os documentos ↓</a></p>
   </div>
 </div>
 
@@ -1803,6 +1819,29 @@ footer p+p{margin-top:.4rem;}
     <div class="road-step"><div class="road-num">4</div><h4>Distribuição</h4><p>Nomear um agente de colocação licenciado para o Luxemburgo, Israel e EAU; garantir compromissos-âncora; abrir a angariação.</p></div>
   </div>
 </div>
+
+<!-- DOCUMENT RESOURCES -->
+<section class="document-resources" id="documents" aria-labelledby="documents-title">
+  <h2 id="documents-title">Documentos e propriedade</h2>
+  <div class="document-resources-grid">
+    <div class="document-resources-group">
+      <h3>Memorandos para investidores</h3>
+      <p>Escolha um idioma. Documentos PDF.</p>
+      <ul>
+        <li><a href="BBRF-PT-Investor-Memorandum.pdf?v=aligned2" hreflang="en" type="application/pdf"><span lang="en">English</span>&nbsp;(PDF)</a></li>
+        <li><a href="BBRF-PT-Memorandum-Investisseur.pdf?v=aligned2" hreflang="fr" type="application/pdf"><span lang="fr">Français</span>&nbsp;(PDF)</a></li>
+        <li><a href="BBRF-PT-Memorando-Investidor.pdf?v=aligned2" hreflang="pt" type="application/pdf"><span lang="pt">Português</span>&nbsp;(PDF)</a></li>
+      </ul>
+    </div>
+    <div class="document-resources-group">
+      <h3>Propriedade piloto</h3>
+      <ul>
+        <li><a href="/properties/pebble-stone/brochure.html" hreflang="en">Brochura da propriedade (inglês)</a></li>
+        <li><a href="/properties/pebble-stone/gallery.html" hreflang="en">Galeria aérea (inglês)</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
 <div class="section">

@@ -140,6 +140,21 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
 <link rel="alternate" hreflang="en" href="https://eytan.com/pitches/bbrf-pt-private.html">
 <link rel="alternate" hreflang="fr" href="https://eytan.com/pitches/bbrf-pt-private-fr.html">
 <link rel="alternate" hreflang="pt" href="https://eytan.com/pitches/bbrf-pt-private-pt.html">
+<style>
+/* Shared document access, independent of audience-specific pitch content. */
+.document-jump{margin:1rem 0;font-size:.95rem;}
+.document-jump a,.document-resources a{color:inherit;text-decoration:underline;text-underline-offset:.2em;display:inline-flex;align-items:center;min-height:44px;}
+.document-jump a:focus-visible,.document-resources a:focus-visible{outline:3px solid currentColor;outline-offset:4px;}
+.document-resources{max-width:1100px;margin:2rem auto;padding:1.5rem;color:var(--text,var(--ink));scroll-margin-top:120px;}
+.document-resources h2{font-size:1.5rem;line-height:1.4;margin:0 0 1rem;}
+.document-resources-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;}
+.document-resources-group{border:1px solid var(--border,currentColor);border-radius:8px;padding:1.25rem;}
+.document-resources h3{font-size:1rem;margin:0 0 .5rem;}
+.document-resources p{font-size:.9rem;margin:0 0 .5rem;}
+.document-resources ul{list-style:none;padding:0;margin:0;}
+.document-resources li{margin:.25rem 0;overflow-wrap:anywhere;}
+@media(max-width:600px){.document-resources-grid{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
 
@@ -174,6 +189,7 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
     <div class="fact"><span class="v">€11M</span><span class="l">Pilot asset</span></div>
   </div>
   <p class="hero-note"><strong>Important notice.</strong> This page is provided for information only to professional and well-informed investors. It is not a prospectus, an offer, or a solicitation, and does not constitute investment, legal, or tax advice. Figures are indicative and subject to definitive documentation and formal legal and tax opinions in Luxembourg and Portugal. Capital is at risk, including total loss.</p>
+    <p class="document-jump"><a href="#documents">Read the documents ↓</a></p>
 </div>
 
 <hr class="rule">
@@ -446,6 +462,29 @@ footer{max-width:960px;margin:0 auto;padding:3rem 2rem;font-size:.72rem;color:va
     </div>
   </div>
 </div>
+
+<!-- DOCUMENT RESOURCES -->
+<section class="document-resources" id="documents" aria-labelledby="documents-title">
+  <h2 id="documents-title">Documents & property</h2>
+  <div class="document-resources-grid">
+    <div class="document-resources-group">
+      <h3>Investor memoranda</h3>
+      <p>Choose a language. PDF documents.</p>
+      <ul>
+        <li><a href="BBRF-PT-Investor-Memorandum.pdf?v=aligned2" hreflang="en" type="application/pdf"><span lang="en">English</span>&nbsp;(PDF)</a></li>
+        <li><a href="BBRF-PT-Memorandum-Investisseur.pdf?v=aligned2" hreflang="fr" type="application/pdf"><span lang="fr">Français</span>&nbsp;(PDF)</a></li>
+        <li><a href="BBRF-PT-Memorando-Investidor.pdf?v=aligned2" hreflang="pt" type="application/pdf"><span lang="pt">Português</span>&nbsp;(PDF)</a></li>
+      </ul>
+    </div>
+    <div class="document-resources-group">
+      <h3>Pilot property</h3>
+      <ul>
+        <li><a href="/properties/pebble-stone/brochure.html" hreflang="en">Property brochure (English)</a></li>
+        <li><a href="/properties/pebble-stone/gallery.html" hreflang="en">Aerial gallery (English)</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
 <div class="section wide">
